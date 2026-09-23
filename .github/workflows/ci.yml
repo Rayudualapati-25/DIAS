@@ -61,8 +61,16 @@ jobs:
           test -f README.md
           test -f CITATION.cff
           test -f LICENSE
-          test -f papers/final_paper/SEBA_XAI_ACM_6page.tex
-          test -f output/overleaf/SEBA_XAI_Overleaf_Package/main.tex
+
+      # The manuscript and its review material stay off the public repository
+      # until publication (.gitignore); fail if any of it is committed.
+      - name: Keep the manuscript out of the repository
+        shell: bash
+        run: |
+          leaked="$(git ls-files -- 'Proof reading' 'DIAS latex paper' papers/final_paper output/overleaf)"
+          if [[ -n "$leaked" ]]; then
+            echo "Manuscript files are committed:"; echo "$leaked"; exit 1
+          fi
 
   chaincode-unit:
     name: Chaincode unit tests
@@ -102,9 +110,14 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: |
+            backend/package-lock.json
+            chaincode/crimerecords/package-lock.json
+      # The contract compatibility test loads the chaincode contracts.
       - name: Install locked dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm ci --prefix ../chaincode/crimerecords
       - name: Run offline tests
         run: npm run test:unit
       - name: Audit production dependencies
@@ -157,6 +170,13 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: benchmarks/caliper/package-lock.json
+      # The plot-axis check renders figures with matplotlib.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install plotting dependency
+        run: python -m pip install matplotlib==3.10.9
       - name: Use the pinned npm controller
         run: npm install --global npm@11.5.1
       - name: Install locked dependencies
