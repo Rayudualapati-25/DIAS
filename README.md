@@ -338,9 +338,9 @@ Apache License 2.0. See `LICENSE`.
 
 ## Citation
 
-GitHub can generate a software citation from `CITATION.cff`. The frozen
-manuscript package and its evidence provenance are retained under
-`output/overleaf/SEBA_XAI_Overleaf_Package/` and `papers/final_paper/`.
+GitHub can generate a software citation from `CITATION.cff`. The manuscript is
+kept outside this repository until publication; the evidence behind it is under
+`experiments/runs/`, `results/` and `reports/`.
 
 ## Known limitations
 
