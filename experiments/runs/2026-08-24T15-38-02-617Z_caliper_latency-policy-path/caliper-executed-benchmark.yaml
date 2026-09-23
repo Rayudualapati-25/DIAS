@@ -1,0 +1,140 @@
+test:
+  name: SEBA-XAI policy decision latency by rule path
+  description: Measure contextual access latency across distinct policy outcomes.
+  workers:
+    number: 1
+  rounds:
+    - label: policy-path-warmup
+      txDuration: 10
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: POLICY_SATISFIED
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: policy-rule1-credential-revoked
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: CRED_NOT_ACTIVE
+          invokerIdentity: insp.rathore
+          invokerMspId: PoliceMSP
+    - label: policy-rule3-rbac
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-EVIDENCE-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: RBAC_NO_PERMISSION
+          invokerIdentity: const.verma
+          invokerMspId: PoliceMSP
+    - label: policy-rule6-cross-jurisdiction
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: CROSS_JURISDICTION
+          invokerIdentity: insp.singh
+          invokerMspId: PoliceMSP
+    - label: policy-rule7-not-assigned
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: NOT_ASSIGNED
+          invokerIdentity: const.verma
+          invokerMspId: PoliceMSP
+    - label: policy-full-allow
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: POLICY_SATISFIED
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+monitors:
+  transaction:
+    - module: monitors/latency-tx-observer.js
+  resource:
+    - module: prometheus
+      options:
+        url: http://127.0.0.1:9090
+        metrics:
+          include:
+            - .*
+          queries:
+            - name: Process resident memory (MiB, max)
+              query: process_resident_memory_bytes{job=~"fabric-.*"}
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 9.5367431640625e-7
+            - name: Process CPU rate (percent, max)
+              query: rate(process_cpu_seconds_total{job=~"fabric-.*"}[1m])
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 100
+            - name: Crimerecords endorsement duration (seconds, avg)
+              query: >-
+                sum by (instance)
+                (rate(endorser_proposal_duration_sum{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))
+                / sum by (instance)
+                (rate(endorser_proposal_duration_count{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))
+              step: 1
+              label: instance
+              statistic: avg
+            - name: Ledger height (blocks, max)
+              query: >-
+                ledger_blockchain_height{job=~"fabric-.*",channel="crimechannel"}
+              step: 1
+              label: instance
+              statistic: max

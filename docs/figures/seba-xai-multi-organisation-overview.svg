@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720" width="600" height="720">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 z" fill="#222"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 z" fill="#355c8a"/>
+    </marker>
+    <style>
+      .layer { font: bold 14px Arial, Helvetica, sans-serif; letter-spacing: .5px; fill: #333; }
+      .title { font: bold 17px "Times New Roman", Times, serif; fill: #111; }
+      .head { font: bold 15px "Times New Roman", Times, serif; fill: #111; }
+      .body { font: 14px "Times New Roman", Times, serif; fill: #111; }
+      .small { font: 12.5px "Times New Roman", Times, serif; fill: #222; }
+      .line { fill: none; stroke: #222; stroke-width: 1.8; marker-end: url(#arrow); }
+      .blue { fill: none; stroke: #355c8a; stroke-width: 2.2; marker-end: url(#arrowBlue); }
+    </style>
+  </defs>
+  <rect width="600" height="720" fill="#fff"/>
+
+  <!-- Source organisation -->
+  <rect x="65" y="20" width="470" height="110" rx="5" fill="#fbfbfb" stroke="#222" stroke-width="1.5"/>
+  <rect x="65" y="20" width="470" height="30" fill="#e7eef7" stroke="#222" stroke-width="1.5"/>
+  <text x="300" y="40" text-anchor="middle" class="title">Source Organisation</text>
+  <rect x="90" y="68" width="100" height="38" rx="3" fill="#fff" stroke="#444"/>
+  <text x="140" y="92" text-anchor="middle" class="head">Users</text>
+  <rect x="250" y="68" width="100" height="38" rx="3" fill="#fff" stroke="#444"/>
+  <text x="300" y="92" text-anchor="middle" class="head">Entity</text>
+  <rect x="405" y="63" width="110" height="48" rx="3" fill="#f4f7fb" stroke="#222" stroke-width="1.3"/>
+  <text x="460" y="83" text-anchor="middle" class="head">Information</text>
+  <text x="460" y="100" text-anchor="middle" class="head">System</text>
+  <path d="M190 87 L246 87" class="line"/>
+  <path d="M350 87 L401 87" class="line"/>
+
+  <!-- Permissioned network and participating peers -->
+  <path d="M460 111 L460 173" class="line"/>
+  <text x="473" y="151" class="small">request</text>
+  <rect x="40" y="180" width="520" height="245" rx="5" fill="#fafafa" stroke="#222" stroke-width="1.8"/>
+  <rect x="40" y="180" width="520" height="35" fill="#e9e9e9" stroke="#222" stroke-width="1.8"/>
+  <text x="300" y="203" text-anchor="middle" class="title">Permissioned Blockchain Network</text>
+
+  <rect x="415" y="240" width="120" height="48" rx="3" fill="#e7eef7" stroke="#222" stroke-width="1.3"/>
+  <text x="475" y="269" text-anchor="middle" class="head">Source Peer</text>
+  <rect x="205" y="228" width="190" height="72" rx="3" fill="#fff" stroke="#222" stroke-width="1.3"/>
+  <text x="300" y="254" text-anchor="middle" class="head">Information-Exchange</text>
+  <text x="300" y="278" text-anchor="middle" class="body">Logic and Shared Ledger</text>
+  <rect x="65" y="240" width="120" height="48" rx="3" fill="#e6f1e4" stroke="#222" stroke-width="1.3"/>
+  <text x="125" y="269" text-anchor="middle" class="head">Destination Peer</text>
+  <path d="M415 264 L399 264" class="line"/>
+  <path d="M205 264 L189 264" class="line"/>
+
+  <rect x="205" y="335" width="190" height="42" rx="3" fill="#f0f0f0" stroke="#555" stroke-width="1.2"/>
+  <text x="300" y="352" text-anchor="middle" class="head">Other Organisation Peers</text>
+  <text x="300" y="369" text-anchor="middle" class="small">endorsement and validation</text>
+  <path d="M300 335 L300 304" class="line"/>
+  <text x="300" y="405" text-anchor="middle" class="body">Peers validate and record the information exchange</text>
+
+  <!-- LLM is a compact decision service connected to the network -->
+  <path d="M265 425 L265 465" class="line"/>
+  <text x="185" y="449" class="small">request context</text>
+  <path d="M335 465 L335 425" class="line"/>
+  <text x="350" y="449" class="small">decision</text>
+  <rect x="175" y="470" width="250" height="70" rx="5" fill="#fff8eb" stroke="#777" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="300" y="497" text-anchor="middle" class="head">LLM Decision Service</text>
+  <text x="300" y="520" text-anchor="middle" class="body">decision and explanation</text>
+
+  <!-- Destination organisation -->
+  <path d="M125 288 L125 570" class="blue"/>
+  <text x="138" y="562" class="small">authorised information</text>
+  <rect x="65" y="578" width="470" height="110" rx="5" fill="#fbfbfb" stroke="#222" stroke-width="1.5"/>
+  <rect x="65" y="578" width="470" height="30" fill="#e6f1e4" stroke="#222" stroke-width="1.5"/>
+  <text x="300" y="598" text-anchor="middle" class="title">Destination Organisation</text>
+  <rect x="85" y="621" width="110" height="48" rx="3" fill="#f2f8f1" stroke="#222" stroke-width="1.3"/>
+  <text x="140" y="641" text-anchor="middle" class="head">Information</text>
+  <text x="140" y="658" text-anchor="middle" class="head">System</text>
+  <rect x="250" y="626" width="100" height="38" rx="3" fill="#fff" stroke="#444"/>
+  <text x="300" y="650" text-anchor="middle" class="head">Entity</text>
+  <rect x="410" y="626" width="100" height="38" rx="3" fill="#fff" stroke="#444"/>
+  <text x="460" y="650" text-anchor="middle" class="head">Users</text>
+  <path d="M195 645 L246 645" class="line"/>
+  <path d="M350 645 L406 645" class="line"/>
+</svg>

@@ -1,0 +1,4 @@
+test,expected,model_decision,model_reason,policy_decision,policy_reason,input_agreement,policy_agreement,final_decision,effective_reason,fabric_state,attestation,result
+Allow,allow,allow,POLICY_SATISFIED,allow,POLICY_SATISFIED,true,true,allow,POLICY_SATISFIED,granted,valid,PASS
+Deny,deny,deny,CRED_NOT_ACTIVE,deny,CRED_NOT_ACTIVE,true,true,deny,CRED_NOT_ACTIVE,denied,valid,PASS
+Escalate,escalate,allow,POLICY_SATISFIED,allow,POLICY_SATISFIED,false,true,escalate,MODEL_INPUT_DISAGREEMENT,approved-after-escalation,valid,PASS

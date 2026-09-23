@@ -1,0 +1,152 @@
+{
+  "artifactType": "dias-v2-training-subsets",
+  "generatedAtUtc": "2026-09-12T08:45:48.268Z",
+  "seed": 20260912,
+  "source": "experiments/dias-finetuning/data-v2-binary/train.jsonl",
+  "sourceExamples": 5254,
+  "strata": 24,
+  "method": "proportional allocation over scenario x label x justification-kind strata, nested by a seeded per-example priority, then coverage-repaired so every reason code and scenario in the pool survives",
+  "purpose": "Learning curve / bounded pilot. A subset is NOT a claim that the remaining examples are useless; it is how the training count gets chosen by evidence instead of by assumption.",
+  "subsets": {
+    "400": {
+      "examples": 400,
+      "allow": 200,
+      "deny": 200,
+      "allowShare": 0.5,
+      "reasonCodes": {
+        "POLICY_SATISFIED": 200,
+        "CRED_NOT_ACTIVE": 31,
+        "RBAC_NO_PERMISSION": 54,
+        "JUVENILE_PROTECTED": 24,
+        "NOT_ASSIGNED": 24,
+        "CROSS_JURISDICTION": 17,
+        "SEALED_RECORD": 13,
+        "VICTIM_DATA_NOT_NECESSARY": 19,
+        "INSUFFICIENT_CLEARANCE": 18
+      },
+      "scenarios": {
+        "adversarial-on-allow": 49,
+        "single-violation": 67,
+        "near-miss": 95,
+        "multi-violation": 65,
+        "clean-allow": 92,
+        "adversarial-on-deny": 32
+      },
+      "justificationKinds": {
+        "injection": 88,
+        "contradictory": 108,
+        "plain": 171,
+        "verbose": 33
+      },
+      "families": 380,
+      "file": "train-400.jsonl",
+      "sha256": "a6befa61e49d2a139338295abdc2d49dcb1c10a557dd808beda0e289c2d0dd95",
+      "nestedInsidePrevious": null
+    },
+    "800": {
+      "examples": 800,
+      "allow": 399,
+      "deny": 401,
+      "allowShare": 0.4988,
+      "reasonCodes": {
+        "POLICY_SATISFIED": 399,
+        "CROSS_JURISDICTION": 40,
+        "SEALED_RECORD": 36,
+        "CRED_NOT_ACTIVE": 57,
+        "RBAC_NO_PERMISSION": 118,
+        "JUVENILE_PROTECTED": 47,
+        "NOT_ASSIGNED": 45,
+        "INSUFFICIENT_CLEARANCE": 32,
+        "VICTIM_DATA_NOT_NECESSARY": 26
+      },
+      "scenarios": {
+        "near-miss": 189,
+        "multi-violation": 129,
+        "single-violation": 135,
+        "clean-allow": 183,
+        "adversarial-on-deny": 65,
+        "adversarial-on-allow": 99
+      },
+      "justificationKinds": {
+        "plain": 343,
+        "injection": 179,
+        "contradictory": 214,
+        "verbose": 64
+      },
+      "families": 731,
+      "file": "train-800.jsonl",
+      "sha256": "c0de352c48d79f18239599aa0defb6ea0990cc84581085e6f5b07efd310818e4",
+      "nestedInsidePrevious": true
+    },
+    "1600": {
+      "examples": 1600,
+      "allow": 800,
+      "deny": 800,
+      "allowShare": 0.5,
+      "reasonCodes": {
+        "VICTIM_DATA_NOT_NECESSARY": 64,
+        "NOT_ASSIGNED": 64,
+        "RBAC_NO_PERMISSION": 233,
+        "SEALED_RECORD": 85,
+        "POLICY_SATISFIED": 800,
+        "CRED_NOT_ACTIVE": 110,
+        "CROSS_JURISDICTION": 89,
+        "INSUFFICIENT_CLEARANCE": 64,
+        "JUVENILE_PROTECTED": 91
+      },
+      "scenarios": {
+        "multi-violation": 258,
+        "single-violation": 269,
+        "adversarial-on-allow": 199,
+        "clean-allow": 365,
+        "near-miss": 380,
+        "adversarial-on-deny": 129
+      },
+      "justificationKinds": {
+        "plain": 684,
+        "contradictory": 430,
+        "injection": 358,
+        "verbose": 128
+      },
+      "families": 1337,
+      "file": "train-1600.jsonl",
+      "sha256": "09d540287a591ce9abaa146c3727847490b423d08bb43db2735be74d756142a3",
+      "nestedInsidePrevious": true
+    },
+    "3200": {
+      "examples": 3200,
+      "allow": 1601,
+      "deny": 1599,
+      "allowShare": 0.5003,
+      "reasonCodes": {
+        "RBAC_NO_PERMISSION": 438,
+        "JUVENILE_PROTECTED": 192,
+        "POLICY_SATISFIED": 1601,
+        "SEALED_RECORD": 168,
+        "INSUFFICIENT_CLEARANCE": 136,
+        "CRED_NOT_ACTIVE": 238,
+        "CROSS_JURISDICTION": 172,
+        "NOT_ASSIGNED": 137,
+        "VICTIM_DATA_NOT_NECESSARY": 118
+      },
+      "scenarios": {
+        "multi-violation": 514,
+        "near-miss": 761,
+        "clean-allow": 731,
+        "single-violation": 538,
+        "adversarial-on-allow": 397,
+        "adversarial-on-deny": 259
+      },
+      "justificationKinds": {
+        "plain": 1366,
+        "verbose": 256,
+        "injection": 717,
+        "contradictory": 861
+      },
+      "families": 2202,
+      "file": "train-3200.jsonl",
+      "sha256": "e28ab6762f5e402df4934124bd80641b53a12cdc3d83f23aee68ad153c74d618",
+      "nestedInsidePrevious": true
+    }
+  }
+}

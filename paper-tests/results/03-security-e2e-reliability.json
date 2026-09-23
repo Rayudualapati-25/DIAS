@@ -1,0 +1,723 @@
+{
+  "metadata": {
+    "experiment": "EXP-03",
+    "timestamp": "2026-09-08T00:57:55.876Z",
+    "frozenBaseline": "730d4674cc3689e824b15c01219f6200b14b2d5b",
+    "frozenBaselineTag": "paper-freeze-v1",
+    "harnessCommit": "bbd7adbacea04580000a01547e3293995136a313",
+    "harnessIsBaseline": false,
+    "commitsAheadOfBaseline": 7,
+    "treeHash": "9c8b557c820097df6ccd44dec79658dd51ab95d8",
+    "dirty": true,
+    "uncommittedPaths": 1,
+    "organizations": 6,
+    "chaincode": "crimerecords",
+    "chaincodeVersion": "4.0",
+    "chaincodePackageHash": "43b9336fbc6691253b698e681bff3cb06820ed70e07197ceb6e4655e5e7f5537",
+    "endorsement": "ImplicitMeta MAJORITY 4-of-6",
+    "model": "qwen3-14b-seba-lora-v6",
+    "adapterHash": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "policyVersion": "crime-policy-v2",
+    "hardware": {
+      "cpu": "Apple M3 Max",
+      "cores": 16,
+      "ramGB": 64,
+      "gpu": "Apple M3 Max integrated GPU (unified memory)",
+      "platform": "Darwin 25.6.0",
+      "osVersion": "26.6.2",
+      "node": "v22.20.0",
+      "modelRuntime": "MLX-LM (OpenAI-compatible server)"
+    },
+    "researchQuestions": [
+      "Can authorization evidence be tampered with undetected?",
+      "Does the six-organization workflow execute Allow, Deny and Escalate correctly?",
+      "Is behaviour deterministic under repetition and safe under component failure?"
+    ],
+    "partsRun": [
+      "A",
+      "B",
+      "D",
+      "E",
+      "F",
+      "G"
+    ],
+    "stressRepetitionsPerRouting": 25,
+    "stabilityRuns": 10,
+    "reusedHarnesses": [
+      "experiments/seal-eval/run-negative2.js",
+      "experiments/run-seal-final-e2e.js",
+      "backend `npm test` (the repository integration suite)"
+    ]
+  },
+  "summary": {
+    "durationMs": 1945198,
+    "partFailures": [],
+    "partsFailed": 0,
+    "security": {
+      "total": 11,
+      "behavedAsIntended": 11,
+      "controls": 2,
+      "unauthorizedRelease": 0,
+      "passed": true
+    },
+    "endToEnd": {
+      "passed": true,
+      "scenarios": 3
+    },
+    "auditOriginated": {
+      "attempts": 3,
+      "selfReviewAlwaysRefused": true,
+      "otherReviewerAlwaysAccepted": true,
+      "passed": true
+    },
+    "stability": {
+      "runs": 10,
+      "cleanRuns": 10,
+      "totalPayloadMismatches": 0,
+      "totalTimeouts": 0,
+      "recoveredRuns": 0,
+      "totalListenerRestarts": 0,
+      "totalModelTimeouts": 0,
+      "totalUndecidedRequests": 0,
+      "inferencesOver60s": 0,
+      "maxInferenceMs": 5576,
+      "pendingAccumulation": true,
+      "supervised": true,
+      "passed": true
+    },
+    "stress": {
+      "totalEscalated": 100,
+      "totalResolved": 100,
+      "totalPayloadMismatch": 0,
+      "passed": true
+    },
+    "failSafe": {
+      "scenarios": 4,
+      "unauthorizedAllows": 0,
+      "protectedDataReleases": 0,
+      "passed": true,
+      "note": "An invalid AI signer is not repeated here; it is checks N4 and N5 of Part A, which submit decisions carrying a corrupted signature and a signature from an unregistered key and confirm the ledger refuses both."
+    },
+    "passed": true
+  },
+  "runs": {
+    "security": {
+      "harness": "experiments/seal-eval/run-negative2.js",
+      "exitCode": 1,
+      "durationMs": 241,
+      "checks": [
+        {
+          "id": "N1a",
+          "attack": "the originating requester opens the record under their own ALLOW (control)",
+          "behavedAsIntended": true,
+          "observed": "HTTP 200",
+          "isControl": true
+        },
+        {
+          "id": "N1b",
+          "attack": "a second officer opens the record under that same ALLOW",
+          "behavedAsIntended": true,
+          "observed": "HTTP 422: chaincode response 500, unauthorized: access decision belongs to a different identity or record",
+          "isControl": false
+        },
+        {
+          "id": "N2",
+          "attack": "a police identity reads the AI-only decision context",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, unauthorized: GetAccessRequestForDecision requires the llm-decider identity of AIOrgMSP",
+          "isControl": false
+        },
+        {
+          "id": "N3",
+          "attack": "a police identity submits a model decision",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, unauthorized: SubmitLLMDecision requires the llm-decider identity of AIOrgMSP",
+          "isControl": false
+        },
+        {
+          "id": "N4",
+          "attack": "a decision carrying a corrupted attestation",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, model attestation signature verification failed",
+          "isControl": false
+        },
+        {
+          "id": "N5",
+          "attack": "a decision signed by a key that is not the registered one",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, model attestation signature verification failed",
+          "isControl": false
+        },
+        {
+          "id": "N6",
+          "attack": "a decision payload altered after the attestation was produced",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, model inference: outputHash does not match the submitted decision",
+          "isControl": false
+        },
+        {
+          "id": "N7a",
+          "attack": "a correctly attested, policy-consistent decision (control)",
+          "behavedAsIntended": true,
+          "observed": "accepted: allow / POLICY_SATISFIED",
+          "isControl": true
+        },
+        {
+          "id": "N7b",
+          "attack": "a second decision for the same request (replay)",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, access request '9cecfd680245232ae7ccd1c7c18157724980097a4176dab6cd67a0cc4af85d8d' has already been answered",
+          "isControl": false
+        },
+        {
+          "id": "N8",
+          "attack": "a decision computed before the record was sealed, submitted after",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, trusted access context changed between the request and the decision",
+          "isControl": false
+        },
+        {
+          "id": "N9",
+          "attack": "an explanation forged after signing, with the output commitment recomputed and the attestation re-signed so that both pass",
+          "behavedAsIntended": true,
+          "observed": "chaincode response 500, model inference: submitted decision does not match the independently derived policy result",
+          "isControl": false
+        }
+      ],
+      "summary": {
+        "total": 11,
+        "behavedAsIntended": 11,
+        "controls": 2,
+        "unauthorizedRelease": 0,
+        "passed": true
+      },
+      "note": "Attestation covers queryHash, contextHash, the decision (with its explanation, decisive attributes and counterfactual), the committed action and purpose, the policy and model versions, the adapter hash and the raw model classification. It does NOT cover the requester identity; requester binding is enforced separately by the chaincode using sha256 of the caller X.509 id. The signature establishes provenance, integrity and attribution for covered information. It does not prove that the model executed, nor that its output is correct."
+    },
+    "endToEnd": {
+      "harness": "experiments/run-seal-final-e2e.js",
+      "exitCode": 0,
+      "durationMs": 30168,
+      "outputFile": "paper-tests/results/raw/final-e2e-1788827131023.json",
+      "stderr": null,
+      "scenarios": [
+        {
+          "scenario": "Allow",
+          "expected": "allow",
+          "requester": "io.krishnan",
+          "record": "REC-040265D9CA53",
+          "committed": {
+            "action": "view",
+            "purpose": "investigation"
+          },
+          "modelRead": "view/investigation",
+          "modelProposed": "allow/POLICY_SATISFIED",
+          "inputAgreement": true,
+          "policyAgreement": true,
+          "effectiveDecision": "allow",
+          "effectiveReason": "POLICY_SATISFIED",
+          "decisionAuthority": "llm-policy-agreement",
+          "requestTxId": "b25a39f1f0070a7fb12c2b4b45a3c83b4f821d2e43c2f8791a40309c43de4c2f",
+          "decisionTxId": "2510591430e28688b1f9c81b2e9834505df1a50dd8784db16761c90906377f58",
+          "ledgerState": "granted",
+          "attestationValid": true,
+          "metadataReleased": true,
+          "pdfReleased": true,
+          "contentHash": "93e4a3b57ff8ee9abc063c1b00bddc2d8e85a78a87173d1c9ac7a4a387b5a489",
+          "humanReviewer": null,
+          "inferenceMs": 2401,
+          "apiRoundTripMs": 6601
+        },
+        {
+          "scenario": "Deny",
+          "expected": "deny",
+          "requester": "insp.rathore",
+          "record": "REC-040265D9CA53",
+          "committed": {
+            "action": "view",
+            "purpose": "investigation"
+          },
+          "modelRead": "view/investigation",
+          "modelProposed": "deny/CRED_NOT_ACTIVE",
+          "inputAgreement": true,
+          "policyAgreement": true,
+          "effectiveDecision": "deny",
+          "effectiveReason": "CRED_NOT_ACTIVE",
+          "decisionAuthority": "llm-policy-agreement",
+          "requestTxId": "f94aa7209762d64c8f0a6536cbfff234ec4e749a370ec7baaca309e593b35b6e",
+          "decisionTxId": "ccb9067aca866a97f77694fceb886776cb50dc46d33cf8c40042d8e074773b67",
+          "ledgerState": "denied",
+          "attestationValid": true,
+          "metadataReleased": false,
+          "pdfReleased": false,
+          "contentHash": null,
+          "humanReviewer": null,
+          "inferenceMs": 2264,
+          "apiRoundTripMs": 6607
+        },
+        {
+          "scenario": "Escalate",
+          "expected": "escalate",
+          "requester": "io.krishnan",
+          "record": "REC-BDE4E6001578",
+          "committed": {
+            "action": "view",
+            "purpose": "investigation"
+          },
+          "modelRead": "export/prosecution",
+          "modelProposed": "allow/POLICY_SATISFIED",
+          "inputAgreement": false,
+          "policyAgreement": true,
+          "effectiveDecision": "escalate",
+          "effectiveReason": "MODEL_INPUT_DISAGREEMENT",
+          "decisionAuthority": "canonical-input-escalation",
+          "requestTxId": "978fe9c1722e34bf192d11056ffda3401ff20479773dca02685e3fc606f3b261",
+          "decisionTxId": "8bdc9d49da0db8b6b5226e338734600c38db14403d490d69b5edb91dc3416fa5",
+          "ledgerState": "approved-after-escalation",
+          "attestationValid": true,
+          "metadataReleased": false,
+          "pdfReleased": false,
+          "contentHash": null,
+          "humanReviewer": "AuditMSP/sp",
+          "inferenceMs": 2368,
+          "apiRoundTripMs": 6567
+        }
+      ],
+      "summary": {
+        "total": 3,
+        "passed": 3,
+        "decisions": [
+          "allow",
+          "deny",
+          "escalate"
+        ]
+      },
+      "passed": true
+    },
+    "auditOriginated": {
+      "rows": [
+        {
+          "iteration": 1,
+          "raised": false,
+          "error": "transport failure on POST /access/llm-request: fetch failed | cause: Error(ECONNRESET): read ECONNRESET"
+        },
+        {
+          "iteration": 2,
+          "raised": true,
+          "escalated": true,
+          "reason": "MODEL_POLICY_DISAGREEMENT",
+          "subject": "AuditMSP/sp",
+          "selfReviewStatus": 422,
+          "selfReviewRefused": true,
+          "selfReviewError": "chaincode response 500, unauthorized: a requester cannot resolve their own escalation",
+          "otherReviewerStatus": 200,
+          "otherReviewerAccepted": true,
+          "finalState": "approved-after-escalation",
+          "pass": true
+        },
+        {
+          "iteration": 3,
+          "raised": true,
+          "escalated": true,
+          "reason": "MODEL_POLICY_DISAGREEMENT",
+          "subject": "AuditMSP/sp",
+          "selfReviewStatus": 422,
+          "selfReviewRefused": true,
+          "selfReviewError": "chaincode response 500, unauthorized: a requester cannot resolve their own escalation",
+          "otherReviewerStatus": 200,
+          "otherReviewerAccepted": true,
+          "finalState": "approved-after-escalation",
+          "pass": true
+        }
+      ],
+      "summary": {
+        "attempts": 3,
+        "selfReviewAlwaysRefused": true,
+        "otherReviewerAlwaysAccepted": true,
+        "passed": true
+      }
+    },
+    "stability": {
+      "rows": [
+        {
+          "run": 1,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 75363,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 3396,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 2,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 75991,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 4403,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 3,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 94226,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 5576,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 4,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 92532,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 5482,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 5,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 87998,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 4683,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 6,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 84790,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 4399,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 7,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 81008,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 3807,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 8,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 78625,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 3379,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 9,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 75918,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 2942,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        },
+        {
+          "run": 10,
+          "passed": 105,
+          "failed": 0,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "ledgerHeightBefore": null,
+          "ledgerHeightAfter": null,
+          "durationMs": 74845,
+          "exitCode": 0,
+          "apiNotAnswered": 0,
+          "listenerExits": 0,
+          "listenerRestarts": 0,
+          "modelTimeouts": 0,
+          "undecidedRequests": 0,
+          "undecidedDetail": [],
+          "decisionsMade": 8,
+          "maxInferenceMs": 2803,
+          "inferencesOver60s": 0,
+          "clean": true,
+          "recovered": false
+        }
+      ],
+      "summary": {
+        "runs": 10,
+        "cleanRuns": 10,
+        "totalPayloadMismatches": 0,
+        "totalTimeouts": 0,
+        "recoveredRuns": 0,
+        "totalListenerRestarts": 0,
+        "totalModelTimeouts": 0,
+        "totalUndecidedRequests": 0,
+        "inferencesOver60s": 0,
+        "maxInferenceMs": 5576,
+        "pendingAccumulation": true,
+        "supervised": true,
+        "passed": true
+      }
+    },
+    "stress": {
+      "rows": [
+        {
+          "case": "sealed->Court",
+          "attempted": 25,
+          "raised": 25,
+          "escalated": 25,
+          "resolved": 25,
+          "failed": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "reasons": {
+            "SEALED_RECORD": 25
+          },
+          "errors": {},
+          "pass": true
+        },
+        {
+          "case": "input-disagreement->Audit",
+          "attempted": 25,
+          "raised": 25,
+          "escalated": 25,
+          "resolved": 25,
+          "failed": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "reasons": {
+            "MODEL_INPUT_DISAGREEMENT": 25
+          },
+          "errors": {},
+          "pass": true
+        },
+        {
+          "case": "policy-disagreement->Audit",
+          "attempted": 25,
+          "raised": 25,
+          "escalated": 25,
+          "resolved": 25,
+          "failed": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "reasons": {
+            "MODEL_POLICY_DISAGREEMENT": 25
+          },
+          "errors": {},
+          "pass": true
+        },
+        {
+          "case": "audit-originated->other-Audit-head",
+          "attempted": 25,
+          "raised": 25,
+          "escalated": 25,
+          "resolved": 25,
+          "failed": 0,
+          "payloadMismatch": 0,
+          "timeouts": 0,
+          "reasons": {
+            "MODEL_POLICY_DISAGREEMENT": 25
+          },
+          "errors": {},
+          "pass": true
+        }
+      ],
+      "summary": {
+        "totalEscalated": 100,
+        "totalResolved": 100,
+        "totalPayloadMismatch": 0,
+        "passed": true
+      }
+    },
+    "failSafe": {
+      "rows": [
+        {
+          "scenario": "model server unavailable",
+          "outcome": "no decision (HTTP 202)",
+          "requestAccepted": true,
+          "decisionProduced": false,
+          "effectiveDecision": null,
+          "leftPending": true,
+          "pendingBefore": 0,
+          "pendingAfter": 0,
+          "protectedDataReleased": false,
+          "unauthorizedAllow": false,
+          "pass": true
+        },
+        {
+          "scenario": "AI listener unavailable",
+          "outcome": "no decision (HTTP 202)",
+          "decisionProduced": false,
+          "effectiveDecision": null,
+          "leftPending": true,
+          "protectedDataReleased": false,
+          "unauthorizedAllow": false,
+          "pass": true
+        },
+        {
+          "scenario": "peers below endorsement majority",
+          "outcome": "refused (HTTP 500)",
+          "decisionProduced": false,
+          "effectiveDecision": null,
+          "requestRejected": true,
+          "error": "internal error",
+          "protectedDataReleased": false,
+          "unauthorizedAllow": false,
+          "pass": true
+        },
+        {
+          "scenario": "protected-record storage unavailable",
+          "outcome": "release endpoint HTTP 410",
+          "releaseStatus": 410,
+          "protectedDataReleased": false,
+          "expectedNoAllow": false,
+          "unauthorizedAllow": false,
+          "pass": true
+        }
+      ],
+      "summary": {
+        "scenarios": 4,
+        "unauthorizedAllows": 0,
+        "protectedDataReleases": 0,
+        "passed": true,
+        "note": "An invalid AI signer is not repeated here; it is checks N4 and N5 of Part A, which submit decisions carrying a corrupted signature and a signature from an unregistered key and confirm the ledger refuses both."
+      }
+    }
+  }
+}

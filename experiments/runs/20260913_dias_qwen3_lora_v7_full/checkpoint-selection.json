@@ -1,0 +1,26 @@
+{
+  "artifactType": "dias-v7-validation-checkpoint-selection",
+  "selectionRule": "Minimum validation loss among retained checkpoints; held-out test sets were not consulted.",
+  "selectedIteration": 4500,
+  "selectedValidationLoss": 0.002,
+  "selectedAdapter": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0004500_adapters.safetensors",
+  "selectedAdapterSha256": "c837152bc44ba734dd95838a6e76aff63dee1fd6c09d91e1f08dc3786daa54dc",
+  "finalIteration": 5254,
+  "finalValidationLoss": 0.003,
+  "finalAdapter": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/adapters.safetensors",
+  "finalAdapterSha256": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+  "retainedCheckpointValidationLosses": {
+    "500": 0.023,
+    "1000": 0.012,
+    "1500": 0.008,
+    "2000": 0.007,
+    "2500": 0.006,
+    "3000": 0.004,
+    "3500": 0.006,
+    "4000": 0.003,
+    "4500": 0.002,
+    "5000": 0.004,
+    "5254-final": 0.003
+  },
+  "limitation": "Validation loss is a token-level training objective, not held-out decision accuracy or safety performance. Both the selected and final adapters require the frozen six-suite evaluation."
+}

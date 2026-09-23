@@ -1,0 +1,53 @@
+{
+  "schema": "seal-reliability-finding/1",
+  "generatedAt": "2026-09-08T00:23:52.283631Z",
+  "finding": "an undecidable request halts the listener permanently, even under a supervisor",
+  "classification": "availability limitation; no authorization defect",
+  "isSecurityFailure": false,
+  "stuckRequestId": "339c65caf3b1e6860ed1c5b480805a552b1e1408bcfe40103ee11b8a5de61a6e",
+  "targetRecord": "FIR-API-1788784189066",
+  "targetRecordOrigin": "created by the repository integration suite during a stability run",
+  "chaincodeRejection": "chaincode response 500, trusted access context changed between the request and the decision",
+  "endorsingPeer": "peer0.ai.example.com:12051 (AIOrgMSP)",
+  "mechanism": [
+    "the integration suite created a record and raised a request against it",
+    "the stability run was aborted before the listener answered that request",
+    "the suite's teardown changed or removed the record, so the trusted context no longer matched the committed contextHash",
+    "the chaincode correctly refused to accept a decision for a request whose trusted context had changed",
+    "the listener correctly refused to advance its checkpoint past an unanswered request",
+    "the supervisor correctly restarted the listener after each exit",
+    "each component behaved as designed, and together they formed a loop that could not clear itself"
+  ],
+  "observedRestarts": 29,
+  "everyComponentBehavedAsDesigned": true,
+  "securityControlThatFired": "the chaincode's trusted-context binding, which is the control that prevents a decision being applied to a request whose authenticated facts have changed",
+  "safetyOutcome": {
+    "unauthorizedAllow": 0,
+    "protectedRecordReleased": 0,
+    "committedRequestsLost": 0,
+    "statement": "The chaincode's refusal is the correct and safe behaviour. A decision computed against one set of authenticated facts must not be applied to a request whose facts have since changed."
+  },
+  "availabilityOutcome": {
+    "statement": "The checkpoint discipline has no escape for a request that can never be decided. A supervisor restores the listener but cannot clear the request, so decisioning stays blocked until an operator intervenes.",
+    "supervisorSufficient": false,
+    "operatorInterventionRequired": true
+  },
+  "operationalResolution": {
+    "action": "advanced the listener checkpoint past the entire stale backlog of undecidable test requests",
+    "blockSkipped": 1728,
+    "authority": "Level 2 experiment operations (test-generated pending request), explicitly authorised",
+    "frozenCodeChanged": false,
+    "note": "This is the manual intervention the listener's own design comment anticipates. It is recorded rather than performed silently.",
+    "blocksSkippedFrom": 1728,
+    "checkpointSetTo": 1752,
+    "ledgerHeightAtResolution": 1751,
+    "undecidableRequestsObserved": [
+      "339c65ca\u2026",
+      "2f18611f\u2026",
+      "and further requests in the same backlog"
+    ],
+    "whatWasAbandoned": "requests raised by the repository integration suite during aborted stability runs, whose records were changed or removed by the suite's own teardown",
+    "verification": "after the skip, a fresh request on each of the three authorization paths decided correctly: allow/POLICY_SATISFIED, deny/CRED_NOT_ACTIVE, escalate/MODEL_INPUT_DISAGREEMENT"
+  },
+  "productionRelevance": "The trigger here was integration-test teardown, which would not normally occur in production. The underlying gap is general: any request that becomes permanently undecidable blocks the queue behind it."
+}

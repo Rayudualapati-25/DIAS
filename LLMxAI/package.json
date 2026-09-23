@@ -1,0 +1,14 @@
+{
+  "name": "llmxai-policy-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone explainable Qwen3-14B policy decision interface",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "model": "./scripts/serve-model.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

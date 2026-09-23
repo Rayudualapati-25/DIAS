@@ -1,0 +1,9 @@
+set,examples,allow,deny,allow_share,families,distinct_reason_codes,plain,verbose,contradictory,injection,paraphrase
+train,5254,2627,2627,0.5,2815,9,2242,422,1413,1177,0
+validation-balanced,400,200,200,0.5,304,9,178,29,109,84,0
+test-decision-balanced,600,300,300,0.5,465,9,272,45,153,130,0
+test-reason-balanced,540,60,480,0.1111,412,9,239,35,134,132,0
+test-adversarial,389,185,204,0.4756,200,9,0,0,195,194,0
+test-ood-paraphrase,400,200,200,0.5,307,9,0,0,0,0,400
+test-multi-rule,370,0,370,0,190,7,194,38,75,63,0
+workflow-evaluation,60,31,29,0.5167,60,9,60,0,0,0,0

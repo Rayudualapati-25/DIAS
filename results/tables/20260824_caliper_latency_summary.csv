@@ -1,0 +1,18 @@
+axis_id,x_label,x_value,round_label,run_directory,successful_transactions,failed_transactions,send_rate_tps,throughput_tps,latency_min_s,latency_avg_s,latency_max_s
+concurrent_clients_vs_lookup_latency,1,1,clients-1-read,experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1,46,0,1,1,0,0.01,0.02
+concurrent_clients_vs_lookup_latency,2,2,clients-2-read,experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2,92,0,2,2,0.01,0.01,0.03
+concurrent_clients_vs_lookup_latency,4,4,clients-4-read,experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4,184,0,4.1,4.1,0,0.02,0.03
+concurrent_clients_vs_lookup_latency,8,8,clients-8-read,experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8,368,0,8.2,8.2,0.01,0.02,0.04
+offered_tps_vs_write_latency,1,1,write-tps-1,experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps,52,0,1.1,1,2.07,2.1,2.12
+offered_tps_vs_write_latency,2,2,write-tps-2,experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps,96,0,2.1,2.1,0.1,1.35,2.11
+offered_tps_vs_write_latency,5,5,write-tps-5,experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps,232,0,5.1,4.9,0.09,0.92,2.1
+offered_tps_vs_write_latency,10,10,write-tps-10,experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps,456,0,10.1,9.7,0.07,0.52,2.12
+offered_tps_vs_write_latency,20,20,write-tps-20,experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps,904,0,20.1,19.2,0.06,0.3,2.06
+query_result_count_vs_latency,1,1,query-count-1,experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count,48,0,1,1,0.69,0.72,0.74
+query_result_count_vs_latency,2,2,query-count-2,experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count,48,0,1,1,0.68,0.73,0.77
+query_result_count_vs_latency,3,3,query-count-3,experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count,48,0,1,1,0.7,0.72,0.75
+policy_path_vs_latency,Credential revoked,policy-rule1-credential-revoked,policy-rule1-credential-revoked,experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path,46,0,1,1,0.07,1.19,2.09
+policy_path_vs_latency,RBAC deny,policy-rule3-rbac,policy-rule3-rbac,experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path,46,0,1,1,0.08,1.2,2.1
+policy_path_vs_latency,Cross-jurisdiction,policy-rule6-cross-jurisdiction,policy-rule6-cross-jurisdiction,experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path,46,0,1,1,0.06,1.19,2.09
+policy_path_vs_latency,Not assigned,policy-rule7-not-assigned,policy-rule7-not-assigned,experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path,46,0,1,1,0.07,1.19,2.09
+policy_path_vs_latency,Full allow,policy-full-allow,policy-full-allow,experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path,46,0,1,1,0.07,1.19,2.12

@@ -1,0 +1,80 @@
+{
+  "createdAtUtc": "2026-09-02T04:26:39.495Z",
+  "status": "passed",
+  "auditor": "experiments/llm_policy_engine/audit_dataset.js",
+  "dataDirectory": "experiments/llm_policy_engine/data_v4",
+  "manifestSha256": "a4bae181e40168ba0e23f7cf21097753368087c78779e1b4ee8371c1aafa5155",
+  "checks": {
+    "splitSizes": {
+      "train": 5040,
+      "valid": 630,
+      "test": 360,
+      "testBalanced60": 60
+    },
+    "classCounts": {
+      "train": {
+        "CRED_NOT_ACTIVE": 240,
+        "INVALID_PURPOSE": 240,
+        "RBAC_NO_PERMISSION": 240,
+        "AUDIT_METADATA_ONLY": 240,
+        "SEALED_RECORD": 560,
+        "JUVENILE_PROTECTED": 240,
+        "VICTIM_DATA_NOT_NECESSARY": 240,
+        "EMERGENCY_CROSS_JURISDICTION": 840,
+        "CROSS_JURISDICTION": 560,
+        "NOT_ASSIGNED": 240,
+        "INSUFFICIENT_CLEARANCE": 560,
+        "POLICY_SATISFIED": 840
+      },
+      "valid": {
+        "CRED_NOT_ACTIVE": 30,
+        "INVALID_PURPOSE": 30,
+        "RBAC_NO_PERMISSION": 30,
+        "AUDIT_METADATA_ONLY": 30,
+        "SEALED_RECORD": 70,
+        "JUVENILE_PROTECTED": 30,
+        "VICTIM_DATA_NOT_NECESSARY": 30,
+        "EMERGENCY_CROSS_JURISDICTION": 105,
+        "CROSS_JURISDICTION": 70,
+        "NOT_ASSIGNED": 30,
+        "INSUFFICIENT_CLEARANCE": 70,
+        "POLICY_SATISFIED": 105
+      },
+      "test": {
+        "CRED_NOT_ACTIVE": 30,
+        "INVALID_PURPOSE": 30,
+        "RBAC_NO_PERMISSION": 30,
+        "AUDIT_METADATA_ONLY": 30,
+        "SEALED_RECORD": 30,
+        "JUVENILE_PROTECTED": 30,
+        "VICTIM_DATA_NOT_NECESSARY": 30,
+        "EMERGENCY_CROSS_JURISDICTION": 30,
+        "CROSS_JURISDICTION": 30,
+        "NOT_ASSIGNED": 30,
+        "INSUFFICIENT_CLEARANCE": 30,
+        "POLICY_SATISFIED": 30
+      }
+    },
+    "adversarialCounts": {
+      "train": 1260,
+      "valid": 212,
+      "test": 120
+    },
+    "uniqueExampleIds": 6030,
+    "uniqueResourceAndCaseIds": 12060,
+    "oracleMismatches": 0,
+    "materializationMismatches": 0,
+    "compactSchemaMismatches": 0,
+    "templateAttributionMismatches": 0,
+    "crossSplitTemplateFamilyMatches": 0,
+    "balancedSuiteUniqueSubset": true,
+    "artifactHashesMatchManifest": true
+  },
+  "observedHashes": {
+    "train": "757c6b15cfe05b9e4ab4f86bf30d54411ba1630c3a152360f58282e549f1231a",
+    "valid": "be4ea5cc7ab55f6b4e272631aabeefbe4890b613fa4946a70fc5b193bf1492be",
+    "test": "c660ae020b8eb6175473c11743eb5f2ac7939c698b35e459c82d442d56ef79d6",
+    "testBalanced60": "4ab0c1b912401f367c894ca86358761b336f8ca7f100ad920def0962a6fef31e"
+  },
+  "problems": []
+}

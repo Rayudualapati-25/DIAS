@@ -1,0 +1,4 @@
+case,expected,actual,reason_code,decision_source,consistent,latency_ms,passed
+allow-active-assigned-investigator,allow,allow,POLICY_SATISFIED,qwen3-14b-seba-lora-v4,true,3736.94,true
+deny-suspended-credential,deny,deny,CRED_NOT_ACTIVE,qwen3-14b-seba-lora-v4,true,2143.24,true
+escalate-cross-jurisdiction,escalate,escalate,CROSS_JURISDICTION,qwen3-14b-seba-lora-v4,true,2279.68,true

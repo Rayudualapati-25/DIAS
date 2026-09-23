@@ -1,0 +1,1541 @@
+{
+  "root": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS",
+  "rows": 2741,
+  "files_listed": 2689,
+  "collapsed_directories": {
+    ".venv-qwen-policy/": {
+      "size": 632560960,
+      "count": 15758
+    },
+    "LLMxAI/experiments/llm_policy_engine/__pycache__/": {
+      "size": 33309,
+      "count": 4
+    },
+    "backend/data/agency-vault/": {
+      "size": 4874,
+      "count": 24
+    },
+    "backend/data/dias-reviews/": {
+      "size": 249177,
+      "count": 63
+    },
+    "backend/node_modules/": {
+      "size": 30526866,
+      "count": 3705
+    },
+    "benchmarks/caliper/scripts/__pycache__/": {
+      "size": 32206,
+      "count": 2
+    },
+    "chaincode/crimerecords/.nyc_output/": {
+      "size": 286111,
+      "count": 3
+    },
+    "chaincode/crimerecords/coverage/": {
+      "size": 752336,
+      "count": 34
+    },
+    "chaincode/crimerecords/node_modules/": {
+      "size": 54465327,
+      "count": 6024
+    },
+    "docs/architecture/__pycache__/": {
+      "size": 20881,
+      "count": 1
+    },
+    "experiments/__pycache__/": {
+      "size": 45667,
+      "count": 3
+    },
+    "experiments/dias-finetuning/v2/__pycache__/": {
+      "size": 5600,
+      "count": 1
+    },
+    "experiments/dias-finetuning/v2/eval/__pycache__/": {
+      "size": 5399,
+      "count": 1
+    },
+    "experiments/dias/__pycache__/": {
+      "size": 24399,
+      "count": 2
+    },
+    "experiments/runs/20260911_dias_qwen3_lora_train_v1/__pycache__/": {
+      "size": 3945,
+      "count": 1
+    },
+    "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/.nyc_output/": {
+      "size": 352672,
+      "count": 3
+    },
+    "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/coverage/": {
+      "size": 806700,
+      "count": 34
+    },
+    "network/channel-artifacts/": {
+      "size": 405092,
+      "count": 7
+    },
+    "network/organizations/fabric-ca/": {
+      "size": 677117,
+      "count": 70
+    },
+    "network/organizations/ordererOrganizations/": {
+      "size": 25317,
+      "count": 30
+    },
+    "network/organizations/peerOrganizations/": {
+      "size": 230731,
+      "count": 306
+    },
+    "paper experiment results/__pycache__/": {
+      "size": 17781,
+      "count": 2
+    },
+    "paper-tests/figures/__pycache__/": {
+      "size": 166516,
+      "count": 8
+    },
+    "papers/final_paper/artifacts/__pycache__/": {
+      "size": 7300,
+      "count": 1
+    },
+    "results/plots/__pycache__/": {
+      "size": 28055,
+      "count": 3
+    },
+    "scripts/__pycache__/": {
+      "size": 5832,
+      "count": 1
+    },
+    "scripts/audit/__pycache__/": {
+      "size": 13088,
+      "count": 1
+    },
+    "tmp/": {
+      "size": 35441683,
+      "count": 112
+    }
+  },
+  "by_git_status": {
+    "ignored": 122,
+    "modified": 99,
+    "tracked-clean": 1764,
+    "untracked": 732,
+    "staged-deleted": 24
+  },
+  "by_classification": {
+    "generated-cache": 24,
+    "generated-output": 76,
+    "canonical-config": 6,
+    "local-secret": 6,
+    "canonical-doc": 31,
+    "superseded-draft": 120,
+    "historical-evidence": 1316,
+    "third-party-copyrighted": 57,
+    "canonical-evidence": 557,
+    "model-weights": 38,
+    "duplicate": 1,
+    "canonical-manuscript-source": 31,
+    "temporary": 3,
+    "local-state": 4,
+    "canonical-source": 144,
+    "canonical-test": 50,
+    "canonical-data": 96,
+    "canonical-plan": 23,
+    "obsolete-deliverable": 15,
+    "generated-build": 6,
+    "canonical-report": 55,
+    "canonical-result": 47,
+    "legacy-prototype": 8,
+    "local-environment": 1,
+    "dependency": 2,
+    "intentional-deletion": 24
+  },
+  "by_action": {
+    "keep-ignored": 62,
+    "move:trashy/generated/": 95,
+    "keep": 2299,
+    "move:trashy/superseded-paper-drafts/": 121,
+    "move:trashy/third-party-papers/": 57,
+    "canonicalize:papers/final_paper/": 31,
+    "move:trashy/temporary/": 3,
+    "move:trashy/obsolete/seal-era/": 44,
+    "review": 5,
+    "none": 24
+  },
+  "large_files_over_10MiB": [
+    [
+      ".venv-qwen-policy/",
+      632560960
+    ],
+    [
+      "chaincode/crimerecords/node_modules/",
+      54465327
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0000200_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0000400_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0000600_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0000800_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0001000_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0001200_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0001400_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0001600_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/0000012_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0000500_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0001000_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0001500_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0002000_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0002500_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0003000_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0003500_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0004000_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0004500_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/0005000_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/0000064_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/0000128_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/0000192_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/0000256_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/0000064_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/0000128_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/0000192_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/0000256_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/0000064_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/0000128_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/0000192_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/0000256_adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/adapters.safetensors",
+      51404480
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best/adapters.safetensors",
+      51404480
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/train.jsonl",
+      43954735
+    ],
+    [
+      "tmp/",
+      35441683
+    ],
+    [
+      "backend/node_modules/",
+      30526866
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/subsets/train-3200.jsonl",
+      26772190
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data_v5/train.jsonl",
+      22251852
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data_v4/train.jsonl",
+      15549650
+    ],
+    [
+      "experiments/dias-finetuning/data-v1/train.jsonl",
+      14743188
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/staged/train-1600/train.jsonl",
+      13390023
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/subsets/train-1600.jsonl",
+      13390023
+    ],
+    [
+      "papers/reference_library/03_methodology_and_benchmark_papers/AVChain.pdf",
+      10854988
+    ]
+  ],
+  "duplicate_groups": 237,
+  "duplicate_files": 694,
+  "duplicate_groups_detail": [
+    [
+      "experiments/runs/2026-08-24T09-27-26-466Z_caliper_load/network-config.json",
+      "experiments/runs/2026-08-24T09-29-09-984Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-29-37-032Z_caliper_latency-users-2/network-config.json",
+      "experiments/runs/2026-08-24T09-29-53-808Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-30-22-582Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-30-48-513Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-31-48-043Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-32-15-175Z_caliper_latency-users-2/network-config.json",
+      "experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/network-config.json",
+      "experiments/runs/2026-08-24T09-33-04-411Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-33-10-157Z_caliper_latency-users-8/network-config.json",
+      "experiments/runs/2026-08-24T09-34-47-959Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-34-57-682Z_caliper_latency-users-8/network-config.json",
+      "experiments/runs/2026-08-24T09-37-24-587Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-37-36-885Z_caliper_latency-users-2/network-config.json",
+      "experiments/runs/2026-08-24T09-37-49-241Z_caliper_latency-users-4/network-config.json",
+      "experiments/runs/2026-08-24T09-38-02-139Z_caliper_latency-users-8/network-config.json",
+      "experiments/runs/2026-08-24T09-38-39-449Z_caliper_latency-users-1/network-config.json",
+      "experiments/runs/2026-08-24T09-38-51-376Z_caliper_latency-users-2/network-config.json",
+      "experiments/runs/2026-08-24T09-39-03-331Z_caliper_latency-users-4/network-config.json",
+      "experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/network-config.json",
+      "experiments/runs/2026-08-24T09-39-27-274Z_caliper_latency-write-tps/network-config.json",
+      "experiments/runs/2026-08-24T09-40-38-181Z_caliper_latency-query-results/network-config.json",
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/network-config.json",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/network-config.json",
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/network-config.json",
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/network-config.json",
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/network-config.json",
+      "experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps/network-config.json",
+      "experiments/runs/2026-08-24T09-56-41-932Z_caliper_write-verifier-check/network-config.json",
+      "experiments/runs/2026-08-24T09-57-03-955Z_caliper_write-verifier-check/network-config.json",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/network-config.json",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/network-config.json",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/network-config.json",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/network-config.json",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/network-config.json",
+      "experiments/runs/2026-08-24T10-07-43-197Z_caliper_latency-query-count/network-config.json",
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/network-config.json",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/network-config.json",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/network-config.json",
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/network-config.json",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/network-config.json"
+    ],
+    [
+      "benchmarks/caliper/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-31-48-043Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-32-15-175Z_caliper_latency-users-2/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-33-04-411Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-33-10-157Z_caliper_latency-users-8/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-34-47-959Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-34-57-682Z_caliper_latency-users-8/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-37-24-587Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-37-36-885Z_caliper_latency-users-2/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-37-49-241Z_caliper_latency-users-4/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-38-02-139Z_caliper_latency-users-8/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-38-39-449Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-38-51-376Z_caliper_latency-users-2/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-39-03-331Z_caliper_latency-users-4/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-39-27-274Z_caliper_latency-write-tps/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-40-38-181Z_caliper_latency-query-results/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-56-41-932Z_caliper_write-verifier-check/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-57-03-955Z_caliper_write-verifier-check/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T10-07-43-197Z_caliper_latency-query-count/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/monitors/latency-tx-observer.js"
+    ],
+    [
+      "benchmarks/caliper/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-21-50-774Z_caliper_read/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-24-35-112Z_caliper_write/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-27-26-466Z_caliper_load/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T10-07-43-197Z_caliper_latency-query-count/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/monitoring/compose.yaml",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/monitoring/compose.yaml"
+    ],
+    [
+      "benchmarks/caliper/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-21-50-774Z_caliper_read/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-24-35-112Z_caliper_write/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-27-26-466Z_caliper_load/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T10-07-43-197Z_caliper_latency-query-count/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/monitoring/prometheus.yml",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/monitoring/prometheus.yml"
+    ],
+    [
+      "benchmarks/caliper/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-20-06-499Z_caliper_smoke/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-21-50-774Z_caliper_read/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-38-39-449Z_caliper_latency-users-1/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-38-51-376Z_caliper_latency-users-2/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-39-03-331Z_caliper_latency-users-4/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/workloads/read-record.js",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/workloads/read-record.js",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/workloads/read-record.js",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/workloads/read-record.js"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-30-22-582Z_caliper_latency-users-1/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-30-48-513Z_caliper_latency-users-1/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-31-48-043Z_caliper_latency-users-1/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-32-15-175Z_caliper_latency-users-2/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-33-04-411Z_caliper_latency-users-1/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-33-10-157Z_caliper_latency-users-8/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-34-47-959Z_caliper_latency-users-1/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-34-57-682Z_caliper_latency-users-8/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-37-24-587Z_caliper_latency-users-1/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-37-36-885Z_caliper_latency-users-2/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-37-49-241Z_caliper_latency-users-4/workloads/query-records.js"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v4-best/adapter_config.json",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v4/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0000180/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0000360/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0000540/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0000720/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0000900/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0001080/adapter_config.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_select_v4/ckpt_0001260/adapter_config.json"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v5-best/adapter_config.json",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v5/adapter_config.json",
+      "LLMxAI/experiments/runs/20260904_qwen3_policy_engine_select_v5/ckpt_0000300/adapter_config.json",
+      "LLMxAI/experiments/runs/20260904_qwen3_policy_engine_select_v5/ckpt_0000600/adapter_config.json",
+      "LLMxAI/experiments/runs/20260904_qwen3_policy_engine_select_v5/ckpt_0000900/adapter_config.json",
+      "LLMxAI/experiments/runs/20260904_qwen3_policy_engine_select_v5/ckpt_0001200/adapter_config.json",
+      "LLMxAI/experiments/runs/20260904_qwen3_policy_engine_select_v5/ckpt_0001500/adapter_config.json",
+      "LLMxAI/experiments/runs/20260904_qwen3_policy_engine_select_v5/ckpt_0001800/adapter_config.json"
+    ],
+    [
+      "benchmarks/caliper/workloads/request-access-verified.js",
+      "experiments/runs/2026-08-24T09-56-41-932Z_caliper_write-verifier-check/workloads/request-access-verified.js",
+      "experiments/runs/2026-08-24T09-57-03-955Z_caliper_write-verifier-check/workloads/request-access-verified.js",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/workloads/request-access-verified.js",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/workloads/request-access-verified.js",
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/workloads/request-access-verified.js",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/workloads/request-access-verified.js"
+    ],
+    [
+      "DIAS latex paper/figures/caliper/concurrent_clients_vs_lookup_latency.pdf",
+      "Proof reading/figures/caliper/concurrent_clients_vs_lookup_latency.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/caliper/concurrent_clients_vs_lookup_latency.pdf",
+      "papers/final_paper/figures/caliper/concurrent_clients_vs_lookup_latency.pdf",
+      "results/plots/caliper-latency/concurrent_clients_vs_lookup_latency.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/caliper/policy_path_vs_latency.pdf",
+      "Proof reading/figures/caliper/policy_path_vs_latency.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/caliper/policy_path_vs_latency.pdf",
+      "papers/final_paper/figures/caliper/policy_path_vs_latency.pdf",
+      "results/plots/caliper-latency/policy_path_vs_latency.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/caliper/query_result_count_vs_latency.pdf",
+      "Proof reading/figures/caliper/query_result_count_vs_latency.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/caliper/query_result_count_vs_latency.pdf",
+      "papers/final_paper/figures/caliper/query_result_count_vs_latency.pdf",
+      "results/plots/caliper-latency/query_result_count_vs_latency.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/caliper/offered_tps_vs_write_latency.pdf",
+      "Proof reading/figures/caliper/offered_tps_vs_write_latency.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/caliper/offered_tps_vs_write_latency.pdf",
+      "papers/final_paper/figures/caliper/offered_tps_vs_write_latency.pdf",
+      "results/plots/caliper-latency/offered_tps_vs_write_latency.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/caliper/elapsed_time_vs_latency.pdf",
+      "Proof reading/figures/caliper/elapsed_time_vs_latency.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/caliper/elapsed_time_vs_latency.pdf",
+      "papers/final_paper/figures/caliper/elapsed_time_vs_latency.pdf",
+      "results/plots/caliper-latency/elapsed_time_vs_latency.pdf"
+    ],
+    [
+      "benchmarks/caliper/workloads/request-access.js",
+      "experiments/runs/2026-08-24T09-20-06-499Z_caliper_smoke/workloads/request-access.js",
+      "experiments/runs/2026-08-24T09-24-35-112Z_caliper_write/workloads/request-access.js",
+      "experiments/runs/2026-08-24T09-27-26-466Z_caliper_load/workloads/request-access.js",
+      "experiments/runs/2026-08-24T09-39-27-274Z_caliper_latency-write-tps/workloads/request-access.js"
+    ],
+    [
+      "experiments/runs/2026-08-24T07-17-54-198Z_caliper_smoke/network-config.json",
+      "experiments/runs/2026-08-24T07-19-29-888Z_caliper_smoke/network-config.json",
+      "experiments/runs/2026-08-24T09-20-06-499Z_caliper_smoke/network-config.json",
+      "experiments/runs/2026-08-24T09-21-50-774Z_caliper_read/network-config.json",
+      "experiments/runs/2026-08-24T09-24-35-112Z_caliper_write/network-config.json"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-29-53-808Z_caliper_latency-users-1/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-30-22-582Z_caliper_latency-users-1/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-30-48-513Z_caliper_latency-users-1/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-31-48-043Z_caliper_latency-users-1/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-33-04-411Z_caliper_latency-users-1/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-29-53-808Z_caliper_latency-users-1/latency-users-1.yaml",
+      "experiments/runs/2026-08-24T09-30-22-582Z_caliper_latency-users-1/latency-users-1.yaml",
+      "experiments/runs/2026-08-24T09-30-48-513Z_caliper_latency-users-1/latency-users-1.yaml",
+      "experiments/runs/2026-08-24T09-31-48-043Z_caliper_latency-users-1/latency-users-1.yaml",
+      "experiments/runs/2026-08-24T09-33-04-411Z_caliper_latency-users-1/latency-users-1.yaml"
+    ],
+    [
+      "DIAS latex paper/figures/dias-concurrent-latency-throughput.pdf",
+      "output/overleaf/DIAS_Experimental_Results_Exact_Filenames/dias-concurrent-latency-throughput.pdf",
+      "papers/final_paper/figures/dias-concurrent-latency-throughput.pdf",
+      "results/plots/dias-overnight/03_concurrent_user_latency_throughput.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/caliper/caliper_latency_five_panel.pdf",
+      "Proof reading/figures/caliper/caliper_latency_five_panel.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/caliper/caliper_latency_five_panel.pdf",
+      "papers/final_paper/figures/caliper/caliper_latency_five_panel.pdf"
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/staged/train-1600/test.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/staged/train-400/test.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/test-decision-balanced.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/test.jsonl"
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/staged/train-1600/valid.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/staged/train-400/valid.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/valid.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/validation-balanced.jsonl"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/oracle/policyV1.js",
+      "chaincode/crimerecords/lib/policy/policyV1.js",
+      "experiments/policy-v2-precision/data/policy-snapshot/policyV1.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/policyV1.js"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/oracle/authority.js",
+      "chaincode/crimerecords/lib/policy/authority.js",
+      "experiments/policy-v2-precision/data/policy-snapshot/authority.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/authority.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm_acceptance/scenarios.csv",
+      "experiments/runs/20260915_dias_backend_llm_acceptance_170525/scenarios.csv",
+      "experiments/runs/20260916_dias_backend_llm_acceptance_054757/scenarios.csv",
+      "experiments/runs/20260916_dias_v7_live_acceptance_r3/scenarios.csv"
+    ],
+    [
+      "benchmarks/caliper/workloads/query-records.js",
+      "experiments/runs/2026-08-24T10-07-43-197Z_caliper_latency-query-count/workloads/query-records.js",
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/workloads/query-records.js",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/workloads/query-records.js"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-29-37-032Z_caliper_latency-users-2/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-29-53-808Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-30-22-582Z_caliper_latency-users-1/monitors/latency-tx-observer.js",
+      "experiments/runs/2026-08-24T09-30-48-513Z_caliper_latency-users-1/monitors/latency-tx-observer.js"
+    ],
+    [
+      "DIAS latex paper/figures/interface/file_record.jpg",
+      "Proof reading/figures/interface/file_record.jpg",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/interface/file_record.jpg",
+      "results/plots/interface/file_record.jpg"
+    ],
+    [
+      "DIAS latex paper/figures/interface/search_access_decision.jpg",
+      "Proof reading/figures/interface/search_access_decision.jpg",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/interface/search_access_decision.jpg",
+      "results/plots/interface/search_access_decision.jpg"
+    ],
+    [
+      "DIAS latex paper/figures/results/100UsersLatency.pdf",
+      "Proof reading/figures/results/100UsersLatency.pdf",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/latency_three_panel_by_users.pdf",
+      "results/plots/ui-unique-user-latency/latency_three_panel_by_users.pdf"
+    ],
+    [
+      "output/pdf/dias-results-reference-style/dias_paper.blg",
+      "output/pdf/dias_paper.blg",
+      "papers/final_paper/dias_paper.blg"
+    ],
+    [
+      "DIAS latex paper/figures/dias-scope-safety-efficiency.pdf",
+      "papers/final_paper/figures/dias-scope-safety-efficiency.pdf",
+      "results/plots/dias-overnight/02_scope_safety_efficiency.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/dias-model-failure-unsafe-allow.pdf",
+      "papers/final_paper/figures/dias-model-failure-unsafe-allow.pdf",
+      "results/plots/dias-overnight/04_model_failure_unsafe_allow.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/dias-recommendation-quality.pdf",
+      "papers/final_paper/figures/dias-recommendation-quality.pdf",
+      "results/plots/dias-overnight/01_recommendation_quality.pdf"
+    ],
+    [
+      "LLMxAI/2511.20284v2.pdf",
+      "papers/reference_library/01_cited_in_current_manuscript/Groschupp2025.pdf",
+      "reports/research/20260905_related_work/llm_sources/groschupp_2511.20284v2.pdf"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-clients-8.yaml",
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/latency-clients-8.yaml",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/latency-clients-8.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-stability-short.yaml",
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/latency-stability-short.yaml",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/latency-stability-short.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-clients-1.yaml",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/latency-clients-1.yaml",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/latency-clients-1.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-write-tps.yaml",
+      "experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps/latency-write-tps.yaml",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/latency-write-tps.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-query-count.yaml",
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/latency-query-count.yaml",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/latency-query-count.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-clients-2.yaml",
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/latency-clients-2.yaml",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/latency-clients-2.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-clients-4.yaml",
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/latency-clients-4.yaml",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/latency-clients-4.yaml"
+    ],
+    [
+      "DIAS latex paper/README_OVERLEAF.txt",
+      "Proof reading/README_OVERLEAF.txt",
+      "output/overleaf/SEBA_XAI_Overleaf_Package/README_OVERLEAF.txt"
+    ],
+    [
+      "Proof reading/figures/dias-methodology-final-single-column.drawio.pdf",
+      "Proof reading/figures/results/dias-methodology-final-single-column.drawio.pdf",
+      "output/overleaf/DIAS_Experimental_Results_Exact_Filenames/dias-methodology-final-single-column.drawio.pdf"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/index.html",
+      "frontend/index.html"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/README.md",
+      "frontend/README.md"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/auditor-handoff.html",
+      "frontend/auditor-handoff.html"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/package.json",
+      "frontend/package.json"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/test/auditor-handoff.test.mjs",
+      "frontend/test/auditor-handoff.test.mjs"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/test/recent-requests.test.mjs",
+      "frontend/test/recent-requests.test.mjs"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/test/access-log.test.mjs",
+      "frontend/test/access-log.test.mjs"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/css/layout.css",
+      "frontend/css/layout.css"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/css/components.css",
+      "frontend/css/components.css"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/css/base.css",
+      "frontend/css/base.css"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/app.js",
+      "frontend/js/app.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/core/format.js",
+      "frontend/js/core/format.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/core/components.js",
+      "frontend/js/core/components.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/core/router.js",
+      "frontend/js/core/router.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/core/dom.js",
+      "frontend/js/core/dom.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/core/toast.js",
+      "frontend/js/core/toast.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/shared/auditor-handoff.js",
+      "frontend/js/shared/auditor-handoff.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/shared/access-log.js",
+      "frontend/js/shared/access-log.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/frontend/js/views/login.js",
+      "frontend/js/views/login.js"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/README.md",
+      "papers/final_paper/DIAS_OVERLEAF_README.md"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/DIAS_REWRITE_NOTES.md",
+      "papers/final_paper/DIAS_REWRITE_NOTES.md"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/main.tex",
+      "papers/final_paper/DIAS_Methodology_Results.tex"
+    ],
+    [
+      "papers/final_paper/SEBA_Internship_Report_Revised_Student_Voice.docx",
+      "reports/SEBA_Internship_Report_Revised_Student_Voice.docx"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/tables/dias_recommendation.tex",
+      "papers/final_paper/tables/dias_recommendation.tex"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/tables/dias_input_ablation.tex",
+      "papers/final_paper/tables/dias_input_ablation.tex"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/tables/dias_workflow.tex",
+      "papers/final_paper/tables/dias_workflow.tex"
+    ],
+    [
+      "output/overleaf/DIAS_Methodology_Results/tables/dias_scope.tex",
+      "papers/final_paper/tables/dias_scope.tex"
+    ],
+    [
+      "Proof reading/figures/interface/dias-llm-auditor-interface.jpg",
+      "papers/final_paper/figures/implementation/dias-llm-auditor-interface.jpg"
+    ],
+    [
+      "Proof reading/figures/interface/dias-access-contract-excerpt.jpg",
+      "papers/final_paper/figures/implementation/dias-access-contract-excerpt.jpg"
+    ],
+    [
+      "papers/reference_library/01_cited_in_current_manuscript/Zisad2026.pdf",
+      "reports/research/20260905_related_work/llm_sources/llmac_2602.09392v1.pdf"
+    ],
+    [
+      "papers/reference_library/01_cited_in_current_manuscript/Cheng2025.pdf",
+      "reports/research/20260905_related_work/llm_sources/lace_2505.23835v1.pdf"
+    ],
+    [
+      "paper-tests/results/failures/exp03-attempt3-listener-halt-20260908T001006Z.log",
+      "paper-tests/results/logs/exp03.log"
+    ],
+    [
+      "experiments/seal-eval/negative-results.json",
+      "paper-tests/results/raw/negative-results.json"
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/staged/train-1600/train.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/subsets/train-1600.jsonl"
+    ],
+    [
+      "experiments/dias-finetuning/data-v2-binary/staged/train-400/train.jsonl",
+      "experiments/dias-finetuning/data-v2-binary/subsets/train-400.jsonl"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/oracle/policyEngine.js",
+      "experiments/policy-v2-precision/data/policy-snapshot/policyEngine.js"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-07-11-290Z_ui_unique_user_provisioning/summary.json",
+      "results/tables/ui-unique-user-latency/provisioning-summary.json"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-06-52-462Z_ui_unique_user_provisioning/users.json",
+      "experiments/runs/2026-08-28T04-07-11-290Z_ui_unique_user_provisioning/users.json"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-18-28-093Z_ui_unique_user_release_layout_ablation/rounds.csv",
+      "results/tables/ui-unique-user-latency/release-layout-ablation-rounds.csv"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-18-28-093Z_ui_unique_user_release_layout_ablation/summary.csv",
+      "results/tables/ui-unique-user-latency/release-layout-ablation-summary.csv"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-18-28-093Z_ui_unique_user_release_layout_ablation/run-report.json",
+      "results/tables/ui-unique-user-latency/release-layout-ablation-report.json"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-33-10-157Z_caliper_latency-users-8/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-34-57-682Z_caliper_latency-users-8/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-33-10-157Z_caliper_latency-users-8/latency-users-8.yaml",
+      "experiments/runs/2026-08-24T09-34-57-682Z_caliper_latency-users-8/latency-users-8.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/write-performance.yaml",
+      "experiments/runs/2026-08-24T09-24-35-112Z_caliper_write/write-performance.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/2026-08-24T15-43-02-557Z_caliper_latency-stability/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/smoke.yaml",
+      "experiments/runs/2026-08-24T09-20-06-499Z_caliper_smoke/smoke.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency/rounds.csv",
+      "results/tables/ui-unique-user-latency/unique-user-rounds.csv"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency/summary.csv",
+      "results/tables/ui-unique-user-latency/unique-user-summary.csv"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency/raw-samples.jsonl",
+      "experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency/raw-samples.partial.jsonl"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency/run-report.json",
+      "results/tables/ui-unique-user-latency/unique-user-run-report.json"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/network/compose/compose-net.yaml",
+      "network/compose/compose-net.yaml"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/network/compose/compose-ca.yaml",
+      "network/compose/compose-ca.yaml"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/network/scripts/deployCC.sh",
+      "network/scripts/deployCC.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/network/scripts/registerEnroll.sh",
+      "network/scripts/registerEnroll.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/network/scripts/seed-identities.sh",
+      "network/scripts/seed-identities.sh"
+    ],
+    [
+      "backend/package-lock.json",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/package-lock.json"
+    ],
+    [
+      "backend/test/diasContract.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/diasContract.unit.test.js"
+    ],
+    [
+      "backend/test/diasPolicyContext.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/diasPolicyContext.unit.test.js"
+    ],
+    [
+      "backend/test/vault.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/vault.unit.test.js"
+    ],
+    [
+      "backend/test/setup.unit.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/setup.unit.js"
+    ],
+    [
+      "backend/test/diasRecommender.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/diasRecommender.unit.test.js"
+    ],
+    [
+      "backend/test/policyDecision.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/policyDecision.unit.test.js"
+    ],
+    [
+      "backend/test/diasPrompt.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/diasPrompt.unit.test.js"
+    ],
+    [
+      "backend/test/security.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/security.unit.test.js"
+    ],
+    [
+      "backend/test/llm.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/llm.unit.test.js"
+    ],
+    [
+      "backend/test/policyAttestation.unit.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/policyAttestation.unit.test.js"
+    ],
+    [
+      "backend/test/fixtures/diasFixtures.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/test/fixtures/diasFixtures.js"
+    ],
+    [
+      "backend/data/ai-decider-checkpoint.json",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/data/ai-decider-checkpoint.json"
+    ],
+    [
+      "backend/data/dias-recommender-checkpoint.json",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/data/dias-recommender-checkpoint.json"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/backend/data/agency-vault/police/documents/712878b2d87f1661beef14f63426cae16cd2ebce57c85111709e8038a8621bd3.pdf",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/data/agency-vault/police/documents/ecb3b672cb34de28721326fe7437150493515c50faa2a4f5839736cbaa319a91.pdf"
+    ],
+    [
+      "backend/src/dias/policyContextProvider.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/dias/policyContextProvider.js"
+    ],
+    [
+      "backend/src/dias/recommendationContract.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/dias/recommendationContract.js"
+    ],
+    [
+      "backend/src/dias/recommendationPrompt.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/dias/recommendationPrompt.js"
+    ],
+    [
+      "backend/src/dias/recommender.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/dias/recommender.js"
+    ],
+    [
+      "backend/src/middleware/auth.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/middleware/auth.js"
+    ],
+    [
+      "backend/src/llm/groundedPolicyPrompt.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/groundedPolicyPrompt.js"
+    ],
+    [
+      "backend/src/llm/policyDecision.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/policyDecision.js"
+    ],
+    [
+      "backend/src/llm/policyPrompt.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/policyPrompt.js"
+    ],
+    [
+      "backend/src/llm/policyAttestation.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/policyAttestation.js"
+    ],
+    [
+      "backend/src/llm/explain.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/explain.js"
+    ],
+    [
+      "backend/src/llm/ollama.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/ollama.js"
+    ],
+    [
+      "backend/src/llm/template.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/llm/template.js"
+    ],
+    [
+      "backend/src/storage/vault.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/storage/vault.js"
+    ],
+    [
+      "backend/src/fabric/users.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/fabric/users.js"
+    ],
+    [
+      "backend/src/fabric/ca.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/fabric/ca.js"
+    ],
+    [
+      "backend/src/routes/cases.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/routes/cases.js"
+    ],
+    [
+      "backend/src/routes/auth.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/routes/auth.js"
+    ],
+    [
+      "backend/src/routes/departments.js",
+      "experiments/runs/20260915_dias_backend_llm/before/backend/src/routes/departments.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/dias-governance-policy-v1.json",
+      "policies/dias-governance-policy-v1.json"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/package.json",
+      "policies/package.json"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/tools/render-policy-spec.js",
+      "policies/tools/render-policy-spec.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/tools/derive-governance-policy-v1.js",
+      "policies/tools/derive-governance-policy-v1.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/test/bundle.test.js",
+      "policies/test/bundle.test.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/test/referencePolicyOracle.test.js",
+      "policies/test/referencePolicyOracle.test.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/lib/bundle.js",
+      "policies/lib/bundle.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/policies/reference-oracle/referencePolicyOracle.js",
+      "policies/reference-oracle/referencePolicyOracle.js"
+    ],
+    [
+      "chaincode/crimerecords/package-lock.json",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/package-lock.json"
+    ],
+    [
+      "chaincode/crimerecords/package.json",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/package.json"
+    ],
+    [
+      "chaincode/crimerecords/test/diasSchema.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/diasSchema.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/userContract.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/userContract.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/testHelpers.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/testHelpers.js"
+    ],
+    [
+      "chaincode/crimerecords/test/canonicalState.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/canonicalState.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/authority.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/authority.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/governanceContract.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/governanceContract.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/legacy/dynamicPolicy.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/legacy/dynamicPolicy.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/legacy/structuredExplanation.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/legacy/structuredExplanation.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/legacy/canonicalInputs.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/legacy/canonicalInputs.test.js"
+    ],
+    [
+      "chaincode/crimerecords/test/legacy/policyEngine.test.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/test/legacy/policyEngine.test.js"
+    ],
+    [
+      "chaincode/crimerecords/META-INF/statedb/couchdb/indexes/indexDocTypeCaseId.json",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/META-INF/statedb/couchdb/indexes/indexDocTypeCaseId.json"
+    ],
+    [
+      "chaincode/crimerecords/lib/userContract.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/userContract.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/governanceContract.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/governanceContract.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/dias/recommendationSchema.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/dias/recommendationSchema.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/dias/verifiedRequest.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/dias/verifiedRequest.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/util/state.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/util/state.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/util/identity.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/util/identity.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/util/validate.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/util/validate.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/policy/controlledDecision.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/controlledDecision.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/policy/reasonDecisions.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/reasonDecisions.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/policy/policyEngine.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/policyEngine.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/policy/dynamicPolicy.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/dynamicPolicy.js"
+    ],
+    [
+      "chaincode/crimerecords/lib/policy/llmDecisionProtocol.js",
+      "experiments/runs/20260915_dias_backend_llm/before/chaincode/crimerecords/lib/policy/llmDecisionProtocol.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/check-repository.py",
+      "scripts/check-repository.py"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/setup-ollama.sh",
+      "scripts/setup-ollama.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/verify-access-log.sh",
+      "scripts/verify-access-log.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/network-up.sh",
+      "scripts/network-up.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/seed-users-onchain.js",
+      "scripts/seed-users-onchain.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/seed-demo-records.js",
+      "scripts/seed-demo-records.js"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/dias/train-v7.sh",
+      "scripts/dias/train-v7.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/dias/evaluate-v7.sh",
+      "scripts/dias/evaluate-v7.sh"
+    ],
+    [
+      "experiments/runs/20260915_dias_backend_llm/before/scripts/dias/adapterDigest.js",
+      "scripts/dias/adapterDigest.js"
+    ],
+    [
+      "experiments/runs/2026-08-24T07-17-54-198Z_caliper_smoke/smoke.yaml",
+      "experiments/runs/2026-08-24T07-19-29-888Z_caliper_smoke/smoke.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-56-41-932Z_caliper_write-verifier-check/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T09-56-41-932Z_caliper_write-verifier-check/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-37-24-587Z_caliper_latency-users-1/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T09-37-24-587Z_caliper_latency-users-1/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "benchmarks/caliper/configs/read-performance.yaml",
+      "experiments/runs/2026-08-24T09-21-50-774Z_caliper_read/read-performance.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "benchmarks/caliper/configs/latency-policy-path.yaml",
+      "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/latency-policy-path.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-43-08-294Z_caliper_latency-clients-1/latency-clients-1.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-29-37-032Z_caliper_latency-users-2/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-29-53-808Z_caliper_latency-users-1/workloads/query-records.js"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/2026-08-28T04-14-37-157Z_ui_unique_user_latency/raw-samples.jsonl",
+      "experiments/runs/2026-08-28T04-14-37-157Z_ui_unique_user_latency/raw-samples.partial.jsonl"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-38-39-449Z_caliper_latency-users-1/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T09-38-39-449Z_caliper_latency-users-1/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/rounds.csv",
+      "results/tables/ui-latency/rounds.csv"
+    ],
+    [
+      "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/summary.csv",
+      "results/tables/ui-latency/summary.csv"
+    ],
+    [
+      "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/raw-samples.jsonl",
+      "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/raw-samples.partial.jsonl"
+    ],
+    [
+      "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/run-report.json",
+      "results/tables/ui-latency/run-report.json"
+    ],
+    [
+      "experiments/runs/2026-08-24T10-17-02-255Z_caliper_latency-query-count/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4/caliper-executed-benchmark.yaml",
+      "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/caliper-executed-benchmark.yaml"
+    ],
+    [
+      "experiments/runs/20260916_dias_audit_reconstruction/audit-reconstruction.csv",
+      "results/tables/dias_audit_reconstruction.csv"
+    ],
+    [
+      "experiments/runs/20260916_dias_concurrent_users/concurrent-users.csv",
+      "results/tables/dias_concurrent_users.csv"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-38-02-139Z_caliper_latency-users-8/workloads/query-records.js",
+      "experiments/runs/2026-08-24T09-40-38-181Z_caliper_latency-query-results/workloads/query-records.js"
+    ],
+    [
+      "experiments/runs/2026-08-24T09-57-03-955Z_caliper_write-verifier-check/caliper-transactions.jsonl",
+      "experiments/runs/2026-08-24T09-57-03-955Z_caliper_write-verifier-check/latency-transactions-worker-0.ndjson"
+    ],
+    [
+      "experiments/runs/20260916_dias_scope_workload_sweep/scope-workload-sweep.csv",
+      "results/tables/dias_scope_workload_sweep.csv"
+    ],
+    [
+      "benchmarks/caliper/configs/increasing-load.yaml",
+      "experiments/runs/2026-08-24T09-27-26-466Z_caliper_load/increasing-load.yaml"
+    ],
+    [
+      "experiments/runs/2026-08-25T14-07-26-224Z_ui_interaction_latency/summary.csv",
+      "results/tables/ui-latency/baseline-unindexed-search-summary.csv"
+    ],
+    [
+      "experiments/runs/2026-08-25T14-07-26-224Z_ui_interaction_latency/raw-samples.jsonl",
+      "experiments/runs/2026-08-25T14-07-26-224Z_ui_interaction_latency/raw-samples.partial.jsonl"
+    ],
+    [
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/search_latency.pdf",
+      "results/plots/ui-latency/search_latency.pdf"
+    ],
+    [
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/interactive_latency_three_panel.pdf",
+      "results/plots/ui-latency/interactive_latency_three_panel.pdf"
+    ],
+    [
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/release_layout_ablation.pdf",
+      "results/plots/ui-unique-user-latency/release_layout_ablation.pdf"
+    ],
+    [
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/release_latency.pdf",
+      "results/plots/ui-latency/release_latency.pdf"
+    ],
+    [
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/interactive_latency_distinct_users.pdf",
+      "results/plots/ui-unique-user-latency/interactive_latency_distinct_users.pdf"
+    ],
+    [
+      "output/overleaf/SEBA_XAI_Overleaf_Package/figures/results/submit_latency.pdf",
+      "results/plots/ui-latency/submit_latency.pdf"
+    ],
+    [
+      "Proof reading/figures/results/Adversarial policy denied test on model.pdf",
+      "output/overleaf/DIAS_Experimental_Results_Exact_Filenames/adversarial-policy-denied.pdf"
+    ],
+    [
+      "Proof reading/figures/results/Auditor review savings by repeated requests.pdf",
+      "output/overleaf/DIAS_Experimental_Results_Exact_Filenames/auditor-review-savings.pdf"
+    ],
+    [
+      "Proof reading/figures/results/Model quality on 600 test decisions.pdf",
+      "output/overleaf/DIAS_Experimental_Results_Exact_Filenames/model-quality-600.pdf"
+    ],
+    [
+      "output/pdf/DIAS_Experimental_Results_Reference_Style.pdf",
+      "output/pdf/dias-results-reference-style/dias_paper.pdf"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/train_config.yaml",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_train_v3/train_config.yaml"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/0000256_adapters.safetensors",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42/adapters.safetensors"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/0000256_adapters.safetensors",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-73/adapters.safetensors"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/0000012_adapters.safetensors",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/adapters.safetensors"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best/adapter_config.json",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6/adapter_config.json"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/0000256_adapters.safetensors",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17/adapters.safetensors"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3-best/adapter_config.json",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/adapter_config.json"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/0001600_adapters.safetensors",
+      "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8/adapters.safetensors"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data_v3/dataset_manifest.json",
+      "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_train_v3/dataset_manifest.json"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data/train.jsonl",
+      "LLMxAI/experiments/runs/20260901_qwen3_policy_engine_train_v2/dataset_snapshot/train.jsonl"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data/test.jsonl",
+      "LLMxAI/experiments/runs/20260901_qwen3_policy_engine_train_v2/dataset_snapshot/test.jsonl"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data/test_balanced_60.jsonl",
+      "LLMxAI/experiments/runs/20260901_qwen3_policy_engine_train_v2/dataset_snapshot/test_balanced_60.jsonl"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data/valid.jsonl",
+      "LLMxAI/experiments/runs/20260901_qwen3_policy_engine_train_v2/dataset_snapshot/valid.jsonl"
+    ],
+    [
+      "LLMxAI/experiments/llm_policy_engine/data/dataset_manifest.json",
+      "LLMxAI/experiments/runs/20260901_qwen3_policy_engine_train_v2/dataset_snapshot/dataset_manifest.json"
+    ],
+    [
+      "DIAS latex paper/main_old.pdf",
+      "Proof reading/main_old.pdf"
+    ],
+    [
+      "DIAS latex paper/dias-refs.bib",
+      "Proof reading/_pre_review_backup/dias-refs.bib"
+    ],
+    [
+      "DIAS latex paper/figures/Architecture.drawio.png",
+      "Proof reading/figures/Architecture.drawio.png"
+    ],
+    [
+      "DIAS latex paper/figures/Finalarc.pdf",
+      "Proof reading/figures/Finalarc.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/dias_intro.pdf",
+      "Proof reading/figures/dias_intro::.pdf"
+    ],
+    [
+      "DIAS latex paper/figures/architecture_aligned.svg",
+      "Proof reading/figures/architecture_aligned.svg"
+    ],
+    [
+      "Proof reading/_pre_review_backup/sections_round2/Conclusion.tex",
+      "Proof reading/sections/Conclusion.tex"
+    ],
+    [
+      "Proof reading/_pre_review_backup/sections_round2/Abstract.tex",
+      "Proof reading/sections/Abstract.tex"
+    ]
+  ],
+  "symlinks": []
+}

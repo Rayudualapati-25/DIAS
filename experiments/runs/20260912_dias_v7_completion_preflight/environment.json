@@ -1,0 +1,44 @@
+{
+  "captured_at_utc": "2026-09-12T04:04:39.716143+00:00",
+  "disk_free_data_volume": "/dev/disk3s1   926Gi   493Gi   408Gi    55%    3.0M  4.3G    0%   /System/Volumes/Data",
+  "git": {
+    "branch": "main",
+    "dirty_entries": 44,
+    "head": "9a3dddf31d4dd2855faf8143186578c5f893af63",
+    "head_subject": "Create standalone DIAS project snapshot"
+  },
+  "platform": {
+    "cpu_count": 16,
+    "machine": "arm64",
+    "physical_memory_bytes": 68719476736,
+    "processor": "Apple M3 Max",
+    "release": "25.6.0",
+    "system": "Darwin"
+  },
+  "protected_paths_readonly": [
+    "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network",
+    "/Users/venkatrayudu/Workspace/XAI workspace/wt-dias"
+  ],
+  "repo": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS",
+  "toolchain": {
+    "docker": "Docker version 29.6.2, build dfc4efb",
+    "git": "git version 2.50.1 (Apple Git-155)",
+    "node": "v22.20.0",
+    "npm": "10.9.3",
+    "peer": "",
+    "python3": "Python 3.13.5"
+  },
+  "v6_service": {
+    "adapter_path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best",
+    "must_not_be_touched": true,
+    "pid": 54194,
+    "port": 8080
+  },
+  "venv_qwen_policy": {
+    "mlx": "0.32.2",
+    "mlx_lm": "0.31.3",
+    "path": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy",
+    "python": "Python 3.13.7",
+    "transformers": "5.17.0"
+  }
+}

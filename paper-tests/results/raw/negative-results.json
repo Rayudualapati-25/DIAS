@@ -1,0 +1,72 @@
+{
+  "ranAt": "2026-09-05T20:08:20.062Z",
+  "results": [
+    {
+      "id": "N1a",
+      "attempt": "the originating requester opens the record under their own ALLOW (control)",
+      "refused": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "id": "N1b",
+      "attempt": "a second officer opens the record under that same ALLOW",
+      "refused": true,
+      "detail": "HTTP 422: chaincode response 500, unauthorized: access decision belongs to a different identity or record"
+    },
+    {
+      "id": "N2",
+      "attempt": "a police identity reads the AI-only decision context",
+      "refused": true,
+      "detail": "chaincode response 500, unauthorized: GetAccessRequestForDecision requires the llm-decider identity of AIOrgMSP"
+    },
+    {
+      "id": "N3",
+      "attempt": "a police identity submits a model decision",
+      "refused": true,
+      "detail": "chaincode response 500, unauthorized: SubmitLLMDecision requires the llm-decider identity of AIOrgMSP"
+    },
+    {
+      "id": "N4",
+      "attempt": "a decision carrying a corrupted attestation",
+      "refused": true,
+      "detail": "chaincode response 500, model attestation signature verification failed"
+    },
+    {
+      "id": "N5",
+      "attempt": "a decision signed by a key that is not the registered one",
+      "refused": true,
+      "detail": "chaincode response 500, model attestation signature verification failed"
+    },
+    {
+      "id": "N6",
+      "attempt": "a decision payload altered after the attestation was produced",
+      "refused": true,
+      "detail": "chaincode response 500, model inference: outputHash does not match the submitted decision"
+    },
+    {
+      "id": "N7a",
+      "attempt": "a correctly attested, policy-consistent decision (control)",
+      "refused": true,
+      "detail": "accepted: allow / POLICY_SATISFIED"
+    },
+    {
+      "id": "N7b",
+      "attempt": "a second decision for the same request (replay)",
+      "refused": true,
+      "detail": "chaincode response 500, access request '9cecfd680245232ae7ccd1c7c18157724980097a4176dab6cd67a0cc4af85d8d' has already been answered"
+    },
+    {
+      "id": "N8",
+      "attempt": "a decision computed before the record was sealed, submitted after",
+      "refused": true,
+      "detail": "chaincode response 500, trusted access context changed between the request and the decision"
+    },
+    {
+      "id": "N9",
+      "attempt": "an explanation forged after signing, with the output commitment recomputed and the attestation re-signed so that both pass",
+      "refused": true,
+      "detail": "chaincode response 500, model inference: submitted decision does not match the independently derived policy result"
+    }
+  ],
+  "note": "N9 isolates the ledger's independent re-derivation: the decisive attributes, counterfactual and explanation text were replaced while the decision and reason code were left intact, then the output commitment was recomputed over the forged decision and the attestation re-signed. Both the commitment check and the signature check therefore pass, so the refusal can only come from the chaincode recomputing the decision and explanation itself."
+}

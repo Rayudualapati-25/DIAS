@@ -1,0 +1,45 @@
+{
+  "purpose": "reproduce a retained DIAS model evaluation with the current checkout",
+  "label": "qwen3-14b-dias-v7",
+  "startedAtUtc": "2026-09-21T04:38:25Z",
+  "baseModel": "mlx-community/Qwen3-14B-4bit",
+  "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "adapterPath": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7",
+  "adapterSha256": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+  "server": {
+    "binary": ".venv-qwen-policy/bin/mlx_lm.server",
+    "port": 8083,
+    "maxTokens": 512,
+    "chatTemplateArgs": {
+      "enable_thinking": false
+    },
+    "env": {
+      "HF_HUB_OFFLINE": "1"
+    }
+  },
+  "decoding": {
+    "temperature": 0,
+    "topP": 1,
+    "maxTokens": 512,
+    "thinking": "disabled",
+    "seed": "not applicable (greedy decoding)"
+  },
+  "harness": "experiments/dias-finetuning/v2/eval/evaluate.js -> backend/src/dias/recommender.js",
+  "sets": {
+    "test-decision-balanced": {
+      "file": "experiments/dias-finetuning/data-v2-binary/test-decision-balanced.cases.jsonl",
+      "sha256": "91e909ee2a49a04ebaabd6cd3281c38105bba590ca7cbca08aaa9562439e5bf6"
+    },
+    "test-adversarial": {
+      "file": "experiments/dias-finetuning/data-v2-binary/test-adversarial.cases.jsonl",
+      "sha256": "f3fa70d9c42e95459e7e41f64092c8a21f1d2b12ac785bee7b30341bb3b5e726"
+    }
+  },
+  "limit": null,
+  "git": {
+    "commit": "d899bf706bc37422321feae5e851b33326dbb491",
+    "branch": "dias-backend-llm",
+    "dirtyFiles": 262,
+    "promptPathDiffVsHead": "policies/test/policyPackage.test.js | 11 +++--------\n 1 file changed, 3 insertions(+), 8 deletions(-)"
+  }
+}

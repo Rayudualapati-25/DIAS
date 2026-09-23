@@ -1,0 +1,16 @@
+% Generated from experiment result JSON. Do not edit by hand.
+\toprule
+Case & Attack or control & Kind & Behaved as intended & Unauthorized Allow & Protected record released \\
+\midrule
+N1a & the originating requester opens the record under their own ALLOW (control) & control & yes & no & no \\
+N1b & a second officer opens the record under that same ALLOW & attack & yes & no & no \\
+N2 & a police identity reads the AI-only decision context & attack & yes & no & no \\
+N3 & a police identity submits a model decision & attack & yes & no & no \\
+N4 & a decision carrying a corrupted attestation & attack & yes & no & no \\
+N5 & a decision signed by a key that is not the registered one & attack & yes & no & no \\
+N6 & a decision payload altered after the attestation was produced & attack & yes & no & no \\
+N7a & a correctly attested, policy-consistent decision (control) & control & yes & no & no \\
+N7b & a second decision for the same request (replay) & attack & yes & no & no \\
+N8 & a decision computed before the record was sealed, submitted after & attack & yes & no & no \\
+N9 & an explanation forged after signing, with the output commitment recomputed and the attes & attack & yes & no & no \\
+\bottomrule

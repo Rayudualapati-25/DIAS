@@ -1,0 +1,28 @@
+[config] JWT_SECRET not set — using a dev-only default. Do not deploy like this.
+
+========================================================================
+EXPERIMENT 03 — security, end-to-end workflows and reliability
+========================================================================
+  preflight OK — paper-freeze-v1 (working tree dirty)
+
+  A. tamper / security
+    11/11 checks behaved as intended
+
+  B/C. Allow / Deny / Escalate end to end
+    Allow      allow/POLICY_SATISFIED  released=true
+    Deny       deny/CRED_NOT_ACTIVE  released=false
+    Escalate   escalate/MODEL_INPUT_DISAGREEMENT  released=false
+
+  D. audit-originated escalation
+    self-review refused: true, other reviewer accepted: true
+
+  E. 10 consecutive live integration suites
+    run  1  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  2  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  3  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  4  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  5  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  6  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  7  105 passing / 0 failing  pending 0->0  mismatch 0  timeout 0
+    run  8  100 passing / 5 failing  pending 0->0  mismatch 0  timeout 1
+    run  9  96 passing / 9 failing  pending 0->0  mismatch 0  timeout 3

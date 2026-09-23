@@ -1,0 +1,243 @@
+# Crime Records Access Network — channel configuration
+# 5 department orgs + 1 orderer org, single application channel "crimechannel".
+# Modeled on fabric-samples test-network configtx (Fabric 2.5).
+
+Organizations:
+  - &OrdererOrg
+    Name: OrdererOrg
+    ID: OrdererMSP
+    MSPDir: ../organizations/ordererOrganizations/example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('OrdererMSP.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('OrdererMSP.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('OrdererMSP.admin')"
+    OrdererEndpoints:
+      - orderer.example.com:7050
+
+  - &Police
+    Name: PoliceMSP
+    ID: PoliceMSP
+    MSPDir: ../organizations/peerOrganizations/police.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('PoliceMSP.admin', 'PoliceMSP.peer', 'PoliceMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('PoliceMSP.admin', 'PoliceMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('PoliceMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('PoliceMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.police.example.com
+        Port: 7051
+
+  - &Forensics
+    Name: ForensicsMSP
+    ID: ForensicsMSP
+    MSPDir: ../organizations/peerOrganizations/forensics.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('ForensicsMSP.admin', 'ForensicsMSP.peer', 'ForensicsMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('ForensicsMSP.admin', 'ForensicsMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('ForensicsMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('ForensicsMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.forensics.example.com
+        Port: 8051
+
+  - &Prosecution
+    Name: ProsecutionMSP
+    ID: ProsecutionMSP
+    MSPDir: ../organizations/peerOrganizations/prosecution.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('ProsecutionMSP.admin', 'ProsecutionMSP.peer', 'ProsecutionMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('ProsecutionMSP.admin', 'ProsecutionMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('ProsecutionMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('ProsecutionMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.prosecution.example.com
+        Port: 9051
+
+  - &Court
+    Name: CourtMSP
+    ID: CourtMSP
+    MSPDir: ../organizations/peerOrganizations/court.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('CourtMSP.admin', 'CourtMSP.peer', 'CourtMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('CourtMSP.admin', 'CourtMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('CourtMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('CourtMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.court.example.com
+        Port: 10051
+
+  - &Audit
+    Name: AuditMSP
+    ID: AuditMSP
+    MSPDir: ../organizations/peerOrganizations/audit.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('AuditMSP.admin', 'AuditMSP.peer', 'AuditMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('AuditMSP.admin', 'AuditMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('AuditMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('AuditMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.audit.example.com
+        Port: 11051
+
+  # The organisation that operates the fine-tuned policy model. Inference happens
+  # off-chain on its own hardware; this membership is what lets it sign the
+  # decisions it produces, so an access decision is attributable to the model
+  # operator rather than to the officer who asked for the file.
+  - &AIOrg
+    Name: AIOrgMSP
+    ID: AIOrgMSP
+    MSPDir: ../organizations/peerOrganizations/ai.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('AIOrgMSP.admin', 'AIOrgMSP.peer', 'AIOrgMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('AIOrgMSP.admin', 'AIOrgMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('AIOrgMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('AIOrgMSP.peer')"
+    AnchorPeers:
+      - Host: peer0.ai.example.com
+        Port: 12051
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+  Application: &ApplicationCapabilities
+    V2_5: true
+
+Application: &ApplicationDefaults
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    LifecycleEndorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+    Endorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+  Addresses:
+    - orderer.example.com:7050
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    BlockValidation:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+
+Channel: &ChannelDefaults
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+  Capabilities:
+    <<: *ChannelCapabilities
+
+Profiles:
+  CrimeChannel:
+    <<: *ChannelDefaults
+    Orderer:
+      <<: *OrdererDefaults
+      OrdererType: etcdraft
+      EtcdRaft:
+        Consenters:
+          - Host: orderer.example.com
+            Port: 7050
+            ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+            ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+      Organizations:
+        - *OrdererOrg
+      Capabilities: *OrdererCapabilities
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *Police
+        - *Forensics
+        - *Prosecution
+        - *Court
+        - *Audit
+        - *AIOrg
+      Capabilities: *ApplicationCapabilities

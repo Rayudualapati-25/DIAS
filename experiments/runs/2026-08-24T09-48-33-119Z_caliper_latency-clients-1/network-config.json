@@ -1,0 +1,124 @@
+{
+  "name": "SEBA-XAI Crime Records Fabric Network",
+  "version": "2.0.0",
+  "caliper": {
+    "blockchain": "fabric",
+    "sutOptions": {
+      "mutualTls": false
+    }
+  },
+  "info": {
+    "fabricVersion": "v2.5.16",
+    "topology": "five organizations, one peer per organization, one Raft orderer",
+    "distribution": "single-host local Docker/Colima research prototype",
+    "stateDatabase": "CouchDB"
+  },
+  "channels": [
+    {
+      "channelName": "crimechannel",
+      "contracts": [
+        {
+          "id": "crimerecords"
+        }
+      ]
+    }
+  ],
+  "organizations": [
+    {
+      "mspid": "PoliceMSP",
+      "identities": {
+        "certificates": [
+          {
+            "name": "io.krishnan",
+            "clientPrivateKey": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/io.krishnan@police.example.com/msp/keystore/c8b5cb3d8938cb90b7f8980467bee364a338c546b1e143f009cbd7b941942b83_sk"
+            },
+            "clientSignedCert": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/io.krishnan@police.example.com/msp/signcerts/cert.pem"
+            }
+          },
+          {
+            "name": "insp.rathore",
+            "clientPrivateKey": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/insp.rathore@police.example.com/msp/keystore/8d6d5b730ea7273a3831541c3ecb734f37d1b4204248c2916265610cd3b7c7c6_sk"
+            },
+            "clientSignedCert": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/insp.rathore@police.example.com/msp/signcerts/cert.pem"
+            }
+          },
+          {
+            "name": "insp.singh",
+            "clientPrivateKey": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/insp.singh@police.example.com/msp/keystore/4ad1fd228302f9ed29fa1c17a27b8c60e590a39345fc9a5ae852680025cd9679_sk"
+            },
+            "clientSignedCert": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/insp.singh@police.example.com/msp/signcerts/cert.pem"
+            }
+          },
+          {
+            "name": "const.verma",
+            "clientPrivateKey": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/const.verma@police.example.com/msp/keystore/feb9555126ce402b258b54d0877da0ec1f7dfef064ccc0fdae3f67bd5b15f180_sk"
+            },
+            "clientSignedCert": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/const.verma@police.example.com/msp/signcerts/cert.pem"
+            }
+          },
+          {
+            "name": "insp.sharma",
+            "clientPrivateKey": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/insp.sharma@police.example.com/msp/keystore/81e1d759fb9eff8ca9728b02b965afa12edad0e181e3d024a274eccc646bb272_sk"
+            },
+            "clientSignedCert": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/users/insp.sharma@police.example.com/msp/signcerts/cert.pem"
+            }
+          }
+        ]
+      },
+      "peers": [
+        {
+          "endpoint": "localhost:7051",
+          "tlsCACerts": {
+            "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/police.example.com/tlsca/tlsca.police.example.com-cert.pem"
+          },
+          "grpcOptions": {
+            "ssl-target-name-override": "peer0.police.example.com",
+            "grpc.keepalive_time_ms": 120000,
+            "grpc.keepalive_timeout_ms": 20000,
+            "grpc.keepalive_permit_without_calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "mspid": "AuditMSP",
+      "identities": {
+        "certificates": [
+          {
+            "name": "aud.qureshi",
+            "clientPrivateKey": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/audit.example.com/users/aud.qureshi@audit.example.com/msp/keystore/c75320addb32196c4569921863f63969665ab194f825c8198124f3be2f1873f9_sk"
+            },
+            "clientSignedCert": {
+              "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/audit.example.com/users/aud.qureshi@audit.example.com/msp/signcerts/cert.pem"
+            }
+          }
+        ]
+      },
+      "peers": [
+        {
+          "endpoint": "localhost:11051",
+          "tlsCACerts": {
+            "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/network/organizations/peerOrganizations/audit.example.com/tlsca/tlsca.audit.example.com-cert.pem"
+          },
+          "grpcOptions": {
+            "ssl-target-name-override": "peer0.audit.example.com",
+            "grpc.keepalive_time_ms": 120000,
+            "grpc.keepalive_timeout_ms": 20000,
+            "grpc.keepalive_permit_without_calls": 1
+          }
+        }
+      ]
+    }
+  ]
+}

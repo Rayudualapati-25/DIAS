@@ -1,0 +1,61 @@
+{
+  "runId": "2026-08-24T09-56-41-932Z_caliper_write-verifier-check",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:56:41.934Z",
+  "benchmarkConfig": "diagnostic-write-verified.yaml",
+  "benchmarkConfigSha256": "f925b353a8175d1193b7272ee5be7458f15841020ed4b988f2693859cf161d62",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "b7d3a266278f58adba8fedbcbc3df77777755b36f88a6aba4c8d66a2cfec8a48",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "afb549878d40fa751cb1e44406a68bb72a51f6bc502e1ffba25af32a58e20a7a",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/request-access-verified.js",
+      "sha256": "794371c2634bdddcdf8f888e61edacfed4e4c4f51505101e4bf8356d74d67a18"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "ebaf4d0a5dcd19b128aba2e5d3837a076643fc67812445a9f25809e94ca40fbc"
+      }
+    ],
+    "transactions": "caliper-transactions.jsonl",
+    "summary": "caliper-transaction-summary.json",
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": "7a11dd2316ccf460d28e8b15d2c32a92d6c118744af5a3b6981705f0cd00b81a",
+    "summarySha256": "dbb3955bfae07c5d6769d3a969382de9b838d2489ea0b5f6bfb81ed5e0894128",
+    "error": null
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T09:56:50.497Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "performanceSummary": null,
+  "performanceSummarySha256": null,
+  "failedTransactions": null,
+  "reportCreated": true,
+  "reportSha256": "4b0a06df5f80532e90a19e5513c4da02d37631a5d8b82764c89568c99be26a84",
+  "logSha256": "14803e6b5fc7a67c8b7f2b6f06c817f7d682adc5bc3d4221eda49c032cd41de7",
+  "failureReason": "Caliper report summary could not be parsed: Caliper summary column 'Send Rate (TPS)' is not numeric: Infinity"
+}

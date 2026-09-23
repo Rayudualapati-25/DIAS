@@ -1,0 +1,60 @@
+{
+  "generatedAtUtc": "2026-08-28",
+  "main": {
+    "runId": "2026-08-28T04-15-05-267Z_ui_unique_user_latency",
+    "manifestMismatches": [],
+    "rawSamples": 2340,
+    "expectedSamples": 2340,
+    "batches": 45,
+    "expectedBatches": 45,
+    "requestFailures": 0,
+    "grantDecisionMismatches": 0,
+    "identityOrRecordGuardrailFailures": [],
+    "summaryMismatches": [],
+    "runReportFullSweepPassed": true
+  },
+  "releaseLayoutAblation": {
+    "runId": "2026-08-28T04-18-28-093Z_ui_unique_user_release_layout_ablation",
+    "manifestMismatches": [],
+    "rawSamples": 780,
+    "expectedSamples": 780,
+    "batches": 15,
+    "expectedBatches": 15,
+    "requestFailures": 0,
+    "grantDecisionMismatches": 0,
+    "identityOrRecordGuardrailFailures": [],
+    "summaryMismatches": [],
+    "runReportFullSweepPassed": true
+  },
+  "provisioningManifestMismatches": [],
+  "provisioning": {
+    "runId": "2026-08-28T04-07-11-290Z_ui_unique_user_provisioning",
+    "completedAtUtc": "2026-08-28T04:14:16.145Z",
+    "requestedUsers": 100,
+    "readyUsers": 100,
+    "enrolledNow": 98,
+    "createdOnLedgerNow": 98,
+    "alreadyReady": 2,
+    "assignedToCaseNow": 98,
+    "failedChecks": [],
+    "success": true
+  },
+  "sourcePlanChecks": {
+    "reconstructedMainPlanSha256": "065e916825ab16033958116224d72a636fc13d9967f17bc470bd7ce1d54633b2",
+    "recordedMainPlanSha256": "065e916825ab16033958116224d72a636fc13d9967f17bc470bd7ce1d54633b2",
+    "currentExtendedPlanSha256": "15d8fa70f55bcab724190fc2fcfdc557d81b52a1ee24a124b484377bfe5af401",
+    "recordedAblationPlanSha256": "15d8fa70f55bcab724190fc2fcfdc557d81b52a1ee24a124b484377bfe5af401"
+  },
+  "sourceFileChecks": {
+    "mainRunner": true,
+    "ablationRunner": true,
+    "provisioningRunner": true,
+    "backendRecordRoutes": true,
+    "fabricGateway": true,
+    "accessChaincode": true,
+    "recordChaincode": true,
+    "couchDbCaseIndex": true
+  },
+  "failures": [],
+  "passed": true
+}

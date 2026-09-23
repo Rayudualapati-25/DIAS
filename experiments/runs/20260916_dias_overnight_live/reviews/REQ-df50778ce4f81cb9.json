@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-df50778ce4f81cb9",
+  "recordId": "REC-FIR-001",
+  "requesterUsername": "insp.sharma",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "PoliceMSP",
+      "organization": "police",
+      "role": "inspector",
+      "rank": "3",
+      "station": "PS-Central",
+      "jurisdiction": "district-north",
+      "clearance": "high",
+      "credentialStatus": "active",
+      "assignedToRequestedCase": true
+    },
+    "resource": {
+      "recordType": "fir",
+      "caseId": "CASE-2026-001",
+      "sensitivityLevel": "medium",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": false,
+      "witnessFlag": false,
+      "victimProtectionFlag": false
+    },
+    "request": {
+      "action": "annotate",
+      "purpose": "investigation",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "45d263f7edba8953e423bcf328742782af2011f4b1b265a246a773a42d4d602c",
+  "justification": "I need to add investigation notes to the FIR for my case.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "RBAC_NO_PERMISSION",
+    "reason": "Role inspector may not annotate fir records (GP-RBAC:C2@v1).",
+    "policyRefs": [
+      "GP-RBAC:C2@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [],
+    "errorCode": null,
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-df50778ce4f81cb9",
+      "modelId": "qwen3-14b-dias-v7",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": "qwen3-14b-dias-lora-v7",
+      "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "45d263f7edba8953e423bcf328742782af2011f4b1b265a246a773a42d4d602c",
+      "justificationHash": "be9473c0ef329679ebfcc3d54c5571b227e9dc07c1f147cd80f2ee1680d79f10",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:06:42.283Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "d00c77d8aafa0df01609719a6e23db0aa4bf2a23085d8dc2a1ba1b741c967054",
+      "promptHash": "bc3a0aefe7a74352fd1f0fe39b825e34040087010807a0f150a5a7370db1ee57",
+      "promptChars": 7611,
+      "usage": {
+        "promptTokens": 1908,
+        "completionTokens": 59
+      },
+      "rawOutputHash": "a15477cff8a765b2f35ec2bff127412d0a7466ffb48750789143d72a435fc78e",
+      "parserStatus": "OK",
+      "parserErrors": [],
+      "parserTolerances": [],
+      "generationStatus": "OK",
+      "latencyMs": {
+        "contextAssembly": 0.408,
+        "inference": 7944.348,
+        "validation": 0.105,
+        "total": 7945.142
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:06:50.228Z"
+    }
+  },
+  "auditorNote": {
+    "decision": "FORCE_DENY",
+    "llmAgreement": "AGREED",
+    "reason": null,
+    "auditorUsername": "sp.north",
+    "decidedAtUtc": "2026-09-16T17:06:50.479Z",
+    "txId": "61e77c891dc68aaf5dd40f22e5bf07847467149c7d1f6dc606dbe5a7c0a3ceca"
+  },
+  "createdAtUtc": "2026-09-16T17:06:42.280Z",
+  "updatedAtUtc": "2026-09-16T17:06:52.536Z"
+}

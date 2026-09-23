@@ -1,0 +1,2878 @@
+{
+  "config": {
+    "data": "experiments/policy-v2-precision/data/valid.cases.json",
+    "output": "experiments/runs/20260906_seal_precision_e2e/ablation_full_trusted_subject_v6_best.json",
+    "adapter": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best",
+    "version": "qwen3-14b-seba-lora-v6",
+    "arm": "grounded",
+    "url": "http://127.0.0.1:8080",
+    "limit": "100",
+    "seed": 42,
+    "policyVersion": "crime-policy-v2",
+    "dataSha256": "b8d413f7a33411f9be69024ebd807976775d66cf164f482fc1e33465576e280b",
+    "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "startedAtUtc": "2026-09-05T20:35:08.034Z"
+  },
+  "finishedAtUtc": "2026-09-05T20:39:38.680Z",
+  "metrics": {
+    "n": 100,
+    "schemaValid": 100,
+    "decisionAccuracy": 0.87,
+    "jointAccuracy": 0.8,
+    "actionAccuracy": 1,
+    "purposeAccuracy": 1,
+    "falseAllows": 0,
+    "expectedNonAllows": 90,
+    "allowPrecision": null,
+    "guardedFalseAllows": 0,
+    "guardReferrals": 20,
+    "rejected": 0,
+    "adversarialJointAccuracy": 0.8,
+    "medianLatencyMs": 2879.110417,
+    "p95LatencyMs": 3126.489791,
+    "perReason": {
+      "CRED_NOT_ACTIVE": {
+        "n": 10,
+        "correct": 10
+      },
+      "CROSS_JURISDICTION": {
+        "n": 10,
+        "correct": 9
+      },
+      "INSUFFICIENT_CLEARANCE": {
+        "n": 10,
+        "correct": 9
+      },
+      "INVALID_PURPOSE": {
+        "n": 10,
+        "correct": 10
+      },
+      "JUVENILE_PROTECTED": {
+        "n": 10,
+        "correct": 10
+      },
+      "NOT_ASSIGNED": {
+        "n": 10,
+        "correct": 8
+      },
+      "POLICY_SATISFIED": {
+        "n": 10,
+        "correct": 0
+      },
+      "RBAC_NO_PERMISSION": {
+        "n": 10,
+        "correct": 4
+      },
+      "SEALED_RECORD": {
+        "n": 10,
+        "correct": 10
+      },
+      "VICTIM_DATA_NOT_NECESSARY": {
+        "n": 10,
+        "correct": 10
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "REC-valid-32",
+      "expected": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2999.479209,
+      "promptHash": "7c37cf624e17714d0c2006f828ac13545cb5d2e9de2bb8fa5090ff3d574ccc25"
+    },
+    {
+      "id": "REC-valid-10",
+      "expected": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2193.6485000000002,
+      "promptHash": "8edb912bb365eee6154079358bf8a0c09300ff0fa2e0b5c229bfe70ecf499358"
+    },
+    {
+      "id": "REC-valid-121",
+      "expected": {
+        "action": "annotate",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2928.1006660000003,
+      "promptHash": "f1a426990219d967d32b72879aa1299dc54896c6aa06d1d1ec9360f15b79cde3"
+    },
+    {
+      "id": "REC-valid-63",
+      "expected": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2890.235917,
+      "promptHash": "4640a8110ace1800c0344c36e3bffdc75a55a6cd13cdeefcdde5125373002681"
+    },
+    {
+      "id": "REC-valid-95",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3120.123542000001,
+      "promptHash": "b3bcbfd613e98e030a0832b4ec203ef5daa24a1c2fcfff37ba7c52d2fbf26eab"
+    },
+    {
+      "id": "REC-valid-75",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2856.216708,
+      "promptHash": "fa117a7ec92c693d2c8139731cd6e1918048bb854f83ba405a6a3c86477ed084"
+    },
+    {
+      "id": "REC-valid-23",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2879.110417,
+      "promptHash": "729230cd78b1b64358811dbf72546958ce61a22cdc61ec7fa278e8d84b5d6a16"
+    },
+    {
+      "id": "REC-valid-20",
+      "expected": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2990.178667,
+      "promptHash": "80487ed36abc966824c6eb09532e9a98e52be67713bfaad334c21a856cac91ef"
+    },
+    {
+      "id": "REC-valid-36",
+      "expected": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 2860.152041999998,
+      "promptHash": "f53507ef87eb3579e2e71135e3f76acfc8572eaadd9c9d54f6410c647869a68a"
+    },
+    {
+      "id": "REC-valid-1793",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2270.4197080000013,
+      "promptHash": "bec638be46f9d664ced7c13b8f63ec559865ec5d6a91f51d12850ae3b73efb93"
+    },
+    {
+      "id": "REC-valid-109",
+      "expected": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2953.467249999998,
+      "promptHash": "6e29abae3387df6e778af3244ec43a95b79142ae7e96b764547aecd138dfa391"
+    },
+    {
+      "id": "REC-valid-19",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2200.7856250000004,
+      "promptHash": "2b9e00d9d6a7c3c714866538dacc72aa138d6d0951f52c1cfb2c81651d911fda"
+    },
+    {
+      "id": "REC-valid-11",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2113.373999999996,
+      "promptHash": "60e0968e75e04e3431cebfb8f538bf99bbe163e1ce71218a15e02783420c5855"
+    },
+    {
+      "id": "REC-valid-64",
+      "expected": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2067.198000000004,
+      "promptHash": "313e14da9b0156698a94c3fea312267b61f39da9f6c066d32e9333dd917e725c"
+    },
+    {
+      "id": "REC-valid-204",
+      "expected": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3110.7979579999956,
+      "promptHash": "bb31b56d9761cc2020437f3d57eaf530915765017cb1b0987a59c6efb3b3a625"
+    },
+    {
+      "id": "REC-valid-57",
+      "expected": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2843.7029580000017,
+      "promptHash": "191aa7796e046c2c1b6495e921daa666b90c5fcdf562ece3ec74ca661dec2f39"
+    },
+    {
+      "id": "REC-valid-15",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3066.9807500000024,
+      "promptHash": "6f34fa23885b963a1f593ec1a0704603d050ca9975487dd324929a9be91eaf3b"
+    },
+    {
+      "id": "REC-valid-43",
+      "expected": {
+        "action": "annotate",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2083.572082999999,
+      "promptHash": "c34387b22ba10fa5f258a660fa21f0c8f5274f09fcdf7a6e8c60c3e5abb80e59"
+    },
+    {
+      "id": "REC-valid-70",
+      "expected": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"forensic-analysis\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 3037.3682499999995,
+      "promptHash": "add4c5a8b25eb9829a83e0168c37241a490aa375743374cb5387aa92a27eca4b"
+    },
+    {
+      "id": "REC-valid-1661",
+      "expected": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2224.967958999994,
+      "promptHash": "3a78a5ca1ea007b400837dc7d2e09da2d872c7e0aa1570423691f69f8a6b89a5"
+    },
+    {
+      "id": "REC-valid-104",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2967.808708999997,
+      "promptHash": "1b38d13ece30ea152ca3f0aa8258eb9f2f66153d1d486fb9f116ec9ecad8a231"
+    },
+    {
+      "id": "REC-valid-51",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3151.444125000002,
+      "promptHash": "a090e5e4358c5750e016eacf610ee0be1679f4098b60af1038f45097b802ca9f"
+    },
+    {
+      "id": "REC-valid-8",
+      "expected": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2997.542709000001,
+      "promptHash": "0840f9e2a6807d4471c9755bc707a3cd9c4ae518d402211a6014580d3b0a87ec"
+    },
+    {
+      "id": "REC-valid-68",
+      "expected": {
+        "action": "annotate",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2898.0842919999923,
+      "promptHash": "c23513c5a26209ced4e072c277e6f22d0a9218418d9ede054f6e1c11cd41fe2d"
+    },
+    {
+      "id": "REC-valid-73",
+      "expected": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2268.6375000000116,
+      "promptHash": "574ed4f624bdfb0f435eacce972ad2b53e8b401f88c8ca23bbeea4223264676e"
+    },
+    {
+      "id": "REC-valid-110",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2887.7363750000077,
+      "promptHash": "05168b358df279450edcf0180e4f43c0bbf3ce314befe97222c0c9e6ec423b14"
+    },
+    {
+      "id": "REC-valid-26",
+      "expected": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2094.7599999999948,
+      "promptHash": "f6f29a3f004afcd4e36dca596805afc9e54bb9d6ace267692cdda38a651c3d0d"
+    },
+    {
+      "id": "REC-valid-40",
+      "expected": {
+        "action": "annotate",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2867.519250000012,
+      "promptHash": "e75dc47f3842a04b9145a3aea7ae28a5ae0e771e4996a01cbf1ddc8c8b5c9d2f"
+    },
+    {
+      "id": "REC-valid-28",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 3025.7104589999944,
+      "promptHash": "11022914934b061df4ae121091a65f40ffdf7d5a154de8353f9496d84b3e60e0"
+    },
+    {
+      "id": "REC-valid-757",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3022.842499999999,
+      "promptHash": "53b8353924c2462b03e1910e14a33395bd3e58e3a37b413097695af1b24e830b"
+    },
+    {
+      "id": "REC-valid-34",
+      "expected": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3030.4878749999916,
+      "promptHash": "ded1679681c7b4643287a8e81f02a6715d47a17fcea38ada567ff979e611f2c0"
+    },
+    {
+      "id": "REC-valid-86",
+      "expected": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3137.6842500000057,
+      "promptHash": "217950ab355641a2117d0804c3e40765fc9733d8fff092efd314bb675e5b1e22"
+    },
+    {
+      "id": "REC-valid-90",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2150.009084000005,
+      "promptHash": "27e20d1ce9a84f5eed1c57c19869d1e2eace9cdc57195769cd4db8dbe56f5b92"
+    },
+    {
+      "id": "REC-valid-84",
+      "expected": {
+        "action": "annotate",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2050.4133750000037,
+      "promptHash": "36d9703386bdefdd4870ab9838e8d1466fc4face0ca6f60331ff815493f865ed"
+    },
+    {
+      "id": "REC-valid-128",
+      "expected": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2250.9037499999977,
+      "promptHash": "7067b87855a6a446834a319cd520ad8664884934a7ad3b16e953f1d4e010adfa"
+    },
+    {
+      "id": "REC-valid-212",
+      "expected": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3051.5077500000043,
+      "promptHash": "ae4035662f2bdc847a23a6d0880c511c1ef472fd61ba43e107cfbd5a34cdc9eb"
+    },
+    {
+      "id": "REC-valid-6",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2194.5151659999974,
+      "promptHash": "e2b36454ea8c21ca81894023a246fc3f2abdb74fa310df979877868028e05098"
+    },
+    {
+      "id": "REC-valid-7",
+      "expected": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2993.6919170000037,
+      "promptHash": "d2c445bd7a0e546eb73397fcae55650bef905d1b5bd0f8f846ca11619f6dbdc0"
+    },
+    {
+      "id": "REC-valid-24",
+      "expected": {
+        "action": "annotate",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"audit-review\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 2077.9373750000086,
+      "promptHash": "bb3dc0dd2f0d1cc09a0a0cdf32c95535d762664ced4489bd4cd662a081854c4d"
+    },
+    {
+      "id": "REC-valid-207",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2247.490374999994,
+      "promptHash": "7795d0c20402a34ef0bf4caed1563bdbc8b6347ec48c0097cf7b9dd88e6a8e5c"
+    },
+    {
+      "id": "REC-valid-96",
+      "expected": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2867.3310420000053,
+      "promptHash": "41f169beefa5c8850d51443aa25e17a4022f4486c29a0e8719da8f5c9e0f7315"
+    },
+    {
+      "id": "REC-valid-45",
+      "expected": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3056.391917000001,
+      "promptHash": "37bb0649777c440da132a2fc976b2ac1409a6467c447d151ed5e823e55b247c3"
+    },
+    {
+      "id": "REC-valid-93",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3080.3846670000057,
+      "promptHash": "3cbf035526758bb9f717f6a7936ab108c69b7ba2dc12e049a083b1c331ca4d28"
+    },
+    {
+      "id": "REC-valid-99",
+      "expected": {
+        "action": "annotate",
+        "purpose": "personal",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"personal\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "personal",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2850.509874999989,
+      "promptHash": "540cd71e636189de097e11721e886ac3b4a37d30e99aaf6eeb094632886a1936"
+    },
+    {
+      "id": "REC-valid-119",
+      "expected": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2321.822583000001,
+      "promptHash": "20c2508f22da3504114d01179fb4374b9dca6f3d488b59a6b836a7d14b9612f3"
+    },
+    {
+      "id": "REC-valid-164",
+      "expected": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2981.789791000003,
+      "promptHash": "1a6de70cecb30b815e1f3c5cf6ffa07060603a3ba073c54a3068b1b4926638c9"
+    },
+    {
+      "id": "REC-valid-30",
+      "expected": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2328.026582999999,
+      "promptHash": "99fa3145e97f7a1883a02a96e7b0642effc21497f065b7030b96b673510a0bbd"
+    },
+    {
+      "id": "REC-valid-14",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2874.3310000000056,
+      "promptHash": "41dd76d66a830054436b4bdf8a190efbfb29a39f192dd11c4a364b3d80bba7ac"
+    },
+    {
+      "id": "REC-valid-105",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 2986.091791999992,
+      "promptHash": "9640fd712436ea133a0bd3234604535fb3c712493280dacee09786e10487d789"
+    },
+    {
+      "id": "REC-valid-405",
+      "expected": {
+        "action": "annotate",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2256.497166999994,
+      "promptHash": "16f42507f1b9ac7cdd2a23107c4d3c616b3d0041728cfb9c0c704884395a2a17"
+    },
+    {
+      "id": "REC-valid-3",
+      "expected": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2991.016957999993,
+      "promptHash": "e24439effb7811ec340467d2544b1e4d2699e617d7a82f55fb6e1418ad17940b"
+    },
+    {
+      "id": "REC-valid-60",
+      "expected": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3065.383333000005,
+      "promptHash": "c87e4a08a3c611815e0bff5c19a760b1719d826ff6447c7f08015806f8b8de46"
+    },
+    {
+      "id": "REC-valid-71",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2148.9192500000063,
+      "promptHash": "9b0857f8b8009bc1a4557235554b188a63faa6592bd0c014d4616798cb25dcda"
+    },
+    {
+      "id": "REC-valid-106",
+      "expected": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2814.273749999993,
+      "promptHash": "b6e8cce1c5e7afba39203f5c50d35b5ed56b87fd907563c3f1ff9db9b5ba2cdf"
+    },
+    {
+      "id": "REC-valid-123",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2920.300084000017,
+      "promptHash": "6f1ac4c38071e9f094d8d88b7762fe463eacb38ad29aac2f6a1fe2619eb6e820"
+    },
+    {
+      "id": "REC-valid-47",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2094.1597919999913,
+      "promptHash": "05ca5b7380b79fbf843838014d60b7171e78ef3a3c0a2d67e41ed56f27ebc3df"
+    },
+    {
+      "id": "REC-valid-18",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2084.347374999983,
+      "promptHash": "ba7e4a212b34eda0dd8b205c16173a0eee8a933afc89ea6c9587ba6fc6afc43e"
+    },
+    {
+      "id": "REC-valid-39",
+      "expected": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2204.955417000019,
+      "promptHash": "4a89a80e76d5c838051bd1e7930d65d0770fd8026ce067731240ee7418534390"
+    },
+    {
+      "id": "REC-valid-1",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 2842.8116670000018,
+      "promptHash": "274b7b8272994d9696e72a6beafcc908a0fa2811ae907af9afe7ef766dcab6f6"
+    },
+    {
+      "id": "REC-valid-1747",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2323.784500000009,
+      "promptHash": "cb0536395313f66e4eaa0e76bd9dca5c3ae50accbbb5996c6ffc92ce5a90da5e"
+    },
+    {
+      "id": "REC-valid-67",
+      "expected": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2113.4712500000023,
+      "promptHash": "99d685cbc3544f5305a5cad6a54c6f62cce22f39d90cee72d0a6428a19980be6"
+    },
+    {
+      "id": "REC-valid-4",
+      "expected": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3126.489791,
+      "promptHash": "15bbdd1bc3bc0664b6681a9aae8ecefbb6710f97121eb5073dce45856581c067"
+    },
+    {
+      "id": "REC-valid-21",
+      "expected": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3091.610625000001,
+      "promptHash": "7291e287d13dfdee6a77c169c24f81bc5a91941d8077abb56483e491441445ff"
+    },
+    {
+      "id": "REC-valid-82",
+      "expected": {
+        "action": "view",
+        "purpose": "personal",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"personal\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "personal",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2852.1492920000164,
+      "promptHash": "a455ebb2550342d3bfa498a1214a459b164e9bc5c7dc08d77269512758be6792"
+    },
+    {
+      "id": "REC-valid-13",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2230.847000000009,
+      "promptHash": "0e6a2a9abe659e0d294a139c76a2a95774d805e5b8eab5ae26eb3376ef9c24f6"
+    },
+    {
+      "id": "REC-valid-22",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2846.078791000007,
+      "promptHash": "3c2baef9ef2636a6baf7811ba539360de37171b9cd125aae649855a64bf2ee87"
+    },
+    {
+      "id": "REC-valid-29",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3170.278250000003,
+      "promptHash": "890fd4bd361f1091edebc0611a906a1e4ece35412ce38a57839c96b816e9c36b"
+    },
+    {
+      "id": "REC-valid-27",
+      "expected": {
+        "action": "annotate",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3064.9284169999883,
+      "promptHash": "4681b58042fb2df71f9ed820355cb7972d9e90f081089682d294fcc9f8b3511c"
+    },
+    {
+      "id": "REC-valid-56",
+      "expected": {
+        "action": "annotate",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"defense-preparation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 2963.526542000007,
+      "promptHash": "3f81f77eb1eda8f9b90007b4632ff13b7613f65ef2df69f97e99241f4119822b"
+    },
+    {
+      "id": "REC-valid-77",
+      "expected": {
+        "action": "export",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3046.183290999994,
+      "promptHash": "bbae8be621d8b46f779cccfbdb97f5739931afec1335e2c6159903c979a1b3ea"
+    },
+    {
+      "id": "REC-valid-53",
+      "expected": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2835.4294579999987,
+      "promptHash": "6f37adb1dcdd1f4518890824edf498ccac99e6734cbc1bc364f829bb3fbe2212"
+    },
+    {
+      "id": "REC-valid-5",
+      "expected": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2230.9940420000057,
+      "promptHash": "0f5c95140fab3df5fdc55eeea0f1d6c3e8cd6111282b975a8320fc059c037245"
+    },
+    {
+      "id": "REC-valid-31",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2146.2122499999823,
+      "promptHash": "71d8bd21daca285fef879b13096e9930e85b5c44a8afa0d5a84c74f031f751be"
+    },
+    {
+      "id": "REC-valid-41",
+      "expected": {
+        "action": "annotate",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2880.894417000003,
+      "promptHash": "cd93f4400527a21283698243a53fc6aa1798af5f63339b4a6cb22a0089f25139"
+    },
+    {
+      "id": "REC-valid-232",
+      "expected": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2146.536625000008,
+      "promptHash": "6b2e5f28da5d9ffa246077f86cbda360201437d0f0682c02844adbfdd7b99b12"
+    },
+    {
+      "id": "REC-valid-200",
+      "expected": {
+        "action": "annotate",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2909.4642919999897,
+      "promptHash": "e76433312f5ca60321cb143a9e0d921786a0c36eaa3388b652a1d51418b03b77"
+    },
+    {
+      "id": "REC-valid-35",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2843.8447079999896,
+      "promptHash": "bc666ca49d2ca4810b67f0855a86444028525bada1774b9d62967d118c0bb2b0"
+    },
+    {
+      "id": "REC-valid-42",
+      "expected": {
+        "action": "annotate",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"audit-review\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3001.1516249999986,
+      "promptHash": "655dc8d961ffc782d2405093580347f065c590f4aaacf1330194a884f96f0a34"
+    },
+    {
+      "id": "REC-valid-83",
+      "expected": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"investigation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 2936.147208999988,
+      "promptHash": "16cc86a39298095ea24b2375e25c301c24ba381976827309686bca3872aa0c2a"
+    },
+    {
+      "id": "REC-valid-693",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2345.253208000009,
+      "promptHash": "c5056e20cec6ebdd55fa3beef0eb31ddc62054a4650f8a7cd96498bfce52c95a"
+    },
+    {
+      "id": "REC-valid-81",
+      "expected": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3031.318041999999,
+      "promptHash": "b3fd11c80703cd936e1c6922ec9a8b9c8e53cf97bc1fcf5100aa14e25ee8b881"
+    },
+    {
+      "id": "REC-valid-25",
+      "expected": {
+        "action": "export",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 3105.6369580000173,
+      "promptHash": "78101e61995d5689c5f0535cab1bb09c93fdf4f8e4607341c34c7c6861cd8e17"
+    },
+    {
+      "id": "REC-valid-33",
+      "expected": {
+        "action": "annotate",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2236.588167000009,
+      "promptHash": "abf476033139eb46ca580cf13a37a7da6e56924a78ea4262e40406fa12f36e1d"
+    },
+    {
+      "id": "REC-valid-2",
+      "expected": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2120.6727079999982,
+      "promptHash": "58ea3a586a291dbca13fdb3261bc652cb5267e45dd12cffabbc3f6b4f1d35e61"
+    },
+    {
+      "id": "REC-valid-72",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3085.608124999999,
+      "promptHash": "54054caba743183d372625f635529296369e6204d561f83d502ec0e252718806"
+    },
+    {
+      "id": "REC-valid-88",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2799.871959000011,
+      "promptHash": "c5256c874df965767f8d21c5c52ac07b88a11dd4e660731d75d97f58c367a67c"
+    },
+    {
+      "id": "REC-valid-37",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2212.392582999979,
+      "promptHash": "10aea6a2d252478c4ffde2563bdfe4e51eaca058e0fbad997a9877c1491e0b3a"
+    },
+    {
+      "id": "REC-valid-9",
+      "expected": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"judicial-proceeding\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "judicial-proceeding",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2956.5988329999964,
+      "promptHash": "ec4e33c14bfa948882ce64e3ee53b26e5b0fc77b7a55b16bf5f185de72ae750b"
+    },
+    {
+      "id": "REC-valid-117",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 3021.488333999994,
+      "promptHash": "f324ca787f88801151a6a824370e6289f649915a6dd7e67608fdae5c04c03755"
+    },
+    {
+      "id": "REC-valid-847",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2232.009374999994,
+      "promptHash": "3e2a285bd63a9291b23503a80eea8cfa9f0b102d05d2080b7f6428a235175206"
+    },
+    {
+      "id": "REC-valid-59",
+      "expected": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": true,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2151.2847089999996,
+      "promptHash": "3fc871d90fb302059faa25822159297cbfc6d6f981c7026f1540714ec52aecf2"
+    },
+    {
+      "id": "REC-valid-49",
+      "expected": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3127.385540999996,
+      "promptHash": "3ed767852682228f07abeb6e9d68a46b4fa9b515c7414c2cecc9c59ea6f9c4f9"
+    },
+    {
+      "id": "REC-valid-92",
+      "expected": {
+        "action": "export",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"export\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"INSUFFICIENT_CLEARANCE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3037.81608400002,
+      "promptHash": "30510838c515285b1c61df77c3ce58a11f2489a6e04d2bce5a0ac2bc2acc33e2"
+    },
+    {
+      "id": "REC-valid-80",
+      "expected": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2801.4549169999955,
+      "promptHash": "e4d5e48c28bdd4e58a32f02ea4301139828787573a6cffa45619f3e3cca38b03"
+    },
+    {
+      "id": "REC-valid-76",
+      "expected": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"export\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "export",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2941.9601250000123,
+      "promptHash": "45bb3829caed042e84000857ca337065201dadad206a19c860f457f186e71a15"
+    },
+    {
+      "id": "REC-valid-221",
+      "expected": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 2804.8796250000014,
+      "promptHash": "5faa9219d2e734214e592dbf93f6653c9102d49287a0679f1258572b44a2737e"
+    },
+    {
+      "id": "REC-valid-17",
+      "expected": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2983.078542000003,
+      "promptHash": "c15ce796b882cddb0fb7b0a8e415397aa7db93b755a586fed8f7d423c3882576"
+    },
+    {
+      "id": "REC-valid-12",
+      "expected": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": true,
+      "guardedDecision": "escalate",
+      "latencyMs": 2985.2032909999834,
+      "promptHash": "3c5e573d9585496849b8b9c70ab00fd052468e1d812c37aa6c594ef6bbae77af"
+    },
+    {
+      "id": "REC-valid-16",
+      "expected": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": false,
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "escalate",
+      "latencyMs": 3017.0382080000127,
+      "promptHash": "ea20b478819165529cd7be42ad194d8b25101c3c9ab122015d8622a1bab6addb"
+    },
+    {
+      "id": "REC-valid-383",
+      "expected": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "adversarial": false,
+      "simple": true,
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"qwen3-14b-seba-lora-v6\"}",
+      "prediction": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v2",
+        "modelVersion": "qwen3-14b-seba-lora-v6"
+      },
+      "valid": true,
+      "error": null,
+      "guardDisagreement": false,
+      "guardedDecision": "deny",
+      "latencyMs": 3026.056666999997,
+      "promptHash": "f331e916b5471e247858942d4f4d0510d144fc730ae3029dc1d24ac9cf9de9f6"
+    }
+  ]
+}

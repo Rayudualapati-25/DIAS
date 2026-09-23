@@ -1,0 +1,505 @@
+2026.08.24-15:09:15.405[32m info [39m [caliper] [cli-launch-manager] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.405[32m info [39m [caliper] [cli-launch-manager] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.405[32m info [39m [caliper] [cli-launch-manager] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.406[32m info [39m [caliper] [cli-launch-manager] 	Set SUT type: fabric
+2026.08.24-15:09:15.414[32m info [39m [caliper] [benchmark-validator] 	No observer specified, will default to `none`
+2026.08.24-15:09:15.414[32m info [39m [caliper] [caliper-engine] 	Starting benchmark flow
+2026.08.24-15:09:15.414[32m info [39m [caliper] [caliper-engine] 	Skipping start commands due to benchmark flow conditioning
+2026.08.24-15:09:15.414[32m info [39m [caliper] [caliper-engine] 	Skipping initialization phase due to benchmark flow conditioning
+2026.08.24-15:09:15.414[32m info [39m [caliper] [caliper-engine] 	Skipping install smart contract phase due to benchmark flow conditioning
+2026.08.24-15:09:15.457[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.464[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.465[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.465[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.465[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.465[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.466[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.467[32m info [39m [caliper] [monitor.js] 	No resource monitors specified
+2026.08.24-15:09:15.467[32m info [39m [caliper] [default-observer] 	Observer interval set to 5000 milliseconds
+2026.08.24-15:09:15.468[32m info [39m [caliper] [round-orchestrator] 	Preparing worker connections
+2026.08.24-15:09:15.468[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 1 of 8
+2026.08.24-15:09:15.470[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 2 of 8
+2026.08.24-15:09:15.470[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 3 of 8
+2026.08.24-15:09:15.470[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 4 of 8
+2026.08.24-15:09:15.471[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 5 of 8
+2026.08.24-15:09:15.471[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 6 of 8
+2026.08.24-15:09:15.471[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 7 of 8
+2026.08.24-15:09:15.472[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 8 of 8
+2026.08.24-15:09:15.472[32m info [39m [caliper] [worker-orchestrator] 	Messenger not configured, entering configure phase...
+2026.08.24-15:09:15.472[32m info [39m [caliper] [worker-orchestrator] 	No existing workers detected, entering worker launch phase...
+2026.08.24-15:09:15.472[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 8 workers to be connected...
+2026.08.24-15:09:15.605[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.607[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.607[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.607[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.608[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.608[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.608[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.608[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.608[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.609[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.609[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.606[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.607[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.609[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.609[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.609[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.610[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:09:15.610[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-executed-benchmark.yaml
+2026.08.24-15:09:15.610[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:09:15.610[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:09:15.630[32m info [39m [caliper] [worker-orchestrator] 	8 workers connected, progressing to worker assignment phase.
+2026.08.24-15:09:15.630[32m info [39m [caliper] [worker-orchestrator] 	Workers currently unassigned, awaiting index assignment...
+2026.08.24-15:09:15.631[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 8 workers to be assigned...
+2026.08.24-15:09:15.634[32m info [39m [caliper] [worker-orchestrator] 	8 workers assigned, progressing to worker initialization phase.
+2026.08.24-15:09:15.634[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 8 workers to be ready...
+2026.08.24-15:09:15.634[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#0...
+2026.08.24-15:09:15.634[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#1...
+2026.08.24-15:09:15.635[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#4...
+2026.08.24-15:09:15.635[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#3...
+2026.08.24-15:09:15.635[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#7...
+2026.08.24-15:09:15.635[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#5...
+2026.08.24-15:09:15.635[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#6...
+2026.08.24-15:09:15.635[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#2...
+2026.08.24-15:09:15.693[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.693[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.693[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.693[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.694[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.694[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.694[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.694[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.696[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:09:15.697[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.698[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.699[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:09:15.700[32m info [39m [caliper] [worker-message-handler] 	Worker#3 initialized
+2026.08.24-15:09:15.700[32m info [39m [caliper] [worker-message-handler] 	Worker#2 initialized
+2026.08.24-15:09:15.700[32m info [39m [caliper] [worker-message-handler] 	Worker#0 initialized
+2026.08.24-15:09:15.700[32m info [39m [caliper] [worker-message-handler] 	Worker#4 initialized
+2026.08.24-15:09:15.701[32m info [39m [caliper] [worker-message-handler] 	Worker#7 initialized
+2026.08.24-15:09:15.701[32m info [39m [caliper] [worker-message-handler] 	Worker#5 initialized
+2026.08.24-15:09:15.701[32m info [39m [caliper] [worker-message-handler] 	Worker#1 initialized
+2026.08.24-15:09:15.701[32m info [39m [caliper] [worker-message-handler] 	Worker#6 initialized
+2026.08.24-15:09:15.701[32m info [39m [caliper] [worker-orchestrator] 	8 workers ready, progressing to test preparation phase.
+2026.08.24-15:09:15.701[32m info [39m [caliper] [round-orchestrator] 	Started round 1 (search-users-8)
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#2 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#1 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#5 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#6 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#3 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#7 for Round#0
+2026.08.24-15:09:15.702[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#4 for Round#0
+2026.08.24-15:09:15.711[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.711[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.711[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.711[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.711[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.711[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.712[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.713[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.714[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.714[32m info [39m [caliper] [caliper-worker] 	Info: worker 7 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.714[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.714[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.714[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.714[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.714[32m info [39m [caliper] [caliper-worker] 	Info: worker 6 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.714[32m info [39m [caliper] [caliper-worker] 	Info: worker 2 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.715[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.715[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.715[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.715[32m info [39m [caliper] [caliper-worker] 	Info: worker 4 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.715[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.715[32m info [39m [caliper] [caliper-worker] 	Info: worker 5 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.715[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.715[32m info [39m [caliper] [caliper-worker] 	Info: worker 3 prepare test phase for round 0 is starting...
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [worker-message-handler] 	Worker#1 prepared for Round#0
+2026.08.24-15:09:15.716[32m info [39m [caliper] [caliper-worker] 	Info: worker 2 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [caliper-worker] 	Info: worker 6 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.716[32m info [39m [caliper] [worker-message-handler] 	Worker#2 prepared for Round#0
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [worker-message-handler] 	Worker#6 prepared for Round#0
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [caliper-worker] 	Info: worker 7 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [worker-message-handler] 	Worker#7 prepared for Round#0
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [caliper-worker] 	Info: worker 4 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.716[32m info [39m [caliper] [worker-message-handler] 	Worker#4 prepared for Round#0
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.716[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.716[32m info [39m [caliper] [worker-message-handler] 	Worker#0 prepared for Round#0
+2026.08.24-15:09:15.716[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.717[32m info [39m [caliper] [caliper-worker] 	Info: worker 5 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.717[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:15.717[32m info [39m [caliper] [worker-message-handler] 	Worker#5 prepared for Round#0
+2026.08.24-15:09:15.717[32m info [39m [caliper] [caliper-worker] 	Info: worker 3 prepare test phase for round 0 is completed
+2026.08.24-15:09:15.717[32m info [39m [caliper] [worker-message-handler] 	Worker#3 prepared for Round#0
+2026.08.24-15:09:15.717[32m info [39m [caliper] [worker-orchestrator] 	8 workers prepared, progressing to test phase.
+2026.08.24-15:09:15.717[32m info [39m [caliper] [round-orchestrator] 	Monitors successfully started
+2026.08.24-15:09:15.717[32m info [39m [caliper] [worker-message-handler] 	Worker#0 is starting Round#0
+2026.08.24-15:09:15.717[32m info [39m [caliper] [worker-message-handler] 	Worker#1 is starting Round#0
+2026.08.24-15:09:15.717[32m info [39m [caliper] [worker-message-handler] 	Worker#3 is starting Round#0
+2026.08.24-15:09:15.718[32m info [39m [caliper] [worker-message-handler] 	Worker#2 is starting Round#0
+2026.08.24-15:09:15.718[32m info [39m [caliper] [worker-message-handler] 	Worker#4 is starting Round#0
+2026.08.24-15:09:15.718[32m info [39m [caliper] [worker-message-handler] 	Worker#5 is starting Round#0
+2026.08.24-15:09:15.718[32m info [39m [caliper] [worker-message-handler] 	Worker#6 is starting Round#0
+2026.08.24-15:09:15.718[32m info [39m [caliper] [worker-message-handler] 	Worker#7 is starting Round#0
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.719[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.720[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.721[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.722[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #0 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #4 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #6 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #1 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #5 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #3 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #7 starting workload loop
+2026.08.24-15:09:15.722[32m info [39m [caliper] [caliper-worker] 	Worker #2 starting workload loop
+CALIPER_TX_LATENCY {"workerIndex":5,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"e3b5aae30266b01bc42bf78e22b2a4de6f4fcb6ad187f89efd0157328829727f","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"4e35c3fccdf47e1d64517df2ad89cc23112e7e669c45728b429520dc31ef1977","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"dd7fc49b16a6a52a6ec8749005d8e725f7c81fafd2ee34a924fa1353926578a1","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"e93472b65b8f6ca1faddc907784bbc72a7db45e27c560c55c45a91541b902171","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"d3be96d2948cc571766cd019a7bbe6774258c93ab5062a444456ad6ec88b2ff2","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":4,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"f87cb19af73e7c2e70bcae54a78702a076832b3d4251a47a80264c8457440861","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":7,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"f31f07dfa8b7d73ea3bc0ed4c779b4fc4d707b0183e7a6988b089f583844bf61","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":6,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"910762556bda78bcf7ec08098d2da24f4f5504d87758d50c372b862a65198d3b","status":"success","startEpochMs":1787564355725,"endEpochMs":1787564355793,"latencyMs":68}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"20d7ff1f7ed7548f99e2455df546c847ff1bdefde8fff1cbddef1e2d22fd706c","status":"success","startEpochMs":1787564356724,"endEpochMs":1787564356753,"latencyMs":29}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"dee65525f82153a484a1521998de37295ebde6609d769a4a7b7af935f33a68ca","status":"success","startEpochMs":1787564356724,"endEpochMs":1787564356753,"latencyMs":29}
+CALIPER_TX_LATENCY {"workerIndex":5,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"1ae044b27addebf71eab4fa768b267ca959f5be5268ef6800f9067a27b209a98","status":"success","startEpochMs":1787564356725,"endEpochMs":1787564356757,"latencyMs":32}
+CALIPER_TX_LATENCY {"workerIndex":4,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"2c436c6b47736ee293cf5eb96a9a38b08a8d0077bb67798857481d743ebe4858","status":"success","startEpochMs":1787564356725,"endEpochMs":1787564356757,"latencyMs":32}
+CALIPER_TX_LATENCY {"workerIndex":6,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"854587f09adf505106912be84d7da8f9ca50701b43155c8f5f81346e07a8065c","status":"success","startEpochMs":1787564356725,"endEpochMs":1787564356757,"latencyMs":32}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"6e3ce9eecb3b9a7e2a3084207f859d035eb2889de56cbc5e28a42509f084f6d3","status":"success","startEpochMs":1787564356725,"endEpochMs":1787564356757,"latencyMs":32}
+CALIPER_TX_LATENCY {"workerIndex":7,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"2243d482942be6efea05c6afb639078e7c0d4eab1d4295060a9db4df1427815a","status":"success","startEpochMs":1787564356727,"endEpochMs":1787564356757,"latencyMs":30}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"0a9e2b55ef7ffcdc9754f740927f1763b80e4b1262a5e3b0b85a143490514753","status":"success","startEpochMs":1787564356726,"endEpochMs":1787564356757,"latencyMs":31}
+CALIPER_TX_LATENCY {"workerIndex":7,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"eaa19fdc72a20b2153ee8543f128f37f983a0931e00763e494b683a171eaed61","status":"success","startEpochMs":1787564357725,"endEpochMs":1787564357750,"latencyMs":25}
+CALIPER_TX_LATENCY {"workerIndex":6,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"b696b3de03a32faf96f1bef8f5af185a80103c1d797df25256c63dd9f4499537","status":"success","startEpochMs":1787564357723,"endEpochMs":1787564357750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"a0bac67f7c8a178b2dd03697812d445257235af3a6fb61a1d62bcb096bcb19a5","status":"success","startEpochMs":1787564357722,"endEpochMs":1787564357750,"latencyMs":28}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"9e603097bd2a54684d460e4f8002dc2a83f6b338cf7d77ea6e877b60bbe768e7","status":"success","startEpochMs":1787564357724,"endEpochMs":1787564357750,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"e347d0b2e34e290a3ac67f3f48a17d81a39be5b145e1f95fd76281950367a86d","status":"success","startEpochMs":1787564357724,"endEpochMs":1787564357750,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":4,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"49b8bc1a6eb53fa064e14ab1605b3aa0ff06c6782b2e0a7c174079b0cc873722","status":"success","startEpochMs":1787564357724,"endEpochMs":1787564357750,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"ab2e7c4e3c333e7f55d3ee9bb4b0c1d2fd527992e8535bb25353cf0126c9c262","status":"success","startEpochMs":1787564357723,"endEpochMs":1787564357750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":5,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"3cf5c5bd095f82aad1ecedf1a6d00a1d34ca2f7950c5e550f26100df8dc550e2","status":"success","startEpochMs":1787564357723,"endEpochMs":1787564357750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":7,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"5fd4780611fef19fe19ea171988c79e1502c458b71269f14b0b75abd1a5a2960","status":"success","startEpochMs":1787564358724,"endEpochMs":1787564358748,"latencyMs":24}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"ed8d3e05f732686874b7df0010cea599270d40f778a43614c840f3022b10c0c3","status":"success","startEpochMs":1787564358723,"endEpochMs":1787564358748,"latencyMs":25}
+CALIPER_TX_LATENCY {"workerIndex":6,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"eb706f7c136b65ba81a6e87ed679da5fa2152674a9b18695376502aece89fdaf","status":"success","startEpochMs":1787564358723,"endEpochMs":1787564358748,"latencyMs":25}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"8b69e5cfaaa3fcbf43e005e9236a755288b6cdd70e41b6e4af4c2fe38a6635fd","status":"success","startEpochMs":1787564358724,"endEpochMs":1787564358749,"latencyMs":25}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"1a249ccf8c829b25e786f604d197cf2b159a6d8a97ca2e0445d65a793998b753","status":"success","startEpochMs":1787564358724,"endEpochMs":1787564358749,"latencyMs":25}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"5f0474c310db2a73cd925785d88cebd52aafe4ccf6f33498a02779e5e7b61e0b","status":"success","startEpochMs":1787564358723,"endEpochMs":1787564358749,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":4,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"5d1c47e9dfc1789afb588790e687c45cb48558bb5a0a138533eca641efe56992","status":"success","startEpochMs":1787564358724,"endEpochMs":1787564358749,"latencyMs":25}
+CALIPER_TX_LATENCY {"workerIndex":5,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"6d5016e58490506b715a10bc65a9d6e155f6d11860f8201f3cd520f4c6c08e05","status":"success","startEpochMs":1787564358723,"endEpochMs":1787564358749,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"b0d2c20aaa5f21f9d957fc071c8c653f465770367a4c3aa97e82c99577c47218","status":"success","startEpochMs":1787564359723,"endEpochMs":1787564359750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":7,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"819548047d857343714bc84e3db334fc7fd26a60b62a9cdb1bc538b0e0855279","status":"success","startEpochMs":1787564359724,"endEpochMs":1787564359750,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":6,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"d0f02d1db272844c641b7285305dd6c3e8e6c9fc688f061300b86bc418897c70","status":"success","startEpochMs":1787564359723,"endEpochMs":1787564359750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"d8a8c913690b4c404945d95576e3153b5bcb14f65d0088a4fadec7a5af282bd9","status":"success","startEpochMs":1787564359723,"endEpochMs":1787564359750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":5,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"caaa72666f5bcab03ce7621b8ba77f4b4d442ef7e3abb4edd8b7891c0fd82806","status":"success","startEpochMs":1787564359724,"endEpochMs":1787564359750,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":4,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"d64a20885636956aeee9d35f2d2bd89a95cc72c50e3cc6624e14a201eb352d52","status":"success","startEpochMs":1787564359724,"endEpochMs":1787564359750,"latencyMs":26}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"c66f15b153c2f0527836ed5576427f1800b02a2f2902551b8e7c81473ca53b9e","status":"success","startEpochMs":1787564359723,"endEpochMs":1787564359750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"bf5fe516438ca85353a57a419c393de2c8ac5f65f239866c4d67ceb0c436d561","status":"success","startEpochMs":1787564359725,"endEpochMs":1787564359751,"latencyMs":26}
+2026.08.24-15:09:20.731[32m info [39m [caliper] [default-observer] 	[search-users-8 Round 0 Transaction Info] - Submitted: 37 Succ: 32 Fail:0 Unfinished:5
+CALIPER_TX_LATENCY {"workerIndex":4,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"5cb7e1d204fc991df230b72fe044bb7239c86da0f7baeb3119295b0de7f6e590","status":"success","startEpochMs":1787564360723,"endEpochMs":1787564360750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"64fe8c5afdaf42970ca7fcb0478b26241959eb98bbfff449b8ba434513195c1c","status":"success","startEpochMs":1787564360723,"endEpochMs":1787564360750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"c0b3f3057cdcf35f287b740c71e7827ded89067c965022aab201cc588fd93ca3","status":"success","startEpochMs":1787564360723,"endEpochMs":1787564360750,"latencyMs":27}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"626ed020da0875b5cee5cf5fe70392b209453378c8d727737ad78ad441f63026","status":"success","startEpochMs":1787564360723,"endEpochMs":1787564360752,"latencyMs":29}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"6b8ecc3c860e497311097573dc78013131fead6396c1749059b49738aacac3cd","status":"success","startEpochMs":1787564360724,"endEpochMs":1787564360752,"latencyMs":28}
+CALIPER_TX_LATENCY {"workerIndex":7,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"a69fe67c8692263300f22e7de18fb71eeed174967cf85f2408fab4560087da95","status":"success","startEpochMs":1787564360724,"endEpochMs":1787564360752,"latencyMs":28}
+CALIPER_TX_LATENCY {"workerIndex":6,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"a82b0e68590b58a9fa17ec5fedca83546238e18b3e42b64385b56b467fdab371","status":"success","startEpochMs":1787564360724,"endEpochMs":1787564360752,"latencyMs":28}
+CALIPER_TX_LATENCY {"workerIndex":5,"roundIndex":0,"roundLabel":"search-users-8","transactionId":"ef9daf38f80352bc8b8e41e65ddf5f701814cc4c66da99a61b5d72e3da7da385","status":"success","startEpochMs":1787564360723,"endEpochMs":1787564360752,"latencyMs":29}
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:09:21.829[32m info [39m [caliper] [worker-message-handler] 	Worker#0 finished Round#0
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [worker-message-handler] 	Worker#4 finished Round#0
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:09:21.829[32m info [39m [caliper] [worker-message-handler] 	Worker#5 finished Round#0
+2026.08.24-15:09:21.829[32m info [39m [caliper] [worker-message-handler] 	Worker#1 finished Round#0
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:09:21.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.830[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.830[32m info [39m [caliper] [worker-message-handler] 	Worker#2 finished Round#0
+2026.08.24-15:09:21.830[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.830[32m info [39m [caliper] [worker-message-handler] 	Worker#6 finished Round#0
+2026.08.24-15:09:21.830[32m info [39m [caliper] [worker-message-handler] 	Worker#7 finished Round#0
+2026.08.24-15:09:21.830[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:09:21.830[32m info [39m [caliper] [worker-message-handler] 	Worker#3 finished Round#0
+2026.08.24-15:09:26.833[32m info [39m [caliper] [default-observer] 	Resetting txCount indicator count
+2026.08.24-15:09:26.833[32m info [39m [caliper] [report-builder] 	### Test result ###
+2026.08.24-15:09:26.837[32m info [39m [caliper] [report-builder] 	
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+| Name           | Succ | Fail | Send Rate (TPS) | Max Latency (s) | Min Latency (s) | Avg Latency (s) | Throughput (TPS) |
+|----------------|------|------|-----------------|-----------------|-----------------|-----------------|------------------|
+| search-users-8 | 48   | 0    | 9.6             | 0.07            | 0.02            | 0.03            | 9.5              |
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+
+2026.08.24-15:09:26.837[32m info [39m [caliper] [round-orchestrator] 	Finished round 1 (search-users-8) in 5.105 seconds
+2026.08.24-15:09:26.837[32m info [39m [caliper] [monitor.js] 	Stopping all monitors
+2026.08.24-15:09:26.837[32m info [39m [caliper] [report-builder] 	### All test results ###
+2026.08.24-15:09:26.838[32m info [39m [caliper] [report-builder] 	
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+| Name           | Succ | Fail | Send Rate (TPS) | Max Latency (s) | Min Latency (s) | Avg Latency (s) | Throughput (TPS) |
+|----------------|------|------|-----------------|-----------------|-----------------|-----------------|------------------|
+| search-users-8 | 48   | 0    | 9.6             | 0.07            | 0.02            | 0.03            | 9.5              |
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+
+2026.08.24-15:09:26.845[32m info [39m [caliper] [report-builder] 	Generated report with path /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-39-15-291Z_caliper_latency-users-8/caliper-report.html
+2026.08.24-15:09:26.845[32m info [39m [caliper] [monitor.js] 	Stopping all monitors
+2026.08.24-15:09:26.845[32m info [39m [caliper] [worker-orchestrator] 	Sending exit message to connected workers
+2026.08.24-15:09:26.846[32m info [39m [caliper] [round-orchestrator] 	Benchmark finished in 11.145 seconds. Total rounds: 1. Successful rounds: 1. Failed rounds: 0.
+2026.08.24-15:09:26.846[32m info [39m [caliper] [caliper-engine] 	Skipping end command due to benchmark flow conditioning
+2026.08.24-15:09:26.846[32m info [39m [caliper] [cli-launch-manager] 	Benchmark successfully finished!
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#3 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#1 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#0 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#4 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#2 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#5 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#6 is exiting
+2026.08.24-15:09:26.846[32m info [39m [caliper] [worker-message-handler] 	Worker#7 is exiting

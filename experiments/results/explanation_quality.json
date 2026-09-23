@@ -1,0 +1,131 @@
+{
+  "generatedAtUtc": "2026-08-06T17:08:21.620Z",
+  "model": "llama3.2:3b",
+  "paperBaseline": {
+    "fullCoverage": 0.781,
+    "meanCoverage": 0.931,
+    "source": "paper Section IV-E / results/tables/explanation_audit_quality_summary.csv"
+  },
+  "newHintKeys": [
+    "subject.role",
+    "subject.clearance",
+    "object.recordType",
+    "subject.mspId"
+  ],
+  "scenarios": [
+    "allow / assigned inspector",
+    "escalate / low clearance",
+    "deny / role has no permission",
+    "deny / revoked credential",
+    "escalate / juvenile record",
+    "escalate / sealed record"
+  ],
+  "arms": {
+    "template": {
+      "n": 6,
+      "meanCoverage": 1,
+      "fullCoverageRate": 1,
+      "labelFidelityRate": 1,
+      "counterfactualMentionRate": 1,
+      "fallbackRate": "n/a",
+      "latencyP50Ms": 0
+    },
+    "llm": {
+      "n": 6,
+      "meanCoverage": 0.9167,
+      "fullCoverageRate": 0.8333,
+      "labelFidelityRate": 1,
+      "counterfactualMentionRate": 0.6667,
+      "fallbackRate": 0.5,
+      "latencyP50Ms": 0
+    }
+  },
+  "perScenario": [
+    {
+      "label": "allow / assigned inspector",
+      "decision": "allow",
+      "decisiveAttributes": [
+        "subject.role",
+        "subject.jurisdiction",
+        "subject.clearance",
+        "env.purpose"
+      ],
+      "templateCoverage": 1,
+      "llmCoverage": 1,
+      "llmSource": "llm",
+      "llmText": "As an inspector with a high clearance and from the District-North jurisdiction, you have been granted access to view the case diary for the purpose of investigating a FIR. This decision was made based on policy, as your role and clearance meet the requirements outlined in crime-policy-v1. Your request has been approved.",
+      "templateText": "Access was allowed because every policy check passed for this role, purpose and record sensitivity. The attributes that decided it were requester role, requester jurisdiction, requester clearance and purpose. Context: requester role inspector, requester clearance high, record type fir, record sensitivity level medium and purpose investigation. Evaluated under policy crime-policy-v1.",
+      "problems": []
+    },
+    {
+      "label": "escalate / low clearance",
+      "decision": "escalate",
+      "decisiveAttributes": [
+        "subject.clearance",
+        "object.sensitivityLevel"
+      ],
+      "templateCoverage": 1,
+      "llmCoverage": 1,
+      "llmSource": "template",
+      "llmText": "Access was escalated for senior review because the requester clearance sits below the record sensitivity level. The attributes that decided it were requester clearance and record sensitivity level. Context: requester role constable, requester clearance low and purpose investigation. What would change the outcome: decision would change if requester clearance were 'medium' or higher. Evaluated under policy crime-policy-v1.",
+      "templateText": "Access was escalated for senior review because the requester clearance sits below the record sensitivity level. The attributes that decided it were requester clearance and record sensitivity level. Context: requester role constable, requester clearance low, record type fir, record sensitivity level medium and purpose investigation. What would change the outcome: decision would change if requester clearance were 'medium' or higher. Evaluated under policy crime-policy-v1.",
+      "problems": []
+    },
+    {
+      "label": "deny / role has no permission",
+      "decision": "deny",
+      "decisiveAttributes": [
+        "subject.role",
+        "action",
+        "object.recordType"
+      ],
+      "templateCoverage": 1,
+      "llmCoverage": 1,
+      "llmSource": "llm",
+      "llmText": "The access request for viewing a FIR record was denied due to insufficient permissions, specifically because your role as defense counsel does not have the required \"view\" permission on FIR records. This is based on our policy version crime-policy-v1 and its associated rules. The reason code RBAC_NO_PERMISSION indicates that this decision is made through Role-Based Access Control (RBAC) mechanisms.",
+      "templateText": "Access was denied because this role holds no permission for that action on that record type. The attributes that decided it were requester role, action and record type. Context: requester role defense-counsel, requester clearance low, record type fir, record sensitivity level medium and purpose defense-preparation. What would change the outcome: role 'defense-counsel' has no 'view' permission on 'fir'. Evaluated under policy crime-policy-v1.",
+      "problems": []
+    },
+    {
+      "label": "deny / revoked credential",
+      "decision": "deny",
+      "decisiveAttributes": [
+        "subject.credentialStatus"
+      ],
+      "templateCoverage": 1,
+      "llmCoverage": 1,
+      "llmSource": "template",
+      "llmText": "Access was denied because the requester credential status is not active, so the request cannot proceed. The attributes that decided it were requester credential status. Context: requester role inspector, requester clearance high and purpose investigation. What would change the outcome: decision would change if the requester credential status were \"active\". Evaluated under policy crime-policy-v1.",
+      "templateText": "Access was denied because the requester credential status is not active, so the request cannot proceed. The attributes that decided it were requester credential status. Context: requester role inspector, requester clearance high, record type fir, record sensitivity level medium and purpose investigation. What would change the outcome: decision would change if the requester credential status were \"active\". Evaluated under policy crime-policy-v1.",
+      "problems": []
+    },
+    {
+      "label": "escalate / juvenile record",
+      "decision": "escalate",
+      "decisiveAttributes": [
+        "object.juvenileFlag",
+        "subject.role"
+      ],
+      "templateCoverage": 1,
+      "llmCoverage": 1,
+      "llmSource": "template",
+      "llmText": "Access was escalated for senior review because the record carries a juvenile flag and needs supervisory approval. The attributes that decided it were juvenile flag and requester role. Context: requester role constable, requester clearance low and purpose investigation. What would change the outcome: a supervisory approval is required because the record involves a juvenile. Evaluated under policy crime-policy-v1.",
+      "templateText": "Access was escalated for senior review because the record carries a juvenile flag and needs supervisory approval. The attributes that decided it were juvenile flag and requester role. Context: requester role constable, requester clearance low, record type fir, record sensitivity level medium and purpose investigation. What would change the outcome: a supervisory approval is required because the record involves a juvenile. Evaluated under policy crime-policy-v1.",
+      "problems": []
+    },
+    {
+      "label": "escalate / sealed record",
+      "decision": "escalate",
+      "decisiveAttributes": [
+        "object.sealed",
+        "subject.mspId"
+      ],
+      "templateCoverage": 1,
+      "llmCoverage": 0.5,
+      "llmSource": "llm",
+      "llmText": "The access request has been escalated due to a sealed record, which means that the information is protected by law and cannot be viewed without further authorization. The reason for this decision is the sealed status of the record, which indicates that it contains sensitive or confidential information. This decision will be reviewed normally if the record were not sealed, but in this case, the sealed status requires a supervisor's approval to proceed with viewing the record.",
+      "templateText": "Access was escalated for senior review because the record carries sealed status, so a court authority must decide access. The attributes that decided it were sealed status and requester organization. Context: requester role public-prosecutor, requester clearance high, record type fir, record sensitivity level medium and purpose prosecution. What would change the outcome: decision would be evaluated normally if the record were not sealed. Evaluated under policy crime-policy-v1.",
+      "problems": []
+    }
+  ]
+}

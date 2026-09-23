@@ -1,0 +1,12 @@
+Property,Unsupervised prototype deployment,Supervised deployment
+Trigger,a single model inference exceeding the 60 s timeout,a single model inference exceeding the 60 s timeout
+Listener behaviour,exits by design without advancing its checkpoint,exits by design without advancing its checkpoint
+Checkpoint,not advanced past the unanswered request,not advanced past the unanswered request
+Committed request,preserved and retryable,preserved and retried
+Restart,none; manual intervention required,"automatic, after a bounded backoff"
+Decisioning after the event,halted until an operator restarts the service,resumes once the listener is back
+Effect on the run,"runs 8 and 9 degraded to 100/5 and 96/9 passing/failing, every failure being HTTP 202 'the policy model has not answered yet'",the run continues; each restart is recorded and the run is reported as recovered rather than clean
+Unauthorized Allow,0,0
+Protected record released,0,0
+Committed requests lost,0,0
+Observed in,Experiment 03 stability runs 8 and 9,"supervised restart verification, and Experiment 03 final run"

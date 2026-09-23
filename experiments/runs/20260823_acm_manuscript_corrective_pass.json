@@ -1,0 +1,100 @@
+{
+  "runId": "20260823_acm_manuscript_corrective_pass",
+  "date": "2026-08-23",
+  "objective": "Corrective pass on papers/final_paper/SEBA_XAI_ACM_6page.tex: make the containment checker portable and hash-anchored, restrict ethics claims to what repository artifacts establish, relabel the latency figure as a configured reference plus an observed difference rather than component timing, and bring repository records up to date.",
+  "environment": {
+    "platform": "local macOS workspace (Darwin arm64)",
+    "tectonic": "Tectonic 0.16.9",
+    "node": "v22.20.0",
+    "texEngine": "XeTeX via Tectonic",
+    "documentClass": "documentclass[sigconf,authordraft]{acmart}",
+    "liveFabricNetwork": "not reachable in this environment; no new live measurements were taken"
+  },
+  "commands": [
+    "tectonic -X compile papers/final_paper/SEBA_XAI_ACM_6page.tex --outdir papers/final_paper/build-acm --keep-intermediates --keep-logs",
+    "pdfinfo papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf",
+    "pdftoppm -png -r 100 papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf <out>",
+    "node papers/final_paper/artifacts/check_faithfulness.js",
+    "node results/plots/figure3_latency_reference.js"
+  ],
+  "manuscriptOutput": {
+    "pages": 5,
+    "pageLimitIncludingReferences": 6,
+    "withinLimit": true,
+    "figures": 3,
+    "tables": 2,
+    "numberedEquations": 5,
+    "figureDescriptions": 3,
+    "visualInspection": "all 5 pages rendered at 100 dpi and inspected; no clipping, overlap, or missing figures observed"
+  },
+  "compileWarnings": {
+    "overfullHbox": 0,
+    "overfullVbox": 1,
+    "overfullVboxDetail": [
+      "1.16599"
+    ],
+    "underfullHbox": 2,
+    "underfullHboxBadness": [
+      "2111",
+      "2103"
+    ],
+    "underfullVbox": 2,
+    "acmartClassWarnings": 0,
+    "undefinedReferencesOrCitations": 0,
+    "bibtexFieldWarnings": [
+      "empty address in Androulaki2018, Azaria2016, Zyskind2015",
+      "no number/volume and no pages in Doshi2017, Wood2014"
+    ],
+    "note": "BibTeX field warnings concern optional bibliographic fields, do not appear in the rendered PDF, and were left unfilled rather than populated with invented values."
+  },
+  "containmentCheck": {
+    "script": "papers/final_paper/artifacts/check_faithfulness.js",
+    "recordedOutput": "papers/final_paper/artifacts/decisive_attribute_check.txt",
+    "rulesExercised": 12,
+    "firedAsIntended": 12,
+    "subsetSafe": "10/12",
+    "portable": "resolves the policy engine relative to __dirname; accepts an explicit path argument; verified from repo root, from the artifacts directory, and from /tmp",
+    "auditedSources": {
+      "chaincode/crimerecords/lib/policy/policyEngine.js": "5d092f295513e19891553c8010f8b5750b9616063abae5753770f617523b6d38",
+      "chaincode/crimerecords/lib/policy/policyV1.js": "0a70e5b31575a03034a2021ed414755c4c7697d2f24421f04c7b4a1a9f920015"
+    },
+    "interpretation": "The guard table in the checker is transcribed by hand from the engine, so the digests above bound the transcription's validity. Two rules are not subset-safe: the victim-protection prohibition lists the request purpose without reading it in its guard, and the default allow has no guard so containment is undefined for it."
+  },
+  "hashes": {
+    "papers/final_paper/SEBA_XAI_ACM_6page.tex": "46662ad2872ef030e1db63ce29e27c9d5fd61b613c48d153aa3bfd1ee2559dbd",
+    "papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf": "5874bde478b2238a2d477d5e7e815cfcdf362acfc8d14840daa5d37dde81c81d",
+    "papers/final_paper/artifacts/check_faithfulness.js": "657b3f71f387e7de6d069efabc36a65138518bd5d6c4d44d51159782519fbc4b",
+    "results/plots/figure3_latency_reference.js": "be1f6ecd9618d61467d713869be0a78b10ee3d85547ed5eb33518b230d9b9b91",
+    "experiments/results/live_fabric_measurements.json": "9015d93cbd8e976f2272d21faf32c03bb5eaa1a5abf0cbea8d6a03b8c2506427"
+  },
+  "corrections": [
+    "check_faithfulness.js no longer hard-codes an absolute path; it resolves repo-relative from __dirname, accepts a CLI path, and prints SHA-256 digests of policyEngine.js and policyV1.js.",
+    "Ethics text no longer asserts author conduct ('no operational police system was contacted', 'no institutional review was sought'). It now delimits the recorded evaluation and states that real deployment or human-subject work requires applicable institutional and legal review.",
+    "Figure 3 relabelled: 2000 ms is a configured timeout reference, 72.69 ms is an observed difference from that reference. Caption and description disclaim component and causal interpretation.",
+    "'Dominated by' removed from abstract, results, and conclusion; replaced with non-causal phrasing.",
+    "reports/iteration/iter_008_acm_6page_manuscript.md corrected from its stale four-page status.",
+    "results/plots/ added with repo-relative reproduction material and a manuscript-consistency gate for Figure 3."
+  ],
+  "limitations": [
+    "No new live-network measurement was taken; all quantitative claims restate dated repository artifacts.",
+    "Component-level policy, explanation, endorsement, ordering, and commit timings remain uninstrumented; the 72.69 ms figure is a difference from a configuration constant, not a component timing, and supports no causal claim.",
+    "Venue, DOI, and ISBN remain deliberately non-resolvable placeholders; the authordraft watermark is retained until real ACM metadata is supplied.",
+    "Two policy rules remain non-subset-safe; this is reported as a finding, not repaired, because changing the engine would invalidate the recorded evaluation.",
+    "One overfull vbox of 1.17 pt persists on the final page. Raggedbottom clears it but overrides ACM flushbottom, so it was not applied.",
+    "The eight policy scenarios are fixtures authored with the prototype and were not independently adjudicated."
+  ],
+  "artifacts": [
+    "papers/final_paper/SEBA_XAI_ACM_6page.tex",
+    "papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf",
+    "papers/final_paper/artifacts/check_faithfulness.js",
+    "papers/final_paper/artifacts/decisive_attribute_check.txt",
+    "papers/final_paper/artifacts/PROVENANCE.md",
+    "results/plots/figure3_latency_reference.js",
+    "results/plots/README.md",
+    "results/tables/20260811_policy_scenario_comparison_v2_3.csv",
+    "experiments/results/live_fabric_measurements.json",
+    "experiments/results/explanation_quality.json",
+    "reports/iteration/iter_008_acm_6page_manuscript.md",
+    "docs/evaluation.md"
+  ]
+}

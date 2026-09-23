@@ -1,0 +1,1365 @@
+{
+  "experiment": "access-decision latency as the ledger grows",
+  "generatedAtUtc": "2026-08-23T09:29:21.014Z",
+  "environment": {
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "organizations": 5,
+    "stateDatabase": "CouchDB",
+    "couchDbIndexes": "none defined (no META-INF/statedb/couchdb/indexes)",
+    "batchTimeout": "2s",
+    "maxMessageCount": 10,
+    "host": "single machine, Colima 10 vCPU / 24 GiB"
+  },
+  "method": {
+    "readsMeasured": "serially at concurrency 1; queries never reach the orderer",
+    "decisionMeasured": "concurrency 20",
+    "repetitions": 3,
+    "resultSetControl": "filler records use owningStation PS-BULK; the probe query asks for PS-Central, matched only by the 3 seeded demo records, so the result set stays constant while the collection grows",
+    "operationClasses": {
+      "pointRead": "getState by key",
+      "richQuery": "getQueryResult, CouchDB Mango selector, no index",
+      "auditTrail": "getStateByPartialCompositeKey([recordId]) + getHistoryForKey",
+      "accessLog": "getStateByPartialCompositeKey([]) over all access events",
+      "decision": "point reads + policy evaluation + ordered commit"
+    }
+  },
+  "points": [
+    {
+      "recordCount": 1000,
+      "couch": {
+        "available": false,
+        "error": "Request cannot be constructed from a URL that includes credentials: http://admin:adminpw@localhost:5984/crimechannel_crimerecords"
+      },
+      "operations": {
+        "pointRead": {
+          "p50Ms": 3.61,
+          "p95Ms": 20.91,
+          "failed": 0,
+          "repetitions": [
+            3.7,
+            3.62,
+            3.5
+          ],
+          "allSamplesFailed": false
+        },
+        "richQuery": {
+          "p50Ms": 159.01,
+          "p95Ms": 180.98,
+          "failed": 0,
+          "repetitions": [
+            146.37,
+            158.84,
+            171.82
+          ],
+          "allSamplesFailed": false
+        },
+        "auditTrail": {
+          "p50Ms": 93.66,
+          "p95Ms": 129.65,
+          "failed": 0,
+          "repetitions": [
+            6.9,
+            94.47,
+            179.62
+          ],
+          "allSamplesFailed": false
+        },
+        "accessLog": {
+          "p50Ms": 125.57,
+          "p95Ms": 133.22,
+          "failed": 0,
+          "repetitions": [
+            114.89,
+            125.16,
+            136.66
+          ],
+          "allSamplesFailed": false
+        },
+        "decision": {
+          "p50Ms": 117.79,
+          "p95Ms": 164,
+          "failed": 0,
+          "repetitions": [
+            119.91,
+            109,
+            124.45
+          ],
+          "allSamplesFailed": false
+        }
+      },
+      "perRepetition": [
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.9,
+            "p50Ms": 3.7,
+            "meanMs": 6.61,
+            "p95Ms": 20.82,
+            "maxMs": 27.67
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 139.65,
+            "p50Ms": 146.37,
+            "meanMs": 150.02,
+            "p95Ms": 194.85,
+            "maxMs": 194.85
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 5.66,
+            "p50Ms": 6.9,
+            "meanMs": 8.2,
+            "p95Ms": 21.71,
+            "maxMs": 21.71
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 112.02,
+            "p50Ms": 114.89,
+            "meanMs": 116.92,
+            "p95Ms": 127.09,
+            "maxMs": 127.09
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 76.96,
+            "p50Ms": 119.91,
+            "meanMs": 124.1,
+            "p95Ms": 167.35,
+            "maxMs": 168
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.84,
+            "p50Ms": 3.62,
+            "meanMs": 6.25,
+            "p95Ms": 20.75,
+            "maxMs": 24.01
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 152.24,
+            "p50Ms": 158.84,
+            "meanMs": 159.12,
+            "p95Ms": 164.42,
+            "maxMs": 164.42
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 91.98,
+            "p50Ms": 94.47,
+            "meanMs": 97.91,
+            "p95Ms": 143,
+            "maxMs": 143
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 122.24,
+            "p50Ms": 125.16,
+            "meanMs": 125.59,
+            "p95Ms": 130.37,
+            "maxMs": 130.37
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 50.93,
+            "p50Ms": 109,
+            "meanMs": 106.92,
+            "p95Ms": 153.8,
+            "maxMs": 154.22
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.62,
+            "p50Ms": 3.5,
+            "meanMs": 5.98,
+            "p95Ms": 21.16,
+            "maxMs": 22.2
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 160.42,
+            "p50Ms": 171.82,
+            "meanMs": 172.4,
+            "p95Ms": 183.67,
+            "maxMs": 183.67
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 172.11,
+            "p50Ms": 179.62,
+            "meanMs": 183.13,
+            "p95Ms": 224.23,
+            "maxMs": 224.23
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 130.01,
+            "p50Ms": 136.66,
+            "meanMs": 136.61,
+            "p95Ms": 142.19,
+            "maxMs": 142.19
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 63.15,
+            "p50Ms": 124.45,
+            "meanMs": 121.72,
+            "p95Ms": 170.85,
+            "maxMs": 171.64
+          }
+        }
+      ]
+    },
+    {
+      "recordCount": 5000,
+      "couch": {
+        "available": false,
+        "error": "Request cannot be constructed from a URL that includes credentials: http://admin:adminpw@localhost:5984/crimechannel_crimerecords"
+      },
+      "operations": {
+        "pointRead": {
+          "p50Ms": 3.47,
+          "p95Ms": 21.53,
+          "failed": 0,
+          "repetitions": [
+            3.27,
+            3.39,
+            3.75
+          ],
+          "allSamplesFailed": false
+        },
+        "richQuery": {
+          "p50Ms": 734.97,
+          "p95Ms": 748.73,
+          "failed": 0,
+          "repetitions": [
+            720.21,
+            735.49,
+            749.2
+          ],
+          "allSamplesFailed": false
+        },
+        "auditTrail": {
+          "p50Ms": 356.92,
+          "p95Ms": 414.67,
+          "failed": 0,
+          "repetitions": [
+            274.88,
+            353.27,
+            442.61
+          ],
+          "allSamplesFailed": false
+        },
+        "accessLog": {
+          "p50Ms": 562.67,
+          "p95Ms": 582.51,
+          "failed": 0,
+          "repetitions": [
+            551.71,
+            563.27,
+            573.03
+          ],
+          "allSamplesFailed": false
+        },
+        "decision": {
+          "p50Ms": 121.4,
+          "p95Ms": 172.57,
+          "failed": 0,
+          "repetitions": [
+            123.15,
+            132.41,
+            108.65
+          ],
+          "allSamplesFailed": false
+        }
+      },
+      "perRepetition": [
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.46,
+            "p50Ms": 3.27,
+            "meanMs": 6.58,
+            "p95Ms": 21.38,
+            "maxMs": 21.4
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 706.7,
+            "p50Ms": 720.21,
+            "meanMs": 719.13,
+            "p95Ms": 730.76,
+            "maxMs": 730.76
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 264.46,
+            "p50Ms": 274.88,
+            "meanMs": 277.23,
+            "p95Ms": 316.38,
+            "maxMs": 316.38
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 541.72,
+            "p50Ms": 551.71,
+            "meanMs": 553.28,
+            "p95Ms": 568.63,
+            "maxMs": 568.63
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 88.36,
+            "p50Ms": 123.15,
+            "meanMs": 120,
+            "p95Ms": 173.98,
+            "maxMs": 190.93
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.55,
+            "p50Ms": 3.39,
+            "meanMs": 5.48,
+            "p95Ms": 20.25,
+            "maxMs": 22.63
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 728.2,
+            "p50Ms": 735.49,
+            "meanMs": 735.58,
+            "p95Ms": 747.07,
+            "maxMs": 747.07
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 346.75,
+            "p50Ms": 353.27,
+            "meanMs": 358.81,
+            "p95Ms": 417.54,
+            "maxMs": 417.54
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 560.42,
+            "p50Ms": 563.27,
+            "meanMs": 566.42,
+            "p95Ms": 583.11,
+            "maxMs": 583.11
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 99.03,
+            "p50Ms": 132.41,
+            "meanMs": 128.6,
+            "p95Ms": 153.14,
+            "maxMs": 198.27
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 3.01,
+            "p50Ms": 3.75,
+            "meanMs": 5.89,
+            "p95Ms": 22.97,
+            "maxMs": 24.9
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 739.4,
+            "p50Ms": 749.2,
+            "meanMs": 750.9,
+            "p95Ms": 768.35,
+            "maxMs": 768.35
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 427.43,
+            "p50Ms": 442.61,
+            "meanMs": 445.78,
+            "p95Ms": 510.09,
+            "maxMs": 510.09
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 567.31,
+            "p50Ms": 573.03,
+            "meanMs": 577.95,
+            "p95Ms": 595.79,
+            "maxMs": 595.79
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 74.15,
+            "p50Ms": 108.65,
+            "meanMs": 120.44,
+            "p95Ms": 190.6,
+            "maxMs": 192.02
+          }
+        }
+      ]
+    },
+    {
+      "recordCount": 10000,
+      "couch": {
+        "available": false,
+        "error": "Request cannot be constructed from a URL that includes credentials: http://admin:adminpw@localhost:5984/crimechannel_crimerecords"
+      },
+      "operations": {
+        "pointRead": {
+          "p50Ms": 3.58,
+          "p95Ms": 23.22,
+          "failed": 0,
+          "repetitions": [
+            3.45,
+            3.77,
+            3.52
+          ],
+          "allSamplesFailed": false
+        },
+        "richQuery": {
+          "p50Ms": 1461.51,
+          "p95Ms": 1489.76,
+          "failed": 0,
+          "repetitions": [
+            1434.49,
+            1463.98,
+            1486.07
+          ],
+          "allSamplesFailed": false
+        },
+        "auditTrail": {
+          "p50Ms": 637.54,
+          "p95Ms": 705.63,
+          "failed": 0,
+          "repetitions": [
+            545.79,
+            638.45,
+            728.39
+          ],
+          "allSamplesFailed": false
+        },
+        "accessLog": {
+          "p50Ms": 1109.88,
+          "p95Ms": 1119.29,
+          "failed": 0,
+          "repetitions": [
+            1095.6,
+            1109.77,
+            1124.26
+          ],
+          "allSamplesFailed": false
+        },
+        "decision": {
+          "p50Ms": 112.57,
+          "p95Ms": 158.88,
+          "failed": 0,
+          "repetitions": [
+            111.1,
+            113.3,
+            113.3
+          ],
+          "allSamplesFailed": false
+        }
+      },
+      "perRepetition": [
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.42,
+            "p50Ms": 3.45,
+            "meanMs": 5.39,
+            "p95Ms": 20.78,
+            "maxMs": 25.02
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 1424.81,
+            "p50Ms": 1434.49,
+            "meanMs": 1439.59,
+            "p95Ms": 1477.33,
+            "maxMs": 1477.33
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 535.26,
+            "p50Ms": 545.79,
+            "meanMs": 549.01,
+            "p95Ms": 598.54,
+            "maxMs": 598.54
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 1082.73,
+            "p50Ms": 1095.6,
+            "meanMs": 1095.42,
+            "p95Ms": 1103.51,
+            "maxMs": 1103.51
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 72.63,
+            "p50Ms": 111.1,
+            "meanMs": 113.1,
+            "p95Ms": 164.44,
+            "maxMs": 178.49
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.85,
+            "p50Ms": 3.77,
+            "meanMs": 5.91,
+            "p95Ms": 24.64,
+            "maxMs": 25.37
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 1457.75,
+            "p50Ms": 1463.98,
+            "meanMs": 1467.18,
+            "p95Ms": 1482.39,
+            "maxMs": 1482.39
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 624.57,
+            "p50Ms": 638.45,
+            "meanMs": 641.27,
+            "p95Ms": 723.05,
+            "maxMs": 723.05
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 1096.91,
+            "p50Ms": 1109.77,
+            "meanMs": 1111.9,
+            "p95Ms": 1122.03,
+            "maxMs": 1122.03
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 74.3,
+            "p50Ms": 113.3,
+            "meanMs": 115.6,
+            "p95Ms": 167.41,
+            "maxMs": 182.78
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.62,
+            "p50Ms": 3.52,
+            "meanMs": 5.86,
+            "p95Ms": 24.25,
+            "maxMs": 25.69
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 1475.18,
+            "p50Ms": 1486.07,
+            "meanMs": 1489.14,
+            "p95Ms": 1509.55,
+            "maxMs": 1509.55
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 708.69,
+            "p50Ms": 728.39,
+            "meanMs": 731.86,
+            "p95Ms": 795.31,
+            "maxMs": 795.31
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 1115.72,
+            "p50Ms": 1124.26,
+            "meanMs": 1124.38,
+            "p95Ms": 1132.33,
+            "maxMs": 1132.33
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 76.07,
+            "p50Ms": 113.3,
+            "meanMs": 109.86,
+            "p95Ms": 144.78,
+            "maxMs": 183.81
+          }
+        }
+      ]
+    },
+    {
+      "recordCount": 25000,
+      "couch": {
+        "available": false,
+        "error": "Request cannot be constructed from a URL that includes credentials: http://admin:adminpw@localhost:5984/crimechannel_crimerecords"
+      },
+      "operations": {
+        "pointRead": {
+          "p50Ms": 3.96,
+          "p95Ms": 26.87,
+          "failed": 0,
+          "repetitions": [
+            4.12,
+            3.91,
+            3.86
+          ],
+          "allSamplesFailed": false
+        },
+        "richQuery": {
+          "p50Ms": 3502.65,
+          "p95Ms": 3635.55,
+          "failed": 0,
+          "repetitions": [
+            3524.52,
+            3473.34,
+            3510.1
+          ],
+          "allSamplesFailed": false
+        },
+        "auditTrail": {
+          "p50Ms": 938.48,
+          "p95Ms": 1052.79,
+          "failed": 0,
+          "repetitions": [
+            857.19,
+            921.27,
+            1036.99
+          ],
+          "allSamplesFailed": false
+        },
+        "accessLog": {
+          "p50Ms": 2672.28,
+          "p95Ms": 2820.99,
+          "failed": 0,
+          "repetitions": [
+            2737.14,
+            2645.03,
+            2634.68
+          ],
+          "allSamplesFailed": false
+        },
+        "decision": {
+          "p50Ms": 122.18,
+          "p95Ms": 146.94,
+          "failed": 0,
+          "repetitions": [
+            130.2,
+            126.85,
+            109.49
+          ],
+          "allSamplesFailed": false
+        }
+      },
+      "perRepetition": [
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.51,
+            "p50Ms": 4.12,
+            "meanMs": 7.32,
+            "p95Ms": 26.9,
+            "maxMs": 36.08
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 3427.45,
+            "p50Ms": 3524.52,
+            "meanMs": 3538.22,
+            "p95Ms": 3682.92,
+            "maxMs": 3682.92
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 789.83,
+            "p50Ms": 857.19,
+            "meanMs": 859.26,
+            "p95Ms": 995.43,
+            "maxMs": 995.43
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 2667.55,
+            "p50Ms": 2737.14,
+            "meanMs": 2762.01,
+            "p95Ms": 2885.53,
+            "maxMs": 2885.53
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 95.26,
+            "p50Ms": 130.2,
+            "meanMs": 126.05,
+            "p95Ms": 148.34,
+            "maxMs": 201.39
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.97,
+            "p50Ms": 3.91,
+            "meanMs": 6.59,
+            "p95Ms": 29.31,
+            "maxMs": 31.8
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 3422.06,
+            "p50Ms": 3473.34,
+            "meanMs": 3519.11,
+            "p95Ms": 3670.66,
+            "maxMs": 3670.66
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 898.3,
+            "p50Ms": 921.27,
+            "meanMs": 937.11,
+            "p95Ms": 1025.23,
+            "maxMs": 1025.23
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 2609.53,
+            "p50Ms": 2645.03,
+            "meanMs": 2661.01,
+            "p95Ms": 2729.23,
+            "maxMs": 2729.23
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 81.05,
+            "p50Ms": 126.85,
+            "meanMs": 121.29,
+            "p95Ms": 150.34,
+            "maxMs": 200.55
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.97,
+            "p50Ms": 3.86,
+            "meanMs": 6.25,
+            "p95Ms": 24.4,
+            "maxMs": 27.92
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 3404.61,
+            "p50Ms": 3510.1,
+            "meanMs": 3505.54,
+            "p95Ms": 3553.08,
+            "maxMs": 3553.08
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 15,
+            "failed": 0,
+            "minMs": 965.75,
+            "p50Ms": 1036.99,
+            "meanMs": 1037.25,
+            "p95Ms": 1137.7,
+            "maxMs": 1137.7
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 10,
+            "failed": 0,
+            "minMs": 2606.23,
+            "p50Ms": 2634.68,
+            "meanMs": 2675.93,
+            "p95Ms": 2848.21,
+            "maxMs": 2848.21
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 72.56,
+            "p50Ms": 109.49,
+            "meanMs": 112.81,
+            "p95Ms": 142.14,
+            "maxMs": 189.09
+          }
+        }
+      ]
+    },
+    {
+      "recordCount": 50000,
+      "couch": {
+        "available": false,
+        "error": "Request cannot be constructed from a URL that includes credentials: http://admin:adminpw@localhost:5984/crimechannel_crimerecords"
+      },
+      "operations": {
+        "pointRead": {
+          "p50Ms": 3.52,
+          "p95Ms": 24.89,
+          "failed": 0,
+          "repetitions": [
+            3.39,
+            3.85,
+            3.32
+          ],
+          "allSamplesFailed": false
+        },
+        "richQuery": {
+          "p50Ms": null,
+          "p95Ms": null,
+          "failed": 45,
+          "repetitions": [
+            null,
+            null,
+            null
+          ],
+          "allSamplesFailed": true,
+          "failureMode": "gRPC DEADLINE_EXCEEDED after 5s (backend evaluateOptions deadline)"
+        },
+        "auditTrail": {
+          "p50Ms": 1191.04,
+          "p95Ms": 1504.24,
+          "failed": 3,
+          "repetitions": [
+            1090.44,
+            1194.06,
+            1288.63
+          ],
+          "allSamplesFailed": false
+        },
+        "accessLog": {
+          "p50Ms": null,
+          "p95Ms": null,
+          "failed": 30,
+          "repetitions": [
+            null,
+            null,
+            null
+          ],
+          "allSamplesFailed": true,
+          "failureMode": "gRPC DEADLINE_EXCEEDED after 5s (backend evaluateOptions deadline)"
+        },
+        "decision": {
+          "p50Ms": 178.83,
+          "p95Ms": 2209.64,
+          "failed": 0,
+          "repetitions": [
+            180.64,
+            174.33,
+            181.52
+          ],
+          "allSamplesFailed": false
+        }
+      },
+      "perRepetition": [
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.47,
+            "p50Ms": 3.39,
+            "meanMs": 6.63,
+            "p95Ms": 25.7,
+            "maxMs": 27.36
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 14,
+            "failed": 1,
+            "minMs": 1082.89,
+            "p50Ms": 1090.44,
+            "meanMs": 1130.52,
+            "p95Ms": 1579.52,
+            "maxMs": 1579.52
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 0,
+            "failed": 10,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 104.87,
+            "p50Ms": 180.64,
+            "meanMs": 1080.77,
+            "p95Ms": 2049.16,
+            "maxMs": 2099.58
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.77,
+            "p50Ms": 3.85,
+            "meanMs": 5.94,
+            "p95Ms": 23.9,
+            "maxMs": 25.55
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 14,
+            "failed": 1,
+            "minMs": 1169.11,
+            "p50Ms": 1194.06,
+            "meanMs": 1208.17,
+            "p95Ms": 1433.21,
+            "maxMs": 1433.21
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 0,
+            "failed": 10,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 92.03,
+            "p50Ms": 174.33,
+            "meanMs": 1134.84,
+            "p95Ms": 2222.06,
+            "maxMs": 2280.16
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.69,
+            "p50Ms": 3.32,
+            "meanMs": 5.84,
+            "p95Ms": 25.06,
+            "maxMs": 27.71
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 14,
+            "failed": 1,
+            "minMs": 1271.71,
+            "p50Ms": 1288.63,
+            "meanMs": 1304.16,
+            "p95Ms": 1500,
+            "maxMs": 1500
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 0,
+            "failed": 10,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 86.76,
+            "p50Ms": 181.52,
+            "meanMs": 1190.59,
+            "p95Ms": 2357.71,
+            "maxMs": 2406.08
+          }
+        }
+      ]
+    },
+    {
+      "recordCount": 100000,
+      "couch": {
+        "available": false,
+        "error": "Request cannot be constructed from a URL that includes credentials: http://admin:adminpw@localhost:5984/crimechannel_crimerecords"
+      },
+      "operations": {
+        "pointRead": {
+          "p50Ms": 5.05,
+          "p95Ms": 1096.47,
+          "failed": 14,
+          "repetitions": [
+            3.95,
+            4.18,
+            7.01
+          ],
+          "allSamplesFailed": false
+        },
+        "richQuery": {
+          "p50Ms": null,
+          "p95Ms": null,
+          "failed": 45,
+          "repetitions": [
+            null,
+            null,
+            null
+          ],
+          "allSamplesFailed": true,
+          "failureMode": "gRPC DEADLINE_EXCEEDED after 5s (backend evaluateOptions deadline)"
+        },
+        "auditTrail": {
+          "p50Ms": 1452.33,
+          "p95Ms": 4682.32,
+          "failed": 36,
+          "repetitions": [
+            1452.33,
+            null,
+            null
+          ],
+          "allSamplesFailed": false
+        },
+        "accessLog": {
+          "p50Ms": null,
+          "p95Ms": null,
+          "failed": 30,
+          "repetitions": [
+            null,
+            null,
+            null
+          ],
+          "allSamplesFailed": true,
+          "failureMode": "gRPC DEADLINE_EXCEEDED after 5s (backend evaluateOptions deadline)"
+        },
+        "decision": {
+          "p50Ms": 883.74,
+          "p95Ms": 6338.97,
+          "failed": 25,
+          "repetitions": [
+            489.19,
+            2066.52,
+            95.51
+          ],
+          "allSamplesFailed": false
+        }
+      },
+      "perRepetition": [
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.85,
+            "p50Ms": 3.95,
+            "meanMs": 6.99,
+            "p95Ms": 26.84,
+            "maxMs": 33.23
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 9,
+            "failed": 6,
+            "minMs": 1407.94,
+            "p50Ms": 1452.33,
+            "meanMs": 2025.01,
+            "p95Ms": 4682.32,
+            "maxMs": 4682.32
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 0,
+            "failed": 10,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 40,
+            "failed": 0,
+            "minMs": 89.39,
+            "p50Ms": 489.19,
+            "meanMs": 2757.01,
+            "p95Ms": 10359.69,
+            "maxMs": 10360.77
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 30,
+            "failed": 0,
+            "minMs": 2.75,
+            "p50Ms": 4.18,
+            "meanMs": 9.39,
+            "p95Ms": 28.2,
+            "maxMs": 28.49
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 0,
+            "failed": 10,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 28,
+            "failed": 12,
+            "minMs": 2062.24,
+            "p50Ms": 2066.52,
+            "meanMs": 2434,
+            "p95Ms": 4443.8,
+            "maxMs": 4444.34
+          }
+        },
+        {
+          "pointRead": {
+            "samples": 30,
+            "successful": 16,
+            "failed": 14,
+            "minMs": 3.06,
+            "p50Ms": 7.01,
+            "meanMs": 213.1,
+            "p95Ms": 3234.37,
+            "maxMs": 3234.37
+          },
+          "richQuery": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "auditTrail": {
+            "samples": 15,
+            "successful": 0,
+            "failed": 15,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "accessLog": {
+            "samples": 10,
+            "successful": 0,
+            "failed": 10,
+            "minMs": null,
+            "p50Ms": null,
+            "meanMs": null,
+            "p95Ms": null,
+            "maxMs": null
+          },
+          "decision": {
+            "samples": 40,
+            "successful": 27,
+            "failed": 13,
+            "minMs": 81.53,
+            "p50Ms": 95.51,
+            "meanMs": 1614.32,
+            "p95Ms": 4213.42,
+            "maxMs": 4213.77
+          }
+        }
+      ]
+    }
+  ]
+}

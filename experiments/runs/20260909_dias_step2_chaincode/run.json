@@ -1,0 +1,53 @@
+{
+  "runId": "20260909_dias_step2_chaincode",
+  "date": "2026-09-09",
+  "objective": "Verify the smallest working DIAS dynamic-policy chaincode core before changing the LLM and auditor decision flow.",
+  "environment": {
+    "node": "v22.20.0",
+    "npm": "10.9.3",
+    "packageInstall": "npm ci"
+  },
+  "commands": [
+    {
+      "command": "npx mocha test/dynamicPolicy.test.js",
+      "workingDirectory": "chaincode/crimerecords",
+      "status": "passed",
+      "passing": 8,
+      "failing": 0,
+      "elapsedReportedMs": 15
+    },
+    {
+      "command": "npm test",
+      "workingDirectory": "chaincode/crimerecords",
+      "status": "passed",
+      "passing": 207,
+      "failing": 0,
+      "elapsedReportedMs": 90,
+      "coveragePercent": {
+        "statements": 90.79,
+        "branches": 82.32,
+        "functions": 90.96,
+        "lines": 92.13
+      }
+    },
+    {
+      "command": "git diff --check",
+      "workingDirectory": ".",
+      "status": "passed"
+    }
+  ],
+  "verifiedBehaviors": [
+    "Canonical fingerprints ignore recordId and caseId but change for every governed match field.",
+    "Only an LLM DENY plus auditor FORCE_ALLOW can be represented as a dynamic-rule asset.",
+    "An exact active match creates a fresh identity-bound ALLOW decision without a query, LLM invocation, or auditor review.",
+    "A miss retains the private query path and produces an AccessRequestCreated event for the AI listener.",
+    "AuditMSP district authorities can query rule state and history or revoke an active rule; ordinary requesters cannot.",
+    "A revoked rule no longer grants and the request returns to the LLM-auditor path."
+  ],
+  "limitations": [
+    "The qualifying auditor decision is not yet connected to rule creation; Step 2 tests seed the validated rule asset directly.",
+    "The existing SubmitLLMDecision method still finalizes model output and will be converted to advisory-only behavior in Step 3.",
+    "npm ci reported 6 dependency audit findings in the pinned chaincode dependency tree: 4 moderate and 2 high; no automatic dependency mutation was applied.",
+    "No live Fabric network, backend, browser, baseline experiment, proposed-method experiment, or ablation was run in this step."
+  ]
+}

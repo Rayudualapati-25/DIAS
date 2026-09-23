@@ -1,0 +1,53 @@
+{
+  "model": "mlx-community/Qwen3-14B-4bit",
+  "modelPath": "/Users/venkatrayudu/.cache/huggingface/hub/models--mlx-community--Qwen3-14B-4bit/snapshots/a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "tokenizerSource": "mlx_lm.utils.load_tokenizer",
+  "method": "mlx_lm.tuner.datasets.ChatDataset(mask_prompt=True).process",
+  "splits": {
+    "train": {
+      "examples": 3000,
+      "minTokens": 1056,
+      "meanTokens": 1115.7,
+      "p99Tokens": 1142,
+      "maxTokens": 1148,
+      "totalTokens": 3347242,
+      "trainedCompletionTokens": {
+        "min": 45,
+        "max": 54
+      },
+      "over1536": 0,
+      "over2048": 0,
+      "firstTrainedCompletion": "<think>\n\n</think>\n\n{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"dias-recommender-v1\"}<|im_end|>\n"
+    },
+    "valid": {
+      "examples": 500,
+      "minTokens": 1062,
+      "meanTokens": 1117.2,
+      "p99Tokens": 1145,
+      "maxTokens": 1147,
+      "totalTokens": 558618,
+      "trainedCompletionTokens": {
+        "min": 45,
+        "max": 54
+      },
+      "over1536": 0,
+      "over2048": 0,
+      "firstTrainedCompletion": "<think>\n\n</think>\n\n{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"dias-recommender-v1\"}<|im_end|>\n"
+    },
+    "test": {
+      "examples": 1000,
+      "minTokens": 1060,
+      "meanTokens": 1116.8,
+      "p99Tokens": 1149,
+      "maxTokens": 1152,
+      "totalTokens": 1116778,
+      "trainedCompletionTokens": {
+        "min": 45,
+        "max": 54
+      },
+      "over1536": 0,
+      "over2048": 0,
+      "firstTrainedCompletion": "<think>\n\n</think>\n\n{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v2\",\"modelVersion\":\"dias-recommender-v1\"}<|im_end|>\n"
+    }
+  }
+}

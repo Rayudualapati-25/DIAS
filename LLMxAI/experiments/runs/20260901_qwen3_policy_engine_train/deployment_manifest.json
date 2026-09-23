@@ -1,0 +1,19 @@
+{
+  "createdAtUtc": "2026-09-01T15:21:55.255Z",
+  "modelVersion": "qwen3-14b-seba-lora-v1",
+  "adapterPath": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v1/adapters.safetensors",
+  "adapterSha256": "c7e4bf3aafcc176c37efb40bd65a3d3bfa3d6a983a561142951de57a1486b074",
+  "privateKeyPath": "backend/data/llm-policy-signer-private.pem",
+  "privateKeyGenerated": true,
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAoDJxdRHJRiToljvlIfc2Qker3euIzO9IXXjfwlkIEiM=\n-----END PUBLIC KEY-----\n",
+  "publicKeySha256": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180",
+  "activation": {
+    "contract": "PolicyContract",
+    "transaction": "ActivateLLMPolicyModel",
+    "arguments": [
+      "qwen3-14b-seba-lora-v1",
+      "c7e4bf3aafcc176c37efb40bd65a3d3bfa3d6a983a561142951de57a1486b074",
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAoDJxdRHJRiToljvlIfc2Qker3euIzO9IXXjfwlkIEiM=\n-----END PUBLIC KEY-----\n"
+    ]
+  }
+}

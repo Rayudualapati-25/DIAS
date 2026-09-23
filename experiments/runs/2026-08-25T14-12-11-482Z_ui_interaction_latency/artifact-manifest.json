@@ -1,0 +1,51 @@
+{
+  "runId": "2026-08-25T14-12-11-482Z_ui_interaction_latency",
+  "generatedAtUtc": "2026-08-25T14:13:09.757Z",
+  "artifacts": {
+    "config.json": {
+      "sha256": "bb6623671490b4605af4083243d5ffff4f283ac66ce9f54e701f1e5809a20eef",
+      "bytes": 1188
+    },
+    "environment.json": {
+      "sha256": "2090ec373bf4d8b4b77426eddced7f8e63dafdbeb11fab10c81ef72569d4508c",
+      "bytes": 486
+    },
+    "experiment.log": {
+      "sha256": "47e9b626a3ccc1a04dc2eaf44f8e7de53c4ed28e7464b1c0549c6bffba2233f6",
+      "bytes": 2887
+    },
+    "raw-samples.jsonl": {
+      "sha256": "437d1217b2205463ac2af31c8f01c1b9455407c9afa6bd7b7201aaf4d67d7d6f",
+      "bytes": 518531
+    },
+    "raw-samples.partial.jsonl": {
+      "sha256": "437d1217b2205463ac2af31c8f01c1b9455407c9afa6bd7b7201aaf4d67d7d6f",
+      "bytes": 518531
+    },
+    "rounds.csv": {
+      "sha256": "1cc88ecb95b6bcc7fc6c3910ca33069146b785385e09f8c69992bafeb5081244",
+      "bytes": 3133
+    },
+    "rounds.partial.jsonl": {
+      "sha256": "4e6b49037afda009c7b4d486b69f8f8d6c6c8b772bbac986b20028e0551a9fd4",
+      "bytes": 10203
+    },
+    "summary.csv": {
+      "sha256": "c3599fd731d5c1ddcf6b142b8c9ed42d9b464f59f63973ef946c040ceb94da3c",
+      "bytes": 1119
+    },
+    "run-report.json": {
+      "sha256": "0a0fd639b13c4d45b75581859756c46af577305a24f85d111f5c4c1adf42f16b",
+      "bytes": 23214
+    }
+  },
+  "corrections": [
+    {
+      "recordedAtUtc": "2026-08-27T15:53:58Z",
+      "field": "artifacts.experiment.log",
+      "reason": "The original runner appended its completion lines after hashing the log; the digest and byte count were updated without changing the retained log or measurements.",
+      "previousSha256": "b3d25febadf7f6ab3d50af0774bd6104d2e9f29884b3425f9e70656fa27d6bd9",
+      "previousBytes": 2716
+    }
+  ]
+}

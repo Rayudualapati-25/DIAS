@@ -1,0 +1,365 @@
+{
+  "generatedAtUtc": "2026-08-24T16:00:20.903596+00:00",
+  "sourceSuiteManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-278Z_caliper_latency_pilot_suite/suite-manifest.json",
+  "sourceSuiteManifestSha256": "0a85d3e8a6ca3ec7129b9d3de873b50a11081c656c511ead1a8befb276bf89fa",
+  "performanceResultsUsed": true,
+  "figures": [
+    {
+      "axis": "concurrent_clients_vs_lookup_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/concurrent_clients_vs_lookup_latency.png",
+      "sha256": "ce5f1efd38603ae291ceb7ac53ab2fc81bfaa539a9af5b2eae75bab01565a179"
+    },
+    {
+      "axis": "concurrent_clients_vs_lookup_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/concurrent_clients_vs_lookup_latency.pdf",
+      "sha256": "d3757593914f31aabedde626c0c5b5b7f8133464dd8a8f8aa29d0c222e09cbb5"
+    },
+    {
+      "axis": "offered_tps_vs_write_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/offered_tps_vs_write_latency.png",
+      "sha256": "7c7301677f88e857a77709a8bbfecbd842bf79db73ea3eac91e7f4cb391a8fe6"
+    },
+    {
+      "axis": "offered_tps_vs_write_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/offered_tps_vs_write_latency.pdf",
+      "sha256": "4b9c8388fe61420ef7a3ca3f5c70b75ba9768bcdb3feb66c53fe79a7abf01a14"
+    },
+    {
+      "axis": "query_result_count_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/query_result_count_vs_latency.png",
+      "sha256": "136c36bcf659fc439e46c64d7d6dbfde13de601475f96d45d05484cf6faeec88"
+    },
+    {
+      "axis": "query_result_count_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/query_result_count_vs_latency.pdf",
+      "sha256": "89a9270ffedea4ee7ae38ff405fbbe98ef34d3ec01a7a818dd2dae84d0b5dfb2"
+    },
+    {
+      "axis": "policy_path_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/policy_path_vs_latency.png",
+      "sha256": "625a702a194254604446cf5435564c9d352a0d7822413f8c211a4493765a8b05"
+    },
+    {
+      "axis": "policy_path_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/policy_path_vs_latency.pdf",
+      "sha256": "5d52d54d5414729ede6952731bc01c70aac6790a3c783ae27f7726021f69cb95"
+    },
+    {
+      "axis": "elapsed_time_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/elapsed_time_vs_latency.png",
+      "sha256": "932a079a6bd9c684b3ba271b63c7556080e49895c123c76ddc20f761ab82861d"
+    },
+    {
+      "axis": "elapsed_time_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/plots/caliper-latency/elapsed_time_vs_latency.pdf",
+      "sha256": "6b991aebe11d06242a267da144ced5d7dd16fbab596e4674b8576301d04799a0"
+    }
+  ],
+  "tables": [
+    {
+      "axis": "concurrent_clients_vs_lookup_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/tables/caliper_latency/concurrent_clients_vs_lookup_latency.csv",
+      "sha256": "9492452edc0209648e43c788452bb0ef85bbe7bf3b9aa7502c2b49757ac5e14c",
+      "sourceRuns": [
+        {
+          "runId": "2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+          "roundLabel": "clients-1-read",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1/run-manifest.json",
+          "runManifestSha256": "cd2e7e25db7e33c7aa858f2106e297ebc6dd36c76313dc2253415b0f0cdb13ba",
+          "caliperSummarySha256": "ebe5fe854d97b7f2ef069888f28ad8035bcc344f9f84b86207ca2db30955e430",
+          "transactionSummarySha256": "e94e29c530b5630aeecabdce6b34d720c3ffd82f485161a9d8a1491bf53128cf",
+          "transactionJsonlSha256": "f412276aaae1d48a916ac2fc3e04f4376c72fb009e2ca092d126a7eecfa47699"
+        },
+        {
+          "runId": "2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+          "roundLabel": "clients-2-read",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2/run-manifest.json",
+          "runManifestSha256": "dea081b87c8f8f0d4fed7be6396e3779e2f9027151da62e5fff31d14b67de5ba",
+          "caliperSummarySha256": "155eb41b08747b4ac7f4f3401cd67ee029a5d4950389926aace8045c0efa7781",
+          "transactionSummarySha256": "b7b3169255903b70e6d4d1b81e13a8cb6bf812b024efa543c24ca0572d3c8c4e",
+          "transactionJsonlSha256": "d3f7cfe3c929b0c0afaefbfddea7fe86bfd68fbca2a8301b73c1b55d4babdc31"
+        },
+        {
+          "runId": "2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+          "roundLabel": "clients-4-read",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4/run-manifest.json",
+          "runManifestSha256": "49e6a1af3954368de57fa80caa17144e7efcaa1cb51a48f71b5334eebcf09aae",
+          "caliperSummarySha256": "3cfc4dc089c8e3ca30bedb2a0790ad0f50af084c5f709a05f6fe307db1153e58",
+          "transactionSummarySha256": "ec5df07f60a5437b45e678c1377c0907d9bdcafcf14ab836568bd9de18b7dc85",
+          "transactionJsonlSha256": "fdaaf0dde7a20dd4944a766d192fc9910e1c0bef48cd6449faae7ddda3ef9e55"
+        },
+        {
+          "runId": "2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+          "roundLabel": "clients-8-read",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8/run-manifest.json",
+          "runManifestSha256": "a36ab0ecd8959b78812cf5ff03a1b21ed8f95a15e0153c323b3c16e6b1d8b25f",
+          "caliperSummarySha256": "f59dcb6c0b1b61691bf1c5f8d453fb8e7b8f8af6370e76ffa65ee3633cf1cf13",
+          "transactionSummarySha256": "8a5d060fcf8c58971b6f290265e27fdd6deb720e3150c63b15002fe7651164ae",
+          "transactionJsonlSha256": "f235fb35cf0a295f109f9dc24c28a12d804d3aedffa002ba2d56c26dcbd3ad02"
+        }
+      ]
+    },
+    {
+      "axis": "offered_tps_vs_write_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/tables/caliper_latency/offered_tps_vs_write_latency.csv",
+      "sha256": "edcda3af9cec712ac6df6ec607cafd661fbd42c82bba31d52f297631c6e0142f",
+      "sourceRuns": [
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-1",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/run-manifest.json",
+          "runManifestSha256": "710a015ca60bee50777c2c5065d02e08358b091a1e867e0a7bb17178a4e4b128",
+          "caliperSummarySha256": "7f3a7c212f2c724c7819f6a8e7ac79d51c5b85c04d671ec834057ce74ff66919",
+          "transactionSummarySha256": "6c5c9e71bd7f68acc000d895bbae7e7f4eee0bcf73883b41e8cd15ca6bc8163c",
+          "transactionJsonlSha256": "9dddcdb05931126d416fbc4e896d5b9a9c965e809053caef22914020b1082861"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-2",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/run-manifest.json",
+          "runManifestSha256": "710a015ca60bee50777c2c5065d02e08358b091a1e867e0a7bb17178a4e4b128",
+          "caliperSummarySha256": "7f3a7c212f2c724c7819f6a8e7ac79d51c5b85c04d671ec834057ce74ff66919",
+          "transactionSummarySha256": "6c5c9e71bd7f68acc000d895bbae7e7f4eee0bcf73883b41e8cd15ca6bc8163c",
+          "transactionJsonlSha256": "9dddcdb05931126d416fbc4e896d5b9a9c965e809053caef22914020b1082861"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-5",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/run-manifest.json",
+          "runManifestSha256": "710a015ca60bee50777c2c5065d02e08358b091a1e867e0a7bb17178a4e4b128",
+          "caliperSummarySha256": "7f3a7c212f2c724c7819f6a8e7ac79d51c5b85c04d671ec834057ce74ff66919",
+          "transactionSummarySha256": "6c5c9e71bd7f68acc000d895bbae7e7f4eee0bcf73883b41e8cd15ca6bc8163c",
+          "transactionJsonlSha256": "9dddcdb05931126d416fbc4e896d5b9a9c965e809053caef22914020b1082861"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-10",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/run-manifest.json",
+          "runManifestSha256": "710a015ca60bee50777c2c5065d02e08358b091a1e867e0a7bb17178a4e4b128",
+          "caliperSummarySha256": "7f3a7c212f2c724c7819f6a8e7ac79d51c5b85c04d671ec834057ce74ff66919",
+          "transactionSummarySha256": "6c5c9e71bd7f68acc000d895bbae7e7f4eee0bcf73883b41e8cd15ca6bc8163c",
+          "transactionJsonlSha256": "9dddcdb05931126d416fbc4e896d5b9a9c965e809053caef22914020b1082861"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-20",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps/run-manifest.json",
+          "runManifestSha256": "710a015ca60bee50777c2c5065d02e08358b091a1e867e0a7bb17178a4e4b128",
+          "caliperSummarySha256": "7f3a7c212f2c724c7819f6a8e7ac79d51c5b85c04d671ec834057ce74ff66919",
+          "transactionSummarySha256": "6c5c9e71bd7f68acc000d895bbae7e7f4eee0bcf73883b41e8cd15ca6bc8163c",
+          "transactionJsonlSha256": "9dddcdb05931126d416fbc4e896d5b9a9c965e809053caef22914020b1082861"
+        }
+      ]
+    },
+    {
+      "axis": "query_result_count_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/tables/caliper_latency/query_result_count_vs_latency.csv",
+      "sha256": "0b9a8964bf7fc0f6f6d4f34f9d1a8e26d3369e192c3e725d869cd1c33f80d76c",
+      "sourceRuns": [
+        {
+          "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "roundLabel": "query-count-1",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/run-manifest.json",
+          "runManifestSha256": "c89cb7388ebb827be46e31981ab9a43b5e03acc905e7ddccabdcb952e03145e0",
+          "caliperSummarySha256": "6accf126612a37edfa20f2a7d7d429973e549b5248b58c154d1892adaa38709d",
+          "transactionSummarySha256": "eda9cbc997871ade479c0c113bf34cfd24a8dfe44b82da19fc86a6052b2ebbb1",
+          "transactionJsonlSha256": "64761653d18a768ae43616e51b0eb13421fcdf9989295e71e83625b53fd512dc"
+        },
+        {
+          "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "roundLabel": "query-count-2",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/run-manifest.json",
+          "runManifestSha256": "c89cb7388ebb827be46e31981ab9a43b5e03acc905e7ddccabdcb952e03145e0",
+          "caliperSummarySha256": "6accf126612a37edfa20f2a7d7d429973e549b5248b58c154d1892adaa38709d",
+          "transactionSummarySha256": "eda9cbc997871ade479c0c113bf34cfd24a8dfe44b82da19fc86a6052b2ebbb1",
+          "transactionJsonlSha256": "64761653d18a768ae43616e51b0eb13421fcdf9989295e71e83625b53fd512dc"
+        },
+        {
+          "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "roundLabel": "query-count-3",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count/run-manifest.json",
+          "runManifestSha256": "c89cb7388ebb827be46e31981ab9a43b5e03acc905e7ddccabdcb952e03145e0",
+          "caliperSummarySha256": "6accf126612a37edfa20f2a7d7d429973e549b5248b58c154d1892adaa38709d",
+          "transactionSummarySha256": "eda9cbc997871ade479c0c113bf34cfd24a8dfe44b82da19fc86a6052b2ebbb1",
+          "transactionJsonlSha256": "64761653d18a768ae43616e51b0eb13421fcdf9989295e71e83625b53fd512dc"
+        }
+      ]
+    },
+    {
+      "axis": "policy_path_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/tables/caliper_latency/policy_path_vs_latency.csv",
+      "sha256": "ff3a8500536bc321795ec2dd0a05cfb86070b60b283f9fb54c5edb6365edfd8e",
+      "sourceRuns": [
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule1-credential-revoked",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/run-manifest.json",
+          "runManifestSha256": "6087dcb65287660fd5c1577c4eb37ac3df664fa02f8f7650a647331e784a9041",
+          "caliperSummarySha256": "2e572018002baec56092ca0a73b03010e0805e7c04f1d5dd76e4dcb953061a2d",
+          "transactionSummarySha256": "1967df1e6f0742c47de15539d6f70eaad2027e992cc67b37c9aacaf0294dc347",
+          "transactionJsonlSha256": "67cbc6cf4ec9077348d381314933e4b91c837db6254c80ac7f87d2230feb88db"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule3-rbac",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/run-manifest.json",
+          "runManifestSha256": "6087dcb65287660fd5c1577c4eb37ac3df664fa02f8f7650a647331e784a9041",
+          "caliperSummarySha256": "2e572018002baec56092ca0a73b03010e0805e7c04f1d5dd76e4dcb953061a2d",
+          "transactionSummarySha256": "1967df1e6f0742c47de15539d6f70eaad2027e992cc67b37c9aacaf0294dc347",
+          "transactionJsonlSha256": "67cbc6cf4ec9077348d381314933e4b91c837db6254c80ac7f87d2230feb88db"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule6-cross-jurisdiction",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/run-manifest.json",
+          "runManifestSha256": "6087dcb65287660fd5c1577c4eb37ac3df664fa02f8f7650a647331e784a9041",
+          "caliperSummarySha256": "2e572018002baec56092ca0a73b03010e0805e7c04f1d5dd76e4dcb953061a2d",
+          "transactionSummarySha256": "1967df1e6f0742c47de15539d6f70eaad2027e992cc67b37c9aacaf0294dc347",
+          "transactionJsonlSha256": "67cbc6cf4ec9077348d381314933e4b91c837db6254c80ac7f87d2230feb88db"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule7-not-assigned",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/run-manifest.json",
+          "runManifestSha256": "6087dcb65287660fd5c1577c4eb37ac3df664fa02f8f7650a647331e784a9041",
+          "caliperSummarySha256": "2e572018002baec56092ca0a73b03010e0805e7c04f1d5dd76e4dcb953061a2d",
+          "transactionSummarySha256": "1967df1e6f0742c47de15539d6f70eaad2027e992cc67b37c9aacaf0294dc347",
+          "transactionJsonlSha256": "67cbc6cf4ec9077348d381314933e4b91c837db6254c80ac7f87d2230feb88db"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-full-allow",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path/run-manifest.json",
+          "runManifestSha256": "6087dcb65287660fd5c1577c4eb37ac3df664fa02f8f7650a647331e784a9041",
+          "caliperSummarySha256": "2e572018002baec56092ca0a73b03010e0805e7c04f1d5dd76e4dcb953061a2d",
+          "transactionSummarySha256": "1967df1e6f0742c47de15539d6f70eaad2027e992cc67b37c9aacaf0294dc347",
+          "transactionJsonlSha256": "67cbc6cf4ec9077348d381314933e4b91c837db6254c80ac7f87d2230feb88db"
+        }
+      ]
+    },
+    {
+      "axis": "elapsed_time_vs_latency",
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/results/tables/caliper_latency/elapsed_time_vs_latency.csv",
+      "sha256": "98c38bbe5753d907ee5a6561b3e18e536f36e5deb5c87f308a344477fbb9cccc",
+      "sourceRuns": [
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-01",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-02",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-03",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-04",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-05",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-06",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-07",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-08",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-09",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-10",
+          "runDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runManifest": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability/run-manifest.json",
+          "runManifestSha256": "5a7a717028f00c8251105fb9ce8df0ff43831399eaabde2c542b7876cc39f736",
+          "caliperSummarySha256": "6d8c4002b9b991c773a47dfe1b97cbc97460adf988519099df6e1d2a5b01b600",
+          "transactionSummarySha256": "652691002ed47aabeee82acc5d8bfecb5d671315e1a1d4c31d3e52054316152b",
+          "transactionJsonlSha256": "212e3546efd25b7e650604e96eb0d178d1c70a00a0db01dd170c46485bf5d7f5"
+        }
+      ]
+    }
+  ]
+}

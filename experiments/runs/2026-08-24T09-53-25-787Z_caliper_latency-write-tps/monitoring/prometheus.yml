@@ -1,0 +1,34 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: fabric-orderer
+    static_configs:
+      - targets:
+          - orderer.example.com:9443
+
+  - job_name: fabric-peer-police
+    static_configs:
+      - targets:
+          - peer0.police.example.com:9444
+
+  - job_name: fabric-peer-forensics
+    static_configs:
+      - targets:
+          - peer0.forensics.example.com:9445
+
+  - job_name: fabric-peer-prosecution
+    static_configs:
+      - targets:
+          - peer0.prosecution.example.com:9446
+
+  - job_name: fabric-peer-court
+    static_configs:
+      - targets:
+          - peer0.court.example.com:9447
+
+  - job_name: fabric-peer-audit
+    static_configs:
+      - targets:
+          - peer0.audit.example.com:9448

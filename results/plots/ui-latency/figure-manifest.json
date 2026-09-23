@@ -1,0 +1,45 @@
+{
+  "generatedFrom": "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/run-report.json",
+  "inputSha256": "0a0fd639b13c4d45b75581859756c46af577305a24f85d111f5c4c1adf42f16b",
+  "runId": "2026-08-25T14-12-11-482Z_ui_interaction_latency",
+  "metric": "client-observed HTTP latency in milliseconds",
+  "curves": [
+    "pooled p50",
+    "pooled p95"
+  ],
+  "pointSampling": "three simultaneous-request batches; 3N samples per point",
+  "outputs": {
+    "search_latency.pdf": {
+      "sha256": "a588c0f4ac89fd67f594056c713b4c3119471b6e9abf01c8b8d73df27c828233",
+      "bytes": 26866
+    },
+    "search_latency.png": {
+      "sha256": "5e566c1f85293f2c0b33d6f564f5463b9489bebc08da53cfb19eed9d50804aef",
+      "bytes": 59745
+    },
+    "submit_latency.pdf": {
+      "sha256": "a664420dc22e79b7ea9067d2ab224c22cb775735512ec7fe53be6698068827f6",
+      "bytes": 26642
+    },
+    "submit_latency.png": {
+      "sha256": "780a9c0aed8df44261e2bb13673b37f7a112d07cbe1b419ff9dba471faa124fa",
+      "bytes": 61315
+    },
+    "release_latency.pdf": {
+      "sha256": "a48cd309c5abedeac8f142182fba18b7dc9977a18f3512b3f404cfafd3fed066",
+      "bytes": 25921
+    },
+    "release_latency.png": {
+      "sha256": "bfbfa44c24a8a384fdf1450563cbd1b97ff996d96de8bd4368e1cc1e6dccc22f",
+      "bytes": 61737
+    },
+    "interactive_latency_three_panel.pdf": {
+      "sha256": "dfab6718b06e9797280dfa1beb2e7a700bc1c3a6241fb17663c9c8ee83ca0774",
+      "bytes": 30739
+    },
+    "interactive_latency_three_panel.png": {
+      "sha256": "82ccf1a0b5c7d3c117efcf743eaf209dfed8c2b76f2f7e7631aa2c0e70a8c707",
+      "bytes": 121808
+    }
+  }
+}

@@ -1,0 +1,7 @@
+set,model,true_allow_pred_allow,true_allow_pred_deny,true_deny_pred_allow,true_deny_pred_deny,invalid
+test-adversarial,untuned-qwen3-14b,13,141,4,175,56
+test-decision-balanced,untuned-qwen3-14b,70,204,14,266,46
+test-multi-rule,untuned-qwen3-14b,0,0,0,352,18
+test-ood-paraphrase,untuned-qwen3-14b,74,105,28,166,27
+test-reason-balanced,untuned-qwen3-14b,13,42,19,435,31
+validation-balanced,untuned-qwen3-14b,35,148,7,180,30

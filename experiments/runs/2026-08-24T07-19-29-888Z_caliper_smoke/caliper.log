@@ -1,0 +1,95 @@
+2026.08.24-12:49:30.004[32m info [39m [caliper] [cli-launch-manager] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-12:49:30.004[32m info [39m [caliper] [cli-launch-manager] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/configs/smoke.yaml
+2026.08.24-12:49:30.004[32m info [39m [caliper] [cli-launch-manager] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-12:49:30.005[32m info [39m [caliper] [cli-launch-manager] 	Set SUT type: fabric
+2026.08.24-12:49:30.014[32m info [39m [caliper] [benchmark-validator] 	No observer specified, will default to `none`
+2026.08.24-12:49:30.015[32m info [39m [caliper] [caliper-engine] 	Starting benchmark flow
+2026.08.24-12:49:30.015[32m info [39m [caliper] [caliper-engine] 	Skipping start commands due to benchmark flow conditioning
+2026.08.24-12:49:30.015[32m info [39m [caliper] [caliper-engine] 	Skipping initialization phase due to benchmark flow conditioning
+2026.08.24-12:49:30.015[32m info [39m [caliper] [caliper-engine] 	Skipping install smart contract phase due to benchmark flow conditioning
+2026.08.24-12:49:30.057[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-12:49:30.064[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-12:49:30.065[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-12:49:30.066[32m info [39m [caliper] [monitor.js] 	No resource monitors specified
+2026.08.24-12:49:30.066[32m info [39m [caliper] [default-observer] 	Observer interval set to 5000 milliseconds
+2026.08.24-12:49:30.067[32m info [39m [caliper] [round-orchestrator] 	Preparing worker connections
+2026.08.24-12:49:30.067[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 1 of 1
+2026.08.24-12:49:30.069[32m info [39m [caliper] [worker-orchestrator] 	Messenger not configured, entering configure phase...
+2026.08.24-12:49:30.069[32m info [39m [caliper] [worker-orchestrator] 	No existing workers detected, entering worker launch phase...
+2026.08.24-12:49:30.069[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 1 workers to be connected...
+2026.08.24-12:49:30.169[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-12:49:30.169[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/configs/smoke.yaml
+2026.08.24-12:49:30.170[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-12:49:30.170[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-12:49:30.184[32m info [39m [caliper] [worker-orchestrator] 	1 workers connected, progressing to worker assignment phase.
+2026.08.24-12:49:30.184[32m info [39m [caliper] [worker-orchestrator] 	Workers currently unassigned, awaiting index assignment...
+2026.08.24-12:49:30.184[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 1 workers to be assigned...
+2026.08.24-12:49:30.186[32m info [39m [caliper] [worker-orchestrator] 	1 workers assigned, progressing to worker initialization phase.
+2026.08.24-12:49:30.186[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 1 workers to be ready...
+2026.08.24-12:49:30.186[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#0...
+2026.08.24-12:49:30.229[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-12:49:30.231[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-12:49:30.231[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-12:49:30.233[31m error[39m [caliper] [worker-message-handler] 	Error while handling "initialize" message for Worker (50113): TypeError: Cannot read properties of undefined (reading 'loggerModuleName')
+    at new LoggingTxObserver (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/tx-observers/logging-tx-observer.js:34:53)
+    at createTxObserver (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/tx-observers/logging-tx-observer.js:69:12)
+    at new TxObserverDispatch (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/tx-observers/tx-observer-dispatch.js:49:35)
+    at new CaliperWorker (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:44:35)
+    at WorkerMessageHandler._handleInitializeMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:186:27)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:85:13)
+2026.08.24-12:49:30.233[32m info [39m [caliper] [worker-orchestrator] 	1 workers ready, progressing to test preparation phase.
+2026.08.24-12:49:30.233[32m info [39m [caliper] [round-orchestrator] 	Started round 1 (record-read-connectivity)
+2026.08.24-12:49:30.234[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#0
+2026.08.24-12:49:30.234[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker (50113): TypeError: Cannot read properties of undefined (reading 'prepareTest')
+    at WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:31)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:24)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at process.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at process.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-12:49:30.234[31m error[39m [caliper] [round-orchestrator] 	Failed round 1 (record-read-connectivity): Error: TypeError: Cannot read properties of undefined (reading 'prepareTest')
+    at WorkerOrchestrator.updateWorkerPhase (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:306:61)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:109:18)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at ChildProcess.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-12:49:30.234[32m info [39m [caliper] [round-orchestrator] 	Started round 2 (contextual-access-connectivity)
+2026.08.24-12:49:30.234[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#1
+2026.08.24-12:49:30.234[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker (50113): TypeError: Cannot read properties of undefined (reading 'prepareTest')
+    at WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:31)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:24)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at process.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at process.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-12:49:30.235[31m error[39m [caliper] [round-orchestrator] 	Failed round 2 (contextual-access-connectivity): Error: TypeError: Cannot read properties of undefined (reading 'prepareTest')
+    at WorkerOrchestrator.updateWorkerPhase (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:306:61)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:109:18)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at ChildProcess.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-12:49:30.235[32m info [39m [caliper] [report-builder] 	### All test results ###
+2026.08.24-12:49:30.235[31m error[39m [caliper] [report-builder] 	No data within test result; implies error within configuration files
+2026.08.24-12:49:30.235[31m error[39m [caliper] [round-orchestrator] 	Error while finalizing the report: Error: unrecognized report table
+    at ReportBuilder.setSummaryTable (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/report/report-builder.js:142:19)
+    at Report.printResultsByRound (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/report/report.js:182:28)
+    at RoundOrchestrator.run (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/round-orchestrator.js:229:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async CaliperEngine.run (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/caliper-engine.js:154:17)
+    at async LaunchManager.handler (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-cli/lib/launch/lib/launchManager.js:81:30)
+2026.08.24-12:49:30.235[32m info [39m [caliper] [monitor.js] 	Stopping all monitors
+2026.08.24-12:49:30.235[32m info [39m [caliper] [worker-orchestrator] 	Sending exit message to connected workers
+2026.08.24-12:49:30.235[32m info [39m [caliper] [round-orchestrator] 	Benchmark finished in 0.002 seconds. Total rounds: 2. Successful rounds: 0. Failed rounds: 2.
+2026.08.24-12:49:30.235[32m info [39m [caliper] [caliper-engine] 	Skipping end command due to benchmark flow conditioning
+2026.08.24-12:49:30.235[32m info [39m [caliper] [cli-launch-manager] 	Benchmark successfully finished!
+2026.08.24-12:49:30.235[32m info [39m [caliper] [worker-message-handler] 	Worker#0 is exiting

@@ -1,0 +1,599 @@
+{
+  "artifactType": "dias-prompt-ablations",
+  "label": "qwen3-14b-dias-v7",
+  "model": {
+    "url": "http://127.0.0.1:8082/v1",
+    "servedModel": "default_model",
+    "adapterPath": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7"
+  },
+  "evaluatedAtUtc": "2026-09-14T12:32:49.555Z",
+  "set": "test-decision-balanced",
+  "examples": 200,
+  "decoding": {
+    "temperature": 0,
+    "topP": 1,
+    "maxTokens": 512
+  },
+  "ablations": {
+    "full": {
+      "examples": 200,
+      "schemaValid": 200,
+      "schemaValidRate": 1,
+      "schemaValidCI": {
+        "point": 1,
+        "low": 0.981154,
+        "high": 1
+      },
+      "invalid": 0,
+      "statusCounts": {
+        "OK": 200
+      },
+      "decisionAccuracy": 0.985,
+      "decisionAccuracyCI": {
+        "point": 0.985,
+        "low": 0.956834,
+        "high": 0.994886
+      },
+      "balancedAccuracy": 0.984949,
+      "macroF1": 0.984997,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 100,
+          "DENY": 1
+        },
+        "DENY": {
+          "ALLOW": 2,
+          "DENY": 97
+        }
+      },
+      "allow": {
+        "truePositive": 100,
+        "falsePositive": 2,
+        "falseNegative": 1,
+        "precision": 0.980392,
+        "recall": 0.990099,
+        "f1": 0.985222
+      },
+      "deny": {
+        "truePositive": 97,
+        "falsePositive": 1,
+        "falseNegative": 2,
+        "precision": 0.989796,
+        "recall": 0.979798,
+        "f1": 0.984772
+      },
+      "falseAllow": {
+        "count": 2,
+        "ofDenyExamples": 0.020202,
+        "ofAllValid": 0.01,
+        "ci": {
+          "point": 0.020202,
+          "low": 0.005558,
+          "high": 0.070692
+        }
+      },
+      "falseDeny": {
+        "count": 1,
+        "ofAllowExamples": 0.009901,
+        "ofAllValid": 0.005,
+        "ci": {
+          "point": 0.009901,
+          "low": 0.00175,
+          "high": 0.053968
+        }
+      },
+      "reasonCodeAccuracy": 0.97,
+      "policyRefAccuracy": 0.955,
+      "reviewFlagAccuracy": 1,
+      "decisionAndReasonAccuracy": 0.97,
+      "fullyCorrectRate": 0.955,
+      "latencyMs": {
+        "count": 200,
+        "mean": 7452.7,
+        "median": 7522.9,
+        "p95": 8433.5,
+        "p99": 8971.1,
+        "max": 9280.3
+      },
+      "ablation": {
+        "label": "full prompt (control)",
+        "expectation": "the reference point every other row is measured against"
+      },
+      "errorCategories": {
+        "false-allow": 2,
+        "right-decision-wrong-reason:RBAC_NO_PERMISSION": 2,
+        "right-decision-wrong-reason:VICTIM_DATA_NOT_NECESSARY": 1,
+        "false-deny": 1
+      }
+    },
+    "no-requester": {
+      "examples": 200,
+      "schemaValid": 200,
+      "schemaValidRate": 1,
+      "schemaValidCI": {
+        "point": 1,
+        "low": 0.981154,
+        "high": 1
+      },
+      "invalid": 0,
+      "statusCounts": {
+        "OK": 200
+      },
+      "decisionAccuracy": 0.58,
+      "decisionAccuracyCI": {
+        "point": 0.58,
+        "low": 0.510719,
+        "high": 0.646265
+      },
+      "balancedAccuracy": 0.583859,
+      "macroF1": 0.509116,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 20,
+          "DENY": 81
+        },
+        "DENY": {
+          "ALLOW": 3,
+          "DENY": 96
+        }
+      },
+      "allow": {
+        "truePositive": 20,
+        "falsePositive": 3,
+        "falseNegative": 81,
+        "precision": 0.869565,
+        "recall": 0.19802,
+        "f1": 0.322581
+      },
+      "deny": {
+        "truePositive": 96,
+        "falsePositive": 81,
+        "falseNegative": 3,
+        "precision": 0.542373,
+        "recall": 0.969697,
+        "f1": 0.695652
+      },
+      "falseAllow": {
+        "count": 3,
+        "ofDenyExamples": 0.030303,
+        "ofAllValid": 0.015,
+        "ci": {
+          "point": 0.030303,
+          "low": 0.010358,
+          "high": 0.085338
+        }
+      },
+      "falseDeny": {
+        "count": 81,
+        "ofAllowExamples": 0.80198,
+        "ofAllValid": 0.405,
+        "ci": {
+          "point": 0.80198,
+          "low": 0.713834,
+          "high": 0.867996
+        }
+      },
+      "reasonCodeAccuracy": 0.355,
+      "policyRefAccuracy": 0.185,
+      "reviewFlagAccuracy": 0.97,
+      "decisionAndReasonAccuracy": 0.355,
+      "fullyCorrectRate": 0.155,
+      "latencyMs": {
+        "count": 200,
+        "mean": 7369.7,
+        "median": 7367.3,
+        "p95": 8653.5,
+        "p99": 10223.3,
+        "max": 10860.4
+      },
+      "ablation": {
+        "label": "requester attributes removed",
+        "expectation": "should collapse: credential, role, clearance, jurisdiction and assignment all live here"
+      },
+      "errorCategories": {
+        "false-deny": 81,
+        "right-decision-wrong-reason:JUVENILE_PROTECTED": 10,
+        "right-decision-wrong-reason:INSUFFICIENT_CLEARANCE": 9,
+        "right-decision-wrong-reason:CRED_NOT_ACTIVE": 8,
+        "right-decision-wrong-reason:CROSS_JURISDICTION": 6,
+        "right-decision-wrong-reason:NOT_ASSIGNED": 5,
+        "false-allow": 3,
+        "right-decision-wrong-reason:SEALED_RECORD": 3,
+        "right-decision-wrong-reason:RBAC_NO_PERMISSION": 3,
+        "right-decision-wrong-reason:VICTIM_DATA_NOT_NECESSARY": 1
+      }
+    },
+    "no-resource": {
+      "examples": 200,
+      "schemaValid": 200,
+      "schemaValidRate": 1,
+      "schemaValidCI": {
+        "point": 1,
+        "low": 0.981154,
+        "high": 1
+      },
+      "invalid": 0,
+      "statusCounts": {
+        "OK": 200
+      },
+      "decisionAccuracy": 0.58,
+      "decisionAccuracyCI": {
+        "point": 0.58,
+        "low": 0.510719,
+        "high": 0.646265
+      },
+      "balancedAccuracy": 0.583558,
+      "macroF1": 0.521367,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 23,
+          "DENY": 78
+        },
+        "DENY": {
+          "ALLOW": 6,
+          "DENY": 93
+        }
+      },
+      "allow": {
+        "truePositive": 23,
+        "falsePositive": 6,
+        "falseNegative": 78,
+        "precision": 0.793103,
+        "recall": 0.227723,
+        "f1": 0.353846
+      },
+      "deny": {
+        "truePositive": 93,
+        "falsePositive": 78,
+        "falseNegative": 6,
+        "precision": 0.54386,
+        "recall": 0.939394,
+        "f1": 0.688889
+      },
+      "falseAllow": {
+        "count": 6,
+        "ofDenyExamples": 0.060606,
+        "ofAllValid": 0.03,
+        "ci": {
+          "point": 0.060606,
+          "low": 0.028069,
+          "high": 0.125969
+        }
+      },
+      "falseDeny": {
+        "count": 78,
+        "ofAllowExamples": 0.772277,
+        "ofAllValid": 0.39,
+        "ci": {
+          "point": 0.772277,
+          "low": 0.681408,
+          "high": 0.843193
+        }
+      },
+      "reasonCodeAccuracy": 0.345,
+      "policyRefAccuracy": 0.23,
+      "reviewFlagAccuracy": 0.71,
+      "decisionAndReasonAccuracy": 0.345,
+      "fullyCorrectRate": 0.09,
+      "latencyMs": {
+        "count": 200,
+        "mean": 7598,
+        "median": 7432.2,
+        "p95": 8890.2,
+        "p99": 9841.8,
+        "max": 9950.4
+      },
+      "ablation": {
+        "label": "record attributes removed",
+        "expectation": "should collapse: sealed, juvenile, victim, jurisdiction and sensitivity live here"
+      },
+      "errorCategories": {
+        "false-deny": 78,
+        "right-decision-wrong-reason:JUVENILE_PROTECTED": 16,
+        "right-decision-wrong-reason:SEALED_RECORD": 9,
+        "right-decision-wrong-reason:INSUFFICIENT_CLEARANCE": 7,
+        "false-allow": 6,
+        "right-decision-wrong-reason:NOT_ASSIGNED": 6,
+        "right-decision-wrong-reason:CROSS_JURISDICTION": 6,
+        "right-decision-wrong-reason:VICTIM_DATA_NOT_NECESSARY": 3
+      }
+    },
+    "no-action-purpose": {
+      "examples": 200,
+      "schemaValid": 200,
+      "schemaValidRate": 1,
+      "schemaValidCI": {
+        "point": 1,
+        "low": 0.981154,
+        "high": 1
+      },
+      "invalid": 0,
+      "statusCounts": {
+        "OK": 200
+      },
+      "decisionAccuracy": 0.92,
+      "decisionAccuracyCI": {
+        "point": 0.92,
+        "low": 0.87401,
+        "high": 0.95016
+      },
+      "balancedAccuracy": 0.919592,
+      "macroF1": 0.919799,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 97,
+          "DENY": 4
+        },
+        "DENY": {
+          "ALLOW": 12,
+          "DENY": 87
+        }
+      },
+      "allow": {
+        "truePositive": 97,
+        "falsePositive": 12,
+        "falseNegative": 4,
+        "precision": 0.889908,
+        "recall": 0.960396,
+        "f1": 0.923809
+      },
+      "deny": {
+        "truePositive": 87,
+        "falsePositive": 4,
+        "falseNegative": 12,
+        "precision": 0.956044,
+        "recall": 0.878788,
+        "f1": 0.91579
+      },
+      "falseAllow": {
+        "count": 12,
+        "ofDenyExamples": 0.121212,
+        "ofAllValid": 0.06,
+        "ci": {
+          "point": 0.121212,
+          "low": 0.070715,
+          "high": 0.200008
+        }
+      },
+      "falseDeny": {
+        "count": 4,
+        "ofAllowExamples": 0.039604,
+        "ofAllValid": 0.02,
+        "ci": {
+          "point": 0.039604,
+          "low": 0.015507,
+          "high": 0.097441
+        }
+      },
+      "reasonCodeAccuracy": 0.905,
+      "policyRefAccuracy": 0.87,
+      "reviewFlagAccuracy": 0.785,
+      "decisionAndReasonAccuracy": 0.905,
+      "fullyCorrectRate": 0.615,
+      "latencyMs": {
+        "count": 200,
+        "mean": 7596.3,
+        "median": 7722.4,
+        "p95": 8477.7,
+        "p99": 9049.6,
+        "max": 9302.6
+      },
+      "ablation": {
+        "label": "action and purpose removed",
+        "expectation": "the RBAC matrix becomes unevaluable"
+      },
+      "errorCategories": {
+        "false-allow": 12,
+        "false-deny": 4,
+        "right-decision-wrong-reason:JUVENILE_PROTECTED": 2,
+        "right-decision-wrong-reason:RBAC_NO_PERMISSION": 1
+      }
+    },
+    "no-policy": {
+      "examples": 200,
+      "schemaValid": 0,
+      "schemaValidRate": 0,
+      "schemaValidCI": {
+        "point": 0,
+        "low": 0,
+        "high": 0.018846
+      },
+      "invalid": 200,
+      "statusCounts": {
+        "INVALID_OUTPUT": 200
+      },
+      "decisionAccuracy": null,
+      "decisionAccuracyCI": null,
+      "balancedAccuracy": null,
+      "macroF1": null,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 0,
+          "DENY": 0
+        },
+        "DENY": {
+          "ALLOW": 0,
+          "DENY": 0
+        }
+      },
+      "allow": {
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "deny": {
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "falseAllow": {
+        "count": 0,
+        "ofDenyExamples": null,
+        "ofAllValid": null,
+        "ci": null
+      },
+      "falseDeny": {
+        "count": 0,
+        "ofAllowExamples": null,
+        "ofAllValid": null,
+        "ci": null
+      },
+      "reasonCodeAccuracy": null,
+      "policyRefAccuracy": null,
+      "reviewFlagAccuracy": null,
+      "decisionAndReasonAccuracy": null,
+      "fullyCorrectRate": null,
+      "latencyMs": {
+        "count": 200,
+        "mean": 2829.2,
+        "median": 2767.2,
+        "p95": 3381.1,
+        "p99": 4276.7,
+        "max": 5523.4
+      },
+      "ablation": {
+        "label": "governance policy removed",
+        "expectation": "separates reliance on the supplied policy from memorised training behaviour"
+      },
+      "errorCategories": {
+        "invalid:INVALID_OUTPUT": 200
+      }
+    },
+    "no-justification": {
+      "examples": 200,
+      "schemaValid": 200,
+      "schemaValidRate": 1,
+      "schemaValidCI": {
+        "point": 1,
+        "low": 0.981154,
+        "high": 1
+      },
+      "invalid": 0,
+      "statusCounts": {
+        "OK": 200
+      },
+      "decisionAccuracy": 0.99,
+      "decisionAccuracyCI": {
+        "point": 0.99,
+        "low": 0.964278,
+        "high": 0.997253
+      },
+      "balancedAccuracy": 0.989999,
+      "macroF1": 0.989999,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 100,
+          "DENY": 1
+        },
+        "DENY": {
+          "ALLOW": 1,
+          "DENY": 98
+        }
+      },
+      "allow": {
+        "truePositive": 100,
+        "falsePositive": 1,
+        "falseNegative": 1,
+        "precision": 0.990099,
+        "recall": 0.990099,
+        "f1": 0.990099
+      },
+      "deny": {
+        "truePositive": 98,
+        "falsePositive": 1,
+        "falseNegative": 1,
+        "precision": 0.989899,
+        "recall": 0.989899,
+        "f1": 0.989899
+      },
+      "falseAllow": {
+        "count": 1,
+        "ofDenyExamples": 0.010101,
+        "ofAllValid": 0.005,
+        "ci": {
+          "point": 0.010101,
+          "low": 0.001785,
+          "high": 0.055017
+        }
+      },
+      "falseDeny": {
+        "count": 1,
+        "ofAllowExamples": 0.009901,
+        "ofAllValid": 0.005,
+        "ci": {
+          "point": 0.009901,
+          "low": 0.00175,
+          "high": 0.053968
+        }
+      },
+      "reasonCodeAccuracy": 0.98,
+      "policyRefAccuracy": 0.96,
+      "reviewFlagAccuracy": 0.445,
+      "decisionAndReasonAccuracy": 0.98,
+      "fullyCorrectRate": 0.415,
+      "latencyMs": {
+        "count": 200,
+        "mean": 7249.3,
+        "median": 7409.6,
+        "p95": 8223.3,
+        "p99": 9289.2,
+        "max": 9366.8
+      },
+      "ablation": {
+        "label": "user justification removed",
+        "expectation": "should barely move: the justification is untrusted and carries no policy weight"
+      },
+      "errorCategories": {
+        "right-decision-wrong-reason:VICTIM_DATA_NOT_NECESSARY": 1,
+        "false-deny": 1,
+        "false-allow": 1,
+        "right-decision-wrong-reason:RBAC_NO_PERMISSION": 1
+      }
+    }
+  },
+  "deltasVersusControl": {
+    "full": {
+      "decisionAccuracyDelta": 0,
+      "macroF1Delta": 0,
+      "falseAllowDelta": 0,
+      "schemaValidDelta": 0
+    },
+    "no-requester": {
+      "decisionAccuracyDelta": -0.405,
+      "macroF1Delta": -0.475881,
+      "falseAllowDelta": 1,
+      "schemaValidDelta": 0
+    },
+    "no-resource": {
+      "decisionAccuracyDelta": -0.405,
+      "macroF1Delta": -0.46363,
+      "falseAllowDelta": 4,
+      "schemaValidDelta": 0
+    },
+    "no-action-purpose": {
+      "decisionAccuracyDelta": -0.065,
+      "macroF1Delta": -0.065198,
+      "falseAllowDelta": 10,
+      "schemaValidDelta": 0
+    },
+    "no-policy": {
+      "decisionAccuracyDelta": null,
+      "macroF1Delta": null,
+      "falseAllowDelta": -2,
+      "schemaValidDelta": -1
+    },
+    "no-justification": {
+      "decisionAccuracyDelta": 0.005,
+      "macroF1Delta": 0.005002,
+      "falseAllowDelta": -1,
+      "schemaValidDelta": 0
+    }
+  },
+  "note": "Prompt (input) ablations on a trained model. Training-data ablations require separate runs and are not included here."
+}

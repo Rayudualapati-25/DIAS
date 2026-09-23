@@ -1,0 +1,16 @@
+operation,concurrency,baseline_identity_pool,distinct_user_pool,baseline_p50_ms,distinct_user_p50_ms,p50_change_percent,baseline_p95_ms,distinct_user_p95_ms,p95_change_percent,comparison_scope
+search,10,5,100,41.77,52.36,25.35,58.35,58.93,0.99,descriptive cross-run; release also changes grant-set size
+search,25,5,100,80.77,77.15,-4.48,99.69,90.31,-9.41,descriptive cross-run; release also changes grant-set size
+search,50,5,100,115.55,109.99,-4.81,129.9,123.53,-4.9,descriptive cross-run; release also changes grant-set size
+search,75,5,100,126.05,140.3,11.31,168.27,172.1,2.28,descriptive cross-run; release also changes grant-set size
+search,100,5,100,122.67,126.26,2.93,157.3,180.21,14.56,descriptive cross-run; release also changes grant-set size
+release,10,5,100,49.35,112.85,128.67,60.98,126.44,107.35,descriptive cross-run; release also changes grant-set size
+release,25,5,100,80.19,246.56,207.47,94.25,259.51,175.34,descriptive cross-run; release also changes grant-set size
+release,50,5,100,99.68,454.03,355.49,116.46,476.48,309.14,descriptive cross-run; release also changes grant-set size
+release,75,5,100,122.08,654.58,436.19,153.27,679.7,343.47,descriptive cross-run; release also changes grant-set size
+release,100,5,100,154.28,844.38,447.3,181.26,882.3,386.76,descriptive cross-run; release also changes grant-set size
+submit,10,5,100,115.64,98.34,-14.96,141.69,107.04,-24.45,descriptive cross-run; release also changes grant-set size
+submit,25,5,100,151.09,156.5,3.58,181.04,230.64,27.4,descriptive cross-run; release also changes grant-set size
+submit,50,5,100,239.06,232.64,-2.69,327.94,330.98,0.93,descriptive cross-run; release also changes grant-set size
+submit,75,5,100,332.77,316.05,-5.02,445.66,467.33,4.86,descriptive cross-run; release also changes grant-set size
+submit,100,5,100,396.35,420.37,6.06,583.3,603.63,3.49,descriptive cross-run; release also changes grant-set size

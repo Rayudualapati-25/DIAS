@@ -1,0 +1,210 @@
+{
+  "datasetVersion": "dias-recommendation-dataset-v1",
+  "schemaVersion": "dias-recommendation-schema-v1",
+  "modelOutputVersion": "dias-recommender-v1",
+  "seed": 20260911,
+  "synthetic": true,
+  "labelSource": "offline-documented-policy-oracle",
+  "intendedUse": "supervised fine-tuning and held-out evaluation of an advisory LLM recommendation model",
+  "prohibitedUse": "direct access granting or training the exact-match dynamic-policy engine",
+  "splits": {
+    "train": {
+      "examples": 3000,
+      "adversarialExamples": 750,
+      "byDecision": {
+        "allow": 1000,
+        "deny": 1000,
+        "escalate": 1000
+      },
+      "byReason": {
+        "CRED_NOT_ACTIVE": 125,
+        "INVALID_PURPOSE": 125,
+        "RBAC_NO_PERMISSION": 125,
+        "SEALED_RECORD": 1000,
+        "JUVENILE_PROTECTED": 125,
+        "VICTIM_DATA_NOT_NECESSARY": 125,
+        "CROSS_JURISDICTION": 125,
+        "NOT_ASSIGNED": 125,
+        "INSUFFICIENT_CLEARANCE": 125,
+        "POLICY_SATISFIED": 1000
+      },
+      "roles": [
+        "assistant-public-prosecutor",
+        "chief-forensic-officer",
+        "circle-inspector",
+        "commissioner",
+        "constable",
+        "court-clerk",
+        "defense-counsel",
+        "director-of-prosecution",
+        "district-judge",
+        "dsp",
+        "inspector",
+        "investigating-officer",
+        "judge",
+        "lab-analyst",
+        "lab-assistant",
+        "lab-director",
+        "magistrate",
+        "public-prosecutor",
+        "senior-analyst",
+        "senior-public-prosecutor",
+        "sp",
+        "sub-inspector"
+      ],
+      "organizations": [
+        "court",
+        "forensics",
+        "police",
+        "prosecution"
+      ]
+    },
+    "valid": {
+      "examples": 500,
+      "adversarialExamples": 125,
+      "byDecision": {
+        "allow": 166,
+        "deny": 168,
+        "escalate": 166
+      },
+      "byReason": {
+        "CRED_NOT_ACTIVE": 21,
+        "INVALID_PURPOSE": 21,
+        "RBAC_NO_PERMISSION": 21,
+        "SEALED_RECORD": 166,
+        "JUVENILE_PROTECTED": 21,
+        "VICTIM_DATA_NOT_NECESSARY": 21,
+        "CROSS_JURISDICTION": 21,
+        "NOT_ASSIGNED": 21,
+        "INSUFFICIENT_CLEARANCE": 21,
+        "POLICY_SATISFIED": 166
+      },
+      "roles": [
+        "assistant-public-prosecutor",
+        "chief-forensic-officer",
+        "circle-inspector",
+        "commissioner",
+        "constable",
+        "court-clerk",
+        "defense-counsel",
+        "director-of-prosecution",
+        "district-judge",
+        "dsp",
+        "inspector",
+        "investigating-officer",
+        "judge",
+        "lab-analyst",
+        "lab-assistant",
+        "lab-director",
+        "magistrate",
+        "public-prosecutor",
+        "senior-analyst",
+        "senior-public-prosecutor",
+        "sp",
+        "sub-inspector"
+      ],
+      "organizations": [
+        "court",
+        "forensics",
+        "police",
+        "prosecution"
+      ]
+    },
+    "test": {
+      "examples": 1000,
+      "adversarialExamples": 250,
+      "byDecision": {
+        "allow": 100,
+        "deny": 800,
+        "escalate": 100
+      },
+      "byReason": {
+        "CRED_NOT_ACTIVE": 100,
+        "INVALID_PURPOSE": 100,
+        "RBAC_NO_PERMISSION": 100,
+        "SEALED_RECORD": 100,
+        "JUVENILE_PROTECTED": 100,
+        "VICTIM_DATA_NOT_NECESSARY": 100,
+        "CROSS_JURISDICTION": 100,
+        "NOT_ASSIGNED": 100,
+        "INSUFFICIENT_CLEARANCE": 100,
+        "POLICY_SATISFIED": 100
+      },
+      "roles": [
+        "assistant-public-prosecutor",
+        "chief-forensic-officer",
+        "circle-inspector",
+        "commissioner",
+        "constable",
+        "court-clerk",
+        "defense-counsel",
+        "director-of-prosecution",
+        "district-judge",
+        "dsp",
+        "inspector",
+        "investigating-officer",
+        "judge",
+        "lab-analyst",
+        "lab-assistant",
+        "lab-director",
+        "magistrate",
+        "public-prosecutor",
+        "senior-analyst",
+        "senior-public-prosecutor",
+        "sp",
+        "sub-inspector"
+      ],
+      "organizations": [
+        "court",
+        "forensics",
+        "police",
+        "prosecution"
+      ]
+    }
+  },
+  "workflowEvaluationSequences": 9,
+  "sourceHashes": {
+    "experiments/dias-finetuning/generate.js": "3a34e41d7582930c0562cbc93582688c5495c0818727c001a8ec269b55851620",
+    "chaincode/crimerecords/lib/policy/policyV1.js": "fbb606d142be9f09628384c3972e7ebdfee39f47725b2e8d9ab973b34f45599e",
+    "chaincode/crimerecords/lib/policy/policyEngine.js": "46eb9deff6eb251fe7cd445c079ca7901cf5ca4e5d5fd7eb75abc0d4295028be",
+    "chaincode/crimerecords/lib/policy/authority.js": "1036edf354a92b141d41557fc523096ca40083dbe0ebc2da5455706d74cddf20",
+    "chaincode/crimerecords/lib/policy/reasonDecisions.js": "d79efad4eb407ec1702ec1c305fd60b824ce5689a18ffb420b4a0e7b03863ca6",
+    "backend/src/llm/policyPrompt.js": "ca53172d10836c1ea55d86a3f2774062eb6c680f4848e46ca1ccbf82fc55857e",
+    "backend/src/llm/groundedPolicyPrompt.js": "10fa1b7b42f3bf0af658a70c26debe65424e296c1843a05f48b6e7f2a0db5e86"
+  },
+  "artifacts": {
+    "train.cases.jsonl": {
+      "sha256": "eaf52c4ec06170419f6083211370727e9ce3fd88d3bc80b09ec8e8ce619ffbdd",
+      "bytes": 5820461
+    },
+    "train.jsonl": {
+      "sha256": "bc82b14bdef7a255fb4d23b1aa0378fc36d9a2e12b0fae34773d886f27294263",
+      "bytes": 14743188
+    },
+    "valid.cases.jsonl": {
+      "sha256": "9bf3397870a8afb604fd88cfaa7f10aa1016a76a74fca6bda2086be6079b1de1",
+      "bytes": 973879
+    },
+    "valid.jsonl": {
+      "sha256": "50fa55c8a72393faa89efb77d728583aece823db8cf014c36d0d2e85f230e8fe",
+      "bytes": 2462286
+    },
+    "test.cases.jsonl": {
+      "sha256": "0c8786391e7faf16744ad7c9398be23c46f3dad71873864481844a5a386b1aa7",
+      "bytes": 1880550
+    },
+    "test.jsonl": {
+      "sha256": "bbfef4310b63b9a555090563771d4cc85ecca901ea4aa76a7b71d71e1da22095",
+      "bytes": 4918550
+    },
+    "workflow-evaluation.jsonl": {
+      "sha256": "47151869704242cef20fdce4abf1b0dd9c131c58cdf65431d58bcc89ef9d9631",
+      "bytes": 25060
+    }
+  },
+  "limitations": [
+    "Synthetic recommendations are not evidence of real auditor judgment.",
+    "Balanced reason classes do not represent production prevalence.",
+    "A future model requires a baseline comparison, held-out evaluation, and ablations before adoption."
+  ]
+}

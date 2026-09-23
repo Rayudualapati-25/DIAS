@@ -1,0 +1,25 @@
+services:
+  caliper-prometheus:
+    image: prom/prometheus:v3.13.1
+    container_name: caliper-prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=3d
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - caliper-prometheus-data:/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    networks:
+      - crimenet
+    restart: unless-stopped
+
+networks:
+  crimenet:
+    external: true
+    name: crimenet
+
+volumes:
+  caliper-prometheus-data:
+    name: caliper-prometheus-data

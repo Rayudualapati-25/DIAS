@@ -1,0 +1,151 @@
+# Crime Records Access Network — Fabric CAs (one per department + orderer)
+#
+# Each CA owns its embedded registry under its mounted Fabric CA directory.
+# This is CA infrastructure, not application state; no external PostgreSQL
+# service is required by the prototype.
+
+networks:
+  crime:
+    name: crimenet
+
+services:
+
+  ca_police:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-police
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=7054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17054
+    ports:
+      - "7054:7054"
+      - "17054:17054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/police:/etc/hyperledger/fabric-ca-server
+    container_name: ca_police
+    networks:
+      - crime
+
+  ca_forensics:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-forensics
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=8054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:18054
+    ports:
+      - "8054:8054"
+      - "18054:18054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/forensics:/etc/hyperledger/fabric-ca-server
+    container_name: ca_forensics
+    networks:
+      - crime
+
+  ca_prosecution:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-prosecution
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=9054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+    ports:
+      - "9054:9054"
+      - "19054:19054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/prosecution:/etc/hyperledger/fabric-ca-server
+    container_name: ca_prosecution
+    networks:
+      - crime
+
+  ca_court:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-court
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=10054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:20054
+    ports:
+      - "10054:10054"
+      - "20054:20054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/court:/etc/hyperledger/fabric-ca-server
+    container_name: ca_court
+    networks:
+      - crime
+
+  ca_audit:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-audit
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=11054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:21054
+    ports:
+      - "11054:11054"
+      - "21054:21054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/audit:/etc/hyperledger/fabric-ca-server
+    container_name: ca_audit
+    networks:
+      - crime
+
+  ca_ai:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-ai
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=13054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:23054
+    ports:
+      - "13054:13054"
+      - "23054:23054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/ai:/etc/hyperledger/fabric-ca-server
+    container_name: ca_ai
+    networks:
+      - crime
+
+  ca_orderer:
+    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION:-1.5.22}
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=12054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:22054
+    ports:
+      - "12054:12054"
+      - "22054:22054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orderer
+    networks:
+      - crime

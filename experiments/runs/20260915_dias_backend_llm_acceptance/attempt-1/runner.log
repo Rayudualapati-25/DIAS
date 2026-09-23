@@ -1,0 +1,32 @@
+PASS          R1  Request log: who requested which record
+FAIL          R2  LLM recommendation in the backend, not on the ledger
+      x ledger trail holds no LLM data: ledger trail JSON searched
+PASS          R3  Decision log: auditor agrees with an LLM ALLOW
+PASS          R4  Decision log: auditor overrides an LLM DENY
+PASS          R5  Exact repeat is granted automatically
+PASS          R6  Near misses are not reused
+PASS          R7  Decision log: auditor agrees with an LLM DENY
+NOT EXERCISED R8  Decision log: auditor overrides an LLM ALLOW
+      x scenario prerequisites: no near miss received an LLM ALLOW
+PASS          R9  Revocation and expiry stop reuse
+PASS          R10  An auditor cannot decide their own request
+PASS          R11  A decision on changed facts is refused
+PASS          R12  No LLM recommendation: the auditor still decides
+PASS          R13  Application access log: request and decision
+FAIL          R14  The ledger holds no LLM recommendation, reason, or justification
+      x REQ-41a72cc3915ad0ad: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-3dcbba3c42ebeb2d: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,DYNAMIC_AUTHORIZATION_CREATED,ACCESS_OUTCOME_RECORDED
+      x REQ-7f2d65aea44673ed: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_REVIEW_SKIPPED,ACCESS_OUTCOME_RECORDED
+      x REQ-3e84222cd0dff5d2: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-19d5ded4489c91a5: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-a6a1dbf5af5a53cd: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-60ee22ed69fd352a: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-30cb7d5d3ddb2f49: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,DYNAMIC_AUTHORIZATION_CREATED,ACCESS_OUTCOME_RECORDED
+      x REQ-8d9bb0cffa35464e: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_REVIEW_SKIPPED,ACCESS_OUTCOME_RECORDED
+      x REQ-befdd77a9cea454c: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-142d11523ac63dd6: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-e5e103bbcd56543e: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+      x REQ-a78d2349582cfed4: ledger trail holds no LLM data: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED
+
+11/14 scenarios pass, 62/77 checks; written to experiments/runs/20260915_dias_backend_llm_acceptance
+exit=1

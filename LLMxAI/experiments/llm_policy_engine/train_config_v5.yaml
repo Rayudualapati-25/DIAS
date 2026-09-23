@@ -1,0 +1,25 @@
+model: mlx-community/Qwen3-14B-4bit
+train: true
+fine_tune_type: lora
+optimizer: adam
+data: experiments/llm_policy_engine/data_v5
+seed: 42
+num_layers: 16
+batch_size: 1
+# 7200 training examples / (batch 1 x 4 accumulation) = 1800 iterations = one epoch,
+# the same single-epoch regime as V4 (5040 / 4 = 1260).
+iters: 1800
+val_batches: 60
+learning_rate: 1e-5
+steps_per_report: 10
+steps_per_eval: 300
+grad_accumulation_steps: 4
+adapter_path: experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v5
+save_every: 300
+max_seq_length: 768
+mask_prompt: true
+grad_checkpoint: true
+lora_parameters:
+  rank: 8
+  dropout: 0.05
+  scale: 20.0

@@ -1,0 +1,123 @@
+{
+  "schema": "seal-exp03-failure-summary/1",
+  "generatedAt": "2026-09-08T00:14:01.546572Z",
+  "classification": "availability limitation of the unsupervised prototype deployment",
+  "isSecurityFailure": false,
+  "frozenImplementation": {
+    "commit": "730d4674",
+    "tag": "paper-freeze-v1"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "harness transport failure",
+      "detail": "TypeError: fetch failed in part D; node fetch reports every socket error identically and the harness recorded no cause",
+      "partsCompleted": [
+        "A",
+        "B/C"
+      ],
+      "resultFileWritten": false,
+      "classification": "harness defect",
+      "fix": "api() unwraps and reports the cause chain"
+    },
+    {
+      "attempt": 2,
+      "outcome": "harness hang",
+      "detail": "socket to the API observed CLOSED with the fetch promise still pending; stalled over 20 minutes at zero CPU in part G",
+      "partsCompleted": [
+        "A",
+        "B/C",
+        "D",
+        "E",
+        "F",
+        "G scenario 1"
+      ],
+      "resultFileWritten": false,
+      "classification": "harness defect",
+      "fix": "api() carries an explicit 120 s ceiling above the API's own 90 s decision ceiling"
+    },
+    {
+      "attempt": 3,
+      "outcome": "AI listener halted permanently after one model-inference timeout",
+      "detail": "listener exited by design on a >60 s inference and nothing restarted it",
+      "partsCompleted": [
+        "A",
+        "B/C",
+        "D",
+        "E runs 1-7 clean"
+      ],
+      "resultFileWritten": false,
+      "classification": "frozen-system availability behaviour",
+      "fix": "external supervisor added as deployment configuration only"
+    }
+  ],
+  "listenerHalt": {
+    "trigger": "a single model inference exceeding the 60 s LLM_POLICY_TIMEOUT_MS",
+    "mechanism": [
+      "decideOneRequest throws on model timeout",
+      "run() catches, logs, and deliberately re-throws so the checkpoint is not advanced past an unanswered request",
+      "start.js catches and calls process.exit(1)",
+      "backend/package.json runs the listener as a bare node process, so nothing restarts it"
+    ],
+    "sourceReference": "backend/src/ai/decisionService.js run()",
+    "designIntent": "avoid advancing the checkpoint past a committed but unanswered request so a restart retries it",
+    "gap": "the design assumes a supervisor that the prototype deployment did not provide",
+    "decisionsBeforeHalt": 70,
+    "inferenceLatencyMsBeforeHalt": {
+      "n": 70,
+      "min": 2068,
+      "max": 5526,
+      "mean": 2433.8
+    },
+    "haltRecord": [
+      "[ai] 7461fda8c2461f8cc2a313f461cf65dcd7a78f79523e7b5ba8fa2097242ec95d could not be decided: The operation was aborted due to timeout",
+      "[ai] listener stopped: The operation was aborted due to timeout"
+    ]
+  },
+  "safetyOutcome": {
+    "unauthorizedAllow": 0,
+    "protectedRecordReleased": 0,
+    "committedRequestsLost": 0,
+    "checkpointAdvancedPastUnansweredRequest": false,
+    "checkpointAtCapture": {
+      "nextBlock": "1719"
+    },
+    "pendingEscalationsAtCapture": 0,
+    "statement": "SEAL failed safely under the observed model-timeout condition: no unauthorized access was granted and the unanswered request remained committed and retryable."
+  },
+  "availabilityOutcome": {
+    "authorizationDecisioningHalted": true,
+    "automaticRecovery": false,
+    "manualRestartRequired": true,
+    "statement": "In the unsupervised prototype deployment the timeout terminated the AI decision listener, requiring service restart before authorization processing could resume."
+  },
+  "stabilityDegradation": {
+    "cleanRunsBeforeHalt": 7,
+    "assertionsPerCleanRun": 105,
+    "run8": {
+      "passing": 100,
+      "failing": 5,
+      "notAnsweredYet": 3,
+      "mochaTimeouts": 1,
+      "payloadMismatches": 0
+    },
+    "run9": {
+      "passing": 96,
+      "failing": 9,
+      "notAnsweredYet": 3,
+      "mochaTimeouts": 3,
+      "payloadMismatches": 0
+    },
+    "note": "every failure is HTTP 202 'the policy model has not answered yet'; payload mismatches were zero throughout, so the ledger was healthy and nothing was answering"
+  },
+  "evidenceFiles": [
+    "exp03-attempt1-20260907T102924Z.log",
+    "exp03-attempt2-hang-20260907T112737Z.diagnosis.txt",
+    "exp03-attempt2-hang-20260907T112737Z.log",
+    "exp03-attempt3-listener-halt-20260908T001006Z.ai-listener.log",
+    "exp03-attempt3-listener-halt-20260908T001006Z.diagnosis.txt",
+    "exp03-attempt3-listener-halt-20260908T001006Z.log",
+    "exp03-attempt3-listener-halt-20260908T001006Z.stability-run-8.log",
+    "exp03-attempt3-listener-halt-20260908T001006Z.stability-run-9.log"
+  ]
+}

@@ -1,0 +1,781 @@
+{
+  "createdAtUtc": "2026-09-01T21:58:36.888Z",
+  "config": {
+    "provider": "openai",
+    "url": "http://127.0.0.1:8080",
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "adapter": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v2",
+    "arm": "no-rules",
+    "data": "experiments/llm_policy_engine/data/test_balanced_60.jsonl",
+    "output": "experiments/runs/20260901_qwen3_policy_engine_eval_v2/proposed_pilot12.json",
+    "limit": 12,
+    "seed": 42,
+    "testDataSha256": "0783c40fc947a7a2824ba2d0de58d3ec17c39da5723cc6a9f94a4630e00ae9ca"
+  },
+  "modelInfo": null,
+  "metrics": {
+    "n": 12,
+    "parseRate": 1,
+    "strictJsonRate": 1,
+    "schemaValidRate": 1,
+    "decisionAccuracy": 0.5,
+    "reasonAccuracy": 0.4167,
+    "jointDecisionReasonAccuracy": 0.4167,
+    "decisiveAttributeExactRate": 0.4167,
+    "parsedActionAccuracy": 1,
+    "parsedPurposeAccuracy": 1,
+    "falseAllowRateAmongNonAllow": 0,
+    "falseAllowCount": 0,
+    "expectedNonAllowCount": 8,
+    "adversarialJointAccuracy": 0.5,
+    "latencyMs": {
+      "median": 5681.38,
+      "p95": 7356.75,
+      "mean": 5748.94
+    },
+    "perDecision": {
+      "allow": {
+        "support": 4,
+        "recall": 0.25
+      },
+      "deny": {
+        "support": 4,
+        "recall": 1
+      },
+      "escalate": {
+        "support": 4,
+        "recall": 0.25
+      }
+    },
+    "perReason": {
+      "CRED_NOT_ACTIVE": {
+        "support": 2,
+        "recall": 1
+      },
+      "SEALED_RECORD": {
+        "support": 1,
+        "recall": 0
+      },
+      "VICTIM_DATA_NOT_NECESSARY": {
+        "support": 2,
+        "recall": 1
+      },
+      "EMERGENCY_CROSS_JURISDICTION": {
+        "support": 1,
+        "recall": 1
+      },
+      "CROSS_JURISDICTION": {
+        "support": 1,
+        "recall": 0
+      },
+      "INSUFFICIENT_CLEARANCE": {
+        "support": 2,
+        "recall": 0
+      },
+      "POLICY_SATISFIED": {
+        "support": 3,
+        "recall": 0
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "test-cross_jurisdiction-004",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02324",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02324",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-south'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02324",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02324",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.jurisdiction",
+          "subject.jurisdiction"
+        ],
+        "counterfactual": "decision would change if the emergency Flag were false",
+        "explanation": "Access is escalated because the cross-jurisdiction request is an emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"escalate\",\"reasonCode\":\"EMERGENCY_CROSS_JURISDICTION\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02324\",\"recordType\":\"evidence\",\"caseId\":\"CASE-LLM-02324\",\"emergencyFlag\":true},\"decisiveAttributes\":[\"env.emergencyFlag\",\"env.jurisdiction\",\"subject.jurisdiction\"],\"counterfactual\":\"decision would change if the emergency Flag were false\",\"explanation\":\"Access is escalated because the cross-jurisdiction request is an emergency.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 7356.75,
+      "promptTokens": 409,
+      "completionTokens": 152,
+      "error": null
+    },
+    {
+      "id": "test-sealed_record-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-LLM-02242",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02242",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "AUDIT_METADATA_ONLY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-LLM-02242",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02242",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action"
+        ],
+        "counterfactual": "use the audit-trail query, which excludes protected raw content",
+        "explanation": "Access is denied because the oversight policy excludes protected raw content from this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"AUDIT_METADATA_ONLY\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"prosecution\",\"recordId\":\"REC-LLM-02242\",\"recordType\":\"chargesheet\",\"caseId\":\"CASE-LLM-02242\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.role\",\"action\"],\"counterfactual\":\"use the audit-trail query, which excludes protected raw content\",\"explanation\":\"Access is denied because the oversight policy excludes protected raw content from this request.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5345.87,
+      "promptTokens": 370,
+      "completionTokens": 140,
+      "error": null
+    },
+    {
+      "id": "test-emergency_cross_jurisdiction-003",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02303",
+          "recordType": "fir",
+          "caseId": "CASE-LLM-02303",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02303",
+          "recordType": "fir",
+          "caseId": "CASE-LLM-02303",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"allow\",\"reasonCode\":\"EMERGENCY_CROSS_JURISDICTION\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02303\",\"recordType\":\"fir\",\"caseId\":\"CASE-LLM-02303\",\"emergencyFlag\":true},\"decisiveAttributes\":[\"env.emergencyFlag\",\"env.approvalToken\",\"subject.jurisdiction\",\"object.jurisdiction\"],\"counterfactual\":null,\"explanation\":\"Access is allowed because the cross-jurisdiction request is an approved emergency.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5664.21,
+      "promptTokens": 390,
+      "completionTokens": 149,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-004",
+      "adversarial": true,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02384",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02384",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02384",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02384",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02384\",\"recordType\":\"evidence\",\"caseId\":\"CASE-LLM-02384\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"env.purpose\"],\"counterfactual\":\"decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]\",\"explanation\":\"Access is denied because the stated purpose is not permitted by the policy.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5738.11,
+      "promptTokens": 401,
+      "completionTokens": 153,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-004",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02164",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02164",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02164",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02164",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"parsedRequest\":{\"action\":\"export\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02164\",\"recordType\":\"chargesheet\",\"caseId\":\"CASE-LLM-02164\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.credentialStatus\"],\"counterfactual\":\"decision would change if the requester credential status were \\\"active\\\"\",\"explanation\":\"Access is denied because the authenticated credential is not active.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5200.75,
+      "promptTokens": 399,
+      "completionTokens": 135,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-02281",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02281",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-02281",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02281",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"recordId\":\"REC-LLM-02281\",\"recordType\":\"evidence\",\"caseId\":\"CASE-LLM-02281\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"object.victimProtectionFlag\",\"subject.role\",\"env.purpose\"],\"counterfactual\":\"request a purpose-specific evidence artifact that excludes victim identity data\",\"explanation\":\"Access is denied because the forensic role does not need victim-protected raw data for this request.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5877.19,
+      "promptTokens": 379,
+      "completionTokens": 155,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-004",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-02284",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02284",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-02284",
+          "recordType": "evidence",
+          "caseId": "CASE-LLM-02284",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"recordId\":\"REC-LLM-02284\",\"recordType\":\"evidence\",\"caseId\":\"CASE-LLM-02284\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"object.victimProtectionFlag\",\"subject.role\",\"env.purpose\"],\"counterfactual\":\"request a purpose-specific evidence artifact that excludes victim identity data\",\"explanation\":\"Access is denied because the forensic role does not need victim-protected raw data for this request.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5895.9,
+      "promptTokens": 401,
+      "completionTokens": 155,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-02362",
+          "recordType": "forensic-report",
+          "caseId": "CASE-LLM-02362",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'high' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-02362",
+          "recordType": "forensic-report",
+          "caseId": "CASE-LLM-02362",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'lab-director' has no 'view' permission on 'forensic-report'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"recordId\":\"REC-LLM-02362\",\"recordType\":\"forensic-report\",\"caseId\":\"CASE-LLM-02362\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.role\",\"action\",\"object.recordType\"],\"counterfactual\":\"role 'lab-director' has no 'view' permission on 'forensic-report'\",\"explanation\":\"Access is denied because the authenticated role has no permission for this action and record type.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5812.55,
+      "promptTokens": 385,
+      "completionTokens": 153,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-003",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02363",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02363",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'high' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02363",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02363",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'inspector' has no 'export' permission on 'chargesheet'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"parsedRequest\":{\"action\":\"export\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02363\",\"recordType\":\"chargesheet\",\"caseId\":\"CASE-LLM-02363\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.role\",\"action\",\"object.recordType\"],\"counterfactual\":\"role 'inspector' has no 'export' permission on 'chargesheet'\",\"explanation\":\"Access is denied because the authenticated role has no permission for this action and record type.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5681.38,
+      "promptTokens": 382,
+      "completionTokens": 149,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02160",
+          "recordType": "fir",
+          "caseId": "CASE-LLM-02160",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02160",
+          "recordType": "fir",
+          "caseId": "CASE-LLM-02160",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"CRED_NOT_ACTIVE\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02160\",\"recordType\":\"fir\",\"caseId\":\"CASE-LLM-02160\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.credentialStatus\"],\"counterfactual\":\"decision would change if the requester credential status were \\\"active\\\"\",\"explanation\":\"Access is denied because the authenticated credential is not active.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5169.03,
+      "promptTokens": 397,
+      "completionTokens": 134,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02381",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02381",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02381",
+          "recordType": "chargesheet",
+          "caseId": "CASE-LLM-02381",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'inspector' has no 'export' permission on 'chargesheet'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"parsedRequest\":{\"action\":\"export\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02381\",\"recordType\":\"chargesheet\",\"caseId\":\"CASE-LLM-02381\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.role\",\"action\",\"object.recordType\"],\"counterfactual\":\"role 'inspector' has no 'export' permission on 'chargesheet'\",\"explanation\":\"Access is denied because the authenticated role has no permission for this action and record type.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5633.94,
+      "promptTokens": 381,
+      "completionTokens": 149,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02380",
+          "recordType": "fir",
+          "caseId": "CASE-LLM-02380",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-LLM-02380",
+          "recordType": "fir",
+          "caseId": "CASE-LLM-02380",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'constable' has no 'view' permission on 'fir'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v2"
+      },
+      "raw": "{\"decision\":\"deny\",\"reasonCode\":\"RBAC_NO_PERMISSION\",\"parsedRequest\":{\"action\":\"view\",\"purpose\":\"investigation\",\"recordId\":\"REC-LLM-02380\",\"recordType\":\"fir\",\"caseId\":\"CASE-LLM-02380\",\"emergencyFlag\":false},\"decisiveAttributes\":[\"subject.role\",\"action\",\"object.recordType\"],\"counterfactual\":\"role 'constable' has no 'view' permission on 'fir'\",\"explanation\":\"Access is denied because the authenticated role has no permission for this action and record type.\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v2\"}",
+      "strictJson": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 5611.55,
+      "promptTokens": 399,
+      "completionTokens": 147,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "capturedAtUtc": "2026-09-03T16:06:27.387Z",
+  "apiBase": "http://127.0.0.1:3001/api",
+  "recordId": "FIR-API-1788451536211",
+  "decisionId": "023b1a1cb8bc9f401d839b6962493c7a7c76f49d2e5c9d3a8a64178f0b7567fd",
+  "documentRequestId": "761baba4c99952844b23f6380721568fdaa18cf0e9e66a5ffd61f18743cd5d7e",
+  "checks": {
+    "escalationResolvedByAuditMsp": true,
+    "decisionStatus": "approved-after-escalation",
+    "metadataHttpStatus": 200,
+    "metadataExcludesOffChainReference": true,
+    "metadataBoundToDecision": true,
+    "documentStatus": "ready",
+    "requesterDocumentHttpStatus": 200,
+    "requesterDocumentContentType": "application/pdf",
+    "requesterDocumentBytes": 34,
+    "requesterDocumentSha256": "d643a48271a504a2c88bc663b6e8d8ed1a9554dbff1a8bb74de572b8a0fb7a48",
+    "ledgerDocumentSha256": "d643a48271a504a2c88bc663b6e8d8ed1a9554dbff1a8bb74de572b8a0fb7a48",
+    "documentHashMatchesLedger": true,
+    "wrongIdentityHttpStatus": 422,
+    "wrongIdentityRejected": true
+  }
+}

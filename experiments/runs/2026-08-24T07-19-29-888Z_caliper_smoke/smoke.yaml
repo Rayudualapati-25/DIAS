@@ -1,0 +1,45 @@
+test:
+  name: SEBA-XAI Caliper connectivity smoke test
+  description: >-
+    Low-load manual validation against the live single-host Fabric network.
+    This is a setup check, not a paper-quality performance experiment.
+  workers:
+    number: 1
+  rounds:
+    - label: record-read-connectivity
+      description: Evaluate the seeded record through RecordContract without a ledger write.
+      txDuration: 10
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/read-record.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+
+    - label: contextual-access-connectivity
+      description: >-
+        Submit the deployed contextual access decision, explanation, hash, and
+        audit state through AccessContract.
+      txDuration: 15
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+
+monitors:
+  transaction:
+    - module: logging

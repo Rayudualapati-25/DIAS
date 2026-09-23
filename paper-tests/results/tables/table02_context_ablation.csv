@@ -1,0 +1,10 @@
+Measure,With authenticated subject context,Without authenticated subject context,Difference
+Action accuracy (%),100,100,+0
+Purpose accuracy (%),100,99,+1
+Decision accuracy (%),87,84,+3
+Reason-code accuracy (%),80,36,+44
+Joint accuracy (%),80,35,+45
+Allow ground-truth cases,10,10,0
+Allow recall,0.00,0.00,0.00
+Allow proposals made,0,0,0
+Always-Deny baseline decision accuracy (%),80,80,0

@@ -1,0 +1,87 @@
+{
+  "runId": "20260902_llm_policy_interface",
+  "completedAtUtc": "2026-09-02T04:44:07Z",
+  "purpose": "Live professor-demo verification of the registered-user natural-language LLM policy interface",
+  "environment": {
+    "interfaceUrl": "http://localhost:3001/#/llm-policy",
+    "policyMode": "llm-only",
+    "modelVersion": "qwen3-14b-seba-lora-v4",
+    "decisionAuthority": "fine-tuned-llm",
+    "fabricChannel": "crimechannel",
+    "chaincodeVersion": "2.4",
+    "chaincodeSequence": 2
+  },
+  "browserSmoke": {
+    "httpStatus": 200,
+    "registeredAccountCards": 14,
+    "defaultRoute": "#/llm-policy",
+    "pageTitle": "Ask the LLM",
+    "consoleErrors": 0,
+    "failedRequests": 0,
+    "desktopHorizontalOverflow": false,
+    "mobileHorizontalOverflow": false
+  },
+  "scenarios": [
+    {
+      "username": "insp.sharma",
+      "displayName": "Insp. A. Sharma",
+      "role": "inspector",
+      "recordId": "REC-FIR-001",
+      "query": "I need to view this record for an active investigation.",
+      "expectedDecision": "allow",
+      "decision": "allow",
+      "reasonCode": "POLICY_SATISFIED",
+      "latencyMs": 2134,
+      "decisionId": "c5569b5f87109be8c2090788d043f6183219a0239d50b5cb9adfa6d176633823",
+      "createdAtUtc": "2026-09-02T04:43:41.394Z"
+    },
+    {
+      "username": "insp.rathore",
+      "displayName": "Insp. V. Rathore (revoked credential)",
+      "role": "inspector",
+      "recordId": "REC-FIR-001",
+      "query": "I need to view this record for an active investigation.",
+      "expectedDecision": "deny",
+      "decision": "deny",
+      "reasonCode": "CRED_NOT_ACTIVE",
+      "latencyMs": 2387,
+      "decisionId": "17b759ec736fcabdccdb9dfcd9bad43aa5dcd5ce7f74d765a9042efd87adf3c9",
+      "createdAtUtc": "2026-09-02T04:43:45.862Z"
+    },
+    {
+      "username": "insp.singh",
+      "displayName": "Insp. P. Singh (cross-district)",
+      "role": "inspector",
+      "recordId": "REC-FIR-001",
+      "query": "I need to view this record for an active investigation.",
+      "expectedDecision": "escalate",
+      "decision": "escalate",
+      "reasonCode": "CROSS_JURISDICTION",
+      "latencyMs": 2565,
+      "decisionId": "e7693df2a89c93024e869b592843b0ed1c1c1e82eb90ab7307e5906df92c7ff7",
+      "createdAtUtc": "2026-09-02T04:43:50.517Z"
+    }
+  ],
+  "tests": {
+    "backendUnit": {
+      "passing": 39,
+      "failing": 0
+    },
+    "liveScenarioMatches": 3,
+    "liveScenarioTotal": 3
+  },
+  "screenshots": [
+    {
+      "path": "results/plots/llm-policy-ui/professor-demo-query.png",
+      "sha256": "5e0dca9f6921f79d71cfb39b7f2f6946b755b034a7c11c764348d6f1bda70dc1"
+    },
+    {
+      "path": "results/plots/llm-policy-ui/professor-demo-decision-desktop.png",
+      "sha256": "e8367be4761a4047a58d76645491b57d2cf8b05ab3f779823e83d1ab9652f9b3"
+    },
+    {
+      "path": "results/plots/llm-policy-ui/professor-demo-decision-mobile.png",
+      "sha256": "915b23808bad26e6d45666e245b6e29f5b4867655ed46e55e6b80505654b3c45"
+    }
+  ]
+}

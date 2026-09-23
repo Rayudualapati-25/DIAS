@@ -1,0 +1,199 @@
+{
+  "artifactType": "dias-completion-checklist",
+  "generatedAtUtc": "2026-09-12T09:40:02.835Z",
+  "commit": "82960449e23ca59e089f22f1aa3adb0656231a8c",
+  "branch": "dias-v7-completion",
+  "verdict": "NOT COMPLETE",
+  "ready": 25,
+  "total": 29,
+  "groups": {
+    "architecture": [
+      {
+        "id": "arch.binary-vocabulary",
+        "requirement": "the model vocabulary is exactly ALLOW and DENY",
+        "status": "READY",
+        "evidence": "recommendationSchema.RECOMMENDATIONS"
+      },
+      {
+        "id": "arch.no-seal-listener",
+        "requirement": "the SEAL listener that imported the runtime guard is gone",
+        "status": "READY",
+        "evidence": "backend/src/ai/decisionService.js absent"
+      },
+      {
+        "id": "arch.exact-scope",
+        "requirement": "dynamic authorization scope is exact-record",
+        "status": "READY",
+        "evidence": "authorization.SCOPE_VERSION"
+      },
+      {
+        "id": "arch.action-purpose-supplied",
+        "requirement": "action and purpose are supplied to the model as verified facts",
+        "status": "READY",
+        "evidence": "verifiedRequest.VERIFIED_REQUEST_FIELDS.request"
+      }
+    ],
+    "policy": [
+      {
+        "id": "policy.bundle",
+        "requirement": "a versioned governance policy bundle exists with a canonical hash",
+        "status": "READY",
+        "evidence": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0"
+      },
+      {
+        "id": "policy.open-questions",
+        "requirement": "the open-questions document referenced by the bundle exists and names this bundle",
+        "status": "READY",
+        "evidence": "docs/policies/policy-open-questions.md"
+      },
+      {
+        "id": "policy.specification",
+        "requirement": "the generated specification matches the bundle",
+        "status": "READY",
+        "evidence": "docs/policies/governance-policy-specification.md"
+      }
+    ],
+    "dataset": [
+      {
+        "id": "data.exists",
+        "requirement": "the binary v2 dataset exists with a manifest",
+        "status": "READY",
+        "evidence": "experiments/dias-finetuning/data-v2-binary/manifest.json"
+      },
+      {
+        "id": "data.validated",
+        "requirement": "every dataset check passes",
+        "status": "READY",
+        "evidence": "25/25 checks"
+      },
+      {
+        "id": "data.not-claimed-reviewed",
+        "requirement": "the dataset is NOT described as human-reviewed",
+        "status": "READY",
+        "evidence": "humanReview.reviewStatus = pending_manual_review"
+      },
+      {
+        "id": "data.labels-from-policy",
+        "requirement": "labels come from the written policy, never from auditor overrides",
+        "status": "READY",
+        "evidence": "offline reference oracle applied to the versioned written governance policy"
+      },
+      {
+        "id": "data.token-audit",
+        "requirement": "max_seq_length is justified by a tokenizer measurement",
+        "status": "READY",
+        "evidence": "longest 2150 tokens, recommended 2560"
+      }
+    ],
+    "liveFabric": [
+      {
+        "id": "live.scenarios",
+        "requirement": "every live Fabric acceptance scenario passes",
+        "status": "READY",
+        "evidence": "15/15 scenarios, 72/72 checks"
+      },
+      {
+        "id": "live.coverage",
+        "requirement": "scenarios A-O were all exercised",
+        "status": "READY",
+        "evidence": "ran ABCDEFGHIJKLMNO"
+      },
+      {
+        "id": "live.separate-chaincode",
+        "requirement": "DIAS deployed under its own chaincode name",
+        "status": "READY",
+        "evidence": "chaincode = diasrecords"
+      }
+    ],
+    "model": [
+      {
+        "id": "model.v6-intact",
+        "requirement": "the V6 adapter is byte-identical to its recorded digest",
+        "status": "READY",
+        "evidence": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe"
+      },
+      {
+        "id": "model.baseline",
+        "requirement": "an untuned baseline exists on every held-out set",
+        "status": "NOT READY",
+        "evidence": "1 sets: test-adversarial"
+      },
+      {
+        "id": "model.smoke",
+        "requirement": "the training smoke run passed its engineering checks",
+        "status": "READY",
+        "evidence": "fresh base true, checkpoint true, peak 13 GB"
+      },
+      {
+        "id": "model.checkpoint-loads",
+        "requirement": "a saved checkpoint loads and emits parseable binary output",
+        "status": "READY",
+        "evidence": "3 prompts, all parsed true, all binary true"
+      },
+      {
+        "id": "model.v7-trained",
+        "requirement": "a full V7 adapter exists with a complete run record",
+        "status": "NOT READY",
+        "evidence": "no full V7 run"
+      },
+      {
+        "id": "model.v7-evaluated",
+        "requirement": "V7 has been evaluated on the held-out suite",
+        "status": "NOT READY",
+        "evidence": "no V7 evaluation"
+      }
+    ],
+    "tests": [
+      {
+        "id": "tests.chaincode",
+        "requirement": "chaincode suite passes",
+        "status": "READY",
+        "evidence": "230 passing, 0 failing"
+      },
+      {
+        "id": "tests.backend",
+        "requirement": "backend suite passes",
+        "status": "READY",
+        "evidence": "171 passing, 0 failing"
+      },
+      {
+        "id": "tests.policies",
+        "requirement": "policy suite passes",
+        "status": "READY",
+        "evidence": "28 passing, 0 failing"
+      },
+      {
+        "id": "tests.frontend",
+        "requirement": "frontend suite passes",
+        "status": "READY",
+        "evidence": "21 passing, 0 failing"
+      },
+      {
+        "id": "tests.dataset",
+        "requirement": "dataset and evaluation suite passes",
+        "status": "READY",
+        "evidence": "93 passing, 0 failing"
+      }
+    ],
+    "repository": [
+      {
+        "id": "repo.integrity",
+        "requirement": "the publication check finds no secrets or local state",
+        "status": "READY",
+        "evidence": "Repository publication check passed: 1832 files, 322.3 MiB."
+      },
+      {
+        "id": "repo.clean",
+        "requirement": "the working tree has no unexplained changes",
+        "status": "NOT READY",
+        "evidence": "1 uncommitted entries"
+      },
+      {
+        "id": "repo.branch",
+        "requirement": "work is on its own branch",
+        "status": "READY",
+        "evidence": "branch dias-v7-completion"
+      }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "startedAt": "2026-09-05T19:50:33.185Z",
+  "scenarios": [
+    {
+      "name": "ALLOW",
+      "user": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "query": "I need to view the first information report for case CASE-2026-001 as part of my investigation.",
+      "httpStatus": 201,
+      "decision": "allow",
+      "reasonCode": "POLICY_SATISFIED",
+      "decisionAuthority": "llm-policy-agreement",
+      "subject": {
+        "mspId": "PoliceMSP",
+        "role": "inspector",
+        "jurisdiction": "district-north",
+        "clearance": "high"
+      },
+      "decidedByMsp": "AIOrgMSP",
+      "attestationPresent": true,
+      "publicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180",
+      "decisiveAttributes": [
+        "subject.role",
+        "subject.jurisdiction",
+        "subject.clearance",
+        "env.purpose"
+      ],
+      "counterfactual": null,
+      "explanationText": "Access is allowed because every applicable policy condition is satisfied.",
+      "modelVersion": "qwen3-14b-seba-lora-v4",
+      "policyVersion": "crime-policy-v2",
+      "inferenceMs": 7390,
+      "status": "granted",
+      "requestId": "77b5eca7c1944265716b5dec67e63406ae83a6b3757c10ed800d4d96b394b2eb",
+      "decisionId": "9e7e4ee2a4b917514c0e35ce867b36cd16fcb611ec8b66bdf3c612f1f4054287",
+      "e2eMs": 11631,
+      "error": null
+    },
+    {
+      "name": "DENY",
+      "user": "const.verma",
+      "recordId": "REC-FIR-001",
+      "query": "I need to view the first information report for case CASE-2026-001 for investigation.",
+      "httpStatus": 202,
+      "subject": null,
+      "attestationPresent": false,
+      "e2eMs": 47257,
+      "error": "the request is recorded on the ledger but the policy model has not answered yet"
+    },
+    {
+      "name": "DISAGREEMENT",
+      "user": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "query": "I need to view the first information report for case CASE-2026-001 for my investigation.",
+      "httpStatus": 202,
+      "subject": null,
+      "attestationPresent": false,
+      "e2eMs": 47175,
+      "error": "the request is recorded on the ledger but the policy model has not answered yet"
+    },
+    {
+      "name": "ESCALATE-sealed",
+      "user": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "query": "I need to view the sealed evidence record for case CASE-2026-001 for my investigation.",
+      "httpStatus": 201,
+      "decision": "escalate",
+      "reasonCode": "SEALED_RECORD",
+      "decisionAuthority": "llm-policy-agreement",
+      "subject": {
+        "mspId": "PoliceMSP",
+        "role": "inspector",
+        "jurisdiction": "district-north",
+        "clearance": "high"
+      },
+      "decidedByMsp": "AIOrgMSP",
+      "attestationPresent": true,
+      "publicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180",
+      "decisiveAttributes": [
+        "object.sealed",
+        "subject.mspId"
+      ],
+      "counterfactual": "decision would be evaluated normally if the record were not sealed",
+      "explanationText": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+      "modelVersion": "qwen3-14b-seba-lora-v4",
+      "policyVersion": "crime-policy-v2",
+      "inferenceMs": 5584,
+      "status": "pending-escalation",
+      "requestId": "635b8db128606e888b3e3349e361eb17306bccdbf47c194a15c219027fdcad6c",
+      "decisionId": "9bacd764a785cae215a9b8b745fbd82c5871bf7843b31b41beef885ab5bb6c90",
+      "e2eMs": 9999,
+      "error": null
+    }
+  ],
+  "latency": [
+    {
+      "i": 0,
+      "e2eMs": 7637,
+      "inferenceMs": 3411,
+      "decision": "allow",
+      "reasonCode": "POLICY_SATISFIED"
+    }
+  ],
+  "negative": [],
+  "review": {
+    "reviewerVisible": true,
+    "approveStatus": 422,
+    "resolutionBy": null,
+    "explanationRetained": false
+  }
+}

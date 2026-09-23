@@ -1,0 +1,13 @@
+{
+  "data": "experiments/policy-v2-precision/data/test.cases.json",
+  "output": "experiments/runs/20260906_seal_precision_e2e/proposed_grounded_v4.json",
+  "adapter": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v4-best",
+  "version": "qwen3-14b-seba-lora-v4",
+  "arm": "grounded",
+  "url": "http://127.0.0.1:8080",
+  "seed": 42,
+  "policyVersion": "crime-policy-v2",
+  "dataSha256": "8248184e90f3e95017a534a8489980216daddb9c41b190db66cb59161b7affa7",
+  "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+  "startedAtUtc": "2026-09-05T19:47:04.274Z"
+}

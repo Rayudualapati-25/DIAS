@@ -1,0 +1,7 @@
+variant,examples,schema_valid_rate,decision_accuracy,balanced_accuracy,macro_f1,false_allow_count,false_allow_rate_of_deny,false_deny_count,false_deny_rate_of_allow,reason_code_accuracy,policy_ref_accuracy
+full,200,1.000000,0.880000,0.878888,0.878247,23,0.232323,1,0.009901,0.840000,0.755000
+no-requester,200,1.000000,0.550000,0.553655,0.482996,8,0.080808,82,0.811881,0.275000,0.150000
+no-resource,200,1.000000,0.515000,0.518802,0.435636,10,0.101010,87,0.861386,0.275000,0.190000
+no-action-purpose,200,1.000000,0.850000,0.849185,0.848775,23,0.232323,7,0.069307,0.745000,0.685000
+no-policy,200,0.000000,,,,0,,0,,,
+no-justification,200,1.000000,0.935000,0.934743,0.934921,9,0.090909,4,0.039604,0.885000,0.805000

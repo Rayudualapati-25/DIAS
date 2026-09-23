@@ -1,0 +1,35 @@
+{
+  "transactions": 456,
+  "rounds": [
+    {
+      "roundLabel": "clients-8-warmup",
+      "roundIndex": 0,
+      "count": 88,
+      "successfulTransactions": 88,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 10,
+        "mean": 27.079545454545453,
+        "p50": 25,
+        "p95": 70.29999999999998,
+        "p99": 71,
+        "max": 71
+      }
+    },
+    {
+      "roundLabel": "clients-8-read",
+      "roundIndex": 1,
+      "count": 368,
+      "successfulTransactions": 368,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 8,
+        "mean": 23.380434782608695,
+        "p50": 24,
+        "p95": 30.649999999999977,
+        "p99": 37.329999999999984,
+        "max": 38
+      }
+    }
+  ]
+}

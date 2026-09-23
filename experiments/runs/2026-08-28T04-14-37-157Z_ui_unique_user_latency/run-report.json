@@ -1,0 +1,168 @@
+{
+  "experiment": "live interactive latency with distinct enrolled Fabric users",
+  "runId": "2026-08-28T04-14-37-157Z_ui_unique_user_latency",
+  "generatedAtUtc": "2026-08-28T04:14:45.787Z",
+  "config": {
+    "experiment": "live interactive latency with distinct enrolled Fabric users",
+    "runId": "2026-08-28T04-14-37-157Z_ui_unique_user_latency",
+    "generatedAtUtc": "2026-08-28T04:14:37.158Z",
+    "apiBase": "http://127.0.0.1:3001/api",
+    "levels": [
+      2
+    ],
+    "operations": [
+      "search",
+      "release",
+      "submit"
+    ],
+    "repetitions": 1,
+    "expectedMeasuredRequests": 6,
+    "cooldownMs": 100,
+    "setupCooldownMs": 1000,
+    "setupParallelism": 10,
+    "searchCaseId": "CASE-2026-002",
+    "expectedSearchResults": 1,
+    "fileCaseId": "CASE-2026-001",
+    "identityPoolSize": 2,
+    "identityPool": [
+      "latuser.001",
+      "latuser.002"
+    ],
+    "concurrencyMeaning": "N simultaneous HTTP requests signed by N distinct enrolled Fabric users",
+    "reuseAcrossBatches": "the same pool of 100 users is reused across repetitions and levels",
+    "measuredPaths": {
+      "search": "GET /records?caseId -> RecordContract.QueryRecords",
+      "submit": "POST /records -> vault save + RecordContract.CreateCaseRecord + commit",
+      "release": "GET /records/:id/payload -> RecordContract.AuthorizeRecordRead + vault read + SHA-256 check"
+    },
+    "excludedSetup": [
+      "CA registration/enrollment",
+      "on-chain user creation",
+      "case assignment",
+      "login",
+      "per-user access-decision creation",
+      "five warm-up requests per operation"
+    ],
+    "timingBoundary": "client-observed HTTP request start through parsed JSON response",
+    "order": "all search rounds, then all release rounds, then all submit rounds",
+    "afterResponseAuditLogging": "enabled in backend; audit submissions occur after responses and may contribute background load",
+    "stoppingRule": "fixed sweep; stop on prerequisite, unique-identity, access, or response correctness failure",
+    "invocation": {
+      "command": "node experiments/run-ui-unique-user-latency.js",
+      "overrides": {
+        "LEVELS": "2",
+        "REPETITIONS": "1",
+        "COOLDOWN_MS": "100",
+        "SETUP_COOLDOWN_MS": "1000"
+      }
+    },
+    "repository": {
+      "commit": "e3adbdb1e8ad3b56fdd9f47b90aad031d15fcb5d",
+      "trackedStatus": "M .env.example\n M .github/PULL_REQUEST_TEMPLATE.md\n M .github/workflows/ci.yml\n M CONTRIBUTING.md\n M Makefile\n M README.md\n M SECURITY.md\n M backend/package.json\n M backend/src/config.js\n M backend/test/security.unit.test.js\n M docs/github-repository.md\n M experiments/plot-ui-latency.py\n M experiments/run-ui-latency.js\n M experiments/runs/2026-08-25T14-07-26-224Z_ui_interaction_latency/artifact-manifest.json\n M experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency/artifact-manifest.json\n M output/overleaf/SEBA_XAI_Overleaf_Package/main.tex\n M papers/final_paper/artifacts/PROVENANCE.md\n M reports/iteration/iter_017_interactive_results_and_six_page_paper.md\n M results/plots/ui-latency/figure-manifest.json"
+    },
+    "sourceSha256": {
+      "runner": "1b57d27ddf2b147962367d589d29a042c73b70ae37760551740453d0a2df0143",
+      "experimentPlan": "065e916825ab16033958116224d72a636fc13d9967f17bc470bd7ce1d54633b2",
+      "backendRecordRoutes": "e036a5253d2092de0e075be69faf1a5aab670e0d5da06e222a2ccac1f79e3d71",
+      "fabricGateway": "4e703007812f383db990d51087bf78780c15a37646e95dc0acdd311650d79ca1",
+      "accessChaincode": "345eecbf46f2db7dbeaa245e6eda00ef681a738893bd976bbfa170c23aa66e18",
+      "recordChaincode": "876a0171040268f31beb1d609ea0b91535089a4fd65b3551074b8cb4fa8006cc",
+      "couchDbCaseIndex": "4483f5866d95091ad877e1ed8dcb743af650198413e2cd5d2f26f978263866aa"
+    }
+  },
+  "environment": {
+    "recordedAtUtc": "2026-08-28T04:14:45.725Z",
+    "node": "v22.20.0",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "containerImages": [
+      "couchdb-audit\tcouchdb:3.4.2",
+      "couchdb-court\tcouchdb:3.4.2",
+      "couchdb-forensics\tcouchdb:3.4.2",
+      "couchdb-police\tcouchdb:3.4.2",
+      "couchdb-prosecution\tcouchdb:3.4.2",
+      "orderer.example.com\thyperledger/fabric-orderer:latest",
+      "peer0.audit.example.com\thyperledger/fabric-peer:latest",
+      "peer0.court.example.com\thyperledger/fabric-peer:latest",
+      "peer0.forensics.example.com\thyperledger/fabric-peer:latest",
+      "peer0.police.example.com\thyperledger/fabric-peer:latest",
+      "peer0.prosecution.example.com\thyperledger/fabric-peer:latest"
+    ],
+    "topology": {
+      "channel": "crimechannel",
+      "chaincode": "crimerecords",
+      "organizations": 5,
+      "peersPerOrganization": 1,
+      "orderer": "single-node Raft",
+      "stateDatabase": "CouchDB",
+      "deployment": "single-host local Docker; not a geographically distributed benchmark"
+    },
+    "observedCases": [
+      "CASE-2026-001",
+      "CASE-2026-002"
+    ]
+  },
+  "result": {
+    "expectedRequests": 6,
+    "attemptedRequests": 6,
+    "successfulRequests": 6,
+    "failedRequests": 0,
+    "uniqueIdentityGuardrailPassed": true,
+    "fullSweepPassed": true
+  },
+  "summary": [
+    {
+      "operation": "search",
+      "concurrentUsers": 2,
+      "batches": 1,
+      "attempted": 2,
+      "successful": 2,
+      "failed": 0,
+      "minMs": 26.05,
+      "p50Ms": 26.05,
+      "meanMs": 27.38,
+      "p95Ms": 28.7,
+      "maxMs": 28.7,
+      "batchP50MeanMs": 26.05,
+      "batchP50SdMs": 0
+    },
+    {
+      "operation": "release",
+      "concurrentUsers": 2,
+      "batches": 1,
+      "attempted": 2,
+      "successful": 2,
+      "failed": 0,
+      "minMs": 13.45,
+      "p50Ms": 13.45,
+      "meanMs": 14.19,
+      "p95Ms": 14.93,
+      "maxMs": 14.93,
+      "batchP50MeanMs": 13.45,
+      "batchP50SdMs": 0
+    },
+    {
+      "operation": "submit",
+      "concurrentUsers": 2,
+      "batches": 1,
+      "attempted": 2,
+      "successful": 2,
+      "failed": 0,
+      "minMs": 1857.92,
+      "p50Ms": 1857.92,
+      "meanMs": 1858.51,
+      "p95Ms": 1859.1,
+      "maxMs": 1859.1,
+      "batchP50MeanMs": 1857.92,
+      "batchP50SdMs": 0
+    }
+  ],
+  "limitations": [
+    "single-host local Fabric deployment",
+    "three batches per point do not establish a capacity threshold or confidence interval",
+    "the same synthetic users are reused across batches and concurrency levels",
+    "operation groups are sequential rather than randomized",
+    "after-response audit transactions can create overlapping background load",
+    "comparison with the earlier five-identity run is cross-run and descriptive, not causal"
+  ]
+}

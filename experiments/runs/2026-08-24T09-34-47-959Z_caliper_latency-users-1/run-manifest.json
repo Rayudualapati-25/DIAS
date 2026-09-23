@@ -1,0 +1,61 @@
+{
+  "runId": "2026-08-24T09-34-47-959Z_caliper_latency-users-1",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:34:47.962Z",
+  "benchmarkConfig": "latency-users-1.yaml",
+  "benchmarkConfigSha256": "bc06c3b54fc24828e28da31e8e996370d9fefd309d483fcda9419b704b734d5f",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "ef71212384bfb14e7d5a1f08cbbf502a27be768596b4e83a17f59ccd16527999",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "7c72cee5047b8408a84b0efd897c490a36db4a2b92ba0c01cbdfdd45821f7402",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/query-records.js",
+      "sha256": "e2b0249d9f635389e6ef86a3c72deb63b4a997f29ebc4a7c4bda4dafc7363f25"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "ebaf4d0a5dcd19b128aba2e5d3837a076643fc67812445a9f25809e94ca40fbc"
+      }
+    ],
+    "transactions": null,
+    "summary": null,
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": null,
+    "summarySha256": null,
+    "error": "transaction evidence count mismatch for 'search-users-1': 22 observed, 11 in Caliper summary"
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T09:35:08.794Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "performanceSummary": "caliper-summary.json",
+  "performanceSummarySha256": "102129e59de16c9bb0d427d7d050a799a72cc28a84a6b454aad6c324e881198e",
+  "failedTransactions": 0,
+  "reportCreated": true,
+  "reportSha256": "1662581a3c85f2efa84ee04b4ef5a5b521ea3284c1a58cddb32c6637d1f674df",
+  "logSha256": "55b6accbe9b393a45fd0dac7d90dc8e0bb9934c88c1e2be4f8892e3844349715",
+  "failureReason": "transaction evidence count mismatch for 'search-users-1': 22 observed, 11 in Caliper summary"
+}

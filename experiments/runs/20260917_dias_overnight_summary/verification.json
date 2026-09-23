@@ -1,0 +1,135 @@
+{
+  "artifactType": "dias-overnight-verification",
+  "verifiedAtUtc": "2026-09-17T03:19:35.621Z",
+  "status": "PASS",
+  "checks": {
+    "figureFiles": 8,
+    "recommendationBaselineAndV7": true,
+    "crossedFailureSource": true,
+    "measuredConcurrentWorkflows": 81,
+    "concurrentFailures": 0,
+    "scopeCells": 48,
+    "acceptanceScenarios": 14,
+    "acceptanceChecks": 81,
+    "auditCases": 7,
+    "expandedAdversarialExamples": 120,
+    "expandedAdversarialFalseAllows": 0,
+    "seedPilots": 3
+  },
+  "figures": [
+    {
+      "path": "results/plots/dias-overnight/01_recommendation_quality.png",
+      "bytes": 94215,
+      "sha256": "a0b8dde8dbe6bb3b0bce26dfb3e012f8c863825d01adeafbc1e7dd2c15491ed8"
+    },
+    {
+      "path": "results/plots/dias-overnight/01_recommendation_quality.pdf",
+      "bytes": 20570,
+      "sha256": "f8071b8cb2ce51f088d0c720678b53a7220371cad3ac27d4547e67b8949807ea"
+    },
+    {
+      "path": "results/plots/dias-overnight/02_scope_safety_efficiency.png",
+      "bytes": 170564,
+      "sha256": "b2cfdb123068efd8f5fe2620b74a037184b598973912576b0acf753fda213a97"
+    },
+    {
+      "path": "results/plots/dias-overnight/02_scope_safety_efficiency.pdf",
+      "bytes": 19372,
+      "sha256": "74720632521f8c814bec8b56008e74643d3d7c8a8482040599c3bb252d59db47"
+    },
+    {
+      "path": "results/plots/dias-overnight/03_concurrent_user_latency_throughput.png",
+      "bytes": 177078,
+      "sha256": "3dcf6f4ee861972eb4577d9faef56f3d6b101e94fa9bfa88b3e11819205fd177"
+    },
+    {
+      "path": "results/plots/dias-overnight/03_concurrent_user_latency_throughput.pdf",
+      "bytes": 19423,
+      "sha256": "41e6f30d98ec2e3a52ebb4c9981f003732a2f20c515a8d709f524c5290b2459f"
+    },
+    {
+      "path": "results/plots/dias-overnight/04_model_failure_unsafe_allow.png",
+      "bytes": 124144,
+      "sha256": "cf31a6943486f02a326ffb38c9e33fa9725eceaa8ab0ad254908a13bcc18bae6"
+    },
+    {
+      "path": "results/plots/dias-overnight/04_model_failure_unsafe_allow.pdf",
+      "bytes": 27772,
+      "sha256": "dac66519060d6501d0da18463258802f0ef8df5ce88a554c62c92497f990aad0"
+    }
+  ],
+  "supporting": [
+    {
+      "path": "results/tables/dias_concurrent_users.csv",
+      "bytes": 871,
+      "sha256": "a2aa6ee1bfca4309e427b76dc4b89ecbf7b7d0e24cb4e124f887fb1b25b240cc"
+    },
+    {
+      "path": "results/tables/dias_scope_workload_sweep.csv",
+      "bytes": 3152,
+      "sha256": "d09c35c0ff3f70c6bd5a62d58d9dc27331e1dfb0d22611183cb5b1cac510c833"
+    },
+    {
+      "path": "results/tables/dias_audit_reconstruction.csv",
+      "bytes": 521,
+      "sha256": "90d1f941f5ff6e1c4ec873ee33ab576062f7581e8d238d00975f48f9901fdcc4"
+    },
+    {
+      "path": "results/tables/dias_expanded_adversarial_summary.json",
+      "bytes": 2891,
+      "sha256": "5341f2bccce432d5244adff16562ab53136eb31c13c55f44fa0e84b90e8ffc9e"
+    },
+    {
+      "path": "results/tables/dias_seed_pilot_summary.json",
+      "bytes": 2694,
+      "sha256": "bc7e75ed45ae0b841afee489e4f780cbd1df0957fcf7403ed4f8a5548bad5d4a"
+    },
+    {
+      "path": "experiments/plans/20260916_dias_overnight_campaign.md",
+      "bytes": 5350,
+      "sha256": "8d20c10af1f10e082c9c38481c3d223e832372d0b1cd911d05e6260582a5c996"
+    },
+    {
+      "path": "reports/iteration/iter_052_dias_overnight_experiments.md",
+      "bytes": 10444,
+      "sha256": "cd28aeb479f846e0d49cd4310367fbc25bd50ea562dbc17f0758440c6810a3ea"
+    },
+    {
+      "path": "DIAS latex paper/sections/Results.tex",
+      "bytes": 17798,
+      "sha256": "1fa11e6598513aebc54e156907143d7047163b001dc2f6200f5826e149cf546f"
+    },
+    {
+      "path": "papers/final_paper/results.tex",
+      "bytes": 11154,
+      "sha256": "f50692574dc6c9aeeed62e0bc04919a920974f0cfe402d6db0d4392e132d16f0"
+    },
+    {
+      "path": "output/pdf/DIAS_Overnight_Results_20260917.pdf",
+      "bytes": 174694,
+      "sha256": "47a25dd667f2e5a95e1a620a5a702acb7e32efbda9f3e1305556871fa4cf7348"
+    },
+    {
+      "path": "output/pdf/dias_paper_overnight_20260917.pdf",
+      "bytes": 2520422,
+      "sha256": "ec1c4cfed2c4e102dff294f422029a33f46cb9136d088fc3b07adb67dea2169a"
+    }
+  ],
+  "seeds": [
+    {
+      "seed": 17,
+      "adapterHash": "fc4ece9d526081a64d4a871b7b03d92e0b0b662601825fc1a5d70a3abf987199",
+      "balancedAccuracy": 0.73142
+    },
+    {
+      "seed": 42,
+      "adapterHash": "dd9b2c13000c55204e108617c8dddfa83475220286bebf9cf5f0e9d04e90bd8a",
+      "balancedAccuracy": 0.717721
+    },
+    {
+      "seed": 73,
+      "adapterHash": "6fe597287f5fe64e67fe5c7f119ce4bf7d14d22a84f1acb7a822d6050f88bdb9",
+      "balancedAccuracy": 0.669339
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "runType": "caliper-five-test-suite-static-validation",
+  "timestampLocal": "2026-08-24T13:20:26+05:30",
+  "objective": "Prepare five user-operated Hyperledger Caliper pilot tests without executing a benchmark",
+  "executionBoundary": {
+    "caliperWorkloadRunByAssistant": false,
+    "transactionsSubmittedByAssistant": 0,
+    "prometheusStartedByAssistant": false,
+    "performanceResultsProduced": false,
+    "paperResultsDrafted": false
+  },
+  "profiles": [
+    {
+      "test": "read-performance",
+      "workers": 2,
+      "warmup": {"seconds": 15, "offeredRateTps": 2},
+      "measurement": {"seconds": 120, "offeredRateTps": 10},
+      "operation": "RecordContract:GetRecord",
+      "readOnly": true
+    },
+    {
+      "test": "write-performance",
+      "workers": 2,
+      "warmup": {"seconds": 15, "offeredRateTps": 1},
+      "measurement": {"seconds": 120, "offeredRateTps": 5},
+      "operation": "AccessContract:RequestAccess",
+      "readOnly": false
+    },
+    {
+      "test": "increasing-load",
+      "workers": 4,
+      "steps": [
+        {"seconds": 60, "offeredRateTps": 1},
+        {"seconds": 60, "offeredRateTps": 2},
+        {"seconds": 60, "offeredRateTps": 5},
+        {"seconds": 60, "offeredRateTps": 10},
+        {"seconds": 60, "offeredRateTps": 20}
+      ],
+      "operation": "AccessContract:RequestAccess"
+    },
+    {
+      "test": "mixed-workload",
+      "workers": 4,
+      "warmup": {"seconds": 15, "offeredRateTps": 2},
+      "measurement": {"seconds": 300, "offeredRateTps": 10},
+      "plannedReadPercent": 70,
+      "plannedWritePercent": 30
+    },
+    {
+      "test": "endurance",
+      "workers": 4,
+      "warmup": {"seconds": 60, "offeredRateTps": 2},
+      "measurement": {"seconds": 7200, "offeredRateTps": 5},
+      "plannedReadPercent": 70,
+      "plannedWritePercent": 30
+    }
+  ],
+  "frozenInputs": {
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "identity": "io.krishnan",
+    "mspId": "PoliceMSP",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "investigation"
+  },
+  "monitoring": {
+    "dockerResourceMonitorConfigured": true,
+    "prometheusResourceMonitorConfigured": true,
+    "prometheusImage": "prom/prometheus:v3.13.1",
+    "prometheusImageManifestCheck": "passed without pulling or starting the image",
+    "fabricTargets": 6,
+    "fabricMetricsEndpointsReadOnlyCheck": "passed",
+    "composeRenderCheck": "passed",
+    "collectorRuntimeCheck": "not run because the user will start monitoring manually"
+  },
+  "validation": {
+    "exactDependencyCheck": "passed",
+    "sixBenchmarkConfigurationChecks": "passed",
+    "profileInvariantChecks": "passed",
+    "javascriptSyntaxChecks": "passed",
+    "reportSummaryParserAndPhaseTaggingTest": "passed",
+    "mixedTenCallCycleCheck": "passed with 7 reads and 3 writes per worker",
+    "liveNetworkPreparation": "passed",
+    "htmlReportsPresent": 0
+  },
+  "dependencies": {
+    "@hyperledger/caliper-cli": "0.7.1",
+    "@hyperledger/caliper-fabric": "0.7.1",
+    "@hyperledger/fabric-gateway": "1.7.1",
+    "@grpc/grpc-js": "1.14.4"
+  },
+  "sha256": {
+    "packageLock": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d",
+    "readConfig": "1cf3f19ba23e08f051c820d219ecb53656128be14db0767d367cdeed59f276ed",
+    "writeConfig": "e23d5a3fed4e49a4cb0ced87635365a0d55279e6a58afec8856730362c1a5bb9",
+    "increasingLoadConfig": "af5b8866fd06e1ba189a361d770666b1dabb71db231cefb2b43c626a830fca22",
+    "mixedConfig": "79486d4ef14b55bb3f5f26d626c09db921511b7c3b89a944c6885733102d68ae",
+    "enduranceConfig": "9aa78e47a1e2723c8e11bcd978adbe54b210cf48289d1fa55deb1b97f565dfa3",
+    "readWorkload": "28ee21b2b33ba175a6ed7c3c09a8dbe58208ff9344d6fc2679328a85c355fc32",
+    "writeWorkload": "afad03ac47f5e26eed508756c3d32052559c9052b7c565ed99eebf7208eb2888",
+    "mixedWorkload": "af0c5d09cb0a0c160335829d22664809de9fd47bf59966a5001b58f44124e061",
+    "prometheusCompose": "cf0f6e3af4c5cd805137bbc4a59bf7d0e62ba9b39b66ec36c578d7af268b6ed0",
+    "prometheusScrapeConfig": "5bcaa59d52b38bf91f9cb96e93a2833744554c6994f5d60067b5f0cfe8e5fc0d"
+  },
+  "knownInvalidRuns": [
+    "experiments/runs/2026-08-24T07-17-54-198Z_caliper_smoke",
+    "experiments/runs/2026-08-24T07-19-29-888Z_caliper_smoke"
+  ],
+  "limitations": [
+    "The configured offered rates are pilot inputs, not measured capacity.",
+    "No corrected successful smoke result exists yet.",
+    "Single-host measurements cannot establish distributed scalability or Raft fault tolerance.",
+    "Observed mixed ratios can differ slightly when a duration round ends mid-cycle.",
+    "A single endurance run or peak-memory value cannot establish a memory leak.",
+    "Baseline and ablation deployments remain required before comparative paper claims."
+  ]
+}

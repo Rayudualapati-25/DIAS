@@ -1,0 +1,25 @@
+{
+  "preparedAtUtc": "2026-08-24T07:17:54.197Z",
+  "nodeVersion": "v22.20.0",
+  "fabricVersion": "v2.5.16",
+  "channel": "crimechannel",
+  "chaincode": "crimerecords",
+  "topology": "five organizations, one peer per organization, one Raft orderer",
+  "distribution": "single-host local Docker/Colima research prototype",
+  "stateDatabase": "CouchDB",
+  "identities": [
+    {
+      "mspid": "PoliceMSP",
+      "user": "io.krishnan"
+    },
+    {
+      "mspid": "AuditMSP",
+      "user": "aud.qureshi"
+    }
+  ],
+  "limitations": [
+    "Single-host measurements do not establish distributed or multi-site scalability.",
+    "One Raft orderer does not provide orderer fault tolerance.",
+    "Only synthetic seeded records and identities are permitted."
+  ]
+}

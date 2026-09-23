@@ -1,0 +1,6 @@
+label,split,modelVersion,arm,n,decisionAccuracy,jointAccuracy,actionAccuracy,purposeAccuracy,reasonAccuracy,macroF1,falseAllowCount,nonAllowGroundTruth,falseDenyCount,schemaRejected,medianInferenceMs,p95InferenceMs,storedSummaryAgrees
+V6 grounded,test,qwen3-14b-seba-lora-v6,grounded,200,0.89,0.77,0.99,0.985,0.775,0.6857,0,180,13,2,2912.04,3141.14,true
+V4 grounded,test,qwen3-14b-seba-lora-v4,grounded,200,0.735,0.585,1,0.995,0.665,0.5922,10,180,10,0,3000.38,5555.88,true
+V4 short prompt,test,qwen3-14b-seba-lora-v4,short,200,0.675,0.535,1,0.995,0.62,0.4083,14,180,31,0,2302.52,4357.35,true
+V6 with subject context,validation,qwen3-14b-seba-lora-v6,grounded,100,0.87,0.8,1,1,0.8,0.8959,0,90,10,0,2879.11,3126.49,true
+V6 without subject context,validation,qwen3-14b-seba-lora-v6,no-subject,100,0.84,0.35,1,0.99,0.36,0.8268,0,90,11,0,2059,2198.18,true

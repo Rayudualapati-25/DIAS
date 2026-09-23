@@ -1,0 +1,121 @@
+Verification run: 2026-08-23T10:11:51Z
+Host: Darwin arm64
+
+------------------------------------------------------------
+1. ENVIRONMENT FINGERPRINT
+------------------------------------------------------------
+Fabric peer binary:
+  peer:
+   Version: v2.5.16
+   Commit SHA: f871cf9
+   Go version: go1.26.4
+   OS/Arch: darwin/arm64
+   Chaincode:
+
+Colima VM:
+  PROFILE    STATUS     ARCH       CPUS    MEMORY    DISK     RUNTIME    ADDRESS
+  default    Running    aarch64    10      24GiB     60GiB    docker     
+
+Running Fabric containers:
+ca_audit	Up 44 minutes
+ca_court	Up 44 minutes
+ca_forensics	Up 44 minutes
+ca_orderer	Up 44 minutes
+ca_police	Up 44 minutes
+ca_prosecution	Up 44 minutes
+couchdb-audit	Up 44 minutes (healthy)
+couchdb-court	Up 44 minutes (healthy)
+couchdb-forensics	Up 44 minutes (healthy)
+couchdb-police	Up 44 minutes (healthy)
+couchdb-prosecution	Up 44 minutes (healthy)
+dev-peer0.audit.example.com-crimerecords_2.3-fa87087ef1900d8c46f21ab03ea9ec3472ae2b98d37d3e1e191702b3eaa93c00	Up 43 minutes
+dev-peer0.court.example.com-crimerecords_2.3-fa87087ef1900d8c46f21ab03ea9ec3472ae2b98d37d3e1e191702b3eaa93c00	Up 43 minutes
+dev-peer0.forensics.example.com-crimerecords_2.3-fa87087ef1900d8c46f21ab03ea9ec3472ae2b98d37d3e1e191702b3eaa93c00	Up 43 minutes
+dev-peer0.police.example.com-crimerecords_2.3-fa87087ef1900d8c46f21ab03ea9ec3472ae2b98d37d3e1e191702b3eaa93c00	Up 43 minutes
+dev-peer0.prosecution.example.com-crimerecords_2.3-fa87087ef1900d8c46f21ab03ea9ec3472ae2b98d37d3e1e191702b3eaa93c00	Up 43 minutes
+orderer.example.com	Up 44 minutes
+peer0.audit.example.com	Up 44 minutes
+peer0.court.example.com	Up 44 minutes
+peer0.forensics.example.com	Up 44 minutes
+peer0.police.example.com	Up 44 minutes
+peer0.prosecution.example.com	Up 44 minutes
+
+Container count: 22
+
+Orderer batching (from configtx.yaml — the cause of the 1-user latency):
+    BatchTimeout: 2s
+      MaxMessageCount: 10
+------------------------------------------------------------
+2. LEDGER BLOCK HEIGHT
+------------------------------------------------------------
+Reported by the police peer itself, not by the experiment:
+  Blockchain info: {"height":20519,"currentBlockHash":"dezDb4dAQBtdvWxil4sHkybNDZwDLEyPsy5JP8cKbwc=","previousBlockHash":"ygk0bKccUydYH+mXe7VscaiMPvNcOHncmVXPWguYlmI="}
+
+A ledger that never ran these transactions cannot have this height.
+Record it before and after a re-run: the delta is the transaction count.
+------------------------------------------------------------
+3. TRANSACTION PROVENANCE OF SAMPLED RECORDS
+------------------------------------------------------------
+Sampling 5 filler records written by the experiment.
+createdTxId and createdAtUtc are assigned by the NETWORK (getTxID and
+getDateTimestamp inside the chaincode), not by the client harness.
+
+  BULK-003961
+     txid       e0eb6ea5a54a7ab9f9dcac3acb65e5faf9c63a5a4488274b396d65e086809d55
+     committed  2026-08-23T09:30:04.224Z   (orderer-assigned timestamp)
+  BULK-011006
+     txid       db22a109dce1211d2941922dea4ab363427f421a3b48184adcb8b1aa67e56523
+     committed  2026-08-23T09:34:11.176Z   (orderer-assigned timestamp)
+  BULK-004381
+     txid       6ce8a85dea26f84bd7706e2603c47c967d6f463c13daed6ef69f1df5bf711b81
+     committed  2026-08-23T09:30:07.194Z   (orderer-assigned timestamp)
+  BULK-009488
+     txid       f3a4635adb388f5f040f5d855ae0d152d7ce379b9ec918a4f3ffd60310b57918
+     committed  2026-08-23T09:31:50.871Z   (orderer-assigned timestamp)
+  BULK-045641
+     txid       8fd2eeba7606d696111ae2e767a1632339f0984155ac6544b4ccb01b6ddd32f5
+     committed  2026-08-23T09:43:16.887Z   (orderer-assigned timestamp)
+------------------------------------------------------------
+4. THOSE TXIDS RESOLVE TO REAL BLOCKS
+------------------------------------------------------------
+Querying the Query System Chaincode (qscc) on the peer. This reads the
+committed ledger directly. A fabricated txid cannot be retrieved.
+
+  e0eb6ea5a54a7ab9f9dcac3a...  FOUND in a committed block (80994 bytes returned)
+  db22a109dce1211d2941922d...  FOUND in a committed block (81625 bytes returned)
+  6ce8a85dea26f84bd7706e26...  FOUND in a committed block (81360 bytes returned)
+  f3a4635adb388f5f040f5d85...  FOUND in a committed block (81625 bytes returned)
+  8fd2eeba7606d696111ae2e7...  FOUND in a committed block (80882 bytes returned)
+------------------------------------------------------------
+5. ENDORSEMENT SIGNATURES ON A REAL BLOCK
+------------------------------------------------------------
+Fetching the newest block and showing the MSPs that signed it.
+  [34m2026-08-23 15:41:53.089 IST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+  [34m2026-08-23 15:41:53.091 IST 0002 INFO[0m [cli.common] [34;1mreadBlock[0m -> Received block: 20518
+
+  MSP identities appearing in the block:
+       1 ForensicsMSP
+       1 OrdererMSP
+       5 PoliceMSP
+       1 ProsecutionMSP
+
+  Block size on disk: 8847 bytes
+------------------------------------------------------------
+6. INDEPENDENT RECORD COUNT (CouchDB, not the API)
+------------------------------------------------------------
+The peer's state database, queried directly. Different system, different
+credentials, no involvement from the experiment harness.
+
+  ! CouchDB not reachable
+------------------------------------------------------------
+7. INDEPENDENT TIMING (curl, not the Node harness)
+------------------------------------------------------------
+The experiment timed itself with process.hrtime. curl is a different
+program with a different clock path. If the two disagree, distrust both.
+
+  point read         5 ms       5 ms       5 ms
+  rich query      5004 ms    5003 ms    5002 ms
+  audit trail     5003 ms    5003 ms    3227 ms
+------------------------------------------------------------
+Report written to: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/paper experiment results/verification_report.txt
+------------------------------------------------------------

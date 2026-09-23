@@ -1,0 +1,20 @@
+{
+  "transactions": 6,
+  "rounds": [
+    {
+      "roundLabel": "search-users-1",
+      "roundIndex": 0,
+      "count": 6,
+      "successfulTransactions": 6,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 13,
+        "mean": 19.833333333333332,
+        "p50": 14,
+        "p95": 40,
+        "p99": 46.400000000000006,
+        "max": 48
+      }
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "preparedAtUtc": "2026-08-24T09:29:36.968Z",
+  "nodeVersion": "v22.20.0",
+  "host": {
+    "platform": "darwin",
+    "release": "25.3.0",
+    "architecture": "arm64",
+    "logicalCpuCount": 16,
+    "cpuModel": "Apple M3 Max",
+    "totalMemoryBytes": 68719476736
+  },
+  "fabricVersion": "v2.5.16",
+  "channel": "crimechannel",
+  "chaincode": "crimerecords",
+  "topology": "five organizations, one peer per organization, one Raft orderer",
+  "distribution": "single-host local Docker/Colima research prototype",
+  "stateDatabase": "CouchDB",
+  "identities": [
+    {
+      "mspid": "PoliceMSP",
+      "user": "io.krishnan"
+    },
+    {
+      "mspid": "PoliceMSP",
+      "user": "insp.rathore"
+    },
+    {
+      "mspid": "PoliceMSP",
+      "user": "insp.singh"
+    },
+    {
+      "mspid": "PoliceMSP",
+      "user": "const.verma"
+    },
+    {
+      "mspid": "PoliceMSP",
+      "user": "insp.sharma"
+    },
+    {
+      "mspid": "AuditMSP",
+      "user": "aud.qureshi"
+    }
+  ],
+  "runningContainers": [
+    {
+      "name": "ca_audit",
+      "image": "hyperledger/fabric-ca:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "ca_court",
+      "image": "hyperledger/fabric-ca:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "ca_forensics",
+      "image": "hyperledger/fabric-ca:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "ca_orderer",
+      "image": "hyperledger/fabric-ca:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "ca_police",
+      "image": "hyperledger/fabric-ca:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "ca_prosecution",
+      "image": "hyperledger/fabric-ca:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "caliper-prometheus",
+      "image": "prom/prometheus:v3.13.1",
+      "status": "Up 8 minutes"
+    },
+    {
+      "name": "couchdb-audit",
+      "image": "couchdb:3.4.2",
+      "status": "Up 3 hours (healthy)"
+    },
+    {
+      "name": "couchdb-court",
+      "image": "couchdb:3.4.2",
+      "status": "Up 3 hours (healthy)"
+    },
+    {
+      "name": "couchdb-forensics",
+      "image": "couchdb:3.4.2",
+      "status": "Up 3 hours (healthy)"
+    },
+    {
+      "name": "couchdb-police",
+      "image": "couchdb:3.4.2",
+      "status": "Up 3 hours (healthy)"
+    },
+    {
+      "name": "couchdb-prosecution",
+      "image": "couchdb:3.4.2",
+      "status": "Up 3 hours (healthy)"
+    },
+    {
+      "name": "dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512",
+      "image": "dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512-28003f850926c076b5796d00482a2e1d0c9964d8dcc0bb5f082f34e31e50eea5",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512",
+      "image": "dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512-e90d5f7dd98eaea599a1ce958ff6273805ffd3f8972cad94b2a047a54aeb0d8e",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512",
+      "image": "dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512-0f2332c246d8ff5c9d483d9a7134a88bbec2feb86bc1cf87fb160f5d01a61eee",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512",
+      "image": "dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512-c79c9760c5baf233e717704cf25bbe6d4c95eef8b78a17a6c37c5cf649b4c7f2",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512",
+      "image": "dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512-d225b2414b0829d461e73f0ccdaf66fa9ecb860c015e27ef5c33ed7b4d81ca4a",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "orderer.example.com",
+      "image": "hyperledger/fabric-orderer:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "peer0.audit.example.com",
+      "image": "hyperledger/fabric-peer:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "peer0.court.example.com",
+      "image": "hyperledger/fabric-peer:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "peer0.forensics.example.com",
+      "image": "hyperledger/fabric-peer:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "peer0.police.example.com",
+      "image": "hyperledger/fabric-peer:latest",
+      "status": "Up 3 hours"
+    },
+    {
+      "name": "peer0.prosecution.example.com",
+      "image": "hyperledger/fabric-peer:latest",
+      "status": "Up 3 hours"
+    }
+  ],
+  "limitations": [
+    "Single-host measurements do not establish distributed or multi-site scalability.",
+    "One Raft orderer does not provide orderer fault tolerance.",
+    "Only synthetic seeded records and identities are permitted."
+  ]
+}

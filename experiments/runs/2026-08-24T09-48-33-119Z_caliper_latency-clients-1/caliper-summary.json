@@ -1,0 +1,26 @@
+{
+  "rounds": [
+    {
+      "label": "clients-1-warmup",
+      "successfulTransactions": 11,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.1,
+      "latencyMaxSeconds": 0.05,
+      "latencyMinSeconds": 0.01,
+      "latencyAverageSeconds": 0.02,
+      "throughputTps": 1.1,
+      "phase": "warmup"
+    },
+    {
+      "label": "clients-1-read",
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 0.02,
+      "latencyMinSeconds": 0.01,
+      "latencyAverageSeconds": 0.01,
+      "throughputTps": 1,
+      "phase": "measurement"
+    }
+  ]
+}

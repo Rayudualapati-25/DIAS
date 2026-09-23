@@ -1,0 +1,42 @@
+{
+  "runId": "20260811_contextual_fabric_vertical_slice",
+  "date": "2026-08-11",
+  "seedPolicy": "deterministic named synthetic fixtures; no random generator",
+  "network": {
+    "organizations": 5,
+    "channel": "crimechannel",
+    "chaincodeVersion": "2.3",
+    "chaincodeSequence": 4,
+    "deployment": "single-host Docker/Colima"
+  },
+  "commands": [
+    "make down && make all",
+    "cd chaincode/crimerecords && npm test",
+    "cd backend && npm test",
+    "make smoke",
+    "make verify-log",
+    "make prove",
+    "node experiments/measure.js"
+  ],
+  "results": {
+    "chaincodeTestsPassing": 92,
+    "chaincodeStatementCoveragePercent": 94.15,
+    "chaincodeBranchCoveragePercent": 87.37,
+    "backendTestsPassing": 33,
+    "smokeTestsPassing": 16,
+    "permissionedProofChecksPassing": 12,
+    "permissionedProofChecksFailing": 0,
+    "roleOnlyAblationCorrect": 1,
+    "contextualPolicyCorrect": 8,
+    "scenarioCount": 8,
+    "forgedExplanationDetected": true,
+    "rawVictimContentAbsentFromLedgerMetadata": true
+  },
+  "limitations": [
+    "synthetic fixed workload",
+    "single-host deployment",
+    "custodial development identity selector",
+    "unencrypted filesystem vault",
+    "no production or legal-compliance claim"
+  ]
+}

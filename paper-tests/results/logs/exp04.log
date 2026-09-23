@@ -1,0 +1,28 @@
+[config] JWT_SECRET not set — using a dev-only default. Do not deploy like this.
+
+========================================================================
+EXPERIMENT 04 — latency decomposition and concurrency
+========================================================================
+  preflight OK — paper-freeze-v1
+
+  model only (no ledger, no validator), 5 warm-up + 50 samples
+    median 1781 ms   p95 1874 ms   n=50
+
+  full SEAL path: allow  (5 warm-up + 50 measured)
+    e2e median 6598 ms  p95 8143 ms  |  inference median 2230 ms  |  remainder median 4252 ms  |  50/50 ok  (NON-STATIONARY)
+
+  full SEAL path: deny  (5 warm-up + 50 measured)
+    e2e median 6329 ms  p95 6362 ms  |  inference median 1989 ms  |  remainder median 4343 ms  |  50/50 ok
+
+  full SEAL path: escalate  (5 warm-up + 50 measured)
+    e2e median 6317 ms  p95 6597 ms  |  inference median 2136 ms  |  remainder median 4183 ms  |  50/50 ok
+
+  concurrency (ALLOW path)
+    level  1  ok 1/1  throughput 0.1581/s  e2e median 6327 ms  p95 6327 ms
+    level  5  ok 5/5  throughput 0.2606/s  e2e median 12850 ms  p95 19182 ms
+    level 10  ok 10/10  throughput 0.311/s  e2e median 19419 ms  p95 32154 ms
+    level 20  ok 20/20  throughput 0.3306/s  e2e median 30568 ms  p95 60486 ms
+    level 20 was clean — extending to 50
+    level 50  ok 32/50  throughput 0.346/s  e2e median 46655 ms
+
+  wrote 04-performance.{json,csv}

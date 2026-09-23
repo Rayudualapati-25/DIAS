@@ -1,0 +1,29 @@
+{
+  "name": "crime-records-backend",
+  "version": "1.0.0",
+  "description": "REST API for the Crime Records Access Network (SEBA-XAI on Fabric)",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=../.env src/server.js",
+    "test": "mocha --require test/setup.unit.js 'test/**/*.unit.test.js' --timeout 30000",
+    "test:unit": "mocha --require test/setup.unit.js 'test/**/*.unit.test.js' --timeout 10000",
+    "ai": "node --env-file-if-exists=../.env src/ai/start.js",
+    "test:live": "mocha test/api.live.test.js --timeout 600000"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.0",
+    "@hyperledger/fabric-gateway": "^1.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.0",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}

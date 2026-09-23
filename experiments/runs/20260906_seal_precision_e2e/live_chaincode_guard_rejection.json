@@ -1,0 +1,18 @@
+{
+  "checkedAtUtc": "2026-09-05T19:52:12.367Z",
+  "requestId": "0d679376a597e2baf7cb7d7c5983d8e13c3b0e9779d101bc30fb651f8ab8b033",
+  "queryHash": "9caa6979abab27f2dad992d42a26334e850a151ee95717f4c6ef2cfee9d962d1",
+  "modelClassification": {
+    "action": "view",
+    "purpose": "investigation",
+    "decision": "deny",
+    "reasonCode": "NOT_ASSIGNED",
+    "policyVersion": "crime-policy-v2",
+    "modelVersion": "qwen3-14b-seba-lora-v4"
+  },
+  "submittedDecision": "deny",
+  "submittedReason": "NOT_ASSIGNED",
+  "signatureCreated": true,
+  "rejected": true,
+  "rejection": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, model inference: submitted decision does not match the independently derived policy result"
+}

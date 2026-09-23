@@ -1,0 +1,32 @@
+{
+  "recordedAtUtc": "2026-08-28T04:16:23.780Z",
+  "node": "v22.20.0",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "containerImages": [
+    "couchdb-audit\tcouchdb:3.4.2",
+    "couchdb-court\tcouchdb:3.4.2",
+    "couchdb-forensics\tcouchdb:3.4.2",
+    "couchdb-police\tcouchdb:3.4.2",
+    "couchdb-prosecution\tcouchdb:3.4.2",
+    "orderer.example.com\thyperledger/fabric-orderer:latest",
+    "peer0.audit.example.com\thyperledger/fabric-peer:latest",
+    "peer0.court.example.com\thyperledger/fabric-peer:latest",
+    "peer0.forensics.example.com\thyperledger/fabric-peer:latest",
+    "peer0.police.example.com\thyperledger/fabric-peer:latest",
+    "peer0.prosecution.example.com\thyperledger/fabric-peer:latest"
+  ],
+  "topology": {
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "organizations": 5,
+    "peersPerOrganization": 1,
+    "orderer": "single-node Raft",
+    "stateDatabase": "CouchDB",
+    "deployment": "single-host local Docker; not a geographically distributed benchmark"
+  },
+  "observedCases": [
+    "CASE-2026-001",
+    "CASE-2026-002"
+  ]
+}

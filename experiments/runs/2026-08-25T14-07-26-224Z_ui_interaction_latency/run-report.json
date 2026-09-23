@@ -1,0 +1,134 @@
+{
+  "experiment": "live interactive latency on Hyperledger Fabric",
+  "runId": "2026-08-25T14-07-26-224Z_ui_interaction_latency",
+  "generatedAtUtc": "2026-08-25T14:07:42.559Z",
+  "config": {
+    "runId": "2026-08-25T14-07-26-224Z_ui_interaction_latency",
+    "generatedAtUtc": "2026-08-25T14:07:26.225Z",
+    "apiBase": "http://127.0.0.1:3001/api",
+    "levels": [
+      10,
+      25
+    ],
+    "operations": [
+      "search"
+    ],
+    "repetitions": 1,
+    "cooldownMs": 2000,
+    "searchCaseId": "CASE-2026-002",
+    "expectedSearchResults": 1,
+    "fileCaseId": "CASE-2026-001",
+    "identityPool": [
+      "insp.sharma",
+      "sho.reddy",
+      "const.verma",
+      "io.krishnan",
+      "insp.singh"
+    ],
+    "accessIdentity": "insp.sharma",
+    "concurrencyMeaning": "N simultaneous HTTP client sessions; identities are reused from the fixed pool",
+    "measuredPaths": {
+      "search": "GET /records?caseId -> RecordContract.QueryRecords",
+      "submit": "POST /records -> vault save + RecordContract.CreateCaseRecord + commit",
+      "release": "GET /records/:id/payload -> RecordContract.AuthorizeRecordRead + vault read + SHA-256 check"
+    },
+    "timingBoundary": "client-observed HTTP request start through parsed JSON response",
+    "warmup": "five requests per operation, excluded",
+    "order": "all search rounds, then all release rounds, then all submit rounds"
+  },
+  "environment": {
+    "recordedAtUtc": "2026-08-25T14:07:42.557Z",
+    "node": "v22.20.0",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "topology": {
+      "channel": "crimechannel",
+      "chaincode": "crimerecords",
+      "organizations": 5,
+      "peersPerOrganization": 1,
+      "orderer": "single-node Raft",
+      "stateDatabase": "CouchDB",
+      "deployment": "single-host local Docker; not a geographically distributed benchmark"
+    },
+    "observedCases": [
+      "CASE-2026-001",
+      "CASE-2026-002"
+    ]
+  },
+  "accessSetup": null,
+  "rounds": [
+    {
+      "operation": "search",
+      "repetition": 1,
+      "concurrentSessions": 10,
+      "attempted": 10,
+      "successful": 10,
+      "failed": 0,
+      "minMs": 4186.18,
+      "p50Ms": 4240.03,
+      "meanMs": 4234.68,
+      "p95Ms": 4244.33,
+      "maxMs": 4244.33,
+      "batchWallClockMs": 4245,
+      "throughputRps": 2.36
+    },
+    {
+      "operation": "search",
+      "repetition": 1,
+      "concurrentSessions": 25,
+      "attempted": 25,
+      "successful": 0,
+      "failed": 25,
+      "minMs": null,
+      "p50Ms": null,
+      "meanMs": null,
+      "p95Ms": null,
+      "maxMs": null,
+      "batchWallClockMs": 5044.39,
+      "throughputRps": 0
+    }
+  ],
+  "summary": [
+    {
+      "operation": "search",
+      "concurrentSessions": 10,
+      "batches": 1,
+      "attempted": 10,
+      "successful": 10,
+      "failed": 0,
+      "minMs": 4186.18,
+      "p50Ms": 4240.03,
+      "meanMs": 4234.68,
+      "p95Ms": 4244.33,
+      "maxMs": 4244.33,
+      "batchP50MeanMs": 4240.03,
+      "batchP50SdMs": 0
+    },
+    {
+      "operation": "search",
+      "concurrentSessions": 25,
+      "batches": 1,
+      "attempted": 25,
+      "successful": 0,
+      "failed": 25,
+      "minMs": null,
+      "p50Ms": null,
+      "meanMs": null,
+      "p95Ms": null,
+      "maxMs": null,
+      "batchP50MeanMs": null,
+      "batchP50SdMs": 0
+    }
+  ],
+  "totals": {
+    "attempted": 35,
+    "successful": 10,
+    "failed": 25
+  },
+  "interpretationLimits": [
+    "The concurrency levels are simultaneous client sessions, not distinct enrolled officers.",
+    "All services ran on one host, so results do not estimate wide-area or multi-host performance.",
+    "The release path is end-to-end authorization plus vault retrieval and hash verification; it is not isolated chaincode compute time.",
+    "Three batches per point expose limited run-to-run variability but do not establish a production capacity threshold."
+  ]
+}

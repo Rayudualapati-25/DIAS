@@ -1,0 +1,29 @@
+{
+  "createdAtUtc": "2026-09-02T04:17:08.916Z",
+  "modelVersion": "qwen3-14b-seba-lora-v3",
+  "adapterPath": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3-best/adapters.safetensors",
+  "adapterSha256": "33edb16377ac9955fc61a9d6ab07c6758db6cc06fc2d45c625e134e7cb0bc8bb",
+  "privateKeyPath": "backend/data/llm-policy-signer-private.pem",
+  "privateKeyGenerated": false,
+  "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAoDJxdRHJRiToljvlIfc2Qker3euIzO9IXXjfwlkIEiM=\n-----END PUBLIC KEY-----\n",
+  "publicKeySha256": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180",
+  "serving": {
+    "engine": "mlx_lm.server",
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "temperature": 0,
+    "topP": 1,
+    "maxTokens": 192,
+    "chatTemplateArgs": {
+      "enable_thinking": false
+    }
+  },
+  "activation": {
+    "contract": "PolicyContract",
+    "transaction": "ActivateLLMPolicyModel",
+    "arguments": [
+      "qwen3-14b-seba-lora-v3",
+      "33edb16377ac9955fc61a9d6ab07c6758db6cc06fc2d45c625e134e7cb0bc8bb",
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAoDJxdRHJRiToljvlIfc2Qker3euIzO9IXXjfwlkIEiM=\n-----END PUBLIC KEY-----\n"
+    ]
+  }
+}

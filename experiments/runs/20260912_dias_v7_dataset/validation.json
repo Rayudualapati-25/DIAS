@@ -1,0 +1,145 @@
+{
+  "dataset": "experiments/dias-finetuning/data-v2-binary",
+  "validatedAtUtc": "2026-09-12T04:42:18.909Z",
+  "bundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+  "totalExamples": 8013,
+  "setSizes": {
+    "train": 5254,
+    "validation-balanced": 400,
+    "test-decision-balanced": 600,
+    "test-reason-balanced": 540,
+    "test-adversarial": 389,
+    "test-ood-paraphrase": 400,
+    "test-multi-rule": 370,
+    "workflow-evaluation": 60
+  },
+  "checks": [
+    {
+      "id": "pairing:train",
+      "ok": true,
+      "detail": "5254 training lines match their audit records"
+    },
+    {
+      "id": "pairing:validation-balanced",
+      "ok": true,
+      "detail": "400 training lines match their audit records"
+    },
+    {
+      "id": "pairing:test-decision-balanced",
+      "ok": true,
+      "detail": "600 training lines match their audit records"
+    },
+    {
+      "id": "pairing:test-reason-balanced",
+      "ok": true,
+      "detail": "540 training lines match their audit records"
+    },
+    {
+      "id": "pairing:test-adversarial",
+      "ok": true,
+      "detail": "389 training lines match their audit records"
+    },
+    {
+      "id": "pairing:test-ood-paraphrase",
+      "ok": true,
+      "detail": "400 training lines match their audit records"
+    },
+    {
+      "id": "pairing:test-multi-rule",
+      "ok": true,
+      "detail": "370 training lines match their audit records"
+    },
+    {
+      "id": "pairing:workflow-evaluation",
+      "ok": true,
+      "detail": "60 training lines match their audit records"
+    },
+    {
+      "id": "schema",
+      "ok": true,
+      "detail": "8013 labels satisfy the response contract"
+    },
+    {
+      "id": "label-reproduction",
+      "ok": true,
+      "detail": "8013 labels reproduced from the oracle and the family declaration"
+    },
+    {
+      "id": "balance",
+      "ok": true,
+      "detail": "4 sets balanced within ±0.02"
+    },
+    {
+      "id": "duplicate-prompts",
+      "ok": true,
+      "detail": "7478 distinct prompts; 535 reuses across views of the same split"
+    },
+    {
+      "id": "feature-leakage",
+      "ok": true,
+      "detail": "4675 distinct feature sets, none crossing a split"
+    },
+    {
+      "id": "family-leakage",
+      "ok": true,
+      "detail": "4260 families, each in exactly one split"
+    },
+    {
+      "id": "template-leakage",
+      "ok": true,
+      "detail": "5 held-out template families, none in training; test-ood-paraphrase uses only them"
+    },
+    {
+      "id": "identifier-substring",
+      "ok": true,
+      "detail": "no identifier contains a label, reason code, split, role or organization"
+    },
+    {
+      "id": "identifier-predictiveness:recordId",
+      "ok": true,
+      "detail": "4 buckets of >=50; none beyond z=5.7 from 0.450"
+    },
+    {
+      "id": "identifier-predictiveness:caseId",
+      "ok": true,
+      "detail": "16 buckets of >=50; none beyond z=6.4 from 0.450"
+    },
+    {
+      "id": "identifier-predictiveness:username",
+      "ok": true,
+      "detail": "9 buckets of >=50; none beyond z=6.1 from 0.450"
+    },
+    {
+      "id": "coverage",
+      "ok": true,
+      "detail": "10 clause references and 9 reason codes present"
+    },
+    {
+      "id": "vocabulary-coverage",
+      "ok": true,
+      "detail": "roles=22 clearances=3 actions=3 purposes=6 recordTypes=7 sensitivity=3 organizations=4"
+    },
+    {
+      "id": "precedence",
+      "ok": true,
+      "detail": "1621 multi-clause DENY examples across 149 clause combinations"
+    },
+    {
+      "id": "explanation-grounding",
+      "ok": true,
+      "detail": "8013 explanations cite only listed clauses and name the decisive one"
+    },
+    {
+      "id": "irrelevant-field-independence",
+      "ok": true,
+      "detail": "overall ALLOW 0.450; {\"emergencyFlag\":{\"trueShare\":0.4662,\"falseShare\":0.444,\"trueCount\":2040,\"falseCount\":5973},\"approvalTokenPresent\":{\"trueShare\":0.4438,\"falseShare\":0.4516,\"trueCount\":2037,\"falseCount\":5976},\"witnessFlag\":{\"trueShare\":0.4501,\"falseShare\":0.4494,\"trueCount\":2417,\"falseCount\":5596}}"
+    },
+    {
+      "id": "scenario-presence",
+      "ok": true,
+      "detail": "training covers clean-allow, multi-violation, near-miss, adversarial-on-allow, single-violation, adversarial-on-deny with plain, injection, contradictory, verbose text"
+    }
+  ],
+  "passed": 25,
+  "failed": 0
+}

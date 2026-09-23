@@ -1,0 +1,61 @@
+{
+  "runId": "2026-08-24T09-29-09-984Z_caliper_latency-users-1",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:29:09.986Z",
+  "benchmarkConfig": "latency-users-1.yaml",
+  "benchmarkConfigSha256": "2eb08ca49b91b0b6bc623f5636bd06d4c49ba1e92a815dfc0f89785c46bd4136",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "05cc95b5eb81b1608873f8fc202465baf1b50c20a5c4b5d9d5200e08d6415701",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "35882aa0ac594bee42b7705415a598f8ca74d946198b7c7abd16a09ecff612ae",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/query-records.js",
+      "sha256": "8a237861c7c52b6d487c28829c08e31199e3aacfef5ef3da0f75db4a87fe0cf8"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "4cfad455bdbd945f2d739e911c1dd3be1430b580f68d334fb8453f0835d6cfa4"
+      }
+    ],
+    "transactions": "caliper-transactions.jsonl",
+    "summary": "caliper-transaction-summary.json",
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": "5f19f9e562c5e353165f150890ee4d28ff172515ff94f47fa2a5dc50baa650b3",
+    "summarySha256": "3efd5ff7becc888cdb42539a7f5d62140f2542606b760c587970ba2b7699a7b3",
+    "error": null
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Invalid measurement: this run overlapped another Caliper workload. Retained for failure traceability only.",
+  "finishedAtUtc": "2026-08-24T09:29:36.577Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "performanceSummary": "caliper-summary.json",
+  "performanceSummarySha256": "c2aebf04c08254a569f0d6516bdb1859713a13719f6eaedf0e50b717745c8227",
+  "failedTransactions": 0,
+  "reportCreated": true,
+  "reportSha256": "2c6b91853242377d0ecb5d2b8e79b9d0d3a9cdb71427eaab28ebc5700367d08b",
+  "logSha256": "57e37774a9c03fab40945dba8f0507ddd2bada5133eae923707f30c1fbc1c287",
+  "failureReason": "Overlapping Caliper workloads invalidated the measurement."
+}

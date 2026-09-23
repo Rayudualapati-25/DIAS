@@ -1,0 +1,106 @@
+{
+  "generatedAtUtc": "2026-09-01T15:33:04.977Z",
+  "generator": "experiments/llm_policy_engine/generate_dataset.js",
+  "seed": 42,
+  "policyVersion": "crime-policy-v1",
+  "modelVersion": "qwen3-14b-seba-lora-v2",
+  "oracleSourceHashes": {
+    "chaincode/crimerecords/lib/policy/policyEngine.js": "5d092f295513e19891553c8010f8b5750b9616063abae5753770f617523b6d38",
+    "chaincode/crimerecords/lib/policy/policyV1.js": "0a70e5b31575a03034a2021ed414755c4c7697d2f24421f04c7b4a1a9f920015"
+  },
+  "splitStrategy": {
+    "trainTemplates": [
+      "Please {verb} the {record} for {purpose}.",
+      "I need to {verb} this {record} for {purpose}.",
+      "Can I {verb} the {record}? The purpose is {purpose}.",
+      "My request is to {verb} the {record} as part of {purpose}.",
+      "Open a request to {verb} this {record} for {purpose}.",
+      "Authorize {verb} access to the {record}; I need it for {purpose}.",
+      "For my {purpose} duties, may I {verb} this {record}?",
+      "Evaluate whether I can {verb} the {record} in support of {purpose}.",
+      "Submit my request to {verb} this {record}. It relates to {purpose}.",
+      "I am asking for approval to {verb} the {record} because of {purpose}.",
+      "Check access for this task: {verb} the {record} for {purpose}.",
+      "May the system let me {verb} this {record} for {purpose}?",
+      "Review my need to {verb} the {record} during {purpose}.",
+      "The required operation is to {verb} the {record}; purpose: {purpose}.",
+      "Decide my request to {verb} this {record} for {purpose}."
+    ],
+    "validTemplates": [
+      "Would you authorize me to {verb} this {record} for {purpose}?",
+      "Process access so I can {verb} the {record}; it is needed for {purpose}."
+    ],
+    "testTemplates": [
+      "I am seeking permission to {verb} this {record} in connection with {purpose}.",
+      "Determine whether I may {verb} the {record}. My stated purpose is {purpose}.",
+      "For {purpose}, let me {verb} the indicated {record}.",
+      "Assess my request: {verb} the {record} for {purpose}."
+    ],
+    "note": "Template families are disjoint; identifiers and attribute combinations are unique."
+  },
+  "summary": {
+    "train": {
+      "examples": 1920,
+      "classCounts": {
+        "CRED_NOT_ACTIVE": 160,
+        "INVALID_PURPOSE": 160,
+        "RBAC_NO_PERMISSION": 160,
+        "AUDIT_METADATA_ONLY": 160,
+        "SEALED_RECORD": 160,
+        "JUVENILE_PROTECTED": 160,
+        "VICTIM_DATA_NOT_NECESSARY": 160,
+        "EMERGENCY_CROSS_JURISDICTION": 160,
+        "CROSS_JURISDICTION": 160,
+        "NOT_ASSIGNED": 160,
+        "INSUFFICIENT_CLEARANCE": 160,
+        "POLICY_SATISFIED": 160
+      },
+      "adversarialExamples": 384,
+      "sha256": "b342937985477e764bc883376fa4308482bf9445c015918db07a42e27b37fdee"
+    },
+    "valid": {
+      "examples": 240,
+      "classCounts": {
+        "CRED_NOT_ACTIVE": 20,
+        "INVALID_PURPOSE": 20,
+        "RBAC_NO_PERMISSION": 20,
+        "AUDIT_METADATA_ONLY": 20,
+        "SEALED_RECORD": 20,
+        "JUVENILE_PROTECTED": 20,
+        "VICTIM_DATA_NOT_NECESSARY": 20,
+        "EMERGENCY_CROSS_JURISDICTION": 20,
+        "CROSS_JURISDICTION": 20,
+        "NOT_ASSIGNED": 20,
+        "INSUFFICIENT_CLEARANCE": 20,
+        "POLICY_SATISFIED": 20
+      },
+      "adversarialExamples": 0,
+      "sha256": "0c9c1b873af58a05e553ae279c97782b59b1fe56eb979abdc6d80c6d6f65957f"
+    },
+    "test": {
+      "examples": 240,
+      "classCounts": {
+        "CRED_NOT_ACTIVE": 20,
+        "INVALID_PURPOSE": 20,
+        "RBAC_NO_PERMISSION": 20,
+        "AUDIT_METADATA_ONLY": 20,
+        "SEALED_RECORD": 20,
+        "JUVENILE_PROTECTED": 20,
+        "VICTIM_DATA_NOT_NECESSARY": 20,
+        "EMERGENCY_CROSS_JURISDICTION": 20,
+        "CROSS_JURISDICTION": 20,
+        "NOT_ASSIGNED": 20,
+        "INSUFFICIENT_CLEARANCE": 20,
+        "POLICY_SATISFIED": 20
+      },
+      "adversarialExamples": 60,
+      "sha256": "c8bab3fa1a163a3396438bb3b02e9d89318a5c65b04b582473c7ea45917a6508"
+    },
+    "testBalanced60": {
+      "examples": 60,
+      "examplesPerReason": 5,
+      "adversarialExamples": 24,
+      "sha256": "0783c40fc947a7a2824ba2d0de58d3ec17c39da5723cc6a9f94a4630e00ae9ca"
+    }
+  }
+}

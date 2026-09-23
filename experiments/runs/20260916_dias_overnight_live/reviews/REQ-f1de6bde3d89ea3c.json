@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-f1de6bde3d89ea3c",
+  "recordId": "REC-FIR-001",
+  "requesterUsername": "insp.sharma",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "PoliceMSP",
+      "organization": "police",
+      "role": "inspector",
+      "rank": "3",
+      "station": "PS-Central",
+      "jurisdiction": "district-north",
+      "clearance": "high",
+      "credentialStatus": "active",
+      "assignedToRequestedCase": true
+    },
+    "resource": {
+      "recordType": "fir",
+      "caseId": "CASE-2026-001",
+      "sensitivityLevel": "medium",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": false,
+      "witnessFlag": false,
+      "victimProtectionFlag": false
+    },
+    "request": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "ffbc4d12900eb2f118f429a59cf2a3b51bb9d673af5b559399ff7aef54f61cdf",
+  "justification": "I am investigating CASE-2026-001 and need to read the FIR.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "OK",
+    "recommendation": "ALLOW",
+    "reasonCode": "POLICY_SATISFIED",
+    "reason": "Role inspector may view fir records and no DENY clause applies (GP-RBAC:C2@v1, GP-DEFAULT:C1@v1).",
+    "policyRefs": [
+      "GP-RBAC:C2@v1",
+      "GP-DEFAULT:C1@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [],
+    "errorCode": null,
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-f1de6bde3d89ea3c",
+      "modelId": "qwen3-14b-dias-v7",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": "qwen3-14b-dias-lora-v7",
+      "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "ffbc4d12900eb2f118f429a59cf2a3b51bb9d673af5b559399ff7aef54f61cdf",
+      "justificationHash": "25648ccef2182e90f40670410cf69bf271cefcbeef01a1c3506c6db19a6ed55d",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:05:18.068Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "d00c77d8aafa0df01609719a6e23db0aa4bf2a23085d8dc2a1ba1b741c967054",
+      "promptHash": "3f564fbc719ce7b72a2635ee96aeca498220faca52e105b306b036780ef124f7",
+      "promptChars": 7608,
+      "usage": {
+        "promptTokens": 1915,
+        "completionTokens": 84
+      },
+      "rawOutputHash": "781c25acaec4880c93e0b66bbc9dabc127b501ddf8b99d76aa0311a0977b48e1",
+      "parserStatus": "OK",
+      "parserErrors": [],
+      "parserTolerances": [],
+      "generationStatus": "OK",
+      "latencyMs": {
+        "contextAssembly": 0.401,
+        "inference": 10913.359,
+        "validation": 0.487,
+        "total": 10914.881
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:05:28.983Z"
+    }
+  },
+  "auditorNote": null,
+  "createdAtUtc": "2026-09-16T17:05:18.065Z",
+  "updatedAtUtc": "2026-09-16T17:05:28.983Z"
+}

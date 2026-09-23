@@ -1,0 +1,95 @@
+{
+  "transactions": 46,
+  "rounds": [
+    {
+      "roundLabel": "write-tps-warmup",
+      "roundIndex": 0,
+      "count": 4,
+      "successfulTransactions": 4,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 2270,
+        "mean": 2270,
+        "p50": 2270,
+        "p95": 2270,
+        "p99": 2270,
+        "max": 2270
+      }
+    },
+    {
+      "roundLabel": "write-tps-1",
+      "roundIndex": 1,
+      "count": 4,
+      "successfulTransactions": 4,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 2114,
+        "mean": 2114.25,
+        "p50": 2114,
+        "p95": 2114.85,
+        "p99": 2114.97,
+        "max": 2115
+      }
+    },
+    {
+      "roundLabel": "write-tps-2",
+      "roundIndex": 2,
+      "count": 8,
+      "successfulTransactions": 8,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 114,
+        "mean": 1115.875,
+        "p50": 1116,
+        "p95": 2117.65,
+        "p99": 2117.93,
+        "max": 2118
+      }
+    },
+    {
+      "roundLabel": "write-tps-5",
+      "roundIndex": 3,
+      "count": 10,
+      "successfulTransactions": 10,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 92,
+        "mean": 1049.9,
+        "p50": 889,
+        "p95": 1690.5500000000002,
+        "p99": 1690.9099999999999,
+        "max": 1691
+      }
+    },
+    {
+      "roundLabel": "write-tps-10",
+      "roundIndex": 4,
+      "count": 10,
+      "successfulTransactions": 10,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 105,
+        "mean": 586.4,
+        "p50": 507,
+        "p95": 908,
+        "p99": 908,
+        "max": 908
+      }
+    },
+    {
+      "roundLabel": "write-tps-20",
+      "roundIndex": 5,
+      "count": 10,
+      "successfulTransactions": 10,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 112,
+        "mean": 353.2,
+        "p50": 314.5,
+        "p95": 514.0999999999999,
+        "p99": 514.82,
+        "max": 515
+      }
+    }
+  ]
+}

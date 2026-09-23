@@ -1,0 +1,21 @@
+Run: 2026-08-28T04-14-37-157Z_ui_unique_user_latency
+Output: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-28T04-14-37-157Z_ui_unique_user_latency
+Authenticating 2 distinct enrolled identities (excluded) ...
+Warm-up: five distinct-user searches (excluded) ...
+Warm-up: five distinct-user record submissions (excluded) ...
+Creating 2 identity-bound allow decisions (excluded) ...
+Warm-up: five distinct-user authorized opens (excluded) ...
+Authorized synthetic record: UIUSR-20260828T041437-warm-R0-N5-I000
+
+SEARCH MEASUREMENTS
+search  R1 users=  2: p50=  26.05 ms, p95=   28.7 ms
+
+RELEASE MEASUREMENTS
+release R1 users=  2: p50=  13.45 ms, p95=  14.93 ms
+
+SUBMIT MEASUREMENTS
+submit  R1 users=  2: p50=1857.92 ms, p95= 1859.1 ms
+
+Completed: 6/6 measured requests succeeded.
+Identity guardrail: passed.
+Artifacts: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-28T04-14-37-157Z_ui_unique_user_latency

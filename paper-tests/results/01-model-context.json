@@ -1,0 +1,1401 @@
+{
+  "metadata": {
+    "experiment": "EXP-01",
+    "timestamp": "2026-09-07T10:00:35.828Z",
+    "frozenCommit": "730d4674cc3689e824b15c01219f6200b14b2d5b",
+    "tag": "paper-freeze-v1",
+    "treeHash": "e01a86c428a9c22a60132e4d9606cb67586f032c",
+    "dirty": true,
+    "uncommittedPaths": 1,
+    "organizations": 6,
+    "chaincode": "crimerecords",
+    "chaincodeVersion": "4.0",
+    "chaincodePackageHash": "43b9336fbc6691253b698e681bff3cb06820ed70e07197ceb6e4655e5e7f5537",
+    "endorsement": "ImplicitMeta MAJORITY 4-of-6",
+    "model": "qwen3-14b-seba-lora-v6",
+    "adapterHash": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "policyVersion": "crime-policy-v2",
+    "hardware": {
+      "cpu": "Apple M3 Max",
+      "cores": 16,
+      "ramGB": 64,
+      "gpu": "Apple M3 Max integrated GPU (unified memory)",
+      "platform": "Darwin 25.6.0",
+      "osVersion": "26.6.2",
+      "node": "v22.20.0",
+      "modelRuntime": "MLX-LM (OpenAI-compatible server)"
+    },
+    "researchQuestion": "How accurately does the fine-tuned model perform SEAL authorization, and how much does the authenticated subject context contribute?",
+    "jointAccuracyDefinition": "action AND purpose AND decision AND reasonCode all correct, on a schema-valid output",
+    "scopeExclusion": "Deterministic-validator behaviour is deliberately excluded from this experiment. The retained runs replay a guard derived from the model's own action and purpose and their dataset carries no committed action/purpose, so those columns describe the pre-hardening validator. Experiment 02 owns all validator claims.",
+    "datasetFiles": [
+      "test.cases.json",
+      "train.cases.json",
+      "valid.cases.json"
+    ]
+  },
+  "summary": {
+    "arms": [
+      {
+        "label": "V6 grounded",
+        "split": "test",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "arm": "grounded",
+        "n": 200,
+        "decisionAccuracy": 0.89,
+        "jointAccuracy": 0.77,
+        "actionAccuracy": 0.99,
+        "purposeAccuracy": 0.985,
+        "reasonAccuracy": 0.775,
+        "macroF1": 0.6857,
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 180,
+        "falseDenyCount": 13,
+        "schemaRejected": 2,
+        "medianInferenceMs": 2912.04,
+        "p95InferenceMs": 3141.14,
+        "storedSummaryAgrees": true
+      },
+      {
+        "label": "V4 grounded",
+        "split": "test",
+        "modelVersion": "qwen3-14b-seba-lora-v4",
+        "arm": "grounded",
+        "n": 200,
+        "decisionAccuracy": 0.735,
+        "jointAccuracy": 0.585,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.995,
+        "reasonAccuracy": 0.665,
+        "macroF1": 0.5922,
+        "falseAllowCount": 10,
+        "nonAllowGroundTruth": 180,
+        "falseDenyCount": 10,
+        "schemaRejected": 0,
+        "medianInferenceMs": 3000.38,
+        "p95InferenceMs": 5555.88,
+        "storedSummaryAgrees": true
+      },
+      {
+        "label": "V4 short prompt",
+        "split": "test",
+        "modelVersion": "qwen3-14b-seba-lora-v4",
+        "arm": "short",
+        "n": 200,
+        "decisionAccuracy": 0.675,
+        "jointAccuracy": 0.535,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.995,
+        "reasonAccuracy": 0.62,
+        "macroF1": 0.4083,
+        "falseAllowCount": 14,
+        "nonAllowGroundTruth": 180,
+        "falseDenyCount": 31,
+        "schemaRejected": 0,
+        "medianInferenceMs": 2302.52,
+        "p95InferenceMs": 4357.35,
+        "storedSummaryAgrees": true
+      },
+      {
+        "label": "V6 with subject context",
+        "split": "validation",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "arm": "grounded",
+        "n": 100,
+        "decisionAccuracy": 0.87,
+        "jointAccuracy": 0.8,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 1,
+        "reasonAccuracy": 0.8,
+        "macroF1": 0.8959,
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 90,
+        "falseDenyCount": 10,
+        "schemaRejected": 0,
+        "medianInferenceMs": 2879.11,
+        "p95InferenceMs": 3126.49,
+        "storedSummaryAgrees": true
+      },
+      {
+        "label": "V6 without subject context",
+        "split": "validation",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "arm": "no-subject",
+        "n": 100,
+        "decisionAccuracy": 0.84,
+        "jointAccuracy": 0.35,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.99,
+        "reasonAccuracy": 0.36,
+        "macroF1": 0.8268,
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 90,
+        "falseDenyCount": 11,
+        "schemaRejected": 0,
+        "medianInferenceMs": 2059,
+        "p95InferenceMs": 2198.18,
+        "storedSummaryAgrees": true
+      }
+    ],
+    "ablation": {
+      "whatDiffers": "The \"without subject context\" arm replaces every authenticated subject attribute value (organisation, role, jurisdiction, clearance, credential status, case assignment) with null, and the role-specific RBAC row in the system prompt becomes empty as a consequence. The ordered policy rules, the record/resource attributes and the request text are unchanged.",
+      "notAClaimAbout": "This is not an ablation of all trusted context; resource context remains fully present in both arms.",
+      "matchedCases": true,
+      "caseCount": 100,
+      "_unused": 6,
+      "sameDatasetFile": true,
+      "withSubject": {
+        "n": 100,
+        "schemaValid": 100,
+        "schemaRejected": 0,
+        "decisionAccuracy": 0.87,
+        "jointAccuracy": 0.8,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 1,
+        "reasonAccuracy": 0.8,
+        "adversarialJointAccuracy": 0.8,
+        "perClass": {
+          "allow": {
+            "support": 10,
+            "tp": 0,
+            "fp": 0,
+            "fn": 10,
+            "precision": null,
+            "recall": 0,
+            "f1": null
+          },
+          "deny": {
+            "support": 80,
+            "tp": 77,
+            "fp": 10,
+            "fn": 3,
+            "precision": 0.8851,
+            "recall": 0.9625,
+            "f1": 0.9222
+          },
+          "escalate": {
+            "support": 10,
+            "tp": 10,
+            "fp": 3,
+            "fn": 0,
+            "precision": 0.7692,
+            "recall": 1,
+            "f1": 0.8696
+          }
+        },
+        "macroF1": 0.8959,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 0,
+            "deny": 10,
+            "escalate": 0,
+            "invalid": 0
+          },
+          "deny": {
+            "allow": 0,
+            "deny": 77,
+            "escalate": 3,
+            "invalid": 0
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 0,
+            "escalate": 10,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 90,
+        "falseAllowCases": [],
+        "falseDenyCount": 10,
+        "falseDenyCases": [
+          {
+            "id": "REC-valid-23",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-15",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-26",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-6",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-30",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-18",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-29",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-35",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-17",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          }
+        ],
+        "allowGroundTruth": 10,
+        "inferenceLatencyMs": {
+          "n": 100,
+          "mean": 2706.1,
+          "median": 2879.11,
+          "p95": 3126.49,
+          "p99": 3170.28,
+          "sd": 382.95,
+          "min": 2050.41,
+          "max": 3170.28
+        }
+      },
+      "withoutSubject": {
+        "n": 100,
+        "schemaValid": 100,
+        "schemaRejected": 0,
+        "decisionAccuracy": 0.84,
+        "jointAccuracy": 0.35,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.99,
+        "reasonAccuracy": 0.36,
+        "adversarialJointAccuracy": 0.3333,
+        "perClass": {
+          "allow": {
+            "support": 10,
+            "tp": 0,
+            "fp": 0,
+            "fn": 10,
+            "precision": null,
+            "recall": 0,
+            "f1": null
+          },
+          "deny": {
+            "support": 80,
+            "tp": 75,
+            "fp": 11,
+            "fn": 5,
+            "precision": 0.8721,
+            "recall": 0.9375,
+            "f1": 0.9036
+          },
+          "escalate": {
+            "support": 10,
+            "tp": 9,
+            "fp": 5,
+            "fn": 1,
+            "precision": 0.6429,
+            "recall": 0.9,
+            "f1": 0.75
+          }
+        },
+        "macroF1": 0.8268,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 0,
+            "deny": 10,
+            "escalate": 0,
+            "invalid": 0
+          },
+          "deny": {
+            "allow": 0,
+            "deny": 75,
+            "escalate": 5,
+            "invalid": 0
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 1,
+            "escalate": 9,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 90,
+        "falseAllowCases": [],
+        "falseDenyCount": 11,
+        "falseDenyCases": [
+          {
+            "id": "REC-valid-23",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-36",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-valid-15",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-26",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-6",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-30",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-18",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-29",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-35",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-17",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          }
+        ],
+        "allowGroundTruth": 10,
+        "inferenceLatencyMs": {
+          "n": 100,
+          "mean": 2085.49,
+          "median": 2059,
+          "p95": 2198.18,
+          "p99": 2929.98,
+          "sd": 104.12,
+          "min": 1952.79,
+          "max": 2929.98
+        }
+      },
+      "jointAccuracyDrop": 0.45,
+      "decisionAccuracyDrop": 0.03
+    },
+    "gaps": [
+      "No V6 short-prompt arm was retained on the held-out test split, so the contribution of prompt grounding is measured only for V4.",
+      "No non-fine-tuned baseline exists on this test split. Untuned arms were retained only against a superseded 60-case suite and are not comparable."
+    ],
+    "falseAllowObservation": "False-Allow counts are an observation on the retained held-out split at this model version. They are not a general guarantee about unseen requests."
+  },
+  "runs": [
+    {
+      "file": "proposed_grounded_v6_best.json",
+      "label": "V6 grounded",
+      "split": "test",
+      "missing": false,
+      "runFile": "proposed_grounded_v6_best.json",
+      "runFileSha256": "ee6b6a0017b4ba4fa4074900cf9a589591dfd5f6b0884261d7029f87a15335c4",
+      "config": {
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "arm": "grounded",
+        "dataset": "test.cases.json",
+        "datasetSha256": "8248184e90f3e95017a534a8489980216daddb9c41b190db66cb59161b7affa7",
+        "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+        "seed": 42,
+        "policyVersion": "crime-policy-v2"
+      },
+      "metrics": {
+        "n": 200,
+        "schemaValid": 198,
+        "schemaRejected": 2,
+        "decisionAccuracy": 0.89,
+        "jointAccuracy": 0.77,
+        "actionAccuracy": 0.99,
+        "purposeAccuracy": 0.985,
+        "reasonAccuracy": 0.775,
+        "adversarialJointAccuracy": 0.7,
+        "perClass": {
+          "allow": {
+            "support": 20,
+            "tp": 3,
+            "fp": 0,
+            "fn": 17,
+            "precision": 1,
+            "recall": 0.15,
+            "f1": 0.2609
+          },
+          "deny": {
+            "support": 160,
+            "tp": 155,
+            "fp": 13,
+            "fn": 5,
+            "precision": 0.9226,
+            "recall": 0.9688,
+            "f1": 0.9451
+          },
+          "escalate": {
+            "support": 20,
+            "tp": 20,
+            "fp": 7,
+            "fn": 0,
+            "precision": 0.7407,
+            "recall": 1,
+            "f1": 0.8511
+          }
+        },
+        "macroF1": 0.6857,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 3,
+            "deny": 13,
+            "escalate": 3,
+            "invalid": 1
+          },
+          "deny": {
+            "allow": 0,
+            "deny": 155,
+            "escalate": 4,
+            "invalid": 1
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 0,
+            "escalate": 20,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 180,
+        "falseAllowCases": [],
+        "falseDenyCount": 13,
+        "falseDenyCases": [
+          {
+            "id": "REC-test-19",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-1",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-48",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-3",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-21",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-44",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-55",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-22",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-72",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-65",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-50",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-17",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          }
+        ],
+        "allowGroundTruth": 20,
+        "inferenceLatencyMs": {
+          "n": 200,
+          "mean": 2717.63,
+          "median": 2912.04,
+          "p95": 3141.14,
+          "p99": 3215.55,
+          "sd": 432.3,
+          "min": 2015.81,
+          "max": 5089.97
+        }
+      },
+      "storedSummaryAgrees": true,
+      "storedSummaryDifferences": []
+    },
+    {
+      "file": "proposed_grounded_v4.json",
+      "label": "V4 grounded",
+      "split": "test",
+      "missing": false,
+      "runFile": "proposed_grounded_v4.json",
+      "runFileSha256": "6a2ba426c133cfa1ff7e55af3c952f83b93973d4350e0b70e54b04883a9108ff",
+      "config": {
+        "modelVersion": "qwen3-14b-seba-lora-v4",
+        "arm": "grounded",
+        "dataset": "test.cases.json",
+        "datasetSha256": "8248184e90f3e95017a534a8489980216daddb9c41b190db66cb59161b7affa7",
+        "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+        "seed": 42,
+        "policyVersion": "crime-policy-v2"
+      },
+      "metrics": {
+        "n": 200,
+        "schemaValid": 200,
+        "schemaRejected": 0,
+        "decisionAccuracy": 0.735,
+        "jointAccuracy": 0.585,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.995,
+        "reasonAccuracy": 0.665,
+        "adversarialJointAccuracy": 0.56,
+        "perClass": {
+          "allow": {
+            "support": 20,
+            "tp": 8,
+            "fp": 10,
+            "fn": 12,
+            "precision": 0.4444,
+            "recall": 0.4,
+            "f1": 0.4211
+          },
+          "deny": {
+            "support": 160,
+            "tp": 120,
+            "fp": 10,
+            "fn": 40,
+            "precision": 0.9231,
+            "recall": 0.75,
+            "f1": 0.8276
+          },
+          "escalate": {
+            "support": 20,
+            "tp": 19,
+            "fp": 33,
+            "fn": 1,
+            "precision": 0.3654,
+            "recall": 0.95,
+            "f1": 0.5278
+          }
+        },
+        "macroF1": 0.5922,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 8,
+            "deny": 9,
+            "escalate": 3,
+            "invalid": 0
+          },
+          "deny": {
+            "allow": 10,
+            "deny": 120,
+            "escalate": 30,
+            "invalid": 0
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 1,
+            "escalate": 19,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 10,
+        "nonAllowGroundTruth": 180,
+        "falseAllowCases": [
+          {
+            "id": "REC-test-115",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-344",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-608",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-151",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-529",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-16",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-82",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-12",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-91",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-34",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          }
+        ],
+        "falseDenyCount": 10,
+        "falseDenyCases": [
+          {
+            "id": "REC-test-31",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-19",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-1",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-20",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-3",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-21",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-44",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-22",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-50",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          }
+        ],
+        "allowGroundTruth": 20,
+        "inferenceLatencyMs": {
+          "n": 200,
+          "mean": 3100.77,
+          "median": 3000.38,
+          "p95": 5555.88,
+          "p99": 7376.19,
+          "sd": 1025.87,
+          "min": 2015.82,
+          "max": 7578.42
+        }
+      },
+      "storedSummaryAgrees": true,
+      "storedSummaryDifferences": []
+    },
+    {
+      "file": "baseline_short_v4.json",
+      "label": "V4 short prompt",
+      "split": "test",
+      "missing": false,
+      "runFile": "baseline_short_v4.json",
+      "runFileSha256": "1c7d7dfed99eb0cda00fefe9d2009b6a8f309ee279ef66290e2737862d970fa2",
+      "config": {
+        "modelVersion": "qwen3-14b-seba-lora-v4",
+        "arm": "short",
+        "dataset": "test.cases.json",
+        "datasetSha256": "8248184e90f3e95017a534a8489980216daddb9c41b190db66cb59161b7affa7",
+        "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+        "seed": 42,
+        "policyVersion": "crime-policy-v2"
+      },
+      "metrics": {
+        "n": 200,
+        "schemaValid": 200,
+        "schemaRejected": 0,
+        "decisionAccuracy": 0.675,
+        "jointAccuracy": 0.535,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.995,
+        "reasonAccuracy": 0.62,
+        "adversarialJointAccuracy": 0.5,
+        "perClass": {
+          "allow": {
+            "support": 20,
+            "tp": 8,
+            "fp": 14,
+            "fn": 12,
+            "precision": 0.3636,
+            "recall": 0.4,
+            "f1": 0.381
+          },
+          "deny": {
+            "support": 160,
+            "tp": 126,
+            "fp": 31,
+            "fn": 34,
+            "precision": 0.8025,
+            "recall": 0.7875,
+            "f1": 0.795
+          },
+          "escalate": {
+            "support": 20,
+            "tp": 1,
+            "fp": 20,
+            "fn": 19,
+            "precision": 0.0476,
+            "recall": 0.05,
+            "f1": 0.0488
+          }
+        },
+        "macroF1": 0.4083,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 8,
+            "deny": 12,
+            "escalate": 0,
+            "invalid": 0
+          },
+          "deny": {
+            "allow": 14,
+            "deny": 126,
+            "escalate": 20,
+            "invalid": 0
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 19,
+            "escalate": 1,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 14,
+        "nonAllowGroundTruth": 180,
+        "falseAllowCases": [
+          {
+            "id": "REC-test-406",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-128",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-344",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-608",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-151",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-582",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-16",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-82",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-91",
+            "expected": "CROSS_JURISDICTION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-230",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-42",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-66",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-34",
+            "expected": "RBAC_NO_PERMISSION",
+            "predicted": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-603",
+            "expected": "NOT_ASSIGNED",
+            "predicted": "POLICY_SATISFIED"
+          }
+        ],
+        "falseDenyCount": 31,
+        "falseDenyCases": [
+          {
+            "id": "REC-test-41",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-315",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-31",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-324",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-19",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-39",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-202",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-1",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-187",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-20",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-208",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-143",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-3",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-303",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-64",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-248",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-21",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-155",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-43",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-199",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-225",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-272",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-22",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-334",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-249",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-65",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-298",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-50",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-189",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-test-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-test-92",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          }
+        ],
+        "allowGroundTruth": 20,
+        "inferenceLatencyMs": {
+          "n": 200,
+          "mean": 2525.77,
+          "median": 2302.52,
+          "p95": 4357.35,
+          "p99": 4610.11,
+          "sd": 661.19,
+          "min": 2015.64,
+          "max": 4939.21
+        }
+      },
+      "storedSummaryAgrees": true,
+      "storedSummaryDifferences": []
+    },
+    {
+      "file": "ablation_full_trusted_subject_v6_best.json",
+      "label": "V6 with subject context",
+      "split": "validation",
+      "missing": false,
+      "runFile": "ablation_full_trusted_subject_v6_best.json",
+      "runFileSha256": "272e53b0d8ba343f32136ccd3be9159901c8bf41f1cc3effd50e59fdf908ebcf",
+      "config": {
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "arm": "grounded",
+        "dataset": "valid.cases.json",
+        "datasetSha256": "b8d413f7a33411f9be69024ebd807976775d66cf164f482fc1e33465576e280b",
+        "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+        "seed": 42,
+        "policyVersion": "crime-policy-v2"
+      },
+      "metrics": {
+        "n": 100,
+        "schemaValid": 100,
+        "schemaRejected": 0,
+        "decisionAccuracy": 0.87,
+        "jointAccuracy": 0.8,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 1,
+        "reasonAccuracy": 0.8,
+        "adversarialJointAccuracy": 0.8,
+        "perClass": {
+          "allow": {
+            "support": 10,
+            "tp": 0,
+            "fp": 0,
+            "fn": 10,
+            "precision": null,
+            "recall": 0,
+            "f1": null
+          },
+          "deny": {
+            "support": 80,
+            "tp": 77,
+            "fp": 10,
+            "fn": 3,
+            "precision": 0.8851,
+            "recall": 0.9625,
+            "f1": 0.9222
+          },
+          "escalate": {
+            "support": 10,
+            "tp": 10,
+            "fp": 3,
+            "fn": 0,
+            "precision": 0.7692,
+            "recall": 1,
+            "f1": 0.8696
+          }
+        },
+        "macroF1": 0.8959,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 0,
+            "deny": 10,
+            "escalate": 0,
+            "invalid": 0
+          },
+          "deny": {
+            "allow": 0,
+            "deny": 77,
+            "escalate": 3,
+            "invalid": 0
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 0,
+            "escalate": 10,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 90,
+        "falseAllowCases": [],
+        "falseDenyCount": 10,
+        "falseDenyCases": [
+          {
+            "id": "REC-valid-23",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-15",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-26",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-6",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-30",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-18",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-29",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-35",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-17",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          }
+        ],
+        "allowGroundTruth": 10,
+        "inferenceLatencyMs": {
+          "n": 100,
+          "mean": 2706.1,
+          "median": 2879.11,
+          "p95": 3126.49,
+          "p99": 3170.28,
+          "sd": 382.95,
+          "min": 2050.41,
+          "max": 3170.28
+        }
+      },
+      "storedSummaryAgrees": true,
+      "storedSummaryDifferences": []
+    },
+    {
+      "file": "ablation_no_trusted_subject_v6_best.json",
+      "label": "V6 without subject context",
+      "split": "validation",
+      "missing": false,
+      "runFile": "ablation_no_trusted_subject_v6_best.json",
+      "runFileSha256": "c0efdc591e450ce5bb15d366e52bfb992ab59cbe991560d8fd27cc9bcce281f9",
+      "config": {
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "arm": "no-subject",
+        "dataset": "valid.cases.json",
+        "datasetSha256": "b8d413f7a33411f9be69024ebd807976775d66cf164f482fc1e33465576e280b",
+        "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+        "seed": 42,
+        "policyVersion": "crime-policy-v2"
+      },
+      "metrics": {
+        "n": 100,
+        "schemaValid": 100,
+        "schemaRejected": 0,
+        "decisionAccuracy": 0.84,
+        "jointAccuracy": 0.35,
+        "actionAccuracy": 1,
+        "purposeAccuracy": 0.99,
+        "reasonAccuracy": 0.36,
+        "adversarialJointAccuracy": 0.3333,
+        "perClass": {
+          "allow": {
+            "support": 10,
+            "tp": 0,
+            "fp": 0,
+            "fn": 10,
+            "precision": null,
+            "recall": 0,
+            "f1": null
+          },
+          "deny": {
+            "support": 80,
+            "tp": 75,
+            "fp": 11,
+            "fn": 5,
+            "precision": 0.8721,
+            "recall": 0.9375,
+            "f1": 0.9036
+          },
+          "escalate": {
+            "support": 10,
+            "tp": 9,
+            "fp": 5,
+            "fn": 1,
+            "precision": 0.6429,
+            "recall": 0.9,
+            "f1": 0.75
+          }
+        },
+        "macroF1": 0.8268,
+        "confusionMatrix": {
+          "allow": {
+            "allow": 0,
+            "deny": 10,
+            "escalate": 0,
+            "invalid": 0
+          },
+          "deny": {
+            "allow": 0,
+            "deny": 75,
+            "escalate": 5,
+            "invalid": 0
+          },
+          "escalate": {
+            "allow": 0,
+            "deny": 1,
+            "escalate": 9,
+            "invalid": 0
+          }
+        },
+        "falseAllowCount": 0,
+        "nonAllowGroundTruth": 90,
+        "falseAllowCases": [],
+        "falseDenyCount": 11,
+        "falseDenyCases": [
+          {
+            "id": "REC-valid-23",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-36",
+            "expectedDecision": "escalate",
+            "expectedReason": "SEALED_RECORD"
+          },
+          {
+            "id": "REC-valid-15",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-26",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-6",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-30",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-18",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-29",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-35",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-37",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          },
+          {
+            "id": "REC-valid-17",
+            "expectedDecision": "allow",
+            "expectedReason": "POLICY_SATISFIED"
+          }
+        ],
+        "allowGroundTruth": 10,
+        "inferenceLatencyMs": {
+          "n": 100,
+          "mean": 2085.49,
+          "median": 2059,
+          "p95": 2198.18,
+          "p99": 2929.98,
+          "sd": 104.12,
+          "min": 1952.79,
+          "max": 2929.98
+        }
+      },
+      "storedSummaryAgrees": true,
+      "storedSummaryDifferences": []
+    }
+  ]
+}

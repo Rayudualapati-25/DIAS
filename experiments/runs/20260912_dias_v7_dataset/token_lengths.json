@@ -1,0 +1,187 @@
+{
+  "model": "mlx-community/Qwen3-14B-4bit",
+  "pinnedRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "modelPath": "/Users/venkatrayudu/.cache/huggingface/hub/models--mlx-community--Qwen3-14B-4bit/snapshots/a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "method": "mlx_lm.tuner.datasets.ChatDataset(mask_prompt=True).process",
+  "candidateLimits": [
+    1024,
+    1536,
+    2048,
+    2560,
+    3072,
+    4096
+  ],
+  "sets": {
+    "train": {
+      "examples": 5254,
+      "minTokens": 1931,
+      "meanTokens": 2014.9,
+      "medianTokens": 2014,
+      "p95Tokens": 2069,
+      "p99Tokens": 2102,
+      "maxTokens": 2150,
+      "totalTokens": 10586206,
+      "completionMeanTokens": 92.4,
+      "completionMaxTokens": 173,
+      "truncatedAtLimit": {
+        "1024": 5254,
+        "1536": 5254,
+        "2048": 668,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"ALLOW\",\"reason_code\":\"POLICY_SATISFIED\",\"reason\":\"Role senior-analyst may annotate forensic-report records and no DENY clause applies (GP-RBAC:C2@v1, GP-DEFAULT:C1@v1).\",\"policy_refs\":[\"GP-RBAC:C2@v1\",\"GP-DEFAULT:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[]}<|im_end|>\n"
+    },
+    "validation-balanced": {
+      "examples": 400,
+      "minTokens": 1942,
+      "meanTokens": 2015.3,
+      "medianTokens": 2015,
+      "p95Tokens": 2075,
+      "p99Tokens": 2105,
+      "maxTokens": 2127,
+      "totalTokens": 806119,
+      "completionMeanTokens": 91.6,
+      "completionMaxTokens": 148,
+      "truncatedAtLimit": {
+        "1024": 400,
+        "1536": 400,
+        "2048": 59,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"DENY\",\"reason_code\":\"INSUFFICIENT_CLEARANCE\",\"reason\":\"Requester clearance medium is below record sensitivity high (GP-CLEAR:C1@v1).\",\"policy_refs\":[\"GP-CLEAR:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[]}<|im_end|>\n"
+    },
+    "test-decision-balanced": {
+      "examples": 600,
+      "minTokens": 1934,
+      "meanTokens": 2013.2,
+      "medianTokens": 2013,
+      "p95Tokens": 2067,
+      "p99Tokens": 2101,
+      "maxTokens": 2119,
+      "totalTokens": 1207949,
+      "completionMeanTokens": 91.2,
+      "completionMaxTokens": 183,
+      "truncatedAtLimit": {
+        "1024": 600,
+        "1536": 600,
+        "2048": 76,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"DENY\",\"reason_code\":\"JUVENILE_PROTECTED\",\"reason\":\"The record is juvenile-protected and role senior-analyst is not juvenile-authorized (GP-JUV:C1@v1).\",\"policy_refs\":[\"GP-JUV:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[]}<|im_end|>\n"
+    },
+    "test-reason-balanced": {
+      "examples": 540,
+      "minTokens": 1934,
+      "meanTokens": 2005.1,
+      "medianTokens": 2002,
+      "p95Tokens": 2058,
+      "p99Tokens": 2093,
+      "maxTokens": 2129,
+      "totalTokens": 1082755,
+      "completionMeanTokens": 86.5,
+      "completionMaxTokens": 176,
+      "truncatedAtLimit": {
+        "1024": 540,
+        "1536": 540,
+        "2048": 46,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"ALLOW\",\"reason_code\":\"POLICY_SATISFIED\",\"reason\":\"Role senior-analyst may annotate forensic-report records and no DENY clause applies (GP-RBAC:C2@v1, GP-DEFAULT:C1@v1).\",\"policy_refs\":[\"GP-RBAC:C2@v1\",\"GP-DEFAULT:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[\"INSTRUCTION_IN_JUSTIFICATION\"]}<|im_end|>\n"
+    },
+    "test-adversarial": {
+      "examples": 389,
+      "minTokens": 1951,
+      "meanTokens": 2013.1,
+      "medianTokens": 2014,
+      "p95Tokens": 2054,
+      "p99Tokens": 2063,
+      "maxTokens": 2071,
+      "totalTokens": 783078,
+      "completionMeanTokens": 91.0,
+      "completionMaxTokens": 143,
+      "truncatedAtLimit": {
+        "1024": 389,
+        "1536": 389,
+        "2048": 34,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"DENY\",\"reason_code\":\"RBAC_NO_PERMISSION\",\"reason\":\"Role court-clerk may not annotate court-order records (GP-RBAC:C2@v1).\",\"policy_refs\":[\"GP-RBAC:C2@v1\"],\"missing_evidence\":[],\"review_flags\":[\"UNVERIFIED_CLAIM_IN_JUSTIFICATION\"]}<|im_end|>\n"
+    },
+    "test-ood-paraphrase": {
+      "examples": 400,
+      "minTokens": 1938,
+      "meanTokens": 2009.6,
+      "medianTokens": 2009,
+      "p95Tokens": 2048,
+      "p99Tokens": 2057,
+      "maxTokens": 2059,
+      "totalTokens": 803832,
+      "completionMeanTokens": 85.8,
+      "completionMaxTokens": 117,
+      "truncatedAtLimit": {
+        "1024": 400,
+        "1536": 400,
+        "2048": 19,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"ALLOW\",\"reason_code\":\"POLICY_SATISFIED\",\"reason\":\"Role dsp may view court-order records and no DENY clause applies (GP-RBAC:C2@v1, GP-DEFAULT:C1@v1).\",\"policy_refs\":[\"GP-RBAC:C2@v1\",\"GP-DEFAULT:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[]}<|im_end|>\n"
+    },
+    "test-multi-rule": {
+      "examples": 370,
+      "minTokens": 1962,
+      "meanTokens": 2026.9,
+      "medianTokens": 2023,
+      "p95Tokens": 2089,
+      "p99Tokens": 2121,
+      "maxTokens": 2139,
+      "totalTokens": 749938,
+      "completionMeanTokens": 108.7,
+      "completionMaxTokens": 193,
+      "truncatedAtLimit": {
+        "1024": 370,
+        "1536": 370,
+        "2048": 86,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"DENY\",\"reason_code\":\"CRED_NOT_ACTIVE\",\"reason\":\"Requester credential status is revoked, not active (GP-CRED:C1@v1). Also applicable: GP-RBAC:C2@v1, GP-CLEAR:C1@v1.\",\"policy_refs\":[\"GP-CRED:C1@v1\",\"GP-RBAC:C2@v1\",\"GP-CLEAR:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[\"UNVERIFIED_CLAIM_IN_JUSTIFICATION\"]}<|im_end|>\n"
+    },
+    "workflow-evaluation": {
+      "examples": 60,
+      "minTokens": 1947,
+      "meanTokens": 1997.5,
+      "medianTokens": 1995,
+      "p95Tokens": 2044,
+      "p99Tokens": 2048,
+      "maxTokens": 2048,
+      "totalTokens": 119849,
+      "completionMeanTokens": 83.2,
+      "completionMaxTokens": 99,
+      "truncatedAtLimit": {
+        "1024": 60,
+        "1536": 60,
+        "2048": 0,
+        "2560": 0,
+        "3072": 0,
+        "4096": 0
+      },
+      "sampleCompletion": "<think>\n\n</think>\n\n{\"recommendation\":\"ALLOW\",\"reason_code\":\"POLICY_SATISFIED\",\"reason\":\"Role commissioner may view witness-statement records and no DENY clause applies (GP-RBAC:C2@v1, GP-DEFAULT:C1@v1).\",\"policy_refs\":[\"GP-RBAC:C2@v1\",\"GP-DEFAULT:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[]}<|im_end|>\n"
+    }
+  },
+  "overallMaxTokens": 2150,
+  "recommendedMaxSeqLength": 2560,
+  "justification": "The longest example across every set is 2150 tokens. max_seq_length 2560 is the smallest candidate that truncates nothing; anything smaller would cut a completion and teach the model to emit unterminated JSON."
+}

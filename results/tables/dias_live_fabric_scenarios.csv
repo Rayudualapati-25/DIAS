@@ -1,0 +1,16 @@
+scenario,title,status,checks_passed,checks_total,key_evidence
+A,"Model ALLOW + auditor FORCE_ALLOW",PASS,5,5,REQ-1540f95089ec5ae9
+B,"Model DENY + auditor FORCE_DENY",PASS,4,4,REQ-fa91fa1e70c64aa6
+C,"Model DENY + auditor FORCE_ALLOW",PASS,7,7,REQ-6a05b62a384b5e59
+D,"Exact repeat of an authorized request",PASS,7,7,REQ-3f8e621e974920a0
+E,"Near misses",PASS,4,4,
+F,"Revocation",PASS,6,6,AUTH-3b16fe4f98b0d8de
+G,"Expiry",PASS,6,6,AUTH-1313544405bfffab
+H,"Model ALLOW + auditor FORCE_DENY",PASS,4,4,REQ-2d0905a0e311e6ad
+I,"Model unavailable",PASS,8,8,REQ-338430204b5c51d7
+J,"Invalid model output",PASS,5,5,REQ-a7d12bf4aac25fef
+K,"Restart and replay",PASS,4,4,REQ-21ab5ab10821df0e
+L,"Concurrent duplicate events",PASS,3,3,REQ-da6c40831afbba92
+M,"Requester decides their own request",PASS,3,3,REQ-08824c666cc39511
+N,"Unauthorized organisation recommends",PASS,2,2,REQ-4025ef0376989543
+O,"Facts change after the recommendation",PASS,4,4,REQ-c52f3cd907da123d

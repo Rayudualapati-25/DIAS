@@ -1,0 +1,70 @@
+{
+  "runId": "2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+  "status": "completed",
+  "startedAtUtc": "2026-08-24T09:58:49.265Z",
+  "benchmarkConfig": "latency-clients-2.yaml",
+  "benchmarkConfigSha256": "b4739a2698f1428eac86b61466eb488aff6c562ac8b34882a700504252e2d3a5",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "033d632a58b8386726c9cecc132da82d102b6f3c6d04785801291f2d6328ac6a",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "21646cec9afc7728273ca79d923f728c4e33593fe66d74194a88ce2904c983fc",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/read-record.js",
+      "sha256": "28ee21b2b33ba175a6ed7c3c09a8dbe58208ff9344d6fc2679328a85c355fc32"
+    }
+  ],
+  "monitoringConfiguration": [
+    {
+      "path": "monitoring/prometheus.yml",
+      "sha256": "5bcaa59d52b38bf91f9cb96e93a2833744554c6994f5d60067b5f0cfe8e5fc0d"
+    },
+    {
+      "path": "monitoring/compose.yaml",
+      "sha256": "cf0f6e3af4c5cd805137bbc4a59bf7d0e62ba9b39b66ec36c578d7af268b6ed0"
+    }
+  ],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "ebaf4d0a5dcd19b128aba2e5d3837a076643fc67812445a9f25809e94ca40fbc"
+      }
+    ],
+    "transactions": "caliper-transactions.jsonl",
+    "summary": "caliper-transaction-summary.json",
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": "d3f7cfe3c929b0c0afaefbfddea7fe86bfd68fbca2a8301b73c1b55d4babdc31",
+    "summarySha256": "b7b3169255903b70e6d4d1b81e13a8cb6bf812b024efa543c24ca0572d3c8c4e",
+    "error": null
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T10:00:01.969Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0
+  },
+  "performanceSummary": "caliper-summary.json",
+  "performanceSummarySha256": "155eb41b08747b4ac7f4f3401cd67ee029a5d4950389926aace8045c0efa7781",
+  "failedTransactions": 0,
+  "reportCreated": true,
+  "reportSha256": "7a3dc6977f482122ea2ae6a6724aba0431b780da99398fc1c8b1f620df16e2d1",
+  "logSha256": "b021a34b8ab5842eabe394aab26670f7b678f22e850fd557b5da684165645d42",
+  "failureReason": null
+}

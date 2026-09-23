@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this research prototype, please cite the software using these metadata."
+title: "DIAS: Dynamic and Explainable Access Control for Blockchain-enabled Inter-organizational Data Sharing"
+type: software
+authors:
+  - family-names: "Rayudu"
+    given-names: "Alapati Venkat"
+    email: "venkatarayudu_alapati@srmap.edu.in"
+    affiliation: "Department of Computer Science and Engineering, SRM University-AP"
+  - family-names: "Sengupta"
+    given-names: "Tirthankar"
+    email: "tirthankar.s@srmap.edu.in"
+    affiliation: "Department of Computer Science and Engineering, SRM University-AP"
+version: 1.0.0
+date-released: 2026-08-26
+license: Apache-2.0
+abstract: >-
+  A Hyperledger Fabric research prototype for access control among five synthetic
+  criminal-justice organizations: an exact-scope dynamic authorization grants a
+  matching request automatically; otherwise an application-backend LLM gives an
+  advisory recommendation and an auditor makes the binding decision, with the
+  request and the decision (including agreement with the LLM) recorded on the
+  ledger.
+keywords:
+  - Hyperledger Fabric
+  - explainable access control
+  - dynamic authorization
+  - large language models
+  - blockchain audit
+  - inter-agency data sharing

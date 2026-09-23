@@ -1,0 +1,105 @@
+{
+  "artifactType": "configured-workload-methodology-figures",
+  "generatedAtUtc": "2026-08-24T08:19:16.465685+00:00",
+  "performanceResultsUsed": false,
+  "interRoundWaitSeconds": 5,
+  "generator": "benchmarks/caliper/scripts/generate-workload-profile-graphs.py",
+  "generatorSha256": "de824a2366d1669a85056ab71b457b0422054538e2e0670a9d5e07ec94072f7f",
+  "environment": {
+    "python": "3.13.7",
+    "matplotlib": "3.10.7",
+    "pyyaml": "6.0.3"
+  },
+  "figures": [
+    {
+      "test": "read",
+      "sourceConfig": "configs/read-performance.yaml",
+      "sourceConfigSha256": "1cf3f19ba23e08f051c820d219ecb53656128be14db0767d367cdeed59f276ed",
+      "sourceTable": "results/tables/caliper_profiles/caliper_read_configured_profile.csv",
+      "sourceTableSha256": "a56fa238614006a5228871d677768f9e929d9ee8bdb7371041add91445970494",
+      "outputs": [
+        {
+          "path": "results/plots/caliper/caliper_read_configured_profile.png",
+          "sha256": "4a420589f9bf88120715449fc1d71dd6c72a7fa9bf5b1794c97f4e3c6deff2cd"
+        },
+        {
+          "path": "results/plots/caliper/caliper_read_configured_profile.pdf",
+          "sha256": "7bb89de5c66805208a2333119c9c9d25c87e2c6b299ac677ddd24d5c36caa401"
+        }
+      ],
+      "classification": "configured input; not a benchmark result"
+    },
+    {
+      "test": "write",
+      "sourceConfig": "configs/write-performance.yaml",
+      "sourceConfigSha256": "e23d5a3fed4e49a4cb0ced87635365a0d55279e6a58afec8856730362c1a5bb9",
+      "sourceTable": "results/tables/caliper_profiles/caliper_write_configured_profile.csv",
+      "sourceTableSha256": "2b84d424d11012700bc3c099bf8ca44370f0f9bee6b3b93d1632aca5702062ff",
+      "outputs": [
+        {
+          "path": "results/plots/caliper/caliper_write_configured_profile.png",
+          "sha256": "f74e5ebb95caff2066df6cc9979a443c8bae6046d8809ca64a4c14df7337b7c7"
+        },
+        {
+          "path": "results/plots/caliper/caliper_write_configured_profile.pdf",
+          "sha256": "3b22da4ff6d3bda212d3878d949cf80c0796705a43ab5a0a20951d13bb013bd9"
+        }
+      ],
+      "classification": "configured input; not a benchmark result"
+    },
+    {
+      "test": "increasing_load",
+      "sourceConfig": "configs/increasing-load.yaml",
+      "sourceConfigSha256": "af5b8866fd06e1ba189a361d770666b1dabb71db231cefb2b43c626a830fca22",
+      "sourceTable": "results/tables/caliper_profiles/caliper_increasing_load_configured_profile.csv",
+      "sourceTableSha256": "12d0bd437b1b985ab50e796b393b12d7be9c72bb622009ef1228f27a2c72a24f",
+      "outputs": [
+        {
+          "path": "results/plots/caliper/caliper_increasing_load_configured_profile.png",
+          "sha256": "d8cb1295df704f3818f7d94b0f0cadf35af45be99ed82453e5454302c349a267"
+        },
+        {
+          "path": "results/plots/caliper/caliper_increasing_load_configured_profile.pdf",
+          "sha256": "f0267a91c8eaa80efd950aeb37e1d1ad57b75ae4587c0b70c0ef78d6e951321f"
+        }
+      ],
+      "classification": "configured input; not a benchmark result"
+    },
+    {
+      "test": "mixed",
+      "sourceConfig": "configs/mixed-workload.yaml",
+      "sourceConfigSha256": "79486d4ef14b55bb3f5f26d626c09db921511b7c3b89a944c6885733102d68ae",
+      "sourceTable": "results/tables/caliper_profiles/caliper_mixed_configured_profile.csv",
+      "sourceTableSha256": "5dcd39190d66ec59d18d699f64589336f7fc907a18c486d2e2d337065248be09",
+      "outputs": [
+        {
+          "path": "results/plots/caliper/caliper_mixed_configured_profile.png",
+          "sha256": "2d2850f097d879d76d9e6f6082fd444e91f5d3f9fe21a49b6eeb474a642f2429"
+        },
+        {
+          "path": "results/plots/caliper/caliper_mixed_configured_profile.pdf",
+          "sha256": "2e63062056d78d931c7122ff347fbe91cc2f5a6741b513f06d8d6da9f4be7dde"
+        }
+      ],
+      "classification": "configured input; not a benchmark result"
+    },
+    {
+      "test": "endurance",
+      "sourceConfig": "configs/endurance.yaml",
+      "sourceConfigSha256": "9aa78e47a1e2723c8e11bcd978adbe54b210cf48289d1fa55deb1b97f565dfa3",
+      "sourceTable": "results/tables/caliper_profiles/caliper_endurance_configured_profile.csv",
+      "sourceTableSha256": "4d3968c5a03f607aa55ca6e0db379c99effc8ff122a66724407492063e21b2ee",
+      "outputs": [
+        {
+          "path": "results/plots/caliper/caliper_endurance_configured_profile.png",
+          "sha256": "c371ae7775c36595337b61f63cafecd6dbcac0cd222aa0e62c028dd706dd8469"
+        },
+        {
+          "path": "results/plots/caliper/caliper_endurance_configured_profile.pdf",
+          "sha256": "8d29251763dca72a440955079aa7a458beaa2e77e1b3214a37606bd547a7a4a8"
+        }
+      ],
+      "classification": "configured input; not a benchmark result"
+    }
+  ]
+}

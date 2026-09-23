@@ -1,0 +1,46 @@
+=== 2026-09-12T04:47:59Z validation-balanced ===
+[eval] untuned-qwen3-14b-4bit :: validation-balanced (400 examples)
+  25/400  50/400  75/400  100/400  125/400  150/400  175/400  200/400  225/400  250/400  275/400  300/400  325/400  350/400  375/400  400/400  valid 370/400  accuracy 0.581081  macroF1 0.50507  falseALLOW 7  falseDENY 148  p95 13376.7 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T05:49:58Z test-decision-balanced ===
+[eval] untuned-qwen3-14b-4bit :: test-decision-balanced (600 examples)
+  25/600  50/600  75/600  100/600  125/600  150/600  175/600  200/600  225/600  250/600  275/600  300/600  325/600  350/600  375/600  400/600  425/600  450/600  475/600  500/600  525/600  550/600  575/600  600/600  valid 554/600  accuracy 0.606498  macroF1 0.550197  falseALLOW 14  falseDENY 204  p95 9488.5 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T07:07:50Z test-reason-balanced ===
+[eval] untuned-qwen3-14b-4bit :: test-reason-balanced (540 examples)
+  25/540  50/540  75/540  100/540  125/540  150/540  175/540  200/540  225/540  250/540  275/540  300/540  325/540  350/540  375/540  400/540  425/540  450/540  475/540  500/540  525/540  valid 509/540  accuracy 0.880157  macroF1 0.616665  falseALLOW 19  falseDENY 42  p95 9147 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T08:14:55Z test-adversarial ===
+[eval] untuned-qwen3-14b-4bit :: test-adversarial (389 examples)
+  25/389  50/389  75/389  100/389  125/389  150/389  175/389  200/389  225/389  250/389  275/389  300/389  325/389  350/389  375/389  valid 333/389  accuracy 0.564565  macroF1 0.429558  falseALLOW 4  falseDENY 141  p95 11793.5 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T09:12:30Z test-ood-paraphrase ===
+[eval] untuned-qwen3-14b-4bit :: test-ood-paraphrase (400 examples)
+  25/400  50/400  75/400  100/400  125/400  150/400  175/400  200/400  225/400  250/400  275/400  300/400  325/400  350/400  375/400  400/400  valid 373/400  accuracy 0.643432  macroF1 0.620334  falseALLOW 28  falseDENY 105  p95 11487.9 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T10:14:31Z test-multi-rule ===
+[eval] untuned-qwen3-14b-4bit :: test-multi-rule (370 examples)
+  25/370  50/370  75/370  100/370  125/370  150/370  175/370  200/370  225/370  250/370  275/370  300/370  325/370  350/370  valid 352/370  accuracy 1  macroF1 n/a  falseALLOW 0  falseDENY 0  p95 10287.6 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T11:06:55Z recomputing combined metrics ===
+[eval] untuned-qwen3-14b-4bit :: validation-balanced reusing 400 predictions
+  valid 370/400  accuracy 0.581081  macroF1 0.50507  falseALLOW 7  falseDENY 148  p95 13376.7 ms
+[eval] untuned-qwen3-14b-4bit :: test-decision-balanced reusing 600 predictions
+  valid 554/600  accuracy 0.606498  macroF1 0.550197  falseALLOW 14  falseDENY 204  p95 9488.5 ms
+[eval] untuned-qwen3-14b-4bit :: test-reason-balanced reusing 540 predictions
+  valid 509/540  accuracy 0.880157  macroF1 0.616665  falseALLOW 19  falseDENY 42  p95 9147 ms
+[eval] untuned-qwen3-14b-4bit :: test-adversarial reusing 389 predictions
+  valid 333/389  accuracy 0.564565  macroF1 0.429558  falseALLOW 4  falseDENY 141  p95 11793.5 ms
+[eval] untuned-qwen3-14b-4bit :: test-ood-paraphrase reusing 400 predictions
+  valid 373/400  accuracy 0.643432  macroF1 0.620334  falseALLOW 28  falseDENY 105  p95 11487.9 ms
+[eval] untuned-qwen3-14b-4bit :: test-multi-rule reusing 370 predictions
+  valid 352/370  accuracy 1  macroF1 n/a  falseALLOW 0  falseDENY 0  p95 10287.6 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_baseline
+=== 2026-09-12T11:06:55Z done ===

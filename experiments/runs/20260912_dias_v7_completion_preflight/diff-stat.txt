@@ -1,0 +1,15 @@
+ chaincode/crimerecords/lib/accessContract.js       | 2044 ++++++++++----------
+ chaincode/crimerecords/lib/auditContract.js        |  386 ++--
+ chaincode/crimerecords/lib/policyContract.js       |  319 ++-
+ chaincode/crimerecords/lib/recordContract.js       |   55 +-
+ chaincode/crimerecords/test/accessContract.test.js |  372 ----
+ chaincode/crimerecords/test/aiDecisionFlow.test.js |  471 -----
+ chaincode/crimerecords/test/auditContract.test.js  |  216 ---
+ .../crimerecords/test/canonicalInputs.test.js      |  325 ----
+ chaincode/crimerecords/test/dynamicPolicy.test.js  |  318 ---
+ chaincode/crimerecords/test/policyContract.test.js |  111 --
+ chaincode/crimerecords/test/policyEngine.test.js   |  142 --
+ chaincode/crimerecords/test/recordContract.test.js |   66 +
+ .../test/structuredExplanation.test.js             |  286 ---
+ network/scripts/deployCC.sh                        |    7 +
+ 14 files changed, 1567 insertions(+), 3551 deletions(-)

@@ -1,0 +1,25 @@
+{
+  "runId": "20260910_dias_live_fabric",
+  "status": "failed",
+  "generatedAtUtc": "2026-09-10T01:27:49.387Z",
+  "error": "first request did not reach auditor",
+  "completedSteps": [
+    {
+      "name": "authenticate three Fabric identities",
+      "status": "passed",
+      "evidence": {
+        "requester": "const.verma",
+        "auditor": "sp.north",
+        "owner": "insp.sharma"
+      }
+    },
+    {
+      "name": "create same-property record",
+      "status": "passed",
+      "evidence": {
+        "recordId": "REC-DIAS-REPEAT-001"
+      }
+    }
+  ],
+  "diagnosis": "The backend polling budget expired before the worktree AI listener was restarted with the local adapter path. The listener later committed the recommendation; the resumable rerun reuses that pending request."
+}

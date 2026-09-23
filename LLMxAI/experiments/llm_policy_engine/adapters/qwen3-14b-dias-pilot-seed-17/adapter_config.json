@@ -1,0 +1,41 @@
+{
+    "adapter_path": "experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-17",
+    "batch_size": 1,
+    "clear_cache_threshold": 0,
+    "config": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/pilot-seed-17.yaml",
+    "data": "../experiments/dias-finetuning/data-v2-binary/staged/train-400",
+    "fine_tune_type": "lora",
+    "grad_accumulation_steps": 4,
+    "grad_checkpoint": true,
+    "iters": 256,
+    "learning_rate": 1e-05,
+    "lora_parameters": {
+        "rank": 8,
+        "dropout": 0.05,
+        "scale": 20.0
+    },
+    "lr_schedule": null,
+    "mask_prompt": true,
+    "max_seq_length": 2560,
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "num_layers": 16,
+    "optimizer": "adam",
+    "optimizer_config": {
+        "adam": {},
+        "adamw": {},
+        "muon": {},
+        "sgd": {},
+        "adafactor": {}
+    },
+    "project_name": null,
+    "report_to": null,
+    "resume_adapter_file": null,
+    "save_every": 64,
+    "seed": 17,
+    "steps_per_eval": 64,
+    "steps_per_report": 16,
+    "test": false,
+    "test_batches": 500,
+    "train": true,
+    "val_batches": 20
+}

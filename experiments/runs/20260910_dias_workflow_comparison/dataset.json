@@ -1,0 +1,1891 @@
+{
+  "schemaVersion": "dias-workflow-dataset-v1",
+  "seed": 20260910,
+  "description": "One denial override, five exact repeats, and one near miss per fingerprint field.",
+  "requests": [
+    {
+      "scenarioId": "seed-deny-force-allow",
+      "kind": "seed-override",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-allow",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-FIR-SEED",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "9b44c5cbac80ebd6692b205b96843c0242240fa156bdea6ab64553d961c4229e"
+    },
+    {
+      "scenarioId": "exact-repeat-1",
+      "kind": "exact-repeat",
+      "shouldAutoGrant": true,
+      "modelRecommendation": null,
+      "auditorDecision": null,
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-FIR-REPEAT-1",
+          "caseId": "CASE-REPEAT-1",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "9b44c5cbac80ebd6692b205b96843c0242240fa156bdea6ab64553d961c4229e"
+    },
+    {
+      "scenarioId": "exact-repeat-2",
+      "kind": "exact-repeat",
+      "shouldAutoGrant": true,
+      "modelRecommendation": null,
+      "auditorDecision": null,
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-FIR-REPEAT-2",
+          "caseId": "CASE-REPEAT-2",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "9b44c5cbac80ebd6692b205b96843c0242240fa156bdea6ab64553d961c4229e"
+    },
+    {
+      "scenarioId": "exact-repeat-3",
+      "kind": "exact-repeat",
+      "shouldAutoGrant": true,
+      "modelRecommendation": null,
+      "auditorDecision": null,
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-FIR-REPEAT-3",
+          "caseId": "CASE-REPEAT-3",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "9b44c5cbac80ebd6692b205b96843c0242240fa156bdea6ab64553d961c4229e"
+    },
+    {
+      "scenarioId": "exact-repeat-4",
+      "kind": "exact-repeat",
+      "shouldAutoGrant": true,
+      "modelRecommendation": null,
+      "auditorDecision": null,
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-FIR-REPEAT-4",
+          "caseId": "CASE-REPEAT-4",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "9b44c5cbac80ebd6692b205b96843c0242240fa156bdea6ab64553d961c4229e"
+    },
+    {
+      "scenarioId": "exact-repeat-5",
+      "kind": "exact-repeat",
+      "shouldAutoGrant": true,
+      "modelRecommendation": null,
+      "auditorDecision": null,
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-FIR-REPEAT-5",
+          "caseId": "CASE-REPEAT-5",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "9b44c5cbac80ebd6692b205b96843c0242240fa156bdea6ab64553d961c4229e"
+    },
+    {
+      "scenarioId": "near-miss-subject.username",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.username",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.other",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-USERNAME",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.other",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "f31a61c537c2a2f5258a4217f8608794bc6469d7b3b26426908bc2b74baa76d6"
+    },
+    {
+      "scenarioId": "near-miss-subject.mspId",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.mspId",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "ForensicsMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-MSPID",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "ForensicsMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "1d224bbbbadf1a7a4f56a041d9164c0ce6a798d8303f1e15e35d2aa6a7977e4c"
+    },
+    {
+      "scenarioId": "near-miss-subject.organization",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.organization",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "forensics",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-ORGANIZATION",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "forensics",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "51a663d23027f5b5110a474946279be377a17ae02a79baa8c5bad66195f9ebfb"
+    },
+    {
+      "scenarioId": "near-miss-subject.role",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.role",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "sub-inspector",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-ROLE",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "sub-inspector",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "ccbbb397d68b07aef7110376c985695296f72e0f1746175ca45253aed245a160"
+    },
+    {
+      "scenarioId": "near-miss-subject.rank",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.rank",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "2",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-RANK",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "2",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "ad354fa1fb6d0e31e6b218570f17f1c794637713e13e2cf1aea45c183e7c29f4"
+    },
+    {
+      "scenarioId": "near-miss-subject.station",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.station",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-East",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-STATION",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-East",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "0bfca1ad2742622fc56a713479ae8c44bf68b0744719611680f753f04f09d099"
+    },
+    {
+      "scenarioId": "near-miss-subject.jurisdiction",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.jurisdiction",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-south",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-JURISDICTION",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-south",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "a7c464b341887b207c7f86b5602ccdbb798ff385eb40af975c9967eebed25b9b"
+    },
+    {
+      "scenarioId": "near-miss-subject.clearance",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.clearance",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-CLEARANCE",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "06ba46048f9a67967a60ff1c00ed2765c0281b144cbea734c9dbb9fead3270ae"
+    },
+    {
+      "scenarioId": "near-miss-subject.credentialStatus",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.credentialStatus",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "suspended",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-CREDENTIALSTATUS",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "suspended",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "53f27394d9a5d45ab8323382bd61b06d50a8a7caa8c32e8a6d0d433748b01b2f"
+    },
+    {
+      "scenarioId": "near-miss-subject.assignedToRequestedCase",
+      "kind": "one-field-near-miss",
+      "changedDimension": "subject.assignedToRequestedCase",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": "CASE-SEED"
+        },
+        "record": {
+          "recordId": "REC-NEAR-SUBJECT-ASSIGNEDTOREQUESTEDCASE",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": true
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "3dad9e4c8fd36e72137fae076198777584a71d1d7acad0caa397a8753d5abfbd"
+    },
+    {
+      "scenarioId": "near-miss-request.action",
+      "kind": "one-field-near-miss",
+      "changedDimension": "request.action",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-REQUEST-ACTION",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "export",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "export",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "d4c006e825004d8cb187d8b16871a863be107f2277e9765d02eed863b08fd518"
+    },
+    {
+      "scenarioId": "near-miss-request.purpose",
+      "kind": "one-field-near-miss",
+      "changedDimension": "request.purpose",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-REQUEST-PURPOSE",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "audit-review"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "audit-review"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "40d7f9044a993b25da48108beb4de0ee1378f688d13c5afb22e6076ac5aa1ec8"
+    },
+    {
+      "scenarioId": "near-miss-record.recordType",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.recordType",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-RECORDTYPE",
+          "caseId": "CASE-SEED",
+          "recordType": "case-diary",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "case-diary",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "2eedd280df1837226dddd461c88375885d3af7c86e53e225a854d37045fb5ed7"
+    },
+    {
+      "scenarioId": "near-miss-record.sensitivityLevel",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.sensitivityLevel",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-SENSITIVITYLEVEL",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "high",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "high",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "5fb29313ea6ac68ad2708e121cd8e940cd3237d5e96cb5337b8a74b210e9dcee"
+    },
+    {
+      "scenarioId": "near-miss-record.jurisdiction",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.jurisdiction",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-JURISDICTION",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "248109d5ccc2b919b5454a951b88188866c072762536de62c8b9b2ad0adfc914"
+    },
+    {
+      "scenarioId": "near-miss-record.owningAgency",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.owningAgency",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-OWNINGAGENCY",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "prosecution",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "prosecution",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "e28b48a5e18b3c1e29fa5f375434f2e9f87fbbca4c7475a37aa63f94582574ea"
+    },
+    {
+      "scenarioId": "near-miss-record.owningStation",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.owningStation",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-OWNINGSTATION",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-East",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-East",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "3c11dd0f71cf7dab9ad6905629348fa3b82d56e8666ae50b3e7b014a0b238681"
+    },
+    {
+      "scenarioId": "near-miss-record.sealed",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.sealed",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-SEALED",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": true,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": true,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "91d6e0f99b9e3e9ebcc05501aedc5548446721a68f3504662fc8ab81f3b76ec0"
+    },
+    {
+      "scenarioId": "near-miss-record.juvenileFlag",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.juvenileFlag",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-JUVENILEFLAG",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": true,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": true,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "2b3883ed4b4cf4a3737957074ded26aecda54ce29d5ea40180afe4fb59f53ccd"
+    },
+    {
+      "scenarioId": "near-miss-record.witnessFlag",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.witnessFlag",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-WITNESSFLAG",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": true,
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": true,
+          "victimProtectionFlag": false
+        }
+      },
+      "fingerprintHash": "ca06d29190b8b9a985a3addd36b44bd8a8dc82495606096aae5e8d5059b20e1f"
+    },
+    {
+      "scenarioId": "near-miss-record.victimProtectionFlag",
+      "kind": "one-field-near-miss",
+      "changedDimension": "record.victimProtectionFlag",
+      "shouldAutoGrant": false,
+      "modelRecommendation": "deny",
+      "auditorDecision": "force-deny",
+      "input": {
+        "governed": {
+          "enrollmentId": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "caseAssignments": ""
+        },
+        "record": {
+          "recordId": "REC-NEAR-RECORD-VICTIMPROTECTIONFLAG",
+          "caseId": "CASE-SEED",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": true
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        }
+      },
+      "fingerprint": {
+        "fingerprintVersion": "dias-request-fingerprint-v1",
+        "subject": {
+          "username": "const.verma",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "medium",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "record": {
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": true
+        }
+      },
+      "fingerprintHash": "4200f1824ff94cadc334a7f2ffa36231edfa756ce7c643161d660c53271d3ec1"
+    }
+  ]
+}

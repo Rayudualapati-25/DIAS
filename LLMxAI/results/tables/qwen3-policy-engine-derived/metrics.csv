@@ -1,0 +1,7 @@
+label,n,schemaValidRate,decisionAccuracy,decisionMacroF1,reasonAccuracy,reasonMacroF1,jointDecisionReasonAccuracy,falseAllowRateAmongNonAllow,falseAllowCount,expectedNonAllowCount,adversarialJointAccuracy,medianLatencyMs,p95LatencyMs
+"Untuned, no rules (Ollama)",60,1,0.4833,0.4621,0.4167,0.3963,0.4167,0.4,20,50,0.2083,2939.21,3154.33
+"Untuned, rules prompt (Ollama)",60,1,0.6833,0.6016,0.4667,0.4818,0.4667,0.14,7,50,0.2083,3014.99,3292.44
+"Untuned, no rules (prod decoding)",60,0,0,0,0,0,0,0,0,50,0,2150.11,2311.46
+"Untuned, rules prompt (prod decoding)",60,0,0,0,0,0,0,0,0,50,0,1851.27,2061.78
+Fine-tuned V3 (proposed),60,1,0.8667,0.8403,0.8167,0.8201,0.8167,0,0,50,0.7083,2302.03,2521.73
+"Fine-tuned V3, no subject attributes",60,1,0.75,0.6394,0.5167,0.4651,0.5167,0.04,2,50,0.5417,2173.24,2387.65

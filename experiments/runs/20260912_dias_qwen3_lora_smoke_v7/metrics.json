@@ -1,0 +1,38 @@
+{
+  "artifactType": "dias-v7-training-smoke-metrics",
+  "status": "passed",
+  "seed": 42,
+  "baseModel": "mlx-community/Qwen3-14B-4bit",
+  "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "freshBase": true,
+  "resumeAdapterUsed": false,
+  "dataset": "dias-recommendation-dataset-v2-binary",
+  "iterations": 12,
+  "gradientAccumulationSteps": 4,
+  "optimizerUpdates": 3,
+  "maxSequenceLength": 2560,
+  "knownDatasetMaximumTokens": 2150,
+  "truncatedExamples": 0,
+  "initialValidationLoss": 1.272,
+  "finalValidationLoss": 0.826,
+  "validationLossRelativeChange": -0.3506,
+  "reportedTrainingLoss": {
+    "iteration4": 1.382,
+    "iteration8": 1.300,
+    "iteration12": 0.794
+  },
+  "iterationThroughputRangePerSecond": [0.050, 0.055],
+  "peakMemoryGb": 13.000,
+  "durationSeconds": 272.677,
+  "checkpointSaved": true,
+  "adapterSha256": "b5f4670f9d863c9864e8fed7e829265855117e2dbe983eb886858044f4651a15",
+  "acceptanceChecks": {
+    "loadedFreshBase": true,
+    "loadedDataset": true,
+    "finiteLoss": true,
+    "noOutOfMemory": true,
+    "minimumOptimizerUpdatesCompleted": true,
+    "checkpointCreated": true
+  },
+  "claimBoundary": "Engineering smoke test only; no held-out accuracy or convergence claim."
+}

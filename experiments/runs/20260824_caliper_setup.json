@@ -1,0 +1,85 @@
+{
+  "runType": "caliper-setup-validation",
+  "timestampLocal": "2026-08-24T12:40:01+05:30",
+  "objective": "Prepare an isolated Hyperledger Caliper controller for user-operated manual testing of the live SEBA-XAI Fabric network",
+  "executionBoundary": {
+    "caliperWorkloadRun": false,
+    "transactionsSubmittedByCaliper": 0,
+    "performanceResultsProduced": false,
+    "reason": "The user requested setup only and will start testing manually."
+  },
+  "environment": {
+    "node": "v22.20.0",
+    "npmSelectedByMakeTarget": "11.5.1",
+    "fabricPeer": "v2.5.16",
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "distribution": "single-host local Docker/Colima research prototype"
+  },
+  "dependencies": {
+    "@hyperledger/caliper-cli": "0.7.1",
+    "@hyperledger/caliper-fabric": "0.7.1",
+    "@hyperledger/fabric-gateway": "1.7.1",
+    "@grpc/grpc-js": "1.14.4"
+  },
+  "configuredRounds": [
+    {
+      "label": "record-read-connectivity",
+      "durationSeconds": 10,
+      "offeredRateTps": 1,
+      "transaction": "RecordContract:GetRecord",
+      "mode": "evaluate"
+    },
+    {
+      "label": "contextual-access-connectivity",
+      "durationSeconds": 15,
+      "offeredRateTps": 1,
+      "transaction": "AccessContract:RequestAccess",
+      "mode": "submit"
+    }
+  ],
+  "verification": {
+    "requiredContainersRunning": "passed",
+    "networkConfigurationGenerated": "passed",
+    "javascriptSyntax": "passed",
+    "caliperVersion": "passed",
+    "workloadContractNames": "passed",
+    "smokeConfigurationSyntax": "passed",
+    "caliperReportsCreated": 0
+  },
+  "postSetupCorrection": {
+    "trigger": "Two initial user-operated runs exposed a semantic transaction-monitor configuration error that static parsing did not detect.",
+    "change": "Removed the optional transaction logging monitor and made the run wrapper require zero failed rounds, an HTML report, a parseable performance summary, and zero failed Fabric transactions for smoke-test completion.",
+    "benchmarkRerunByAssistant": false
+  },
+  "dependencyIntegrityCorrection": {
+    "observed": "The earlier Caliper binding command rewrote the installed @grpc/grpc-js package contents to 1.13.1 even though the lockfile resolved 1.14.4.",
+    "change": "A clean pinned npm ci restored 1.14.4, the binding is now declarative through package dependencies, and installation validation reads the actual installed package files.",
+    "verifiedActualGrpcVersion": "1.14.4"
+  },
+  "dependencyAudit": {
+    "command": "npm audit --omit=dev",
+    "total": 14,
+    "low": 5,
+    "moderate": 2,
+    "high": 7,
+    "critical": 0,
+    "nonBreakingAutomaticFixAvailable": false,
+    "forcedFixApplied": false
+  },
+  "sha256": {
+    "packageLock": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "artifacts": [
+    "benchmarks/caliper/README.md",
+    "benchmarks/caliper/EXPERIMENT_PLAN.md",
+    "benchmarks/caliper/configs/smoke.yaml",
+    "results/tables/20260824_caliper_setup_audit.txt"
+  ],
+  "limitations": [
+    "The prepared smoke test validates connectivity only and is not a formal benchmark.",
+    "Single-host measurements cannot establish distributed or multi-site scalability.",
+    "A valid paper comparison still requires matched baseline, proposed-method, and ablation runs.",
+    "Caliper 0.7.1 retains known transitive dependency findings documented in the audit artifact."
+  ]
+}

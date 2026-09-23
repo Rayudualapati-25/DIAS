@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "2026-08-24T15-50-35-278Z_caliper_latency_pilot_suite",
+  "status": "completed",
+  "startedAtUtc": "2026-08-24T15:50:35.281Z",
+  "interpretation": "Single live-network pilot; not repeated paper evidence.",
+  "controls": {
+    "execution": "strictly sequential; overlap guard and exclusive suite lock",
+    "ledgerResetBetweenPoints": false,
+    "warmupsExcludedFromAxes": true,
+    "resumedFromSuite": {
+      "path": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite/suite-manifest.json",
+      "suiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    }
+  },
+  "runs": [
+    {
+      "key": "clients1",
+      "label": "latency-clients-1",
+      "config": "configs/latency-clients-1.yaml",
+      "runId": "2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+      "runDirectory": "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "clients2",
+      "label": "latency-clients-2",
+      "config": "configs/latency-clients-2.yaml",
+      "runId": "2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+      "runDirectory": "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "clients4",
+      "label": "latency-clients-4",
+      "config": "configs/latency-clients-4.yaml",
+      "runId": "2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+      "runDirectory": "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "clients8",
+      "label": "latency-clients-8",
+      "config": "configs/latency-clients-8.yaml",
+      "runId": "2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+      "runDirectory": "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "writeTps",
+      "label": "latency-write-tps",
+      "config": "configs/latency-write-tps.yaml",
+      "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+      "runDirectory": "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "queryCount",
+      "label": "latency-query-count",
+      "config": "configs/latency-query-count.yaml",
+      "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+      "runDirectory": "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "policyPath",
+      "label": "latency-policy-path",
+      "config": "configs/latency-policy-path.yaml",
+      "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+      "runDirectory": "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+      "reusedFromSuiteId": "2026-08-24T15-34-51-002Z_caliper_latency_pilot_suite"
+    },
+    {
+      "key": "stability",
+      "label": "latency-stability",
+      "config": "configs/latency-stability-short.yaml",
+      "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+      "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability"
+    }
+  ],
+  "axes": [
+    {
+      "id": "concurrent_clients_vs_lookup_latency",
+      "title": "Record Lookup Latency vs Concurrent Caliper Clients",
+      "xAxis": "Concurrent Caliper clients (one request/s each)",
+      "points": [
+        {
+          "runId": "2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+          "runDirectory": "experiments/runs/2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+          "roundLabel": "clients-1-read",
+          "xValue": 1,
+          "xLabel": "1"
+        },
+        {
+          "runId": "2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+          "runDirectory": "experiments/runs/2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+          "roundLabel": "clients-2-read",
+          "xValue": 2,
+          "xLabel": "2"
+        },
+        {
+          "runId": "2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+          "runDirectory": "experiments/runs/2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+          "roundLabel": "clients-4-read",
+          "xValue": 4,
+          "xLabel": "4"
+        },
+        {
+          "runId": "2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+          "runDirectory": "experiments/runs/2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+          "roundLabel": "clients-8-read",
+          "xValue": 8,
+          "xLabel": "8"
+        }
+      ]
+    },
+    {
+      "id": "offered_tps_vs_write_latency",
+      "title": "Access-Write Latency vs Offered Transaction Rate",
+      "xAxis": "Offered transaction rate (TPS)",
+      "points": [
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runDirectory": "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-1",
+          "xValue": 1,
+          "xLabel": "1"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runDirectory": "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-2",
+          "xValue": 2,
+          "xLabel": "2"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runDirectory": "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-5",
+          "xValue": 5,
+          "xLabel": "5"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runDirectory": "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-10",
+          "xValue": 10,
+          "xLabel": "10"
+        },
+        {
+          "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "runDirectory": "experiments/runs/2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+          "roundLabel": "write-tps-20",
+          "xValue": 20,
+          "xLabel": "20"
+        }
+      ]
+    },
+    {
+      "id": "query_result_count_vs_latency",
+      "title": "Record Query Latency vs Results Returned",
+      "xAxis": "Records returned by verified query",
+      "points": [
+        {
+          "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "runDirectory": "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "roundLabel": "query-count-1",
+          "xValue": 1,
+          "xLabel": "1"
+        },
+        {
+          "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "runDirectory": "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "roundLabel": "query-count-2",
+          "xValue": 2,
+          "xLabel": "2"
+        },
+        {
+          "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "runDirectory": "experiments/runs/2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+          "roundLabel": "query-count-3",
+          "xValue": 3,
+          "xLabel": "3"
+        }
+      ]
+    },
+    {
+      "id": "policy_path_vs_latency",
+      "title": "Access-Write Latency by Verified Policy Path",
+      "xAxis": "Policy path",
+      "categorical": true,
+      "points": [
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runDirectory": "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule1-credential-revoked",
+          "xValue": 1,
+          "xLabel": "Credential revoked"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runDirectory": "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule3-rbac",
+          "xValue": 3,
+          "xLabel": "RBAC deny"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runDirectory": "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule6-cross-jurisdiction",
+          "xValue": 6,
+          "xLabel": "Cross-jurisdiction"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runDirectory": "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-rule7-not-assigned",
+          "xValue": 7,
+          "xLabel": "Not assigned"
+        },
+        {
+          "runId": "2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "runDirectory": "experiments/runs/2026-08-24T15-38-02-617Z_caliper_latency-policy-path",
+          "roundLabel": "policy-full-allow",
+          "xValue": 8,
+          "xLabel": "Full allow"
+        }
+      ]
+    },
+    {
+      "id": "elapsed_time_vs_latency",
+      "title": "Access-Write Latency During the Stability Pilot",
+      "xAxis": "Elapsed measurement time (minutes; bin midpoint)",
+      "points": [
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-01",
+          "xValue": 0.25,
+          "xLabel": "0.25"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-02",
+          "xValue": 0.75,
+          "xLabel": "0.75"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-03",
+          "xValue": 1.25,
+          "xLabel": "1.25"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-04",
+          "xValue": 1.75,
+          "xLabel": "1.75"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-05",
+          "xValue": 2.25,
+          "xLabel": "2.25"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-06",
+          "xValue": 2.75,
+          "xLabel": "2.75"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-07",
+          "xValue": 3.25,
+          "xLabel": "3.25"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-08",
+          "xValue": 3.75,
+          "xLabel": "3.75"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-09",
+          "xValue": 4.25,
+          "xLabel": "4.25"
+        },
+        {
+          "runId": "2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "runDirectory": "experiments/runs/2026-08-24T15-50-35-685Z_caliper_latency-stability",
+          "roundLabel": "stability-bin-10",
+          "xValue": 4.75,
+          "xLabel": "4.75"
+        }
+      ]
+    }
+  ],
+  "failureReason": null,
+  "finishedAtUtc": "2026-08-24T15:57:55.877Z"
+}

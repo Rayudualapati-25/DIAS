@@ -1,0 +1,120 @@
+{
+  "generatedAtUtc": "2026-08-24T15:41:56.097578Z",
+  "sourceRuns": [
+    {
+      "runId": "2026-08-24T09-20-06-499Z_caliper_smoke",
+      "benchmarkConfig": "smoke.yaml",
+      "summarySha256": "40fd6210cbb20069c880aa0557a21d5b3325dd53e8eb3a5a494cfa588d89e8ec"
+    },
+    {
+      "runId": "2026-08-24T09-21-50-774Z_caliper_read",
+      "benchmarkConfig": "read-performance.yaml",
+      "summarySha256": "953b75a64435b704b146b04d9475bbee7af0fd88f45937afa58836eb0c8bf872"
+    },
+    {
+      "runId": "2026-08-24T09-24-35-112Z_caliper_write",
+      "benchmarkConfig": "write-performance.yaml",
+      "summarySha256": "aa7865780f8d143c1ad68d17e73afd3f905d5b962a9ebea34374b78cbb46edda"
+    },
+    {
+      "runId": "2026-08-24T09-37-24-587Z_caliper_latency-users-1",
+      "benchmarkConfig": "latency-users-1.yaml",
+      "summarySha256": "41e354b76f8ed2fee34088e6edf9df05a8ef3daa5684dc5b78c57a8123560cc0"
+    },
+    {
+      "runId": "2026-08-24T09-37-36-885Z_caliper_latency-users-2",
+      "benchmarkConfig": "latency-users-2.yaml",
+      "summarySha256": "fd3dc860a1940a1823e9ffe9f12aec1ca64fbaf3a78f423f80ce6946008bb97f"
+    },
+    {
+      "runId": "2026-08-24T09-37-49-241Z_caliper_latency-users-4",
+      "benchmarkConfig": "latency-users-4.yaml",
+      "summarySha256": "fbd80ad2383695b77e86e30dfd00629ffaad8a52f0273ffa6a822f64cb867222"
+    },
+    {
+      "runId": "2026-08-24T09-38-39-449Z_caliper_latency-users-1",
+      "benchmarkConfig": "latency-users-1.yaml",
+      "summarySha256": "727a7bd195869ba3da7842c0add522b44e62f82045f81edd303d10b87164097f"
+    },
+    {
+      "runId": "2026-08-24T09-38-51-376Z_caliper_latency-users-2",
+      "benchmarkConfig": "latency-users-2.yaml",
+      "summarySha256": "c02799b5c76b4cbb3125a9aedf20dcd7ad55a829c221532a638f0461ecaac59a"
+    },
+    {
+      "runId": "2026-08-24T09-39-03-331Z_caliper_latency-users-4",
+      "benchmarkConfig": "latency-users-4.yaml",
+      "summarySha256": "57998ba185f198c9028803f5cbff9fa3030f4772590e38c898856ed8470fb895"
+    },
+    {
+      "runId": "2026-08-24T09-39-15-291Z_caliper_latency-users-8",
+      "benchmarkConfig": "latency-users-8.yaml",
+      "summarySha256": "1ca13fd243b156bfae2ddea05380932b433bfad957ce7a83e9b5a2fe96bfc3a7"
+    },
+    {
+      "runId": "2026-08-24T09-39-27-274Z_caliper_latency-write-tps",
+      "benchmarkConfig": "latency-write-tps.yaml",
+      "summarySha256": "973ae7a83a1b8a2aabaa1d619714a2cf96f2025090517bf3340517387bdd99ac"
+    },
+    {
+      "runId": "2026-08-24T09-48-33-119Z_caliper_latency-clients-1",
+      "benchmarkConfig": "latency-clients-1.yaml",
+      "summarySha256": "35279e780bb7cada9ca6cfb5ae1ab65d23f0ce7960add3e419df21783c2f8463"
+    },
+    {
+      "runId": "2026-08-24T09-49-46-253Z_caliper_latency-clients-2",
+      "benchmarkConfig": "latency-clients-2.yaml",
+      "summarySha256": "9349a9e4f2c5f51f50ab96870eb4d9da2cf45ea5fdec82456d7b491d5a7f2a67"
+    },
+    {
+      "runId": "2026-08-24T09-50-59-422Z_caliper_latency-clients-4",
+      "benchmarkConfig": "latency-clients-4.yaml",
+      "summarySha256": "69d73d1a8342ffa3090e0ad9ebf4e50399ea1c368e826888b5b355642605303d"
+    },
+    {
+      "runId": "2026-08-24T09-52-12-580Z_caliper_latency-clients-8",
+      "benchmarkConfig": "latency-clients-8.yaml",
+      "summarySha256": "61e15a7ccb8ab150f1fbca65b920fc7679819e1973adbefd32fd7b53a431b0a0"
+    },
+    {
+      "runId": "2026-08-24T09-57-03-955Z_caliper_write-verifier-check",
+      "benchmarkConfig": "diagnostic-write-verified.yaml",
+      "summarySha256": "af2878a27d2f9ccb9e1916787abee85f43e7be737cb48e4ebaad4f349ff18cf1"
+    },
+    {
+      "runId": "2026-08-24T09-57-36-116Z_caliper_latency-clients-1",
+      "benchmarkConfig": "latency-clients-1.yaml",
+      "summarySha256": "ebe5fe854d97b7f2ef069888f28ad8035bcc344f9f84b86207ca2db30955e430"
+    },
+    {
+      "runId": "2026-08-24T09-58-49-262Z_caliper_latency-clients-2",
+      "benchmarkConfig": "latency-clients-2.yaml",
+      "summarySha256": "155eb41b08747b4ac7f4f3401cd67ee029a5d4950389926aace8045c0efa7781"
+    },
+    {
+      "runId": "2026-08-24T10-00-02-406Z_caliper_latency-clients-4",
+      "benchmarkConfig": "latency-clients-4.yaml",
+      "summarySha256": "3cfc4dc089c8e3ca30bedb2a0790ad0f50af084c5f709a05f6fe307db1153e58"
+    },
+    {
+      "runId": "2026-08-24T10-01-15-573Z_caliper_latency-clients-8",
+      "benchmarkConfig": "latency-clients-8.yaml",
+      "summarySha256": "f59dcb6c0b1b61691bf1c5f8d453fb8e7b8f8af6370e76ffa65ee3633cf1cf13"
+    },
+    {
+      "runId": "2026-08-24T10-02-28-804Z_caliper_latency-write-tps",
+      "benchmarkConfig": "latency-write-tps.yaml",
+      "summarySha256": "7f3a7c212f2c724c7819f6a8e7ac79d51c5b85c04d671ec834057ce74ff66919"
+    },
+    {
+      "runId": "2026-08-24T15-34-51-409Z_caliper_latency-query-count",
+      "benchmarkConfig": "latency-query-count.yaml",
+      "summarySha256": "6accf126612a37edfa20f2a7d7d429973e549b5248b58c154d1892adaa38709d"
+    }
+  ],
+  "outputs": [
+    "results/plots/caliper/caliper_read-performance.png",
+    "results/plots/caliper/caliper_write-performance.png",
+    "results/plots/caliper/caliper_increasing-load.png"
+  ]
+}

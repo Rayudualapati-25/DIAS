@@ -1,0 +1,6 @@
+Provisioning run: 2026-08-28T04-06-52-462Z_ui_unique_user_provisioning
+Target: 100 distinct synthetic PoliceMSP identities
+FAILED: Error: latuser.001: existing ledger field 'departmentId' does not match
+    at assertMatchingProfile (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/provision-ui-unique-users.js:102:13)
+    at main (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/provision-ui-unique-users.js:146:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)

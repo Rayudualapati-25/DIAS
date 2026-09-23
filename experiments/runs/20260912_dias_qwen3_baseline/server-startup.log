@@ -1,0 +1,20 @@
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/server.py:1723: UserWarning: mlx_lm.server is not recommended for production as it only implements basic security checks.
+  warnings.warn(
+2026-09-12 10:15:03,469 - INFO - Starting httpd at 127.0.0.1 on port 8081...
+2026-09-12 10:15:03,915 - INFO - HTTP Request: GET https://huggingface.co/api/agent-harnesses "HTTP/1.1 200 OK"
+2026-09-12 10:15:04,179 - INFO - HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen3-14B-4bit/revision/main "HTTP/1.1 200 OK"
+Fetching 10 files:   0%|          | 0/10 [00:00<?, ?it/s]Fetching 10 files: 100%|██████████| 10/10 [00:00<00:00, 2402.65it/s]
+2026-09-12 10:16:36,749 - INFO - Prompt Cache: 0 sequences, 0.00 GB
+2026-09-12 10:16:36,749 - INFO - - assistant: 0 sequences, 0.00 GB
+2026-09-12 10:16:36,749 - INFO - - user: 0 sequences, 0.00 GB
+2026-09-12 10:16:36,749 - INFO - - system: 0 sequences, 0.00 GB
+127.0.0.1 - - [12/Sep/2026 10:16:36] "POST /v1/chat/completions HTTP/1.1" 200 -
+2026-09-12 10:16:37,583 - INFO - Prompt processing progress: 243/1897
+2026-09-12 10:16:41,622 - INFO - Prompt processing progress: 1893/1897
+2026-09-12 10:16:41,703 - INFO - Prompt processing progress: 1896/1897
+2026-09-12 10:16:41,822 - INFO - Prompt processing progress: 1897/1897
+2026-09-12 10:16:45,792 - INFO - Prompt Cache: 1 sequences, 0.34 GB
+2026-09-12 10:16:45,792 - INFO - - assistant: 1 sequences, 0.34 GB
+2026-09-12 10:16:45,792 - INFO - - user: 0 sequences, 0.00 GB
+2026-09-12 10:16:45,792 - INFO - - system: 0 sequences, 0.00 GB
+127.0.0.1 - - [12/Sep/2026 10:16:45] "POST /v1/chat/completions HTTP/1.1" 200 -

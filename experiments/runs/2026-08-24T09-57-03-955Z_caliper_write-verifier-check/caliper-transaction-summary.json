@@ -1,0 +1,20 @@
+{
+  "transactions": 6,
+  "rounds": [
+    {
+      "roundLabel": "verified-write-diagnostic",
+      "roundIndex": 0,
+      "count": 6,
+      "successfulTransactions": 6,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 69,
+        "mean": 1092.5,
+        "p50": 1091.5,
+        "p95": 2104.5,
+        "p99": 2113.7,
+        "max": 2116
+      }
+    }
+  ]
+}

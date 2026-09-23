@@ -1,0 +1,15 @@
+id,title,status,checks_passed,checks_total
+R1,"Request log: who requested which record",PASS,5,5
+R2,"LLM recommendation in the backend, not on the ledger",FAIL,4,5
+R3,"Decision log: auditor agrees with an LLM ALLOW",PASS,5,5
+R4,"Decision log: auditor overrides an LLM DENY",PASS,7,7
+R5,"Exact repeat is granted automatically",PASS,4,4
+R6,"Near misses are not reused",PASS,4,4
+R7,"Decision log: auditor agrees with an LLM DENY",PASS,16,16
+R8,"Decision log: auditor overrides an LLM ALLOW",NOT EXERCISED,0,1
+R9,"Revocation and expiry stop reuse",PASS,5,5
+R10,"An auditor cannot decide their own request",PASS,2,2
+R11,"A decision on changed facts is refused",PASS,4,4
+R12,"No LLM recommendation: the auditor still decides",PASS,4,4
+R13,"Application access log: request and decision",PASS,2,2
+R14,"The ledger holds no LLM recommendation, reason, or justification",FAIL,0,13

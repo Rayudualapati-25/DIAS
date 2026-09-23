@@ -1,0 +1,36 @@
+CALIPER FIVE-TEST SUITE VALIDATION
+Date: 2026-08-24
+Scope: Static, dependency, live-prerequisite, and read-only metrics validation.
+No Caliper workload transaction was submitted by the assistant.
+
+Configured pilot inputs (not measured results)
+- Read: 2 workers; 15 s at 2 TPS warm-up; 120 s at 10 TPS measurement.
+- Write: 2 workers; 15 s at 1 TPS warm-up; 120 s at 5 TPS measurement.
+- Increasing load: 4 workers; 60 s each at 1, 2, 5, 10, and 20 TPS.
+- Mixed: 4 workers; 15 s at 2 TPS warm-up; 300 s at 10 TPS measurement; planned 70/30 split.
+- Endurance: 4 workers; 60 s at 2 TPS warm-up; 7,200 s at 5 TPS measurement; planned 70/30 split.
+
+Validation evidence
+- Exact installed package check: passed.
+- Six Caliper YAML parse and invariant checks: passed.
+- JavaScript syntax checks: passed.
+- Caliper HTML summary parsing, phase tagging, and smoke-failure semantics: passed.
+- Mixed schedule check: every complete ten-call cycle per worker contains 7 reads and 3 writes.
+- Docker Compose render check: passed.
+- Pinned Prometheus image manifest availability check: passed; image not pulled or started.
+- Live orderer, five peers, and five CouchDB prerequisite check: passed.
+- Required metric names were present on the six Fabric operations endpoints.
+- Prometheus runtime: not started by the assistant; user-operated step remains.
+- Successful corrected smoke report: not present.
+- Performance HTML reports currently present: 0.
+
+Retained invalid diagnostics
+- experiments/runs/2026-08-24T07-17-54-198Z_caliper_smoke
+- experiments/runs/2026-08-24T07-19-29-888Z_caliper_smoke
+Both report 0 successful rounds, 2 failed rounds, no HTML report, and failure
+before a workload transaction was submitted.
+
+Interpretation boundary
+This file proves only that the five manual tests are configured and their live
+prerequisites were validated. It contains no throughput, latency, transaction,
+CPU, memory, saturation, scalability, stability, baseline, or ablation result.

@@ -1,0 +1,40 @@
+{
+  "runId": "20260910_dias_workflow_comparison",
+  "artifacts": [
+    {
+      "path": "experiments/runs/20260910_dias_workflow_comparison/config.json",
+      "sha256": "d491d309a10399410e0beae179ec0d478314a64968b3485274342a076093a50f",
+      "bytes": 1255
+    },
+    {
+      "path": "experiments/runs/20260910_dias_workflow_comparison/dataset.json",
+      "sha256": "97ec4a916be2a575c1aa61dbc8058ec72130d85d50338505e56df5e3d480f915",
+      "bytes": 59942
+    },
+    {
+      "path": "experiments/runs/20260910_dias_workflow_comparison/metrics.json",
+      "sha256": "455b649c13877ce66888f9ec4ce6db6c9fe9b8392b2d78e20b6814ab18063bd1",
+      "bytes": 11152
+    },
+    {
+      "path": "experiments/runs/20260910_dias_workflow_comparison/event-log.jsonl",
+      "sha256": "9be4b1b5c7e069522ab6e9f7f073cd50cc1d58a9bf510db74351312f4b3469d9",
+      "bytes": 113198
+    },
+    {
+      "path": "results/tables/dias_workflow_comparison.csv",
+      "sha256": "2c0f3f590aa1b4dfdb30ad99489aa228d437fcbd66b4fc971a21a639d965e373",
+      "bytes": 355
+    },
+    {
+      "path": "results/tables/dias_fingerprint_ablation.csv",
+      "sha256": "a9dd971f53f67536ef7f16fdef0096560548fceaf4e6a58d7dd8396de3a00555",
+      "bytes": 1709
+    },
+    {
+      "path": "results/plots/dias_workflow_llm_invocations.svg",
+      "sha256": "fb3ee9203fee5136afb40a299e1176dc83ff07eff6a1c5e08ed98cd204a7bcf4",
+      "bytes": 1284
+    }
+  ]
+}

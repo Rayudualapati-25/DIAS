@@ -1,0 +1,52 @@
+{
+  "runId": "20260910_dias_workflow_comparison",
+  "seed": 20260910,
+  "execution": "offline deterministic workflow replay",
+  "latencyMeasured": false,
+  "modelAccuracyMeasured": false,
+  "variants": [
+    {
+      "variant": "baseline",
+      "ruleCreationEnabled": false,
+      "lookupEnabled": false
+    },
+    {
+      "variant": "proposed",
+      "ruleCreationEnabled": true,
+      "lookupEnabled": true
+    },
+    {
+      "variant": "ablation-rule-creation-off",
+      "ruleCreationEnabled": false,
+      "lookupEnabled": true
+    },
+    {
+      "variant": "ablation-lookup-off",
+      "ruleCreationEnabled": true,
+      "lookupEnabled": false
+    }
+  ],
+  "fingerprintDimensionAblations": [
+    "subject.username",
+    "subject.mspId",
+    "subject.organization",
+    "subject.role",
+    "subject.rank",
+    "subject.station",
+    "subject.jurisdiction",
+    "subject.clearance",
+    "subject.credentialStatus",
+    "subject.assignedToRequestedCase",
+    "request.action",
+    "request.purpose",
+    "record.recordType",
+    "record.sensitivityLevel",
+    "record.jurisdiction",
+    "record.owningAgency",
+    "record.owningStation",
+    "record.sealed",
+    "record.juvenileFlag",
+    "record.witnessFlag",
+    "record.victimProtectionFlag"
+  ]
+}

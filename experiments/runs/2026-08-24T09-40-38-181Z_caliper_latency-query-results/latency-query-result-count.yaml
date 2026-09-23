@@ -1,0 +1,48 @@
+test:
+  name: Latency by query result count
+  description: Short Caliper characterization run for latency-axis graph generation.
+  workers:
+    number: 2
+  rounds:
+    - label: query-results-1
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            caseId: CASE-2026-002
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: query-results-2
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            caseId: CASE-2026-001
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: query-results-3
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            jurisdiction: district-north
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP

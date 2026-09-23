@@ -1,0 +1,23 @@
+EXP03 attempt 2 — hang diagnosis captured 20260907T112737Z
+
+State: process alive, 0% CPU, stuck in part G scenario 2 ('AI listener unavailable').
+Completed: parts A, B/C, D, E (10/10 clean), F (100/100), G scenario 1.
+
+== EXP03 sockets ==
+node    44136 venkatrayudu   11u    IPv4 0x3d1784205491b558       0t0                 TCP 127.0.0.1:63025->127.0.0.1:3001 (CLOSED)
+node    44136 venkatrayudu   15u    IPv4 0x151a976239b32480       0t0                 TCP 127.0.0.1:61288->127.0.0.1:11051 (ESTABLISHED)
+
+== peers (all 6 up: scenario 3 never started) ==
+peer0.ai.example.com
+peer0.audit.example.com
+peer0.court.example.com
+peer0.forensics.example.com
+peer0.police.example.com
+peer0.prosecution.example.com
+
+== duplicate listener started by scenario 2 restore ==
+46999     1   24:13 bash -lc cd backend && nohup node --env-file-if-exists=../.env src/ai/start.js > /tmp/seal-ai.log 2>&1 &
+47000 46999   24:13 node --env-file-if-exists=../.env src/ai/start.js
+
+== pending escalations ==
+1 (from scenario 2 request, which WAS decided because the pkill target does not exist)

@@ -1,0 +1,7 @@
+set,model,examples,schema_valid_rate,decision_accuracy,balanced_accuracy,macro_f1,false_allow_count,false_allow_rate,false_deny_count,reason_code_accuracy,latency_p95_ms
+test-adversarial,untuned-qwen3-14b,389,0.856041,0.564565,0.531035,0.429558,4,0.022346,141,0.264264,11793.5
+test-decision-balanced,untuned-qwen3-14b,600,0.923333,0.606498,0.602737,0.550197,14,0.05,204,0.366426,9488.5
+test-multi-rule,untuned-qwen3-14b,370,0.951351,1,,,0,0,0,0.542614,10287.6
+test-ood-paraphrase,untuned-qwen3-14b,400,0.9325,0.643432,0.634539,0.620334,28,0.14433,105,0.436997,11487.9
+test-reason-balanced,untuned-qwen3-14b,540,0.942593,0.880157,0.597257,0.616665,19,0.04185,42,0.479371,9147
+validation-balanced,untuned-qwen3-14b,400,0.925,0.581081,0.576912,0.50507,7,0.037433,148,0.359459,13376.7

@@ -1,0 +1,12 @@
+{
+  "name": "dias-policies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DIAS governance policy bundle, its loader, and the OFFLINE reference oracle used only for dataset labelling, validation and evaluation.",
+  "scripts": {
+    "test": "node --test test/bundle.test.js test/referencePolicyOracle.test.js test/policyPackage.test.js",
+    "derive:check": "node tools/derive-governance-policy-v1.js --check",
+    "spec": "node tools/render-policy-spec.js"
+  },
+  "license": "Apache-2.0"
+}

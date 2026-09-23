@@ -1,0 +1,54 @@
+{
+  "artifactType": "dias-scope-ablation",
+  "generatedAtUtc": "2026-09-16T16:59:39.177Z",
+  "seed": 20260912,
+  "method": "Both scope designs replay one identical request stream with identical model labels and identical auditor behaviour. Only the scope key differs, so every difference below is attributable to the scope design.",
+  "stream": {
+    "distinctCases": 60,
+    "siblingsPerCase": 2,
+    "repeats": 3,
+    "requests": 720,
+    "distinctRecords": 180,
+    "siblingNote": "Each case has 2 sibling record(s): a different record and case with identical governed properties, which is the situation the scope design decides."
+  },
+  "arms": {
+    "exact-record": {
+      "requests": 720,
+      "modelInvocations": 549,
+      "auditorReviews": 549,
+      "authorizationsCreated": 57,
+      "automaticGrants": 171,
+      "automaticGrantsOnTheApprovedRecord": 171,
+      "automaticGrantsOnADifferentRecord": 0,
+      "recordsPerApproval": {
+        "approvals": 57,
+        "max": 1,
+        "mean": 1,
+        "approvalsReachingMoreThanOneRecord": 0
+      }
+    },
+    "property-fingerprint": {
+      "requests": 720,
+      "modelInvocations": 511,
+      "auditorReviews": 511,
+      "authorizationsCreated": 19,
+      "automaticGrants": 209,
+      "automaticGrantsOnTheApprovedRecord": 57,
+      "automaticGrantsOnADifferentRecord": 152,
+      "recordsPerApproval": {
+        "approvals": 19,
+        "max": 3,
+        "mean": 3,
+        "approvalsReachingMoreThanOneRecord": 19
+      }
+    }
+  },
+  "finding": {
+    "workSaved": "Both designs skip the model and the auditor on a match; the property fingerprint matches at least as often, so it never does more work.",
+    "theCostThatMatters": "How many DISTINCT RECORDS one auditor approval covers. Exact-record: one, by construction. Property fingerprint: every record sharing those governed properties, none of which the auditor saw.",
+    "exactRecordApprovalsReachingAnotherRecord": 0,
+    "propertyApprovalsReachingAnotherRecord": 152
+  },
+  "deployedDesign": "exact-record",
+  "limitation": "A replay over synthetic workflow cases, not a live Fabric measurement. The difference between the designs is CONDITIONAL on records that share governed properties existing at all: with siblings 0 the two arms are identical. This bounds the scope difference; it does not measure how often siblings occur in real traffic, which is unknown."
+}

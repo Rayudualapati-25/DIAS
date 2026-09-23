@@ -1,0 +1,869 @@
+{
+  "chaincode": "diasrecords",
+  "channel": "crimechannel",
+  "modelEndpoint": "http://127.0.0.1:8081/v1",
+  "ranAtUtc": "2026-09-12T05:17:07.526Z",
+  "scenariosRun": 15,
+  "passed": 15,
+  "failed": 0,
+  "results": [
+    {
+      "id": "A",
+      "title": "Model ALLOW + auditor FORCE_ALLOW",
+      "expectation": "grant, no dynamic authorization",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "access outcome is GRANTED",
+          "ok": true,
+          "detail": "GRANTED"
+        },
+        {
+          "name": "basis is the auditor decision",
+          "ok": true,
+          "detail": "AUDITOR_DECISION"
+        },
+        {
+          "name": "no dynamic authorization created",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "auditor decision not marked an override",
+          "ok": true,
+          "detail": "false"
+        },
+        {
+          "name": "lifecycle holds no DYNAMIC_AUTHORIZATION_CREATED",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,POLICY_CONTEXT_ASSEMBLED,LLM_RECOMMENDATION_RECORDED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-1540f95089ec5ae9",
+        "requestTxId": "1540f95089ec5ae944c41676762c41bb3ddb85e44ce2482a6f71be6c2b52d59a",
+        "recommendationTxId": "d610f10a8bc51f8ce8f6d55f0d555c6b13794aa22294725344d9e639d02712cb",
+        "auditorTxId": "7ef034c4d5e751c4af9734ddcb935f70ac008d7780e19dfbdafd1cd8ea457732",
+        "outcomeId": "OUTCOME-7ef034c4d5e751c4",
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "1540f95089ec5ae944c41676762c41bb3ddb85e44ce2482a6f71be6c2b52d59a"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "1540f95089ec5ae944c41676762c41bb3ddb85e44ce2482a6f71be6c2b52d59a"
+          },
+          {
+            "seq": 3,
+            "eventType": "POLICY_CONTEXT_ASSEMBLED",
+            "txId": "d610f10a8bc51f8ce8f6d55f0d555c6b13794aa22294725344d9e639d02712cb"
+          },
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_RECORDED",
+            "txId": "d610f10a8bc51f8ce8f6d55f0d555c6b13794aa22294725344d9e639d02712cb"
+          },
+          {
+            "seq": 5,
+            "eventType": "AUDITOR_DECISION_RECORDED",
+            "txId": "7ef034c4d5e751c4af9734ddcb935f70ac008d7780e19dfbdafd1cd8ea457732"
+          },
+          {
+            "seq": 6,
+            "eventType": "ACCESS_OUTCOME_RECORDED",
+            "txId": "7ef034c4d5e751c4af9734ddcb935f70ac008d7780e19dfbdafd1cd8ea457732"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B",
+      "title": "Model DENY + auditor FORCE_DENY",
+      "expectation": "deny, no dynamic authorization",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "model recommended DENY",
+          "ok": true,
+          "detail": "DENY (CROSS_JURISDICTION)"
+        },
+        {
+          "name": "access outcome is DENIED",
+          "ok": true,
+          "detail": "DENIED"
+        },
+        {
+          "name": "no dynamic authorization created",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "lifecycle holds no DYNAMIC_AUTHORIZATION_CREATED",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,POLICY_CONTEXT_ASSEMBLED,LLM_RECOMMENDATION_RECORDED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-fa91fa1e70c64aa6",
+        "requestTxId": "fa91fa1e70c64aa6144ae78eb81a024f9b2dfa315a844f63f7217f074612b3d8",
+        "auditorTxId": "587a8d8b721f111e83e6825fc73fa6ec4b1d2fa9d0add2e79a68357ebb806fba",
+        "outcomeId": "OUTCOME-587a8d8b721f111e",
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "fa91fa1e70c64aa6144ae78eb81a024f9b2dfa315a844f63f7217f074612b3d8"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "fa91fa1e70c64aa6144ae78eb81a024f9b2dfa315a844f63f7217f074612b3d8"
+          },
+          {
+            "seq": 3,
+            "eventType": "POLICY_CONTEXT_ASSEMBLED",
+            "txId": "9fc0abb81b6c48d1c7d90068bb266a9a8dda0ad6dc4c61c543c288ece78eacc6"
+          },
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_RECORDED",
+            "txId": "9fc0abb81b6c48d1c7d90068bb266a9a8dda0ad6dc4c61c543c288ece78eacc6"
+          },
+          {
+            "seq": 5,
+            "eventType": "AUDITOR_DECISION_RECORDED",
+            "txId": "587a8d8b721f111e83e6825fc73fa6ec4b1d2fa9d0add2e79a68357ebb806fba"
+          },
+          {
+            "seq": 6,
+            "eventType": "ACCESS_OUTCOME_RECORDED",
+            "txId": "587a8d8b721f111e83e6825fc73fa6ec4b1d2fa9d0add2e79a68357ebb806fba"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C",
+      "title": "Model DENY + auditor FORCE_ALLOW",
+      "expectation": "grant and create an exact authorization",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "access outcome is GRANTED",
+          "ok": true,
+          "detail": "GRANTED"
+        },
+        {
+          "name": "dynamic authorization created",
+          "ok": true,
+          "detail": "AUTH-3b16fe4f98b0d8de"
+        },
+        {
+          "name": "decision recorded as an override",
+          "ok": true,
+          "detail": "true"
+        },
+        {
+          "name": "authorization scope is exact-record",
+          "ok": true,
+          "detail": "dias-authorization-scope-exact-record-v1"
+        },
+        {
+          "name": "authorization names the originating request",
+          "ok": true,
+          "detail": "REQ-6a05b62a384b5e59"
+        },
+        {
+          "name": "authorization origin is DENY then FORCE_ALLOW",
+          "ok": true,
+          "detail": "DENY/FORCE_ALLOW"
+        },
+        {
+          "name": "lifecycle records DYNAMIC_AUTHORIZATION_CREATED",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,POLICY_CONTEXT_ASSEMBLED,LLM_RECOMMENDATION_RECORDED,AUDITOR_DECISION_RECORDED,DYNAMIC_AUTHORIZATION_CREATED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-6a05b62a384b5e59",
+        "requestTxId": "6a05b62a384b5e598c253dd89d6668c76509186247e4c06c37e9d630ff754ca8",
+        "auditorTxId": "3b16fe4f98b0d8def2afbab3e927a4e24485f98f61f489b3f2459e50376d5b99",
+        "authorizationId": "AUTH-3b16fe4f98b0d8de",
+        "authorizationScope": {
+          "action": "view",
+          "caseId": "CASE-2026-001",
+          "purpose": "investigation",
+          "recordId": "REC-FIR-001",
+          "scopeVersion": "dias-authorization-scope-exact-record-v1",
+          "stableUserId": "PoliceMSP::insp.singh"
+        },
+        "validUntilUtc": null,
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "6a05b62a384b5e598c253dd89d6668c76509186247e4c06c37e9d630ff754ca8"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "6a05b62a384b5e598c253dd89d6668c76509186247e4c06c37e9d630ff754ca8"
+          },
+          {
+            "seq": 3,
+            "eventType": "POLICY_CONTEXT_ASSEMBLED",
+            "txId": "d0f879d791fd868d769492c9d4fab8ae021bf7e0a0fd03dce88874e29ae698b4"
+          },
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_RECORDED",
+            "txId": "d0f879d791fd868d769492c9d4fab8ae021bf7e0a0fd03dce88874e29ae698b4"
+          },
+          {
+            "seq": 5,
+            "eventType": "AUDITOR_DECISION_RECORDED",
+            "txId": "3b16fe4f98b0d8def2afbab3e927a4e24485f98f61f489b3f2459e50376d5b99"
+          },
+          {
+            "seq": 6,
+            "eventType": "DYNAMIC_AUTHORIZATION_CREATED",
+            "txId": "3b16fe4f98b0d8def2afbab3e927a4e24485f98f61f489b3f2459e50376d5b99"
+          },
+          {
+            "seq": 7,
+            "eventType": "ACCESS_OUTCOME_RECORDED",
+            "txId": "3b16fe4f98b0d8def2afbab3e927a4e24485f98f61f489b3f2459e50376d5b99"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D",
+      "title": "Exact repeat of an authorized request",
+      "expectation": "automatic grant, model and auditor skipped",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "granted without reaching the model",
+          "ok": true,
+          "detail": "granted"
+        },
+        {
+          "name": "processing path is the dynamic authorization",
+          "ok": true,
+          "detail": "dynamic-authorization"
+        },
+        {
+          "name": "model recorded as skipped",
+          "ok": true,
+          "detail": "SKIPPED"
+        },
+        {
+          "name": "auditor recorded as skipped",
+          "ok": true,
+          "detail": "SKIPPED"
+        },
+        {
+          "name": "the matched authorization is the one created in C",
+          "ok": true,
+          "detail": "AUTH-3b16fe4f98b0d8de vs AUTH-3b16fe4f98b0d8de"
+        },
+        {
+          "name": "lifecycle records both skips and the outcome",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,LLM_RECOMMENDATION_SKIPPED,AUDITOR_REVIEW_SKIPPED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "no recommendation was recorded",
+          "ok": true,
+          "detail": "null"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-3f8e621e974920a0",
+        "requestTxId": "3f8e621e974920a0381bc40ee340f7b2cf33213f8f20abbd6313c62a8ea8e3e2",
+        "matchedAuthorizationId": "AUTH-3b16fe4f98b0d8de",
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "3f8e621e974920a0381bc40ee340f7b2cf33213f8f20abbd6313c62a8ea8e3e2"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "3f8e621e974920a0381bc40ee340f7b2cf33213f8f20abbd6313c62a8ea8e3e2"
+          },
+          {
+            "seq": 3,
+            "eventType": "LLM_RECOMMENDATION_SKIPPED",
+            "txId": "3f8e621e974920a0381bc40ee340f7b2cf33213f8f20abbd6313c62a8ea8e3e2"
+          },
+          {
+            "seq": 4,
+            "eventType": "AUDITOR_REVIEW_SKIPPED",
+            "txId": "3f8e621e974920a0381bc40ee340f7b2cf33213f8f20abbd6313c62a8ea8e3e2"
+          },
+          {
+            "seq": 5,
+            "eventType": "ACCESS_OUTCOME_RECORDED",
+            "txId": "3f8e621e974920a0381bc40ee340f7b2cf33213f8f20abbd6313c62a8ea8e3e2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E",
+      "title": "Near misses",
+      "expectation": "no near miss reuses the authorization",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "different record does not reuse the authorization",
+          "ok": true,
+          "detail": "outcome=NO_AUTHORIZATION matched=false"
+        },
+        {
+          "name": "different action does not reuse the authorization",
+          "ok": true,
+          "detail": "outcome=NO_AUTHORIZATION matched=false"
+        },
+        {
+          "name": "different purpose does not reuse the authorization",
+          "ok": true,
+          "detail": "outcome=NO_AUTHORIZATION matched=false"
+        },
+        {
+          "name": "different user does not reuse the authorization",
+          "ok": true,
+          "detail": "outcome=NO_AUTHORIZATION matched=false"
+        }
+      ],
+      "evidence": {
+        "variants": [
+          {
+            "variant": "different record",
+            "requestId": "REQ-392eb3f780a6f504",
+            "txId": "392eb3f780a6f5042f3c96b1afdc01d989fba288ab4cc7bd157a60db226a14d1",
+            "status": "awaiting-auditor",
+            "checkOutcome": "NO_AUTHORIZATION",
+            "scopeHash": "2fe8a3d96ea2eb814981614e9f9edde901f77fd777c17ab2d391ea682d29f8e6"
+          },
+          {
+            "variant": "different action",
+            "requestId": "REQ-c866b1baee1497f9",
+            "txId": "c866b1baee1497f9910afea02bb45636cec100420434bd5aaf0aaa0b76ad84bf",
+            "status": "awaiting-auditor",
+            "checkOutcome": "NO_AUTHORIZATION",
+            "scopeHash": "b6eb0ad978cd387a9e28817823b1df1e7e79e98c6721d4c9e8bfe91132ce1054"
+          },
+          {
+            "variant": "different purpose",
+            "requestId": "REQ-f488719b881b1182",
+            "txId": "f488719b881b118227e91a2aea3bfb829ff511a29b8d71e398160d0ff0ff89dd",
+            "status": "awaiting-auditor",
+            "checkOutcome": "NO_AUTHORIZATION",
+            "scopeHash": "327876771394e78e9204faf23b6078427c855bf2a44fcf764889de58afb57e58"
+          },
+          {
+            "variant": "different user",
+            "requestId": "REQ-d1375d42d208024e",
+            "txId": "d1375d42d208024e2626373dc19813061582d516f20af8236fd7182ab2edfcb5",
+            "status": "awaiting-auditor",
+            "checkOutcome": "NO_AUTHORIZATION",
+            "scopeHash": "8416477a2b45712539b9af7088c393b9b81e024da4648be7226b900752d6880e"
+          }
+        ]
+      }
+    },
+    {
+      "id": "F",
+      "title": "Revocation",
+      "expectation": "a revoked authorization stops automatic reuse",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "authorization status is revoked",
+          "ok": true,
+          "detail": "revoked"
+        },
+        {
+          "name": "revocation carries a reason",
+          "ok": true,
+          "detail": "Joint enquiry concluded; standing access withdrawn by the auditor."
+        },
+        {
+          "name": "revocation names who did it and when",
+          "ok": true,
+          "detail": "sp.north at 2026-09-12T05:11:46.418Z"
+        },
+        {
+          "name": "the repeat request was not granted automatically",
+          "ok": true,
+          "detail": "llm-auditor"
+        },
+        {
+          "name": "the check reports REVOKED",
+          "ok": true,
+          "detail": "REVOKED"
+        },
+        {
+          "name": "the repeat request reached the auditor queue",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        }
+      ],
+      "evidence": {
+        "authorizationId": "AUTH-3b16fe4f98b0d8de",
+        "revocationTxId": "e742270377122a65b3c70c6b7722e59e650cb464fdec67e216efb81b0985d6b8",
+        "revokedBy": {
+          "username": "sp.north",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2"
+        },
+        "revocationReason": "Joint enquiry concluded; standing access withdrawn by the auditor.",
+        "repeatRequestId": "REQ-20823cf7e644fb8e",
+        "repeatTxId": "20823cf7e644fb8ef3bb94dd8f29adcb55529a3087e1efb514e3e1fe48250d85",
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "20823cf7e644fb8ef3bb94dd8f29adcb55529a3087e1efb514e3e1fe48250d85"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "20823cf7e644fb8ef3bb94dd8f29adcb55529a3087e1efb514e3e1fe48250d85"
+          },
+          {
+            "seq": 3,
+            "eventType": "POLICY_CONTEXT_ASSEMBLED",
+            "txId": "d6d52f522442672f85c79b094db3b23ca851aea471ab77b46519e8eeddf028b5"
+          },
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_RECORDED",
+            "txId": "d6d52f522442672f85c79b094db3b23ca851aea471ab77b46519e8eeddf028b5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "G",
+      "title": "Expiry",
+      "expectation": "an expired authorization stops automatic reuse",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "the window outlasted the setup",
+          "ok": true,
+          "detail": "165 s left after creation"
+        },
+        {
+          "name": "before expiry the authorization still grants automatically",
+          "ok": true,
+          "detail": "dynamic-authorization"
+        },
+        {
+          "name": "after expiry the request is not granted automatically",
+          "ok": true,
+          "detail": "llm-auditor"
+        },
+        {
+          "name": "the check reports EXPIRED",
+          "ok": true,
+          "detail": "EXPIRED"
+        },
+        {
+          "name": "the authorization state moved to expired",
+          "ok": true,
+          "detail": "expired"
+        },
+        {
+          "name": "an expiry lifecycle event was recorded",
+          "ok": true,
+          "detail": "DYNAMIC_AUTHORIZATION_CREATED,DYNAMIC_AUTHORIZATION_EXPIRED"
+        }
+      ],
+      "evidence": {
+        "authorizationId": "AUTH-1313544405bfffab",
+        "validUntilUtc": "2026-09-12T05:15:05.152Z",
+        "secondsLeftAfterCreation": 165,
+        "beforeExpiryRequestId": "REQ-1d4e270066a1bfd3",
+        "beforeExpiryPath": "dynamic-authorization",
+        "afterExpiryRequestId": "REQ-4b78ca83f494afc4",
+        "afterExpiryOutcome": "EXPIRED",
+        "authorizationEvents": [
+          {
+            "seq": 1,
+            "eventType": "DYNAMIC_AUTHORIZATION_CREATED",
+            "txId": "1313544405bfffabc7882a874d28301f0629c22f53d0749afef8f939c4f408ab"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_EXPIRED",
+            "txId": "4b78ca83f494afc46961af620985cdc99e8b25d453bb89ed806f0b205b7933a1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "H",
+      "title": "Model ALLOW + auditor FORCE_DENY",
+      "expectation": "deny, no dynamic authorization",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "access outcome is DENIED",
+          "ok": true,
+          "detail": "DENIED"
+        },
+        {
+          "name": "no dynamic authorization created",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "decision recorded as an override",
+          "ok": true,
+          "detail": "true"
+        },
+        {
+          "name": "lifecycle holds no DYNAMIC_AUTHORIZATION_CREATED",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,POLICY_CONTEXT_ASSEMBLED,LLM_RECOMMENDATION_RECORDED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-2d0905a0e311e6ad",
+        "auditorTxId": "8ad6af65abf79d79bf35103a959085535dfd81c7d4d8f8d9319cca996f9cd2d2",
+        "outcomeId": "OUTCOME-8ad6af65abf79d79"
+      }
+    },
+    {
+      "id": "I",
+      "title": "Model unavailable",
+      "expectation": "auditor can decide; no authorization is created",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "generation status is UNAVAILABLE",
+          "ok": true,
+          "detail": "UNAVAILABLE"
+        },
+        {
+          "name": "no recommendation was invented",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "an error code was recorded",
+          "ok": true,
+          "detail": "server_unreachable"
+        },
+        {
+          "name": "the request still reached the auditor",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        },
+        {
+          "name": "the auditor decision was accepted",
+          "ok": true,
+          "detail": "GRANTED"
+        },
+        {
+          "name": "an override reason was required and recorded",
+          "ok": true,
+          "detail": "override=true"
+        },
+        {
+          "name": "NO dynamic authorization was created",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "lifecycle records LLM_RECOMMENDATION_UNAVAILABLE",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,POLICY_CONTEXT_ASSEMBLED,LLM_RECOMMENDATION_UNAVAILABLE,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-338430204b5c51d7",
+        "generationStatus": "UNAVAILABLE",
+        "errorCode": "server_unreachable",
+        "auditorTxId": "deecf2691eef7bfd4118d482f207ac91ca7b5b534ac4191170d5c437e4ad15ce",
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "338430204b5c51d79a5595dace801bf57ea48f43ba4aec1813f8a588e15bf023"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "338430204b5c51d79a5595dace801bf57ea48f43ba4aec1813f8a588e15bf023"
+          },
+          {
+            "seq": 3,
+            "eventType": "POLICY_CONTEXT_ASSEMBLED",
+            "txId": "48ef8dd08fcc569cf6b093d1fadcc306b327c585d254daaaaef9f2e75fec78e5"
+          },
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_UNAVAILABLE",
+            "txId": "48ef8dd08fcc569cf6b093d1fadcc306b327c585d254daaaaef9f2e75fec78e5"
+          },
+          {
+            "seq": 5,
+            "eventType": "AUDITOR_DECISION_RECORDED",
+            "txId": "deecf2691eef7bfd4118d482f207ac91ca7b5b534ac4191170d5c437e4ad15ce"
+          },
+          {
+            "seq": 6,
+            "eventType": "ACCESS_OUTCOME_RECORDED",
+            "txId": "deecf2691eef7bfd4118d482f207ac91ca7b5b534ac4191170d5c437e4ad15ce"
+          }
+        ]
+      }
+    },
+    {
+      "id": "J",
+      "title": "Invalid model output",
+      "expectation": "INVALID_OUTPUT recorded, request routed to the auditor",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "generation status is INVALID_OUTPUT",
+          "ok": true,
+          "detail": "INVALID_OUTPUT"
+        },
+        {
+          "name": "no recommendation was salvaged from the prose",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "the request is waiting for the auditor",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        },
+        {
+          "name": "the parser failure is recorded in provenance",
+          "ok": true,
+          "detail": "[\"output is not a single JSON object\"]"
+        },
+        {
+          "name": "the raw output hash is committed",
+          "ok": true,
+          "detail": "d8df76be879e1beb05b79c2311ddacefd4c8616725a3fa6c5fed54fc56140d67"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-a7d12bf4aac25fef",
+        "generationStatus": "INVALID_OUTPUT",
+        "parserErrors": [
+          "output is not a single JSON object"
+        ],
+        "lifecycle": [
+          {
+            "seq": 1,
+            "eventType": "ACCESS_REQUEST_SUBMITTED",
+            "txId": "a7d12bf4aac25fef912931e5453752506aba82e523ae9a0062952115da7e76d4"
+          },
+          {
+            "seq": 2,
+            "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+            "txId": "a7d12bf4aac25fef912931e5453752506aba82e523ae9a0062952115da7e76d4"
+          },
+          {
+            "seq": 3,
+            "eventType": "POLICY_CONTEXT_ASSEMBLED",
+            "txId": "22b2cf391b2476a92edae7668d6f22167c5c037466d726ce945ea69b07ce4a1c"
+          },
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_UNAVAILABLE",
+            "txId": "22b2cf391b2476a92edae7668d6f22167c5c037466d726ce945ea69b07ce4a1c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K",
+      "title": "Restart and replay",
+      "expectation": "a request committed while the listener was down is still answered",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "the request was pending before the restart",
+          "ok": true,
+          "detail": "awaiting-recommendation"
+        },
+        {
+          "name": "the restarted listener answered it",
+          "ok": true,
+          "detail": "true"
+        },
+        {
+          "name": "the request reached the auditor",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        },
+        {
+          "name": "exactly one recommendation event exists",
+          "ok": true,
+          "detail": "1: LLM_RECOMMENDATION_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-21ab5ab10821df0e",
+        "statusBefore": "awaiting-recommendation",
+        "statusAfter": "awaiting-auditor",
+        "recommendationEvents": [
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_RECORDED",
+            "txId": "09a48c299ff13ad7e06e40f4e51efeb14dca0f5be329072f4c41b465f9f47fd4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "L",
+      "title": "Concurrent duplicate events",
+      "expectation": "exactly one recommendation is recorded",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "exactly one recommendation event on the ledger",
+          "ok": true,
+          "detail": "1 events"
+        },
+        {
+          "name": "the request advanced exactly once",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        },
+        {
+          "name": "at most one delivery produced a submission",
+          "ok": true,
+          "detail": "1 of 2 deliveries submitted"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-da6c40831afbba92",
+        "deliveryOutcomes": [
+          "rejected: Transaction f0544a3cc0ff8a2b0d12c6b8abd65ea2feb5d7c56bf637f269b3f41791feffad failed to commit with status code 11 (MVCC_READ_CONFLICT)",
+          "submitted"
+        ],
+        "recommendationEvents": [
+          {
+            "seq": 4,
+            "eventType": "LLM_RECOMMENDATION_RECORDED",
+            "txId": "0587bbe65af5c61e725d6659fc331e3b83dbb60abae3ee8ac001ab79c066ff38"
+          }
+        ]
+      }
+    },
+    {
+      "id": "M",
+      "title": "Requester decides their own request",
+      "expectation": "rejected; another auditor can decide",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "the self-decision was rejected",
+          "ok": true,
+          "detail": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: a requester cannot decide their own request"
+        },
+        {
+          "name": "the rejection names the reason",
+          "ok": true,
+          "detail": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: a requester cannot decide their own request"
+        },
+        {
+          "name": "a different auditor could decide it",
+          "ok": true,
+          "detail": "DENIED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-08824c666cc39511",
+        "requester": "sp.north",
+        "decidedBy": "dj.north",
+        "rejection": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: a requester cannot decide their own request"
+      }
+    },
+    {
+      "id": "N",
+      "title": "Unauthorized organisation recommends",
+      "expectation": "rejected for every non-AI identity",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "police/insp.sharma was refused",
+          "ok": true,
+          "detail": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: SubmitLLMRecommendation requires the llm-decider identity of AIOrgMSP"
+        },
+        {
+          "name": "audit/sp.north was refused",
+          "ok": true,
+          "detail": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: SubmitLLMRecommendation requires the llm-decider identity of AIOrgMSP"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-4025ef0376989543",
+        "attempts": [
+          {
+            "who": "police/insp.sharma",
+            "rejected": true,
+            "message": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: SubmitLLMRecommendation requires the llm-decider identity of AIOrgMSP"
+          },
+          {
+            "who": "audit/sp.north",
+            "rejected": true,
+            "message": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, unauthorized: SubmitLLMRecommendation requires the llm-decider identity of AIOrgMSP"
+          }
+        ]
+      }
+    },
+    {
+      "id": "O",
+      "title": "Facts change after the recommendation",
+      "expectation": "the stale decision is refused",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "a recommendation existed before the change",
+          "ok": true,
+          "detail": "OK"
+        },
+        {
+          "name": "the decision on stale facts was refused",
+          "ok": true,
+          "detail": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, verified request facts changed since the request was submitted; submit a new request"
+        },
+        {
+          "name": "the refusal names the changed facts",
+          "ok": true,
+          "detail": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, verified request facts changed since the request was submitted; submit a new request"
+        },
+        {
+          "name": "the request was not settled by the refused decision",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-c52f3cd907da123d",
+        "recordId": "REC-FIR-001",
+        "changeApplied": "RecordContract.SealRecord then UnsealRecord",
+        "rejection": "10 ABORTED: failed to endorse transaction, see attached details for more info | chaincode response 500, verified request facts changed since the request was submitted; submit a new request"
+      }
+    }
+  ]
+}

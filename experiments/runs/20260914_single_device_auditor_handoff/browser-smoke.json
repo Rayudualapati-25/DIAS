@@ -1,0 +1,100 @@
+{
+  "run_id": "20260914_single_device_auditor_handoff",
+  "date": "2026-09-14",
+  "application_url": "http://localhost:3001",
+  "fabric_channel": "crimechannel",
+  "fabric_chaincode": "diasrecords",
+  "actors": {
+    "requester": "io.krishnan",
+    "auditor": "sp.north"
+  },
+  "test_request": {
+    "record_id": "12345",
+    "request_id": "REQ-ce193a12f3eaa10e",
+    "action": "view",
+    "purpose": "investigation",
+    "status_at_end_of_test": "awaiting-auditor",
+    "model_recommendation_status": "UNAVAILABLE",
+    "final_auditor_decision_recorded": false
+  },
+  "fabric_access_event": {
+    "found": true,
+    "transaction_id": "c7a8cc93124eaeb95b0db231facfc28612401e1dc5a040de57a8e9fd44406a68",
+    "action": "access.request",
+    "target": {
+      "recordId": "12345",
+      "requestId": "REQ-ce193a12f3eaa10e",
+      "action": "view",
+      "purpose": "investigation",
+      "processingPath": "llm-auditor"
+    },
+    "outcome": "ok"
+  },
+  "checks": [
+    {
+      "name": "direct_record_lookup_verifies_existence",
+      "result": "pass",
+      "evidence": "REC-FIR-001 rendered from the public index; REC-NOT-FOUND produced one friendly not-found message and no access request."
+    },
+    {
+      "name": "request_creates_correlated_access_event",
+      "result": "pass",
+      "evidence": "Fabric event c7a8cc93124eaeb95b0db231facfc28612401e1dc5a040de57a8e9fd44406a68 contains the record, request, action, purpose and processing path."
+    },
+    {
+      "name": "isolated_auditor_handoff",
+      "result": "pass",
+      "evidence": "The requester flow reported Auditor window opened; independent auditor sign-in deep-linked to REQ-ce193a12f3eaa10e and consumed the one-shot URL parameter."
+    },
+    {
+      "name": "auditor_authority_controls",
+      "result": "pass",
+      "evidence": "The exact-request dialog displayed model status, verified requester/resource facts, Force Allow, Force Deny and mandatory-reason validation."
+    },
+    {
+      "name": "existing_model_recommendations_render",
+      "result": "pass",
+      "evidence": "The queue and review dialog rendered existing genuine ALLOW and DENY recommendations, including DENY request REQ-1017c1ab86159ed8."
+    },
+    {
+      "name": "access_log_target_is_visible",
+      "result": "pass",
+      "evidence": "The table rendered record 12345, request REQ-ce193a12f3eaa10e, action view and purpose investigation in its Record/request column."
+    },
+    {
+      "name": "access_log_refresh",
+      "result": "pass",
+      "evidence": "Refresh added the new read-the-access-log transaction to the table."
+    },
+    {
+      "name": "fabric_integrity_description",
+      "result": "pass",
+      "evidence": "The UI returned intact for 235 DIAS ledger events."
+    },
+    {
+      "name": "dynamic_authorization_history",
+      "result": "pass",
+      "evidence": "Inspect showed both DYNAMIC_AUTHORIZATION_CREATED and DYNAMIC_AUTHORIZATION_REVOKED lifecycle events for AUTH-0fc08dfa8f18d5ca."
+    },
+    {
+      "name": "browser_console",
+      "result": "pass",
+      "evidence": "No warning or error entries were returned after the smoke flow."
+    },
+    {
+      "name": "safe_primary_navigation",
+      "result": "pass",
+      "evidence": "Cases, File a record, Search case files, Evidence, Audit trail, Payload integrity, Departments, Register an officer, Officer directory, Ask the LLM, Auditor review and Access log each opened its expected screen with no visible load failure."
+    },
+    {
+      "name": "fresh_v7_live_inference",
+      "result": "not_run",
+      "evidence": "The V7 final evaluation already owned the model runtime on port 8082 and the application inference endpoint on port 8081 was intentionally not started or redirected."
+    }
+  ],
+  "destructive_controls_not_executed": [
+    "Force Allow",
+    "Force Deny",
+    "Revoke dynamic authorization"
+  ]
+}

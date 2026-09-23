@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="SEBA-XAI" version="24.7.17">
+  <diagram name="SEBA-XAI Overview" id="seba-xai-overview">
+    <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="offband" value="OFF-CHAIN" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 6;fillColor=none;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=11;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1220" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="onband" value="ON-CHAIN&#10;Permissioned blockchain (Hyperledger Fabric) — channel: crimechannel" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F7F7F7;strokeColor=#333333;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="360" width="1220" height="360" as="geometry" />
+        </mxCell>
+
+        <mxCell id="officer" value="&lt;b&gt;Requesting Officer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Police / Forensics /&lt;br&gt;Prosecution / Court&lt;br&gt;&lt;br&gt;X.509 identity carries&lt;br&gt;role · station · jurisdiction&lt;br&gt;· clearance&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=11;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="70" y="80" width="200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="nlq" value="&lt;i&gt;“I need to view the metadata&lt;br&gt;for REC-FIR-001 for investigation.”&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;dashed=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="220" height="46" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aiorg" value="&lt;b&gt;AI Organisation&lt;/b&gt; (AIOrgMSP) — identity: llm-decider" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;verticalAlign=top;align=center;spacingTop=6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="700" y="70" width="530" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="qwen" value="&lt;b&gt;Fine-tuned Qwen3-14B&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;LoRA adapter, 4-bit&lt;br&gt;ALLOW / DENY / ESCALATE&lt;br&gt;+ reason code&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="722" y="112" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="guard" value="&lt;b&gt;Deterministic policy engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;safety guard — disagreement&lt;br&gt;forces human review&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="976" y="112" width="232" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="signer" value="Ed25519 attestation over &amp;#123; hash(query), hash(attributes), decision &amp;#125;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="722" y="212" width="486" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="qg" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;" edge="1" parent="1" source="qwen" target="guard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="peers" value="Endorsing peers — a decision is committed only when a majority of organisations independently verify it" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;dashed=1;verticalAlign=top;align=center;spacingTop=4;fontSize=10;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="70" y="392" width="1160" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="Police" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="424" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="Forensics" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="266" y="424" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="Prosecution" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="442" y="424" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="Court" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="618" y="424" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="Authority&#10;(department heads)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="794" y="424" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" value="&lt;b&gt;AI Organisation&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DDDDDD;strokeColor=#000000;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="970" y="424" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="txa" value="&lt;b&gt;TX A — Access Request&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;signed by the &lt;b&gt;officer&lt;/b&gt;&lt;br&gt;&lt;br&gt;trusted attribute snapshot&lt;br&gt;hash(query)&lt;br&gt;status: REQUESTED&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="90" y="520" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="txb" value="&lt;b&gt;TX B — Access Decision&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;signed by the &lt;b&gt;AI organisation&lt;/b&gt;&lt;br&gt;&lt;br&gt;decision · reason code · counterfactual&lt;br&gt;decisive attributes (XAI artifact, hashed)&lt;br&gt;attestation ↔ registered adapter digest&lt;br&gt;subject = the officer, not the AI&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#000000;strokeWidth=2;fontSize=10;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="500" y="520" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="txc" value="&lt;b&gt;TX C — Metadata Release&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;signed by the &lt;b&gt;officer&lt;/b&gt;&lt;br&gt;&lt;br&gt;released only to the identity&lt;br&gt;named in decision B&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=10;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="520" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pdc" value="Private data collection &lt;i&gt;accessRequestQuery&lt;/i&gt; — the question in full; the public ledger holds only its hash" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;dashed=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="90" y="656" width="710" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ledgerlbl" value="Immutable transaction log — who asked, who decided, who read" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontStyle=2;fontColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="820" y="656" width="390" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="&lt;b&gt;1&lt;/b&gt;  submit request" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;fontSize=10;verticalAlign=bottom;" edge="1" parent="1" source="officer" target="txa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="&lt;b&gt;2&lt;/b&gt;  AccessRequestCreated event" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;fontSize=10;verticalAlign=top;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="txa" target="p6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="420" y="500" /><mxPoint x="1050" y="500" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="&lt;b&gt;3&lt;/b&gt;  read attributes and question&#10;from the ledger" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;fontSize=10;align=right;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="p6" target="aiorg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1244" y="444" /><mxPoint x="1244" y="290" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="&lt;b&gt;4&lt;/b&gt;  decide off-chain, then sign" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;fontSize=10;" edge="1" parent="1" source="guard" target="signer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="&lt;b&gt;5&lt;/b&gt;  submit signed decision&#10;(peers verify attestation and&#10;that the facts have not changed)" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=2;fontSize=10;align=right;" edge="1" parent="1" source="signer" target="txb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="650" y="235" /><mxPoint x="650" y="580" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="&lt;b&gt;6&lt;/b&gt;  ALLOW → gated metadata" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#000000;fontSize=10;" edge="1" parent="1" source="txb" target="txc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="&lt;b&gt;6a&lt;/b&gt;  DENY → request review&#10;&lt;b&gt;6b&lt;/b&gt;  ESCALATE → human decides" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;dashed=1;strokeColor=#000000;fontSize=10;align=center;verticalAlign=bottom;" edge="1" parent="1" source="txb" target="p5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;dashed=1;strokeColor=#666666;" edge="1" parent="1" source="nlq" target="pdc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

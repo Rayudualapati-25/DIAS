@@ -1,0 +1,18 @@
+{
+  "artifactType": "dias-v2-staged-training-directory",
+  "stagedAtUtc": "2026-09-12T08:51:34.678Z",
+  "trainingCount": 400,
+  "validationCount": 400,
+  "testCount": 600,
+  "sources": {
+    "train": "experiments/dias-finetuning/data-v2-binary/subsets/train-400.jsonl",
+    "valid": "experiments/dias-finetuning/data-v2-binary/valid.jsonl",
+    "test": "experiments/dias-finetuning/data-v2-binary/test.jsonl"
+  },
+  "sha256": {
+    "train": "a6befa61e49d2a139338295abdc2d49dcb1c10a557dd808beda0e289c2d0dd95",
+    "valid": "e36e37624602561cc0844d41a0430dd0e01f258f7695b76ad85439a3b603cd0e",
+    "test": "7efcb8b1f0d1fc158e56369e60dc9878af1978e601c28fee0e73984c46623489"
+  },
+  "note": "valid.jsonl is identical across every staged directory, so a learning curve varies the training count alone. test.jsonl is present because MLX-LM expects it; it is NOT read during training or selection."
+}

@@ -1,0 +1,143 @@
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*_sk
+
+# Generated crypto material and channel artifacts
+network/organizations/peerOrganizations/
+network/organizations/ordererOrganizations/
+network/organizations/fabric-ca/
+network/channel-artifacts/
+
+# Bootstrap logs
+.bootstrap-logs/
+
+# Node
+node_modules/
+**/node_modules/
+coverage/
+.nyc_output/
+dist/
+build/
+
+# Wallets and local state (never commit identities)
+backend/wallets/
+backend/data/agency-vault/
+# Off-chain review store: requester justifications and LLM recommendations
+backend/data/dias-reviews/
+.smoke-offchain/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+
+# Python and LaTeX local build cache
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+*.synctex.gz
+*.bak
+*.zip
+
+# Tool-specific logs; experiment logs under experiments/runs are evidence and
+# intentionally remain versionable.
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Generated during ledger inspection
+.blockdemo/
+
+# Generated Caliper connection data (contains paths to ephemeral identities)
+benchmarks/caliper/generated/
+
+# Scratch output from local paper/rendering passes
+tmp/
+tmp_*.txt
+tmp_acm_formatted_text.txt
+output/overleaf/verify-build/
+output/overleaf/**/verify-build*/
+output/overleaf/**/main.pdf
+output/pdf/
+papers/final_paper/build-*/
+papers/final_paper/SEBA_XAI_Final_Paper.pdf
+papers/final_paper/SEBA_XAI_Internship_Final_Report.pdf
+**/rendered/
+*.bak
+.venv-qwen-policy/
+
+# Model weights are identified by digest, not stored in git. A served adapter's
+# SHA-256 is recorded with every off-chain recommendation (DIAS_ADAPTER_HASH), and
+# training runs record their checkpoints' digests under experiments/runs/.
+*.safetensors
+
+# Runtime state of the retired AI-organization listener, kept ignored so an old
+# checkout's leftovers are never committed.
+backend/data/ai-decider-checkpoint.json
+backend/data/dias-recommender-checkpoint.json
+backend/data/listener-supervisor-events.jsonl
+backend/data/listener-supervisor.paused
+
+# measurement-only stage timings (runtime state, not source)
+backend/data/decision-timings.jsonl
+experiments/runs/**/server.log
+
+# Staged MLX-LM training directories are copies of files already tracked
+# under data-v2-binary/ and its subsets/. The staging record keeps their hashes.
+experiments/dias-finetuning/data-v2-binary/staged/*/train.jsonl
+experiments/dias-finetuning/data-v2-binary/staged/*/valid.jsonl
+experiments/dias-finetuning/data-v2-binary/staged/*/test.jsonl
+
+# The manuscript, its review material and the notes about writing it stay on
+# the author's machine until the paper is published. Code, data, experiments
+# and results are public.
+/Proof reading/
+/DIAS latex paper/
+/papers/final_paper/
+/output/overleaf/
+/paper-tests/results/paper/
+/experiments/runs/*paper_rewrite*/
+/experiments/plans/*professor_review*
+/experiments/plans/*rewrite*
+/experiments/plans/*latex*
+/experiments/plans/*manuscript*
+/experiments/plans/*figures*
+/experiments/plans/*svg*
+/experiments/plans/*claim_aligned*
+/reports/iteration/*rewrite*
+/reports/iteration/*latex*
+/reports/iteration/*manuscript*
+/reports/iteration/*paper*
+/reports/iteration/*acm_*
+/reports/iteration/*figure*
+/reports/iteration/*svg*
+/reports/iteration/*claim_aligned*
+/reports/iteration/*results_reference_style*
+/reports/SEBA_Internship_Report_*.docx
+
+# Backend runtime state copied into run snapshots (vault, checkpoints).
+/experiments/runs/*/before/backend/data/
+
+# Publisher copies (IEEE/ACM) of reference papers may not be redistributed;
+# the other reference PDFs are open-access copies. manifest.csv lists sources.
+/papers/reference_library/03_methodology_and_benchmark_papers/AVChain.pdf
+/papers/reference_library/03_methodology_and_benchmark_papers/ReAcct.pdf
+/papers/reference_library/03_methodology_and_benchmark_papers/SecureBlockchainFL.pdf
+/papers/reference_library/03_methodology_and_benchmark_papers/P2PBotnetCloseness.pdf

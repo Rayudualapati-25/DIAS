@@ -1,0 +1,4155 @@
+{
+  "createdAtUtc": "2026-09-04T01:30:30.140Z",
+  "config": {
+    "provider": "openai",
+    "url": "http://127.0.0.1:8080",
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "adapter": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v5-best",
+    "arm": "subject-ablation",
+    "data": "experiments/llm_policy_engine/data_v5/test_balanced_60.jsonl",
+    "output": "experiments/runs/20260904_qwen3_policy_engine_eval_v5/v5_on_v5balanced60_subject_ablation.json",
+    "limit": null,
+    "seed": 42,
+    "testDataSha256": "a5f9561d2fd01c5f83d278484297b7eecd192c869b23910c9a5cdf47d2f80f8f"
+  },
+  "modelInfo": {
+    "baseModel": "mlx-community/Qwen3-14B-4bit",
+    "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+    "adapterFile": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v5-best/adapters.safetensors",
+    "adapterSha256": "38aac463915f760d8c836556a5b65674d55af1683e4c3639b17888fd0e289374",
+    "serving": {
+      "engine": "mlx_lm.server",
+      "temperature": 0,
+      "topP": 1,
+      "maxTokens": 192,
+      "enableThinking": false
+    }
+  },
+  "metrics": {
+    "n": 60,
+    "parseRate": 1,
+    "decisionDisagreementRate": 0.0833,
+    "strictJsonRate": 1,
+    "schemaValidRate": 1,
+    "decisionAccuracy": 0.6167,
+    "decisionMacroF1": 0.5522,
+    "reasonAccuracy": 0.2333,
+    "reasonMacroF1": 0.1905,
+    "jointDecisionReasonAccuracy": 0.2333,
+    "decisiveAttributeExactRate": 0.2333,
+    "parsedActionAccuracy": 0.9833,
+    "parsedPurposeAccuracy": 0.9833,
+    "falseAllowRateAmongNonAllow": 0.2,
+    "falseAllowCount": 10,
+    "expectedNonAllowCount": 50,
+    "adversarialJointAccuracy": 0.1667,
+    "latencyMs": {
+      "median": 2274.46,
+      "p95": 2474.93,
+      "mean": 2277.64
+    },
+    "perDecision": {
+      "allow": {
+        "support": 10,
+        "precision": 0.4444,
+        "recall": 0.8,
+        "f1": 0.5714
+      },
+      "deny": {
+        "support": 35,
+        "precision": 0.6944,
+        "recall": 0.7143,
+        "f1": 0.7042
+      },
+      "escalate": {
+        "support": 15,
+        "precision": 0.6667,
+        "recall": 0.2667,
+        "f1": 0.381
+      }
+    },
+    "perReason": {
+      "CRED_NOT_ACTIVE": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "INVALID_PURPOSE": {
+        "support": 5,
+        "precision": 0.2727,
+        "recall": 0.6,
+        "f1": 0.375
+      },
+      "RBAC_NO_PERMISSION": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "AUDIT_METADATA_ONLY": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "SEALED_RECORD": {
+        "support": 5,
+        "precision": 0.5,
+        "recall": 0.4,
+        "f1": 0.4444
+      },
+      "JUVENILE_PROTECTED": {
+        "support": 5,
+        "precision": 0.5714,
+        "recall": 0.8,
+        "f1": 0.6666
+      },
+      "VICTIM_DATA_NOT_NECESSARY": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "EMERGENCY_CROSS_JURISDICTION": {
+        "support": 5,
+        "precision": 0.6667,
+        "recall": 0.4,
+        "f1": 0.5
+      },
+      "CROSS_JURISDICTION": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "NOT_ASSIGNED": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "INSUFFICIENT_CLEARANCE": {
+        "support": 5,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      },
+      "POLICY_SATISFIED": {
+        "support": 5,
+        "precision": 0.2,
+        "recall": 0.6,
+        "f1": 0.3
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "test-cross_jurisdiction-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-45DB6967F5E7",
+          "recordType": "forensic-report",
+          "caseId": "CASE-9990E189726A",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-north'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-45DB6967F5E7",
+          "recordType": "forensic-report",
+          "caseId": "CASE-9990E189726A",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-9990E189726A' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"escalate\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": false,
+      "purposeCorrect": true,
+      "latencyMs": 3416.3,
+      "promptTokens": 377,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-sealed_record-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-BF7310C27103",
+          "recordType": "chargesheet",
+          "caseId": "CASE-F692F4B0CDDB",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-BF7310C27103",
+          "recordType": "chargesheet",
+          "caseId": "CASE-F692F4B0CDDB",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"export\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2146.03,
+      "promptTokens": 373,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-emergency_cross_jurisdiction-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-40F767C939F4",
+          "recordType": "forensic-report",
+          "caseId": "CASE-487ACD2482C7",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-40F767C939F4",
+          "recordType": "forensic-report",
+          "caseId": "CASE-487ACD2482C7",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2369.09,
+      "promptTokens": 407,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-6282BC2391B9",
+          "recordType": "evidence",
+          "caseId": "CASE-1B330A419605",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-6282BC2391B9",
+          "recordType": "evidence",
+          "caseId": "CASE-1B330A419605",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2284.37,
+      "promptTokens": 388,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "recordId": "REC-62EB45EDEB29",
+          "recordType": "witness-statement",
+          "caseId": "CASE-86963FAFD952",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "recordId": "REC-62EB45EDEB29",
+          "recordType": "witness-statement",
+          "caseId": "CASE-86963FAFD952",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2179.89,
+      "promptTokens": 374,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-30926EE27960",
+          "recordType": "forensic-report",
+          "caseId": "CASE-D9B54AF0A372",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-30926EE27960",
+          "recordType": "forensic-report",
+          "caseId": "CASE-D9B54AF0A372",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-D9B54AF0A372' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2180.86,
+      "promptTokens": 375,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-A29D99A70223",
+          "recordType": "forensic-report",
+          "caseId": "CASE-E3B00EFD865A",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-A29D99A70223",
+          "recordType": "forensic-report",
+          "caseId": "CASE-E3B00EFD865A",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-E3B00EFD865A' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2183.41,
+      "promptTokens": 383,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-0EA1852F4068",
+          "recordType": "chargesheet",
+          "caseId": "CASE-676F308EB6E2",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'high' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-0EA1852F4068",
+          "recordType": "chargesheet",
+          "caseId": "CASE-676F308EB6E2",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-676F308EB6E2' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2186.52,
+      "promptTokens": 386,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-CFB83466BD4A",
+          "recordType": "fir",
+          "caseId": "CASE-3A3F109560DA",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'high' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-CFB83466BD4A",
+          "recordType": "fir",
+          "caseId": "CASE-3A3F109560DA",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2297.55,
+      "promptTokens": 397,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-C222065DAD71",
+          "recordType": "case-diary",
+          "caseId": "CASE-00986E8770EB",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-C222065DAD71",
+          "recordType": "case-diary",
+          "caseId": "CASE-00986E8770EB",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2365.41,
+      "promptTokens": 402,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-165A75B94DDB",
+          "recordType": "chargesheet",
+          "caseId": "CASE-B9B92B5B7135",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-165A75B94DDB",
+          "recordType": "chargesheet",
+          "caseId": "CASE-B9B92B5B7135",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2402.42,
+      "promptTokens": 381,
+      "completionTokens": 54,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-F3EB2D08F7E5",
+          "recordType": "fir",
+          "caseId": "CASE-B80AF6BF475D",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-F3EB2D08F7E5",
+          "recordType": "fir",
+          "caseId": "CASE-B80AF6BF475D",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2286.71,
+      "promptTokens": 386,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-2872732F24FB",
+          "recordType": "case-diary",
+          "caseId": "CASE-749EE28567F8",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-2872732F24FB",
+          "recordType": "case-diary",
+          "caseId": "CASE-749EE28567F8",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2427.35,
+      "promptTokens": 378,
+      "completionTokens": 55,
+      "error": null
+    },
+    {
+      "id": "test-audit_metadata_only-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "AUDIT_METADATA_ONLY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-B083435D6147",
+          "recordType": "chargesheet",
+          "caseId": "CASE-446015344D08",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action"
+        ],
+        "counterfactual": "use the audit-trail query, which excludes protected raw content",
+        "explanation": "Access is denied because oversight roles must use the metadata-only audit trail instead of protected raw content.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-B083435D6147",
+          "recordType": "chargesheet",
+          "caseId": "CASE-446015344D08",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-446015344D08' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2145.87,
+      "promptTokens": 384,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-489C9B99498A",
+          "recordType": "evidence",
+          "caseId": "CASE-9FA72DA8BE0B",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-489C9B99498A",
+          "recordType": "evidence",
+          "caseId": "CASE-9FA72DA8BE0B",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-9FA72DA8BE0B' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2246.48,
+      "promptTokens": 382,
+      "completionTokens": 50,
+      "error": null
+    },
+    {
+      "id": "test-juvenile_protected-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-5DD3270F66CC",
+          "recordType": "court-order",
+          "caseId": "CASE-A17143251995",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-5DD3270F66CC",
+          "recordType": "court-order",
+          "caseId": "CASE-A17143251995",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2276.48,
+      "promptTokens": 372,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-audit_metadata_only-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "AUDIT_METADATA_ONLY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-FED5A4941C9F",
+          "recordType": "forensic-report",
+          "caseId": "CASE-AE892BF04821",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action"
+        ],
+        "counterfactual": "use the audit-trail query, which excludes protected raw content",
+        "explanation": "Access is denied because oversight roles must use the metadata-only audit trail instead of protected raw content.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-FED5A4941C9F",
+          "recordType": "forensic-report",
+          "caseId": "CASE-AE892BF04821",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2152.47,
+      "promptTokens": 397,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-8688711C0E39",
+          "recordType": "chargesheet",
+          "caseId": "CASE-AF407A4A7081",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-8688711C0E39",
+          "recordType": "chargesheet",
+          "caseId": "CASE-AF407A4A7081",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-AF407A4A7081' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "export",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"export\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2244.01,
+      "promptTokens": 395,
+      "completionTokens": 50,
+      "error": null
+    },
+    {
+      "id": "test-audit_metadata_only-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "AUDIT_METADATA_ONLY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-3914E294D83C",
+          "recordType": "chargesheet",
+          "caseId": "CASE-2FE31D4F7FD4",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action"
+        ],
+        "counterfactual": "use the audit-trail query, which excludes protected raw content",
+        "explanation": "Access is denied because oversight roles must use the metadata-only audit trail instead of protected raw content.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-3914E294D83C",
+          "recordType": "chargesheet",
+          "caseId": "CASE-2FE31D4F7FD4",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2282.33,
+      "promptTokens": 385,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-C9038423F9E4",
+          "recordType": "court-order",
+          "caseId": "CASE-312064B0EC19",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-C9038423F9E4",
+          "recordType": "court-order",
+          "caseId": "CASE-312064B0EC19",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-312064B0EC19' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"escalate\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2209.88,
+      "promptTokens": 376,
+      "completionTokens": 49,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-0260D372F9D3",
+          "recordType": "fir",
+          "caseId": "CASE-381D999580B3",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'medium' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-0260D372F9D3",
+          "recordType": "fir",
+          "caseId": "CASE-381D999580B3",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-381D999580B3' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"escalate\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2173.39,
+      "promptTokens": 374,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-sealed_record-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-53A87D8538BE",
+          "recordType": "fir",
+          "caseId": "CASE-2995C96D919E",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-53A87D8538BE",
+          "recordType": "fir",
+          "caseId": "CASE-2995C96D919E",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2253.2,
+      "promptTokens": 400,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-sealed_record-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-BAB4D4467437",
+          "recordType": "court-order",
+          "caseId": "CASE-5905BFE1AEE6",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-BAB4D4467437",
+          "recordType": "court-order",
+          "caseId": "CASE-5905BFE1AEE6",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2173.51,
+      "promptTokens": 392,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-juvenile_protected-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-695A30E63F68",
+          "recordType": "fir",
+          "caseId": "CASE-433FAEEF4CD8",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-695A30E63F68",
+          "recordType": "fir",
+          "caseId": "CASE-433FAEEF4CD8",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2354.87,
+      "promptTokens": 391,
+      "completionTokens": 53,
+      "error": null
+    },
+    {
+      "id": "test-audit_metadata_only-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "AUDIT_METADATA_ONLY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-87100623AFD3",
+          "recordType": "evidence",
+          "caseId": "CASE-53A97DCE468C",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action"
+        ],
+        "counterfactual": "use the audit-trail query, which excludes protected raw content",
+        "explanation": "Access is denied because oversight roles must use the metadata-only audit trail instead of protected raw content.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-87100623AFD3",
+          "recordType": "evidence",
+          "caseId": "CASE-53A97DCE468C",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2247.38,
+      "promptTokens": 384,
+      "completionTokens": 50,
+      "error": null
+    },
+    {
+      "id": "test-cred_not_active-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "training",
+          "recordId": "REC-8B1CA775A9C2",
+          "recordType": "evidence",
+          "caseId": "CASE-9F0862F3BE2C",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "counterfactual": "decision would change if the requester credential status were \"active\"",
+        "explanation": "Access is denied because the authenticated credential is not active.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "training",
+          "recordId": "REC-8B1CA775A9C2",
+          "recordType": "evidence",
+          "caseId": "CASE-9F0862F3BE2C",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "training",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"training\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2102.91,
+      "promptTokens": 378,
+      "completionTokens": 46,
+      "error": null
+    },
+    {
+      "id": "test-not_assigned-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-5300CE7C45F7",
+          "recordType": "chargesheet",
+          "caseId": "CASE-99ECD538D734",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-99ECD538D734' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-5300CE7C45F7",
+          "recordType": "chargesheet",
+          "caseId": "CASE-99ECD538D734",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2144.63,
+      "promptTokens": 390,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-emergency_cross_jurisdiction-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-F14DF8F1B620",
+          "recordType": "court-order",
+          "caseId": "CASE-38108A7E2979",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-F14DF8F1B620",
+          "recordType": "court-order",
+          "caseId": "CASE-38108A7E2979",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2474.93,
+      "promptTokens": 407,
+      "completionTokens": 54,
+      "error": null
+    },
+    {
+      "id": "test-invalid_purpose-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "research",
+          "recordId": "REC-DE10092B7296",
+          "recordType": "chargesheet",
+          "caseId": "CASE-4538205AF047",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "research",
+          "recordId": "REC-DE10092B7296",
+          "recordType": "chargesheet",
+          "caseId": "CASE-4538205AF047",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-4538205AF047' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "research",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"research\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2098.39,
+      "promptTokens": 379,
+      "completionTokens": 46,
+      "error": null
+    },
+    {
+      "id": "test-rbac_no_permission-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "defense-preparation",
+          "recordId": "REC-E41E8C8F1B68",
+          "recordType": "case-diary",
+          "caseId": "CASE-B4CF62320318",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'defense-counsel' has no 'export' permission on 'case-diary'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "defense-preparation",
+          "recordId": "REC-E41E8C8F1B68",
+          "recordType": "case-diary",
+          "caseId": "CASE-B4CF62320318",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "export",
+        "purpose": "defense-preparation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"export\",\"purpose\":\"defense-preparation\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2384.42,
+      "promptTokens": 400,
+      "completionTokens": 52,
+      "error": null
+    },
+    {
+      "id": "test-juvenile_protected-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-4A4F6F98A634",
+          "recordType": "court-order",
+          "caseId": "CASE-86B61C9972C1",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-4A4F6F98A634",
+          "recordType": "court-order",
+          "caseId": "CASE-86B61C9972C1",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2278.22,
+      "promptTokens": 376,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-juvenile_protected-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "recordId": "REC-D8BC814220DD",
+          "recordType": "case-diary",
+          "caseId": "CASE-4B910CF3633A",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "recordId": "REC-D8BC814220DD",
+          "recordType": "case-diary",
+          "caseId": "CASE-4B910CF3633A",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"investigation\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2385.85,
+      "promptTokens": 402,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-not_assigned-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-80EB10B4C4A0",
+          "recordType": "chargesheet",
+          "caseId": "CASE-32EC9F9CFCFC",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-32EC9F9CFCFC' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-80EB10B4C4A0",
+          "recordType": "chargesheet",
+          "caseId": "CASE-32EC9F9CFCFC",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2276.31,
+      "promptTokens": 386,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-not_assigned-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-5EB620720703",
+          "recordType": "fir",
+          "caseId": "CASE-08EE33D126BF",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-08EE33D126BF' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-5EB620720703",
+          "recordType": "fir",
+          "caseId": "CASE-08EE33D126BF",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2281.82,
+      "promptTokens": 389,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-cross_jurisdiction-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-84EAA76D91B8",
+          "recordType": "fir",
+          "caseId": "CASE-7813AF78F60B",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-south'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-84EAA76D91B8",
+          "recordType": "fir",
+          "caseId": "CASE-7813AF78F60B",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"allow\",\"reasonCode\":\"EMERGENCY_CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2503.14,
+      "promptTokens": 400,
+      "completionTokens": 55,
+      "error": null
+    },
+    {
+      "id": "test-cross_jurisdiction-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-866369C963C5",
+          "recordType": "court-order",
+          "caseId": "CASE-3675061CA020",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-south'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-866369C963C5",
+          "recordType": "court-order",
+          "caseId": "CASE-3675061CA020",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2274.46,
+      "promptTokens": 380,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-juvenile_protected-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-3C10FB11163F",
+          "recordType": "evidence",
+          "caseId": "CASE-AC2F0372EAE6",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-3C10FB11163F",
+          "recordType": "evidence",
+          "caseId": "CASE-AC2F0372EAE6",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2274.83,
+      "promptTokens": 376,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-sealed_record-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-ADBC608B6774",
+          "recordType": "forensic-report",
+          "caseId": "CASE-3975AB430F81",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-ADBC608B6774",
+          "recordType": "forensic-report",
+          "caseId": "CASE-3975AB430F81",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"escalate\",\"reasonCode\":\"SEALED_RECORD\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2206.71,
+      "promptTokens": 379,
+      "completionTokens": 49,
+      "error": null
+    },
+    {
+      "id": "test-audit_metadata_only-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "AUDIT_METADATA_ONLY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-6E13D11A4E4B",
+          "recordType": "chargesheet",
+          "caseId": "CASE-4A9A349B999D",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action"
+        ],
+        "counterfactual": "use the audit-trail query, which excludes protected raw content",
+        "explanation": "Access is denied because oversight roles must use the metadata-only audit trail instead of protected raw content.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-6E13D11A4E4B",
+          "recordType": "chargesheet",
+          "caseId": "CASE-4A9A349B999D",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2330.99,
+      "promptTokens": 399,
+      "completionTokens": 50,
+      "error": null
+    },
+    {
+      "id": "test-not_assigned-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-A35FB2926B78",
+          "recordType": "court-order",
+          "caseId": "CASE-604890DF8969",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-604890DF8969' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-A35FB2926B78",
+          "recordType": "court-order",
+          "caseId": "CASE-604890DF8969",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"VICTIM_DATA_NOT_NECESSARY\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2363.57,
+      "promptTokens": 374,
+      "completionTokens": 53,
+      "error": null
+    },
+    {
+      "id": "test-invalid_purpose-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "research",
+          "recordId": "REC-1DC935C096EF",
+          "recordType": "forensic-report",
+          "caseId": "CASE-E5F043B110BF",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "research",
+          "recordId": "REC-1DC935C096EF",
+          "recordType": "forensic-report",
+          "caseId": "CASE-E5F043B110BF",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-E5F043B110BF' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "research",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"research\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2110.96,
+      "promptTokens": 393,
+      "completionTokens": 46,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-37C282A597D0",
+          "recordType": "forensic-report",
+          "caseId": "CASE-3EB62587CBC0",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-37C282A597D0",
+          "recordType": "forensic-report",
+          "caseId": "CASE-3EB62587CBC0",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2390.32,
+      "promptTokens": 401,
+      "completionTokens": 52,
+      "error": null
+    },
+    {
+      "id": "test-rbac_no_permission-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "audit-review",
+          "recordId": "REC-DC87E1D90DD6",
+          "recordType": "case-diary",
+          "caseId": "CASE-358DC20A9337",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'court-clerk' has no 'annotate' permission on 'case-diary'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "audit-review",
+          "recordId": "REC-DC87E1D90DD6",
+          "recordType": "case-diary",
+          "caseId": "CASE-358DC20A9337",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-358DC20A9337' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2141.06,
+      "promptTokens": 374,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-invalid_purpose-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "convenience",
+          "recordId": "REC-9AC038C8C65C",
+          "recordType": "court-order",
+          "caseId": "CASE-FDB517492F03",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "non-official",
+          "recordId": "REC-9AC038C8C65C",
+          "recordType": "court-order",
+          "caseId": "CASE-FDB517492F03",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "non-official",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"non-official\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": false,
+      "latencyMs": 2174.68,
+      "promptTokens": 398,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-policy_satisfied-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-4105ECE43BBD",
+          "recordType": "chargesheet",
+          "caseId": "CASE-19F58618673A",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-4105ECE43BBD",
+          "recordType": "chargesheet",
+          "caseId": "CASE-19F58618673A",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2139.77,
+      "promptTokens": 394,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-victim_data_not_necessary-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-2F2B7F95A0F3",
+          "recordType": "forensic-report",
+          "caseId": "CASE-A98087D31AF1",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-2F2B7F95A0F3",
+          "recordType": "forensic-report",
+          "caseId": "CASE-A98087D31AF1",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2241.32,
+      "promptTokens": 404,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-emergency_cross_jurisdiction-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-94EF1CB8023A",
+          "recordType": "evidence",
+          "caseId": "CASE-BEE11AEDFD0E",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-94EF1CB8023A",
+          "recordType": "evidence",
+          "caseId": "CASE-BEE11AEDFD0E",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2277.86,
+      "promptTokens": 377,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-cross_jurisdiction-003",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-A0A5E733BA5C",
+          "recordType": "case-diary",
+          "caseId": "CASE-AA6841F07971",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-east'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-A0A5E733BA5C",
+          "recordType": "case-diary",
+          "caseId": "CASE-AA6841F07971",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-AA6841F07971' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2149.74,
+      "promptTokens": 394,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-0419CB8E309C",
+          "recordType": "chargesheet",
+          "caseId": "CASE-FB68957CDFF8",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'high' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "audit-review",
+          "recordId": "REC-0419CB8E309C",
+          "recordType": "chargesheet",
+          "caseId": "CASE-FB68957CDFF8",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-south'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "audit-review",
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"audit-review\",\"decision\":\"escalate\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2308.51,
+      "promptTokens": 375,
+      "completionTokens": 52,
+      "error": null
+    },
+    {
+      "id": "test-not_assigned-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-021430F1A999",
+          "recordType": "court-order",
+          "caseId": "CASE-0E7BC98046E5",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-0E7BC98046E5' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-021430F1A999",
+          "recordType": "court-order",
+          "caseId": "CASE-0E7BC98046E5",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.juvenileFlag",
+          "subject.role"
+        ],
+        "counterfactual": "access requires a role explicitly authorized by the juvenile-protection policy",
+        "explanation": "Access is denied because the record is juvenile-protected and the authenticated role is not in the permitted exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "JUVENILE_PROTECTED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"JUVENILE_PROTECTED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2272,
+      "promptTokens": 377,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-invalid_purpose-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "convenience",
+          "recordId": "REC-D83B3DC0E002",
+          "recordType": "witness-statement",
+          "caseId": "CASE-BE8CE6FEE16C",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "convenience",
+          "recordId": "REC-D83B3DC0E002",
+          "recordType": "witness-statement",
+          "caseId": "CASE-BE8CE6FEE16C",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "convenience",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"convenience\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2150.46,
+      "promptTokens": 386,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-invalid_purpose-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "curiosity",
+          "recordId": "REC-83086FF034A0",
+          "recordType": "fir",
+          "caseId": "CASE-0C4CCC94D7BB",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "curiosity",
+          "recordId": "REC-83086FF034A0",
+          "recordType": "fir",
+          "caseId": "CASE-0C4CCC94D7BB",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "curiosity",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"curiosity\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2154.28,
+      "promptTokens": 371,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-rbac_no_permission-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "audit-review",
+          "recordId": "REC-6A5E29EE75E3",
+          "recordType": "evidence",
+          "caseId": "CASE-2F5F176F2607",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'auditor' has no 'annotate' permission on 'evidence'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "parsedRequest": {
+          "action": "annotate",
+          "purpose": "audit-review",
+          "recordId": "REC-6A5E29EE75E3",
+          "recordType": "evidence",
+          "caseId": "CASE-2F5F176F2607",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "subject.jurisdiction",
+          "subject.clearance",
+          "env.purpose"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "annotate",
+        "purpose": "audit-review",
+        "decision": "allow",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"annotate\",\"purpose\":\"audit-review\",\"decision\":\"allow\",\"reasonCode\":\"POLICY_SATISFIED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2351.48,
+      "promptTokens": 408,
+      "completionTokens": 51,
+      "error": null
+    },
+    {
+      "id": "test-sealed_record-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "SEALED_RECORD",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-A2A66C202943",
+          "recordType": "court-order",
+          "caseId": "CASE-78BF98BF22C4",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "object.sealed",
+          "subject.mspId"
+        ],
+        "counterfactual": "decision would be evaluated normally if the record were not sealed",
+        "explanation": "Access is escalated because the record is sealed and the requester is outside the court organization.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-A2A66C202943",
+          "recordType": "court-order",
+          "caseId": "CASE-78BF98BF22C4",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "env.purpose"
+        ],
+        "counterfactual": "decision would change if purpose were one of [investigation, forensic-analysis, prosecution, judicial-proceeding, audit-review, defense-preparation]",
+        "explanation": "Access is denied because the stated purpose is not permitted by the policy.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "deny",
+        "reasonCode": "INVALID_PURPOSE",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"deny\",\"reasonCode\":\"INVALID_PURPOSE\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2172.54,
+      "promptTokens": 375,
+      "completionTokens": 48,
+      "error": null
+    },
+    {
+      "id": "test-emergency_cross_jurisdiction-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-42B3B28951FD",
+          "recordType": "witness-statement",
+          "caseId": "CASE-ED6CCEA70135",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "investigation",
+          "recordId": "REC-42B3B28951FD",
+          "recordType": "witness-statement",
+          "caseId": "CASE-ED6CCEA70135",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "investigation",
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"investigation\",\"decision\":\"allow\",\"reasonCode\":\"EMERGENCY_CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2380.33,
+      "promptTokens": 388,
+      "completionTokens": 54,
+      "error": null
+    },
+    {
+      "id": "test-rbac_no_permission-004",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-38A18F0C2E96",
+          "recordType": "witness-statement",
+          "caseId": "CASE-42143AF9482B",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'inspector' has no 'export' permission on 'witness-statement'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "export",
+          "purpose": "investigation",
+          "recordId": "REC-38A18F0C2E96",
+          "recordType": "witness-statement",
+          "caseId": "CASE-42143AF9482B",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-42143AF9482B' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "export",
+        "purpose": "investigation",
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"export\",\"purpose\":\"investigation\",\"decision\":\"deny\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2137.54,
+      "promptTokens": 376,
+      "completionTokens": 47,
+      "error": null
+    },
+    {
+      "id": "test-emergency_cross_jurisdiction-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-AD30208A7F66",
+          "recordType": "court-order",
+          "caseId": "CASE-ECA058BF7E64",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "prosecution",
+          "recordId": "REC-AD30208A7F66",
+          "recordType": "court-order",
+          "caseId": "CASE-ECA058BF7E64",
+          "emergencyFlag": true
+        },
+        "decisiveAttributes": [
+          "env.emergencyFlag",
+          "env.approvalToken",
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": null,
+        "explanation": "Access is allowed because the cross-jurisdiction request is an approved emergency.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "prosecution",
+        "decision": "allow",
+        "reasonCode": "EMERGENCY_CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"prosecution\",\"decision\":\"allow\",\"reasonCode\":\"EMERGENCY_CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": true,
+      "reasonCorrect": true,
+      "jointCorrect": true,
+      "attributesCorrect": true,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2417.57,
+      "promptTokens": 381,
+      "completionTokens": 55,
+      "error": null
+    },
+    {
+      "id": "test-cross_jurisdiction-002",
+      "adversarial": false,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-050CDBA9C5DF",
+          "recordType": "court-order",
+          "caseId": "CASE-4417CA32C28F",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-south'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "defense-preparation",
+          "recordId": "REC-050CDBA9C5DF",
+          "recordType": "court-order",
+          "caseId": "CASE-4417CA32C28F",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-4417CA32C28F' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "defense-preparation",
+        "decision": "escalate",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"defense-preparation\",\"decision\":\"escalate\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2203.76,
+      "promptTokens": 375,
+      "completionTokens": 49,
+      "error": null
+    },
+    {
+      "id": "test-rbac_no_permission-001",
+      "adversarial": false,
+      "expected": {
+        "decision": "deny",
+        "reasonCode": "RBAC_NO_PERMISSION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-191CB987C9E5",
+          "recordType": "chargesheet",
+          "caseId": "CASE-560D8649A462",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.role",
+          "action",
+          "object.recordType"
+        ],
+        "counterfactual": "role 'constable' has no 'view' permission on 'chargesheet'",
+        "explanation": "Access is denied because the authenticated role has no permission for this action and record type.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-191CB987C9E5",
+          "recordType": "chargesheet",
+          "caseId": "CASE-560D8649A462",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.jurisdiction",
+          "object.jurisdiction"
+        ],
+        "counterfactual": "decision would change if requester jurisdiction were 'district-west'",
+        "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "forensic-analysis",
+        "decision": "escalate",
+        "reasonCode": "CROSS_JURISDICTION",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"forensic-analysis\",\"decision\":\"escalate\",\"reasonCode\":\"CROSS_JURISDICTION\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": false,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2342.78,
+      "promptTokens": 374,
+      "completionTokens": 53,
+      "error": null
+    },
+    {
+      "id": "test-insufficient_clearance-000",
+      "adversarial": true,
+      "expected": {
+        "decision": "escalate",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-38B8EA4A5DB0",
+          "recordType": "fir",
+          "caseId": "CASE-5A11515CED04",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "counterfactual": "decision would change if requester clearance were 'high' or higher",
+        "explanation": "Access is escalated because the authenticated clearance is below the record sensitivity.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "prediction": {
+        "decision": "deny",
+        "reasonCode": "NOT_ASSIGNED",
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "recordId": "REC-38B8EA4A5DB0",
+          "recordType": "fir",
+          "caseId": "CASE-5A11515CED04",
+          "emergencyFlag": false
+        },
+        "decisiveAttributes": [
+          "subject.caseAssignments",
+          "object.caseId"
+        ],
+        "counterfactual": "decision would change if case 'CASE-5A11515CED04' were in the requester's assignments",
+        "explanation": "Access is denied because the authenticated requester is not assigned to this case.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "classification": {
+        "action": "view",
+        "purpose": "judicial-proceeding",
+        "decision": "escalate",
+        "reasonCode": "NOT_ASSIGNED",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v5"
+      },
+      "raw": "{\"action\":\"view\",\"purpose\":\"judicial-proceeding\",\"decision\":\"escalate\",\"reasonCode\":\"NOT_ASSIGNED\",\"policyVersion\":\"crime-policy-v1\",\"modelVersion\":\"qwen3-14b-seba-lora-v5\"}",
+      "strictJson": true,
+      "decisionDisagreement": true,
+      "schemaProblems": [],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": true,
+      "purposeCorrect": true,
+      "latencyMs": 2274.56,
+      "promptTokens": 386,
+      "completionTokens": 51,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+=== 2026-09-12T08:56:21Z waiting for the baseline evaluation ===
+=== 2026-09-12T11:07:26Z baseline finished ===
+=== 2026-09-12T11:07:26Z launching V7 rank-8, 1600 examples ===
+{
+  "status": "completed",
+  "startedAtUtc": "2026-09-12T11:07:27Z",
+  "config": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/train-v7-r8-1600.yaml",
+  "configSha256": "aab835525eaacb9f75864399264deb7fae29d1df63f5784a83cfd5d684b464ad",
+  "runDir": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260912_dias_qwen3_lora_v7_r8",
+  "baseModel": "mlx-community/Qwen3-14B-4bit",
+  "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "v6AdapterSha256AtStart": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+  "exitCode": 0,
+  "finishedAtUtc": "2026-09-12T17:21:30.092030+00:00",
+  "v6AdapterIntactAfterRun": true,
+  "finalAdapterSha256": "2a159c9c13be4607852575230349081a8b7ad80b7a1e53da3a063dc2297d0aa6"
+}
+=== 2026-09-12T17:21:30Z training finished, exit 0 ===

@@ -1,0 +1,34 @@
+{
+  "runId": "2026-08-25T14-07-26-224Z_ui_interaction_latency",
+  "generatedAtUtc": "2026-08-25T14:07:26.225Z",
+  "apiBase": "http://127.0.0.1:3001/api",
+  "levels": [
+    10,
+    25
+  ],
+  "operations": [
+    "search"
+  ],
+  "repetitions": 1,
+  "cooldownMs": 2000,
+  "searchCaseId": "CASE-2026-002",
+  "expectedSearchResults": 1,
+  "fileCaseId": "CASE-2026-001",
+  "identityPool": [
+    "insp.sharma",
+    "sho.reddy",
+    "const.verma",
+    "io.krishnan",
+    "insp.singh"
+  ],
+  "accessIdentity": "insp.sharma",
+  "concurrencyMeaning": "N simultaneous HTTP client sessions; identities are reused from the fixed pool",
+  "measuredPaths": {
+    "search": "GET /records?caseId -> RecordContract.QueryRecords",
+    "submit": "POST /records -> vault save + RecordContract.CreateCaseRecord + commit",
+    "release": "GET /records/:id/payload -> RecordContract.AuthorizeRecordRead + vault read + SHA-256 check"
+  },
+  "timingBoundary": "client-observed HTTP request start through parsed JSON response",
+  "warmup": "five requests per operation, excluded",
+  "order": "all search rounds, then all release rounds, then all submit rounds"
+}

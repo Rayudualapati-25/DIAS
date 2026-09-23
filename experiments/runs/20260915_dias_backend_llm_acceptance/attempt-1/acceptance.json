@@ -1,0 +1,632 @@
+{
+  "artifactType": "dias-backend-llm-acceptance",
+  "startedAtUtc": "2026-09-15T16:01:17.181Z",
+  "finishedAtUtc": "2026-09-15T16:04:39.320Z",
+  "apiUrl": "http://localhost:3001/api",
+  "summary": {
+    "pass": 11,
+    "fail": 2,
+    "notExercised": 1,
+    "total": 14
+  },
+  "checks": {
+    "passed": 62,
+    "total": 77
+  },
+  "requestIds": [
+    "REQ-41a72cc3915ad0ad",
+    "REQ-3dcbba3c42ebeb2d",
+    "REQ-7f2d65aea44673ed",
+    "REQ-3e84222cd0dff5d2",
+    "REQ-19d5ded4489c91a5",
+    "REQ-a6a1dbf5af5a53cd",
+    "REQ-60ee22ed69fd352a",
+    "REQ-30cb7d5d3ddb2f49",
+    "REQ-8d9bb0cffa35464e",
+    "REQ-befdd77a9cea454c",
+    "REQ-142d11523ac63dd6",
+    "REQ-e5e103bbcd56543e",
+    "REQ-a78d2349582cfed4"
+  ],
+  "scenarios": [
+    {
+      "id": "R1",
+      "title": "Request log: who requested which record",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "backend accepted the request (202)",
+          "ok": true,
+          "detail": "202"
+        },
+        {
+          "name": "request waits for the auditor",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        },
+        {
+          "name": "ledger names the requester",
+          "ok": true,
+          "detail": "{\"identityHash\":\"f27444f5e1edfe86af8dfb6b4ca4cbfe7ac9ddf1b19eee36e658b29e5dc0b16f\",\"mspId\":\"PoliceMSP\",\"organization\":\"police\",\"role\":\"inspector\",\"stableUserId\":\"PoliceMSP::insp.sharma\",\"username\":\"insp.sharma\"}"
+        },
+        {
+          "name": "ledger names the record, action and purpose",
+          "ok": true,
+          "detail": "REC-FIR-001 view investigation"
+        },
+        {
+          "name": "ledger request holds no justification",
+          "ok": true,
+          "detail": "request JSON searched"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-41a72cc3915ad0ad",
+        "txId": "41a72cc3915ad0adb57ae2b316c5812f5f8ae69b8da51b9869db9bdd76cb30ae",
+        "submittedAtUtc": "2026-09-15T16:01:17.206Z"
+      }
+    },
+    {
+      "id": "R2",
+      "title": "LLM recommendation in the backend, not on the ledger",
+      "status": "FAIL",
+      "checks": [
+        {
+          "name": "recommendation prepared by the backend",
+          "ok": true,
+          "detail": "ready"
+        },
+        {
+          "name": "LLM produced a valid ALLOW or DENY",
+          "ok": true,
+          "detail": "OK ALLOW POLICY_SATISFIED"
+        },
+        {
+          "name": "auditor screen receives the justification",
+          "ok": true,
+          "detail": "I am investigating CASE-2026-001 and need to read the FIR."
+        },
+        {
+          "name": "ledger lifecycle holds only the request stages",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED"
+        },
+        {
+          "name": "ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ledger trail JSON searched"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-41a72cc3915ad0ad",
+        "recommendation": "ALLOW",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyRefs": [
+          "GP-RBAC:C2@v1",
+          "GP-DEFAULT:C1@v1"
+        ],
+        "modelId": "qwen3-14b-4bit-untuned",
+        "latencyMs": {
+          "contextAssembly": 0.088,
+          "inference": 6897.792,
+          "validation": 0.119,
+          "total": 6898.073
+        }
+      }
+    },
+    {
+      "id": "R3",
+      "title": "Decision log: auditor agrees with an LLM ALLOW",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "decision committed without a reason (201)",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "decision log records AGREED",
+          "ok": true,
+          "detail": "AGREED"
+        },
+        {
+          "name": "access outcome is GRANTED",
+          "ok": true,
+          "detail": "GRANTED"
+        },
+        {
+          "name": "no dynamic authorization created",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "lifecycle: request, decision, outcome",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-41a72cc3915ad0ad",
+        "auditorTxId": "7496881e2b6ec966c7172060e0110769fb51ea961a7c70494b72935f7aea4a6b"
+      }
+    },
+    {
+      "id": "R4",
+      "title": "Decision log: auditor overrides an LLM DENY",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "override without a reason refused (400)",
+          "ok": true,
+          "detail": "400 a reason is required when the decision does not agree with the LLM recommendation or no recommendation exists"
+        },
+        {
+          "name": "override with a reason committed (201)",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "decision log records NOT_AGREED",
+          "ok": true,
+          "detail": "NOT_AGREED"
+        },
+        {
+          "name": "access outcome is GRANTED",
+          "ok": true,
+          "detail": "GRANTED"
+        },
+        {
+          "name": "exact-scope dynamic authorization created",
+          "ok": true,
+          "detail": "{\"action\":\"view\",\"caseId\":\"CASE-2026-001\",\"purpose\":\"investigation\",\"recordId\":\"REC-FIR-001\",\"scopeVersion\":\"dias-authorization-scope-exact-record-v1\",\"stableUserId\":\"PoliceMSP::insp.singh\"}"
+        },
+        {
+          "name": "authorization records the LLM disagreement",
+          "ok": true,
+          "detail": "{\"auditorDecisionId\":\"AUDIT-b028c59f9bdee822\",\"decision\":\"FORCE_ALLOW\",\"llmAgreement\":\"NOT_AGREED\"}"
+        },
+        {
+          "name": "reason kept off-chain only",
+          "ok": true,
+          "detail": "{\"decision\":\"FORCE_ALLOW\",\"llmAgreement\":\"NOT_AGREED\",\"reason\":\"Supervisor confirmed a joint enquiry that needs this record.\",\"auditorUsername\":\"sp.north\",\"decidedAtUtc\":\"2026-09-15T16:01:37.727Z\",\"txId\":\"b028c59f9bdee8225d8545ae58fdb1d9ff5d7cf1ce69ed06eb14f545a5ad4e57\"}"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-3dcbba3c42ebeb2d",
+        "authorizationId": "AUTH-b028c59f9bdee822"
+      }
+    },
+    {
+      "id": "R5",
+      "title": "Exact repeat is granted automatically",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "granted at once (201)",
+          "ok": true,
+          "detail": "201 granted"
+        },
+        {
+          "name": "matched the authorization",
+          "ok": true,
+          "detail": "MATCH AUTH-b028c59f9bdee822"
+        },
+        {
+          "name": "auditor review recorded as skipped",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_REVIEW_SKIPPED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "LLM not called: no off-chain review exists",
+          "ok": true,
+          "detail": "null"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-7f2d65aea44673ed",
+        "authorizationId": "AUTH-b028c59f9bdee822"
+      }
+    },
+    {
+      "id": "R6",
+      "title": "Near misses are not reused",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "different record: waits for the auditor",
+          "ok": true,
+          "detail": "202 NO_AUTHORIZATION"
+        },
+        {
+          "name": "different action: waits for the auditor",
+          "ok": true,
+          "detail": "202 NO_AUTHORIZATION"
+        },
+        {
+          "name": "different purpose: waits for the auditor",
+          "ok": true,
+          "detail": "202 NO_AUTHORIZATION"
+        },
+        {
+          "name": "different user: waits for the auditor",
+          "ok": true,
+          "detail": "202 NO_AUTHORIZATION"
+        }
+      ],
+      "evidence": {
+        "pending": [
+          {
+            "label": "different record",
+            "requestId": "REQ-3e84222cd0dff5d2"
+          },
+          {
+            "label": "different action",
+            "requestId": "REQ-19d5ded4489c91a5"
+          },
+          {
+            "label": "different purpose",
+            "requestId": "REQ-a6a1dbf5af5a53cd"
+          },
+          {
+            "label": "different user",
+            "requestId": "REQ-60ee22ed69fd352a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R7",
+      "title": "Decision log: auditor agrees with an LLM DENY",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "different record: committed (201)",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "different record: AGREED",
+          "ok": true,
+          "detail": "AGREED"
+        },
+        {
+          "name": "different record: DENIED",
+          "ok": true,
+          "detail": "DENIED"
+        },
+        {
+          "name": "different record: no dynamic authorization",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "different action: committed (201)",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "different action: AGREED",
+          "ok": true,
+          "detail": "AGREED"
+        },
+        {
+          "name": "different action: DENIED",
+          "ok": true,
+          "detail": "DENIED"
+        },
+        {
+          "name": "different action: no dynamic authorization",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "different purpose: committed (201)",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "different purpose: AGREED",
+          "ok": true,
+          "detail": "AGREED"
+        },
+        {
+          "name": "different purpose: DENIED",
+          "ok": true,
+          "detail": "DENIED"
+        },
+        {
+          "name": "different purpose: no dynamic authorization",
+          "ok": true,
+          "detail": "null"
+        },
+        {
+          "name": "different user: committed (201)",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "different user: AGREED",
+          "ok": true,
+          "detail": "AGREED"
+        },
+        {
+          "name": "different user: DENIED",
+          "ok": true,
+          "detail": "DENIED"
+        },
+        {
+          "name": "different user: no dynamic authorization",
+          "ok": true,
+          "detail": "null"
+        }
+      ],
+      "evidence": {
+        "requests": [
+          {
+            "label": "different record",
+            "requestId": "REQ-3e84222cd0dff5d2",
+            "llmAgreement": "AGREED"
+          },
+          {
+            "label": "different action",
+            "requestId": "REQ-19d5ded4489c91a5",
+            "llmAgreement": "AGREED"
+          },
+          {
+            "label": "different purpose",
+            "requestId": "REQ-a6a1dbf5af5a53cd",
+            "llmAgreement": "AGREED"
+          },
+          {
+            "label": "different user",
+            "requestId": "REQ-60ee22ed69fd352a",
+            "llmAgreement": "AGREED"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R8",
+      "title": "Decision log: auditor overrides an LLM ALLOW",
+      "status": "NOT EXERCISED",
+      "checks": [
+        {
+          "name": "scenario prerequisites",
+          "ok": false,
+          "detail": "no near miss received an LLM ALLOW"
+        }
+      ],
+      "evidence": {}
+    },
+    {
+      "id": "R9",
+      "title": "Revocation and expiry stop reuse",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "revocation committed",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "name": "repeat after revocation waits for the auditor",
+          "ok": true,
+          "detail": "202 REVOKED"
+        },
+        {
+          "name": "renewed authorization with an expiry",
+          "ok": true,
+          "detail": "201 generation=2"
+        },
+        {
+          "name": "repeat before expiry granted automatically",
+          "ok": true,
+          "detail": "201 MATCH"
+        },
+        {
+          "name": "repeat after expiry waits for the auditor",
+          "ok": true,
+          "detail": "202 EXPIRED"
+        }
+      ],
+      "evidence": {
+        "revokedAuthorizationId": "AUTH-b028c59f9bdee822",
+        "renewedAuthorizationId": "AUTH-6a184b1ae2a61c0f",
+        "validUntilUtc": "2026-09-15T16:03:52.899Z"
+      }
+    },
+    {
+      "id": "R10",
+      "title": "An auditor cannot decide their own request",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "own decision refused by the chaincode",
+          "ok": true,
+          "detail": "422 chaincode response 500, unauthorized: a requester cannot decide their own request"
+        },
+        {
+          "name": "another auditor decided it",
+          "ok": true,
+          "detail": "201"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-142d11523ac63dd6"
+      }
+    },
+    {
+      "id": "R11",
+      "title": "A decision on changed facts is refused",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "record sealed after the recommendation",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "name": "decision on changed facts refused",
+          "ok": true,
+          "detail": "422 chaincode response 500, verified request facts changed since the request was submitted; submit a new request"
+        },
+        {
+          "name": "record unsealed again",
+          "ok": true,
+          "detail": "200"
+        },
+        {
+          "name": "decision accepted once the facts match again",
+          "ok": true,
+          "detail": "201"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-e5e103bbcd56543e",
+        "recordId": "REC-JUVENILE-001"
+      }
+    },
+    {
+      "id": "R12",
+      "title": "No LLM recommendation: the auditor still decides",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "backend stored a failed generation",
+          "ok": true,
+          "detail": "UNAVAILABLE server_unreachable"
+        },
+        {
+          "name": "decision without a reason refused (400)",
+          "ok": true,
+          "detail": "400 a reason is required when the decision does not agree with the LLM recommendation or no recommendation exists"
+        },
+        {
+          "name": "decision committed with NO_RECOMMENDATION",
+          "ok": true,
+          "detail": "201"
+        },
+        {
+          "name": "no dynamic authorization created",
+          "ok": true,
+          "detail": "null"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-a78d2349582cfed4",
+        "errorCode": "server_unreachable"
+      }
+    },
+    {
+      "id": "R13",
+      "title": "Application access log: request and decision",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "request event names the requester and record",
+          "ok": true,
+          "detail": "{\"action\":\"access.request\",\"actorIdentityHash\":\"fa843aff2ed4fcfd9351ec46e8f9a068ac258a7c71485ad403beaf74efc4fa6e\",\"actorMsp\":\"PoliceMSP\",\"actorRole\":\"inspector\",\"actorUsername\":\"insp.singh\",\"docType\":\"applicationAccessEvent\",\"outcome\":\"ok\",\"status\":202,\"target\":{\"action\":\"view\",\"processingPath\":\"auditor-review\",\"purpose\":\"investigation\",\"recordId\":\"REC-FIR-001\",\"requestId\":\"REQ-3dcbba3c42ebeb2d\"},\"timestamp\":\"2026-09-15T16:01:27.480Z\",\"txId\":\"170f334ef67dd359e489bf8ef7d0ff794e2dd5716671134d6546f50384a9c180\"}"
+        },
+        {
+          "name": "decision event names the auditor and the LLM agreement",
+          "ok": true,
+          "detail": "{\"action\":\"dias.auditor.decision\",\"actorIdentityHash\":\"d585082d8690c4de3957bbcb13a540496dbf3dcc0c1893fb65643bb897ad1a9f\",\"actorMsp\":\"AuditMSP\",\"actorRole\":\"sp\",\"actorUsername\":\"sp.north\",\"docType\":\"applicationAccessEvent\",\"outcome\":\"ok\",\"status\":201,\"target\":{\"decision\":\"FORCE_ALLOW\",\"llmAgreement\":\"NOT_AGREED\",\"requestId\":\"REQ-3dcbba3c42ebeb2d\"},\"timestamp\":\"2026-09-15T16:01:39.773Z\",\"txId\":\"255c99224ad6041a05908e13c6e938ef8fb05ce706f3f85be4e0bac7fea17384\"}"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-3dcbba3c42ebeb2d",
+        "requestTxId": "170f334ef67dd359e489bf8ef7d0ff794e2dd5716671134d6546f50384a9c180",
+        "decisionTxId": "255c99224ad6041a05908e13c6e938ef8fb05ce706f3f85be4e0bac7fea17384"
+      }
+    },
+    {
+      "id": "R14",
+      "title": "The ledger holds no LLM recommendation, reason, or justification",
+      "status": "FAIL",
+      "checks": [
+        {
+          "name": "REQ-41a72cc3915ad0ad: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-3dcbba3c42ebeb2d: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,DYNAMIC_AUTHORIZATION_CREATED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-7f2d65aea44673ed: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_REVIEW_SKIPPED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-3e84222cd0dff5d2: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-19d5ded4489c91a5: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-a6a1dbf5af5a53cd: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-60ee22ed69fd352a: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-30cb7d5d3ddb2f49: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,DYNAMIC_AUTHORIZATION_CREATED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-8d9bb0cffa35464e: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_REVIEW_SKIPPED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-befdd77a9cea454c: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-142d11523ac63dd6: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-e5e103bbcd56543e: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        },
+        {
+          "name": "REQ-a78d2349582cfed4: ledger trail holds no LLM data",
+          "ok": false,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,AUDITOR_DECISION_RECORDED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestIds": [
+          "REQ-41a72cc3915ad0ad",
+          "REQ-3dcbba3c42ebeb2d",
+          "REQ-7f2d65aea44673ed",
+          "REQ-3e84222cd0dff5d2",
+          "REQ-19d5ded4489c91a5",
+          "REQ-a6a1dbf5af5a53cd",
+          "REQ-60ee22ed69fd352a",
+          "REQ-30cb7d5d3ddb2f49",
+          "REQ-8d9bb0cffa35464e",
+          "REQ-befdd77a9cea454c",
+          "REQ-142d11523ac63dd6",
+          "REQ-e5e103bbcd56543e",
+          "REQ-a78d2349582cfed4"
+        ]
+      }
+    }
+  ]
+}

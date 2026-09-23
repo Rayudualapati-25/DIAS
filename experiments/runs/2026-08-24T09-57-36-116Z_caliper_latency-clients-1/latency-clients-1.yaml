@@ -1,0 +1,60 @@
+test:
+  name: SEBA-XAI read latency by client count - 1 client
+  description: Measure record-search latency while one Caliper worker reads REC-FIR-001.
+  workers:
+    number: 1
+  rounds:
+    - label: clients-1-warmup
+      txDuration: 10
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/read-record.js
+        arguments: &read_args
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: clients-1-read
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/read-record.js
+        arguments: *read_args
+monitors:
+  transaction:
+    - module: monitors/latency-tx-observer.js
+  resource:
+    - module: prometheus
+      options:
+        url: http://127.0.0.1:9090
+        metrics:
+          include: [".*"]
+          queries:
+            - name: Process resident memory (MiB, max)
+              query: 'process_resident_memory_bytes{job=~"fabric-.*"}'
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 0.00000095367431640625
+            - name: Process CPU rate (percent, max)
+              query: 'rate(process_cpu_seconds_total{job=~"fabric-.*"}[1m])'
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 100
+            - name: Crimerecords endorsement duration (seconds, avg)
+              query: 'sum by (instance) (rate(endorser_proposal_duration_sum{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m])) / sum by (instance) (rate(endorser_proposal_duration_count{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))'
+              step: 1
+              label: instance
+              statistic: avg
+            - name: Ledger height (blocks, max)
+              query: 'ledger_blockchain_height{job=~"fabric-.*",channel="crimechannel"}'
+              step: 1
+              label: instance
+              statistic: max

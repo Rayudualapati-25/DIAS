@@ -1,0 +1,51 @@
+{
+  "selectedAtUtc": "2026-09-01T22:50:43.879336+00:00",
+  "selectionCriterion": "minimum recorded validation loss; test data not consulted",
+  "trainingRun": "experiments/runs/20260902_qwen3_policy_engine_train_v3",
+  "sourceAdapterDirectory": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3",
+  "selectedIteration": 720,
+  "selectedValidationLoss": 0.005,
+  "selectedCheckpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000720_adapters.safetensors",
+  "deploymentAdapter": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3-best/adapters.safetensors",
+  "deploymentAdapterSha256": "33edb16377ac9955fc61a9d6ab07c6758db6cc06fc2d45c625e134e7cb0bc8bb",
+  "adapterConfig": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3-best/adapter_config.json",
+  "adapterConfigSha256": "b2050230d4c261b7bf9ad7b8d38b93afeec71ad54f059b3343b4c78dc8116f5f",
+  "validationCheckpoints": [
+    {
+      "iteration": 120,
+      "validationLoss": 0.036,
+      "checkpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000120_adapters.safetensors",
+      "sha256": "e05f0aec8128828d1c9bad868ae30f4efb6dd000badead741fba9f348e1b19d8"
+    },
+    {
+      "iteration": 240,
+      "validationLoss": 0.027,
+      "checkpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000240_adapters.safetensors",
+      "sha256": "cf49514df3b99b93e5e6c2f4ce9b190169ab8e14b8fc60ed6ceda7b406e4e9f7"
+    },
+    {
+      "iteration": 360,
+      "validationLoss": 0.017,
+      "checkpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000360_adapters.safetensors",
+      "sha256": "c3402c0201cf6033e7fd2e39a2a5c3ae8fd9ae0c7a72885a57880bafbcc3a577"
+    },
+    {
+      "iteration": 480,
+      "validationLoss": 0.012,
+      "checkpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000480_adapters.safetensors",
+      "sha256": "a28430ff604cffa578270f4a569d0db71a0e7397e88bb34124ccc58a99d8e792"
+    },
+    {
+      "iteration": 600,
+      "validationLoss": 0.013,
+      "checkpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000600_adapters.safetensors",
+      "sha256": "477d22f1ca384b389a8ec903ed409b027a9033061b716f39ee573d83ebbf259a"
+    },
+    {
+      "iteration": 720,
+      "validationLoss": 0.005,
+      "checkpoint": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3/0000720_adapters.safetensors",
+      "sha256": "33edb16377ac9955fc61a9d6ab07c6758db6cc06fc2d45c625e134e7cb0bc8bb"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Standalone explainable LLM policy decision interface">
+  <title>LLMxAI Policy Console</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="LLMxAI home">
+        <span class="brand-mark" aria-hidden="true">LX</span>
+        <span><strong>LLMxAI</strong><small>Policy intelligence</small></span>
+      </a>
+
+      <nav aria-label="Policy console sections">
+        <a class="nav-link active" href="#request"><span>01</span>Decision console</a>
+        <a class="nav-link" href="#context"><span>02</span>Trusted context</a>
+        <a class="nav-link" href="#rules"><span>03</span>Policy memory</a>
+      </nav>
+
+      <div class="model-card">
+        <div class="status-row">
+          <span id="model-dot" class="status-dot checking"></span>
+          <span id="model-status">Checking Qwen…</span>
+        </div>
+        <strong>Qwen3-14B</strong>
+        <small>Fine-tuned V4 adapter</small>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Explainable access control</p>
+          <h1>Ask the policy model</h1>
+        </div>
+        <div class="topbar-right">
+          <div class="version-chip"><span></span> crime-policy-v1</div>
+          <div id="session-chip" class="session-chip" hidden>
+            <span id="session-avatar" class="avatar small"></span>
+            <span><strong id="session-name"></strong><small id="session-title"></small></span>
+            <button id="signout-button" type="button" class="ghost-button">Sign out</button>
+          </div>
+        </div>
+      </header>
+
+      <section id="request" class="hero-grid">
+        <article class="panel request-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="step">Decision request</p>
+              <h2>Describe the access you need</h2>
+            </div>
+            <span class="direct-badge">Direct LLM decision</span>
+          </div>
+
+          <form id="decision-form">
+            <div class="field-grid">
+              <label>
+                Signed in as
+                <output id="identity-output" class="identity-output">—</output>
+              </label>
+              <label>
+                Protected resource
+                <select id="resource-select" name="recordId">
+                  <option value="">Read the record ID from my request</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="query-label" for="query-input">
+              Ask anything
+              <span>Write the request in your own words. Name a record ID such as REC-FIR-001, or pick one above.</span>
+            </label>
+            <textarea id="query-input" name="query" rows="5" maxlength="2000" required
+              placeholder="I need to view REC-FIR-001 for my investigation."></textarea>
+
+            <details class="emergency-box">
+              <summary>Emergency context</summary>
+              <div class="checkbox-row">
+                <label><input id="emergency-flag" type="checkbox"> Mark as emergency</label>
+                <label><input id="approval-flag" type="checkbox"> Separate approval verified</label>
+              </div>
+            </details>
+
+            <div class="submit-row">
+              <p>Your signed-in role, clearance, jurisdiction and assignments are taken from the session — the text you write cannot change them.</p>
+              <button id="submit-button" type="submit"><span>Evaluate request</span><b aria-hidden="true">→</b></button>
+            </div>
+          </form>
+        </article>
+
+        <aside id="context" class="panel context-panel">
+          <p class="step">Authenticated context</p>
+          <div id="profile-card" class="identity-card" aria-live="polite"></div>
+          <div class="divider"></div>
+          <p class="step">Resource facts</p>
+          <div id="resource-card" class="attribute-list"></div>
+        </aside>
+      </section>
+
+      <section id="result-panel" class="panel result-panel empty" aria-live="polite">
+        <div class="empty-state">
+          <span class="empty-icon">↳</span>
+          <div><strong>No decision yet</strong><p>Submit a request to see the model decision and explanation.</p></div>
+        </div>
+      </section>
+
+      <section id="rules" class="rules-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">Model policy memory</p><h2>The ordered policy ideas</h2></div>
+          <p>These labels created the fine-tuning examples. The live prompt does not send this list to Qwen.</p>
+        </div>
+        <ol id="rule-list" class="rule-list"></ol>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

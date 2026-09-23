@@ -1,0 +1,37 @@
+{
+  "status": "completed",
+  "startedAtUtc": "2026-09-01T15:36:52.820191+00:00",
+  "command": [
+    "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/.venv-qwen-policy/bin/python",
+    "-m",
+    "mlx_lm",
+    "lora",
+    "--config",
+    "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/llm_policy_engine/train_config.yaml",
+    "--iters",
+    "10",
+    "--adapter-path",
+    "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-smoke-v2"
+  ],
+  "workingDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network",
+  "config": "experiments/llm_policy_engine/train_config.yaml",
+  "configSha256": "89c5c682121d992223af218b7dd41b462a85e740b68f3fee4a608aac9e5852bd",
+  "datasetHashes": {
+    "train": "b342937985477e764bc883376fa4308482bf9445c015918db07a42e27b37fdee",
+    "valid": "0c9c1b873af58a05e553ae279c97782b59b1fe56eb979abdc6d80c6d6f65957f",
+    "test": "c8bab3fa1a163a3396438bb3b02e9d89318a5c65b04b582473c7ea45917a6508"
+  },
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "python": "3.13.7 (v3.13.7:bcee1c32211, Aug 14 2025, 19:10:51) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "packages": {
+      "mlx": "0.32.2",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.16.1"
+    }
+  },
+  "exitCode": 0,
+  "finishedAtUtc": "2026-09-01T15:39:23.779761+00:00",
+  "durationSeconds": 150.938
+}

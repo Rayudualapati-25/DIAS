@@ -1,0 +1,170 @@
+{
+  "transactions": 321,
+  "rounds": [
+    {
+      "roundLabel": "stability-warmup",
+      "roundIndex": 0,
+      "count": 11,
+      "successfulTransactions": 11,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 94,
+        "mean": 1364.6363636363637,
+        "p50": 1115,
+        "p95": 2107,
+        "p99": 2116.6,
+        "max": 2119
+      }
+    },
+    {
+      "roundLabel": "stability-bin-01",
+      "roundIndex": 1,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 77,
+        "mean": 1212.1290322580646,
+        "p50": 1087,
+        "p95": 2088,
+        "p99": 2090.4,
+        "max": 2091
+      }
+    },
+    {
+      "roundLabel": "stability-bin-02",
+      "roundIndex": 2,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 70,
+        "mean": 1241.483870967742,
+        "p50": 1083,
+        "p95": 2086.5,
+        "p99": 2089.7,
+        "max": 2090
+      }
+    },
+    {
+      "roundLabel": "stability-bin-03",
+      "roundIndex": 3,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 76,
+        "mean": 1305.7096774193549,
+        "p50": 1082,
+        "p95": 2088,
+        "p99": 2101.9,
+        "max": 2107
+      }
+    },
+    {
+      "roundLabel": "stability-bin-04",
+      "roundIndex": 4,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 70,
+        "mean": 1242.5483870967741,
+        "p50": 1085,
+        "p95": 2087,
+        "p99": 2088.4,
+        "max": 2089
+      }
+    },
+    {
+      "roundLabel": "stability-bin-05",
+      "roundIndex": 5,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 76,
+        "mean": 1246.5483870967741,
+        "p50": 1087,
+        "p95": 2091,
+        "p99": 2093.4,
+        "max": 2094
+      }
+    },
+    {
+      "roundLabel": "stability-bin-06",
+      "roundIndex": 6,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 68,
+        "mean": 1241.8709677419354,
+        "p50": 1085,
+        "p95": 2088,
+        "p99": 2088.7,
+        "max": 2089
+      }
+    },
+    {
+      "roundLabel": "stability-bin-07",
+      "roundIndex": 7,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 81,
+        "mean": 1246.2903225806451,
+        "p50": 1088,
+        "p95": 2088,
+        "p99": 2099.2,
+        "max": 2104
+      }
+    },
+    {
+      "roundLabel": "stability-bin-08",
+      "roundIndex": 8,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 82,
+        "mean": 1247.1290322580646,
+        "p50": 1088,
+        "p95": 2092.5,
+        "p99": 2096.7,
+        "max": 2097
+      }
+    },
+    {
+      "roundLabel": "stability-bin-09",
+      "roundIndex": 9,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 80,
+        "mean": 1311.5483870967741,
+        "p50": 1093,
+        "p95": 2098.5,
+        "p99": 2105.1,
+        "max": 2106
+      }
+    },
+    {
+      "roundLabel": "stability-bin-10",
+      "roundIndex": 10,
+      "count": 31,
+      "successfulTransactions": 31,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 76,
+        "mean": 1243.967741935484,
+        "p50": 1087,
+        "p95": 2088,
+        "p99": 2089.3999999999996,
+        "max": 2090
+      }
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-f3f2698af3614df1",
+  "recordId": "REC-JUVENILE-001",
+  "requesterUsername": "insp.sharma",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "PoliceMSP",
+      "organization": "police",
+      "role": "inspector",
+      "rank": "3",
+      "station": "PS-Central",
+      "jurisdiction": "district-north",
+      "clearance": "high",
+      "credentialStatus": "active",
+      "assignedToRequestedCase": true
+    },
+    "resource": {
+      "recordType": "fir",
+      "caseId": "CASE-2026-002",
+      "sensitivityLevel": "high",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": true,
+      "witnessFlag": false,
+      "victimProtectionFlag": false
+    },
+    "request": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "cdc088bf547a72ce6faa5fa2ba4462fff2928a1c36bde5057f8e57f4a5899c3d",
+  "justification": "This record belongs to CASE-2026-002, which I investigate.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "JUVENILE_PROTECTED",
+    "reason": "The record is juvenile-protected and role inspector is not juvenile-authorized (GP-JUV:C1@v1).",
+    "policyRefs": [
+      "GP-JUV:C1@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [],
+    "errorCode": null,
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-f3f2698af3614df1",
+      "modelId": "qwen3-14b-dias-v7",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": "qwen3-14b-dias-lora-v7",
+      "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "cdc088bf547a72ce6faa5fa2ba4462fff2928a1c36bde5057f8e57f4a5899c3d",
+      "justificationHash": "441e7274306cdfed8dcb32cb31ac137f430e5cd997351602ec8fb9d1832f1ca9",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:08:58.554Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "d00c77d8aafa0df01609719a6e23db0aa4bf2a23085d8dc2a1ba1b741c967054",
+      "promptHash": "e5cc0b5734172a3f289ccd268494623a112c0e8dd53447d4a0a5a1e4c8fa5978",
+      "promptChars": 7605,
+      "usage": {
+        "promptTokens": 1914,
+        "completionTokens": 66
+      },
+      "rawOutputHash": "e2f5b889df65099b7f407014a52111eaa56b256b371eb0e2a92524e5979b434b",
+      "parserStatus": "OK",
+      "parserErrors": [],
+      "parserTolerances": [],
+      "generationStatus": "OK",
+      "latencyMs": {
+        "contextAssembly": 0.324,
+        "inference": 8236.542,
+        "validation": 0.125,
+        "total": 8237.219
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:09:06.791Z"
+    }
+  },
+  "auditorNote": {
+    "decision": "FORCE_DENY",
+    "llmAgreement": "AGREED",
+    "reason": "Closing after the facts check.",
+    "auditorUsername": "sp.north",
+    "decidedAtUtc": "2026-09-16T17:09:10.888Z",
+    "txId": "8c301caecea3cc50073e34522c6460c349e8ae63b79b127a2ba93eae946be5a7"
+  },
+  "createdAtUtc": "2026-09-16T17:08:58.551Z",
+  "updatedAtUtc": "2026-09-16T17:09:12.949Z"
+}

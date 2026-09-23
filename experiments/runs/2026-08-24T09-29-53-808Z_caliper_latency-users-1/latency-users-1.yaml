@@ -1,0 +1,21 @@
+test:
+  name: Latency by concurrent search workers 1
+  description: Short Caliper characterization run for latency-axis graph generation.
+  workers:
+    number: 1
+  rounds:
+    - label: search-users-1
+      txDuration: 20
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            caseId: CASE-2026-001
+          expectedCount: 2
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
