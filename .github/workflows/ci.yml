@@ -1,0 +1,167 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-hygiene:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check publication boundary and configuration
+        run: make check
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(git ls-files -z '*.js')
+
+      - name: Check Python syntax
+        shell: bash
+        run: |
+          mapfile -d '' files < <(git ls-files -z '*.py')
+          if (( ${#files[@]} )); then
+            python -m py_compile "${files[@]}"
+          fi
+
+      - name: Check shell syntax
+        shell: bash
+        run: |
+          while IFS= read -r -d '' file; do
+            bash -n "$file"
+          done < <(git ls-files -z '*.sh')
+
+      - name: Verify research entry points
+        run: |
+          test -f README.md
+          test -f CITATION.cff
+          test -f LICENSE
+          test -f papers/final_paper/SEBA_XAI_ACM_6page.tex
+          test -f output/overleaf/SEBA_XAI_Overleaf_Package/main.tex
+
+  chaincode-unit:
+    name: Chaincode unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: chaincode/crimerecords
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: chaincode/crimerecords/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run tests and coverage thresholds
+        run: npm test
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+  backend-unit:
+    name: Backend offline unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run offline tests
+        run: npm run test:unit
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+  dias-offline-suites:
+    name: Policy, frontend and dataset tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: |
+            chaincode/crimerecords/package-lock.json
+            backend/package-lock.json
+      # The frontend navigation test reads the chaincode's role tables, and the
+      # dataset tests use the backend prompt and policy context modules.
+      - name: Install locked chaincode and backend dependencies
+        run: |
+          npm ci --prefix chaincode/crimerecords
+          npm ci --prefix backend
+      - name: Policy package tests
+        run: npm test --prefix policies
+      - name: Frontend tests and module syntax
+        working-directory: frontend
+        run: |
+          npm test
+          npm run check
+      - name: Dataset and evaluation tests
+        run: npm test --prefix experiments/dias-finetuning/v2
+
+  caliper-validation:
+    name: Caliper configuration validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: benchmarks/caliper
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: benchmarks/caliper/package-lock.json
+      - name: Use the pinned npm controller
+        run: npm install --global npm@11.5.1
+      - name: Install locked dependencies
+        run: npm ci --omit=dev
+      - name: Validate configuration, scripts, and plot axes
+        run: npm run check
+      - name: Report advisories and reject critical vulnerabilities
+        run: npm audit --omit=dev --audit-level=critical

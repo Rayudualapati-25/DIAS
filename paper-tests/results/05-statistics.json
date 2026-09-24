@@ -1,0 +1,146 @@
+{
+  "method": {
+    "test": "McNemar exact test (two-sided binomial on discordant pairs)",
+    "pairing": "by case id; both arms answer the identical case set",
+    "interval": "Wilson score, 95%",
+    "jointCriterion": "schema-valid output with action, purpose, decision and reason code all matching the expected case",
+    "note": "Arms compared here were run on the same split. The v6 short-prompt arm was not retained, so prompt grounding is tested only at v4."
+  },
+  "comparisons": [
+    {
+      "comparison": "v6_vs_v4_grounded",
+      "question": "Does the v6 adapter change authorization accuracy relative to v4, with the same grounded prompt on the same held-out cases?",
+      "pairedCases": 200,
+      "firstArm": "V6",
+      "secondArm": "V4",
+      "tests": {
+        "joint": {
+          "b_only_first": 50,
+          "c_only_second": 13,
+          "discordant": 63,
+          "p": 3.0159520846423375e-06,
+          "firstAccuracy": 0.77,
+          "secondAccuracy": 0.585,
+          "firstCI95": [
+            0.706916956331165,
+            0.8229065674204248
+          ],
+          "secondCI95": [
+            0.5157391489971156,
+            0.6510571455172737
+          ],
+          "differencePP": 18.5,
+          "test": "McNemar exact (binomial, two-sided)"
+        },
+        "decision": {
+          "b_only_first": 37,
+          "c_only_second": 6,
+          "discordant": 43,
+          "p": 1.636124125070637e-06,
+          "firstAccuracy": 0.89,
+          "secondAccuracy": 0.735,
+          "firstCI95": [
+            0.8390730900132816,
+            0.9262275554056815
+          ],
+          "secondCI95": [
+            0.6698242380576751,
+            0.7913184585409307
+          ],
+          "differencePP": 15.5,
+          "test": "McNemar exact (binomial, two-sided)"
+        }
+      }
+    },
+    {
+      "comparison": "v4_grounded_vs_short",
+      "question": "Does prompt grounding change accuracy at a fixed adapter version?",
+      "pairedCases": 200,
+      "firstArm": "V4 grounded",
+      "secondArm": "V4 short",
+      "tests": {
+        "joint": {
+          "b_only_first": 34,
+          "c_only_second": 24,
+          "discordant": 58,
+          "p": 0.23704711476271959,
+          "firstAccuracy": 0.585,
+          "secondAccuracy": 0.535,
+          "firstCI95": [
+            0.5157391489971156,
+            0.6510571455172737
+          ],
+          "secondCI95": [
+            0.4658664687075603,
+            0.6028143584454236
+          ],
+          "differencePP": 5.0,
+          "test": "McNemar exact (binomial, two-sided)"
+        },
+        "decision": {
+          "b_only_first": 30,
+          "c_only_second": 18,
+          "discordant": 48,
+          "p": 0.11140289106101878,
+          "firstAccuracy": 0.735,
+          "secondAccuracy": 0.675,
+          "firstCI95": [
+            0.6698242380576751,
+            0.7913184585409307
+          ],
+          "secondCI95": [
+            0.6073198511439182,
+            0.7360842846210012
+          ],
+          "differencePP": 6.0,
+          "test": "McNemar exact (binomial, two-sided)"
+        }
+      }
+    },
+    {
+      "comparison": "subject_context_ablation",
+      "question": "Does removing the authenticated subject context change accuracy on the same validation cases?",
+      "pairedCases": 100,
+      "firstArm": "with subject context",
+      "secondArm": "without subject context",
+      "tests": {
+        "joint": {
+          "b_only_first": 47,
+          "c_only_second": 2,
+          "discordant": 49,
+          "p": 4.355626970209414e-12,
+          "firstAccuracy": 0.8,
+          "secondAccuracy": 0.35,
+          "firstCI95": [
+            0.7111708343839006,
+            0.8666330666818759
+          ],
+          "secondCI95": [
+            0.26364248241263766,
+            0.447455567054474
+          ],
+          "differencePP": 45.0,
+          "test": "McNemar exact (binomial, two-sided)"
+        },
+        "decision": {
+          "b_only_first": 3,
+          "c_only_second": 0,
+          "discordant": 3,
+          "p": 0.25,
+          "firstAccuracy": 0.87,
+          "secondAccuracy": 0.84,
+          "firstCI95": [
+            0.7901964855774672,
+            0.9224283257369903
+          ],
+          "secondCI95": [
+            0.755797306084927,
+            0.8990471151229529
+          ],
+          "differencePP": 3.0,
+          "test": "McNemar exact (binomial, two-sided)"
+        }
+      }
+    }
+  ]
+}

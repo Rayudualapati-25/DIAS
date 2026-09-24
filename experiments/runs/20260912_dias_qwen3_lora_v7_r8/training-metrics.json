@@ -1,0 +1,164 @@
+{
+  "artifactType": "dias-v7-training-metrics",
+  "label": "qwen3-14b-dias-lora-v7-r8",
+  "baseModel": "mlx-community/Qwen3-14B-4bit",
+  "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "freshBase": true,
+  "resumeAdapterUsed": false,
+  "configSha256": "aab835525eaacb9f75864399264deb7fae29d1df63f5784a83cfd5d684b464ad",
+  "trainingExamples": 1600,
+  "gradientAccumulationSteps": 4,
+  "optimizerUpdates": 400,
+  "loraRank": 8,
+  "learningRate": "1e-5",
+  "numLayers": 16,
+  "maxSequenceLength": 2560,
+  "seed": 42,
+  "startedAtUtc": "2026-09-12T11:07:27Z",
+  "finishedAtUtc": "2026-09-12T17:21:30.092030+00:00",
+  "durationSeconds": 22443,
+  "exitCode": 0,
+  "v6AdapterIntactAfterRun": true,
+  "finalAdapterSha256": "2a159c9c13be4607852575230349081a8b7ad80b7a1e53da3a063dc2297d0aa6",
+  "validationCurve": [
+    {
+      "iteration": 1,
+      "loss": 1.384
+    },
+    {
+      "iteration": 100,
+      "loss": 0.061
+    },
+    {
+      "iteration": 200,
+      "loss": 0.039
+    },
+    {
+      "iteration": 300,
+      "loss": 0.026
+    },
+    {
+      "iteration": 400,
+      "loss": 0.02
+    },
+    {
+      "iteration": 500,
+      "loss": 0.023
+    },
+    {
+      "iteration": 600,
+      "loss": 0.017
+    },
+    {
+      "iteration": 700,
+      "loss": 0.022
+    },
+    {
+      "iteration": 800,
+      "loss": 0.014
+    },
+    {
+      "iteration": 900,
+      "loss": 0.016
+    },
+    {
+      "iteration": 1000,
+      "loss": 0.016
+    },
+    {
+      "iteration": 1100,
+      "loss": 0.011
+    },
+    {
+      "iteration": 1200,
+      "loss": 0.011
+    },
+    {
+      "iteration": 1300,
+      "loss": 0.01
+    },
+    {
+      "iteration": 1400,
+      "loss": 0.01
+    },
+    {
+      "iteration": 1500,
+      "loss": 0.011
+    },
+    {
+      "iteration": 1600,
+      "loss": 0.01
+    }
+  ],
+  "bestValidationLoss": {
+    "loss": 0.01,
+    "iteration": 1300
+  },
+  "finalValidationLoss": 0.01,
+  "trainingLossSamples": [
+    {
+      "iteration": 25,
+      "loss": 0.768,
+      "itPerSec": 0.095,
+      "peakMemGb": 13.074
+    },
+    {
+      "iteration": 225,
+      "loss": 0.042,
+      "itPerSec": 0.094,
+      "peakMemGb": 13.149
+    },
+    {
+      "iteration": 425,
+      "loss": 0.008,
+      "itPerSec": 0.089,
+      "peakMemGb": 13.149
+    },
+    {
+      "iteration": 625,
+      "loss": 0.015,
+      "itPerSec": 0.088,
+      "peakMemGb": 13.149
+    },
+    {
+      "iteration": 825,
+      "loss": 0.015,
+      "itPerSec": 0.088,
+      "peakMemGb": 13.149
+    },
+    {
+      "iteration": 1025,
+      "loss": 0.014,
+      "itPerSec": 0.088,
+      "peakMemGb": 13.2
+    },
+    {
+      "iteration": 1225,
+      "loss": 0.01,
+      "itPerSec": 0.096,
+      "peakMemGb": 13.2
+    },
+    {
+      "iteration": 1425,
+      "loss": 0.008,
+      "itPerSec": 0.094,
+      "peakMemGb": 13.2
+    }
+  ],
+  "throughput": {
+    "minItPerSec": 0.08,
+    "maxItPerSec": 0.098
+  },
+  "peakMemoryGb": 13.2,
+  "checkpoints": [
+    "0000200_adapters.safetensors",
+    "0000400_adapters.safetensors",
+    "0000600_adapters.safetensors",
+    "0000800_adapters.safetensors",
+    "0001000_adapters.safetensors",
+    "0001200_adapters.safetensors",
+    "0001400_adapters.safetensors",
+    "0001600_adapters.safetensors"
+  ],
+  "claimBoundary": "Training completed and the validation curve is recorded. No held-out accuracy is claimed here; that is the evaluation artifact."
+}

@@ -1,0 +1,61 @@
+{
+  "runId": "2026-08-24T09-30-48-513Z_caliper_latency-users-1",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:30:48.516Z",
+  "benchmarkConfig": "latency-users-1.yaml",
+  "benchmarkConfigSha256": "42a3484e97a61de43ae14a73d2970748cb2487ca9a87e81925d1fbe6145f6d62",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "4b8847f29a51ce22ca5178fc8cbd28b6e999c3ca6df043af12b1bf2bfbfab7ad",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "105ea2be04152d198f7c2b0a318f6e2d94c32d57377d1f3e6d8d7947aef799c6",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/query-records.js",
+      "sha256": "e2b0249d9f635389e6ef86a3c72deb63b4a997f29ebc4a7c4bda4dafc7363f25"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "87478fb85aafd1c296b15a4eede24405bcdbafcbb088921502788c12380d49c5"
+      }
+    ],
+    "transactions": null,
+    "summary": null,
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": null,
+    "summarySha256": null,
+    "error": "transaction evidence observer was enabled but no transaction evidence was found"
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T09:31:15.249Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "performanceSummary": "caliper-summary.json",
+  "performanceSummarySha256": "f90c553e43af2183acc0ec1ca374c1b46cb2a71ff9682816d7285494409c64dc",
+  "failedTransactions": 0,
+  "reportCreated": true,
+  "reportSha256": "965854443e27b86da4620d603e6979ea0a675f052892d83fb64a3ef8cef76413",
+  "logSha256": "49d37def320c8635e11571911b7b53b2ace44f27f7cf5e8841bff8504040ad92",
+  "failureReason": "transaction evidence observer was enabled but no transaction evidence was found"
+}

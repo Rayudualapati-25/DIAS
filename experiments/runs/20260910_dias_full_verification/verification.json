@@ -1,0 +1,79 @@
+{
+  "runId": "20260910_dias_full_verification",
+  "generatedAtUtc": "2026-09-10T06:32:04Z",
+  "sourceRevision": "b81470dff07fe21cac837b956e8a2d381f5ab56e",
+  "workingTree": "feature/dias-dynamic-access-policy with uncommitted implementation changes",
+  "environment": {
+    "node": "v22.20.0",
+    "npm": "10.9.3",
+    "dockerServer": "29.5.2",
+    "fabricTopology": "six organizations, one peer each, one local orderer",
+    "model": "live registered qwen3-14b-seba-lora-v6 adapter via local MLX endpoint"
+  },
+  "checks": [
+    {
+      "name": "chaincode full suite",
+      "command": "cd chaincode/crimerecords && npm test",
+      "status": "passed",
+      "passed": 211,
+      "failed": 0,
+      "coverage": {
+        "statementsPercent": 91.14,
+        "branchesPercent": 82.9,
+        "functionsPercent": 92.12,
+        "linesPercent": 92.53
+      }
+    },
+    {
+      "name": "backend full suite",
+      "command": "cd backend && npm test",
+      "status": "passed",
+      "passed": 111,
+      "failed": 0,
+      "notes": "Includes 95 unit tests and 16 live API tests against Fabric and Qwen."
+    },
+    {
+      "name": "frontend tests and syntax",
+      "command": "cd frontend && npm test && npm run check",
+      "status": "passed",
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "name": "workflow comparison assertions",
+      "command": "node --test experiments/dias/run-workflow-comparison.test.js",
+      "status": "passed",
+      "scenarioCount": 27,
+      "failed": 0
+    },
+    {
+      "name": "repository, Compose, and shell checks",
+      "command": "make check",
+      "status": "passed"
+    },
+    {
+      "name": "live DIAS Fabric acceptance",
+      "command": "node experiments/dias/run-live-fabric-acceptance.js",
+      "status": "passed",
+      "evidence": "experiments/runs/20260910_dias_live_fabric/verification.json"
+    },
+    {
+      "name": "browser interaction and responsive QA",
+      "status": "passed",
+      "viewports": [375, 768, 1440],
+      "consoleErrorsOrWarnings": 0,
+      "horizontalOverflowPixels": 0,
+      "missingImageAlt": 0,
+      "unlabeledControls": 0,
+      "unnamedButtons": 0,
+      "keyboardFocusReachedDialogClose": true,
+      "notes": "Validated requester pending states, auditor queue, full native dialog, Force Deny final state, and dynamic-rule table. Core Web Vitals and automated WCAG contrast were not measured."
+    },
+    {
+      "name": "whitespace validation",
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "status": "passed"
+}

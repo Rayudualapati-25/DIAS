@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 300" width="420" height="300" font-family="Helvetica, Arial, sans-serif">
+<rect width="420" height="300" fill="#ffffff"/>
+<text x="20" y="24" font-size="15" font-weight="600" fill="#222222">untuned-qwen3-14b — test-decision-balanced</text>
+<rect x="130" y="70" width="106" height="106" fill="#2f7d4f" fill-opacity="0.24"/>
+<text x="183" y="125" font-size="20" font-weight="600" text-anchor="middle" fill="#222222">70</text>
+<rect x="240" y="70" width="106" height="106" fill="#8a8a8a" fill-opacity="0.43"/>
+<text x="293" y="125" font-size="20" font-weight="600" text-anchor="middle" fill="#222222">204</text>
+<rect x="130" y="180" width="106" height="106" fill="#b03a2e" fill-opacity="0.17"/>
+<text x="183" y="235" font-size="20" font-weight="600" text-anchor="middle" fill="#222222">14</text>
+<text x="183" y="253" font-size="9" text-anchor="middle" fill="#b03a2e">false ALLOW</text>
+<rect x="240" y="180" width="106" height="106" fill="#2f7d4f" fill-opacity="0.51"/>
+<text x="293" y="235" font-size="20" font-weight="600" text-anchor="middle" fill="#222222">266</text>
+<text x="185" y="60" font-size="11" text-anchor="middle" fill="#444444">predicted ALLOW</text>
+<text x="295" y="60" font-size="11" text-anchor="middle" fill="#444444">predicted DENY</text>
+<text x="120" y="125" font-size="11" text-anchor="end" fill="#444444">true ALLOW</text>
+<text x="120" y="235" font-size="11" text-anchor="end" fill="#444444">true DENY</text>
+<text x="20" y="316" font-size="11" fill="#444444">46 response(s) were not schema-valid and are excluded from this matrix.</text>
+</svg>

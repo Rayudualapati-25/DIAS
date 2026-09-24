@@ -1,0 +1,116 @@
+{
+  "createdAtUtc": "2026-09-01T15:25:03.318Z",
+  "config": {
+    "provider": "openai",
+    "url": "http://127.0.0.1:8080",
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "arm": "no-rules",
+    "data": "experiments/llm_policy_engine/data/test.jsonl",
+    "output": "experiments/runs/20260901_qwen3_policy_engine_pilot/tuned_training_template_one.json",
+    "limit": 1,
+    "seed": 42,
+    "testDataSha256": "306d27c24f9b0237df670ea4d4084c3a5e8792f0853f6234d839fd70c2ba306f"
+  },
+  "modelInfo": null,
+  "metrics": {
+    "n": 1,
+    "parseRate": 1,
+    "strictJsonRate": 1,
+    "schemaValidRate": 0,
+    "decisionAccuracy": 0,
+    "reasonAccuracy": 0,
+    "jointDecisionReasonAccuracy": 0,
+    "decisiveAttributeExactRate": 0,
+    "parsedActionAccuracy": 0,
+    "parsedPurposeAccuracy": 0,
+    "falseAllowRateAmongNonAllow": 0,
+    "falseAllowCount": 0,
+    "expectedNonAllowCount": 1,
+    "adversarialJointAccuracy": null,
+    "latencyMs": {
+      "median": 10168.64,
+      "p95": 10168.64,
+      "mean": 10168.64
+    },
+    "perDecision": {
+      "allow": {
+        "support": 0,
+        "recall": null
+      },
+      "deny": {
+        "support": 1,
+        "recall": 0
+      },
+      "escalate": {
+        "support": 0,
+        "recall": null
+      }
+    },
+    "perReason": {
+      "VICTIM_DATA_NOT_NECESSARY": {
+        "support": 1,
+        "recall": 0
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "test-victim_data_not_necessary-001",
+      "adversarial": false,
+      "expected": {
+        "parsedRequest": {
+          "action": "view",
+          "purpose": "forensic-analysis",
+          "recordId": "REC-LLM-01201",
+          "recordType": "forensic-report",
+          "caseId": "CASE-LLM-01201",
+          "emergencyFlag": false
+        },
+        "decision": "deny",
+        "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+        "decisiveAttributes": [
+          "object.victimProtectionFlag",
+          "subject.role",
+          "env.purpose"
+        ],
+        "counterfactual": "request a purpose-specific evidence artifact that excludes victim identity data",
+        "explanation": "Access is denied because the forensic role does not need victim-protected raw data for this request.",
+        "policyVersion": "crime-policy-v1",
+        "modelVersion": "qwen3-14b-seba-lora-v1"
+      },
+      "prediction": {
+        "action": "inspect",
+        "resource": "REC-LLM-01201",
+        "caseId": "CASE-LLM-01201",
+        "sensitivityLevel": "medium",
+        "jurisdictionMatch": true,
+        "clearanceSufficient": true,
+        "recordState": "unsealed",
+        "victimProtectionFlag": true,
+        "accessGranted": true
+      },
+      "raw": "{\n  \"action\": \"inspect\",\n  \"resource\": \"REC-LLM-01201\",\n  \"caseId\": \"CASE-LLM-01201\",\n  \"sensitivityLevel\": \"medium\",\n  \"jurisdictionMatch\": true,\n  \"clearanceSufficient\": true,\n  \"recordState\": \"unsealed\",\n  \"victimProtectionFlag\": true,\n  \"accessGranted\": true\n}",
+      "strictJson": true,
+      "schemaProblems": [
+        "invalid decision",
+        "invalid reasonCode",
+        "missing parsedRequest",
+        "invalid decisiveAttributes",
+        "missing counterfactual",
+        "invalid explanation",
+        "invalid policyVersion",
+        "invalid modelVersion"
+      ],
+      "decisionCorrect": false,
+      "reasonCorrect": false,
+      "jointCorrect": false,
+      "attributesCorrect": false,
+      "actionCorrect": false,
+      "purposeCorrect": false,
+      "latencyMs": 10168.64,
+      "promptTokens": 276,
+      "completionTokens": 387,
+      "error": null
+    }
+  ]
+}

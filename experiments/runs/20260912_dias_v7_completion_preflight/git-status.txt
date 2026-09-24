@@ -1,0 +1,53 @@
+On branch main
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   chaincode/crimerecords/lib/accessContract.js
+	modified:   chaincode/crimerecords/lib/auditContract.js
+	modified:   chaincode/crimerecords/lib/policyContract.js
+	modified:   chaincode/crimerecords/lib/recordContract.js
+	deleted:    chaincode/crimerecords/test/accessContract.test.js
+	deleted:    chaincode/crimerecords/test/aiDecisionFlow.test.js
+	deleted:    chaincode/crimerecords/test/auditContract.test.js
+	deleted:    chaincode/crimerecords/test/canonicalInputs.test.js
+	deleted:    chaincode/crimerecords/test/dynamicPolicy.test.js
+	deleted:    chaincode/crimerecords/test/policyContract.test.js
+	deleted:    chaincode/crimerecords/test/policyEngine.test.js
+	modified:   chaincode/crimerecords/test/recordContract.test.js
+	deleted:    chaincode/crimerecords/test/structuredExplanation.test.js
+	modified:   network/scripts/deployCC.sh
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v1-smoke/
+	backend/src/dias/
+	backend/test/diasContract.unit.test.js
+	backend/test/diasPolicyContext.unit.test.js
+	backend/test/diasPrompt.unit.test.js
+	backend/test/diasRecommender.unit.test.js
+	backend/test/fixtures/
+	chaincode/crimerecords/lib/dias/
+	chaincode/crimerecords/test/architectureGuard.test.js
+	chaincode/crimerecords/test/diasAccessSecurity.test.js
+	chaincode/crimerecords/test/diasAccessWorkflow.test.js
+	chaincode/crimerecords/test/diasAuditTrail.test.js
+	chaincode/crimerecords/test/diasAuthorization.test.js
+	chaincode/crimerecords/test/diasLifecycle.test.js
+	chaincode/crimerecords/test/diasPolicyContract.test.js
+	chaincode/crimerecords/test/diasProvenance.test.js
+	chaincode/crimerecords/test/diasSchema.test.js
+	chaincode/crimerecords/test/diasTestWorld.js
+	chaincode/crimerecords/test/legacy/
+	docs/policies/
+	experiments/dias-finetuning/train-v1-smoke.yaml
+	experiments/dias-finetuning/train-v1.yaml
+	experiments/plans/20260911_dias_pretraining_readiness.md
+	experiments/plans/20260911_dias_qwen3_lora_training.md
+	experiments/runs/20260911_dias_design_review/
+	experiments/runs/20260911_dias_qwen3_lora_smoke_v1/
+	experiments/runs/20260911_dias_qwen3_lora_train_v1/
+	experiments/runs/20260912_dias_v7_completion_preflight/
+	policies/
+	reports/iteration/iter_034_dias_design_review.md
+
+no changes added to commit (use "git add" and/or "git commit -a")

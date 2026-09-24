@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "2026-08-24T09-48-32-707Z_caliper_latency_pilot_suite",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:48:32.707Z",
+  "interpretation": "Single live-network pilot; not repeated paper evidence.",
+  "controls": {
+    "execution": "strictly sequential; overlap guard and exclusive suite lock",
+    "ledgerResetBetweenPoints": false,
+    "warmupsExcludedFromAxes": true
+  },
+  "runs": [
+    {
+      "key": "clients1",
+      "label": "latency-clients-1",
+      "config": "configs/latency-clients-1.yaml",
+      "runId": "2026-08-24T09-48-33-119Z_caliper_latency-clients-1",
+      "runDirectory": "experiments/runs/2026-08-24T09-48-33-119Z_caliper_latency-clients-1"
+    },
+    {
+      "key": "clients2",
+      "label": "latency-clients-2",
+      "config": "configs/latency-clients-2.yaml",
+      "runId": "2026-08-24T09-49-46-253Z_caliper_latency-clients-2",
+      "runDirectory": "experiments/runs/2026-08-24T09-49-46-253Z_caliper_latency-clients-2"
+    },
+    {
+      "key": "clients4",
+      "label": "latency-clients-4",
+      "config": "configs/latency-clients-4.yaml",
+      "runId": "2026-08-24T09-50-59-422Z_caliper_latency-clients-4",
+      "runDirectory": "experiments/runs/2026-08-24T09-50-59-422Z_caliper_latency-clients-4"
+    },
+    {
+      "key": "clients8",
+      "label": "latency-clients-8",
+      "config": "configs/latency-clients-8.yaml",
+      "runId": "2026-08-24T09-52-12-580Z_caliper_latency-clients-8",
+      "runDirectory": "experiments/runs/2026-08-24T09-52-12-580Z_caliper_latency-clients-8"
+    }
+  ],
+  "axes": [],
+  "failureReason": "latency-write-tps failed; retained at /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-53-25-787Z_caliper_latency-write-tps",
+  "finishedAtUtc": "2026-08-24T09:54:18.566Z"
+}

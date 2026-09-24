@@ -1,0 +1,11 @@
+axis_id,run_id,round_label,x_axis,x_value,phase,status,successful_transactions,failed_transactions,observed_send_rate_tps,throughput_tps,latency_avg_seconds,latency_min_seconds,latency_max_seconds,note
+read_lookup,2026-08-24T09-57-36-116Z_caliper_latency-clients-1,clients-1-read,workers,1,measurement,success,46,0,1.0,1.0,0.01,0,0.02,"lookup latency"
+read_lookup,2026-08-24T09-58-49-262Z_caliper_latency-clients-2,clients-2-read,workers,2,measurement,success,92,0,2.0,2.0,0.01,0.01,0.03,"lookup latency"
+read_lookup,2026-08-24T10-00-02-406Z_caliper_latency-clients-4,clients-4-read,workers,4,measurement,success,184,0,4.1,4.1,0.02,0,0.03,"lookup latency"
+read_lookup,2026-08-24T10-01-15-573Z_caliper_latency-clients-8,clients-8-read,workers,8,measurement,success,368,0,8.2,8.2,0.02,0.01,0.04,"lookup latency"
+access_write,2026-08-24T10-02-28-804Z_caliper_latency-write-tps,write-tps-1,tps,1,measurement,success,52,0,1.1,1.0,2.10,2.07,2.12,"access-decision write"
+access_write,2026-08-24T10-02-28-804Z_caliper_latency-write-tps,write-tps-2,tps,2,measurement,success,96,0,2.1,2.1,1.35,0.10,2.11,"access-decision write"
+access_write,2026-08-24T10-02-28-804Z_caliper_latency-write-tps,write-tps-5,tps,5,measurement,success,232,0,5.1,4.9,0.92,0.09,2.10,"access-decision write"
+access_write,2026-08-24T10-02-28-804Z_caliper_latency-write-tps,write-tps-10,tps,10,measurement,success,456,0,10.1,9.7,0.52,0.07,2.12,"access-decision write"
+access_write,2026-08-24T10-02-28-804Z_caliper_latency-write-tps,write-tps-20,tps,20,measurement,success,904,0,20.1,19.2,0.30,0.06,2.06,"access-decision write"
+query_count,2026-08-24T10-07-43-197Z_caliper_latency-query-count,query-count-5,tps,5,measurement,failed,,,,,,,,"rich-query saturation; 60-second deadline"

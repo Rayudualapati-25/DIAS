@@ -1,0 +1,22 @@
+[
+  {
+    "name": "evidenceDetails",
+    "//": "Police (owning agency), Forensics (author), Prosecution (case preparation), Court (judicial review). Four member orgs so that a MAJORITY-of-six endorsement can be satisfied entirely by collection members - Fabric refuses to send transient data to an org outside the distribution policy, so the endorser set and this membership must be sized against the CURRENT organisation count.",
+    "policy": "OR('PoliceMSP.member', 'ForensicsMSP.member', 'ProsecutionMSP.member', 'CourtMSP.member')",
+    "requiredPeerCount": 1,
+    "maxPeerCount": 3,
+    "blockToLive": 0,
+    "memberOnlyRead": true,
+    "memberOnlyWrite": true
+  },
+  {
+    "name": "accessRequestQuery",
+    "//": "The requester's natural-language question. The ledger holds only its SHA-256. Every organisation whose members may raise a request must be a member, because memberOnlyWrite refuses the transient write otherwise - the policy engine is written to answer an oversight request with a governed RBAC_NO_PERMISSION deny, which it can only do if the request can be raised at all. The AI organisation is included so the model's own peer receives the question directly.",
+    "policy": "OR('PoliceMSP.member', 'ForensicsMSP.member', 'ProsecutionMSP.member', 'CourtMSP.member', 'AuditMSP.member', 'AIOrgMSP.member')",
+    "requiredPeerCount": 1,
+    "maxPeerCount": 4,
+    "blockToLive": 0,
+    "memberOnlyRead": true,
+    "memberOnlyWrite": true
+  }
+]

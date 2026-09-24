@@ -1,0 +1,222 @@
+{
+  "createdAtUtc": "2026-09-02T06:47:42.212Z",
+  "interfaceUrl": "http://127.0.0.1:3002",
+  "health": {
+    "ready": true,
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "modelVersion": "qwen3-14b-seba-lora-v4",
+    "adapterVerified": true
+  },
+  "status": "passed",
+  "cases": [
+    {
+      "name": "allow-active-assigned-investigator",
+      "signedInAs": "user-sharma",
+      "expected": "allow",
+      "status": 200,
+      "actual": "allow",
+      "reasonCode": "POLICY_SATISFIED",
+      "decisionSource": "qwen3-14b-seba-lora-v4",
+      "modelOutputConsistent": true,
+      "latencyMs": 1885.02,
+      "passed": true,
+      "response": {
+        "requestId": "5571e57e-dc64-4260-8aaf-0860d7e0d573",
+        "decidedAtUtc": "2026-09-02T06:47:37.783Z",
+        "profile": {
+          "id": "user-sharma",
+          "name": "Ananya Sharma",
+          "title": "Investigating Officer",
+          "mspId": "PoliceMSP",
+          "role": "investigating-officer",
+          "clearance": "high",
+          "jurisdiction": "district-north",
+          "credentialStatus": "active",
+          "caseAssignments": "CASE-2026-001"
+        },
+        "resource": {
+          "recordId": "REC-FIR-001",
+          "label": "FIR — North District",
+          "caseId": "CASE-2026-001",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "sealed": false,
+          "juvenileFlag": false,
+          "victimProtectionFlag": false
+        },
+        "result": {
+          "decision": "allow",
+          "modelDecision": "allow",
+          "decisionSource": "qwen3-14b-seba-lora-v4",
+          "modelOutputConsistent": true,
+          "reasonCode": "POLICY_SATISFIED",
+          "action": "view",
+          "purpose": "investigation",
+          "explanation": "Access is allowed because every applicable policy condition is satisfied.",
+          "decisiveAttributes": [
+            "subject.role",
+            "subject.jurisdiction",
+            "subject.clearance",
+            "query.action",
+            "query.purpose"
+          ],
+          "counterfactual": null,
+          "policyVersion": "crime-policy-v1",
+          "modelVersion": "qwen3-14b-seba-lora-v4",
+          "context": {
+            "profileId": "user-sharma",
+            "resourceId": "REC-FIR-001",
+            "emergencyFlag": false,
+            "approvalTokenPresent": false
+          }
+        },
+        "evidence": {
+          "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+          "latencyMs": 1885.02,
+          "promptSha256": "85e1144153b70c2a8bbe7c4e26a91d008b593ca5e9fcaeb78a2abc1109926f20",
+          "rawOutputSha256": "c48840deee5d518bd75633cd4dad857d1cf76c192b0ca13709255fa623cf054a",
+          "servedModel": "mlx-community/Qwen3-14B-4bit",
+          "modelVersion": "qwen3-14b-seba-lora-v4"
+        }
+      }
+    },
+    {
+      "name": "deny-suspended-credential",
+      "signedInAs": "user-rathore",
+      "expected": "deny",
+      "status": 200,
+      "actual": "deny",
+      "reasonCode": "CRED_NOT_ACTIVE",
+      "decisionSource": "qwen3-14b-seba-lora-v4",
+      "modelOutputConsistent": true,
+      "latencyMs": 2111.52,
+      "passed": true,
+      "response": {
+        "requestId": "5927afd1-1f4f-4d05-a1e7-0b284ab2c4d5",
+        "decidedAtUtc": "2026-09-02T06:47:39.921Z",
+        "profile": {
+          "id": "user-rathore",
+          "name": "Meera Rathore",
+          "title": "Inspector — Suspended Credential",
+          "mspId": "PoliceMSP",
+          "role": "inspector",
+          "clearance": "high",
+          "jurisdiction": "district-north",
+          "credentialStatus": "suspended",
+          "caseAssignments": "CASE-2026-001"
+        },
+        "resource": {
+          "recordId": "REC-FIR-001",
+          "label": "FIR — North District",
+          "caseId": "CASE-2026-001",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "sealed": false,
+          "juvenileFlag": false,
+          "victimProtectionFlag": false
+        },
+        "result": {
+          "decision": "deny",
+          "modelDecision": "deny",
+          "decisionSource": "qwen3-14b-seba-lora-v4",
+          "modelOutputConsistent": true,
+          "reasonCode": "CRED_NOT_ACTIVE",
+          "action": "view",
+          "purpose": "investigation",
+          "explanation": "Access is denied because the authenticated credential is not active.",
+          "decisiveAttributes": [
+            "subject.credentialStatus"
+          ],
+          "counterfactual": "An active credential would permit evaluation of the remaining policy conditions.",
+          "policyVersion": "crime-policy-v1",
+          "modelVersion": "qwen3-14b-seba-lora-v4",
+          "context": {
+            "profileId": "user-rathore",
+            "resourceId": "REC-FIR-001",
+            "emergencyFlag": false,
+            "approvalTokenPresent": false
+          }
+        },
+        "evidence": {
+          "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+          "latencyMs": 2111.52,
+          "promptSha256": "d53915c8f0c76b912a5ec3e70910eed02ea402e1a3c23297ca21f26e3138bc3f",
+          "rawOutputSha256": "666acaa0f9488a13b2a3895923ea6bae8f8f603db3c5be3d5717e5058436dca7",
+          "servedModel": "mlx-community/Qwen3-14B-4bit",
+          "modelVersion": "qwen3-14b-seba-lora-v4"
+        }
+      }
+    },
+    {
+      "name": "escalate-cross-jurisdiction",
+      "signedInAs": "user-singh",
+      "expected": "escalate",
+      "status": 200,
+      "actual": "escalate",
+      "reasonCode": "CROSS_JURISDICTION",
+      "decisionSource": "qwen3-14b-seba-lora-v4",
+      "modelOutputConsistent": true,
+      "latencyMs": 2251.11,
+      "passed": true,
+      "response": {
+        "requestId": "7df7a493-6b94-46c2-b8dc-0b3d9c44ce1e",
+        "decidedAtUtc": "2026-09-02T06:47:42.211Z",
+        "profile": {
+          "id": "user-singh",
+          "name": "Arjun Singh",
+          "title": "Inspector — South District",
+          "mspId": "PoliceMSP",
+          "role": "inspector",
+          "clearance": "high",
+          "jurisdiction": "district-south",
+          "credentialStatus": "active",
+          "caseAssignments": "CASE-2026-001"
+        },
+        "resource": {
+          "recordId": "REC-FIR-001",
+          "label": "FIR — North District",
+          "caseId": "CASE-2026-001",
+          "recordType": "fir",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "sealed": false,
+          "juvenileFlag": false,
+          "victimProtectionFlag": false
+        },
+        "result": {
+          "decision": "escalate",
+          "modelDecision": "escalate",
+          "decisionSource": "qwen3-14b-seba-lora-v4",
+          "modelOutputConsistent": true,
+          "reasonCode": "CROSS_JURISDICTION",
+          "action": "view",
+          "purpose": "investigation",
+          "explanation": "Access is escalated because the requester and record jurisdictions differ without an approved emergency exception.",
+          "decisiveAttributes": [
+            "subject.jurisdiction",
+            "resource.jurisdiction"
+          ],
+          "counterfactual": "Use a requester from the record jurisdiction or obtain a separately approved emergency exception.",
+          "policyVersion": "crime-policy-v1",
+          "modelVersion": "qwen3-14b-seba-lora-v4",
+          "context": {
+            "profileId": "user-singh",
+            "resourceId": "REC-FIR-001",
+            "emergencyFlag": false,
+            "approvalTokenPresent": false
+          }
+        },
+        "evidence": {
+          "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+          "latencyMs": 2251.11,
+          "promptSha256": "492bbed3d2c1d7addc170a323df4fd4d26ba010668862383542c972ac761d39a",
+          "rawOutputSha256": "bde6318bee27d9e637ddc49192c0e99c58f50c3ad20ba28e21e047f88fe19df5",
+          "servedModel": "mlx-community/Qwen3-14B-4bit",
+          "modelVersion": "qwen3-14b-seba-lora-v4"
+        }
+      }
+    }
+  ]
+}

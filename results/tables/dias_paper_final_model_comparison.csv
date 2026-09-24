@@ -1,0 +1,13 @@
+set,model,examples,valid,correct,accuracy,balanced_accuracy,false_allow,false_deny,reason_accuracy,policy_reference_accuracy,review_flag_accuracy,mean_latency_ms,p95_latency_ms
+"validation-balanced","baseline",400,370,215,0.581081,0.576912,7,148,0.359459,0.22973,0.824324,9297,13376.7
+"validation-balanced","fine-tuned-final",400,400,395,0.9875,0.9875,3,2,0.9725,0.9525,0.995,7431,8253.8
+"test-decision-balanced","baseline",600,554,336,0.606498,0.602737,14,204,0.366426,0.234657,0.814079,7787,9488.5
+"test-decision-balanced","fine-tuned-final",600,600,592,0.986667,0.986667,6,2,0.973333,0.953333,0.998333,7788.1,9210.5
+"test-reason-balanced","baseline",540,509,448,0.880157,0.597257,19,42,0.479371,0.239686,0.770138,7454.5,9147
+"test-reason-balanced","fine-tuned-final",540,540,536,0.992593,0.995834,4,0,0.983333,0.951852,0.998148,7225.7,8354.1
+"test-adversarial","baseline",389,333,188,0.564565,0.531035,4,141,0.264264,0.183183,0.618619,8880.9,11793.5
+"test-adversarial","fine-tuned-final",389,389,383,0.984576,0.985294,6,0,0.984576,0.984576,1,7408.7,8100
+"test-ood-paraphrase","baseline",400,373,240,0.643432,0.634539,28,105,0.436997,0.340483,0.841823,9301.9,11487.9
+"test-ood-paraphrase","fine-tuned-final",400,400,395,0.9875,0.9875,4,1,0.9875,0.98,0.925,7248,7892.4
+"test-multi-rule","baseline",370,352,352,1,"",0,0,0.542614,0.011364,0.755682,8496.3,10287.6
+"test-multi-rule","fine-tuned-final",370,370,370,1,"",0,0,0.948649,0.813514,0.997297,7842,9258.7

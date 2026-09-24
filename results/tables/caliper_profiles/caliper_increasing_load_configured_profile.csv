@@ -1,0 +1,10 @@
+label,phase,start_s,end_s,duration_s,target_tps,workers,planned_read_percent,planned_write_percent
+increasing-load-1-tps,measurement,0,60,60,1.0,4,,
+caliper-inter-round-wait,wait,60,65,5,0.0,4,,
+increasing-load-2-tps,measurement,65,125,60,2.0,4,,
+caliper-inter-round-wait,wait,125,130,5,0.0,4,,
+increasing-load-5-tps,measurement,130,190,60,5.0,4,,
+caliper-inter-round-wait,wait,190,195,5,0.0,4,,
+increasing-load-10-tps,measurement,195,255,60,10.0,4,,
+caliper-inter-round-wait,wait,255,260,5,0.0,4,,
+increasing-load-20-tps,measurement,260,320,60,20.0,4,,

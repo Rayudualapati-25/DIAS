@@ -1,0 +1,25 @@
+# Bounded overnight seed-sensitivity pilot. Not a full-data robustness run.
+model: mlx-community/Qwen3-14B-4bit
+train: true
+fine_tune_type: lora
+optimizer: adam
+data: ../experiments/dias-finetuning/data-v2-binary/staged/train-400
+seed: 42
+num_layers: 16
+batch_size: 1
+iters: 256
+val_batches: 20
+learning_rate: 1e-5
+steps_per_report: 16
+steps_per_eval: 64
+grad_accumulation_steps: 4
+adapter_path: experiments/llm_policy_engine/adapters/qwen3-14b-dias-pilot-seed-42
+save_every: 64
+max_seq_length: 2560
+mask_prompt: true
+grad_checkpoint: true
+lora_parameters:
+  rank: 8
+  dropout: 0.05
+  scale: 20.0
+

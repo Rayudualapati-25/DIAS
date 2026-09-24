@@ -1,0 +1,186 @@
+{
+  "runId": "20260905_six_peer_manuscript_update",
+  "observedAtLocal": "2026-09-05 21:14 IST",
+  "purpose": "Freeze the evidence used by the updated full SEAL manuscript.",
+  "network": {
+    "channel": "crimechannel",
+    "chaincode": {
+      "name": "crimerecords",
+      "version": "3.2",
+      "sequence": 3
+    },
+    "organizations": [
+      "PoliceMSP",
+      "ForensicsMSP",
+      "ProsecutionMSP",
+      "CourtMSP",
+      "AuditMSP",
+      "AIOrgMSP"
+    ],
+    "peerRuntime": {
+      "expected": 6,
+      "observedRunning": 6,
+      "commonLedgerHeight": 70,
+      "commonCurrentBlockHashBase64": "Sf5/GCz0b/RhwGqODzr/b9P4dKK+smG2hRcctrFjtVk="
+    },
+    "chaincodeApprovalObservedForAllOrganizations": true,
+    "defaultApplicationEndorsement": "MAJORITY",
+    "endorsementsRequiredForSixOrganizations": 4,
+    "orderer": {
+      "count": 1,
+      "consensusConfiguration": "Raft"
+    }
+  },
+  "activeGovernance": {
+    "policyVersion": "crime-policy-v2",
+    "policyActivationTransactionId": "c375df...",
+    "modelVersion": "qwen3-14b-seba-lora-v4",
+    "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+    "modelRegistrationTransactionId": "021139...",
+    "publicKeySha256Prefix": "066ae..."
+  },
+  "modelService": {
+    "baseModel": "mlx-community/Qwen3-14B-4bit",
+    "endpoint": "http://127.0.0.1:8080",
+    "runtime": "MLX-LM",
+    "serviceObservedRunning": true,
+    "backendObservedRunning": true,
+    "decisionIdentity": "AIOrgMSP/llm-decider",
+    "directSmokeTest": {
+      "expectedDecision": "ALLOW",
+      "observedDecision": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "observedReasonCode": "POLICY_SATISFIED",
+      "reportedLatencyMs": 2581,
+      "scope": "one-sample operational smoke test; not an accuracy benchmark"
+    },
+    "restartRisk": "The running server was launched with the pre-move adapter path under /Users/venkatrayudu/Workspace/LLMxAI. It remains alive because the adapter is loaded, but its launch command must use the relocated repository path before a restart."
+  },
+  "tests": {
+    "chaincode": {
+      "passing": 133,
+      "exitCode": 0,
+      "statementCoveragePercent": 91.62,
+      "branchCoveragePercent": 83.31,
+      "functionCoveragePercent": 96.69,
+      "lineCoveragePercent": 93.12
+    },
+    "frontend": {
+      "passing": 7,
+      "exitCode": 0
+    },
+    "backend": {
+      "unitTestsPassing": 57,
+      "wholeSuiteExitCode": 1,
+      "integrationFailure": "The live API before-hook could not register the aud.qureshi fixture identity, so the live API cases did not start."
+    }
+  },
+  "retainedV4Evaluation": {
+    "importantScope": "360-case predominantly single-condition policy-v1 suite; not a current policy-v2 benchmark",
+    "cases": 360,
+    "parseSuccessPercent": 100,
+    "strictJsonPercent": 100,
+    "schemaValidPercent": 100,
+    "decisionAccuracyPercent": 91.39,
+    "jointDecisionReasonAccuracyPercent": 88.06,
+    "adversarialJointAccuracyPercent": 76.67,
+    "decisionMacroF1": 0.8975,
+    "reasonMacroF1": 0.8839,
+    "falseAllows": {
+      "count": 22,
+      "expectedNonAllowCases": 300,
+      "percent": 7.33
+    },
+    "latencyMs": {
+      "mean": 2340.55,
+      "median": 2306.31,
+      "p95": 2483.04
+    }
+  },
+  "guardReplay": {
+    "importantScope": "post-hoc deterministic replay on retained outputs; not a proof of universal safety",
+    "unguarded": {
+      "decisionAccuracyPercent": 91.39,
+      "jointDecisionReasonAccuracyPercent": 88.06,
+      "falseAllows": 22,
+      "referrals": 0
+    },
+    "guarded": {
+      "decisionAccuracyPercent": 90.83,
+      "jointDecisionReasonAccuracyPercent": 88.06,
+      "falseAllows": 0,
+      "referrals": 43,
+      "referralPercent": 11.94
+    }
+  },
+  "authenticatedSubjectAblation": {
+    "importantScope": "60-case comparable retained subset",
+    "fullInput": {
+      "decisionAccuracyPercent": 93.33,
+      "jointDecisionReasonAccuracyPercent": 90.00
+    },
+    "withoutAuthenticatedSubject": {
+      "decisionAccuracyPercent": 66.67,
+      "jointDecisionReasonAccuracyPercent": 46.67
+    }
+  },
+  "harderMultiConditionEvaluation": {
+    "v4OnV5Suite": {
+      "decisionAccuracyPercent": 57.22,
+      "jointDecisionReasonAccuracyPercent": 42.22,
+      "adversarialJointAccuracyPercent": 48.33,
+      "falseAllows": 45,
+      "expectedNonAllowCases": 300,
+      "schemaInvalidOutputs": 1
+    },
+    "v5OnV4Suite": {
+      "decisionAccuracyPercent": 60.83,
+      "jointDecisionReasonAccuracyPercent": 53.06,
+      "adversarialJointAccuracyPercent": 47.50,
+      "falseAllows": 82,
+      "expectedNonAllowCases": 300
+    },
+    "v5OnV5Suite": {
+      "decisionAccuracyPercent": 60.83,
+      "jointDecisionReasonAccuracyPercent": 46.94,
+      "adversarialJointAccuracyPercent": 40.83,
+      "falseAllows": 100,
+      "expectedNonAllowCases": 300
+    },
+    "promotionDecision": "V5 was rejected; V4 remains the registered model."
+  },
+  "policyV2PrecisionWork": {
+    "status": "dataset generated; candidate training and evaluation not yet completed",
+    "modelVersionPlanned": "qwen3-14b-seba-lora-v6",
+    "seed": 20260905,
+    "trainCases": 1200,
+    "validationCases": 100,
+    "testCases": 200,
+    "reasonClasses": 10,
+    "rolesRepresented": 22
+  },
+  "generatedArtifacts": [
+    {
+      "path": "papers/final_paper/SEAL_latest_full_manuscript.md",
+      "sha256": "dd01fa70ceda034ea380b197fee4fd4565372708da6f111b12ffa1c46ac87938"
+    },
+    {
+      "path": "experiments/plans/20260905_six_peer_manuscript_update.md",
+      "sha256": "705976066a31d2bc7ecb468833732fb26336bec34e61c1437becde5b92aa61a8"
+    },
+    {
+      "path": "reports/iteration/iter_028_six_peer_full_manuscript.md",
+      "sha256": "e545fe92428baf1c63979da9d55fa6c341ed5ddfad7910b975397008a170ada1"
+    },
+    {
+      "path": "results/tables/six-peer-manuscript-update/evidence-summary.md",
+      "sha256": "e9328624cd5b64c239a747f550095eec1dd3aca32c2140a1a4a02f4bbbd933ba"
+    }
+  ],
+  "evidenceLimitations": [
+    "No new end-to-end six-peer live access-request transaction benchmark was completed for this manuscript update.",
+    "The current policy-v2 precision dataset exists, but V6 training and evaluation do not yet exist.",
+    "The retained V4 accuracy figures describe the earlier predominantly single-condition policy-v1 suite.",
+    "The older UI latency measurements came from the prior five-organization path and are not presented as current six-organization Qwen latency."
+  ]
+}

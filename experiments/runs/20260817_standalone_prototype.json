@@ -1,0 +1,49 @@
+{
+  "runId": "20260817_standalone_prototype",
+  "date": "2026-08-17",
+  "objective": "Create and verify a minimal standalone copy of the crime-records browser prototype without modifying or deleting original project files.",
+  "environment": {
+    "node": "v22.20.0",
+    "platform": "local macOS workspace",
+    "networkBinding": "temporary 127.0.0.1 port",
+    "externalDependencies": []
+  },
+  "baseline": {
+    "command": "chaincode/crimerecords/node_modules/.bin/mocha --recursive test/**/*.test.js --timeout 30000",
+    "passed": 92,
+    "failed": 0,
+    "reportedDurationMs": 35,
+    "interpretation": "The original deterministic contracts and policy tests passed before the standalone copy was implemented. This is a unit-test baseline, not a live Fabric-network benchmark."
+  },
+  "proposedPrototype": {
+    "path": "standalone-prototype",
+    "command": "npm test",
+    "passed": 10,
+    "failed": 0,
+    "reportedDurationMs": 103.742166,
+    "serverSyntaxCheck": "passed",
+    "frontendModuleSyntaxCheck": {
+      "status": "passed",
+      "filesChecked": 26
+    },
+    "documentedStartCheck": {
+      "command": "PORT=3317 npm start",
+      "status": "passed",
+      "healthResponseMode": "standalone-simulation",
+      "healthPolicyVersion": "crime-policy-v1"
+    },
+    "sizeBytesOnDisk": 262144,
+    "files": 39
+  },
+  "ablation": {
+    "component": "case assignment gate",
+    "withoutAssignment": "DENY / NOT_ASSIGNED",
+    "withAssignment": "ALLOW / POLICY_SATISFIED",
+    "evidence": "standalone-prototype/test/prototype.test.js"
+  },
+  "limitations": [
+    "The standalone prototype does not run Hyperledger Fabric, Fabric CA, CouchDB, Docker, or an LLM.",
+    "Local HMAC tokens, JSON persistence, transaction identifiers, evidence privacy, and the audit hash chain are simulations and are not blockchain evidence.",
+    "The original live-network measurements were not rerun for this packaging task."
+  ]
+}

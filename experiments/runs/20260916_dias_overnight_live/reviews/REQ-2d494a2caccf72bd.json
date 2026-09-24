@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-2d494a2caccf72bd",
+  "recordId": "REC-FIR-001",
+  "requesterUsername": "insp.rathore",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "PoliceMSP",
+      "organization": "police",
+      "role": "inspector",
+      "rank": "3",
+      "station": "PS-East",
+      "jurisdiction": "district-north",
+      "clearance": "high",
+      "credentialStatus": "revoked",
+      "assignedToRequestedCase": false
+    },
+    "resource": {
+      "recordType": "fir",
+      "caseId": "CASE-2026-001",
+      "sensitivityLevel": "medium",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": false,
+      "witnessFlag": false,
+      "victimProtectionFlag": false
+    },
+    "request": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "e0dabeb6c3c42e9142fcff181d47ad0590179dc0a19018ba6c489cd2f40fe863",
+  "justification": "I need the FIR for a related enquiry I am running in my district.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "CRED_NOT_ACTIVE",
+    "reason": "Requester credential status is revoked, not active (GP-CRED:C1@v1). Also applicable: GP-ASSIGN:C1@v1.",
+    "policyRefs": [
+      "GP-CRED:C1@v1",
+      "GP-ASSIGN:C1@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [],
+    "errorCode": null,
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-2d494a2caccf72bd",
+      "modelId": "qwen3-14b-dias-v7",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": "qwen3-14b-dias-lora-v7",
+      "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "e0dabeb6c3c42e9142fcff181d47ad0590179dc0a19018ba6c489cd2f40fe863",
+      "justificationHash": "09c9a5bb030dda81e664ced237c6d05d2d2c12fa616d0220ead607e21e032fef",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:06:28.809Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "d00c77d8aafa0df01609719a6e23db0aa4bf2a23085d8dc2a1ba1b741c967054",
+      "promptHash": "998866971ca3aee212bf7a41ce17d88fc4de15bf2c63323c0904361f51b0536a",
+      "promptChars": 7614,
+      "usage": {
+        "promptTokens": 1910,
+        "completionTokens": 81
+      },
+      "rawOutputHash": "be3d4712934a43fb135e9d213a6069e8e39dd6020a53fefb7fa507601b9b063a",
+      "parserStatus": "OK",
+      "parserErrors": [],
+      "parserTolerances": [],
+      "generationStatus": "OK",
+      "latencyMs": {
+        "contextAssembly": 0.147,
+        "inference": 9440.89,
+        "validation": 0.167,
+        "total": 9441.34
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:06:38.250Z"
+    }
+  },
+  "auditorNote": {
+    "decision": "FORCE_DENY",
+    "llmAgreement": "AGREED",
+    "reason": null,
+    "auditorUsername": "sp.north",
+    "decidedAtUtc": "2026-09-16T17:06:39.141Z",
+    "txId": "793a946afea4f9199258ded4f45a7bdf1feb697ac18587fe1ec4e9e95cb27ed1"
+  },
+  "createdAtUtc": "2026-09-16T17:06:09.258Z",
+  "updatedAtUtc": "2026-09-16T17:06:40.209Z"
+}

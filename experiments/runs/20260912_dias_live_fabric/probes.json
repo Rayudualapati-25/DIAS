@@ -1,0 +1,139 @@
+[
+  {
+    "id": "assigned-inspector-own-district",
+    "requester": {
+      "org": "police",
+      "user": "insp.sharma"
+    },
+    "recordId": "REC-FIR-001",
+    "body": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false
+    },
+    "justification": "I am investigating CASE-2026-001 and need to read the FIR.",
+    "expectation": "ALLOW: assigned, cleared, same district, ordinary record",
+    "requestId": "REQ-0c63f2c425bfcb41",
+    "txId": "0c63f2c425bfcb4165059aa2bcad3112f34c09192768ae071bb402613554508e",
+    "status": "awaiting-auditor",
+    "processingPath": "llm-auditor",
+    "generationStatus": "OK",
+    "recommendation": "ALLOW",
+    "reasonCode": "POLICY_SATISFIED",
+    "policyRefs": [
+      "GP-RBAC:C2@v1",
+      "GP-DEFAULT:C1@v1"
+    ],
+    "reviewFlags": []
+  },
+  {
+    "id": "cross-district-inspector",
+    "requester": {
+      "org": "police",
+      "user": "insp.singh"
+    },
+    "recordId": "REC-FIR-001",
+    "body": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false
+    },
+    "justification": "I need the FIR for a related enquiry I am running.",
+    "expectation": "DENY: requester is in district-south, record is district-north",
+    "requestId": "REQ-0cd43592667d2d07",
+    "txId": "0cd43592667d2d0784ca157ffcf3c886c83e980288510f9495e22709bac1e307",
+    "status": "awaiting-auditor",
+    "processingPath": "llm-auditor",
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "CROSS_JURISDICTION",
+    "policyRefs": [
+      "GP-CRED:C1@v1",
+      "GP-PURPOSE:C1@v1",
+      "GP-RBAC:C1@v1",
+      "GP-RBAC:C2@v1",
+      "GP-SEAL:C1@v1",
+      "GP-JURIS:C1@v1"
+    ],
+    "reviewFlags": []
+  },
+  {
+    "id": "constable-juvenile-record",
+    "requester": {
+      "org": "police",
+      "user": "const.verma"
+    },
+    "recordId": "REC-JUVENILE-001",
+    "body": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false
+    },
+    "justification": "I have been asked to check this file.",
+    "expectation": "DENY: juvenile record, low clearance against high sensitivity, unassigned",
+    "requestId": "REQ-89dd7b1094156c43",
+    "txId": "89dd7b1094156c43d684d8652d3724caf55a861986b410f1c93855a841f5204d",
+    "status": "awaiting-auditor",
+    "processingPath": "llm-auditor",
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "NOT_ASSIGNED",
+    "policyRefs": [
+      "GP-ASSIGN:C1@v1"
+    ],
+    "reviewFlags": []
+  },
+  {
+    "id": "court-clerk-juvenile-record",
+    "requester": {
+      "org": "court",
+      "user": "clerk.das"
+    },
+    "recordId": "REC-JUVENILE-001",
+    "body": {
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "emergencyFlag": false
+    },
+    "justification": "Preparing the hearing bundle for the listed matter.",
+    "expectation": "DENY: court-clerk is not juvenile-authorized and holds low clearance",
+    "requestId": "REQ-abd39c2f62648747",
+    "txId": "abd39c2f6264874740edef12a1e2d44566bf17ebbb0410c94c8bae671ac54d38",
+    "status": "awaiting-auditor",
+    "processingPath": "llm-auditor",
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "RBAC_NO_PERMISSION",
+    "policyRefs": [
+      "GP-RBAC:C2@v1"
+    ],
+    "reviewFlags": []
+  },
+  {
+    "id": "assigned-io-evidence",
+    "requester": {
+      "org": "police",
+      "user": "io.krishnan"
+    },
+    "recordId": "REC-EVIDENCE-001",
+    "body": {
+      "action": "view",
+      "purpose": "investigation",
+      "emergencyFlag": false
+    },
+    "justification": "Reviewing the exhibits logged under CASE-2026-001.",
+    "expectation": "ALLOW: assigned investigating officer, same district, medium sensitivity",
+    "requestId": "REQ-2200ab35013cfc62",
+    "txId": "2200ab35013cfc6279b4cd047e48792d94974dbe312830b2dc46dc9750fe35ee",
+    "status": "awaiting-auditor",
+    "processingPath": "llm-auditor",
+    "generationStatus": "OK",
+    "recommendation": "ALLOW",
+    "reasonCode": "POLICY_SATISFIED",
+    "policyRefs": [
+      "GP-RBAC:C2@v1",
+      "GP-DEFAULT:C1@v1"
+    ],
+    "reviewFlags": []
+  }
+]

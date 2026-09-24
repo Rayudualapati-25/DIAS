@@ -1,0 +1,139 @@
+{
+  "experiment": "concurrent record filing on live Hyperledger Fabric",
+  "runLabel": "run3",
+  "generatedAtUtc": "2026-08-21T11:52:55.580Z",
+  "environment": {
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "organizations": 5,
+    "peersPerOrganization": 1,
+    "orderer": "single-node Raft",
+    "batchTimeout": "2s",
+    "maxMessageCount": 10,
+    "stateDatabase": "CouchDB",
+    "host": "single machine, Colima 10 vCPU / 24 GiB",
+    "deployment": "single-host local Docker; not a distributed benchmark"
+  },
+  "method": {
+    "operation": "POST /records (RecordContract CreateCaseRecord)",
+    "measured": "client-observed end-to-end latency including REST, vault write, endorsement, ordering and commit",
+    "concurrency": "all N requests released together and awaited as one batch",
+    "identityPool": [
+      "sho.reddy",
+      "insp.sharma",
+      "const.verma",
+      "io.krishnan",
+      "insp.singh"
+    ],
+    "identityNote": "N concurrent client sessions drawn from a pool of 5 enrolled police identities",
+    "keyCollisions": "none by construction; every request writes a unique recordId",
+    "warmupRequests": 5,
+    "cooldownMsBetweenLevels": 4000
+  },
+  "levels": [
+    {
+      "concurrentUsers": 1,
+      "requests": 1,
+      "successful": 1,
+      "failed": 0,
+      "minMs": 2042.09,
+      "p50Ms": 2042.09,
+      "meanMs": 2042.09,
+      "p95Ms": 2042.09,
+      "p99Ms": 2042.09,
+      "maxMs": 2042.09,
+      "batchWallClockMs": 2042.1,
+      "throughputTps": 0.49
+    },
+    {
+      "concurrentUsers": 10,
+      "requests": 10,
+      "successful": 10,
+      "failed": 0,
+      "minMs": 70.99,
+      "p50Ms": 74.97,
+      "meanMs": 75.5,
+      "p95Ms": 79.47,
+      "p99Ms": 79.47,
+      "maxMs": 79.47,
+      "batchWallClockMs": 80.67,
+      "throughputTps": 123.97
+    },
+    {
+      "concurrentUsers": 20,
+      "requests": 20,
+      "successful": 20,
+      "failed": 0,
+      "minMs": 82.74,
+      "p50Ms": 87.6,
+      "meanMs": 96.81,
+      "p95Ms": 109.97,
+      "p99Ms": 110.74,
+      "maxMs": 110.74,
+      "batchWallClockMs": 112.71,
+      "throughputTps": 177.44
+    },
+    {
+      "concurrentUsers": 40,
+      "requests": 40,
+      "successful": 40,
+      "failed": 0,
+      "minMs": 107.4,
+      "p50Ms": 144.71,
+      "meanMs": 157.04,
+      "p95Ms": 219.83,
+      "p99Ms": 220.86,
+      "maxMs": 220.86,
+      "batchWallClockMs": 225.44,
+      "throughputTps": 177.43
+    },
+    {
+      "concurrentUsers": 50,
+      "requests": 50,
+      "successful": 50,
+      "failed": 0,
+      "minMs": 117.78,
+      "p50Ms": 186.91,
+      "meanMs": 186.42,
+      "p95Ms": 262.55,
+      "p99Ms": 263.74,
+      "maxMs": 263.74,
+      "batchWallClockMs": 267.54,
+      "throughputTps": 186.89
+    },
+    {
+      "concurrentUsers": 75,
+      "requests": 75,
+      "successful": 75,
+      "failed": 0,
+      "minMs": 133.61,
+      "p50Ms": 251.09,
+      "meanMs": 256.06,
+      "p95Ms": 355.91,
+      "p99Ms": 396.61,
+      "maxMs": 396.61,
+      "batchWallClockMs": 400.49,
+      "throughputTps": 187.27
+    },
+    {
+      "concurrentUsers": 100,
+      "requests": 100,
+      "successful": 100,
+      "failed": 0,
+      "minMs": 127.81,
+      "p50Ms": 296.28,
+      "meanMs": 314.63,
+      "p95Ms": 490.85,
+      "p99Ms": 492.91,
+      "maxMs": 515.73,
+      "batchWallClockMs": 524.06,
+      "throughputTps": 190.82
+    }
+  ],
+  "limitations": [
+    "Single host; one peer per organisation; single-node Raft ordering.",
+    "Latency is client-observed and includes the orderer batch wait.",
+    "Synthetic records only; no real case content.",
+    "Concurrency is simulated from a pool of 5 identities, not 100 distinct officers."
+  ]
+}

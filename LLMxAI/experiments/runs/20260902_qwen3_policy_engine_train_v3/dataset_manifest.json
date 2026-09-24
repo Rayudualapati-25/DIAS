@@ -1,0 +1,112 @@
+{
+  "generatedAtUtc": "2026-09-01T22:06:36.606Z",
+  "generator": "experiments/llm_policy_engine/generate_dataset.js",
+  "seed": 42,
+  "policyVersion": "crime-policy-v1",
+  "modelVersion": "qwen3-14b-seba-lora-v3",
+  "oracleSourceHashes": {
+    "chaincode/crimerecords/lib/policy/policyEngine.js": "5d092f295513e19891553c8010f8b5750b9616063abae5753770f617523b6d38",
+    "chaincode/crimerecords/lib/policy/policyV1.js": "0a70e5b31575a03034a2021ed414755c4c7697d2f24421f04c7b4a1a9f920015"
+  },
+  "splitStrategy": {
+    "trainTemplates": [
+      "Please {verb} the {record} for {purpose}.",
+      "I need to {verb} this {record} for {purpose}.",
+      "Can I {verb} the {record}? The purpose is {purpose}.",
+      "My request is to {verb} the {record} as part of {purpose}.",
+      "Open a request to {verb} this {record} for {purpose}.",
+      "Authorize {verb} access to the {record}; I need it for {purpose}.",
+      "For my {purpose} duties, may I {verb} this {record}?",
+      "Evaluate whether I can {verb} the {record} in support of {purpose}.",
+      "Submit my request to {verb} this {record}. It relates to {purpose}.",
+      "I am asking for approval to {verb} the {record} because of {purpose}.",
+      "Check access for this task: {verb} the {record} for {purpose}.",
+      "May the system let me {verb} this {record} for {purpose}?",
+      "Review my need to {verb} the {record} during {purpose}.",
+      "The required operation is to {verb} the {record}; purpose: {purpose}.",
+      "Decide my request to {verb} this {record} for {purpose}."
+    ],
+    "validTemplates": [
+      "Would you authorize me to {verb} this {record} for {purpose}?",
+      "Process access so I can {verb} the {record}; it is needed for {purpose}.",
+      "Check whether {verb} access to the {record} is available for {purpose}.",
+      "I require permission to {verb} this {record} while handling {purpose}."
+    ],
+    "testTemplates": [
+      "I am seeking permission to {verb} this {record} in connection with {purpose}.",
+      "Determine whether I may {verb} the {record}. My stated purpose is {purpose}.",
+      "For {purpose}, let me {verb} the indicated {record}.",
+      "Assess my request: {verb} the {record} for {purpose}.",
+      "May I proceed to {verb} this {record} as part of {purpose}?",
+      "Please determine access for {purpose}: I need to {verb} the {record}.",
+      "Is it permissible for me to {verb} this {record} during {purpose}?",
+      "My present task is {purpose}; decide whether I can {verb} the {record}."
+    ],
+    "note": "Template families are disjoint; identifiers are content-derived and do not encode reason order."
+  },
+  "summary": {
+    "train": {
+      "examples": 2880,
+      "classCounts": {
+        "CRED_NOT_ACTIVE": 240,
+        "INVALID_PURPOSE": 240,
+        "RBAC_NO_PERMISSION": 240,
+        "AUDIT_METADATA_ONLY": 240,
+        "SEALED_RECORD": 240,
+        "JUVENILE_PROTECTED": 240,
+        "VICTIM_DATA_NOT_NECESSARY": 240,
+        "EMERGENCY_CROSS_JURISDICTION": 240,
+        "CROSS_JURISDICTION": 240,
+        "NOT_ASSIGNED": 240,
+        "INSUFFICIENT_CLEARANCE": 240,
+        "POLICY_SATISFIED": 240
+      },
+      "adversarialExamples": 720,
+      "sha256": "aece8aa41e30f425a197237643f8f12e79fafc02cb19406fe2b443d4c4ff9c57"
+    },
+    "valid": {
+      "examples": 360,
+      "classCounts": {
+        "CRED_NOT_ACTIVE": 30,
+        "INVALID_PURPOSE": 30,
+        "RBAC_NO_PERMISSION": 30,
+        "AUDIT_METADATA_ONLY": 30,
+        "SEALED_RECORD": 30,
+        "JUVENILE_PROTECTED": 30,
+        "VICTIM_DATA_NOT_NECESSARY": 30,
+        "EMERGENCY_CROSS_JURISDICTION": 30,
+        "CROSS_JURISDICTION": 30,
+        "NOT_ASSIGNED": 30,
+        "INSUFFICIENT_CLEARANCE": 30,
+        "POLICY_SATISFIED": 30
+      },
+      "adversarialExamples": 0,
+      "sha256": "63e4a9dfeb7c7fa96230fd411df3f1a97b17b0e8a3efc4d9854e2ae583ed4507"
+    },
+    "test": {
+      "examples": 360,
+      "classCounts": {
+        "CRED_NOT_ACTIVE": 30,
+        "INVALID_PURPOSE": 30,
+        "RBAC_NO_PERMISSION": 30,
+        "AUDIT_METADATA_ONLY": 30,
+        "SEALED_RECORD": 30,
+        "JUVENILE_PROTECTED": 30,
+        "VICTIM_DATA_NOT_NECESSARY": 30,
+        "EMERGENCY_CROSS_JURISDICTION": 30,
+        "CROSS_JURISDICTION": 30,
+        "NOT_ASSIGNED": 30,
+        "INSUFFICIENT_CLEARANCE": 30,
+        "POLICY_SATISFIED": 30
+      },
+      "adversarialExamples": 120,
+      "sha256": "37ac076aa49692198de67c6969ba85f086a7c93ab9f5fb40bab779cd33d7c2cb"
+    },
+    "testBalanced60": {
+      "examples": 60,
+      "examplesPerReason": 5,
+      "adversarialExamples": 24,
+      "sha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+    }
+  }
+}

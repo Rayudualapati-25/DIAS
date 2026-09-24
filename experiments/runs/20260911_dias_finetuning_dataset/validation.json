@@ -1,0 +1,56 @@
+{
+  "valid": true,
+  "datasetVersion": "dias-recommendation-dataset-v1",
+  "splits": {
+    "train": {
+      "examples": 3000,
+      "adversarialExamples": 750,
+      "byReason": {
+        "CRED_NOT_ACTIVE": 125,
+        "INVALID_PURPOSE": 125,
+        "RBAC_NO_PERMISSION": 125,
+        "SEALED_RECORD": 1000,
+        "JUVENILE_PROTECTED": 125,
+        "VICTIM_DATA_NOT_NECESSARY": 125,
+        "CROSS_JURISDICTION": 125,
+        "NOT_ASSIGNED": 125,
+        "INSUFFICIENT_CLEARANCE": 125,
+        "POLICY_SATISFIED": 1000
+      }
+    },
+    "valid": {
+      "examples": 500,
+      "adversarialExamples": 125,
+      "byReason": {
+        "CRED_NOT_ACTIVE": 21,
+        "INVALID_PURPOSE": 21,
+        "RBAC_NO_PERMISSION": 21,
+        "SEALED_RECORD": 166,
+        "JUVENILE_PROTECTED": 21,
+        "VICTIM_DATA_NOT_NECESSARY": 21,
+        "CROSS_JURISDICTION": 21,
+        "NOT_ASSIGNED": 21,
+        "INSUFFICIENT_CLEARANCE": 21,
+        "POLICY_SATISFIED": 166
+      }
+    },
+    "test": {
+      "examples": 1000,
+      "adversarialExamples": 250,
+      "byReason": {
+        "CRED_NOT_ACTIVE": 100,
+        "INVALID_PURPOSE": 100,
+        "RBAC_NO_PERMISSION": 100,
+        "SEALED_RECORD": 100,
+        "JUVENILE_PROTECTED": 100,
+        "VICTIM_DATA_NOT_NECESSARY": 100,
+        "CROSS_JURISDICTION": 100,
+        "NOT_ASSIGNED": 100,
+        "INSUFFICIENT_CLEARANCE": 100,
+        "POLICY_SATISFIED": 100
+      }
+    }
+  },
+  "workflowEvaluationSequences": 9,
+  "oneFieldNearMissDimensions": 21
+}

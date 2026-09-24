@@ -1,0 +1,43 @@
+{
+  "analysis": "attribution of client-observed end-to-end latency",
+  "why": "The decision-service instrumentation begins when the listener picks up the AccessRequestCreated event. The API has by then already committed its own CreateAccessRequest transaction, and afterwards it still has to notice the decision by polling. Neither stage can appear in decision-service timings, so the instrumented total is necessarily smaller than the client round trip.",
+  "path": "allow",
+  "measuredStages": {
+    "apiRequestCommitMs": {
+      "n": 20,
+      "mean": 2085.7,
+      "median": 2067,
+      "p95": 2442,
+      "sd": 81.93,
+      "min": 2058,
+      "max": 2442,
+      "what": "the API's own CreateAccessRequest submit and commit, measured directly through the same gateway with the same endorsing organisations the route uses"
+    },
+    "decisionServiceTotalMs": {
+      "n": 50,
+      "mean": 4616.69,
+      "median": 4326.85,
+      "p95": 5912.51,
+      "sd": 725.37,
+      "min": 4183.24,
+      "max": 7586.79,
+      "what": "ledger context read, model inference, deterministic validation with explanation, attestation signing, and Fabric submission and commit of the decision"
+    }
+  },
+  "reconciliation": {
+    "clientObservedEndToEndMedianMs": 6598,
+    "apiRequestCommitMedianMs": 2067,
+    "decisionServiceTotalMedianMs": 4326.85,
+    "attributedSubtotalMs": 6393.85,
+    "unattributedMs": 204.15,
+    "unattributedShare": 0.0309,
+    "unattributedExplanation": "event dispatch to the listener plus the API's decision-poll interval and the two ledger reads that fetch the decision. The poll interval is 250 ms, which bounds most of this.",
+    "decisionPollIntervalMs": 250
+  },
+  "ledgerVersusModel": {
+    "twoFabricCommitsMedianMs": 4161.88,
+    "modelInferenceMedianMs": 2230,
+    "note": "The authorization workflow commits two separate Fabric transactions: the request and the decision. Together they cost more than the model inference they surround."
+  },
+  "generatedAt": "2026-09-08T02:07:27.911493Z"
+}

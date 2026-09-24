@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "2026-08-24T09-43-07-874Z_caliper_latency_pilot_suite",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:43:07.874Z",
+  "interpretation": "Single live-network pilot; not repeated paper evidence.",
+  "controls": {
+    "execution": "strictly sequential; overlap guard and exclusive suite lock",
+    "ledgerResetBetweenPoints": false,
+    "warmupsExcludedFromAxes": true
+  },
+  "runs": [],
+  "axes": [],
+  "failureReason": "Interrupted during accidental CLI behavior check; not valid benchmark evidence."
+}

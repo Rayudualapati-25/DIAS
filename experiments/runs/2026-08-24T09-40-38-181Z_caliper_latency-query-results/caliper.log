@@ -1,0 +1,252 @@
+2026.08.24-15:10:38.294[32m info [39m [caliper] [cli-launch-manager] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:10:38.295[32m info [39m [caliper] [cli-launch-manager] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-40-38-181Z_caliper_latency-query-results/caliper-executed-benchmark.yaml
+2026.08.24-15:10:38.295[32m info [39m [caliper] [cli-launch-manager] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:10:38.295[32m info [39m [caliper] [cli-launch-manager] 	Set SUT type: fabric
+2026.08.24-15:10:38.305[32m info [39m [caliper] [benchmark-validator] 	No observer specified, will default to `none`
+2026.08.24-15:10:38.305[32m info [39m [caliper] [caliper-engine] 	Starting benchmark flow
+2026.08.24-15:10:38.305[32m info [39m [caliper] [caliper-engine] 	Skipping start commands due to benchmark flow conditioning
+2026.08.24-15:10:38.305[32m info [39m [caliper] [caliper-engine] 	Skipping initialization phase due to benchmark flow conditioning
+2026.08.24-15:10:38.305[32m info [39m [caliper] [caliper-engine] 	Skipping install smart contract phase due to benchmark flow conditioning
+2026.08.24-15:10:38.349[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:10:38.355[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:10:38.356[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:10:38.356[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:10:38.356[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:10:38.357[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:10:38.357[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:10:38.358[32m info [39m [caliper] [monitor.js] 	No resource monitors specified
+2026.08.24-15:10:38.358[32m info [39m [caliper] [default-observer] 	Observer interval set to 5000 milliseconds
+2026.08.24-15:10:38.360[32m info [39m [caliper] [round-orchestrator] 	Preparing worker connections
+2026.08.24-15:10:38.360[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 1 of 2
+2026.08.24-15:10:38.361[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 2 of 2
+2026.08.24-15:10:38.361[32m info [39m [caliper] [worker-orchestrator] 	Messenger not configured, entering configure phase...
+2026.08.24-15:10:38.362[32m info [39m [caliper] [worker-orchestrator] 	No existing workers detected, entering worker launch phase...
+2026.08.24-15:10:38.362[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 2 workers to be connected...
+2026.08.24-15:10:38.469[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:10:38.470[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-40-38-181Z_caliper_latency-query-results/caliper-executed-benchmark.yaml
+2026.08.24-15:10:38.470[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:10:38.471[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:10:38.471[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:10:38.472[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-40-38-181Z_caliper_latency-query-results/caliper-executed-benchmark.yaml
+2026.08.24-15:10:38.472[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:10:38.472[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:10:38.485[32m info [39m [caliper] [worker-orchestrator] 	2 workers connected, progressing to worker assignment phase.
+2026.08.24-15:10:38.485[32m info [39m [caliper] [worker-orchestrator] 	Workers currently unassigned, awaiting index assignment...
+2026.08.24-15:10:38.485[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 2 workers to be assigned...
+2026.08.24-15:10:38.488[32m info [39m [caliper] [worker-orchestrator] 	2 workers assigned, progressing to worker initialization phase.
+2026.08.24-15:10:38.488[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 2 workers to be ready...
+2026.08.24-15:10:38.489[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#0...
+2026.08.24-15:10:38.489[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#1...
+2026.08.24-15:10:38.533[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:10:38.534[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:10:38.535[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:10:38.536[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:10:38.536[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:10:38.536[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:10:38.536[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:10:38.537[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:10:38.537[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:10:38.537[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:10:38.537[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:10:38.537[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:10:38.538[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:10:38.538[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:10:38.539[32m info [39m [caliper] [worker-message-handler] 	Worker#0 initialized
+2026.08.24-15:10:38.540[32m info [39m [caliper] [worker-message-handler] 	Worker#1 initialized
+2026.08.24-15:10:38.540[32m info [39m [caliper] [worker-orchestrator] 	2 workers ready, progressing to test preparation phase.
+2026.08.24-15:10:38.540[32m info [39m [caliper] [round-orchestrator] 	Started round 1 (query-results-1)
+2026.08.24-15:10:38.540[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#0
+2026.08.24-15:10:38.540[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#1 for Round#0
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:10:38.549[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.552[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 0 is starting...
+2026.08.24-15:10:38.552[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 0 is starting...
+2026.08.24-15:10:38.552[33m warn [39m [caliper] [caliper-worker] 	Worker [0] encountered an error during prepare test phase for round 0: Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.552[33m warn [39m [caliper] [caliper-worker] 	Worker [1] encountered an error during prepare test phase for round 0: Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:10:38.552[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 0 is completed
+2026.08.24-15:10:38.552[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:10:38.552[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 0 is completed
+2026.08.24-15:10:38.552[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker (64033): Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.552[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker#1 (64034): Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.553[31m error[39m [caliper] [round-orchestrator] 	Failed round 1 (query-results-1): Error: Error: query-records workload requires 'expectedCount'
+    at WorkerOrchestrator.updateWorkerPhase (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:306:61)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:109:18)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at ChildProcess.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-15:10:38.553[32m info [39m [caliper] [round-orchestrator] 	Started round 2 (query-results-2)
+2026.08.24-15:10:38.553[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#1
+2026.08.24-15:10:38.553[31m error[39m [caliper] [round-orchestrator] 	Failed round 2 (query-results-2): Error: Error: query-records workload requires 'expectedCount'
+    at WorkerOrchestrator.updateWorkerPhase (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:306:61)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:109:18)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at ChildProcess.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-15:10:38.553[32m info [39m [caliper] [round-orchestrator] 	Started round 3 (query-results-3)
+2026.08.24-15:10:38.553[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#1 for Round#1
+2026.08.24-15:10:38.553[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#2
+2026.08.24-15:10:38.553[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 2 is starting...
+2026.08.24-15:10:38.553[33m warn [39m [caliper] [caliper-worker] 	Worker [0] encountered an error during prepare test phase for round 2: Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.553[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#1 for Round#2
+2026.08.24-15:10:38.553[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:10:38.553[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:10:38.553[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:10:38.553[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 2 is starting...
+2026.08.24-15:10:38.553[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:10:38.553[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:10:38.553[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.553[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 2 is completed
+2026.08.24-15:10:38.553[33m warn [39m [caliper] [caliper-worker] 	Worker [1] encountered an error during prepare test phase for round 2: Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:10:38.554[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker (64033): Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.554[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 2 is completed
+2026.08.24-15:10:38.554[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker#1 (64034): Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.554[31m error[39m [caliper] [round-orchestrator] 	Failed round 3 (query-results-3): Error: Error: query-records workload requires 'expectedCount'
+    at WorkerOrchestrator.updateWorkerPhase (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:306:61)
+    at ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/worker-orchestrator.js:109:18)
+    at ProcessMessenger.emit (node:events:519:28)
+    at ProcessMessenger.onMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/messenger-interface.js:40:14)
+    at ChildProcess.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/common/messengers/process/process-messenger.js:59:26)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+2026.08.24-15:10:38.554[32m info [39m [caliper] [report-builder] 	### All test results ###
+2026.08.24-15:10:38.554[31m error[39m [caliper] [report-builder] 	No data within test result; implies error within configuration files
+2026.08.24-15:10:38.554[31m error[39m [caliper] [round-orchestrator] 	Error while finalizing the report: Error: unrecognized report table
+    at ReportBuilder.setSummaryTable (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/report/report-builder.js:142:19)
+    at Report.printResultsByRound (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/report/report.js:182:28)
+    at RoundOrchestrator.run (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/orchestrators/round-orchestrator.js:229:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async CaliperEngine.run (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/manager/caliper-engine.js:154:17)
+    at async LaunchManager.handler (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-cli/lib/launch/lib/launchManager.js:81:30)
+2026.08.24-15:10:38.554[32m info [39m [caliper] [monitor.js] 	Stopping all monitors
+2026.08.24-15:10:38.554[32m info [39m [caliper] [worker-orchestrator] 	Sending exit message to connected workers
+2026.08.24-15:10:38.554[32m info [39m [caliper] [round-orchestrator] 	Benchmark finished in 0.014 seconds. Total rounds: 3. Successful rounds: 0. Failed rounds: 3.
+2026.08.24-15:10:38.554[32m info [39m [caliper] [caliper-engine] 	Skipping end command due to benchmark flow conditioning
+2026.08.24-15:10:38.554[32m info [39m [caliper] [cli-launch-manager] 	Benchmark successfully finished!
+2026.08.24-15:10:38.554[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:10:38.555[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:10:38.556[32m info [39m [caliper] [worker-message-handler] 	Worker#0 is exiting
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:10:38.556[32m info [39m [caliper] [worker-message-handler] 	Worker#1 is exiting
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.556[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 1 is starting...
+2026.08.24-15:10:38.556[33m warn [39m [caliper] [caliper-worker] 	Worker [0] encountered an error during prepare test phase for round 1: Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:10:38.556[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:10:38.556[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 1 is completed
+2026.08.24-15:10:38.557[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker (64033): Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.557[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 1 is starting...
+2026.08.24-15:10:38.557[33m warn [39m [caliper] [caliper-worker] 	Worker [1] encountered an error during prepare test phase for round 1: Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:10:38.557[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:10:38.557[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 1 is completed
+2026.08.24-15:10:38.557[31m error[39m [caliper] [worker-message-handler] 	Error while handling "prepare" message for Worker#1 (64034): Error: query-records workload requires 'expectedCount'
+    at QueryRecordsWorkload.initializeWorkloadModule (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/workloads/query-records.js:26:15)
+    at async CaliperWorker.prepareTest (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/caliper-worker.js:163:13)
+    at async WorkerMessageHandler._handlePrepareMessage (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:210:13)
+    at async ProcessMessenger.<anonymous> (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/node_modules/@hyperledger/caliper-core/lib/worker/worker-message-handler.js:89:13)

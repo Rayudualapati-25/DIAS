@@ -1,0 +1,13 @@
+{
+  "name": "dias-dataset-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Generator, validator and checks for the DIAS binary ALLOW/DENY recommendation dataset v2.",
+  "scripts": {
+    "generate": "node generate.js",
+    "validate": "node validate.js",
+    "test": "node --test test/checks.test.js test/generate.test.js test/metrics.test.js test/ablations.test.js test/subsets.test.js test/v6Adapter.test.js test/scopeAblation.test.js",
+    "subsets": "node make-training-subset.js"
+  },
+  "license": "Apache-2.0"
+}

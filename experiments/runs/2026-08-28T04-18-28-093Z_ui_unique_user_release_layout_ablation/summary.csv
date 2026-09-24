@@ -1,0 +1,6 @@
+operation,concurrentUsers,batches,attempted,successful,failed,minMs,p50Ms,meanMs,p95Ms,maxMs,batchP50MeanMs,batchP50SdMs
+release-per-user-record,10,3,30,30,0,32.04,54.29,48.33,59.93,60.36,49.12,12.66
+release-per-user-record,25,3,75,75,0,14.24,73.01,66.29,95.79,97.84,69.21,24.44
+release-per-user-record,50,3,150,150,0,12.45,100.95,98.95,127.33,130.76,104.05,20.52
+release-per-user-record,75,3,225,225,0,25.44,136.22,130.53,158,162.65,136.8,11.98
+release-per-user-record,100,3,300,300,0,34.5,156.37,145.19,181.53,187.71,156.98,4.73

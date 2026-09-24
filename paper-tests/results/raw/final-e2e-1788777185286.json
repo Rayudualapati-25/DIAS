@@ -1,0 +1,300 @@
+{
+  "runId": "final-e2e-1788777185286",
+  "startedFrom": {
+    "api": "http://127.0.0.1:3001/api",
+    "modelEndpoint": "http://127.0.0.1:8080/v1"
+  },
+  "finishedAtUtc": "2026-09-07T10:33:36.052Z",
+  "modelRegistration": {
+    "modelVersion": "qwen3-14b-seba-lora-v6",
+    "adapterHash": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "publicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180",
+    "activationTxId": "a5ee14117c6ca8d7020d70dd22a2a8d4b393b6a3516f4101d92921dbe67f6aaa",
+    "status": "active"
+  },
+  "tests": [
+    {
+      "test": "Allow",
+      "expected": "allow",
+      "naturalLanguageRequest": "View record REC-D5657CD21B63 for investigation.",
+      "authenticatedRequester": "io.krishnan",
+      "targetRecord": "REC-D5657CD21B63",
+      "trustedContext": {
+        "record": {
+          "caseId": "CASE-2026-001",
+          "jurisdiction": "district-north",
+          "juvenileFlag": false,
+          "recordId": "REC-D5657CD21B63",
+          "recordType": "fir",
+          "sealed": false,
+          "sensitivityLevel": "medium",
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "subject": {
+          "caseAssignments": "CASE-2026-001",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "jurisdiction": "district-north",
+          "mspId": "PoliceMSP",
+          "role": "investigating-officer"
+        }
+      },
+      "queryHash": "d62d52e97263e18a21ab3b82c4bce5fb0f2e93d846f201f04f1719e67b06edf0",
+      "contextHash": "937431223679fff49579cf362b69765804a2b6528848d60d4f25d4428fe33f09",
+      "modelInterpretation": {
+        "action": "view",
+        "decision": "allow",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "policyVersion": "crime-policy-v2",
+        "purpose": "investigation",
+        "reasonCode": "POLICY_SATISFIED"
+      },
+      "deterministicPolicy": {
+        "decision": "allow",
+        "modelInputAgreement": true,
+        "modelPolicyAgreement": true,
+        "reasonCode": "POLICY_SATISFIED"
+      },
+      "finalDecision": "allow",
+      "reasonCode": "POLICY_SATISFIED",
+      "structuredExplanation": {
+        "counterfactual": "the automatic ALLOW would change if any applicable credential, purpose, RBAC, seal, protected-data, jurisdiction, assignment, or clearance condition ceased to be satisfied",
+        "decision": "allow",
+        "decisiveAttributes": [
+          "subject.credentialStatus",
+          "env.purpose",
+          "subject.mspId",
+          "subject.role",
+          "action",
+          "object.recordType",
+          "object.sealed",
+          "object.juvenileFlag",
+          "object.victimProtectionFlag",
+          "subject.jurisdiction",
+          "object.jurisdiction",
+          "subject.caseAssignments",
+          "object.caseId",
+          "subject.clearance",
+          "object.sensitivityLevel"
+        ],
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "policyVersion": "crime-policy-v2",
+        "reasonCode": "POLICY_SATISFIED",
+        "text": "Access is allowed because the active credential and every applicable purpose, permission, protection, jurisdiction, assignment, and clearance condition are satisfied."
+      },
+      "modelPolicyAgreement": true,
+      "attestation": {
+        "valid": true,
+        "signatureValid": true,
+        "outputHashValid": true,
+        "registrationMatches": true,
+        "publicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180"
+      },
+      "fabric": {
+        "requestTransactionId": "0d9b3ff79fcf49ed01f096e7c7173f3a2f8b581cfd761cd737d91bf2a35e15cd",
+        "decisionTransactionId": "8591c1ef6983b8f8a4d746b29fd963387d257c5b0e087c3d995cb26d24f5ae92",
+        "decidedByMsp": "AIOrgMSP",
+        "decisionAuthority": "llm-policy-agreement",
+        "state": "granted"
+      },
+      "latency": {
+        "inferenceMs": 2464,
+        "apiRoundTripMs": 6844
+      },
+      "protectedWorkflow": {
+        "metadataReleased": true,
+        "documentRequestId": "6b285963f67d991bc1ddefc681aa31c0c9f49a9f6b408edd5e206932413b0d4a",
+        "ownerUploadMsp": "PoliceMSP",
+        "pdfHash": "93e4a3b57ff8ee9abc063c1b00bddc2d8e85a78a87173d1c9ac7a4a387b5a489",
+        "pdfReleasedToRequester": true
+      }
+    },
+    {
+      "test": "Deny",
+      "expected": "deny",
+      "naturalLanguageRequest": "Please let me view REC-D5657CD21B63 for the investigation.",
+      "authenticatedRequester": "insp.rathore",
+      "targetRecord": "REC-D5657CD21B63",
+      "trustedContext": {
+        "record": {
+          "caseId": "CASE-2026-001",
+          "jurisdiction": "district-north",
+          "juvenileFlag": false,
+          "recordId": "REC-D5657CD21B63",
+          "recordType": "fir",
+          "sealed": false,
+          "sensitivityLevel": "medium",
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "subject": {
+          "caseAssignments": null,
+          "clearance": "high",
+          "credentialStatus": "revoked",
+          "jurisdiction": "district-north",
+          "mspId": "PoliceMSP",
+          "role": "inspector"
+        }
+      },
+      "queryHash": "29633209cdaa80183bd5df4e0917e2f531be25c95723d96f32946d30c46852ca",
+      "contextHash": "c8f6ca0eb261c76c5883701c4b46b816b32e02033e29262f181fc639811e2b2b",
+      "modelInterpretation": {
+        "action": "view",
+        "decision": "deny",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "policyVersion": "crime-policy-v2",
+        "purpose": "investigation",
+        "reasonCode": "CRED_NOT_ACTIVE"
+      },
+      "deterministicPolicy": {
+        "decision": "deny",
+        "modelInputAgreement": true,
+        "modelPolicyAgreement": true,
+        "reasonCode": "CRED_NOT_ACTIVE"
+      },
+      "finalDecision": "deny",
+      "reasonCode": "CRED_NOT_ACTIVE",
+      "structuredExplanation": {
+        "counterfactual": "the credential-status barrier would be removed if the requester credential status were \"active\"; remaining policy conditions would still be evaluated",
+        "decision": "deny",
+        "decisiveAttributes": [
+          "subject.credentialStatus"
+        ],
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "policyVersion": "crime-policy-v2",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "text": "Access is denied because the authenticated credential is not active."
+      },
+      "modelPolicyAgreement": true,
+      "attestation": {
+        "valid": true,
+        "signatureValid": true,
+        "outputHashValid": true,
+        "registrationMatches": true,
+        "publicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180"
+      },
+      "fabric": {
+        "requestTransactionId": "6d1abdcf1edc9bea2a1f3ac0878ec185e56768ff222b1d76bf0d81b6cf45cf54",
+        "decisionTransactionId": "c8a9bca1695e302cf6ea34784b484d598b74ae8f6b74dfdb40368f1876794bde",
+        "decidedByMsp": "AIOrgMSP",
+        "decisionAuthority": "llm-policy-agreement",
+        "state": "denied"
+      },
+      "latency": {
+        "inferenceMs": 2303,
+        "apiRoundTripMs": 6559
+      },
+      "protectedWorkflow": {
+        "metadataReleased": false,
+        "responseStatus": 422
+      }
+    },
+    {
+      "test": "Escalate",
+      "expected": "escalate",
+      "naturalLanguageRequest": "Export REC-8B7042A24C8F for prosecution.",
+      "authenticatedRequester": "io.krishnan",
+      "targetRecord": "REC-8B7042A24C8F",
+      "trustedContext": {
+        "record": {
+          "caseId": "CASE-2026-001",
+          "jurisdiction": "district-north",
+          "juvenileFlag": false,
+          "recordId": "REC-8B7042A24C8F",
+          "recordType": "fir",
+          "sealed": false,
+          "sensitivityLevel": "medium",
+          "victimProtectionFlag": false
+        },
+        "requestContext": {
+          "action": "view",
+          "purpose": "investigation"
+        },
+        "subject": {
+          "caseAssignments": "CASE-2026-001",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "jurisdiction": "district-north",
+          "mspId": "PoliceMSP",
+          "role": "investigating-officer"
+        }
+      },
+      "queryHash": "dc23143fbc7dab9437e69010f443e77115ede59efab91bdbcc2ed88685987fa8",
+      "contextHash": "9b8bed580dfacabdeea017be25c3dad196f22bbc1224dc5769e4e454a593df7f",
+      "modelInterpretation": {
+        "action": "export",
+        "decision": "allow",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "policyVersion": "crime-policy-v2",
+        "purpose": "prosecution",
+        "reasonCode": "POLICY_SATISFIED"
+      },
+      "deterministicPolicy": {
+        "decision": "allow",
+        "modelInputAgreement": false,
+        "modelPolicyAgreement": true,
+        "reasonCode": "POLICY_SATISFIED"
+      },
+      "finalDecision": "escalate",
+      "reasonCode": "MODEL_INPUT_DISAGREEMENT",
+      "structuredExplanation": {
+        "counterfactual": "automatic authorization could proceed without interpretation review if the model-interpreted action and purpose exactly matched the committed action and purpose",
+        "decision": "escalate",
+        "decisiveAttributes": [
+          "model.action",
+          "model.purpose",
+          "request.action",
+          "request.purpose"
+        ],
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "policyVersion": "crime-policy-v2",
+        "reasonCode": "MODEL_INPUT_DISAGREEMENT",
+        "text": "Access is escalated because the model-interpreted action or purpose does not match the committed request."
+      },
+      "modelPolicyAgreement": true,
+      "attestation": {
+        "valid": true,
+        "signatureValid": true,
+        "outputHashValid": true,
+        "registrationMatches": true,
+        "publicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180"
+      },
+      "fabric": {
+        "requestTransactionId": "854edfbec5abe354a6fde108fa0ac45f9e3240add93fee79fe1111bb3bea55a5",
+        "decisionTransactionId": "387d5eccd5560b691f174cab9843558ca289f11b8826ed064475e687d2c58c77",
+        "decidedByMsp": "AIOrgMSP",
+        "decisionAuthority": "canonical-input-escalation",
+        "state": "approved-after-escalation",
+        "initialState": "pending-escalation"
+      },
+      "latency": {
+        "inferenceMs": 2517,
+        "apiRoundTripMs": 6813
+      },
+      "humanReview": {
+        "completed": true,
+        "reviewerMsp": "AuditMSP",
+        "reviewerRole": "sp",
+        "resolutionTransactionId": "209d11a80859ee80b257519fbfcda234c871b55b9135fcf13327d06eacfe6460",
+        "finalRequestState": "approved-after-escalation",
+        "metadataReleasedAfterReview": true
+      }
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "decisions": [
+      "allow",
+      "deny",
+      "escalate"
+    ]
+  }
+}

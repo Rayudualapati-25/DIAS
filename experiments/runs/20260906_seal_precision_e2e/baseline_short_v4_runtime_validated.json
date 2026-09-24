@@ -1,0 +1,87 @@
+{
+  "source": "experiments/runs/20260906_seal_precision_e2e/baseline_short_v4.json",
+  "correction": "Exact runtime validation rejects contradictory decision/reason pairs.",
+  "metrics": {
+    "n": 200,
+    "schemaValid": 178,
+    "decisionAccuracy": 0.67,
+    "jointAccuracy": 0.535,
+    "actionAccuracy": 0.89,
+    "purposeAccuracy": 0.885,
+    "falseAllows": 14,
+    "expectedNonAllows": 180,
+    "allowPrecision": 0.36363636363636365,
+    "guardedFalseAllows": 0,
+    "guardReferrals": 71,
+    "rejected": 22,
+    "adversarialJointAccuracy": 0.5,
+    "medianLatencyMs": 2302.5210829999996,
+    "p95LatencyMs": 4357.350833999983,
+    "perReason": {
+      "CRED_NOT_ACTIVE": {
+        "n": 20,
+        "correct": 19
+      },
+      "CROSS_JURISDICTION": {
+        "n": 20,
+        "correct": 6
+      },
+      "INSUFFICIENT_CLEARANCE": {
+        "n": 20,
+        "correct": 2
+      },
+      "INVALID_PURPOSE": {
+        "n": 20,
+        "correct": 17
+      },
+      "JUVENILE_PROTECTED": {
+        "n": 20,
+        "correct": 20
+      },
+      "NOT_ASSIGNED": {
+        "n": 20,
+        "correct": 13
+      },
+      "POLICY_SATISFIED": {
+        "n": 20,
+        "correct": 8
+      },
+      "RBAC_NO_PERMISSION": {
+        "n": 20,
+        "correct": 2
+      },
+      "SEALED_RECORD": {
+        "n": 20,
+        "correct": 1
+      },
+      "VICTIM_DATA_NOT_NECESSARY": {
+        "n": 20,
+        "correct": 19
+      }
+    }
+  },
+  "rejectedContradictions": [
+    "REC-test-287",
+    "REC-test-171",
+    "REC-test-68",
+    "REC-test-35",
+    "REC-test-24",
+    "REC-test-134",
+    "REC-test-62",
+    "REC-test-102",
+    "REC-test-149",
+    "REC-test-143",
+    "REC-test-158",
+    "REC-test-166",
+    "REC-test-2",
+    "REC-test-174",
+    "REC-test-165",
+    "REC-test-93",
+    "REC-test-49",
+    "REC-test-11",
+    "REC-test-57",
+    "REC-test-142",
+    "REC-test-119",
+    "REC-test-47"
+  ]
+}

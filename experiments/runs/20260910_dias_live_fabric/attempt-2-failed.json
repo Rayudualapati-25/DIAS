@@ -1,0 +1,15 @@
+{
+  "runId": "20260910_dias_live_fabric",
+  "status": "failed",
+  "generatedAtUtc": "2026-09-10T06:13:48.195Z",
+  "error": "POST /access/llm-request -> 422: ProposalResponsePayloads do not match; ProposalResponsePayloads do not match",
+  "completedSteps": [
+    { "name": "authenticate three Fabric identities", "status": "passed" },
+    { "name": "same-property record is available", "status": "passed" },
+    { "name": "dynamic miss -> live Qwen recommendation", "status": "passed" },
+    { "name": "auditor reads complete Qwen DENY review", "status": "passed" },
+    { "name": "auditor FORCE ALLOW creates rule and final grant", "status": "passed" },
+    { "name": "force-allowed decision unlocks data sharing", "status": "passed" }
+  ],
+  "diagnosis": "An immediate follow-up proposal reached four endorsing peers while the newly committed dynamic rule was still converging, so peers simulated different branches. The backend now retries only this pre-submit endorsement mismatch with bounded exponential backoff."
+}

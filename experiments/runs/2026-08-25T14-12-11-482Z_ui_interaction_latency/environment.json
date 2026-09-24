@@ -1,0 +1,19 @@
+{
+  "recordedAtUtc": "2026-08-25T14:13:09.750Z",
+  "node": "v22.20.0",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "topology": {
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "organizations": 5,
+    "peersPerOrganization": 1,
+    "orderer": "single-node Raft",
+    "stateDatabase": "CouchDB",
+    "deployment": "single-host local Docker; not a geographically distributed benchmark"
+  },
+  "observedCases": [
+    "CASE-2026-001",
+    "CASE-2026-002"
+  ]
+}

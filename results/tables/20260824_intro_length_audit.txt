@@ -1,0 +1,23 @@
+SEBA-XAI introduction length audit
+
+Target file:
+- papers/final_paper/SEBA_XAI_ACM_6page.tex
+
+Measured introduction block (before -> after):
+- Trimmed source lines: 41 -> 41
+- Boundary-inclusive source lines: 43 -> 43
+- Word count: 360 -> 347
+- Paragraphs: 5 -> 5
+
+Constraints checked:
+- Did not increase either source-line measure.
+- Stayed below the 360-word cap used for this revision.
+- Preserved the existing citation set and evidence-bounded tone.
+
+Build verification:
+- PDF pages: 5
+- Rendered pages inspected: 1-5
+- Faithfulness checker: passed
+- Figure 3 reproduction checker: passed
+- Undefined citations/references: 0
+- Overfull boxes: 0

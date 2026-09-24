@@ -1,0 +1,344 @@
+2026.08.24-15:02:42.543[32m info [39m [caliper] [cli-launch-manager] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:02:42.544[32m info [39m [caliper] [cli-launch-manager] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/caliper-executed-benchmark.yaml
+2026.08.24-15:02:42.544[32m info [39m [caliper] [cli-launch-manager] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:02:42.544[32m info [39m [caliper] [cli-launch-manager] 	Set SUT type: fabric
+2026.08.24-15:02:42.553[32m info [39m [caliper] [benchmark-validator] 	No observer specified, will default to `none`
+2026.08.24-15:02:42.553[32m info [39m [caliper] [caliper-engine] 	Starting benchmark flow
+2026.08.24-15:02:42.553[32m info [39m [caliper] [caliper-engine] 	Skipping start commands due to benchmark flow conditioning
+2026.08.24-15:02:42.553[32m info [39m [caliper] [caliper-engine] 	Skipping initialization phase due to benchmark flow conditioning
+2026.08.24-15:02:42.553[32m info [39m [caliper] [caliper-engine] 	Skipping install smart contract phase due to benchmark flow conditioning
+2026.08.24-15:02:42.597[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:02:42.604[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:02:42.604[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:02:42.604[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:02:42.605[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:02:42.605[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:02:42.606[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:02:42.606[32m info [39m [caliper] [monitor.js] 	No resource monitors specified
+2026.08.24-15:02:42.607[32m info [39m [caliper] [default-observer] 	Observer interval set to 5000 milliseconds
+2026.08.24-15:02:42.608[32m info [39m [caliper] [round-orchestrator] 	Preparing worker connections
+2026.08.24-15:02:42.608[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 1 of 4
+2026.08.24-15:02:42.609[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 2 of 4
+2026.08.24-15:02:42.610[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 3 of 4
+2026.08.24-15:02:42.610[32m info [39m [caliper] [worker-orchestrator] 	Launching worker 4 of 4
+2026.08.24-15:02:42.611[32m info [39m [caliper] [worker-orchestrator] 	Messenger not configured, entering configure phase...
+2026.08.24-15:02:42.611[32m info [39m [caliper] [worker-orchestrator] 	No existing workers detected, entering worker launch phase...
+2026.08.24-15:02:42.611[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 4 workers to be connected...
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/caliper-executed-benchmark.yaml
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/caliper-executed-benchmark.yaml
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/caliper-executed-benchmark.yaml
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set workspace path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set benchmark configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/caliper-executed-benchmark.yaml
+2026.08.24-15:02:42.733[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set network configuration path: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/benchmarks/caliper/generated/network-config.json
+2026.08.24-15:02:42.734[32m info [39m [caliper] [cli-launch-worker] 	Set SUT type: fabric
+2026.08.24-15:02:42.750[32m info [39m [caliper] [worker-orchestrator] 	4 workers connected, progressing to worker assignment phase.
+2026.08.24-15:02:42.750[32m info [39m [caliper] [worker-orchestrator] 	Workers currently unassigned, awaiting index assignment...
+2026.08.24-15:02:42.750[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 4 workers to be assigned...
+2026.08.24-15:02:42.753[32m info [39m [caliper] [worker-orchestrator] 	4 workers assigned, progressing to worker initialization phase.
+2026.08.24-15:02:42.753[32m info [39m [caliper] [worker-orchestrator] 	Waiting for 4 workers to be ready...
+2026.08.24-15:02:42.754[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#0...
+2026.08.24-15:02:42.754[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#2...
+2026.08.24-15:02:42.754[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#1...
+2026.08.24-15:02:42.754[32m info [39m [caliper] [worker-message-handler] 	Initializing Worker#3...
+2026.08.24-15:02:42.804[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:02:42.804[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:02:42.804[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:02:42.804[32m info [39m [caliper] [FabricConnectorFactory] 	Initializing peer gateway connector compatible with installed fabric-gateway SDK: 1.7.1
+2026.08.24-15:02:42.806[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:02:42.806[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:02:42.806[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:02:42.806[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:02:42.806[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding io.krishnan (admin=false) as io.krishnan for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding insp.rathore (admin=false) as insp.rathore for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding insp.singh (admin=false) as insp.singh for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:02:42.807[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding const.verma (admin=false) as const.verma for organization PoliceMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:02:42.808[32m info [39m [caliper] [IdentityManager] 	Adding insp.sharma (admin=false) as insp.sharma for organization PoliceMSP
+2026.08.24-15:02:42.809[32m info [39m [caliper] [IdentityManager] 	Adding aud.qureshi (admin=false) as _AuditMSP_aud.qureshi for organization AuditMSP
+2026.08.24-15:02:42.810[32m info [39m [caliper] [worker-message-handler] 	Worker#2 initialized
+2026.08.24-15:02:42.810[32m info [39m [caliper] [worker-message-handler] 	Worker#1 initialized
+2026.08.24-15:02:42.810[32m info [39m [caliper] [worker-message-handler] 	Worker#3 initialized
+2026.08.24-15:02:42.810[32m info [39m [caliper] [worker-message-handler] 	Worker#0 initialized
+2026.08.24-15:02:42.810[32m info [39m [caliper] [worker-orchestrator] 	4 workers ready, progressing to test preparation phase.
+2026.08.24-15:02:42.810[32m info [39m [caliper] [round-orchestrator] 	Started round 1 (search-users-4)
+2026.08.24-15:02:42.811[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#0 for Round#0
+2026.08.24-15:02:42.811[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#2 for Round#0
+2026.08.24-15:02:42.811[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#3 for Round#0
+2026.08.24-15:02:42.811[32m info [39m [caliper] [worker-message-handler] 	Preparing Worker#1 for Round#0
+2026.08.24-15:02:42.819[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.820[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.821[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.821[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.821[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.821[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.823[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.823[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.823[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 0 is starting...
+2026.08.24-15:02:42.823[32m info [39m [caliper] [caliper-worker] 	Info: worker 3 prepare test phase for round 0 is starting...
+2026.08.24-15:02:42.823[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.823[32m info [39m [caliper] [caliper-worker] 	Info: worker 2 prepare test phase for round 0 is starting...
+2026.08.24-15:02:42.823[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.823[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 0 is starting...
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:02:42.824[32m info [39m [caliper] [caliper-worker] 	Info: worker 3 prepare test phase for round 0 is completed
+2026.08.24-15:02:42.824[32m info [39m [caliper] [caliper-worker] 	Info: worker 0 prepare test phase for round 0 is completed
+2026.08.24-15:02:42.824[32m info [39m [caliper] [worker-message-handler] 	Worker#3 prepared for Round#0
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:02:42.824[32m info [39m [caliper] [worker-message-handler] 	Worker#0 prepared for Round#0
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:02:42.824[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:02:42.825[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:02:42.825[32m info [39m [caliper] [caliper-worker] 	Info: worker 2 prepare test phase for round 0 is completed
+2026.08.24-15:02:42.825[32m info [39m [caliper] [caliper-worker] 	Info: worker 1 prepare test phase for round 0 is completed
+2026.08.24-15:02:42.825[32m info [39m [caliper] [worker-message-handler] 	Worker#2 prepared for Round#0
+2026.08.24-15:02:42.825[32m info [39m [caliper] [worker-message-handler] 	Worker#1 prepared for Round#0
+2026.08.24-15:02:42.825[32m info [39m [caliper] [worker-orchestrator] 	4 workers prepared, progressing to test phase.
+2026.08.24-15:02:42.825[32m info [39m [caliper] [round-orchestrator] 	Monitors successfully started
+2026.08.24-15:02:42.825[32m info [39m [caliper] [worker-message-handler] 	Worker#0 is starting Round#0
+2026.08.24-15:02:42.825[32m info [39m [caliper] [worker-message-handler] 	Worker#1 is starting Round#0
+2026.08.24-15:02:42.826[32m info [39m [caliper] [worker-message-handler] 	Worker#2 is starting Round#0
+2026.08.24-15:02:42.826[32m info [39m [caliper] [worker-message-handler] 	Worker#3 is starting Round#0
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user io.krishnan
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.rathore
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.827[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.singh
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user const.verma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.828[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user insp.sharma
+2026.08.24-15:02:42.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.829[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	Generating contract map for user _AuditMSP_aud.qureshi
+2026.08.24-15:02:42.829[32m info [39m [caliper] [caliper-worker] 	Worker #1 starting workload loop
+2026.08.24-15:02:42.829[32m info [39m [caliper] [caliper-worker] 	Worker #2 starting workload loop
+2026.08.24-15:02:42.829[32m info [39m [caliper] [caliper-worker] 	Worker #0 starting workload loop
+2026.08.24-15:02:42.829[32m info [39m [caliper] [caliper-worker] 	Worker #3 starting workload loop
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"673fc8e33d4a7baf6e3862f3b7cd7fe326d331c59e3d51ac90e1925b5c45a9dc","status":"success","startEpochMs":1787563962832,"endEpochMs":1787563963511,"latencyMs":679}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"79bbfddafef1b5619638ade169fb2d03fb05929af7bf0d87010e2e0cf9837756","status":"success","startEpochMs":1787563962832,"endEpochMs":1787563963511,"latencyMs":679}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"68d49d76db8f91c7e17ee13c341d368ccf72d22add7f486bc2aa1ca64718c336","status":"success","startEpochMs":1787563962832,"endEpochMs":1787563963513,"latencyMs":681}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"090c886f958d73c52fbb0f40d5053e1907f2af8d238b74f0403ca9bef8ffff38","status":"success","startEpochMs":1787563962832,"endEpochMs":1787563963514,"latencyMs":682}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"ef9d61d9fc5576baf1efe872fa19db66f441f3b6b054e0925a159ec0bd872aa4","status":"success","startEpochMs":1787563963835,"endEpochMs":1787563964452,"latencyMs":617}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"f29b68c018a1717729dbc63fbb837e21807a0c90f231990facf7fed273a1eb12","status":"success","startEpochMs":1787563963836,"endEpochMs":1787563964452,"latencyMs":616}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"fc199a6a039332ae7da703456ded56c54e96857ee75f9eafa2bf96fc7c6f9f55","status":"success","startEpochMs":1787563963835,"endEpochMs":1787563964452,"latencyMs":617}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"c866b30988ad587721ef1fe745341a2a3a895544b87bcfdecfe1494ee329dc42","status":"success","startEpochMs":1787563963833,"endEpochMs":1787563964453,"latencyMs":620}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e9ec08321a902e3a355cbac1580909bc578435a49c25fc68b82397f9b0035302","status":"success","startEpochMs":1787563964831,"endEpochMs":1787563965485,"latencyMs":654}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"696cf2c52aa318980fd1c1e0297fa79c7ae35c47c617d3a9578a2ff26920bd4b","status":"success","startEpochMs":1787563964831,"endEpochMs":1787563965485,"latencyMs":654}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"20c5992370aa16ad96244f6f88a5e0112bab6a76d3bff1f8160a9caa7c62c86f","status":"success","startEpochMs":1787563964831,"endEpochMs":1787563965485,"latencyMs":654}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"d80fe585e11823c66935751dc88c8380243448abe811876110e2de8349d8918d","status":"success","startEpochMs":1787563964831,"endEpochMs":1787563965486,"latencyMs":655}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"6e4b8b862432bffdc8a8b61d35622703a1e216c6b7c5c219e9275b67bfe4524f","status":"success","startEpochMs":1787563965832,"endEpochMs":1787563966487,"latencyMs":655}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"1ef151d1cd36d277e64a7f05145e9ef11e20c1fcbc2d4af12909ad3306e8b1fe","status":"success","startEpochMs":1787563965832,"endEpochMs":1787563966487,"latencyMs":655}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"72e4674be89a320b81a0f52f0d9b633c33fdc0cc37d21f0e4fe1506e9265c86c","status":"success","startEpochMs":1787563965837,"endEpochMs":1787563966487,"latencyMs":650}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5451bf6b53ddc02a023180be314d1e547a8320ef636743d8f3b7ecfb0e70296b","status":"success","startEpochMs":1787563965832,"endEpochMs":1787563966487,"latencyMs":655}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"2ceb47222e1d01e471b6fcf5279361947d22515a5dbf47e3ef1b93d4430f6dc1","status":"success","startEpochMs":1787563966833,"endEpochMs":1787563967498,"latencyMs":665}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"962cb3a64a929b8bb0dc17edc76997e70c605a1bc88b8180ddfe835597c00a50","status":"success","startEpochMs":1787563966833,"endEpochMs":1787563967499,"latencyMs":666}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"da40aebdff9d3b4429776f47ffb665e9d1ee6fc2225b2a8a6e5ffa8ae25fe0a3","status":"success","startEpochMs":1787563966833,"endEpochMs":1787563967499,"latencyMs":666}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e037b8e085023310c7f366c8d426086eddd39f07a794a367258c74d23e0b0d30","status":"success","startEpochMs":1787563966834,"endEpochMs":1787563967500,"latencyMs":666}
+2026.08.24-15:02:47.837[32m info [39m [caliper] [default-observer] 	[search-users-4 Round 0 Transaction Info] - Submitted: 17 Succ: 16 Fail:0 Unfinished:1
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5bb3c530aa02ffc7ac98fc23d540e6cfb3296ae7547427a4f3c69cad92b57624","status":"success","startEpochMs":1787563967831,"endEpochMs":1787563968482,"latencyMs":651}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"9993e4ded43e06592366a4ba53f049d661e9bdb8faa35d1d938a9a406294d705","status":"success","startEpochMs":1787563967832,"endEpochMs":1787563968482,"latencyMs":650}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"9a29bb4937005ab87c9aea91dec7c6e66fb7494e25de6373f88c222d3af9382c","status":"success","startEpochMs":1787563967831,"endEpochMs":1787563968482,"latencyMs":651}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"28c76f22fcd80d802ad4f8f35b42996ab91465695b212c02cd155b6d0c665726","status":"success","startEpochMs":1787563967831,"endEpochMs":1787563968483,"latencyMs":652}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"d2ac3777e3f9aee53a478a625d2a6e4a3843e3590ecc4cca419414edc801dc78","status":"success","startEpochMs":1787563968831,"endEpochMs":1787563969476,"latencyMs":645}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"33d2b678fe6d02a3bc748a3221328aa2d708922ef972ff5c4161d708937b8af7","status":"success","startEpochMs":1787563968833,"endEpochMs":1787563969476,"latencyMs":643}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"3f2bb64c40be615daa27a2535396ebab88dfe6fbf0ad15f938767f4a66c77f20","status":"success","startEpochMs":1787563968831,"endEpochMs":1787563969477,"latencyMs":646}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"990604aa9130bba728a32db179acd19f9071734cfa0c415ee7ecee6f2eee3a36","status":"success","startEpochMs":1787563968831,"endEpochMs":1787563969477,"latencyMs":646}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e8ee32e1c06eb359e546789960c5b5c3a117a7253c5c490ec59c945e1266fc8a","status":"success","startEpochMs":1787563969831,"endEpochMs":1787563970474,"latencyMs":643}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"ad20479dfe37ee4e9b20484207b990b9c8871691f50f09565a8e96564f472298","status":"success","startEpochMs":1787563969830,"endEpochMs":1787563970474,"latencyMs":644}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"236266af4a1408dfdaa60dd6008ba8c2f02e53debbbad5531f07ac408309dc86","status":"success","startEpochMs":1787563969832,"endEpochMs":1787563970474,"latencyMs":642}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"437d45e30beba29f3633d75d95116df48136d9097c0b16ba4fc97da22e06aea2","status":"success","startEpochMs":1787563969830,"endEpochMs":1787563970474,"latencyMs":644}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"577c759124cf587e512481da3731c76ef2de0e6dbd744f67391c488f0fb689b3","status":"success","startEpochMs":1787563970831,"endEpochMs":1787563971530,"latencyMs":699}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"397fd1a6c277ad5b4302e02e494027345c7eb0cd64e3cb8272dd2ff5edf9175b","status":"success","startEpochMs":1787563970831,"endEpochMs":1787563971530,"latencyMs":699}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"8863c607946f32b741d70e823af23c34234fcb85b36799fcf52b7c33aace79b5","status":"success","startEpochMs":1787563970831,"endEpochMs":1787563971537,"latencyMs":706}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"8800820874c4bdc84350df63c27ff24972787c89d29265f03698d383ff63fe7c","status":"success","startEpochMs":1787563970831,"endEpochMs":1787563971537,"latencyMs":706}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"bb46f86e08b865228ba922996cba39fd299be8c8d3b96b71b3ecda25cbbfce36","status":"success","startEpochMs":1787563971833,"endEpochMs":1787563972496,"latencyMs":663}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5c9afd85c49eef4db99407609fc3af9f5b3382a5286b08411f602523bff407e6","status":"success","startEpochMs":1787563971834,"endEpochMs":1787563972496,"latencyMs":662}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e4f9c8073df8d77a367888d6b0a7874d152dc3aecfa683ac63d6e22075aa0a58","status":"success","startEpochMs":1787563971835,"endEpochMs":1787563972496,"latencyMs":661}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"d81ce5ddadce06fea6518f74e7d45b6bde43396e6d731ca8e51ff1f8aa68550c","status":"success","startEpochMs":1787563971834,"endEpochMs":1787563972498,"latencyMs":664}
+2026.08.24-15:02:52.828[32m info [39m [caliper] [default-observer] 	[search-users-4 Round 0 Transaction Info] - Submitted: 40 Succ: 36 Fail:0 Unfinished:4
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5218d8321170ac8c6ce415a405233c19651d6c554b0c168cec371782b5457bc3","status":"success","startEpochMs":1787563972835,"endEpochMs":1787563973487,"latencyMs":652}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"b16a2f4b30cf09f2da8ee7d1d4ca460d1db26092f7009c58a0bc6679ef6f2f4d","status":"success","startEpochMs":1787563972831,"endEpochMs":1787563973487,"latencyMs":656}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"fb324a9b24996c2e32ea8c96808edd0cad523e1ac379ef53eb6e958254fde289","status":"success","startEpochMs":1787563972831,"endEpochMs":1787563973487,"latencyMs":656}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"960a5c0a1f0cb1706b7dcb5646ecb4ba80dde225fb762da89bf52c57303dfc2d","status":"success","startEpochMs":1787563972831,"endEpochMs":1787563973487,"latencyMs":656}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"07664ca5e397e8a614a62ae17591ac50c8d57a7e0b0769040f61a64ce1861b66","status":"success","startEpochMs":1787563973835,"endEpochMs":1787563974508,"latencyMs":673}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"246361658f4159987391f785ec4c4581d00139572ed2db311a403d1b1cec4ab8","status":"success","startEpochMs":1787563973831,"endEpochMs":1787563974508,"latencyMs":677}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"ff6c91909ccc86d772630b17439d0eb6253969fb7417dbf4a1cc5092f14436be","status":"success","startEpochMs":1787563973831,"endEpochMs":1787563974509,"latencyMs":678}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"16b049773ec36d62f55934de54beb06dfd803457302b664c0957882ff5adfd0c","status":"success","startEpochMs":1787563973831,"endEpochMs":1787563974510,"latencyMs":679}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"3d527cf147b19feb56e3060b47479a8c2b3fcd4ee56111ec179525e14859361c","status":"success","startEpochMs":1787563974831,"endEpochMs":1787563975503,"latencyMs":672}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"1c7dd0ca3174a635a2843ee907f13e997af8be1cab9c0bc01929cff747bf0b8e","status":"success","startEpochMs":1787563974830,"endEpochMs":1787563975503,"latencyMs":673}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"4e280322c1bcf46cf0f513c286e7c482af9fd394588787eb343eb3b68b2b78f4","status":"success","startEpochMs":1787563974831,"endEpochMs":1787563975504,"latencyMs":673}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"a066d08be3fa467a2ae079e3e655c270dc09299bf5aef51a710112d1b13f8bf6","status":"success","startEpochMs":1787563974832,"endEpochMs":1787563975504,"latencyMs":672}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e9b62eb8fd02d8af35bbccee49de3a6e759c55bd6a32b3622da9563deceee1ad","status":"success","startEpochMs":1787563975833,"endEpochMs":1787563976503,"latencyMs":670}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"c5b603b05e124db3a5d94c79050cca73273021b31f93ec09c5acc27840583756","status":"success","startEpochMs":1787563975831,"endEpochMs":1787563976503,"latencyMs":672}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"db8f4b4193fd5ae2129d737ec37bc4c7579cd6bc62e1459f2e24771e82e14633","status":"success","startEpochMs":1787563975831,"endEpochMs":1787563976503,"latencyMs":672}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"f50102c1ef6ad8c2d872a021c9763f05cad69de95da44ab5e4f684b361c0aad3","status":"success","startEpochMs":1787563975831,"endEpochMs":1787563976503,"latencyMs":672}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5732d5bd964b856b1f1f24b3dc96d8d15fe58ee3560b8e7b2f003fb0f85b0800","status":"success","startEpochMs":1787563976831,"endEpochMs":1787563977573,"latencyMs":742}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"7f5ce3b5f0361bdecb84a759add1fb64eab5c96215e19e80da92e7a5c8cb7609","status":"success","startEpochMs":1787563976831,"endEpochMs":1787563977573,"latencyMs":742}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"43bc0f154a9ec10ef0f7f3278aa8eefb163fbbadd04c56d4f2a5444a119f32c6","status":"success","startEpochMs":1787563976833,"endEpochMs":1787563977573,"latencyMs":740}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"f3c0625dedf02f37c1214d93919bfe8a914de6d02d2e6f6353dab7becb4227ba","status":"success","startEpochMs":1787563976831,"endEpochMs":1787563977574,"latencyMs":743}
+2026.08.24-15:02:57.830[32m info [39m [caliper] [default-observer] 	[search-users-4 Round 0 Transaction Info] - Submitted: 60 Succ: 56 Fail:0 Unfinished:4
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e8a224b11abcb0e62c4e7c32d336128bb98b6a96375ca54c9c63a5c2557e33d5","status":"success","startEpochMs":1787563977831,"endEpochMs":1787563978528,"latencyMs":697}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"90db85883d318a04af21f4b3ad1d5eb7448f1394a1482510516e568046739d08","status":"success","startEpochMs":1787563977831,"endEpochMs":1787563978528,"latencyMs":697}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"4e8ac89c3e7ba6025f066367380d81172d35bc89c8ad08e25e044bc6ebc191f2","status":"success","startEpochMs":1787563977831,"endEpochMs":1787563978528,"latencyMs":697}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"2e440ec0afdf20bfa2636183a9b6d6684e4bf304f304154910efdf331746a689","status":"success","startEpochMs":1787563977831,"endEpochMs":1787563978528,"latencyMs":697}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"3be5ff612d711576b4e87d6a3d08da286d7731f9a1a4c281e079582c7c28909f","status":"success","startEpochMs":1787563978830,"endEpochMs":1787563979625,"latencyMs":795}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"f38a4f0ed8d04178b06a90025919c24fff8d6bc5fb9678d0652dcdf32c612417","status":"success","startEpochMs":1787563978830,"endEpochMs":1787563979625,"latencyMs":795}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5805433e217543467fe127b40ab61a6fd6aa9c2b422ec69cb807e117692665e0","status":"success","startEpochMs":1787563978830,"endEpochMs":1787563979626,"latencyMs":796}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"f53b0f5a60b1ebfeb3396d861987bb8152b2a4a8ce22630949cff9f58943dbca","status":"success","startEpochMs":1787563978830,"endEpochMs":1787563979626,"latencyMs":796}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"f654171c96040119fea70b799111cb087e43c6e126c02a0b25564dbe51e07baf","status":"success","startEpochMs":1787563979830,"endEpochMs":1787563980659,"latencyMs":829}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"d6e996da45469ae69078b19fb654146d5f028a46f8245371fa022528b4e5de51","status":"success","startEpochMs":1787563979830,"endEpochMs":1787563980659,"latencyMs":829}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"2211784daf4e1484d7b00d668b985b38c9020acff6512652cd2b394fee792c8a","status":"success","startEpochMs":1787563979830,"endEpochMs":1787563980659,"latencyMs":829}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"d0d78cd65ce0e418efb768c34f754621b762d755b24ef9fc61166994ec06f7e6","status":"success","startEpochMs":1787563979830,"endEpochMs":1787563980659,"latencyMs":829}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"c57038faee8c3bdf150b35fe9313496142b0a6bc30497d66cdaff367dac3df6f","status":"success","startEpochMs":1787563980830,"endEpochMs":1787563981604,"latencyMs":774}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"d83763113484e23ffb17f190b2fd175b3b18df27c16a7abe43b995b7e3f84dab","status":"success","startEpochMs":1787563980830,"endEpochMs":1787563981604,"latencyMs":774}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"965a998c3d0d7e86ea6effdbbc9cc53e94ea2ce13590a8c894c3bb75f4318c25","status":"success","startEpochMs":1787563980830,"endEpochMs":1787563981604,"latencyMs":774}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"ecd0d748bc71cdd28c21e62254244a6b8a41d4f4cff8acb5ba75c88d91a6b35c","status":"success","startEpochMs":1787563980830,"endEpochMs":1787563981604,"latencyMs":774}
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"a1cc5acf87607e7e7111b80159b7e8e09afd9b307d874c17a67ae651b2fc9995","status":"success","startEpochMs":1787563981832,"endEpochMs":1787563982617,"latencyMs":785}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"cf4ea2028980ea35e44058feba18688337b8bab6ca6a4332cc20a0d8766918e0","status":"success","startEpochMs":1787563981832,"endEpochMs":1787563982617,"latencyMs":785}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"9905351987550703a8c22983772b552df3cbb38c7bf57b11f527228856344eac","status":"success","startEpochMs":1787563981830,"endEpochMs":1787563982618,"latencyMs":788}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5746b2522868f2533dd1ffb4c332fdff0936c0d5bc20cf38ac5ae7bf52e92cfe","status":"success","startEpochMs":1787563981832,"endEpochMs":1787563982619,"latencyMs":787}
+2026.08.24-15:03:02.830[32m info [39m [caliper] [default-observer] 	[search-users-4 Round 0 Transaction Info] - Submitted: 80 Succ: 76 Fail:0 Unfinished:4
+CALIPER_TX_LATENCY {"workerIndex":2,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"fff16dc41f8bed46ad0d1f5f2a64838c299290da6918e51d24ce342999e8aad5","status":"success","startEpochMs":1787563982830,"endEpochMs":1787563983683,"latencyMs":853}
+CALIPER_TX_LATENCY {"workerIndex":3,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"e75ef6d58fd4b3f05e94627619a332b7aa0af3a024435a110cbbd76831a5557a","status":"success","startEpochMs":1787563982830,"endEpochMs":1787563983683,"latencyMs":853}
+CALIPER_TX_LATENCY {"workerIndex":0,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"b0198ba976c24d65b47b89741137fcbb34d53601e447ee3c78518a267c5d5eab","status":"success","startEpochMs":1787563982831,"endEpochMs":1787563983683,"latencyMs":852}
+CALIPER_TX_LATENCY {"workerIndex":1,"roundIndex":0,"roundLabel":"search-users-4","transactionId":"5b04929014d666077f4fb772568ac8a56af96d4f45af88739c746a2fe465b4e4","status":"success","startEpochMs":1787563982831,"endEpochMs":1787563983684,"latencyMs":853}
+2026.08.24-15:03:04.736[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:03:04.736[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:03:04.737[32m info [39m [caliper] [worker-message-handler] 	Worker#2 finished Round#0
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:03:04.737[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:03:04.737[32m info [39m [caliper] [worker-message-handler] 	Worker#0 finished Round#0
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user io.krishnan
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.rathore
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.singh
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user const.verma
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user insp.sharma
+2026.08.24-15:03:04.738[32m info [39m [caliper] [worker-message-handler] 	Worker#1 finished Round#0
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gateway for user _AuditMSP_aud.qureshi
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer PoliceMSP_localhost:7051
+2026.08.24-15:03:04.738[32m info [39m [caliper] [connectors/peer-gateway/PeerGateway] 	disconnecting gRpc client at peer AuditMSP_localhost:11051
+2026.08.24-15:03:04.738[32m info [39m [caliper] [worker-message-handler] 	Worker#3 finished Round#0
+2026.08.24-15:03:09.741[32m info [39m [caliper] [default-observer] 	Resetting txCount indicator count
+2026.08.24-15:03:09.741[32m info [39m [caliper] [report-builder] 	### Test result ###
+2026.08.24-15:03:09.743[32m info [39m [caliper] [report-builder] 	
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+| Name           | Succ | Fail | Send Rate (TPS) | Max Latency (s) | Min Latency (s) | Avg Latency (s) | Throughput (TPS) |
+|----------------|------|------|-----------------|-----------------|-----------------|-----------------|------------------|
+| search-users-4 | 84   | 0    | 4.2             | 0.85            | 0.62            | 0.70            | 4.0              |
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+
+2026.08.24-15:03:09.744[32m info [39m [caliper] [round-orchestrator] 	Finished round 1 (search-users-4) in 20.908 seconds
+2026.08.24-15:03:09.744[32m info [39m [caliper] [monitor.js] 	Stopping all monitors
+2026.08.24-15:03:09.744[32m info [39m [caliper] [report-builder] 	### All test results ###
+2026.08.24-15:03:09.744[32m info [39m [caliper] [report-builder] 	
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+| Name           | Succ | Fail | Send Rate (TPS) | Max Latency (s) | Min Latency (s) | Avg Latency (s) | Throughput (TPS) |
+|----------------|------|------|-----------------|-----------------|-----------------|-----------------|------------------|
+| search-users-4 | 84   | 0    | 4.2             | 0.85            | 0.62            | 0.70            | 4.0              |
++----------------+------+------+-----------------+-----------------+-----------------+-----------------+------------------+
+
+2026.08.24-15:03:09.748[32m info [39m [caliper] [report-builder] 	Generated report with path /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-24T09-32-42-425Z_caliper_latency-users-4/caliper-report.html
+2026.08.24-15:03:09.748[32m info [39m [caliper] [monitor.js] 	Stopping all monitors
+2026.08.24-15:03:09.748[32m info [39m [caliper] [worker-orchestrator] 	Sending exit message to connected workers
+2026.08.24-15:03:09.749[32m info [39m [caliper] [round-orchestrator] 	Benchmark finished in 26.939 seconds. Total rounds: 1. Successful rounds: 1. Failed rounds: 0.
+2026.08.24-15:03:09.749[32m info [39m [caliper] [caliper-engine] 	Skipping end command due to benchmark flow conditioning
+2026.08.24-15:03:09.749[32m info [39m [caliper] [cli-launch-manager] 	Benchmark successfully finished!
+2026.08.24-15:03:09.749[32m info [39m [caliper] [worker-message-handler] 	Worker#0 is exiting
+2026.08.24-15:03:09.749[32m info [39m [caliper] [worker-message-handler] 	Worker#1 is exiting
+2026.08.24-15:03:09.749[32m info [39m [caliper] [worker-message-handler] 	Worker#2 is exiting
+2026.08.24-15:03:09.749[32m info [39m [caliper] [worker-message-handler] 	Worker#3 is exiting

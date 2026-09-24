@@ -1,0 +1,33 @@
+{
+  "runType": "manuscript-text-revision",
+  "timestampLocal": "2026-08-24T11:42:10+05:30",
+  "target": "papers/final_paper/SEBA_XAI_ACM_6page.tex",
+  "objective": "Scenario-based introduction rewrite bounded by existing manuscript footprint",
+  "intro": {
+    "baselineWordCount": 360,
+    "wordCount": 347,
+    "baselineTrimmedPhysicalLines": 41,
+    "trimmedPhysicalLines": 41,
+    "baselineBoundaryInclusiveLines": 43,
+    "boundaryInclusiveLines": 43,
+    "paragraphs": 5
+  },
+  "verification": {
+    "compiledPdfPages": 5,
+    "faithfulnessCheck": "passed",
+    "figure3ReproductionCheck": "passed",
+    "renderReview": "all 5 pages inspected",
+    "undefinedCitationsOrReferences": 0,
+    "overfullBoxes": 0
+  },
+  "sha256": {
+    "tex": "a360d4eada818ce1e8280cdee92ad4f646b72b2c8759fd9c96e3a74fa7c8e6a8",
+    "pdf": "4bb70f4141bc1a1bcd2117ea0cd425a59f328bb91c72a4dd7efb447d1f71b340"
+  },
+  "notes": [
+    "No new measurements or citations were introduced.",
+    "The supplied PDF was treated as scenario source material, not as evidence authority.",
+    "Legacy CCTNS/ICJS, compromised-signer, simulated-ledger, and numeric attack-result claims were excluded.",
+    "The rewrite keeps the RBAC/ABAC, blockchain audit, explainability, SEBA-XAI transaction, off-chain vault boundary, and contribution framing."
+  ]
+}

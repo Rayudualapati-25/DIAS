@@ -1,0 +1,78 @@
+{
+  "selectedIteration": 1260,
+  "selectionCriterion": "maximum held-out joint decision+reason accuracy on a decision-balanced validation subset (120 examples, 36% adversarial); validation loss not used",
+  "validationSubset": {
+    "path": "experiments/llm_policy_engine/data_v4/valid_selection_120.jsonl",
+    "sha256": "8760f65488f9f9fbd941220a4b97cedaedee8fc62f7cd1f875d464520558d527",
+    "examples": 120,
+    "uniqueSubsetOfValidation": true,
+    "decisionCounts": {
+      "allow": 40,
+      "deny": 40,
+      "escalate": 40
+    },
+    "adversarialExamples": 43
+  },
+  "selectedAdapter": {
+    "path": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v4-best/adapters.safetensors",
+    "sha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b"
+  },
+  "candidates": [
+    {
+      "iteration": 180,
+      "joint": 0.475,
+      "decisionMacroF1": 0.5569,
+      "escalateRecall": 0.75,
+      "falseAllows": 2,
+      "adversarialJoint": 0.3256
+    },
+    {
+      "iteration": 360,
+      "joint": 0.5333,
+      "decisionMacroF1": 0.5489,
+      "escalateRecall": 0.2,
+      "falseAllows": 22,
+      "adversarialJoint": 0.3023
+    },
+    {
+      "iteration": 540,
+      "joint": 0.775,
+      "decisionMacroF1": 0.7864,
+      "escalateRecall": 0.875,
+      "falseAllows": 6,
+      "adversarialJoint": 0.6047
+    },
+    {
+      "iteration": 720,
+      "joint": 0.8333,
+      "decisionMacroF1": 0.8336,
+      "escalateRecall": 0.9,
+      "falseAllows": 2,
+      "adversarialJoint": 0.7209
+    },
+    {
+      "iteration": 900,
+      "joint": 0.8917,
+      "decisionMacroF1": 0.8871,
+      "escalateRecall": 1,
+      "falseAllows": 5,
+      "adversarialJoint": 0.7907
+    },
+    {
+      "iteration": 1080,
+      "joint": 0.875,
+      "decisionMacroF1": 0.883,
+      "escalateRecall": 0.95,
+      "falseAllows": 5,
+      "adversarialJoint": 0.7674
+    },
+    {
+      "iteration": 1260,
+      "joint": 0.925,
+      "decisionMacroF1": 0.9506,
+      "escalateRecall": 0.95,
+      "falseAllows": 5,
+      "adversarialJoint": 0.8605
+    }
+  ]
+}

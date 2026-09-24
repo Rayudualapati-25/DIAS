@@ -1,0 +1,22 @@
+test:
+  name: Verified write response diagnostic
+  description: One retained transaction used only to validate result decoding and the expected policy reason.
+  workers:
+    number: 1
+  rounds:
+    - label: verified-write-diagnostic
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access-verified.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          expectedReasonCode: POLICY_SATISFIED
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP

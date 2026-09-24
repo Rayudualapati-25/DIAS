@@ -1,0 +1,4 @@
+label,phase,start_s,end_s,duration_s,target_tps,workers,planned_read_percent,planned_write_percent
+mixed-warmup-2-tps,warmup,0,15,15,2.0,4,70,30
+caliper-inter-round-wait,wait,15,20,5,0.0,4,70,30
+mixed-measurement-10-tps,measurement,20,320,300,10.0,4,70,30

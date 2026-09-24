@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" modified="2026-09-05T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="seba-xai-network-operation" name="Page-1">
+    <mxGraphModel dx="600" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="network" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#222222;strokeWidth=1.8;" vertex="1" parent="1"><mxGeometry x="190" y="223" width="220" height="220" as="geometry"/></mxCell>
+        <mxCell id="networkTitle" value="&lt;b&gt;Permissioned Blockchain&lt;/b&gt;&lt;br&gt;&lt;b&gt;Network&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=17;" vertex="1" parent="1"><mxGeometry x="210" y="242" width="180" height="45" as="geometry"/></mxCell>
+
+        <mxCell id="networkPeerLeft" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EEF3F9;strokeColor=#333333;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="235" y="310" width="20" height="20" as="geometry"/></mxCell>
+        <mxCell id="networkPeerTop" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EEF3F9;strokeColor=#333333;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="290" y="292" width="20" height="20" as="geometry"/></mxCell>
+        <mxCell id="networkPeerRight" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EEF3F9;strokeColor=#333333;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="345" y="310" width="20" height="20" as="geometry"/></mxCell>
+        <mxCell id="ledger" value="" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#FFFFFF;strokeColor=#333333;strokeWidth=1.4;" vertex="1" parent="1"><mxGeometry x="270" y="334" width="60" height="54" as="geometry"/></mxCell>
+        <mxCell id="ledgerLabel" value="Shared Ledger" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=12;" vertex="1" parent="1"><mxGeometry x="250" y="389" width="100" height="22" as="geometry"/></mxCell>
+        <mxCell id="peerKey" value="P = organisation peer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="245" y="412" width="110" height="20" as="geometry"/></mxCell>
+        <mxCell id="peerLinkLeft" style="edgeStyle=none;html=1;endArrow=none;strokeColor=#555555;strokeWidth=1.4;" edge="1" parent="1" source="networkPeerLeft" target="ledger"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="peerLinkTop" style="edgeStyle=none;html=1;endArrow=none;strokeColor=#555555;strokeWidth=1.4;" edge="1" parent="1" source="networkPeerTop" target="ledger"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="peerLinkRight" style="edgeStyle=none;html=1;endArrow=none;strokeColor=#555555;strokeWidth=1.4;" edge="1" parent="1" source="networkPeerRight" target="ledger"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="org1Box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBFBFB;strokeColor=#222222;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="205" y="20" width="190" height="115" as="geometry"/></mxCell>
+        <mxCell id="org1Title" value="&lt;b&gt;Organisation 1&lt;/b&gt;" style="whiteSpace=wrap;html=1;fillColor=#E7EEF7;strokeColor=#222222;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=17;" vertex="1" parent="1"><mxGeometry x="205" y="20" width="190" height="29" as="geometry"/></mxCell>
+        <mxCell id="org1UserIcon" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1.3;" vertex="1" parent="1"><mxGeometry x="215" y="57" width="18" height="26" as="geometry"/></mxCell>
+        <mxCell id="org1UserLabel" value="Users / Entity" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=14;" vertex="1" parent="1"><mxGeometry x="240" y="57" width="100" height="27" as="geometry"/></mxCell>
+        <mxCell id="org1SystemIcon" value="" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=none;strokeColor=#333333;strokeWidth=1.3;" vertex="1" parent="1"><mxGeometry x="215" y="89" width="20" height="27" as="geometry"/></mxCell>
+        <mxCell id="org1SystemLabel" value="Information System" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=14;" vertex="1" parent="1"><mxGeometry x="242" y="90" width="125" height="25" as="geometry"/></mxCell>
+        <mxCell id="org1Peer" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E7EEF7;strokeColor=#222222;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="290" y="125" width="20" height="20" as="geometry"/></mxCell>
+
+        <mxCell id="org2Box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBFBFB;strokeColor=#222222;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="15" y="265" width="145" height="135" as="geometry"/></mxCell>
+        <mxCell id="org2Title" value="&lt;b&gt;Organisation 2&lt;/b&gt;" style="whiteSpace=wrap;html=1;fillColor=#EDF3FA;strokeColor=#222222;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=17;" vertex="1" parent="1"><mxGeometry x="15" y="265" width="145" height="29" as="geometry"/></mxCell>
+        <mxCell id="org2UserIcon" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1.3;" vertex="1" parent="1"><mxGeometry x="28" y="305" width="18" height="26" as="geometry"/></mxCell>
+        <mxCell id="org2UserLabel" value="Users / Entity" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=14;" vertex="1" parent="1"><mxGeometry x="53" y="307" width="92" height="25" as="geometry"/></mxCell>
+        <mxCell id="org2SystemIcon" value="" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=none;strokeColor=#333333;strokeWidth=1.3;" vertex="1" parent="1"><mxGeometry x="27" y="345" width="20" height="27" as="geometry"/></mxCell>
+        <mxCell id="org2SystemLabel" value="Information&lt;br&gt;System" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=12;" vertex="1" parent="1"><mxGeometry x="55" y="340" width="92" height="38" as="geometry"/></mxCell>
+        <mxCell id="org2Peer" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDF3FA;strokeColor=#222222;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="150" y="323" width="20" height="20" as="geometry"/></mxCell>
+
+        <mxCell id="orgNBox" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBFBFB;strokeColor=#222222;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="440" y="265" width="145" height="135" as="geometry"/></mxCell>
+        <mxCell id="orgNTitle" value="&lt;b&gt;Organisation N&lt;/b&gt;" style="whiteSpace=wrap;html=1;fillColor=#EDF5EC;strokeColor=#222222;strokeWidth=1.5;fontFamily=Times New Roman;fontSize=17;" vertex="1" parent="1"><mxGeometry x="440" y="265" width="145" height="29" as="geometry"/></mxCell>
+        <mxCell id="orgNUserIcon" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1.3;" vertex="1" parent="1"><mxGeometry x="451" y="305" width="18" height="26" as="geometry"/></mxCell>
+        <mxCell id="orgNUserLabel" value="Users / Entity" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Times New Roman;fontSize=14;" vertex="1" parent="1"><mxGeometry x="476" y="307" width="92" height="25" as="geometry"/></mxCell>
+        <mxCell id="orgNSystemIcon" value="" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=none;strokeColor=#333333;strokeWidth=1.3;" vertex="1" parent="1"><mxGeometry x="450" y="345" width="20" height="27" as="geometry"/></mxCell>
+        <mxCell id="orgNSystemLabel" value="Information&lt;br&gt;System" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=12;" vertex="1" parent="1"><mxGeometry x="478" y="340" width="92" height="38" as="geometry"/></mxCell>
+        <mxCell id="orgNPeer" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDF5EC;strokeColor=#222222;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="430" y="323" width="20" height="20" as="geometry"/></mxCell>
+
+        <mxCell id="org1Network" value="request / result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#355C8A;strokeWidth=2;fontFamily=Times New Roman;fontSize=11;" edge="1" parent="1" source="org1Peer" target="network"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="org2Network" style="edgeStyle=none;html=1;endArrow=none;strokeColor=#355C8A;strokeWidth=2;" edge="1" parent="1" source="org2Peer" target="network"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="orgNNetwork" style="edgeStyle=none;html=1;endArrow=none;strokeColor=#355C8A;strokeWidth=2;" edge="1" parent="1" source="orgNPeer" target="network"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="aiOrg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBFBFB;strokeColor=#777777;strokeWidth=1.4;" vertex="1" parent="1"><mxGeometry x="150" y="500" width="300" height="105" as="geometry"/></mxCell>
+        <mxCell id="aiOrgTitle" value="&lt;b&gt;AI Organisation&lt;/b&gt;" style="whiteSpace=wrap;html=1;fillColor=#FFF3D6;strokeColor=#777777;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=17;" vertex="1" parent="1"><mxGeometry x="150" y="500" width="300" height="28" as="geometry"/></mxCell>
+        <mxCell id="aiPeer" value="P" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFF3D6;strokeColor=#222222;strokeWidth=1.4;fontFamily=Times New Roman;fontSize=11;" vertex="1" parent="1"><mxGeometry x="191" y="544" width="28" height="28" as="geometry"/></mxCell>
+        <mxCell id="aiPeerLabel" value="AI Peer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Times New Roman;fontSize=12;" vertex="1" parent="1"><mxGeometry x="170" y="574" width="70" height="20" as="geometry"/></mxCell>
+        <mxCell id="llm" value="&lt;b&gt;Off-chain LLM&lt;/b&gt;&lt;br&gt;Decision Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8EB;strokeColor=#777777;strokeWidth=1.3;dashed=1;dashPattern=5 4;fontFamily=Times New Roman;fontSize=14;" vertex="1" parent="1"><mxGeometry x="255" y="535" width="170" height="50" as="geometry"/></mxCell>
+        <mxCell id="llmIcon" value="&lt;b&gt;AI&lt;/b&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFF8EB;strokeColor=#333333;strokeWidth=1.3;fontFamily=Arial;fontSize=10;" vertex="1" parent="1"><mxGeometry x="394" y="543" width="22" height="24" as="geometry"/></mxCell>
+        <mxCell id="networkAi" value="context / signed decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#355C8A;strokeWidth=2;fontFamily=Times New Roman;fontSize=11;" edge="1" parent="1" source="network" target="aiPeer"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="aiPeerLlm" style="edgeStyle=none;html=1;endArrow=none;strokeColor=#355C8A;strokeWidth=2;" edge="1" parent="1" source="aiPeer" target="llm"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,4 @@
+label,phase,start_s,end_s,duration_s,target_tps,workers,planned_read_percent,planned_write_percent
+write-warmup-1-tps,warmup,0,15,15,1.0,2,,
+caliper-inter-round-wait,wait,15,20,5,0.0,2,,
+write-measurement-5-tps,measurement,20,140,120,5.0,2,,

@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "startedAtUtc": "2026-09-12T05:00:40.038503+00:00",
+  "command": [
+    "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/bin/python",
+    "-m",
+    "mlx_lm",
+    "lora",
+    "--config",
+    "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/train-v7-smoke.yaml"
+  ],
+  "workingDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/LLMxAI",
+  "config": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/train-v7-smoke.yaml",
+  "configSha256": "a32e709e3c856719e2c6b92b0e69c02ecc3cca69afbcfda72087eec97dbedf11",
+  "baseModel": "mlx-community/Qwen3-14B-4bit",
+  "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "datasetDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/data-v2-binary",
+  "datasetHashes": {
+    "test": "7efcb8b1f0d1fc158e56369e60dc9878af1978e601c28fee0e73984c46623489",
+    "test-adversarial": "acbc55e6c7585d5285b02d0baf289d43beb3a4ba579d617189cac83c0be422b7",
+    "test-adversarial.cases": "f3fa70d9c42e95459e7e41f64092c8a21f1d2b12ac785bee7b30341bb3b5e726",
+    "test-decision-balanced": "7efcb8b1f0d1fc158e56369e60dc9878af1978e601c28fee0e73984c46623489",
+    "test-decision-balanced.cases": "91e909ee2a49a04ebaabd6cd3281c38105bba590ca7cbca08aaa9562439e5bf6",
+    "test-multi-rule": "9589dc1cd84d88e3a0fa77471bdf48b5a80ea2d0240a1bf8c25d250726dd390c",
+    "test-multi-rule.cases": "90dd853458c11af586c7745e7361ad86435c893345ad7992ae4b14f6c00d06e0",
+    "test-ood-paraphrase": "2712b1cadd4aa79def31b6eaf6d588b27b074c46ef1437acd7781886aa138e35",
+    "test-ood-paraphrase.cases": "312b20be460f4c404abf4c5eeeefba437b5adfc5bd4f77fa2708fb3c3ab8c476",
+    "test-reason-balanced": "a53b9dceb493ec5fd19ea1cee97fc60f5146428f878e3b286e9c6cccfc09c371",
+    "test-reason-balanced.cases": "388235c030d88f987ddd425e5dd405c30ee3f173b3b53f4d0d15178c36f1e3e4",
+    "train": "b19fb31278ce0b52e94119a6e50d5545f4c9046390c5c62d7620e389573835ee",
+    "train.cases": "d5767641fc4f156397222d1237e56c8c01bf2fe7b0f35f20cad0c4fd06112c91",
+    "valid": "e36e37624602561cc0844d41a0430dd0e01f258f7695b76ad85439a3b603cd0e",
+    "validation-balanced": "e36e37624602561cc0844d41a0430dd0e01f258f7695b76ad85439a3b603cd0e",
+    "validation-balanced.cases": "802d970f54a3efa5128f994f4428475c81d89242159a2c6d77be1210978eae88",
+    "workflow-evaluation": "86268cf78a1c5236eff3d8cee7639bc92f133b6e27e455181e8afded4b27e418",
+    "workflow-evaluation.cases": "df7797d6ab1a35c8723452cd7ecb738410abd6afb99db6b8395b3f209a89d9ed"
+  },
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "python": "3.13.7 (v3.13.7:bcee1c32211, Aug 14 2025, 19:10:51) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "packages": {
+      "mlx": "0.32.2",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.17.0"
+    }
+  },
+  "exitCode": 0,
+  "finishedAtUtc": "2026-09-12T05:05:12.790113+00:00",
+  "durationSeconds": 272.677
+}

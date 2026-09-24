@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-8d56fb3223aa75a5",
+  "recordId": "REC-FIR-001",
+  "requesterUsername": "insp.sharma",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "PoliceMSP",
+      "organization": "police",
+      "role": "inspector",
+      "rank": "3",
+      "station": "PS-Central",
+      "jurisdiction": "district-north",
+      "clearance": "high",
+      "credentialStatus": "active",
+      "assignedToRequestedCase": true
+    },
+    "resource": {
+      "recordType": "fir",
+      "caseId": "CASE-2026-001",
+      "sensitivityLevel": "medium",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": false,
+      "witnessFlag": false,
+      "victimProtectionFlag": false
+    },
+    "request": {
+      "action": "export",
+      "purpose": "investigation",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "516e799101a9cc1a73f9f98d3c5dd7a70413fa205adfc7dfb2f4b0a865fa5c37",
+  "justification": "I need an export of the FIR for the case file.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "UNAVAILABLE",
+    "recommendation": null,
+    "reasonCode": null,
+    "reason": null,
+    "policyRefs": [],
+    "missingEvidence": [],
+    "reviewFlags": [],
+    "errorCode": "server_unreachable",
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-8d56fb3223aa75a5",
+      "modelId": "qwen3-14b-4bit-untuned",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": null,
+      "adapterHash": null,
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "516e799101a9cc1a73f9f98d3c5dd7a70413fa205adfc7dfb2f4b0a865fa5c37",
+      "justificationHash": "6d25df00f6c9bfb1aa740654a945b107f08ecdca9cf26283daf09616a7356a93",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:12:49.853Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "d00c77d8aafa0df01609719a6e23db0aa4bf2a23085d8dc2a1ba1b741c967054",
+      "promptHash": "880a63c6f177bd45c62ba61a0093f33ef334b2f5742973b8981a6d6c2f5d3819",
+      "promptChars": 7598,
+      "errorCode": "server_unreachable",
+      "errorDetail": "fetch failed",
+      "generationStatus": "UNAVAILABLE",
+      "latencyMs": {
+        "contextAssembly": 0.869,
+        "inference": 18.147,
+        "total": 20.285
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:12:49.873Z"
+    }
+  },
+  "auditorNote": {
+    "decision": "FORCE_ALLOW",
+    "llmAgreement": "NO_RECOMMENDATION",
+    "reason": "Model offline; checked manually against the case file.",
+    "auditorUsername": "sp.north",
+    "decidedAtUtc": "2026-09-16T17:12:49.908Z",
+    "txId": "406024fafce77d8881c4dbdd2e2c527ff82af6fb87df6a754767ba1176467ba1"
+  },
+  "createdAtUtc": "2026-09-16T17:12:49.846Z",
+  "updatedAtUtc": "2026-09-16T17:12:51.954Z"
+}

@@ -1,0 +1,54 @@
+{
+  "createdAtUtc": "2026-09-03T16:00:03.516Z",
+  "method": "Post-hoc replay of retained V4 predictions against policy-oracle labels",
+  "interpretation": "The guard changes mismatched model outputs to ESCALATE; it does not retrain the model.",
+  "source": {
+    "predictionArtifact": "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_eval_v4/proposed_full360.json",
+    "predictionArtifactSha256": "27e239fe0068d082ccf7dbe9d350496da03287fd76822572742842788e397dfe",
+    "datasetAuditArtifact": "LLMxAI/experiments/runs/20260902_qwen3_policy_dataset_audit_v4/report.json",
+    "datasetAuditArtifactSha256": "b944f9251acac30d77f301d6d973b046afb7e972a2a78d16d821dc161613bf81",
+    "oracleMismatches": 0,
+    "seed": 42,
+    "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b"
+  },
+  "baselineGuardOff": {
+    "n": 360,
+    "decisionCorrect": 329,
+    "jointCorrect": 317,
+    "falseAllowCount": 22,
+    "expectedNonAllowCount": 300,
+    "routedToAudit": 0,
+    "routedByExpectedDecision": {
+      "allow": 0,
+      "deny": 0,
+      "escalate": 0
+    },
+    "decisionAccuracy": 0.9138888888888889,
+    "jointDecisionReasonAccuracy": 0.8805555555555555,
+    "falseAllowRateAmongNonAllow": 0.07333333333333333
+  },
+  "proposedGuardOn": {
+    "n": 360,
+    "decisionCorrect": 327,
+    "jointCorrect": 317,
+    "falseAllowCount": 0,
+    "expectedNonAllowCount": 300,
+    "routedToAudit": 43,
+    "routedByExpectedDecision": {
+      "allow": 2,
+      "deny": 31,
+      "escalate": 10
+    },
+    "decisionAccuracy": 0.9083333333333333,
+    "jointDecisionReasonAccuracy": 0.8805555555555555,
+    "falseAllowRateAmongNonAllow": 0
+  },
+  "subjectAttributeAblation": {
+    "sourceArtifact": "LLMxAI/experiments/runs/20260902_qwen3_policy_engine_eval_v4/subject_ablation.json",
+    "sourceArtifactSha256": "c036c5e75a9cce000618fd1540f3a4bbb2090b2b9ab7aa6e2002e113abe068f8",
+    "n": 60,
+    "decisionAccuracy": 0.6667,
+    "jointDecisionReasonAccuracy": 0.4667,
+    "falseAllowRateAmongNonAllow": 0.04
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "runId": "2026-08-24T10-07-43-197Z_caliper_latency-query-count",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T10:07:43.200Z",
+  "benchmarkConfig": "latency-query-count.yaml",
+  "benchmarkConfigSha256": "7a15ac05feebae6188dd15f2cd50a58c97ddd02e4c19768f4c4f6831e9ba3d10",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "cfd62ddb172c5176ee2d48d08f9b5190b0f22c010009c1d0d07a7004ac9f338c",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "1b57c7554189f5dc6fe1640fa9602f9d4b9927aaaef693fbbb17fab60ac7cdb2",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/query-records.js",
+      "sha256": "cacab9bf62c4ced0cc416e01c1ce7a91b07bb3efe1e2b397392c42274debe86d"
+    }
+  ],
+  "monitoringConfiguration": [
+    {
+      "path": "monitoring/prometheus.yml",
+      "sha256": "5bcaa59d52b38bf91f9cb96e93a2833744554c6994f5d60067b5f0cfe8e5fc0d"
+    },
+    {
+      "path": "monitoring/compose.yaml",
+      "sha256": "cf0f6e3af4c5cd805137bbc4a59bf7d0e62ba9b39b66ec36c578d7af268b6ed0"
+    }
+  ],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "ebaf4d0a5dcd19b128aba2e5d3837a076643fc67812445a9f25809e94ca40fbc"
+      }
+    ],
+    "transactions": "caliper-transactions.jsonl",
+    "summary": "caliper-transaction-summary.json",
+    "marker": "CALIPER_TX_LATENCY"
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T10:09:56Z",
+  "failureReason": "Stopped after the 5 TPS rich-query workload saturated and produced 60-second deadlines; excluded from result-count evidence."
+}

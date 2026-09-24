@@ -1,0 +1,4 @@
+Workflow,Expected,Observed,Committed action/purpose,Model proposal,Input agreement,Policy agreement,Reviewer,Ledger committed,Record released,Attestation verified
+Allow,allow,allow/POLICY_SATISFIED,view/investigation,allow/POLICY_SATISFIED,True,True,--,yes,yes,yes
+Deny,deny,deny/CRED_NOT_ACTIVE,view/investigation,deny/CRED_NOT_ACTIVE,True,True,--,yes,no,yes
+Escalate,escalate,escalate/MODEL_INPUT_DISAGREEMENT,view/investigation,allow/POLICY_SATISFIED,False,True,AuditMSP/sp,yes,no,yes

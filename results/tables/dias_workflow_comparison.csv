@@ -1,0 +1,5 @@
+variant,requestCount,llmInvocations,auditorReviews,dynamicPolicyMatches,ruleCreations,correctAutomaticGrants,falseAutomaticGrants,safeNearMissRate,llmInvocationReductionVsBaseline
+"baseline",27,27,27,0,0,0,0,1,0
+"proposed",27,22,22,5,1,5,0,1,0.18518518518518517
+"ablation-rule-creation-off",27,27,27,0,0,0,0,1,0
+"ablation-lookup-off",27,27,27,0,1,0,0,1,0

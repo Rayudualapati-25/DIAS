@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-8bf33cf22381568b",
+  "recordId": "REC-EVIDENCE-001",
+  "requesterUsername": "sp.south",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "AuditMSP",
+      "organization": "audit",
+      "role": "sp",
+      "rank": null,
+      "station": null,
+      "jurisdiction": "district-south",
+      "clearance": "high",
+      "credentialStatus": "active",
+      "assignedToRequestedCase": false
+    },
+    "resource": {
+      "recordType": "evidence",
+      "caseId": "CASE-2026-001",
+      "sensitivityLevel": "medium",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": false,
+      "witnessFlag": false,
+      "victimProtectionFlag": true
+    },
+    "request": {
+      "action": "export",
+      "purpose": "audit-review",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "e20cb773f9ac6585ad8a62e7bce6b02b9bd6e2472e568881bc421f76d5b6a50e",
+  "justification": "Synthetic concurrency measurement overnight-1789578793757; no operational access is requested.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "OK",
+    "recommendation": "DENY",
+    "reasonCode": "CROSS_JURISDICTION",
+    "reason": "Requester jurisdiction district-south differs from record jurisdiction district-north (GP-JURIS:C1@v1).",
+    "policyRefs": [
+      "GP-JURIS:C1@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [
+      "UNVERIFIED_CLAIM_IN_JUSTIFICATION"
+    ],
+    "errorCode": null,
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-8bf33cf22381568b",
+      "modelId": "qwen3-14b-dias-v7",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": "qwen3-14b-dias-lora-v7",
+      "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "e20cb773f9ac6585ad8a62e7bce6b02b9bd6e2472e568881bc421f76d5b6a50e",
+      "justificationHash": "7b5317e3b7b59959947e5ad1254fd8de004427b9563d40a59fd67cc86939556d",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:23:25.527Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "407eccace548fc2158e644375e4599f1b5c0d7bc448402ac305b8d6ec5ad4b15",
+      "promptHash": "081fa35625e562ccf1e21ea1f48dd66af1871869e5dd857ac71085b3c5b59857",
+      "promptChars": 7721,
+      "usage": {
+        "promptTokens": 1941,
+        "completionTokens": 77
+      },
+      "rawOutputHash": "579276f8f75a143044af1008edfc60ad3a6da75d8215c7c570988199e42b917f",
+      "parserStatus": "OK",
+      "parserErrors": [],
+      "parserTolerances": [],
+      "generationStatus": "OK",
+      "latencyMs": {
+        "contextAssembly": 0.18,
+        "inference": 10191.744,
+        "validation": 0.09,
+        "total": 10192.175
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:23:35.719Z"
+    }
+  },
+  "auditorNote": {
+    "decision": "FORCE_DENY",
+    "llmAgreement": "AGREED",
+    "reason": null,
+    "auditorUsername": "sp.north",
+    "decidedAtUtc": "2026-09-16T17:23:35.789Z",
+    "txId": "06c3f9d9b67c23360ee57f140427c2249164631109cc30f92f85927305cfa1e9"
+  },
+  "createdAtUtc": "2026-09-16T17:22:18.442Z",
+  "updatedAtUtc": "2026-09-16T17:23:37.863Z"
+}

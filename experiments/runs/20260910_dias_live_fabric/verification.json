@@ -1,0 +1,113 @@
+{
+  "runId": "20260910_dias_live_fabric",
+  "status": "passed",
+  "generatedAtUtc": "2026-09-10T06:16:04.042Z",
+  "environment": {
+    "baseUrl": "http://127.0.0.1:3001/api",
+    "network": "local Hyperledger Fabric, six organizations",
+    "liveQwenInference": true
+  },
+  "steps": [
+    {
+      "name": "authenticate three Fabric identities",
+      "status": "passed",
+      "evidence": {
+        "requester": "const.verma",
+        "auditor": "sp.north",
+        "owner": "insp.sharma"
+      }
+    },
+    {
+      "name": "same-property record is available",
+      "status": "passed",
+      "evidence": {
+        "recordId": "REC-DIAS-REPEAT-001",
+        "reusedFromEarlierAttempt": true
+      }
+    },
+    {
+      "name": "dynamic miss -> live Qwen recommendation",
+      "status": "passed",
+      "evidence": {
+        "requestId": "fb913af895a053a6b81a0a45783c92a6a218010ac024acf4b7fde0e59a4b8f29",
+        "status": "completed-in-earlier-attempt",
+        "recommendationId": "8f71288cf15c2baa3338d412d9ba87ff45950eac44784f65a7c265a516650bdd",
+        "reusedFromEarlierAttempt": true
+      }
+    },
+    {
+      "name": "auditor reads complete Qwen DENY review",
+      "status": "passed",
+      "evidence": {
+        "username": "const.verma",
+        "recordId": "REC-FIR-001",
+        "recommendation": "deny",
+        "reasonCode": "INSUFFICIENT_CLEARANCE",
+        "modelVersion": "qwen3-14b-seba-lora-v6",
+        "queryHashVerified": true
+      }
+    },
+    {
+      "name": "auditor FORCE ALLOW creates rule and final grant",
+      "status": "passed",
+      "evidence": {
+        "decisionId": "622a1b42d03c4e3dac80451adcf1513b2282563709ba4b66d62545ad837da697",
+        "decisionAuthority": "auditor",
+        "dynamicPolicyRuleCreated": true,
+        "fingerprintHash": "371657bc37b926fc5090fad0a8689e44effa1cec241ebbf2a23458ecbd7cc067",
+        "reusedFromEarlierAttempt": true
+      }
+    },
+    {
+      "name": "force-allowed decision unlocks data sharing",
+      "status": "passed",
+      "evidence": {
+        "recordId": "REC-FIR-001",
+        "authorizedByDecision": "622a1b42d03c4e3dac80451adcf1513b2282563709ba4b66d62545ad837da697"
+      }
+    },
+    {
+      "name": "exact repeat auto-grants without Qwen or auditor",
+      "status": "passed",
+      "evidence": {
+        "requestId": "33b5efc2509815d70aff1da13bdd21b807c9b1bd10ba90926c1270deabbc549e",
+        "decisionId": "33b5efc2509815d70aff1da13bdd21b807c9b1bd10ba90926c1270deabbc549e",
+        "ruleId": "622a1b42d03c4e3dac80451adcf1513b2282563709ba4b66d62545ad837da697",
+        "llmInvoked": false,
+        "auditorRequired": false
+      }
+    },
+    {
+      "name": "one-field near miss returns to Qwen and is force-denied",
+      "status": "passed",
+      "evidence": {
+        "requestId": "446acaad0df65f3e059f5c6cfb91200a58352da569ed7818bc3a0e4cc69ffa20",
+        "changedField": "request.purpose",
+        "recommendation": "deny",
+        "finalDecision": "deny",
+        "dynamicPolicyRuleCreated": false
+      }
+    },
+    {
+      "name": "auditor reconstructs every stage",
+      "status": "passed",
+      "evidence": {
+        "accessRequests": 1,
+        "llmRecommendations": 1,
+        "auditorDecisions": 1,
+        "accessDecisions": 1,
+        "dynamicAccessRules": 1
+      }
+    },
+    {
+      "name": "latest blockchain rule state controls future requests",
+      "status": "passed",
+      "evidence": {
+        "fingerprintHash": "371657bc37b926fc5090fad0a8689e44effa1cec241ebbf2a23458ecbd7cc067",
+        "revokedStatus": "revoked",
+        "postRevocationRequestId": "45affff097468711d84baf90fd5a74a4d3d41faa0249c9ed1083ec8121d004e3",
+        "postRevocationStatus": "pending-auditor"
+      }
+    }
+  ]
+}

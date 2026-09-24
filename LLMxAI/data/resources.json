@@ -1,0 +1,68 @@
+[
+  {
+    "recordId": "REC-FIR-001",
+    "label": "FIR — North District",
+    "caseId": "CASE-2026-001",
+    "recordType": "fir",
+    "sensitivityLevel": "medium",
+    "jurisdiction": "district-north",
+    "sealed": false,
+    "juvenileFlag": false,
+    "victimProtectionFlag": false
+  },
+  {
+    "recordId": "REC-EVIDENCE-001",
+    "label": "Victim-protected evidence",
+    "caseId": "CASE-2026-001",
+    "recordType": "evidence",
+    "sensitivityLevel": "high",
+    "jurisdiction": "district-north",
+    "sealed": false,
+    "juvenileFlag": false,
+    "victimProtectionFlag": true
+  },
+  {
+    "recordId": "REC-JUVENILE-001",
+    "label": "Juvenile-protected FIR",
+    "caseId": "CASE-2026-001",
+    "recordType": "fir",
+    "sensitivityLevel": "high",
+    "jurisdiction": "district-north",
+    "sealed": false,
+    "juvenileFlag": true,
+    "victimProtectionFlag": false
+  },
+  {
+    "recordId": "REC-SEALED-001",
+    "label": "Sealed court order",
+    "caseId": "CASE-2026-001",
+    "recordType": "court-order",
+    "sensitivityLevel": "high",
+    "jurisdiction": "district-north",
+    "sealed": true,
+    "juvenileFlag": false,
+    "victimProtectionFlag": false
+  },
+  {
+    "recordId": "REC-FIR-002",
+    "label": "FIR — South District",
+    "caseId": "CASE-2026-001",
+    "recordType": "fir",
+    "sensitivityLevel": "medium",
+    "jurisdiction": "district-south",
+    "sealed": false,
+    "juvenileFlag": false,
+    "victimProtectionFlag": false
+  },
+  {
+    "recordId": "REC-UNASSIGNED-001",
+    "label": "Unassigned case diary",
+    "caseId": "CASE-2026-099",
+    "recordType": "case-diary",
+    "sensitivityLevel": "medium",
+    "jurisdiction": "district-north",
+    "sealed": false,
+    "juvenileFlag": false,
+    "victimProtectionFlag": false
+  }
+]

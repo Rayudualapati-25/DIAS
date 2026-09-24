@@ -1,0 +1,26 @@
+{
+  "rounds": [
+    {
+      "label": "record-read-connectivity",
+      "successfulTransactions": 11,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.1,
+      "latencyMaxSeconds": 0.05,
+      "latencyMinSeconds": 0.01,
+      "latencyAverageSeconds": 0.02,
+      "throughputTps": 1.1,
+      "phase": "connectivity"
+    },
+    {
+      "label": "contextual-access-connectivity",
+      "successfulTransactions": 16,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.1,
+      "latencyMaxSeconds": 2.3,
+      "latencyMinSeconds": 0.06,
+      "latencyAverageSeconds": 1.23,
+      "throughputTps": 1.1,
+      "phase": "connectivity"
+    }
+  ]
+}

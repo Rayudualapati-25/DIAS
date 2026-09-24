@@ -1,0 +1,8 @@
+area,before,after,evidence,result
+auditor_handoff,"Auditor had to discover the request in the queue","Separate credential-clean window opens the exact request after auditor sign-in","REQ-ce193a12f3eaa10e deep-link browser smoke",pass
+request_log_correlation,"Access event did not contain the committed request identifier","Access event contains recordId requestId action purpose and processingPath","Fabric transaction c7a8cc93124eaeb95b0db231facfc28612401e1dc5a040de57a8e9fd44406a68",pass
+access_log_readability,"Target was not displayed in the table","Record/request column renders the structured target","Live access-log browser smoke",pass
+direct_identifier_search,"An arbitrary identifier could be presented as found","Backend verifies the public record index before showing Request access","REC-FIR-001 and REC-NOT-FOUND browser checks",pass
+auditor_authority,"Existing controls required manual queue navigation","Exact-request dialog shows advisory model output and both final auditor controls","Existing DENY and UNAVAILABLE request dialogs",pass
+safe_primary_navigation,"Not part of the original handoff evidence","Twelve primary navigation controls opened their expected screens without a visible failure","Browser navigation smoke test with no console warnings or errors",pass
+fresh_v7_inference,"Not applicable to the frontend correction","Deferred while the already-running V7 final evaluation owns its runtime","Application model endpoint 8081 intentionally left stopped",not_run

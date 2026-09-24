@@ -1,0 +1,6 @@
+concurrent_users,repetitions,requested,completed,failures,request_commit_p50_ms,request_commit_p95_ms,recommendation_ready_p50_ms,recommendation_ready_p95_ms,model_inference_p50_ms,model_inference_p95_ms,decision_commit_p50_ms,decision_commit_p95_ms,automated_end_to_end_p50_ms,automated_end_to_end_p95_ms,throughput_mean_completed_workflows_per_s,throughput_p95_completed_workflows_per_s
+1,3,3,3,0,2069,2076.2,5739,6023.4,3586.913,3891.065,2094,2107.5,7874,8144.9,0.126,0.129
+2,3,6,6,0,2080,2092.25,9227.5,14533.25,4347.14,8865.15,2082,2085.75,10725.5,16613,0.145,0.168
+4,3,12,12,0,2090,2097.8,16409.5,26274.75,5158.179,10222.911,2073,2083.5,17847.5,27440.8,0.161,0.184
+8,3,24,24,0,2097.5,2111.7,33391,81568.6,5981.505,14834.012,2075.5,2094.65,35485.5,83671.55,0.143,0.177
+12,3,36,36,0,124.5,187.5,41453.5,95213.75,7893.53,11995.165,2079,2092.75,43555,97311,0.125,0.141

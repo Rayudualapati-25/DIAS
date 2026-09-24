@@ -1,0 +1,39 @@
+{
+  "runId": "2026-08-24T09-27-26-466Z_caliper_load",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:27:26.470Z",
+  "benchmarkConfig": "increasing-load.yaml",
+  "benchmarkConfigSha256": "af5b8866fd06e1ba189a361d770666b1dabb71db231cefb2b43c626a830fca22",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "d5cf0f1328513ecfefd98b528a96a1f9c12738681e00b7bff3a46277b3587497",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/request-access.js",
+      "sha256": "afad03ac47f5e26eed508756c3d32052559c9052b7c565ed99eebf7208eb2888"
+    }
+  ],
+  "monitoringConfiguration": [
+    {
+      "path": "monitoring/prometheus.yml",
+      "sha256": "5bcaa59d52b38bf91f9cb96e93a2833744554c6994f5d60067b5f0cfe8e5fc0d"
+    },
+    {
+      "path": "monitoring/compose.yaml",
+      "sha256": "cf0f6e3af4c5cd805137bbc4a59bf7d0e62ba9b39b66ec36c578d7af268b6ed0"
+    }
+  ],
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": "unix:///Users/venkatrayudu/.colima/default/docker.sock",
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Invalid measurement: this run overlapped other Caliper workloads and was terminated. Retained for failure traceability only.",
+  "failureReason": "Interrupted after overlapping Caliper workloads invalidated the measurement."
+}

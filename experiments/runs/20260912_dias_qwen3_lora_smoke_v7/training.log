@@ -1,0 +1,23 @@
+Loading configuration file /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/train-v7-smoke.yaml
+Loading pretrained model
+Loading datasets
+Training
+Trainable parameters: 0.087% (12.845M/14768.307M)
+Starting training..., iters: 12
+
+Calculating loss...:   0%|          | 0/2 [00:00<?, ?it/s]
+Calculating loss...:  50%|█████     | 1/2 [00:12<00:12, 12.81s/it]
+Calculating loss...: 100%|██████████| 2/2 [00:21<00:00, 10.65s/it]
+Calculating loss...: 100%|██████████| 2/2 [00:21<00:00, 10.97s/it]
+Iter 1: Val loss 1.272, Val took 22.025s
+Iter 4: Train loss 1.382, Learning Rate 1.000e-05, It/sec 0.054, Tokens/sec 4.890, Trained Tokens 364, Peak mem 12.897 GB
+Iter 8: Train loss 1.300, Learning Rate 1.000e-05, It/sec 0.055, Tokens/sec 4.190, Trained Tokens 670, Peak mem 13.000 GB
+
+Calculating loss...:   0%|          | 0/2 [00:00<?, ?it/s]
+Calculating loss...:  50%|█████     | 1/2 [00:09<00:09,  9.06s/it]
+Calculating loss...: 100%|██████████| 2/2 [00:17<00:00,  8.76s/it]
+Calculating loss...: 100%|██████████| 2/2 [00:17<00:00,  8.80s/it]
+Iter 12: Val loss 0.826, Val took 17.609s
+Iter 12: Train loss 0.794, Learning Rate 1.000e-05, It/sec 0.050, Tokens/sec 4.546, Trained Tokens 1034, Peak mem 13.000 GB
+Iter 12: Saved adapter weights to experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/adapters.safetensors and experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/0000012_adapters.safetensors.
+Saved final weights to experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke/adapters.safetensors.

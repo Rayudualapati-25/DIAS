@@ -1,0 +1,70 @@
+{
+  "rounds": [
+    {
+      "label": "write-tps-warmup",
+      "successfulTransactions": 16,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.3,
+      "latencyMaxSeconds": 2.16,
+      "latencyMinSeconds": 2.08,
+      "latencyAverageSeconds": 2.11,
+      "throughputTps": 1.1,
+      "phase": "warmup"
+    },
+    {
+      "label": "write-tps-1",
+      "successfulTransactions": 52,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.1,
+      "latencyMaxSeconds": 2.12,
+      "latencyMinSeconds": 2.07,
+      "latencyAverageSeconds": 2.1,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-2",
+      "successfulTransactions": 96,
+      "failedTransactions": 0,
+      "observedSendRateTps": 2.1,
+      "latencyMaxSeconds": 2.11,
+      "latencyMinSeconds": 0.1,
+      "latencyAverageSeconds": 1.35,
+      "throughputTps": 2.1,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-5",
+      "successfulTransactions": 232,
+      "failedTransactions": 0,
+      "observedSendRateTps": 5.1,
+      "latencyMaxSeconds": 2.1,
+      "latencyMinSeconds": 0.09,
+      "latencyAverageSeconds": 0.92,
+      "throughputTps": 4.9,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-10",
+      "successfulTransactions": 456,
+      "failedTransactions": 0,
+      "observedSendRateTps": 10.1,
+      "latencyMaxSeconds": 2.12,
+      "latencyMinSeconds": 0.07,
+      "latencyAverageSeconds": 0.52,
+      "throughputTps": 9.7,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-20",
+      "successfulTransactions": 904,
+      "failedTransactions": 0,
+      "observedSendRateTps": 20.1,
+      "latencyMaxSeconds": 2.06,
+      "latencyMinSeconds": 0.06,
+      "latencyAverageSeconds": 0.3,
+      "throughputTps": 19.2,
+      "phase": "measurement"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+variant,check,result,evidence
+existing_frontend,JavaScript syntax,26/26 passed,frontend/js
+solidity_frontend,JavaScript syntax,2/2 passed,solidity-frontend/app.js and config.js
+solidity_frontend,Solidity 0.8.24 compilation,passed,solidity-frontend/contracts/CrimeRecords.sol
+solidity_frontend,static asset serving,4/4 HTTP 200,localhost ephemeral static server
+without_officer_authorization,fileRecord,rejected,ephemeral Ganache EVM
+with_officer_authorization,fileRecord,accepted and totalRecords=1,ephemeral Ganache EVM
+vercel_production,deployment state,READY,dpl_AKTRfPj6FDKhFVPKK3R1heahyNkD
+vercel_production,public assets,5/5 HTTP 200,https://crimechain-solidity-registry.vercel.app/
+vercel_production,rendered browser check,heading visible and 0 console errors,CrimeChain dashboard
+professional_copy_revision,formal project name,Criminal Investigation Chain,professor feedback applied on 2026-08-20
+professional_copy_revision,obsolete name scan,0 matches,solidity-frontend excluding styles.css
+professional_copy_revision,local rendered screen check,5/5 headings visible and 0 console errors,http://localhost:8080/
+professional_copy_revision,Vercel production deployment,READY,dpl_8wmWsauZKtTLD56RqcF9iCYiHUUK
+professional_copy_revision,Vercel production HTML,HTTP 200 and revised title present,https://crimechain-solidity-registry.vercel.app/
+professional_copy_revision,Vercel production browser check,Overview visible and 0 console errors,https://crimechain-solidity-registry.vercel.app/#dashboard
+report_screenshots,production screen capture,5/5 full-HD genuine PNG files validated,reports/screenshots/criminal-investigation-chain/manifest.json

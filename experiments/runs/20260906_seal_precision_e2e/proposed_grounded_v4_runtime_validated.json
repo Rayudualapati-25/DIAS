@@ -1,0 +1,90 @@
+{
+  "source": "experiments/runs/20260906_seal_precision_e2e/proposed_grounded_v4.json",
+  "correction": "Exact runtime validation rejects contradictory decision/reason pairs.",
+  "metrics": {
+    "n": 200,
+    "schemaValid": 175,
+    "decisionAccuracy": 0.735,
+    "jointAccuracy": 0.585,
+    "actionAccuracy": 0.875,
+    "purposeAccuracy": 0.87,
+    "falseAllows": 10,
+    "expectedNonAllows": 180,
+    "allowPrecision": 0.4444444444444444,
+    "guardedFalseAllows": 0,
+    "guardReferrals": 57,
+    "rejected": 25,
+    "adversarialJointAccuracy": 0.56,
+    "medianLatencyMs": 3000.384250000003,
+    "p95LatencyMs": 5555.878208000002,
+    "perReason": {
+      "CRED_NOT_ACTIVE": {
+        "n": 20,
+        "correct": 19
+      },
+      "CROSS_JURISDICTION": {
+        "n": 20,
+        "correct": 4
+      },
+      "INSUFFICIENT_CLEARANCE": {
+        "n": 20,
+        "correct": 1
+      },
+      "INVALID_PURPOSE": {
+        "n": 20,
+        "correct": 19
+      },
+      "JUVENILE_PROTECTED": {
+        "n": 20,
+        "correct": 17
+      },
+      "NOT_ASSIGNED": {
+        "n": 20,
+        "correct": 3
+      },
+      "POLICY_SATISFIED": {
+        "n": 20,
+        "correct": 8
+      },
+      "RBAC_NO_PERMISSION": {
+        "n": 20,
+        "correct": 9
+      },
+      "SEALED_RECORD": {
+        "n": 20,
+        "correct": 19
+      },
+      "VICTIM_DATA_NOT_NECESSARY": {
+        "n": 20,
+        "correct": 18
+      }
+    }
+  },
+  "rejectedContradictions": [
+    "REC-test-38",
+    "REC-test-287",
+    "REC-test-171",
+    "REC-test-68",
+    "REC-test-29",
+    "REC-test-70",
+    "REC-test-24",
+    "REC-test-134",
+    "REC-test-102",
+    "REC-test-149",
+    "REC-test-158",
+    "REC-test-166",
+    "REC-test-4",
+    "REC-test-174",
+    "REC-test-165",
+    "REC-test-147",
+    "REC-test-25",
+    "REC-test-230",
+    "REC-test-93",
+    "REC-test-122",
+    "REC-test-58",
+    "REC-test-49",
+    "REC-test-142",
+    "REC-test-181",
+    "REC-test-47"
+  ]
+}

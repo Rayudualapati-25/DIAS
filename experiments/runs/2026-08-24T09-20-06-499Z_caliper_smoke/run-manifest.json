@@ -1,0 +1,48 @@
+{
+  "runId": "2026-08-24T09-20-06-499Z_caliper_smoke",
+  "status": "completed",
+  "startedAtUtc": "2026-08-24T09:20:06.501Z",
+  "benchmarkConfig": "smoke.yaml",
+  "benchmarkConfigSha256": "ac14f34c7129108087d6e8d2323d1984653f12a5a13cf4394a7a8790849c3c5b",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "26b72cc44b3b7b4bf53e1676ba685d913fd6b3f6d72daa3bf6dab35d4e7dbd94",
+  "environment": "environment.json",
+  "environmentSha256": "dfe664af5a1ea57a2995a3c21d20939d3080e1ff1c7890d29ca5df68fa0f4efe",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/read-record.js",
+      "sha256": "28ee21b2b33ba175a6ed7c3c09a8dbe58208ff9344d6fc2679328a85c355fc32"
+    },
+    {
+      "path": "workloads/request-access.js",
+      "sha256": "afad03ac47f5e26eed508756c3d32052559c9052b7c565ed99eebf7208eb2888"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Connectivity validation only; not paper-quality evidence.",
+  "finishedAtUtc": "2026-08-24T09:20:49.752Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0
+  },
+  "performanceSummary": "caliper-summary.json",
+  "performanceSummarySha256": "40fd6210cbb20069c880aa0557a21d5b3325dd53e8eb3a5a494cfa588d89e8ec",
+  "failedTransactions": 0,
+  "reportCreated": true,
+  "reportSha256": "e63f89dc507c23ca2a30f8c32390d0ac7200ef8d9f86e8f20593156c24b048e1",
+  "logSha256": "750935a9aa3139593c752d6e5507ad32c2c15518c63cbf60a63d3c051ab7a692",
+  "failureReason": null
+}

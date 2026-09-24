@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign in to the LLMxAI policy console">
+  <title>Sign in — LLMxAI Policy Console</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="login-body">
+  <main class="login-shell">
+    <section class="login-card">
+      <a class="brand" href="/login.html" aria-label="LLMxAI home">
+        <span class="brand-mark" aria-hidden="true">LX</span>
+        <span><strong>LLMxAI</strong><small>Policy intelligence</small></span>
+      </a>
+
+      <h1>Sign in</h1>
+      <p class="login-lede">
+        Your role, clearance, jurisdiction and case assignments are bound to the
+        identity you sign in with. Nothing you type afterwards can change them.
+      </p>
+
+      <form id="login-form" novalidate>
+        <label class="query-label" for="officer-id">
+          Officer identifier
+          <span>Select a registered officer below, or type the identifier.</span>
+        </label>
+        <input id="officer-id" name="profileId" type="text" autocomplete="off"
+               spellcheck="false" placeholder="user-sharma" required>
+        <p id="login-error" class="login-error" role="alert" hidden></p>
+        <button id="login-button" type="submit"><span>Sign in</span><b aria-hidden="true">→</b></button>
+      </form>
+
+      <p class="step">Registered officers</p>
+      <ul id="officer-list" class="officer-list"></ul>
+
+      <p class="login-note">
+        Demonstration identity provider. These are local research profiles, not a
+        production authentication system — there is no password store, and a real
+        deployment must replace this screen with a verified identity provider.
+      </p>
+    </section>
+  </main>
+  <script src="/login.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "runId": "20260812_frontend_case_browser",
+  "date": "2026-08-12",
+  "scope": "deterministic browser interaction check with mocked API responses",
+  "browser": "installed Google Chrome controlled through Playwright",
+  "viewports": [
+    { "name": "desktop", "width": 1440, "height": 1000 },
+    { "name": "mobile", "width": 375, "height": 812 }
+  ],
+  "fixtures": {
+    "cases": 3,
+    "records": 1,
+    "selectedCase": "CASE-2026-001"
+  },
+  "results": {
+    "existingCasesVisible": true,
+    "caseSelectionPrefillsSearch": true,
+    "recordMetadataLoaded": true,
+    "payloadStillRequiresAccessRequest": true,
+    "desktopPageOverflow": false,
+    "mobilePageOverflow": false,
+    "consoleErrors": 0
+  },
+  "limitations": [
+    "browser verification used mocked API responses because the Fabric Docker network was stopped",
+    "live backend and chaincode behavior was not changed by this frontend-only iteration"
+  ]
+}

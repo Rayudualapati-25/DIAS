@@ -1,0 +1,48 @@
+{
+  "rounds": [
+    {
+      "label": "query-count-warmup",
+      "successfulTransactions": 22,
+      "failedTransactions": 0,
+      "observedSendRateTps": 2.2,
+      "latencyMaxSeconds": 1.71,
+      "latencyMinSeconds": 0.69,
+      "latencyAverageSeconds": 0.94,
+      "throughputTps": 2.1,
+      "phase": "warmup"
+    },
+    {
+      "label": "query-count-1",
+      "successfulTransactions": 48,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 0.74,
+      "latencyMinSeconds": 0.69,
+      "latencyAverageSeconds": 0.72,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "query-count-2",
+      "successfulTransactions": 48,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 0.77,
+      "latencyMinSeconds": 0.68,
+      "latencyAverageSeconds": 0.73,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "query-count-3",
+      "successfulTransactions": 48,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 0.75,
+      "latencyMinSeconds": 0.7,
+      "latencyAverageSeconds": 0.72,
+      "throughputTps": 1,
+      "phase": "measurement"
+    }
+  ]
+}

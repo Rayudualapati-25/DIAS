@@ -1,0 +1,82 @@
+test:
+  name: SEBA-XAI mixed read/write performance
+  description: >-
+    Run the deterministic staggered workload with seven read-only record
+    evaluations and three contextual access submissions in every complete
+    ten-operation cycle per worker. The warm-up round is excluded from reported
+    measurements.
+  workers:
+    number: 4
+  rounds:
+    - label: mixed-warmup-2-tps
+      description: Warm read and write paths using the deterministic 70/30 schedule.
+      txDuration: 15
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/mixed-record-access.js
+        arguments: &mixed_arguments
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+          readPercent: 70
+
+    - label: mixed-measurement-10-tps
+      description: Measure the deterministic 70/30 workload at 10 offered TPS.
+      txDuration: 300
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload:
+        module: workloads/mixed-record-access.js
+        arguments: *mixed_arguments
+
+monitors:
+  resource:
+    - module: docker
+      options:
+        interval: 1
+        cpuUsageNormalization: true
+        containers:
+          - all
+        charting:
+          bar:
+            metrics:
+              - Memory(max)
+              - CPU%(max)
+
+    - module: prometheus
+      options:
+        url: http://127.0.0.1:9090
+        metrics:
+          include:
+            - ".*"
+          queries:
+            - name: Process resident memory (MiB, max)
+              query: 'process_resident_memory_bytes{job=~"fabric-.*"}'
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 0.00000095367431640625
+            - name: Process CPU rate (percent, max)
+              query: 'rate(process_cpu_seconds_total{job=~"fabric-.*"}[1m])'
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 100
+            - name: Crimerecords endorsement duration (seconds, avg)
+              query: 'sum by (instance) (rate(endorser_proposal_duration_sum{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m])) / sum by (instance) (rate(endorser_proposal_duration_count{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))'
+              step: 1
+              label: instance
+              statistic: avg
+            - name: Ledger height (blocks, max)
+              query: 'ledger_blockchain_height{job=~"fabric-.*",channel="crimechannel"}'
+              step: 1
+              label: instance
+              statistic: max

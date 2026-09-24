@@ -1,0 +1,17 @@
+{
+  "createdAtUtc": "2026-09-02T05:06:35.714Z",
+  "modelVersion": "qwen3-14b-seba-lora-v4",
+  "adapterPath": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v4-best/adapters.safetensors",
+  "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+  "serving": {
+    "engine": "mlx_lm.server",
+    "model": "mlx-community/Qwen3-14B-4bit",
+    "temperature": 0,
+    "topP": 1,
+    "maxTokens": 192,
+    "chatTemplateArgs": {
+      "enable_thinking": false
+    }
+  },
+  "runtime": "standalone-local"
+}

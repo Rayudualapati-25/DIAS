@@ -1,0 +1,86 @@
+{
+  "analysis": "authenticated subject-context ablation, matched validation cases",
+  "arms": {
+    "with": {
+      "label": "with authenticated subject context",
+      "n": 100,
+      "groundTruthDistribution": {
+        "deny": 80,
+        "allow": 10,
+        "escalate": 10
+      },
+      "predictedDistribution": {
+        "deny": 87,
+        "escalate": 13
+      },
+      "allowGroundTruthCases": 10,
+      "allowPredictedAs": {
+        "deny": 10
+      },
+      "allowRecall": 0.0,
+      "componentAccuracy": {
+        "action": 1.0,
+        "purpose": 1.0,
+        "decision": 0.87,
+        "reasonCode": 0.8
+      },
+      "jointAccuracy": 0.8,
+      "majorityClass": "deny",
+      "majorityClassBaselineDecisionAccuracy": 0.8,
+      "reasonCodesEmitted": {
+        "JUVENILE_PROTECTED": 14,
+        "CROSS_JURISDICTION": 13,
+        "SEALED_RECORD": 13,
+        "VICTIM_DATA_NOT_NECESSARY": 12,
+        "CRED_NOT_ACTIVE": 10,
+        "INVALID_PURPOSE": 10,
+        "RBAC_NO_PERMISSION": 10,
+        "INSUFFICIENT_CLEARANCE": 9,
+        "NOT_ASSIGNED": 9
+      }
+    },
+    "without": {
+      "label": "without authenticated subject context",
+      "n": 100,
+      "groundTruthDistribution": {
+        "deny": 80,
+        "allow": 10,
+        "escalate": 10
+      },
+      "predictedDistribution": {
+        "escalate": 14,
+        "deny": 86
+      },
+      "allowGroundTruthCases": 10,
+      "allowPredictedAs": {
+        "deny": 10
+      },
+      "allowRecall": 0.0,
+      "componentAccuracy": {
+        "action": 1.0,
+        "purpose": 0.99,
+        "decision": 0.84,
+        "reasonCode": 0.36
+      },
+      "jointAccuracy": 0.35,
+      "majorityClass": "deny",
+      "majorityClassBaselineDecisionAccuracy": 0.8,
+      "reasonCodesEmitted": {
+        "RBAC_NO_PERMISSION": 56,
+        "JUVENILE_PROTECTED": 16,
+        "SEALED_RECORD": 14,
+        "INVALID_PURPOSE": 10,
+        "CRED_NOT_ACTIVE": 2,
+        "VICTIM_DATA_NOT_NECESSARY": 2
+      }
+    }
+  },
+  "findings": [
+    "Allow recall is 0.00 in BOTH arms: neither arm proposes Allow for any of the 10 Allow ground-truth cases, so this ablation supports no claim about Allow recall in either direction.",
+    "The set is dominated by Deny (80 of 100), so a model that never proposes Allow already scores 80% decision accuracy. Decision accuracy is a weak discriminator here, which is why it barely separates the arms.",
+    "The ablation's effect is concentrated in the reason code: 80% against 36%, while action and purpose are essentially unchanged.",
+    "The mechanism is visible in the emitted reason codes. Without the subject context the model collapses onto RBAC_NO_PERMISSION for 56 of 100 cases, and the subject-dependent barriers it can no longer identify \u2014 cross-jurisdiction and credential status \u2014 largely disappear from its output."
+  ],
+  "correctInterpretation": "The authenticated subject context substantially improves joint structured classification of action, purpose, decision and reason code, principally by letting the model name the correct subject-dependent barrier. Decision-only accuracy changes much less, and the ablation says nothing about Allow recall.",
+  "incorrectInterpretation": "The 80% to 35% joint drop must NOT be read as a change in Allow recall, nor as the model becoming unable to decide. Allow recall is zero in both arms."
+}

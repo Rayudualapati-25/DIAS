@@ -1,0 +1,65 @@
+{
+  "transactions": 116,
+  "rounds": [
+    {
+      "roundLabel": "write-tps-1",
+      "roundIndex": 0,
+      "count": 12,
+      "successfulTransactions": 12,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 2065,
+        "mean": 2112,
+        "p50": 2112,
+        "p95": 2154,
+        "p99": 2154,
+        "max": 2154
+      }
+    },
+    {
+      "roundLabel": "write-tps-2",
+      "roundIndex": 1,
+      "count": 16,
+      "successfulTransactions": 16,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 96,
+        "mean": 1100.75,
+        "p50": 1101,
+        "p95": 2104,
+        "p99": 2104,
+        "max": 2104
+      }
+    },
+    {
+      "roundLabel": "write-tps-5",
+      "roundIndex": 2,
+      "count": 32,
+      "successfulTransactions": 32,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 97,
+        "mean": 1027.96875,
+        "p50": 907,
+        "p95": 1884.8499999999997,
+        "p99": 2101,
+        "max": 2101
+      }
+    },
+    {
+      "roundLabel": "write-tps-10",
+      "roundIndex": 3,
+      "count": 56,
+      "successfulTransactions": 56,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 60,
+        "mean": 648.2142857142857,
+        "p50": 493,
+        "p95": 1720,
+        "p99": 2119.9,
+        "max": 2121
+      }
+    }
+  ]
+}

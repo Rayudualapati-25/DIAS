@@ -1,0 +1,94 @@
+{
+  "artifactType": "dias-bounded-seed-pilot-summary",
+  "source": "experiments/runs/20260916_dias_seed_pilot",
+  "scope": "Three fresh LoRA adapters trained on the same 400-example subset for 256 iterations and evaluated on the same first 120 validation examples.",
+  "warning": "This budget-limited pilot is not the full 5,254-example, one-epoch training experiment and does not establish full-run seed robustness.",
+  "rows": [
+    {
+      "seed": 17,
+      "examples": 120,
+      "schema_valid_rate": 1,
+      "decision_accuracy": 0.691667,
+      "balanced_accuracy": 0.73142,
+      "reason_code_accuracy": 0.591667,
+      "policy_ref_accuracy": 0.466667,
+      "false_allow_count": 33,
+      "false_allow_rate_among_denials": 0.452055,
+      "false_deny_count": 4,
+      "false_deny_rate_among_allows": 0.085106,
+      "median_latency_ms": 8187.8
+    },
+    {
+      "seed": 42,
+      "examples": 120,
+      "schema_valid_rate": 1,
+      "decision_accuracy": 0.675,
+      "balanced_accuracy": 0.717721,
+      "reason_code_accuracy": 0.591667,
+      "policy_ref_accuracy": 0.5,
+      "false_allow_count": 35,
+      "false_allow_rate_among_denials": 0.479452,
+      "false_deny_count": 4,
+      "false_deny_rate_among_allows": 0.085106,
+      "median_latency_ms": 8114.5
+    },
+    {
+      "seed": 73,
+      "examples": 120,
+      "schema_valid_rate": 1,
+      "decision_accuracy": 0.708333,
+      "balanced_accuracy": 0.669339,
+      "reason_code_accuracy": 0.591667,
+      "policy_ref_accuracy": 0.491667,
+      "false_allow_count": 11,
+      "false_allow_rate_among_denials": 0.150685,
+      "false_deny_count": 24,
+      "false_deny_rate_among_allows": 0.510638,
+      "median_latency_ms": 7613.5
+    }
+  ],
+  "aggregate": {
+    "decision_accuracy": {
+      "mean": 0.691667,
+      "sampleStdDev": 0.016667,
+      "min": 0.675,
+      "max": 0.708333
+    },
+    "balanced_accuracy": {
+      "mean": 0.70616,
+      "sampleStdDev": 0.032615,
+      "min": 0.669339,
+      "max": 0.73142
+    },
+    "reason_code_accuracy": {
+      "mean": 0.591667,
+      "sampleStdDev": 0.0,
+      "min": 0.591667,
+      "max": 0.591667
+    },
+    "policy_ref_accuracy": {
+      "mean": 0.486111,
+      "sampleStdDev": 0.017347,
+      "min": 0.466667,
+      "max": 0.5
+    },
+    "false_allow_rate_among_denials": {
+      "mean": 0.360731,
+      "sampleStdDev": 0.18242,
+      "min": 0.150685,
+      "max": 0.479452
+    },
+    "false_deny_rate_among_allows": {
+      "mean": 0.22695,
+      "sampleStdDev": 0.245681,
+      "min": 0.085106,
+      "max": 0.510638
+    },
+    "median_latency_ms": {
+      "mean": 7971.933333,
+      "sampleStdDev": 312.568494,
+      "min": 7613.5,
+      "max": 8187.8
+    }
+  }
+}

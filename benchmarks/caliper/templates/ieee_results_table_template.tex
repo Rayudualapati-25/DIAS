@@ -1,0 +1,45 @@
+% Required package: \usepackage{booktabs}
+% All measured cells are intentionally blank placeholders. Replace them only
+% with values derived from retained Caliper reports and resource-monitor data.
+\begin{table*}[t]
+  \caption{Hyperledger Caliper Performance Results Across Repeated Runs}
+  \label{tab:caliper-performance-results}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}llrrrrrrrrr@{}}
+    \toprule
+    Test & Measurement round &
+    \multicolumn{1}{c}{Successful} &
+    \multicolumn{1}{c}{Failed} &
+    \multicolumn{1}{c}{Send rate} &
+    \multicolumn{1}{c}{Throughput} &
+    \multicolumn{3}{c}{Latency (s)} &
+    \multicolumn{1}{c}{Peak CPU} &
+    \multicolumn{1}{c}{Peak memory} \\
+    \cmidrule(lr){7-9}
+     & & \multicolumn{1}{c}{(tx)} & \multicolumn{1}{c}{(tx)} &
+    \multicolumn{1}{c}{(TPS)} & \multicolumn{1}{c}{(TPS)} &
+    \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Avg} &
+    \multicolumn{1}{c}{Max} & \multicolumn{1}{c}{(\%)} &
+    \multicolumn{1}{c}{(MiB)} \\
+    \midrule
+    Read performance & 10 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Write performance & 5 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Increasing load & 1 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Increasing load & 2 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Increasing load & 5 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Increasing load & 10 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Increasing load & 20 TPS & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Mixed workload & 10 TPS (70/30) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    Endurance & 5 TPS (70/30) & -- & -- & -- & -- & -- & -- & -- & -- & -- \\
+    \bottomrule
+  \end{tabular}
+  \begin{minipage}{0.99\textwidth}
+    \footnotesize
+    Values must be calculated from retained, repeated runs; report the chosen
+    aggregation and uncertainty measure in the paper. Warm-up rounds are excluded.
+    CPU and memory values must identify whether Docker or Prometheus supplied the
+    reported maximum.
+  \end{minipage}
+\end{table*}
+

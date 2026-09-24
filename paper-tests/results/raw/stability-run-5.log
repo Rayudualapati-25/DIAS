@@ -1,0 +1,147 @@
+
+> crime-records-backend@1.0.0 test
+> mocha --require test/setup.unit.js --recursive 'test/**/*.test.js' --timeout 30000
+
+
+
+  accessLogger.describe
+    ✔ records a fine-tuned LLM access request against its record
+    ✔ never logs the free-text query of an LLM request
+    ✔ records a gated metadata read as its own action with the decision that unlocked it
+    ✔ records reading one decision against its record and decision
+    ✔ does not mistake the document-request routes for a record called "document-requests"
+    ✔ records a full-document request against its record and decision
+    ✔ names the case list instead of a generic api path
+    ✔ keeps existing classifications unchanged
+
+  AI decision service
+    ✔ feeds the model only what the ledger supplied, and signs over both hashes
+    ✔ submits the decision as the AI identity, never as the requester
+    ✔ does nothing for a request that has already been answered
+    ✔ ignores an event for a request that no longer exists
+    ✔ skips a legacy request snapshot that lacks committed action and purpose
+    ✔ never writes a decision when the model fails, so the request stays pending
+    ✔ does not advance its durable checkpoint after a failed model decision
+    ✔ never checkpoints beyond a block that may contain a later failed request
+
+  SEBA-XAI API (live Fabric network)
+    Fabric identity and governance assets
+      ✔ selects an enrolled Fabric identity without an application password
+      ✔ reads Department and Case assets from Fabric
+    RecordMetadata plus agency-controlled raw content
+      ✔ stores only reference/hash metadata on Fabric (2036ms)
+      ✔ enforces the filing identity in chaincode/API
+    contextual policy scenarios
+      ✔ 1. allows an assigned investigating officer for investigation (8984ms)
+      ✔ 2. denies a same-station constable without assignment (8958ms)
+      ✔ 3. exposes evidence metadata but denies unnecessary victim raw content (7943ms)
+      ✔ 4. denies a cross-district request under policy-v2 (8748ms)
+      ✔ 5. denies juvenile-protected raw content to a high-rank inspector (7944ms)
+      ✔ 6. routes a sealed record to CourtMSP, then releases requester-bound content (16758ms)
+      ✔ 7. denies a revoked certificate attribute (8433ms)
+      ✔ 8. reconstructs evidence for an auditor without releasing raw content (8676ms)
+    integrity, evidence custody, and audit events
+      ✔ verifies agency-vault content against the Fabric commitment
+      ✔ commits evidence metadata and a custody transfer (4161ms)
+      ✔ returns direct-ledger application access events (1303ms)
+      ✔ verifies a genuine explanation and rejects a forged artifact
+
+  cross-surface invariants
+    endorsement capacity vs private data collection membership
+      ✔ reads the organization count from the channel profile
+      ✔ 'evidenceDetails' has enough members to satisfy MAJORITY endorsement
+      ✔ 'accessRequestQuery' has enough members to satisfy MAJORITY endorsement
+      ✔ the evidence endorser set is drawn only from evidenceDetails members
+      ✔ the access-query endorser set is drawn only from accessRequestQuery members
+      ✔ recordContract mirrors the evidenceDetails distribution policy
+    explanation schema headroom
+      ✔ the decisiveAttributes cap is identical on both sides of the wire
+      ✔ no reason can emit more decisive attributes than the validators accept
+    timeout ladder
+      ✔ the API waits longer for a decision than the model is allowed to take
+    reason vocabulary
+      ✔ every reason code has explanation details
+      ✔ the model may not emit a system-generated reason
+      ✔ the request schema enums match the policy tables
+    authorization gates agree between API and chaincode
+      ✔ record-filing roles are identical
+      ✔ audit-trail roles are derived from the same policy tables on both sides
+
+  template renderer (baseline and fallback)
+    ✔ states the outcome, the reason and the decisive attributes
+    ✔ includes the counterfactual when there is one
+    ✔ is deterministic
+    ✔ handles an unknown reason code without crashing
+
+  prompt construction
+    ✔ includes the decision, reason and decisive attributes
+    ✔ never sends case contents or personal identifiers to the model
+
+  grounding validation
+    ✔ accepts a faithful explanation
+    ✔ rejects text that contradicts the recorded decision
+    ✔ rejects invented identifiers
+    ✔ rejects an invented record type that was not supplied to the wording model
+    ✔ allows the record and case ids that really belong to this decision
+    ✔ rejects assistant filler and AI self-reference
+    ✔ rejects text that is too short to explain anything
+    ✔ rejects calling an escalated decision final (it is pending review)
+    ✔ accepts an escalated explanation that says review is pending
+    ✔ rejects blaming a factor that did not decide the request
+    ✔ accepts an RBAC denial that blames the right thing
+    ✔ warns but still accepts text that drops the counterfactual
+
+  policy model attestation
+    ✔ creates a verifiable Ed25519 signature over the complete decision binding
+    ✔ fails verification after any trusted context value changes
+    ✔ cryptographically binds the effective decision
+    ✔ cryptographically binds the reasonCode
+    ✔ cryptographically binds the explanation text
+    ✔ cryptographically binds the decisiveAttributes
+    ✔ cryptographically binds the counterfactual
+    ✔ rejects a non-Ed25519 signing key
+
+  fine-tuned policy decision client
+    ✔ keeps authenticated attributes separate from the untrusted query
+    ✔ accepts a structurally consistent model decision
+    ✔ rejects a model decision that contradicts its reason code
+    ✔ rejects system-generated reason codes when they come directly from the model
+    ✔ sends a policy-disagreeing model result to AuditMSP instead of trusting it
+    ✔ accepts a deterministic policy-disagreement escalation artifact
+    ✔ keeps a Qwen result unchanged when it matches the policy safety check
+    ✔ escalates when the model reads a different operation than the one committed
+    ✔ escalates when the model reads a different purpose than the one committed
+    ✔ never puts the canonical operation or purpose in the model prompt
+    ✔ rejects a decision whose recorded request is not the one committed
+    ✔ rejects a decision whose recorded purpose is not the one committed
+    ✔ still rejects a materialized artifact whose decision was tampered with
+    ✔ rejects a materialized artifact whose explanation text was tampered with
+    ✔ rejects a materialized artifact whose decisive attributes were tampered with
+    ✔ rejects a materialized artifact whose counterfactual was tampered with
+    ✔ rejects extra compact-output fields instead of accepting free-form explanations
+    ✔ rejects model attempts to change ledger resource attributes
+    ✔ requires strict JSON without markdown or hidden reasoning
+    ✔ returns a validated decision with audit hashes from the MLX service
+    ✔ rejects an adapter whose local bytes do not match the registered digest
+    ✔ does not invoke inference when adapter verification fails
+
+  security configuration
+    ✔ fails fast when production has no JWT secret (39ms)
+    ✔ retains a loudly warned fallback for local development only
+    ✔ defaults CORS to the local API origin and accepts an explicit origin (62ms)
+    ✔ rejects a wildcard CORS configuration
+    ✔ allows only mutually exclusive LLM and legacy policy modes (91ms)
+    ✔ resolves a relative agency vault path from the repository root
+    ✔ allows same-origin or originless requests and rejects other origins
+    ✔ emits CORS headers only for the configured browser origin
+
+  Fabric CA enrolment secrets
+    ✔ generates distinct URL-safe 256-bit secrets
+
+  off-chain PDF vault
+    ✔ stores PDF bytes, reads them back, and returns a stable SHA-256 commitment
+    ✔ rejects empty, non-PDF, oversized, and duplicate uploads
+
+
+  105 passing (1m)
+

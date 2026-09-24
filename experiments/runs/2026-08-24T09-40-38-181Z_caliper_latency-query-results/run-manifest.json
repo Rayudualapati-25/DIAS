@@ -1,0 +1,61 @@
+{
+  "runId": "2026-08-24T09-40-38-181Z_caliper_latency-query-results",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T09:40:38.184Z",
+  "benchmarkConfig": "latency-query-result-count.yaml",
+  "benchmarkConfigSha256": "274a2f4869bd6438b5e7eaa55cf318cf9247f69529919f6b8f5a903ed2f4736b",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "010c07252b429d9270feb888a45ec5261f5f3cd2a874ecfa9b113250f6848be8",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "469470edab9b23892e8723af42e65175affd7b4ff2df39fdf3a5607d3749337f",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/query-records.js",
+      "sha256": "ff2af6edf03bc59f253dffb1c55097ce4a4ce69cca6938192b0e0ae657cf3b81"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "ebaf4d0a5dcd19b128aba2e5d3837a076643fc67812445a9f25809e94ca40fbc"
+      }
+    ],
+    "transactions": null,
+    "summary": null,
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": null,
+    "summarySha256": null,
+    "error": "transaction evidence observer was enabled but no transaction evidence was found"
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T09:40:38.563Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 3,
+    "successful": 0,
+    "failed": 3
+  },
+  "performanceSummary": null,
+  "performanceSummarySha256": null,
+  "failedTransactions": null,
+  "reportCreated": false,
+  "reportSha256": null,
+  "logSha256": "445b8e2b7a104f9e20cd005aad134ec2ab86b8ace2ee6b51103e9a08680b9ec2",
+  "failureReason": "3 of 3 benchmark rounds failed"
+}

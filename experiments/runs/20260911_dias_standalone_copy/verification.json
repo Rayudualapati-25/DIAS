@@ -1,0 +1,36 @@
+{
+  "runId": "20260911_dias_standalone_copy",
+  "status": "passed",
+  "checks": {
+    "independentGitRepository": true,
+    "sourceWorktreeGitPointerExcluded": true,
+    "repositoryPublicationCheck": "passed",
+    "dockerComposeValidation": "passed",
+    "shellSyntaxValidation": "passed",
+    "adapterPresent": true,
+    "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "mlxRuntimeImport": "passed",
+    "chaincodeTests": { "passed": 211, "failed": 0 },
+    "backendTests": { "passed": 111, "failed": 0, "includesLiveFabric": true },
+    "frontendTests": { "passed": 12, "failed": 0 },
+    "datasetToolTests": { "passed": 2, "failed": 0 },
+    "workflowReplayScenarios": { "passed": 27, "failed": 0 },
+    "datasetValidation": "passed"
+  },
+  "dataset": {
+    "trainExamples": 3000,
+    "validationExamples": 500,
+    "testExamples": 1000,
+    "adversarialShare": 0.25,
+    "roles": 22,
+    "organizations": 4,
+    "recommendationReasonCodes": 10,
+    "workflowEvaluationSequences": 9,
+    "oneFieldNearMissDimensions": 21
+  },
+  "limitations": [
+    "No new LLM was trained or benchmarked because the replacement model has not been selected.",
+    "Synthetic labels do not establish real auditor behavior or production prevalence.",
+    "The current local Fabric/Docker services are shared host services, not duplicated container instances."
+  ]
+}

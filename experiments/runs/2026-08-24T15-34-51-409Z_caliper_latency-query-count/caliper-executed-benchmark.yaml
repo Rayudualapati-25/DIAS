@@ -1,0 +1,104 @@
+test:
+  name: SEBA-XAI query latency by result count
+  description: Measure search latency as the query returns one, two, and three records.
+  workers:
+    number: 2
+  rounds:
+    - label: query-count-warmup
+      txDuration: 10
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            caseId: CASE-2026-002
+          expectedCount: 1
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: query-count-1
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            caseId: CASE-2026-002
+          expectedCount: 1
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: query-count-2
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            caseId: CASE-2026-001
+          expectedCount: 2
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: query-count-3
+      txDuration: 45
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/query-records.js
+        arguments:
+          contractId: crimerecords
+          filters:
+            jurisdiction: district-north
+          expectedCount: 3
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+monitors:
+  transaction:
+    - module: monitors/latency-tx-observer.js
+  resource:
+    - module: prometheus
+      options:
+        url: http://127.0.0.1:9090
+        metrics:
+          include:
+            - .*
+          queries:
+            - name: Process resident memory (MiB, max)
+              query: process_resident_memory_bytes{job=~"fabric-.*"}
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 9.5367431640625e-7
+            - name: Process CPU rate (percent, max)
+              query: rate(process_cpu_seconds_total{job=~"fabric-.*"}[1m])
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 100
+            - name: Crimerecords endorsement duration (seconds, avg)
+              query: >-
+                sum by (instance)
+                (rate(endorser_proposal_duration_sum{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))
+                / sum by (instance)
+                (rate(endorser_proposal_duration_count{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))
+              step: 1
+              label: instance
+              statistic: avg
+            - name: Ledger height (blocks, max)
+              query: >-
+                ledger_blockchain_height{job=~"fabric-.*",channel="crimechannel"}
+              step: 1
+              label: instance
+              statistic: max

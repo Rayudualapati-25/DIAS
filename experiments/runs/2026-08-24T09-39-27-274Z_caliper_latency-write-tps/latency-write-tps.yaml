@@ -1,0 +1,66 @@
+test:
+  name: Latency by access-decision TPS
+  description: Short Caliper characterization run for latency-axis graph generation.
+  workers:
+    number: 4
+  rounds:
+    - label: write-tps-1
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: write-tps-2
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/request-access.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: write-tps-5
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 5
+      workload:
+        module: workloads/request-access.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+    - label: write-tps-10
+      txDuration: 5
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload:
+        module: workloads/request-access.js
+        arguments:
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP

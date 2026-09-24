@@ -1,0 +1,110 @@
+{
+  "runId": "20260818_solidity_frontend",
+  "date": "2026-08-18",
+  "objective": "Create backend-free browser screens that interact directly with a Solidity crime-record metadata contract.",
+  "baseline": {
+    "subject": "existing repository frontend",
+    "check": "Node syntax check over frontend/js/**/*.js",
+    "filesChecked": 26,
+    "status": "passed",
+    "architecture": "uses the repository API and Fabric backend"
+  },
+  "proposed": {
+    "path": "solidity-frontend",
+    "applicationBackend": false,
+    "screens": 5,
+    "javascriptSyntax": "passed",
+    "solidityCompiler": "0.8.24",
+    "solidityCompilation": "passed",
+    "staticAssetHttpChecks": {
+      "index.html": 200,
+      "app.js": 200,
+      "styles.css": 200,
+      "contracts/CrimeRecords.sol": 200
+    }
+  },
+  "ablation": {
+    "component": "officer authorization gate",
+    "unauthorizedWallet": "fileRecord reverted",
+    "afterOwnerAuthorization": "fileRecord succeeded",
+    "storedRecordCount": 1,
+    "status": "passed on an ephemeral Ganache EVM"
+  },
+  "vercelDeployment": {
+    "date": "2026-08-19",
+    "projectId": "prj_4oI3v8OCN9La1NO2jX3BiYW8kqNK",
+    "deploymentId": "dpl_AKTRfPj6FDKhFVPKK3R1heahyNkD",
+    "url": "https://crimechain-solidity-registry.vercel.app/",
+    "state": "READY",
+    "renderedHeadingVisible": true,
+    "browserConsoleErrors": 0,
+    "assetHttpChecks": {
+      "index.html": 200,
+      "app.js": 200,
+      "styles.css": 200,
+      "contracts/CrimeRecords.sol": 200,
+      "favicon.svg": 200
+    },
+    "securityHeadersVerified": [
+      "Content-Security-Policy",
+      "Permissions-Policy",
+      "Referrer-Policy",
+      "Strict-Transport-Security",
+      "X-Content-Type-Options",
+      "X-Frame-Options"
+    ]
+  },
+  "professionalCopyRevision": {
+    "date": "2026-08-20",
+    "feedbackSource": "professor review",
+    "formalName": "Criminal Investigation Chain",
+    "scope": [
+      "site title and brand",
+      "five navigation labels",
+      "investigation-record workflow terminology",
+      "wallet and smart-contract status messages",
+      "privacy and research-demonstration statements"
+    ],
+    "sourceChecks": {
+      "javascriptSyntax": "passed",
+      "vercelConfiguration": "valid",
+      "obsoleteNameMatches": 0,
+      "gitDiffCheck": "passed"
+    },
+    "localRenderedCheck": {
+      "screensChecked": 5,
+      "expectedPageTitleVisible": true,
+      "expectedScreenHeadingsVisible": true,
+      "browserConsoleErrors": 0
+    },
+    "productionDeployment": {
+      "projectId": "prj_4oI3v8OCN9La1NO2jX3BiYW8kqNK",
+      "deploymentId": "dpl_8wmWsauZKtTLD56RqcF9iCYiHUUK",
+      "url": "https://crimechain-solidity-registry.vercel.app/",
+      "state": "READY",
+      "httpStatus": 200,
+      "expectedPageTitleVisible": true,
+      "browserConsoleErrors": 0
+    }
+  },
+  "reportScreenshotSet": {
+    "date": "2026-08-20",
+    "sourceUrl": "https://crimechain-solidity-registry.vercel.app/",
+    "artifactDirectory": "reports/screenshots/criminal-investigation-chain",
+    "screenCount": 5,
+    "format": "PNG",
+    "captureStyle": "full-screen 16:9 desktop viewport",
+    "widthPixels": 1920,
+    "heightPixels": 1080,
+    "browserConsoleErrors": 0,
+    "manifest": "reports/screenshots/criminal-investigation-chain/manifest.json",
+    "archive": "reports/screenshots/criminal-investigation-chain-report-pack.zip",
+    "status": "passed"
+  },
+  "limitations": [
+    "No public or persistent blockchain deployment was performed because no target network or user-approved wallet transaction was supplied.",
+    "The UI loads pinned ethers 6.13.4 from jsDelivr and therefore needs internet access unless that file is vendored before hosting.",
+    "Only synthetic data is appropriate; EVM metadata and events are publicly observable.",
+    "This demonstration does not reproduce Fabric multi-organization endorsement or the full contextual policy."
+  ]
+}

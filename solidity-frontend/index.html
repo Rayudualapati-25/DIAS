@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Criminal Investigation Chain is a Solidity-based registry for verifiable investigation-record metadata and content commitments">
+  <title>Criminal Investigation Chain | Investigation Record Registry</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard" aria-label="Criminal Investigation Chain home">
+        <span class="brand-mark">CIC</span>
+        <span><strong>Criminal Investigation<br>Chain</strong><small>Blockchain Record Registry</small></span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <button class="nav-item active" data-screen="dashboard"><span>⌂</span> Overview</button>
+        <button class="nav-item" data-screen="file"><span>＋</span> Register record</button>
+        <button class="nav-item" data-screen="lookup"><span>⌕</span> Verify record</button>
+        <button class="nav-item" data-screen="officers"><span>♙</span> Manage access</button>
+        <button class="nav-item" data-screen="audit"><span>≡</span> Activity log</button>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="pulse"></span>
+        <div><strong>Direct blockchain access</strong><small>Wallet-to-contract architecture</small></div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Solidity research demonstration</p>
+          <h1 id="page-title">Overview</h1>
+        </div>
+        <div class="wallet-actions">
+          <span id="network-pill" class="pill">No wallet connected</span>
+          <button id="connect-button" class="button primary">Connect wallet</button>
+        </div>
+      </header>
+
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+      <section id="screen-dashboard" class="screen active">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Blockchain-based record integrity</p>
+            <h2>Establish verifiable integrity for investigation records.</h2>
+            <p>Criminal Investigation Chain registers investigation-record metadata and a cryptographic content commitment through a deployed Solidity smart contract. This research demonstration uses synthetic data exclusively.</p>
+          </div>
+          <div class="hero-chain" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat"><span>Registered records</span><strong id="record-count">—</strong><small>Total confirmed by the smart contract</small></article>
+          <article class="stat"><span>Connected wallet</span><strong id="wallet-short">Not connected</strong><small id="wallet-role">Connect a wallet to view authorization</small></article>
+          <article class="stat"><span>Smart contract</span><strong id="contract-short">Not configured</strong><small id="contract-state">Deployment address required</small></article>
+        </div>
+
+        <div class="two-column">
+          <article class="panel">
+            <div class="panel-head"><div><p class="eyebrow">Network configuration</p><h3>Smart contract connection</h3></div><span class="status-dot"></span></div>
+            <form id="contract-form">
+              <label>Deployed contract address<input id="contract-address" name="address" placeholder="0x…" autocomplete="off" required></label>
+              <p class="help">Deploy <code>contracts/CrimeRecords.sol</code> through the Remix IDE, then enter the deployment address for the network selected in your wallet.</p>
+              <button class="button secondary" type="submit">Save contract address</button>
+            </form>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><p class="eyebrow">Data protection model</p><h3>Information recorded on-chain</h3></div></div>
+            <div class="flow"><span>Synthetic narrative remains in browser</span><b>SHA-256</b><span>Digest and record metadata</span><b>→</b><span>Solidity registry</span></div>
+            <p class="help">The browser computes the content digest locally. Only the digest and selected metadata are submitted to the smart contract; the narrative itself is not transmitted.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="screen-file" class="screen">
+        <article class="panel form-panel">
+          <div class="panel-head"><div><p class="eyebrow">Authorized blockchain transaction</p><h3>Register an investigation record</h3></div><span class="tag">Wallet confirmation required</span></div>
+          <form id="file-form">
+            <div class="form-row">
+              <label>Record ID<input name="recordId" placeholder="FIR-2026-001" required></label>
+              <label>Case ID<input name="caseId" placeholder="CASE-2026-001" required></label>
+            </div>
+            <div class="form-row">
+              <label>Record type<select name="recordType"><option value="FIR">First Information Report (FIR)</option><option>Case Diary</option><option>Forensic Evidence Report</option></select></label>
+              <label>Sensitivity<select name="sensitivity"><option>Internal</option><option>Restricted</option><option>Highly Restricted</option></select></label>
+            </div>
+            <label>Synthetic investigation narrative<textarea name="narrative" rows="6" placeholder="Enter synthetic demonstration content only" required></textarea></label>
+            <p class="help">Criminal Investigation Chain computes a SHA-256 digest in this browser. Only the digest and record metadata are submitted to the blockchain.</p>
+            <button class="button primary" type="submit">Register record</button>
+          </form>
+          <div id="file-result"></div>
+        </article>
+      </section>
+
+      <section id="screen-lookup" class="screen">
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">On-chain record query</p><h3>Verify a registered record</h3></div></div>
+          <form id="lookup-form" class="inline-form">
+            <input name="recordId" placeholder="Enter record ID" required>
+            <button class="button primary" type="submit">Retrieve record</button>
+          </form>
+          <div id="lookup-result" class="result-placeholder">Enter the exact record identifier to retrieve and verify its registered metadata.</div>
+        </article>
+      </section>
+
+      <section id="screen-officers" class="screen">
+        <article class="panel form-panel">
+          <div class="panel-head"><div><p class="eyebrow">Smart contract owner</p><h3>Manage officer authorization</h3></div><span class="tag">Administrative access</span></div>
+          <p class="help">Only the wallet that deployed the smart contract can grant or revoke permission to register records.</p>
+          <form id="officer-form">
+            <label>Wallet address<input name="account" placeholder="0x…" required></label>
+            <label>Registration permission<select name="authorized"><option value="true">Authorize record registration</option><option value="false">Revoke record registration</option></select></label>
+            <button class="button primary" type="submit">Update officer access</button>
+          </form>
+          <div id="officer-result"></div>
+        </article>
+      </section>
+
+      <section id="screen-audit" class="screen">
+        <article class="panel">
+          <div class="panel-head"><div><p class="eyebrow">Blockchain event log</p><h3>Recent record registrations</h3></div><button id="refresh-events" class="button secondary">Refresh activity</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Record ID</th><th>Case ID</th><th>Content digest</th><th>Registered by</th><th>Block</th></tr></thead><tbody id="events-body"><tr><td colspan="5" class="empty">Connect a wallet and verify the smart contract to load blockchain activity.</td></tr></tbody></table></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

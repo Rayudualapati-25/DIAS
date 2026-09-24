@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-03",
+  "policyMode": "llm-only",
+  "model": "mlx-community/Qwen3-14B-4bit",
+  "modelVersion": "qwen3-14b-seba-lora-v4",
+  "adapterPath": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v4-best",
+  "adapterSha256": "bdb012513c123311821a8f2a7c10c290dd6dfa52dd51632954484aac2efc873b",
+  "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+  "inferenceUrl": "http://127.0.0.1:8080",
+  "chaincode": {
+    "name": "crimerecords",
+    "channel": "crimechannel",
+    "version": "2.5",
+    "sequence": 3,
+    "approvedMsps": [
+      "AuditMSP",
+      "CourtMSP",
+      "ForensicsMSP",
+      "PoliceMSP",
+      "ProsecutionMSP"
+    ]
+  },
+  "safetyGuard": "convert model/policy decision or reason disagreement to ESCALATE/MODEL_POLICY_DISAGREEMENT",
+  "pdfMaximumBytes": 5242880
+}

@@ -1,0 +1,57 @@
+{
+  "runType": "caliper-configured-profile-figure-generation",
+  "timestampLocal": "2026-08-24T13:47:38+05:30",
+  "objective": "Generate one reproducible methodology figure for each configured Caliper test without executing a benchmark",
+  "executionBoundary": {
+    "caliperWorkloadRunByAssistant": false,
+    "transactionsSubmittedByAssistant": 0,
+    "performanceResultsUsed": false,
+    "performanceClaimsProduced": false
+  },
+  "generator": "benchmarks/caliper/scripts/generate-workload-profile-graphs.py",
+  "manifest": "results/plots/caliper/figure_manifest.json",
+  "profiles": [
+    {
+      "test": "read",
+      "png": "results/plots/caliper/caliper_read_configured_profile.png",
+      "pdf": "results/plots/caliper/caliper_read_configured_profile.pdf"
+    },
+    {
+      "test": "write",
+      "png": "results/plots/caliper/caliper_write_configured_profile.png",
+      "pdf": "results/plots/caliper/caliper_write_configured_profile.pdf"
+    },
+    {
+      "test": "increasing_load",
+      "png": "results/plots/caliper/caliper_increasing_load_configured_profile.png",
+      "pdf": "results/plots/caliper/caliper_increasing_load_configured_profile.pdf"
+    },
+    {
+      "test": "mixed",
+      "png": "results/plots/caliper/caliper_mixed_configured_profile.png",
+      "pdf": "results/plots/caliper/caliper_mixed_configured_profile.pdf"
+    },
+    {
+      "test": "endurance",
+      "png": "results/plots/caliper/caliper_endurance_configured_profile.png",
+      "pdf": "results/plots/caliper/caliper_endurance_configured_profile.pdf"
+    }
+  ],
+  "validation": {
+    "figuresGenerated": 5,
+    "formatsPerFigure": ["png", "pdf"],
+    "sourceTablesGenerated": 5,
+    "pythonSyntaxCheck": "passed",
+    "manifestJsonCheck": "passed",
+    "visualInspection": "passed with minor non-blocking warm-up callout density",
+    "repeatGenerationHashCheck": "passed for all PNG and PDF outputs",
+    "completedCaliperPerformanceRunsFound": 0
+  },
+  "classification": "methodology/configured-input evidence; not benchmark performance evidence",
+  "limitations": [
+    "The figures show offered load rather than achieved throughput.",
+    "The figures contain no measured latency, failure, CPU, or memory values.",
+    "Measured-results figures require valid retained completed Caliper runs.",
+    "Baseline, proposed-method, and ablation repetitions remain required for comparative research claims."
+  ]
+}

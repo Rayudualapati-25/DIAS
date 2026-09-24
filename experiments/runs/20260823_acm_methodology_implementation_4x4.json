@@ -1,0 +1,71 @@
+{
+  "runId": "20260823_acm_methodology_implementation_4x4",
+  "date": "2026-08-23",
+  "objective": "Restructure the existing ACM manuscript so Methodology and Implementation each contain exactly four evidence-backed subsections, without changing empirical claims.",
+  "inputs": [
+    "/Users/venkatrayudu/Downloads/SEBA-XAI Final Research Experiment and Paper Completion Mission.pdf",
+    "papers/final_paper/SEBA_XAI_ACM_6page.tex",
+    "papers/final_paper/SEBA_Internship_Report_Revised_Student_Voice.docx",
+    "papers/final_paper/artifacts/PROVENANCE.md"
+  ],
+  "commands": [
+    "tectonic -X compile papers/final_paper/SEBA_XAI_ACM_6page.tex --outdir papers/final_paper/build-acm --keep-intermediates --keep-logs",
+    "pdfinfo papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf",
+    "pdftoppm -png -r 150 papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf tmp/pdfs/final_4x4_review/page",
+    "node papers/final_paper/artifacts/check_faithfulness.js",
+    "node results/plots/figure3_latency_reference.js"
+  ],
+  "structure": {
+    "methodologySubsections": [
+      "Trust and storage boundary",
+      "Formal request model",
+      "Contextual policy evaluation",
+      "Explanation and audit integrity"
+    ],
+    "implementationSubsections": [
+      "Chaincode, gateway, and vault",
+      "Fabric deployment",
+      "Experimental workloads",
+      "Measurement and integrity protocol"
+    ],
+    "methodologyCount": 4,
+    "implementationCount": 4,
+    "automatedCountCheck": "pass"
+  },
+  "build": {
+    "status": "pass",
+    "pagesIncludingReferences": 5,
+    "pageLimit": 6,
+    "withinLimit": true,
+    "figures": 3,
+    "tables": 2,
+    "numberedEquationGroups": 5,
+    "undefinedCitationsOrReferences": 0,
+    "overfullHbox": 0,
+    "overfullVbox": 0,
+    "underfullHbox": 2,
+    "underfullVbox": 2,
+    "visualInspection": "all five pages rendered at 150 dpi; no clipping, overlap, missing figure, or unreadable table"
+  },
+  "evidenceChecks": {
+    "decisiveRulesFired": "12/12",
+    "subsetSafeRules": "10/12",
+    "figure3Consistency": "pass"
+  },
+  "hashes": {
+    "papers/final_paper/SEBA_XAI_ACM_6page.tex": "70d2d207da11861775959a5d1fd492a1b03582cffbbc5d885a1449fdcd55ed3f",
+    "papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf": "ead18a1744281c32ed747a96bb14f9d9709cb67a24f7093ec0600498c6fc4748"
+  },
+  "claimChanges": "none",
+  "knownLimitations": [
+    "ACM venue, DOI, ISBN, and rights metadata remain placeholders; authordraft is retained.",
+    "No new live experiment was run for this structural manuscript revision.",
+    "The recorded latency evidence remains a sequential single-host characterization, not production scalability evidence."
+  ],
+  "outputs": [
+    "papers/final_paper/SEBA_XAI_ACM_6page.tex",
+    "papers/final_paper/build-acm/SEBA_XAI_ACM_6page.pdf",
+    "results/tables/20260823_acm_4x4_structure_audit.txt",
+    "reports/iteration/iter_009_acm_methodology_implementation_4x4.md"
+  ]
+}

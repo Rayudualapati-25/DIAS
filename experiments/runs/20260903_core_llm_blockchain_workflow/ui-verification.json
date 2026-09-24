@@ -1,0 +1,34 @@
+{
+  "capturedAtUtc": "2026-09-03T16:03:39Z",
+  "browser": "headless Chromium via Chrome DevTools Protocol",
+  "desktopViewport": {
+    "width": 1440,
+    "height": 900,
+    "pageHorizontalOverflow": false,
+    "unlabelledFormControls": 0,
+    "allowMetadataVisible": true,
+    "qwenDecisionProvenanceVisible": true,
+    "requestFullPdfActionVisible": true,
+    "auditorApproveRejectActionsVisible": true
+  },
+  "mobileViewport": {
+    "width": 375,
+    "height": 812,
+    "pageHorizontalOverflow": false,
+    "unlabelledFormControls": 0,
+    "auditorApproveRejectActionsVisible": true,
+    "viewPdfActionVisible": true
+  },
+  "interactionChecks": {
+    "searchInvokedQwenAndRecordedEscalate": true,
+    "auditUserApprovedFromQueue": true,
+    "requesterMetadataLoadedAfterApproval": true,
+    "viewPdfOpenedBlobPageInNewTab": true,
+    "unsupportedRecordTypeWordingShown": false
+  },
+  "screenshots": [
+    "results/plots/core-llm-blockchain-workflow/allow-metadata-desktop.png",
+    "results/plots/core-llm-blockchain-workflow/auditor-queue-desktop.png",
+    "results/plots/core-llm-blockchain-workflow/auditor-queue-mobile.png"
+  ]
+}

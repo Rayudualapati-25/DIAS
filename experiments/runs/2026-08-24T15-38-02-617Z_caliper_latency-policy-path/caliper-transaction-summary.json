@@ -1,0 +1,95 @@
+{
+  "transactions": 241,
+  "rounds": [
+    {
+      "roundLabel": "policy-path-warmup",
+      "roundIndex": 0,
+      "count": 11,
+      "successfulTransactions": 11,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 86,
+        "mean": 1189.6363636363637,
+        "p50": 1093,
+        "p95": 2110,
+        "p99": 2126,
+        "max": 2130
+      }
+    },
+    {
+      "roundLabel": "policy-rule1-credential-revoked",
+      "roundIndex": 1,
+      "count": 46,
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 70,
+        "mean": 1190.6304347826087,
+        "p50": 1085,
+        "p95": 2089.25,
+        "p99": 2092.65,
+        "max": 2094
+      }
+    },
+    {
+      "roundLabel": "policy-rule3-rbac",
+      "roundIndex": 2,
+      "count": 46,
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 83,
+        "mean": 1198.0869565217392,
+        "p50": 1093,
+        "p95": 2095.75,
+        "p99": 2098.1000000000004,
+        "max": 2099
+      }
+    },
+    {
+      "roundLabel": "policy-rule6-cross-jurisdiction",
+      "roundIndex": 3,
+      "count": 46,
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 60,
+        "mean": 1190.695652173913,
+        "p50": 1085.5,
+        "p95": 2088.75,
+        "p99": 2091.55,
+        "max": 2092
+      }
+    },
+    {
+      "roundLabel": "policy-rule7-not-assigned",
+      "roundIndex": 4,
+      "count": 46,
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 75,
+        "mean": 1191.1521739130435,
+        "p50": 1085,
+        "p95": 2089.25,
+        "p99": 2090,
+        "max": 2090
+      }
+    },
+    {
+      "roundLabel": "policy-full-allow",
+      "roundIndex": 5,
+      "count": 46,
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 69,
+        "mean": 1194.3260869565217,
+        "p50": 1088.5,
+        "p95": 2092,
+        "p99": 2106.2,
+        "max": 2117
+      }
+    }
+  ]
+}

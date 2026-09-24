@@ -1,0 +1,122 @@
+{
+  "createdAtUtc": "2026-09-02T01:11:41.053599+00:00",
+  "generator": "experiments/llm_policy_engine/summarize_results.py",
+  "sources": [
+    {
+      "label": "Untuned, no rules (Ollama)",
+      "path": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_ollama_no_rules.rescored.json",
+      "sha256": "204761d3adddc2193ee87256a4829e57c145fafcb011af7c00a4d5b859d4eca8",
+      "config": {
+        "provider": "ollama",
+        "url": "http://localhost:11434",
+        "model": "qwen3:14b",
+        "adapter": null,
+        "arm": "no-rules",
+        "data": "experiments/llm_policy_engine/data_v3/test_balanced_60.jsonl",
+        "output": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_ollama_no_rules.json",
+        "limit": null,
+        "seed": 42,
+        "testDataSha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+      }
+    },
+    {
+      "label": "Untuned, rules prompt (Ollama)",
+      "path": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_ollama_rules_prompt.rescored.json",
+      "sha256": "e99245b04af518321401d7188f770f07c81773baa4f0a9e2ca0ac128775cafdf",
+      "config": {
+        "provider": "ollama",
+        "url": "http://localhost:11434",
+        "model": "qwen3:14b",
+        "adapter": null,
+        "arm": "rules-prompt",
+        "data": "experiments/llm_policy_engine/data_v3/test_balanced_60.jsonl",
+        "output": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_ollama_rules_prompt.json",
+        "limit": null,
+        "seed": 42,
+        "testDataSha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+      }
+    },
+    {
+      "label": "Untuned, no rules (prod decoding)",
+      "path": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_mlx_no_rules.rescored.json",
+      "sha256": "81c0da940a595bb6f42862483fe2cd3b56f63c200d7044cf5f31b5ded7c4613e",
+      "config": {
+        "provider": "openai",
+        "url": "http://127.0.0.1:8080",
+        "model": "mlx-community/Qwen3-14B-4bit",
+        "adapter": null,
+        "arm": "no-rules",
+        "data": "experiments/llm_policy_engine/data_v3/test_balanced_60.jsonl",
+        "output": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_mlx_no_rules.json",
+        "limit": null,
+        "seed": 42,
+        "testDataSha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+      }
+    },
+    {
+      "label": "Untuned, rules prompt (prod decoding)",
+      "path": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_mlx_rules_prompt.rescored.json",
+      "sha256": "90225bad42ea8e380a7d3a419a84b6e59bf9780ac53c9f0b5f01f8ca20f5dfb4",
+      "config": {
+        "provider": "openai",
+        "url": "http://127.0.0.1:8080",
+        "model": "mlx-community/Qwen3-14B-4bit",
+        "adapter": null,
+        "arm": "rules-prompt",
+        "data": "experiments/llm_policy_engine/data_v3/test_balanced_60.jsonl",
+        "output": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/baseline_mlx_rules_prompt.json",
+        "limit": null,
+        "seed": 42,
+        "testDataSha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+      }
+    },
+    {
+      "label": "Fine-tuned V3 (proposed)",
+      "path": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/proposed.rescored.json",
+      "sha256": "b481db2008f9f70111428eb334ce2ef350c9179b74d77103e13cf80dade2bdc3",
+      "config": {
+        "provider": "openai",
+        "url": "http://127.0.0.1:8080",
+        "model": "mlx-community/Qwen3-14B-4bit",
+        "adapter": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3-best",
+        "arm": "no-rules",
+        "data": "experiments/llm_policy_engine/data_v3/test_balanced_60.jsonl",
+        "output": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/proposed.json",
+        "limit": null,
+        "seed": 42,
+        "testDataSha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+      }
+    },
+    {
+      "label": "Fine-tuned V3, no subject attributes",
+      "path": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/subject_ablation.rescored.json",
+      "sha256": "910c8ebbf46e5323d832d1cee24ae0c998b63c4596f932d0936aedf9c4559239",
+      "config": {
+        "provider": "openai",
+        "url": "http://127.0.0.1:8080",
+        "model": "mlx-community/Qwen3-14B-4bit",
+        "adapter": "experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v3-best",
+        "arm": "subject-ablation",
+        "data": "experiments/llm_policy_engine/data_v3/test_balanced_60.jsonl",
+        "output": "experiments/runs/20260902_qwen3_policy_engine_eval_v3/subject_ablation.json",
+        "limit": null,
+        "seed": 42,
+        "testDataSha256": "935d09f21f4f83004d63b0d8767cadcdffce88baabc5f98a735543f4fbe71ef2"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "results/tables/qwen3-policy-engine-derived/metrics.csv",
+      "sha256": "acf8a2812c8c2f081d36c09e24e7dbac6e2f2965764a897b08553514590acb1a"
+    },
+    {
+      "path": "results/tables/qwen3-policy-engine-derived/metrics.md",
+      "sha256": "2d7036e23e45ecb310fcb7d6e30035dc3e667ca239b749eeade1137a7e19452e"
+    },
+    {
+      "path": "results/plots/qwen3-policy-engine-derived/policy_engine_comparison.svg",
+      "sha256": "cffabf412d9dcc23e9bce8c0307bc1c48532471eb1a39ec97d709cd584f1162f"
+    }
+  ]
+}

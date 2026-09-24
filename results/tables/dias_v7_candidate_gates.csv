@@ -1,0 +1,8 @@
+gate,baseline_or_threshold,candidate,result,evidence
+held_out_decision_accuracy,0.606498,0.880000,PASS,test-decision-balanced
+held_out_macro_f1,0.550197,0.879161,PASS,test-decision-balanced
+false_allow_rate_of_deny,0.050000,0.203333,FAIL,test-decision-balanced
+schema_valid_rate,0.980000,1.000000,PASS,test-decision-balanced
+adversarial_false_allow_count,0,54,FAIL,test-adversarial
+ood_accuracy_gap_max,0.100000,0.040000,PASS,absolute difference between OOD and in-domain accuracy
+p95_latency_same_order,9488.5,8290.7,PASS,test-decision-balanced milliseconds

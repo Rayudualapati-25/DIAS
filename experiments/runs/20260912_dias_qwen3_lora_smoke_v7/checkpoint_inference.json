@@ -1,0 +1,52 @@
+{
+  "artifactType": "dias-v7-checkpoint-inference-check",
+  "adapterPath": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-smoke",
+  "baseModel": "mlx-community/Qwen3-14B-4bit",
+  "loadSeconds": 1.9,
+  "prompts": 3,
+  "allParsed": true,
+  "allBinary": true,
+  "allKeysExact": true,
+  "results": [
+    {
+      "prompt": "prompt_0.json",
+      "expectedRecommendation": "DENY",
+      "rawLength": 639,
+      "parsedAsJson": true,
+      "parseError": null,
+      "keysExact": true,
+      "recommendation": "ALLOW",
+      "recommendationIsBinary": true,
+      "reasonCode": "POLICY_SATISFIED",
+      "generationSeconds": 26.0,
+      "rawOutput": "{\"recommendation\":\"ALLOW\",\"reason_code\":\"POLICY_SATISFIED\",\"reason\":\"The request meets the policy requirements. The requester has an active credential, the purpose is valid, the role belongs to the requester's organization, the role has permission to view evidence, the record is not sealed, the record is not juvenile-protected, the record is not victim-protected, the requester's jurisdiction matches the record's jurisdiction, the requester is assigned to the requested case, and the requester's clearance meets the record's sensitivity level.\",\"policy_refs\":[\"GP-RBAC:C2@v1\",\"GP-DEFAULT:C1@v1\"],\""
+    },
+    {
+      "prompt": "prompt_1.json",
+      "expectedRecommendation": "DENY",
+      "rawLength": 357,
+      "parsedAsJson": true,
+      "parseError": null,
+      "keysExact": true,
+      "recommendation": "DENY",
+      "recommendationIsBinary": true,
+      "reasonCode": "RBAC_NO_PERMISSION",
+      "generationSeconds": 18.7,
+      "rawOutput": "{\"recommendation\":\"DENY\",\"reason_code\":\"RBAC_NO_PERMISSION\",\"reason\":\"The requester's role 'magistrate' is owned by the CourtMSP organization, but the request action 'annotate' on the 'chargesheet' record type is not permitted by the role's RBAC matrix. Clause GP-RBAC:C2@v1 applies.\",\"policy_refs\":[\"GP-RBAC:C2@v1\"],\"missing_evidence\":[],\"review_flags\":[]}"
+    },
+    {
+      "prompt": "prompt_2.json",
+      "expectedRecommendation": "ALLOW",
+      "rawLength": 373,
+      "parsedAsJson": true,
+      "parseError": null,
+      "keysExact": true,
+      "recommendation": "DENY",
+      "recommendationIsBinary": true,
+      "reasonCode": "NOT_ASSIGNED",
+      "generationSeconds": 22.7,
+      "rawOutput": "{\"recommendation\":\"DENY\",\"reason_code\":\"NOT_ASSIGNED\",\"reason\":\"The requester is not assigned to the requested case (requester.assignedToRequestedCase is false), and their role (senior-analyst) is not in roleLists.assignmentExempt. This violates GP-ASSIGN:C1@v1.\",\"policy_refs\":[\"GP-ASSIGN:C1@v1\"],\"missing_evidence\":[],\"review_flags\":[\"UNVERIFIED_CLAIM_IN_JUSTIFICATION\"]}"
+    }
+  ],
+  "claimBoundary": "Checkpoint loads and emits the response contract. Three prompts measure nothing about accuracy."
+}

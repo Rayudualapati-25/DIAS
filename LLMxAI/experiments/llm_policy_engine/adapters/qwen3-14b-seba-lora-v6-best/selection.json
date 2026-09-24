@@ -1,0 +1,10 @@
+{
+  "modelVersion": "qwen3-14b-seba-lora-v6",
+  "sourceCheckpoint": "../qwen3-14b-seba-lora-v6/0000150_adapters.safetensors",
+  "selectionCriterion": "lowest recorded validation loss",
+  "validationLossAt150": 0.005,
+  "validationLossAt300": 0.007,
+  "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+  "trainingRun": "../../runs/20260906_qwen3_policy_engine_train_v6/run.json",
+  "note": "The final checkpoint is retained; checkpoint 150 was selected without using test labels."
+}

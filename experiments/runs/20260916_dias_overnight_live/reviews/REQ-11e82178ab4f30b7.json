@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "dias-offchain-review-v1",
+  "requestId": "REQ-11e82178ab4f30b7",
+  "recordId": "REC-EVIDENCE-001",
+  "requesterUsername": "judge.rana",
+  "verifiedRequest": {
+    "requester": {
+      "mspId": "CourtMSP",
+      "organization": "court",
+      "role": "judge",
+      "rank": null,
+      "station": null,
+      "jurisdiction": "district-north",
+      "clearance": "high",
+      "credentialStatus": "active",
+      "assignedToRequestedCase": false
+    },
+    "resource": {
+      "recordType": "evidence",
+      "caseId": "CASE-2026-001",
+      "sensitivityLevel": "medium",
+      "jurisdiction": "district-north",
+      "owningAgency": "police",
+      "owningStation": "PS-Central",
+      "sealed": false,
+      "juvenileFlag": false,
+      "witnessFlag": false,
+      "victimProtectionFlag": true
+    },
+    "request": {
+      "action": "export",
+      "purpose": "audit-review",
+      "emergencyFlag": false,
+      "approvalTokenPresent": false
+    }
+  },
+  "verifiedRequestHash": "a29bfc083817e908420cc7b68eaf1a4f60d44827d2c8083027d187ce9f15144c",
+  "justification": "Synthetic concurrency measurement overnight-1789578793757; no operational access is requested.",
+  "recommendationState": "ready",
+  "recommendation": {
+    "generationStatus": "OK",
+    "recommendation": "ALLOW",
+    "reasonCode": "POLICY_SATISFIED",
+    "reason": "Role judge may export evidence records and no DENY clause applies (GP-RBAC:C2@v1, GP-DEFAULT:C1@v1).",
+    "policyRefs": [
+      "GP-RBAC:C2@v1",
+      "GP-DEFAULT:C1@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [
+      "UNVERIFIED_CLAIM_IN_JUSTIFICATION"
+    ],
+    "errorCode": null,
+    "provenance": {
+      "schemaVersion": "dias-recommendation-provenance-v1",
+      "requestId": "REQ-11e82178ab4f30b7",
+      "modelId": "qwen3-14b-dias-v7",
+      "modelFamily": "qwen3",
+      "baseModel": "mlx-community/Qwen3-14B-4bit",
+      "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": "4bit",
+      "adapterId": "qwen3-14b-dias-lora-v7",
+      "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+      "servedModel": "default_model",
+      "promptVersion": "dias-recommendation-prompt-v1",
+      "responseSchemaVersion": "dias-recommendation-response-v1",
+      "verifiedRequestHash": "a29bfc083817e908420cc7b68eaf1a4f60d44827d2c8083027d187ce9f15144c",
+      "justificationHash": "7b5317e3b7b59959947e5ad1254fd8de004427b9563d40a59fd67cc86939556d",
+      "decoding": {
+        "temperature": 0,
+        "topP": 1,
+        "maxTokens": 512
+      },
+      "inferenceStartedAtUtc": "2026-09-16T17:22:38.617Z",
+      "policyBundleId": "dias-governance-policy",
+      "policyBundleVersion": "v1",
+      "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+      "policyContextHash": "68968a6bfeb62b106370235cf897ee5d602dbc4a9d31c247115b5813cbf72020",
+      "promptHash": "f79d786f80d37c1d9452085b915dd1a8d245e4eb36c8c62f66dcb08d9e5176cd",
+      "promptChars": 7690,
+      "usage": {
+        "promptTokens": 1930,
+        "completionTokens": 93
+      },
+      "rawOutputHash": "1538f0563a46c28fca082e16ed69dd53c1c72052318394215052d184b1ad4fb3",
+      "parserStatus": "OK",
+      "parserErrors": [],
+      "parserTolerances": [],
+      "generationStatus": "OK",
+      "latencyMs": {
+        "contextAssembly": 0.158,
+        "inference": 4862.316,
+        "validation": 0.108,
+        "total": 4863.319
+      },
+      "inferenceCompletedAtUtc": "2026-09-16T17:22:43.480Z"
+    }
+  },
+  "auditorNote": {
+    "decision": "FORCE_ALLOW",
+    "llmAgreement": "AGREED",
+    "reason": null,
+    "auditorUsername": "sp.north",
+    "decidedAtUtc": "2026-09-16T17:22:43.583Z",
+    "txId": "5c62ab0417d5c28bf6e5689c0ff4758b7a1361f7dd380f943df5b5849d09393e"
+  },
+  "createdAtUtc": "2026-09-16T17:22:18.382Z",
+  "updatedAtUtc": "2026-09-16T17:22:45.650Z"
+}

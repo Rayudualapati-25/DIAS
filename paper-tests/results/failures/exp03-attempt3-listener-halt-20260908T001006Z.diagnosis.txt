@@ -1,0 +1,31 @@
+EXP03 attempt 3 — AI listener halted permanently after one model-inference timeout
+Captured: 20260908T001006Z
+
+SEQUENCE
+  Parts A, B/C, D passed. Stability runs 1-7 clean (105 passing / 0 failing each).
+  During run 8 the listener hit a model-inference timeout on one request and exited.
+  Run 8: 100 passing / 5 failing / 1 timeout.  Run 9: 96 passing / 9 failing / 3 timeouts.
+  Every failure is 'HTTP 202 - the request is recorded on the ledger but the policy
+  model has not answered yet'. Payload mismatches: 0 throughout. The ledger was fine;
+  nothing was answering.
+
+MECHANISM (frozen code, backend/src/ai/decisionService.js run())
+  decideOneRequest throws on model timeout.
+  run() catches, logs, and deliberately RE-THROWS so the checkpoint is not advanced
+  past an unanswered request (comment: 'Stop the listener so a supervised/manual
+  restart retries the same committed request').
+  start.js catches, logs 'listener stopped', and calls process.exit(1).
+  backend/package.json: "ai": "node ... src/ai/start.js" - no supervisor, no restart.
+  Net effect: one transient model timeout halts ALL decisioning until a human restarts.
+
+DIRECTION OF FAILURE: fail-closed. No access was granted. Requests stayed pending,
+  the checkpoint was NOT advanced (nextBlock 1719), so a restart retries the same
+  committed request. Nothing was released and nothing was lost.
+
+LISTENER DEATH RECORD
+[ai] 25e901c3183a5f63c1680ed1abdbd6ce02aeab377d24a452c71f9755955d1ca2 -> DENY (CROSS_JURISDICTION) in 2571 ms
+[ai] 7461fda8c2461f8cc2a313f461cf65dcd7a78f79523e7b5ba8fa2097242ec95d could not be decided: The operation was aborted due to timeout
+[ai] listener stopped: The operation was aborted due to timeout
+
+CHECKPOINT AT CAPTURE
+{"nextBlock":"1719"}

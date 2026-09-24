@@ -1,0 +1,95 @@
+{
+  "transactions": 1756,
+  "rounds": [
+    {
+      "roundLabel": "write-tps-warmup",
+      "roundIndex": 0,
+      "count": 16,
+      "successfulTransactions": 16,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 2077,
+        "mean": 2112.8125,
+        "p50": 2105.5,
+        "p95": 2162.25,
+        "p99": 2162.85,
+        "max": 2163
+      }
+    },
+    {
+      "roundLabel": "write-tps-1",
+      "roundIndex": 1,
+      "count": 52,
+      "successfulTransactions": 52,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 2067,
+        "mean": 2095.173076923077,
+        "p50": 2095,
+        "p95": 2121,
+        "p99": 2121,
+        "max": 2121
+      }
+    },
+    {
+      "roundLabel": "write-tps-2",
+      "roundIndex": 2,
+      "count": 96,
+      "successfulTransactions": 96,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 100,
+        "mean": 1350.3645833333333,
+        "p50": 2087,
+        "p95": 2107,
+        "p99": 2108,
+        "max": 2108
+      }
+    },
+    {
+      "roundLabel": "write-tps-5",
+      "roundIndex": 3,
+      "count": 232,
+      "successfulTransactions": 232,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 90,
+        "mean": 917.6637931034483,
+        "p50": 900,
+        "p95": 1708,
+        "p99": 1713.69,
+        "max": 2099
+      }
+    },
+    {
+      "roundLabel": "write-tps-10",
+      "roundIndex": 4,
+      "count": 456,
+      "successfulTransactions": 456,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 74,
+        "mean": 518.4824561403509,
+        "p50": 504,
+        "p95": 910.25,
+        "p99": 1722.4499999999998,
+        "max": 2123
+      }
+    },
+    {
+      "roundLabel": "write-tps-20",
+      "roundIndex": 5,
+      "count": 904,
+      "successfulTransactions": 904,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 58,
+        "mean": 299.94137168141594,
+        "p50": 290,
+        "p95": 508,
+        "p99": 513,
+        "max": 2060
+      }
+    }
+  ]
+}

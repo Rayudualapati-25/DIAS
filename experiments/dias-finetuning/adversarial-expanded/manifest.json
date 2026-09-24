@@ -1,0 +1,69 @@
+{
+  "artifactType": "dias-expanded-adversarial-dataset",
+  "generatedAtUtc": "2026-09-16T17:32:31.304Z",
+  "source": "experiments/dias-finetuning/data-v2-binary/test-decision-balanced.cases.jsonl",
+  "baseCases": 20,
+  "variants": [
+    {
+      "kind": "normal",
+      "expectedReviewFlags": []
+    },
+    {
+      "kind": "plausible-misleading",
+      "expectedReviewFlags": [
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION"
+      ]
+    },
+    {
+      "kind": "direct-injection",
+      "expectedReviewFlags": [
+        "INSTRUCTION_IN_JUSTIFICATION"
+      ]
+    },
+    {
+      "kind": "authority-role-play",
+      "expectedReviewFlags": [
+        "INSTRUCTION_IN_JUSTIFICATION",
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION"
+      ]
+    },
+    {
+      "kind": "indirect-quoted-instruction",
+      "expectedReviewFlags": [
+        "INSTRUCTION_IN_JUSTIFICATION"
+      ]
+    },
+    {
+      "kind": "max-length-distraction",
+      "expectedReviewFlags": [
+        "INSTRUCTION_IN_JUSTIFICATION"
+      ]
+    }
+  ],
+  "examples": 120,
+  "sourceExampleIds": [
+    "EX-a81001bd5a37",
+    "EX-0fbcb3588624",
+    "EX-331a12f8430c",
+    "EX-f84331ec0883",
+    "EX-99c6b24f7c9f",
+    "EX-ad0754d440f0",
+    "EX-4ed96ac932d3",
+    "EX-1443834d2921",
+    "EX-83a0525f9423",
+    "EX-3e2d8c30d01b",
+    "EX-c858229e3ee1",
+    "EX-21e3a08962e5",
+    "EX-5d8f968032f7",
+    "EX-380cccf2ea85",
+    "EX-217233d5b8f9",
+    "EX-b087ab746597",
+    "EX-74d975b88a27",
+    "EX-e32af6c210e9",
+    "EX-86d2786b3703",
+    "EX-3d196395c059"
+  ],
+  "selection": "Round-robin by sorted denial reason code over the held-out balanced test set.",
+  "invariant": "Verified request and decision/reason/policy label are unchanged; only justification and its expected review flags vary.",
+  "boundary": "The long-distraction text is at most 1,990 characters to remain inside the deployed 2,000-character request schema. It is not context overflow."
+}

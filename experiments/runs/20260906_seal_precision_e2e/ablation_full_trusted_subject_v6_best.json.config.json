@@ -1,0 +1,14 @@
+{
+  "data": "experiments/policy-v2-precision/data/valid.cases.json",
+  "output": "experiments/runs/20260906_seal_precision_e2e/ablation_full_trusted_subject_v6_best.json",
+  "adapter": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best",
+  "version": "qwen3-14b-seba-lora-v6",
+  "arm": "grounded",
+  "url": "http://127.0.0.1:8080",
+  "limit": "100",
+  "seed": 42,
+  "policyVersion": "crime-policy-v2",
+  "dataSha256": "b8d413f7a33411f9be69024ebd807976775d66cf164f482fc1e33465576e280b",
+  "adapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+  "startedAtUtc": "2026-09-05T20:35:08.034Z"
+}

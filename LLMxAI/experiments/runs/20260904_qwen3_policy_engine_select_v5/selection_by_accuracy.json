@@ -1,0 +1,721 @@
+{
+  "selectedAtUtc": "2026-09-04T00:45:15.657Z",
+  "criterion": "decisionAccuracy, jointDecisionReasonAccuracy, -falseAllowRate, step",
+  "selectedStep": 900,
+  "candidates": [
+    {
+      "step": 300,
+      "n": 120,
+      "parseRate": 0.9917,
+      "decisionDisagreementRate": 0.125,
+      "strictJsonRate": 1,
+      "schemaValidRate": 0.9917,
+      "decisionAccuracy": 0.4833,
+      "decisionMacroF1": 0.4307,
+      "reasonAccuracy": 0.325,
+      "reasonMacroF1": 0.2864,
+      "jointDecisionReasonAccuracy": 0.325,
+      "decisiveAttributeExactRate": 0.325,
+      "parsedActionAccuracy": 0.9917,
+      "parsedPurposeAccuracy": 0.95,
+      "falseAllowRateAmongNonAllow": 0.09,
+      "falseAllowCount": 9,
+      "expectedNonAllowCount": 100,
+      "adversarialJointAccuracy": 0.3333,
+      "latencyMs": {
+        "median": 2473,
+        "p95": 3114.75,
+        "mean": 2569.08
+      },
+      "perDecision": {
+        "allow": {
+          "support": 20,
+          "precision": 0.3077,
+          "recall": 0.2,
+          "f1": 0.2424
+        },
+        "deny": {
+          "support": 70,
+          "precision": 0.9032,
+          "recall": 0.4,
+          "f1": 0.5545
+        },
+        "escalate": {
+          "support": 30,
+          "precision": 0.3467,
+          "recall": 0.8667,
+          "f1": 0.4953
+        }
+      },
+      "perReason": {
+        "CRED_NOT_ACTIVE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.8,
+          "f1": 0.8889
+        },
+        "INVALID_PURPOSE": {
+          "support": 10,
+          "precision": 0.375,
+          "recall": 0.6,
+          "f1": 0.4615
+        },
+        "RBAC_NO_PERMISSION": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "AUDIT_METADATA_ONLY": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "SEALED_RECORD": {
+          "support": 10,
+          "precision": 0.5,
+          "recall": 0.7,
+          "f1": 0.5833
+        },
+        "JUVENILE_PROTECTED": {
+          "support": 10,
+          "precision": 0.8333,
+          "recall": 0.5,
+          "f1": 0.625
+        },
+        "VICTIM_DATA_NOT_NECESSARY": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "EMERGENCY_CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.25,
+          "recall": 0.2,
+          "f1": 0.2222
+        },
+        "CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.2381,
+          "recall": 0.5,
+          "f1": 0.3226
+        },
+        "NOT_ASSIGNED": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "INSUFFICIENT_CLEARANCE": {
+          "support": 10,
+          "precision": 0.125,
+          "recall": 0.5,
+          "f1": 0.2
+        },
+        "POLICY_SATISFIED": {
+          "support": 10,
+          "precision": 0.2,
+          "recall": 0.1,
+          "f1": 0.1333
+        }
+      }
+    },
+    {
+      "step": 600,
+      "n": 120,
+      "parseRate": 1,
+      "decisionDisagreementRate": 0.075,
+      "strictJsonRate": 1,
+      "schemaValidRate": 1,
+      "decisionAccuracy": 0.5417,
+      "decisionMacroF1": 0.537,
+      "reasonAccuracy": 0.4417,
+      "reasonMacroF1": 0.4016,
+      "jointDecisionReasonAccuracy": 0.4417,
+      "decisiveAttributeExactRate": 0.4417,
+      "parsedActionAccuracy": 1,
+      "parsedPurposeAccuracy": 0.9667,
+      "falseAllowRateAmongNonAllow": 0.45,
+      "falseAllowCount": 45,
+      "expectedNonAllowCount": 100,
+      "adversarialJointAccuracy": 0.3958,
+      "latencyMs": {
+        "median": 2514.1,
+        "p95": 2711.43,
+        "mean": 2507.64
+      },
+      "perDecision": {
+        "allow": {
+          "support": 20,
+          "precision": 0.2969,
+          "recall": 0.95,
+          "f1": 0.4524
+        },
+        "deny": {
+          "support": 70,
+          "precision": 0.8462,
+          "recall": 0.4714,
+          "f1": 0.6055
+        },
+        "escalate": {
+          "support": 30,
+          "precision": 0.7647,
+          "recall": 0.4333,
+          "f1": 0.5532
+        }
+      },
+      "perReason": {
+        "CRED_NOT_ACTIVE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.8,
+          "f1": 0.8889
+        },
+        "INVALID_PURPOSE": {
+          "support": 10,
+          "precision": 0.75,
+          "recall": 0.3,
+          "f1": 0.4286
+        },
+        "RBAC_NO_PERMISSION": {
+          "support": 10,
+          "precision": 0.2,
+          "recall": 0.1,
+          "f1": 0.1333
+        },
+        "AUDIT_METADATA_ONLY": {
+          "support": 10,
+          "precision": 0.5,
+          "recall": 0.1,
+          "f1": 0.1667
+        },
+        "SEALED_RECORD": {
+          "support": 10,
+          "precision": 0.6,
+          "recall": 0.9,
+          "f1": 0.72
+        },
+        "JUVENILE_PROTECTED": {
+          "support": 10,
+          "precision": 0.7273,
+          "recall": 0.8,
+          "f1": 0.7619
+        },
+        "VICTIM_DATA_NOT_NECESSARY": {
+          "support": 10,
+          "precision": 0.8333,
+          "recall": 0.5,
+          "f1": 0.625
+        },
+        "EMERGENCY_CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.2813,
+          "recall": 0.9,
+          "f1": 0.4286
+        },
+        "CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.2,
+          "f1": 0.3333
+        },
+        "NOT_ASSIGNED": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "INSUFFICIENT_CLEARANCE": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "POLICY_SATISFIED": {
+          "support": 10,
+          "precision": 0.2188,
+          "recall": 0.7,
+          "f1": 0.3334
+        }
+      }
+    },
+    {
+      "step": 900,
+      "n": 120,
+      "parseRate": 1,
+      "decisionDisagreementRate": 0.0167,
+      "strictJsonRate": 1,
+      "schemaValidRate": 1,
+      "decisionAccuracy": 0.65,
+      "decisionMacroF1": 0.641,
+      "reasonAccuracy": 0.5583,
+      "reasonMacroF1": 0.5188,
+      "jointDecisionReasonAccuracy": 0.5583,
+      "decisiveAttributeExactRate": 0.5583,
+      "parsedActionAccuracy": 1,
+      "parsedPurposeAccuracy": 0.9583,
+      "falseAllowRateAmongNonAllow": 0.34,
+      "falseAllowCount": 34,
+      "expectedNonAllowCount": 100,
+      "adversarialJointAccuracy": 0.5625,
+      "latencyMs": {
+        "median": 2529.34,
+        "p95": 2702.93,
+        "mean": 2530.22
+      },
+      "perDecision": {
+        "allow": {
+          "support": 20,
+          "precision": 0.3462,
+          "recall": 0.9,
+          "f1": 0.5
+        },
+        "deny": {
+          "support": 70,
+          "precision": 0.9318,
+          "recall": 0.5857,
+          "f1": 0.7193
+        },
+        "escalate": {
+          "support": 30,
+          "precision": 0.7917,
+          "recall": 0.6333,
+          "f1": 0.7037
+        }
+      },
+      "perReason": {
+        "CRED_NOT_ACTIVE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.9,
+          "f1": 0.9474
+        },
+        "INVALID_PURPOSE": {
+          "support": 10,
+          "precision": 0.6667,
+          "recall": 0.6,
+          "f1": 0.6316
+        },
+        "RBAC_NO_PERMISSION": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.1,
+          "f1": 0.1818
+        },
+        "AUDIT_METADATA_ONLY": {
+          "support": 10,
+          "precision": 0.6667,
+          "recall": 0.2,
+          "f1": 0.3077
+        },
+        "SEALED_RECORD": {
+          "support": 10,
+          "precision": 0.625,
+          "recall": 1,
+          "f1": 0.7692
+        },
+        "JUVENILE_PROTECTED": {
+          "support": 10,
+          "precision": 0.8182,
+          "recall": 0.9,
+          "f1": 0.8572
+        },
+        "VICTIM_DATA_NOT_NECESSARY": {
+          "support": 10,
+          "precision": 0.6364,
+          "recall": 0.7,
+          "f1": 0.6667
+        },
+        "EMERGENCY_CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.5385,
+          "recall": 0.7,
+          "f1": 0.6087
+        },
+        "CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.8571,
+          "recall": 0.6,
+          "f1": 0.7059
+        },
+        "NOT_ASSIGNED": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "INSUFFICIENT_CLEARANCE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.1,
+          "f1": 0.1818
+        },
+        "POLICY_SATISFIED": {
+          "support": 10,
+          "precision": 0.2308,
+          "recall": 0.9,
+          "f1": 0.3674
+        }
+      }
+    },
+    {
+      "step": 1200,
+      "n": 120,
+      "parseRate": 1,
+      "decisionDisagreementRate": 0.0417,
+      "strictJsonRate": 1,
+      "schemaValidRate": 1,
+      "decisionAccuracy": 0.575,
+      "decisionMacroF1": 0.5731,
+      "reasonAccuracy": 0.5,
+      "reasonMacroF1": 0.4451,
+      "jointDecisionReasonAccuracy": 0.5,
+      "decisiveAttributeExactRate": 0.5,
+      "parsedActionAccuracy": 1,
+      "parsedPurposeAccuracy": 0.975,
+      "falseAllowRateAmongNonAllow": 0.36,
+      "falseAllowCount": 36,
+      "expectedNonAllowCount": 100,
+      "adversarialJointAccuracy": 0.5,
+      "latencyMs": {
+        "median": 2535.33,
+        "p95": 2708.83,
+        "mean": 2538.87
+      },
+      "perDecision": {
+        "allow": {
+          "support": 20,
+          "precision": 0.3333,
+          "recall": 0.9,
+          "f1": 0.4865
+        },
+        "deny": {
+          "support": 70,
+          "precision": 0.9688,
+          "recall": 0.4429,
+          "f1": 0.6079
+        },
+        "escalate": {
+          "support": 30,
+          "precision": 0.5882,
+          "recall": 0.6667,
+          "f1": 0.625
+        }
+      },
+      "perReason": {
+        "CRED_NOT_ACTIVE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "INVALID_PURPOSE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.4,
+          "f1": 0.5714
+        },
+        "RBAC_NO_PERMISSION": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "AUDIT_METADATA_ONLY": {
+          "support": 10,
+          "precision": 0.5,
+          "recall": 0.1,
+          "f1": 0.1667
+        },
+        "SEALED_RECORD": {
+          "support": 10,
+          "precision": 0.5556,
+          "recall": 1,
+          "f1": 0.7143
+        },
+        "JUVENILE_PROTECTED": {
+          "support": 10,
+          "precision": 0.625,
+          "recall": 0.5,
+          "f1": 0.5556
+        },
+        "VICTIM_DATA_NOT_NECESSARY": {
+          "support": 10,
+          "precision": 0.8571,
+          "recall": 0.6,
+          "f1": 0.7059
+        },
+        "EMERGENCY_CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.3333,
+          "recall": 0.9,
+          "f1": 0.4865
+        },
+        "CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.5385,
+          "recall": 0.7,
+          "f1": 0.6087
+        },
+        "NOT_ASSIGNED": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "INSUFFICIENT_CLEARANCE": {
+          "support": 10,
+          "precision": 0.3333,
+          "recall": 0.1,
+          "f1": 0.1538
+        },
+        "POLICY_SATISFIED": {
+          "support": 10,
+          "precision": 0.2593,
+          "recall": 0.7,
+          "f1": 0.3784
+        }
+      }
+    },
+    {
+      "step": 1500,
+      "n": 120,
+      "parseRate": 1,
+      "decisionDisagreementRate": 0,
+      "strictJsonRate": 1,
+      "schemaValidRate": 1,
+      "decisionAccuracy": 0.65,
+      "decisionMacroF1": 0.6364,
+      "reasonAccuracy": 0.4917,
+      "reasonMacroF1": 0.4573,
+      "jointDecisionReasonAccuracy": 0.4917,
+      "decisiveAttributeExactRate": 0.4917,
+      "parsedActionAccuracy": 1,
+      "parsedPurposeAccuracy": 0.975,
+      "falseAllowRateAmongNonAllow": 0.38,
+      "falseAllowCount": 38,
+      "expectedNonAllowCount": 100,
+      "adversarialJointAccuracy": 0.4375,
+      "latencyMs": {
+        "median": 2428.85,
+        "p95": 2634.83,
+        "mean": 2436.49
+      },
+      "perDecision": {
+        "allow": {
+          "support": 20,
+          "precision": 0.3448,
+          "recall": 1,
+          "f1": 0.5128
+        },
+        "deny": {
+          "support": 70,
+          "precision": 0.9767,
+          "recall": 0.6,
+          "f1": 0.7434
+        },
+        "escalate": {
+          "support": 30,
+          "precision": 0.8421,
+          "recall": 0.5333,
+          "f1": 0.653
+        }
+      },
+      "perReason": {
+        "CRED_NOT_ACTIVE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "INVALID_PURPOSE": {
+          "support": 10,
+          "precision": 0.7778,
+          "recall": 0.7,
+          "f1": 0.7369
+        },
+        "RBAC_NO_PERMISSION": {
+          "support": 10,
+          "precision": 0.1429,
+          "recall": 0.2,
+          "f1": 0.1667
+        },
+        "AUDIT_METADATA_ONLY": {
+          "support": 10,
+          "precision": 0.8,
+          "recall": 0.4,
+          "f1": 0.5333
+        },
+        "SEALED_RECORD": {
+          "support": 10,
+          "precision": 0.7143,
+          "recall": 1,
+          "f1": 0.8333
+        },
+        "JUVENILE_PROTECTED": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.4,
+          "f1": 0.5714
+        },
+        "VICTIM_DATA_NOT_NECESSARY": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "EMERGENCY_CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.7273,
+          "recall": 0.8,
+          "f1": 0.7619
+        },
+        "CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.8,
+          "recall": 0.4,
+          "f1": 0.5333
+        },
+        "NOT_ASSIGNED": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "INSUFFICIENT_CLEARANCE": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "POLICY_SATISFIED": {
+          "support": 10,
+          "precision": 0.2128,
+          "recall": 1,
+          "f1": 0.3509
+        }
+      }
+    },
+    {
+      "step": 1800,
+      "n": 120,
+      "parseRate": 1,
+      "decisionDisagreementRate": 0.0167,
+      "strictJsonRate": 1,
+      "schemaValidRate": 1,
+      "decisionAccuracy": 0.6167,
+      "decisionMacroF1": 0.615,
+      "reasonAccuracy": 0.5583,
+      "reasonMacroF1": 0.5035,
+      "jointDecisionReasonAccuracy": 0.5583,
+      "decisiveAttributeExactRate": 0.5583,
+      "parsedActionAccuracy": 1,
+      "parsedPurposeAccuracy": 0.9667,
+      "falseAllowRateAmongNonAllow": 0.23,
+      "falseAllowCount": 23,
+      "expectedNonAllowCount": 100,
+      "adversarialJointAccuracy": 0.4792,
+      "latencyMs": {
+        "median": 2397.48,
+        "p95": 2585.44,
+        "mean": 2413.1
+      },
+      "perDecision": {
+        "allow": {
+          "support": 20,
+          "precision": 0.439,
+          "recall": 0.9,
+          "f1": 0.5901
+        },
+        "deny": {
+          "support": 70,
+          "precision": 1,
+          "recall": 0.4429,
+          "f1": 0.6139
+        },
+        "escalate": {
+          "support": 30,
+          "precision": 0.5208,
+          "recall": 0.8333,
+          "f1": 0.641
+        }
+      },
+      "perReason": {
+        "CRED_NOT_ACTIVE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1
+        },
+        "INVALID_PURPOSE": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.2,
+          "f1": 0.3333
+        },
+        "RBAC_NO_PERMISSION": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "AUDIT_METADATA_ONLY": {
+          "support": 10,
+          "precision": 0.75,
+          "recall": 0.3,
+          "f1": 0.4286
+        },
+        "SEALED_RECORD": {
+          "support": 10,
+          "precision": 0.5263,
+          "recall": 1,
+          "f1": 0.6896
+        },
+        "JUVENILE_PROTECTED": {
+          "support": 10,
+          "precision": 0.75,
+          "recall": 0.6,
+          "f1": 0.6667
+        },
+        "VICTIM_DATA_NOT_NECESSARY": {
+          "support": 10,
+          "precision": 1,
+          "recall": 0.6,
+          "f1": 0.75
+        },
+        "EMERGENCY_CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.3913,
+          "recall": 0.9,
+          "f1": 0.5455
+        },
+        "CROSS_JURISDICTION": {
+          "support": 10,
+          "precision": 0.5333,
+          "recall": 0.8,
+          "f1": 0.64
+        },
+        "NOT_ASSIGNED": {
+          "support": 10,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "INSUFFICIENT_CLEARANCE": {
+          "support": 10,
+          "precision": 0.3571,
+          "recall": 0.5,
+          "f1": 0.4166
+        },
+        "POLICY_SATISFIED": {
+          "support": 10,
+          "precision": 0.4444,
+          "recall": 0.8,
+          "f1": 0.5714
+        }
+      }
+    }
+  ]
+}

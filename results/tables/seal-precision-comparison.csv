@@ -1,0 +1,6 @@
+arm,model_version,dataset,n,schema_valid,decision_accuracy,joint_accuracy,action_accuracy,purpose_accuracy,false_allows,guarded_false_allows,guard_referrals,rejected,adversarial_joint_accuracy,median_latency_ms,p95_latency_ms
+short-baseline,qwen3-14b-seba-lora-v4,test,200,178,0.670,0.535,0.890,0.885,14,0,71,22,0.500,2302.521,4357.351
+grounded-prompt,qwen3-14b-seba-lora-v4,test,200,175,0.735,0.585,0.875,0.870,10,0,57,25,0.560,3000.384,5555.878
+grounded-v6-best,qwen3-14b-seba-lora-v6,test,200,198,0.890,0.770,0.990,0.985,0,0,43,2,0.700,2912.036,3141.137
+trusted-context,qwen3-14b-seba-lora-v6,validation-subset,100,100,0.870,0.800,1.000,1.000,0,0,20,0,0.800,2879.110,3126.490
+no-trusted-subject-ablation,qwen3-14b-seba-lora-v6,validation-subset,100,100,0.840,0.350,1.000,0.990,0,0,64,0,0.333,2058.996,2198.180

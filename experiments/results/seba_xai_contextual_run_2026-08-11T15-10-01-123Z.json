@@ -1,0 +1,156 @@
+{
+  "generatedAtUtc": "2026-08-11T15:10:01.123Z",
+  "environment": {
+    "channel": "crimechannel",
+    "chaincode": "crimerecords 2.2",
+    "organizations": 5,
+    "deployment": "single-host local Docker/Colima; not a distributed benchmark"
+  },
+  "workload": "eight deterministic synthetic governance scenarios",
+  "baseline": {
+    "name": "role-only access ablation",
+    "removedComponents": [
+      "credential state",
+      "case assignment",
+      "jurisdiction",
+      "record protection flags",
+      "purpose",
+      "supervisor approval"
+    ],
+    "correct": 1,
+    "total": 8,
+    "accuracy": 0.125,
+    "interpretation": "Only this fixed synthetic workload is measured."
+  },
+  "proposed": {
+    "name": "contextual Fabric RBAC+ABAC+PBAC policy",
+    "correct": 8,
+    "total": 8,
+    "accuracy": 1
+  },
+  "scenarios": [
+    {
+      "id": 1,
+      "user": "io.krishnan",
+      "role": "investigating-officer",
+      "record": "REC-FIR-001",
+      "purpose": "investigation",
+      "expected": "allow",
+      "baseline": "allow",
+      "actual": "allow",
+      "reasonCode": "POLICY_SATISFIED",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "b2fe56b20f77cae9225fe7c5a83a71971b801b255b0b4a04b95a1a0515f60914",
+      "commitLatencyMs": 2007.81
+    },
+    {
+      "id": 2,
+      "user": "const.verma",
+      "role": "constable",
+      "record": "REC-FIR-001",
+      "purpose": "investigation",
+      "expected": "deny",
+      "baseline": "allow",
+      "actual": "deny",
+      "reasonCode": "NOT_ASSIGNED",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "5c7e195f6db17166eebd2a13be8c6ce45549828f066190af8ece27f2c3ae6656",
+      "commitLatencyMs": 2071.15
+    },
+    {
+      "id": 3,
+      "user": "analyst.rao",
+      "role": "lab-analyst",
+      "record": "REC-EVIDENCE-001",
+      "purpose": "forensic-analysis",
+      "expected": "deny",
+      "baseline": "allow",
+      "actual": "deny",
+      "reasonCode": "VICTIM_DATA_NOT_NECESSARY",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "ae615ec8048459ea5c37caee8f98c1a44ae9760dfdcdf90f7e8a6e3c404aaf37",
+      "commitLatencyMs": 2065.7
+    },
+    {
+      "id": 4,
+      "user": "insp.singh",
+      "role": "inspector",
+      "record": "REC-FIR-001",
+      "purpose": "investigation",
+      "expected": "escalate",
+      "baseline": "allow",
+      "actual": "escalate",
+      "reasonCode": "CROSS_JURISDICTION",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "7623968fed5cc920133c85e5036096cdcdae4c09ca0afe644c14cafb39cae33e",
+      "commitLatencyMs": 2075.24
+    },
+    {
+      "id": 5,
+      "user": "insp.sharma",
+      "role": "inspector",
+      "record": "REC-JUVENILE-001",
+      "purpose": "investigation",
+      "expected": "deny",
+      "baseline": "allow",
+      "actual": "deny",
+      "reasonCode": "JUVENILE_PROTECTED",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "c24d3ebbf4e39f284ffca908eb36cc35dcd99b7361fc1902012b401245680a56",
+      "commitLatencyMs": 2070.35
+    },
+    {
+      "id": 6,
+      "user": "insp.singh",
+      "role": "inspector",
+      "record": "REC-FIR-001",
+      "purpose": "investigation",
+      "expected": "approved-after-escalation",
+      "baseline": "allow-without-approval",
+      "actual": "approved-after-escalation",
+      "reasonCode": "CROSS_JURISDICTION",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "7623968fed5cc920133c85e5036096cdcdae4c09ca0afe644c14cafb39cae33e",
+      "approvalLatencyMs": 2079.01
+    },
+    {
+      "id": 7,
+      "user": "insp.rathore",
+      "role": "inspector",
+      "record": "REC-FIR-001",
+      "purpose": "investigation",
+      "expected": "deny",
+      "baseline": "allow",
+      "actual": "deny",
+      "reasonCode": "CRED_NOT_ACTIVE",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "cd0837265cedba45dbc877bc349324e58ee595e18f56e2409ec7f5e9890d0181",
+      "commitLatencyMs": 2085.92
+    },
+    {
+      "id": 8,
+      "user": "aud.qureshi",
+      "role": "auditor",
+      "record": "REC-FIR-001",
+      "purpose": "audit-review",
+      "expected": "deny",
+      "baseline": "allow",
+      "actual": "deny",
+      "reasonCode": "AUDIT_METADATA_ONLY",
+      "policyVersion": "crime-policy-v1",
+      "decisionId": "ba2e9ab9561d8431a5858cb9251a2b98898109692d0fa4a66ee2d496424d3cf7",
+      "commitLatencyMs": 2077.5
+    }
+  ],
+  "integrityChecks": {
+    "forgedExplanationDetected": true,
+    "rawVictimContentAbsentFromLedgerMetadata": true,
+    "metadataContainsContentCommitment": true
+  },
+  "limitations": [
+    "Results use synthetic data and deterministic policy fixtures.",
+    "Latency is client-observed on one computer and includes the orderer batch wait.",
+    "The baseline is an ablation for this workload, not a published competing system.",
+    "No production security, legal compliance, or CCTNS/ICJS integration is claimed."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "rounds": [
+    {
+      "label": "policy-path-warmup",
+      "successfulTransactions": 11,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.1,
+      "latencyMaxSeconds": 2.13,
+      "latencyMinSeconds": 0.09,
+      "latencyAverageSeconds": 1.19,
+      "throughputTps": 1.1,
+      "phase": "warmup"
+    },
+    {
+      "label": "policy-rule1-credential-revoked",
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 2.09,
+      "latencyMinSeconds": 0.07,
+      "latencyAverageSeconds": 1.19,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "policy-rule3-rbac",
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 2.1,
+      "latencyMinSeconds": 0.08,
+      "latencyAverageSeconds": 1.2,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "policy-rule6-cross-jurisdiction",
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 2.09,
+      "latencyMinSeconds": 0.06,
+      "latencyAverageSeconds": 1.19,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "policy-rule7-not-assigned",
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 2.09,
+      "latencyMinSeconds": 0.07,
+      "latencyAverageSeconds": 1.19,
+      "throughputTps": 1,
+      "phase": "measurement"
+    },
+    {
+      "label": "policy-full-allow",
+      "successfulTransactions": 46,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1,
+      "latencyMaxSeconds": 2.12,
+      "latencyMinSeconds": 0.07,
+      "latencyAverageSeconds": 1.19,
+      "throughputTps": 1,
+      "phase": "measurement"
+    }
+  ]
+}

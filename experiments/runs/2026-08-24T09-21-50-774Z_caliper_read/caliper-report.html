@@ -1,0 +1,598 @@
+<!doctype html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+    function plotChart(divId, chartData) {
+        // Convert from stringified html, to valid JSON
+        const chartDetails = JSON.parse(chartData.replace(/&quot;/g,'"'));
+        new Chart(document.getElementById(divId), {
+            type: chartDetails.type,
+            data: {
+                labels: chartDetails.labels,
+                datasets: chartDetails.datasets
+            },
+            options: {
+                legend: { display: chartDetails.legend },
+                title: {
+                    display: true,
+                    text: chartDetails.title
+                }
+            }
+        });
+    }
+</script>
+<html>
+<head>
+    <title>Hyperledger Caliper Report</title>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        .left-column {
+            position: fixed;
+            width:20%;
+        }
+        .left-column ul {
+            display: block;
+            padding: 0;
+            list-style: none;
+            border-bottom: 1px solid #d9d9d9;
+            font-size: 14px;
+        }
+        .left-column h2{
+            font-size: 24px;
+            font-weight: 400;
+            margin-block-end: 0.5em;
+        }
+        .left-column h3{
+            font-size: 18px;
+            font-weight: 400;
+            margin-block-end: 0.5em;
+        }
+        .left-column li{
+            margin-left: 10px;
+            margin-bottom: 5px;
+            color: #5e6b73;
+        }
+        .right-column {
+            margin-left: 22%;
+            width:60%;
+        }
+        .right-column table {
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        .right-column h2{
+            font-weight: 400;
+        }
+        .right-column h3{
+            font-weight: 400;
+        }
+        .right-column h4 {
+            font-weight: 400;
+            margin-block-end: 0;
+        }
+        .right-column th {
+            border-width: 1px;
+            font-size: small;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #f2f2f2;
+        }
+        .right-column td {
+            border-width: 1px;
+            font-size: small;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+            font-weight: 400;
+        }
+        .tag {
+            margin-bottom: 10px;
+            padding: 5px 10px;
+        }
+        pre {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            overflow:auto;
+            max-height:300px;
+            font-size:12px;
+        }
+        .charting {
+            display:flex;
+            flex-direction:row;
+            flex-wrap: wrap;
+            page-break-inside: auto;
+        }
+        .chart {
+            display:flex;
+            flex:1;
+            max-width: 50%;
+        }
+    </style>
+</head>
+<body style="font-family: IBM Plex Sans; font-weight: 200;">
+    <main>
+        <div class="left-column">
+            <img src="https://hyperledger-caliper.github.io/caliper/assets/img/hyperledger_caliper_logo_color.png" style="width:95%;" alt="">
+            <ul>
+                <h3>&nbspBasic information</h3>
+                <li>DLT: &nbsp<span style="font-weight: 500;">fabric</span></li>
+                <li>Name: &nbsp<span style="font-weight: 500;">SEBA-XAI read performance</span></li>
+                <li>Description: &nbsp<span style="font-weight: 500;">Evaluate the seeded crime record without changing ledger state. The warm-up round is excluded from reported measurements.</span></li>
+                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">2</span></li>
+                <li><a href="#benchmarkInfo">Details</a></li>
+            </ul>
+            <ul>
+                <h3>&nbspBenchmark results</h3>
+                <li><a href="#benchmarksummary">Summary</a></li>
+                    <li><a href="#read-warmup-2-tps">read-warmup-2-tps</a></li>
+                    <li><a href="#read-measurement-10-tps">read-measurement-10-tps</a></li>
+            </ul>
+            <ul>
+                <h3>&nbspSystem under test</h3>
+                <li>fabricVersion: &nbsp<span style="font-weight: 500;">v2.5.16</span></li>
+                <li>topology: &nbsp<span style="font-weight: 500;">five organizations, one peer per organization, one Raft orderer</span></li>
+                <li>distribution: &nbsp<span style="font-weight: 500;">single-host local Docker&#x2F;Colima research prototype</span></li>
+                <li>stateDatabase: &nbsp<span style="font-weight: 500;">CouchDB</span></li>
+                <li><a href="#sutdetails">Details</a></li>
+            </ul>
+        </div>
+
+        <div class="right-column">
+            <h1 style="padding-top: 3em; font-weight: 500;">Caliper report</h1>
+            <div style="border-bottom: 1px solid #d9d9d9; margin-bottom: 10px;" id="benchmarksummary">
+                <table style="min-width: 100%;">
+                    <h3>Summary of performance metrics</h3>
+                    <tr>
+                         <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                    </tr>
+
+                    <tr>
+                         <td>read-warmup-2-tps</td> <td>32</td> <td>0</td> <td>2.1</td> <td>0.07</td> <td>0.01</td> <td>0.02</td> <td>2.1</td>
+                    </tr>
+                    <tr>
+                         <td>read-measurement-10-tps</td> <td>1202</td> <td>0</td> <td>10.0</td> <td>0.04</td> <td>0.00</td> <td>0.01</td> <td>10.0</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="read-warmup-2-tps">
+                <h2>Benchmark round: read-warmup-2-tps</h2>
+                <p>Warm connections and caches before measuring read performance.</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">txDuration: 15
+rateControl:
+  type: fixed-rate
+  opts:
+    tps: 2
+</pre>
+                        <h3>Performance metrics for read-warmup-2-tps</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>read-warmup-2-tps</td> <td>32</td> <td>0</td> <td>2.1</td> <td>0.07</td> <td>0.01</td> <td>0.02</td> <td>2.1</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for read-warmup-2-tps</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [KB]</th> <th>Traffic Out [KB]</th> <th>Disc Write [KB]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;caliper-prometheus</td> <td>0.0175</td> <td>0.008125</td> <td>41.4</td> <td>41.4</td> <td>250</td> <td>14.8</td> <td>52.0</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0</td> <td>0</td> <td>52.6</td> <td>52.6</td> <td>0.272</td> <td>0.272</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0.015625</td> <td>0.006875</td> <td>54.0</td> <td>53.8</td> <td>88.8</td> <td>37.1</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0.000625</td> <td>0</td> <td>53.4</td> <td>53.4</td> <td>0.272</td> <td>0.272</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0</td> <td>0</td> <td>53.2</td> <td>53.2</td> <td>0.231</td> <td>0.231</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0</td> <td>0</td> <td>52.5</td> <td>52.5</td> <td>0.272</td> <td>0.272</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.audit.example.com</td> <td>0.020625</td> <td>0.014375</td> <td>82.3</td> <td>82.3</td> <td>63.6</td> <td>107</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.court.example.com</td> <td>0.019375</td> <td>0.014375</td> <td>80.0</td> <td>80.0</td> <td>60.1</td> <td>100</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.prosecution.example.com</td> <td>0.021875</td> <td>0.014375</td> <td>75.3</td> <td>75.3</td> <td>62.6</td> <td>107</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.police.example.com</td> <td>0.033125</td> <td>0.01875</td> <td>81.8</td> <td>81.6</td> <td>172</td> <td>237</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.forensics.example.com</td> <td>0.02375</td> <td>0.014375</td> <td>81.4</td> <td>81.4</td> <td>63.9</td> <td>108</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-audit</td> <td>0.015</td> <td>0.008125</td> <td>64.7</td> <td>64.5</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-court</td> <td>0.01875</td> <td>0.00875</td> <td>65.8</td> <td>64.6</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-prosecution</td> <td>0.015</td> <td>0.009375</td> <td>64.9</td> <td>64.9</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-forensics</td> <td>0.018125</td> <td>0.01</td> <td>65.6</td> <td>65.6</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-police</td> <td>0.015</td> <td>0.009375</td> <td>68.9</td> <td>67.1</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.003125</td> <td>0.00125</td> <td>22.2</td> <td>22.1</td> <td>2.71</td> <td>19.6</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_police</td> <td>0</td> <td>0</td> <td>9.37</td> <td>9.37</td> <td>0.00</td> <td>0.00</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_forensics</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_court</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_audit</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_prosecution</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                                <div class="chart">
+                                    <canvas id="MonitorDocker_read-warmup-2-tps_horizontalBar0">
+                                        <script>plotChart("MonitorDocker_read-warmup-2-tps_horizontalBar0", "{&quot;type&quot;:&quot;horizontalBar&quot;,&quot;title&quot;:&quot;CPU%(max)&quot;,&quot;legend&quot;:false,&quot;labels&quot;:[&quot;&#x2F;caliper-prometheus&quot;,&quot;&#x2F;dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;peer0.audit.example.com&quot;,&quot;&#x2F;peer0.court.example.com&quot;,&quot;&#x2F;peer0.prosecution.example.com&quot;,&quot;&#x2F;peer0.police.example.com&quot;,&quot;&#x2F;peer0.forensics.example.com&quot;,&quot;&#x2F;couchdb-audit&quot;,&quot;&#x2F;couchdb-court&quot;,&quot;&#x2F;couchdb-prosecution&quot;,&quot;&#x2F;couchdb-forensics&quot;,&quot;&#x2F;couchdb-police&quot;,&quot;&#x2F;orderer.example.com&quot;,&quot;&#x2F;ca_police&quot;,&quot;&#x2F;ca_forensics&quot;,&quot;&#x2F;ca_orderer&quot;,&quot;&#x2F;ca_court&quot;,&quot;&#x2F;ca_audit&quot;,&quot;&#x2F;ca_prosecution&quot;],&quot;datasets&quot;:[{&quot;backgroundColor&quot;:[&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;,&quot;rgb(128,183,255,0.6)&quot;,&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;],&quot;data&quot;:[0.0175,0,0.015625,0.000625,0,0,0.020625,0.019375,0.021875,0.033125,0.02375,0.015,0.01875,0.015,0.018125,0.015,0.003125,0,0,0,0,0,0]}]}")</script>
+                                    </canvas>
+                                </div>
+                                <div class="chart">
+                                    <canvas id="MonitorDocker_read-warmup-2-tps_horizontalBar1">
+                                        <script>plotChart("MonitorDocker_read-warmup-2-tps_horizontalBar1", "{&quot;type&quot;:&quot;horizontalBar&quot;,&quot;title&quot;:&quot;Memory(max) [MB]&quot;,&quot;legend&quot;:false,&quot;labels&quot;:[&quot;&#x2F;caliper-prometheus&quot;,&quot;&#x2F;dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;peer0.audit.example.com&quot;,&quot;&#x2F;peer0.court.example.com&quot;,&quot;&#x2F;peer0.prosecution.example.com&quot;,&quot;&#x2F;peer0.police.example.com&quot;,&quot;&#x2F;peer0.forensics.example.com&quot;,&quot;&#x2F;couchdb-audit&quot;,&quot;&#x2F;couchdb-court&quot;,&quot;&#x2F;couchdb-prosecution&quot;,&quot;&#x2F;couchdb-forensics&quot;,&quot;&#x2F;couchdb-police&quot;,&quot;&#x2F;orderer.example.com&quot;,&quot;&#x2F;ca_police&quot;,&quot;&#x2F;ca_forensics&quot;,&quot;&#x2F;ca_orderer&quot;,&quot;&#x2F;ca_court&quot;,&quot;&#x2F;ca_audit&quot;,&quot;&#x2F;ca_prosecution&quot;],&quot;datasets&quot;:[{&quot;backgroundColor&quot;:[&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;,&quot;rgb(128,183,255,0.6)&quot;,&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;],&quot;data&quot;:[&quot;41.4&quot;,&quot;52.6&quot;,&quot;54.0&quot;,&quot;53.4&quot;,&quot;53.2&quot;,&quot;52.5&quot;,&quot;82.3&quot;,&quot;80.0&quot;,&quot;75.3&quot;,&quot;81.8&quot;,&quot;81.4&quot;,&quot;64.7&quot;,&quot;65.8&quot;,&quot;64.9&quot;,&quot;65.6&quot;,&quot;68.9&quot;,&quot;22.2&quot;,&quot;9.37&quot;,0,0,0,0,0]}]}")</script>
+                                    </canvas>
+                                </div>
+                            </div>
+                            <h4>Resource monitor: prometheus</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Metric</th> <th>Prometheus Query</th> <th>Name</th> <th>Value</th>
+                                    </tr>
+                                    <tr>
+                                         <td>Process resident memory (MiB, max)</td> <td>process_resident_memory_bytes{job&#x3D;~&quot;fabric-.*&quot;}</td> <td>orderer.example.com:9443</td> <td>43.1</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.audit.example.com:9448</td> <td>114</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>111</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>113</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>113</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>106</td>
+                                    </tr>
+                                    <tr>
+                                         <td>Process CPU rate (percent, max)</td> <td>rate(process_cpu_seconds_total{job&#x3D;~&quot;fabric-.*&quot;}[1m])</td> <td>orderer.example.com:9443</td> <td>0.218</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.audit.example.com:9448</td> <td>2.75</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>2.62</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>2.65</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>2.95</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>2.78</td>
+                                    </tr>
+                                    <tr>
+                                         <td>Crimerecords endorsement duration (seconds, avg)</td> <td>sum by (instance) (rate(endorser_proposal_duration_sum{job&#x3D;~&quot;fabric-.*&quot;,channel&#x3D;&quot;crimechannel&quot;,chaincode&#x3D;&quot;crimerecords&quot;,success&#x3D;&quot;true&quot;}[1m])) &#x2F; sum by (instance) (rate(endorser_proposal_duration_count{job&#x3D;~&quot;fabric-.*&quot;,channel&#x3D;&quot;crimechannel&quot;,chaincode&#x3D;&quot;crimerecords&quot;,success&#x3D;&quot;true&quot;}[1m]))</td> <td>peer0.audit.example.com:9448</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td>Ledger height (blocks, max)</td> <td>ledger_blockchain_height{job&#x3D;~&quot;fabric-.*&quot;,channel&#x3D;&quot;crimechannel&quot;}</td> <td>orderer.example.com:9443</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.audit.example.com:9448</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>39.0</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="read-measurement-10-tps">
+                <h2>Benchmark round: read-measurement-10-tps</h2>
+                <p>Measure read-only crime-record retrieval at 10 offered TPS.</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">txDuration: 120
+rateControl:
+  type: fixed-rate
+  opts:
+    tps: 10
+</pre>
+                        <h3>Performance metrics for read-measurement-10-tps</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>read-measurement-10-tps</td> <td>1202</td> <td>0</td> <td>10.0</td> <td>0.04</td> <td>0.00</td> <td>0.01</td> <td>10.0</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for read-measurement-10-tps</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;caliper-prometheus</td> <td>0.018125</td> <td>0.006875</td> <td>42.4</td> <td>42.1</td> <td>1.51</td> <td>0.0890</td> <td>1.01</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0</td> <td>0</td> <td>52.6</td> <td>52.6</td> <td>0.000804</td> <td>0.000867</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0.059375</td> <td>0.024375</td> <td>59.0</td> <td>55.8</td> <td>3.23</td> <td>1.35</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0</td> <td>0</td> <td>53.4</td> <td>53.4</td> <td>0.000764</td> <td>0.000827</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0.000625</td> <td>0</td> <td>53.2</td> <td>53.2</td> <td>0.000844</td> <td>0.000907</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512</td> <td>0.000625</td> <td>0</td> <td>52.5</td> <td>52.5</td> <td>0.000844</td> <td>0.000907</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.audit.example.com</td> <td>0.029375</td> <td>0.01625</td> <td>85.3</td> <td>83.5</td> <td>0.388</td> <td>0.651</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.court.example.com</td> <td>0.028125</td> <td>0.015625</td> <td>85.4</td> <td>82.6</td> <td>0.383</td> <td>0.654</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.prosecution.example.com</td> <td>0.029375</td> <td>0.015625</td> <td>80.0</td> <td>77.4</td> <td>0.384</td> <td>0.644</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.police.example.com</td> <td>0.059375</td> <td>0.03875</td> <td>87.7</td> <td>86.2</td> <td>4.06</td> <td>4.96</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.forensics.example.com</td> <td>0.03</td> <td>0.01625</td> <td>84.2</td> <td>82.1</td> <td>0.385</td> <td>0.642</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-audit</td> <td>0.023125</td> <td>0.008125</td> <td>64.7</td> <td>64.5</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-court</td> <td>0.021875</td> <td>0.008125</td> <td>65.5</td> <td>64.5</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-prosecution</td> <td>0.02</td> <td>0.008125</td> <td>65.0</td> <td>65.0</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-forensics</td> <td>0.0225</td> <td>0.008125</td> <td>65.6</td> <td>65.6</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;couchdb-police</td> <td>0.02</td> <td>0.008125</td> <td>67.0</td> <td>67.0</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.005625</td> <td>0.00125</td> <td>25.5</td> <td>24.0</td> <td>0.0180</td> <td>0.116</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_police</td> <td>0.0025</td> <td>0</td> <td>9.37</td> <td>9.37</td> <td>0.00</td> <td>0.00</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_forensics</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_court</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_audit</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_prosecution</td> <td>NaN</td> <td>NaN</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                                <div class="chart">
+                                    <canvas id="MonitorDocker_read-measurement-10-tps_horizontalBar0">
+                                        <script>plotChart("MonitorDocker_read-measurement-10-tps_horizontalBar0", "{&quot;type&quot;:&quot;horizontalBar&quot;,&quot;title&quot;:&quot;CPU%(max)&quot;,&quot;legend&quot;:false,&quot;labels&quot;:[&quot;&#x2F;caliper-prometheus&quot;,&quot;&#x2F;dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;peer0.audit.example.com&quot;,&quot;&#x2F;peer0.court.example.com&quot;,&quot;&#x2F;peer0.prosecution.example.com&quot;,&quot;&#x2F;peer0.police.example.com&quot;,&quot;&#x2F;peer0.forensics.example.com&quot;,&quot;&#x2F;couchdb-audit&quot;,&quot;&#x2F;couchdb-court&quot;,&quot;&#x2F;couchdb-prosecution&quot;,&quot;&#x2F;couchdb-forensics&quot;,&quot;&#x2F;couchdb-police&quot;,&quot;&#x2F;orderer.example.com&quot;,&quot;&#x2F;ca_police&quot;,&quot;&#x2F;ca_forensics&quot;,&quot;&#x2F;ca_orderer&quot;,&quot;&#x2F;ca_court&quot;,&quot;&#x2F;ca_audit&quot;,&quot;&#x2F;ca_prosecution&quot;],&quot;datasets&quot;:[{&quot;backgroundColor&quot;:[&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;,&quot;rgb(128,183,255,0.6)&quot;,&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;],&quot;data&quot;:[0.018125,0,0.059375,0,0.000625,0.000625,0.029375,0.028125,0.029375,0.059375,0.03,0.023125,0.021875,0.02,0.0225,0.02,0.005625,0.0025,0,0,0,0,0]}]}")</script>
+                                    </canvas>
+                                </div>
+                                <div class="chart">
+                                    <canvas id="MonitorDocker_read-measurement-10-tps_horizontalBar1">
+                                        <script>plotChart("MonitorDocker_read-measurement-10-tps_horizontalBar1", "{&quot;type&quot;:&quot;horizontalBar&quot;,&quot;title&quot;:&quot;Memory(max) [MB]&quot;,&quot;legend&quot;:false,&quot;labels&quot;:[&quot;&#x2F;caliper-prometheus&quot;,&quot;&#x2F;dev-peer0.forensics.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.police.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.prosecution.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.audit.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;dev-peer0.court.example.com-crimerecords_2.3-97784f7fb69353014f85563171b6ed3e2b9c6a32f1c765c7e59f0979532de512&quot;,&quot;&#x2F;peer0.audit.example.com&quot;,&quot;&#x2F;peer0.court.example.com&quot;,&quot;&#x2F;peer0.prosecution.example.com&quot;,&quot;&#x2F;peer0.police.example.com&quot;,&quot;&#x2F;peer0.forensics.example.com&quot;,&quot;&#x2F;couchdb-audit&quot;,&quot;&#x2F;couchdb-court&quot;,&quot;&#x2F;couchdb-prosecution&quot;,&quot;&#x2F;couchdb-forensics&quot;,&quot;&#x2F;couchdb-police&quot;,&quot;&#x2F;orderer.example.com&quot;,&quot;&#x2F;ca_police&quot;,&quot;&#x2F;ca_forensics&quot;,&quot;&#x2F;ca_orderer&quot;,&quot;&#x2F;ca_court&quot;,&quot;&#x2F;ca_audit&quot;,&quot;&#x2F;ca_prosecution&quot;],&quot;datasets&quot;:[{&quot;backgroundColor&quot;:[&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;,&quot;rgb(128,183,255,0.6)&quot;,&quot;rgb(255,71,0,0.6)&quot;,&quot;rgb(179,50,0,0.6)&quot;,&quot;rgb(255,209,191,0.6)&quot;,&quot;rgb(255,163,128,0.6)&quot;,&quot;rgb(31,235,0,0.6)&quot;,&quot;rgb(22,164,0,0.6)&quot;,&quot;rgb(200,255,191,0.6)&quot;,&quot;rgb(144,255,128,0.6)&quot;,&quot;rgb(0,82,189,0.6)&quot;,&quot;rgb(0,58,132,0.6)&quot;,&quot;rgb(191,219,255,0.6)&quot;],&quot;data&quot;:[&quot;42.4&quot;,&quot;52.6&quot;,&quot;59.0&quot;,&quot;53.4&quot;,&quot;53.2&quot;,&quot;52.5&quot;,&quot;85.3&quot;,&quot;85.4&quot;,&quot;80.0&quot;,&quot;87.7&quot;,&quot;84.2&quot;,&quot;64.7&quot;,&quot;65.5&quot;,&quot;65.0&quot;,&quot;65.6&quot;,&quot;67.0&quot;,&quot;25.5&quot;,&quot;9.37&quot;,0,0,0,0,0]}]}")</script>
+                                    </canvas>
+                                </div>
+                            </div>
+                            <h4>Resource monitor: prometheus</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Metric</th> <th>Prometheus Query</th> <th>Name</th> <th>Value</th>
+                                    </tr>
+                                    <tr>
+                                         <td>Process resident memory (MiB, max)</td> <td>process_resident_memory_bytes{job&#x3D;~&quot;fabric-.*&quot;}</td> <td>orderer.example.com:9443</td> <td>46.4</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.audit.example.com:9448</td> <td>117</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>117</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>116</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>118</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>111</td>
+                                    </tr>
+                                    <tr>
+                                         <td>Process CPU rate (percent, max)</td> <td>rate(process_cpu_seconds_total{job&#x3D;~&quot;fabric-.*&quot;}[1m])</td> <td>orderer.example.com:9443</td> <td>0.236</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.audit.example.com:9448</td> <td>2.69</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>2.56</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>2.65</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>6.45</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>2.73</td>
+                                    </tr>
+                                    <tr>
+                                         <td>Crimerecords endorsement duration (seconds, avg)</td> <td>sum by (instance) (rate(endorser_proposal_duration_sum{job&#x3D;~&quot;fabric-.*&quot;,channel&#x3D;&quot;crimechannel&quot;,chaincode&#x3D;&quot;crimerecords&quot;,success&#x3D;&quot;true&quot;}[1m])) &#x2F; sum by (instance) (rate(endorser_proposal_duration_count{job&#x3D;~&quot;fabric-.*&quot;,channel&#x3D;&quot;crimechannel&quot;,chaincode&#x3D;&quot;crimerecords&quot;,success&#x3D;&quot;true&quot;}[1m]))</td> <td>peer0.audit.example.com:9448</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>0.00898</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>NaN</td>
+                                    </tr>
+                                    <tr>
+                                         <td>Ledger height (blocks, max)</td> <td>ledger_blockchain_height{job&#x3D;~&quot;fabric-.*&quot;,channel&#x3D;&quot;crimechannel&quot;}</td> <td>orderer.example.com:9443</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.audit.example.com:9448</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.court.example.com:9447</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.forensics.example.com:9445</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.police.example.com:9444</td> <td>39.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td></td> <td></td> <td>peer0.prosecution.example.com:9446</td> <td>39.0</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;">
+                <h2>Test Environment</h2>
+                <h3>benchmark config</h3>
+                <pre id="benchmarkInfo" style="overflow: visible;white-space: pre-wrap;max-height:100%;">name: SEBA-XAI read performance
+description: &gt;-
+  Evaluate the seeded crime record without changing ledger state. The warm-up
+  round is excluded from reported measurements.
+workers:
+  number: 2
+rounds:
+  - label: read-warmup-2-tps
+    description: Warm connections and caches before measuring read performance.
+    txDuration: 15
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 2
+    workload:
+      module: workloads&#x2F;read-record.js
+      arguments:
+        contractId: crimerecords
+        recordId: REC-FIR-001
+        invokerIdentity: io.krishnan
+        invokerMspId: PoliceMSP
+  - label: read-measurement-10-tps
+    description: Measure read-only crime-record retrieval at 10 offered TPS.
+    txDuration: 120
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 10
+    workload:
+      module: workloads&#x2F;read-record.js
+      arguments:
+        contractId: crimerecords
+        recordId: REC-FIR-001
+        invokerIdentity: io.krishnan
+        invokerMspId: PoliceMSP
+</pre>
+                <h3>SUT</h3>
+                <pre id="sutdetails">not provided</pre>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

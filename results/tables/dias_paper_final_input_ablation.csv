@@ -1,0 +1,7 @@
+input,examples,valid,accuracy,false_allow,false_deny,reason_accuracy,review_flag_accuracy
+"full",200,200,0.985,2,1,0.97,1
+"no-requester",200,200,0.58,3,81,0.355,0.97
+"no-resource",200,200,0.58,6,78,0.345,0.71
+"no-action-purpose",200,200,0.92,12,4,0.905,0.785
+"no-policy",200,0,"","","","",""
+"no-justification",200,200,0.99,1,1,0.98,0.445

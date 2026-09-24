@@ -1,0 +1,4 @@
+username,display_name,role,record_id,decision,reason_code,decision_authority,model_version,latency_ms,ledger_recorded
+insp.sharma,Insp. A. Sharma,inspector,REC-FIR-001,allow,POLICY_SATISFIED,fine-tuned-llm,qwen3-14b-seba-lora-v4,2134,true
+insp.rathore,Insp. V. Rathore (revoked credential),inspector,REC-FIR-001,deny,CRED_NOT_ACTIVE,fine-tuned-llm,qwen3-14b-seba-lora-v4,2387,true
+insp.singh,Insp. P. Singh (cross-district),inspector,REC-FIR-001,escalate,CROSS_JURISDICTION,fine-tuned-llm,qwen3-14b-seba-lora-v4,2565,true

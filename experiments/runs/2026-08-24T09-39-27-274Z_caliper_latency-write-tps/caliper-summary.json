@@ -1,0 +1,48 @@
+{
+  "rounds": [
+    {
+      "label": "write-tps-1",
+      "successfulTransactions": 12,
+      "failedTransactions": 0,
+      "observedSendRateTps": 1.5,
+      "latencyMaxSeconds": 2.15,
+      "latencyMinSeconds": 2.06,
+      "latencyAverageSeconds": 2.11,
+      "throughputTps": 1.2,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-2",
+      "successfulTransactions": 16,
+      "failedTransactions": 0,
+      "observedSendRateTps": 2.7,
+      "latencyMaxSeconds": 2.1,
+      "latencyMinSeconds": 0.1,
+      "latencyAverageSeconds": 1.1,
+      "throughputTps": 2.6,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-5",
+      "successfulTransactions": 32,
+      "failedTransactions": 0,
+      "observedSendRateTps": 5.7,
+      "latencyMaxSeconds": 2.1,
+      "latencyMinSeconds": 0.1,
+      "latencyAverageSeconds": 1.03,
+      "throughputTps": 4.2,
+      "phase": "measurement"
+    },
+    {
+      "label": "write-tps-10",
+      "successfulTransactions": 56,
+      "failedTransactions": 0,
+      "observedSendRateTps": 10.8,
+      "latencyMaxSeconds": 2.12,
+      "latencyMinSeconds": 0.06,
+      "latencyAverageSeconds": 0.65,
+      "throughputTps": 8.1,
+      "phase": "measurement"
+    }
+  ]
+}

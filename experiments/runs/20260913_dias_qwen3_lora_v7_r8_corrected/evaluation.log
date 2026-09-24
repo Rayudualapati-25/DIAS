@@ -1,0 +1,63 @@
+=== 2026-09-13T01:37:26Z serving /Users/venkatrayudu/Workspace/XAI workspace/DIAS/LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7-r8 (sha256 2a159c9c13be4607852575230349081a8b7ad80b7a1e53da3a063dc2297d0aa6) on :8082 ===
+=== 2026-09-13T01:37:31Z server ready ===
+=== 2026-09-13T01:37:31Z test-decision-balanced ===
+[eval] qwen3-14b-dias-v7 :: test-decision-balanced (600 examples)
+  25/600  50/600  75/600  100/600  125/600  150/600  175/600  200/600  225/600  250/600  275/600  300/600  325/600  350/600  375/600  400/600  425/600  450/600  475/600  500/600  525/600  550/600  575/600  600/600  valid 600/600  accuracy 0.88  macroF1 0.879161  falseALLOW 61  falseDENY 11  p95 8290.7 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T02:52:27Z test-adversarial ===
+[eval] qwen3-14b-dias-v7 :: test-adversarial (389 examples)
+  25/389  50/389  75/389  100/389  125/389  150/389  175/389  200/389  225/389  250/389  275/389  300/389  325/389  350/389  375/389  valid 389/389  accuracy 0.840617  macroF1 0.839846  falseALLOW 54  falseDENY 8  p95 8101.9 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T03:40:54Z test-ood-paraphrase ===
+[eval] qwen3-14b-dias-v7 :: test-ood-paraphrase (400 examples)
+  25/400  50/400  75/400  100/400  125/400  150/400  175/400  200/400  225/400  250/400  275/400  300/400  325/400  350/400  375/400  400/400  valid 400/400  accuracy 0.84  macroF1 0.836801  falseALLOW 60  falseDENY 4  p95 8046.2 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T04:30:29Z test-multi-rule ===
+[eval] qwen3-14b-dias-v7 :: test-multi-rule (370 examples)
+  25/370  50/370  75/370  100/370  125/370  150/370  175/370  200/370  225/370  250/370  275/370  300/370  325/370  350/370  valid 370/370  accuracy 0.991892  macroF1 n/a  falseALLOW 3  falseDENY 0  p95 8791 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T05:15:49Z validation-balanced ===
+[eval] qwen3-14b-dias-v7 :: validation-balanced (400 examples)
+  25/400  50/400  75/400  100/400  125/400  150/400  175/400  200/400  225/400  250/400  275/400  300/400  325/400  350/400  375/400  400/400  valid 400/400  accuracy 0.8975  macroF1 0.897217  falseALLOW 31  falseDENY 10  p95 8159.2 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T06:05:20Z test-reason-balanced ===
+[eval] qwen3-14b-dias-v7 :: test-reason-balanced (540 examples)
+  25/540  50/540  75/540  100/540  125/540  150/540  175/540  200/540  225/540  250/540  275/540  300/540  325/540  350/540  375/540  400/540  425/540  450/540  475/540  500/540  525/540  valid 540/540  accuracy 0.822222  macroF1 0.716256  falseALLOW 93  falseDENY 3  p95 8088.5 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T07:10:21Z combined metrics ===
+[eval] qwen3-14b-dias-v7 :: test-decision-balanced reusing 600 predictions
+  valid 600/600  accuracy 0.88  macroF1 0.879161  falseALLOW 61  falseDENY 11  p95 8290.7 ms
+[eval] qwen3-14b-dias-v7 :: test-adversarial reusing 389 predictions
+  valid 389/389  accuracy 0.840617  macroF1 0.839846  falseALLOW 54  falseDENY 8  p95 8101.9 ms
+[eval] qwen3-14b-dias-v7 :: test-ood-paraphrase reusing 400 predictions
+  valid 400/400  accuracy 0.84  macroF1 0.836801  falseALLOW 60  falseDENY 4  p95 8046.2 ms
+[eval] qwen3-14b-dias-v7 :: test-multi-rule reusing 370 predictions
+  valid 370/370  accuracy 0.991892  macroF1 n/a  falseALLOW 3  falseDENY 0  p95 8791 ms
+[eval] qwen3-14b-dias-v7 :: validation-balanced reusing 400 predictions
+  valid 400/400  accuracy 0.8975  macroF1 0.897217  falseALLOW 31  falseDENY 10  p95 8159.2 ms
+[eval] qwen3-14b-dias-v7 :: test-reason-balanced reusing 540 predictions
+  valid 540/540  accuracy 0.822222  macroF1 0.716256  falseALLOW 93  falseDENY 3  p95 8088.5 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected
+=== 2026-09-13T07:10:21Z prompt ablations ===
+[ablate] qwen3-14b-dias-v7 :: full (200 examples)
+  25/200  50/200  75/200  100/200  125/200  150/200  175/200  200/200  full                 valid 200/200  accuracy 0.88  macroF1 0.878247  falseALLOW 23
+[ablate] qwen3-14b-dias-v7 :: no-requester (200 examples)
+  25/200  50/200  75/200  100/200  125/200  150/200  175/200  200/200  no-requester         valid 200/200  accuracy 0.55  macroF1 0.482996  falseALLOW 8
+[ablate] qwen3-14b-dias-v7 :: no-resource (200 examples)
+  25/200  50/200  75/200  100/200  125/200  150/200  175/200  200/200  no-resource          valid 200/200  accuracy 0.515  macroF1 0.435636  falseALLOW 10
+[ablate] qwen3-14b-dias-v7 :: no-action-purpose (200 examples)
+  25/200  50/200  75/200  100/200  125/200  150/200  175/200  200/200  no-action-purpose    valid 200/200  accuracy 0.85  macroF1 0.848775  falseALLOW 23
+[ablate] qwen3-14b-dias-v7 :: no-policy (200 examples)
+  25/200  50/200  75/200  100/200  125/200  150/200  175/200  200/200  no-policy            valid 0/200  accuracy n/a  macroF1 n/a  falseALLOW 0
+[ablate] qwen3-14b-dias-v7 :: no-justification (200 examples)
+  25/200  50/200  75/200  100/200  125/200  150/200  175/200  200/200  no-justification     valid 200/200  accuracy 0.935  macroF1 0.934921  falseALLOW 9
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260913_dias_qwen3_lora_v7_r8_corrected/ablations
+=== 2026-09-13T09:23:16Z done ===

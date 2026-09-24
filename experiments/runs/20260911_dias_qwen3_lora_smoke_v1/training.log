@@ -1,0 +1,67 @@
+Loading configuration file /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/dias-finetuning/train-v1-smoke.yaml
+Loading pretrained model
+Loading datasets
+Training
+Trainable parameters: 0.087% (12.845M/14768.307M)
+Starting training..., iters: 30
+
+Calculating loss...:   0%|          | 0/10 [00:00<?, ?it/s]
+Calculating loss...:  10%|█         | 1/10 [00:03<00:33,  3.69s/it]
+Calculating loss...:  20%|██        | 2/10 [00:07<00:29,  3.63s/it]
+Calculating loss...:  30%|███       | 3/10 [00:10<00:25,  3.58s/it]
+Calculating loss...:  40%|████      | 4/10 [00:14<00:21,  3.59s/it]
+Calculating loss...:  50%|█████     | 5/10 [00:18<00:18,  3.60s/it]
+Calculating loss...:  60%|██████    | 6/10 [00:21<00:14,  3.56s/it]
+Calculating loss...:  70%|███████   | 7/10 [00:25<00:10,  3.55s/it]
+Calculating loss...:  80%|████████  | 8/10 [00:28<00:07,  3.54s/it]
+Calculating loss...:  90%|█████████ | 9/10 [00:32<00:03,  3.59s/it]
+Calculating loss...: 100%|██████████| 10/10 [00:36<00:00,  3.70s/it]
+Calculating loss...: 100%|██████████| 10/10 [00:36<00:00,  3.62s/it]
+Iter 1: Val loss 1.126, Val took 36.254s
+Iter 10: Train loss 1.008, Learning Rate 1.000e-05, It/sec 0.138, Tokens/sec 6.815, Trained Tokens 495, Peak mem 11.115 GB
+Iter 20: Train loss 0.205, Learning Rate 1.000e-05, It/sec 0.147, Tokens/sec 7.367, Trained Tokens 997, Peak mem 11.115 GB
+
+Calculating loss...:   0%|          | 0/10 [00:00<?, ?it/s]
+Calculating loss...:  10%|█         | 1/10 [00:02<00:26,  2.95s/it]
+Calculating loss...:  20%|██        | 2/10 [00:06<00:25,  3.15s/it]
+Calculating loss...:  30%|███       | 3/10 [00:09<00:23,  3.42s/it]
+Calculating loss...:  40%|████      | 4/10 [00:13<00:21,  3.53s/it]
+Calculating loss...:  50%|█████     | 5/10 [00:17<00:18,  3.65s/it]
+Calculating loss...:  60%|██████    | 6/10 [00:21<00:14,  3.68s/it]
+Calculating loss...:  70%|███████   | 7/10 [00:25<00:11,  3.72s/it]
+Calculating loss...:  70%|███████   | 7/10 [00:29<00:12,  4.15s/it]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/__main__.py", line 6, in <module>
+    cli.main()
+    ~~~~~~~~^^
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/cli.py", line 40, in main
+    submodule.main()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/lora.py", line 369, in main
+    run(types.SimpleNamespace(**args))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/lora.py", line 341, in run
+    train_model(args, model, train_set, valid_set, training_callback)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/lora.py", line 295, in train_model
+    train(
+    ~~~~~^
+        model=model,
+        ^^^^^^^^^^^^
+    ...<4 lines>...
+        training_callback=training_callback,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/tuner/trainer.py", line 290, in train
+    val_loss = evaluate(
+        model=model,
+    ...<5 lines>...
+        iterate_batches=iterate_batches,
+    )
+  File "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/.venv-qwen-policy/lib/python3.13/site-packages/mlx_lm/tuner/trainer.py", line 208, in evaluate
+    mx.eval(all_losses, ntokens)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

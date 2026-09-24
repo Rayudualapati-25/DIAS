@@ -1,0 +1,21 @@
+{
+  "runId": "2026-08-24T07-17-54-198Z_caliper_smoke",
+  "status": "failed",
+  "startedAtUtc": "2026-08-24T07:17:54.198Z",
+  "benchmarkConfig": "smoke.yaml",
+  "networkConfig": "network-config.json",
+  "environment": "environment.json",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "interpretation": "Manual Caliper setup validation; not paper-quality evidence.",
+  "finishedAtUtc": "2026-08-24T07:17:54.546Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 2,
+    "successful": 0,
+    "failed": 2
+  },
+  "reportCreated": false,
+  "failureReason": "The transaction logging observer was configured without its required options; both rounds failed before any workload transaction was submitted. This retained diagnostic run was corrected after log inspection."
+}

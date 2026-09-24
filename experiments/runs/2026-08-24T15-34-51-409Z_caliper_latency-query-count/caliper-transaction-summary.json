@@ -1,0 +1,65 @@
+{
+  "transactions": 166,
+  "rounds": [
+    {
+      "roundLabel": "query-count-warmup",
+      "roundIndex": 0,
+      "count": 22,
+      "successfulTransactions": 22,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 692,
+        "mean": 942.4545454545455,
+        "p50": 738,
+        "p95": 1700.7,
+        "p99": 1707.16,
+        "max": 1708
+      }
+    },
+    {
+      "roundLabel": "query-count-1",
+      "roundIndex": 1,
+      "count": 48,
+      "successfulTransactions": 48,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 690,
+        "mean": 722.2708333333334,
+        "p50": 723,
+        "p95": 740.65,
+        "p99": 744.06,
+        "max": 745
+      }
+    },
+    {
+      "roundLabel": "query-count-2",
+      "roundIndex": 2,
+      "count": 48,
+      "successfulTransactions": 48,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 682,
+        "mean": 729.2916666666666,
+        "p50": 729,
+        "p95": 751.65,
+        "p99": 764.53,
+        "max": 765
+      }
+    },
+    {
+      "roundLabel": "query-count-3",
+      "roundIndex": 3,
+      "count": 48,
+      "successfulTransactions": 48,
+      "failedTransactions": 0,
+      "latencyMs": {
+        "min": 701,
+        "mean": 721.375,
+        "p50": 717,
+        "p95": 740,
+        "p99": 745.53,
+        "max": 746
+      }
+    }
+  ]
+}

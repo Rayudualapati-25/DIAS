@@ -1,0 +1,13 @@
+{
+  "primaryDistinctUserRun": "experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency",
+  "postHocReleaseLayoutAblation": "experiments/runs/2026-08-28T04-18-28-093Z_ui_unique_user_release_layout_ablation",
+  "provisioningRun": "experiments/runs/2026-08-28T04-07-11-290Z_ui_unique_user_provisioning",
+  "reusedIdentityBaseline": "experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency",
+  "verifiedMeasuredRequests": {
+    "mainDistinctUserSweep": 2340,
+    "releaseLayoutAblation": 780,
+    "totalNewMeasuredRequests": 3120
+  },
+  "allNewMeasuredRequestsSucceeded": true,
+  "comparisonWarning": "Runs were sequential and not randomized. The five-identity baseline is from an earlier date; comparisons are descriptive, not causal estimates."
+}

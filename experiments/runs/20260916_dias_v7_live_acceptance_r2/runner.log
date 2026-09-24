@@ -1,0 +1,17 @@
+PASS          R1  Request log: who requested which record
+PASS          R2  LLM recommendation in the backend, not on the ledger
+PASS          R3  Decision log: auditor agrees with an LLM ALLOW
+PASS          R4  Decision log: auditor overrides an LLM DENY
+PASS          R5  Exact repeat is granted automatically
+PASS          R6  Near misses are not reused
+PASS          R7  Decision log: auditor agrees with an LLM DENY
+NOT EXERCISED R8  Decision log: auditor overrides an LLM ALLOW
+      x scenario prerequisites: the dedicated candidate received DENY
+PASS          R9  Revocation and expiry stop reuse
+PASS          R10  An auditor cannot decide their own request
+PASS          R11  A decision on changed facts is refused
+PASS          R12  No LLM recommendation: the auditor still decides
+PASS          R13  Application access log: request and decision
+PASS          R14  The ledger holds no LLM recommendation, reason, or justification
+
+13/14 scenarios pass, 77/78 checks; written to experiments/runs/20260916_dias_v7_live_acceptance_r2

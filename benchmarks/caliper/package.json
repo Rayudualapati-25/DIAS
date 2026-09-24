@@ -1,0 +1,29 @@
+{
+  "name": "seba-xai-caliper-benchmarks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Isolated Hyperledger Caliper workspace for the SEBA-XAI Fabric network",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=11.5.1"
+  },
+  "packageManager": "npm@11.5.1",
+  "scripts": {
+    "network:prepare": "node scripts/prepare-network.js",
+    "monitoring:check": "node scripts/check-monitoring.js",
+    "benchmark:smoke": "node scripts/run-benchmark.js configs/smoke.yaml smoke",
+    "benchmark:read": "node scripts/run-benchmark.js configs/read-performance.yaml read",
+    "benchmark:write": "node scripts/run-benchmark.js configs/write-performance.yaml write",
+    "benchmark:load": "node scripts/run-benchmark.js configs/increasing-load.yaml load",
+    "benchmark:mixed": "node scripts/run-benchmark.js configs/mixed-workload.yaml mixed",
+    "benchmark:endurance": "node scripts/run-benchmark.js configs/endurance.yaml endurance",
+    "benchmark:latency": "node scripts/run-latency-experiments.js",
+    "check": "node scripts/check-installation.js && node scripts/validate-configs.js && node scripts/test-runner-helpers.js && node --check scripts/prepare-network.js && node --check scripts/run-benchmark.js && node --check scripts/check-monitoring.js && node --check scripts/run-latency-experiments.js && node --check monitors/latency-tx-observer.js && python3 -m py_compile scripts/generate-workload-profile-graphs.py scripts/generate-latency-result-graphs.py ../../results/plots/caliper_latency_axes.py ../../results/plots/test_caliper_latency_axes.py && python3 ../../results/plots/test_caliper_latency_axes.py && node --check workloads/read-record.js && node --check workloads/request-access.js && node --check workloads/mixed-record-access.js && node --check workloads/result-json.js && node --check workloads/query-records.js && node --check workloads/request-access-verified.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "1.14.4",
+    "@hyperledger/caliper-cli": "0.7.1",
+    "@hyperledger/fabric-gateway": "1.7.1"
+  }
+}

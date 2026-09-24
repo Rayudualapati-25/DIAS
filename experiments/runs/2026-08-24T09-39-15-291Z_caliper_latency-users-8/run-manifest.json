@@ -1,0 +1,61 @@
+{
+  "runId": "2026-08-24T09-39-15-291Z_caliper_latency-users-8",
+  "status": "completed",
+  "startedAtUtc": "2026-08-24T09:39:15.293Z",
+  "benchmarkConfig": "latency-users-8.yaml",
+  "benchmarkConfigSha256": "2dd27ebf1a938a05c9833e3f0f6b126dc1242d629c1b69284c94dc28c8c62b4c",
+  "executedBenchmarkConfig": "caliper-executed-benchmark.yaml",
+  "executedBenchmarkConfigSha256": "d6d419f4fac0de0461f9bf2b9617e9bfaf69f72941bd525261aea9d4779e2b3b",
+  "networkConfig": "network-config.json",
+  "networkConfigSha256": "b9a85f9da1c7807995032558d36f7dabcbfeca785c91eb70e57181d5338244cf",
+  "environment": "environment.json",
+  "environmentSha256": "6bc9987fccc22f15fc3880f40cd8eca0ae7ef15d09c0b80482e9c0d75c91e4c4",
+  "report": "caliper-report.html",
+  "log": "caliper.log",
+  "workloads": [
+    {
+      "path": "workloads/read-record.js",
+      "sha256": "28ee21b2b33ba175a6ed7c3c09a8dbe58208ff9344d6fc2679328a85c355fc32"
+    }
+  ],
+  "monitoringConfiguration": [],
+  "transactionEvidence": {
+    "observer": "monitors/latency-tx-observer.js",
+    "observerSource": [
+      {
+        "path": "monitors/latency-tx-observer.js",
+        "sha256": "ebaf4d0a5dcd19b128aba2e5d3837a076643fc67812445a9f25809e94ca40fbc"
+      }
+    ],
+    "transactions": "caliper-transactions.jsonl",
+    "summary": "caliper-transaction-summary.json",
+    "marker": "CALIPER_TX_LATENCY",
+    "transactionsSha256": "049109040243e0c3d588a05c1fa22ee6991aaf505bd4ee816b0b6dc669928269",
+    "summarySha256": "f2a2e3bd34e565f46592a66b8fa4a17b62e97e7b0407a133386ae01945e3c959",
+    "error": null
+  },
+  "controller": {
+    "caliper": "0.7.1",
+    "fabricGateway": "1.7.1",
+    "grpc": "1.14.4",
+    "node": "v22.20.0",
+    "dockerHost": null,
+    "packageLockSha256": "b6232576d83709946bf49f6b7e37bc6ee938f084d3092098931077b08f56b52d"
+  },
+  "interpretation": "Characterization run. Paper use requires the declared repetitions, baseline, ablations, and retained aggregation artifacts.",
+  "finishedAtUtc": "2026-08-24T09:39:26.871Z",
+  "caliperExitCode": 0,
+  "signal": null,
+  "rounds": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "performanceSummary": "caliper-summary.json",
+  "performanceSummarySha256": "1ca13fd243b156bfae2ddea05380932b433bfad957ce7a83e9b5a2fe96bfc3a7",
+  "failedTransactions": 0,
+  "reportCreated": true,
+  "reportSha256": "3d127e4ea552c1969507f69f2f4c30cb50c2753bc9a4ce69f4745d4e9ea6c533",
+  "logSha256": "0845f2aeefd015616a522ba9b1b78ea40dc0974c94adf7e737092a581e43ffb5",
+  "failureReason": null
+}

@@ -1,0 +1,60 @@
+Run: 2026-08-25T14-12-11-482Z_ui_interaction_latency
+Output: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency
+Authenticating the fixed local identity pool ...
+Warm-up: case-file search (five requests, excluded) ...
+Warm-up: record submission (five requests, excluded) ...
+Authorized synthetic record for release measurements: UILAT-20260825T141211-warm-R0-N5-I000
+
+SEARCH MEASUREMENTS
+search  R1 N= 10: p50=  17.31 ms, p95=  21.56 ms
+search  R1 N= 25: p50=  92.45 ms, p95= 102.81 ms
+search  R1 N= 50: p50= 120.78 ms, p95= 134.02 ms
+search  R1 N= 75: p50= 149.49 ms, p95= 174.21 ms
+search  R1 N=100: p50=  120.8 ms, p95= 140.87 ms
+search  R2 N= 10: p50=  53.66 ms, p95=  60.37 ms
+search  R2 N= 25: p50=  78.25 ms, p95=  92.64 ms
+search  R2 N= 50: p50= 103.59 ms, p95= 128.65 ms
+search  R2 N= 75: p50=  111.7 ms, p95=    138 ms
+search  R2 N=100: p50= 128.11 ms, p95= 147.31 ms
+search  R3 N= 10: p50=  54.77 ms, p95=  57.69 ms
+search  R3 N= 25: p50=  77.95 ms, p95=  85.63 ms
+search  R3 N= 50: p50= 111.89 ms, p95= 124.17 ms
+search  R3 N= 75: p50= 123.73 ms, p95= 153.44 ms
+search  R3 N=100: p50= 125.41 ms, p95= 160.56 ms
+
+RELEASE MEASUREMENTS
+release R1 N= 10: p50=  47.19 ms, p95=  49.57 ms
+release R1 N= 25: p50=  71.06 ms, p95=  75.76 ms
+release R1 N= 50: p50=  105.2 ms, p95= 118.37 ms
+release R1 N= 75: p50= 140.55 ms, p95= 156.75 ms
+release R1 N=100: p50= 157.22 ms, p95= 182.17 ms
+release R2 N= 10: p50=  49.86 ms, p95=  55.11 ms
+release R2 N= 25: p50=  90.01 ms, p95=  96.02 ms
+release R2 N= 50: p50=  98.81 ms, p95= 109.84 ms
+release R2 N= 75: p50= 112.04 ms, p95=  127.5 ms
+release R2 N=100: p50= 154.56 ms, p95= 178.97 ms
+release R3 N= 10: p50=  55.84 ms, p95=   61.7 ms
+release R3 N= 25: p50=  81.23 ms, p95=   87.3 ms
+release R3 N= 50: p50=  99.29 ms, p95= 112.39 ms
+release R3 N= 75: p50= 121.15 ms, p95=  133.1 ms
+release R3 N=100: p50=  151.3 ms, p95= 182.08 ms
+
+SUBMIT MEASUREMENTS
+submit  R1 N= 10: p50= 129.59 ms, p95= 131.77 ms
+submit  R1 N= 25: p50= 149.75 ms, p95= 180.19 ms
+submit  R1 N= 50: p50= 271.74 ms, p95= 341.63 ms
+submit  R1 N= 75: p50= 316.43 ms, p95= 417.73 ms
+submit  R1 N=100: p50= 369.49 ms, p95= 537.24 ms
+submit  R2 N= 10: p50= 137.26 ms, p95= 142.48 ms
+submit  R2 N= 25: p50= 151.27 ms, p95= 181.04 ms
+submit  R2 N= 50: p50= 260.14 ms, p95= 326.77 ms
+submit  R2 N= 75: p50= 335.08 ms, p95= 473.68 ms
+submit  R2 N=100: p50=  374.4 ms, p95=  535.3 ms
+submit  R3 N= 10: p50= 113.66 ms, p95= 118.53 ms
+submit  R3 N= 25: p50= 151.57 ms, p95= 179.59 ms
+submit  R3 N= 50: p50= 235.63 ms, p95= 311.72 ms
+submit  R3 N= 75: p50= 340.21 ms, p95= 478.98 ms
+submit  R3 N=100: p50= 457.48 ms, p95= 619.32 ms
+
+Completed: 2340/2340 successful
+RUN_DIR=/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency

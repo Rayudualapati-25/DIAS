@@ -1,0 +1,48 @@
+{
+  "capturedAtUtc": "2026-09-06T13:59:19Z",
+  "readOnlyChecks": [
+    "scripts/inspect-ledger.sh",
+    "GET http://127.0.0.1:3001/api/health",
+    "GET http://127.0.0.1:8080/v1/models",
+    "PolicyContract.GetActivePolicyVersion",
+    "PolicyContract.GetActiveLLMPolicyModel",
+    "sha256 adapters.safetensors"
+  ],
+  "fabric": {
+    "channel": "crimechannel",
+    "peerCount": 6,
+    "peerHeight": 311,
+    "sharedLatestBlockHashPrefix": "Gg6SWqZXsHIG1aM4pxEz3SKW",
+    "chaincode": "crimerecords",
+    "chaincodeVersion": "3.7",
+    "chaincodeSequence": 9,
+    "approvals": {
+      "AIOrgMSP": true,
+      "AuditMSP": true,
+      "CourtMSP": true,
+      "ForensicsMSP": true,
+      "PoliceMSP": true,
+      "ProsecutionMSP": true
+    }
+  },
+  "services": {
+    "backendHealth": "ok",
+    "modelEndpoint": "http://127.0.0.1:8080/v1",
+    "aiListener": "running"
+  },
+  "policy": {
+    "version": "crime-policy-v2",
+    "status": "active",
+    "activationTxId": "c375dfccf708405b48f74c884c7ab9ee92e6042593ae642e3d01fed82a55d4e6"
+  },
+  "model": {
+    "baseModel": "mlx-community/Qwen3-14B-4bit",
+    "modelVersion": "qwen3-14b-seba-lora-v6",
+    "adapterPath": "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best",
+    "localAdapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "registeredAdapterSha256": "5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe",
+    "registeredPublicKeyHash": "066ae47875b93a60d4653c26f0e4ca8e74af3c2536508f783a9a51419ce69180",
+    "status": "active",
+    "activationTxId": "bf0590023f04288b7b872c1f9d3e4d07a3f201d7f2100a8ddabbc9f9d70a9779"
+  }
+}

@@ -1,0 +1,55 @@
+# DIAS V7 — advisory binary ALLOW/DENY recommender.
+#
+# Fresh LoRA from the unmodified Qwen3-14B-4bit base. There is deliberately NO
+# resume_adapter_file: V7 is a new model, not a continuation of the SEAL-era V1-V6
+# line, and nothing in this file may reach a V6 directory.
+#
+# Every value below is explained in docs/training-configuration.md. The two that
+# are easy to misread are recorded here as well, because getting either wrong
+# silently changes what the run means:
+#
+#   iters is counted in MICRO-BATCHES, not optimizer updates and not epochs.
+#     With batch_size 1 and grad_accumulation_steps 4, `iters: N` is N examples
+#     seen and N/4 optimizer updates.
+#   max_seq_length TRUNCATES rather than erroring. The longest example in
+#     data-v2-binary is 2150 tokens (measured with the exact tokenizer and chat
+#     template), so 2560 truncates nothing. A smaller value would cut completions
+#     and teach the model to emit unterminated JSON.
+#
+# Paths are relative to LLMxAI/, where mlx_lm runs.
+
+model: mlx-community/Qwen3-14B-4bit
+train: true
+fine_tune_type: lora
+optimizer: adam
+seed: 42
+
+# The training count is chosen from the learning curve, not assumed. Point this
+# at a subset from data-v2-binary/subsets/ (nested, stratified, coverage-repaired)
+# or at the full pool. `data` must be a DIRECTORY holding train.jsonl and
+# valid.jsonl, which is why each subset is staged into its own directory.
+data: ../experiments/dias-finetuning/data-v2-binary
+
+num_layers: 16
+batch_size: 1
+grad_accumulation_steps: 4
+learning_rate: 1e-5
+
+# One pass over the 5,254-example pool. Override on the command line for a
+# subset run; the run record stores whatever was actually used.
+iters: 5254
+
+val_batches: 100
+steps_per_report: 25
+steps_per_eval: 250
+save_every: 500
+
+adapter_path: experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7
+max_seq_length: 2560
+mask_prompt: true
+grad_checkpoint: true
+
+lora_parameters:
+  rank: 8
+  dropout: 0.05
+  scale: 20.0

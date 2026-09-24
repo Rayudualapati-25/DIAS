@@ -1,0 +1,113 @@
+test:
+  name: SEBA-XAI increasing-load performance
+  description: >-
+    Exercise the contextual access write path at fixed offered-load steps. Each
+    step is reported independently so the saturation point can be determined
+    from measured latency, throughput, and failure rate.
+  workers:
+    number: 4
+  rounds:
+    - label: increasing-load-1-tps
+      description: Submit contextual access requests at 1 offered TPS.
+      txDuration: 60
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 1
+      workload:
+        module: workloads/request-access.js
+        arguments: &access_arguments
+          contractId: crimerecords
+          recordId: REC-FIR-001
+          action: view
+          purpose: investigation
+          invokerIdentity: io.krishnan
+          invokerMspId: PoliceMSP
+
+    - label: increasing-load-2-tps
+      description: Submit contextual access requests at 2 offered TPS.
+      txDuration: 60
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 2
+      workload:
+        module: workloads/request-access.js
+        arguments: *access_arguments
+
+    - label: increasing-load-5-tps
+      description: Submit contextual access requests at 5 offered TPS.
+      txDuration: 60
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 5
+      workload:
+        module: workloads/request-access.js
+        arguments: *access_arguments
+
+    - label: increasing-load-10-tps
+      description: Submit contextual access requests at 10 offered TPS.
+      txDuration: 60
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload:
+        module: workloads/request-access.js
+        arguments: *access_arguments
+
+    - label: increasing-load-20-tps
+      description: Submit contextual access requests at 20 offered TPS.
+      txDuration: 60
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 20
+      workload:
+        module: workloads/request-access.js
+        arguments: *access_arguments
+
+monitors:
+  resource:
+    - module: docker
+      options:
+        interval: 1
+        cpuUsageNormalization: true
+        containers:
+          - all
+        charting:
+          bar:
+            metrics:
+              - Memory(max)
+              - CPU%(max)
+
+    - module: prometheus
+      options:
+        url: http://127.0.0.1:9090
+        metrics:
+          include:
+            - ".*"
+          queries:
+            - name: Process resident memory (MiB, max)
+              query: 'process_resident_memory_bytes{job=~"fabric-.*"}'
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 0.00000095367431640625
+            - name: Process CPU rate (percent, max)
+              query: 'rate(process_cpu_seconds_total{job=~"fabric-.*"}[1m])'
+              step: 1
+              label: instance
+              statistic: max
+              multiplier: 100
+            - name: Crimerecords endorsement duration (seconds, avg)
+              query: 'sum by (instance) (rate(endorser_proposal_duration_sum{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m])) / sum by (instance) (rate(endorser_proposal_duration_count{job=~"fabric-.*",channel="crimechannel",chaincode="crimerecords",success="true"}[1m]))'
+              step: 1
+              label: instance
+              statistic: avg
+            - name: Ledger height (blocks, max)
+              query: 'ledger_blockchain_height{job=~"fabric-.*",channel="crimechannel"}'
+              step: 1
+              label: instance
+              statistic: max

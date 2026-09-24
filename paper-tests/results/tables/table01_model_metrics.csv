@@ -1,0 +1,4 @@
+Arm,Model,Prompt,n,Joint (%),Decision (%),Reason (%),Action (%),Purpose (%),Macro F1,False Allow,False Deny,Schema rejected,Median inference (ms),p95 inference (ms)
+V6 grounded,qwen3-14b-seba-lora-v6,grounded,200,77.0,89.0,77.5,99.0,98.5,0.6857,0,13,2,2912.04,3141.14
+V4 grounded,qwen3-14b-seba-lora-v4,grounded,200,58.5,73.5,66.5,100.0,99.5,0.5922,10,10,0,3000.38,5555.88
+V4 short prompt,qwen3-14b-seba-lora-v4,short,200,53.5,67.5,62.0,100.0,99.5,0.4083,14,31,0,2302.52,4357.35

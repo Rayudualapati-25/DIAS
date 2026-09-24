@@ -1,0 +1,12 @@
+[config] JWT_SECRET not set — using a dev-only default. Do not deploy like this.
+crime-records backend listening on http://localhost:3001
+[api] POST /api/access/auditor/REQ-0c63f2c425bfcb41/decision failed: CommitError: Transaction 4fa6084bb1f570b17358180d1d5ec5f169ef95de33518b780a845519e4769f1a failed to commit with status code 11 (MVCC_READ_CONFLICT)
+    at newCommitError (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/commiterror.js:32:12)
+    at ContractImpl.submit (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/contract.js:43:52)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.submit (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/gateway.js:87:18)
+    at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/routes/access.js:223:20
+    at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/util/respond.js:20:7 {
+  code: 11,
+  transactionId: '4fa6084bb1f570b17358180d1d5ec5f169ef95de33518b780a845519e4769f1a'
+}

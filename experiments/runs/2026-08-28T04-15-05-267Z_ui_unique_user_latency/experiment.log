@@ -1,0 +1,63 @@
+Run: 2026-08-28T04-15-05-267Z_ui_unique_user_latency
+Output: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency
+Authenticating 100 distinct enrolled identities (excluded) ...
+Warm-up: five distinct-user searches (excluded) ...
+Warm-up: five distinct-user record submissions (excluded) ...
+Creating 100 identity-bound allow decisions (excluded) ...
+Warm-up: five distinct-user authorized opens (excluded) ...
+Authorized synthetic record: UIUSR-20260828T041505-warm-R0-N5-I000
+
+SEARCH MEASUREMENTS
+search  R1 users= 10: p50=  54.24 ms, p95=  59.35 ms
+search  R1 users= 25: p50=  67.83 ms, p95=  80.21 ms
+search  R1 users= 50: p50= 110.09 ms, p95= 121.82 ms
+search  R1 users= 75: p50= 132.21 ms, p95=  163.3 ms
+search  R1 users=100: p50= 104.94 ms, p95= 182.79 ms
+search  R2 users= 10: p50=  50.18 ms, p95=  54.23 ms
+search  R2 users= 25: p50=  84.96 ms, p95=  91.13 ms
+search  R2 users= 50: p50= 109.28 ms, p95= 122.88 ms
+search  R2 users= 75: p50= 155.44 ms, p95= 175.76 ms
+search  R2 users=100: p50= 129.29 ms, p95= 176.23 ms
+search  R3 users= 10: p50=  53.84 ms, p95=  58.93 ms
+search  R3 users= 25: p50=  79.22 ms, p95=  89.16 ms
+search  R3 users= 50: p50= 107.44 ms, p95= 126.35 ms
+search  R3 users= 75: p50= 134.28 ms, p95= 154.18 ms
+search  R3 users=100: p50= 126.65 ms, p95= 178.28 ms
+
+RELEASE MEASUREMENTS
+release R1 users= 10: p50= 123.97 ms, p95= 126.76 ms
+release R1 users= 25: p50=  244.2 ms, p95=  248.2 ms
+release R1 users= 50: p50= 458.83 ms, p95= 471.11 ms
+release R1 users= 75: p50= 652.36 ms, p95=  664.7 ms
+release R1 users=100: p50= 872.02 ms, p95= 883.28 ms
+release R2 users= 10: p50= 119.28 ms, p95= 121.81 ms
+release R2 users= 25: p50= 255.18 ms, p95= 260.63 ms
+release R2 users= 50: p50= 445.64 ms, p95= 455.65 ms
+release R2 users= 75: p50= 645.64 ms, p95= 662.07 ms
+release R2 users=100: p50= 831.74 ms, p95= 846.82 ms
+release R3 users= 10: p50=  98.36 ms, p95= 100.87 ms
+release R3 users= 25: p50= 246.63 ms, p95= 249.33 ms
+release R3 users= 50: p50=  467.2 ms, p95= 478.84 ms
+release R3 users= 75: p50= 675.98 ms, p95= 690.52 ms
+release R3 users=100: p50= 849.15 ms, p95= 867.84 ms
+
+SUBMIT MEASUREMENTS
+submit  R1 users= 10: p50= 105.24 ms, p95= 107.15 ms
+submit  R1 users= 25: p50= 171.52 ms, p95= 231.57 ms
+submit  R1 users= 50: p50= 250.59 ms, p95= 331.31 ms
+submit  R1 users= 75: p50= 303.48 ms, p95=  449.5 ms
+submit  R1 users=100: p50= 422.73 ms, p95=  646.6 ms
+submit  R2 users= 10: p50=  98.34 ms, p95=  99.74 ms
+submit  R2 users= 25: p50= 155.26 ms, p95= 188.56 ms
+submit  R2 users= 50: p50= 231.68 ms, p95= 308.29 ms
+submit  R2 users= 75: p50= 317.42 ms, p95= 500.23 ms
+submit  R2 users=100: p50= 381.99 ms, p95= 564.31 ms
+submit  R3 users= 10: p50=  83.99 ms, p95=  85.98 ms
+submit  R3 users= 25: p50= 171.57 ms, p95= 203.27 ms
+submit  R3 users= 50: p50= 231.02 ms, p95= 308.08 ms
+submit  R3 users= 75: p50= 304.46 ms, p95= 451.02 ms
+submit  R3 users=100: p50= 388.61 ms, p95= 601.99 ms
+
+Completed: 2340/2340 measured requests succeeded.
+Identity guardrail: passed.
+Artifacts: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-28T04-15-05-267Z_ui_unique_user_latency

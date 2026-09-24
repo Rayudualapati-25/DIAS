@@ -1,0 +1,11 @@
+Run: 2026-08-25T14-07-26-224Z_ui_interaction_latency
+Output: /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-25T14-07-26-224Z_ui_interaction_latency
+Authenticating the fixed local identity pool ...
+Warm-up: case-file search (five requests, excluded) ...
+
+SEARCH MEASUREMENTS
+search  R1 N= 10: p50=4240.03 ms, p95=4244.33 ms
+search  R1 N= 25: p50=   null ms, p95=   null ms, 25 failed
+
+Completed: 10/35 successful
+RUN_DIR=/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/experiments/runs/2026-08-25T14-07-26-224Z_ui_interaction_latency

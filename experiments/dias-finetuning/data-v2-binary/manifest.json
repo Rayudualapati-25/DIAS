@@ -1,0 +1,566 @@
+{
+  "datasetVersion": "dias-recommendation-dataset-v2-binary",
+  "purpose": "Supervised fine-tuning and held-out evaluation of an ADVISORY binary ALLOW/DENY access recommendation model. The model never grants or denies access.",
+  "generatedAtUtc": "2026-09-12T04:41:09.076Z",
+  "seed": 20260912,
+  "deterministic": true,
+  "labelSource": {
+    "method": "offline reference oracle applied to the versioned written governance policy",
+    "bundleId": "dias-governance-policy",
+    "bundleVersion": "v1",
+    "bundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+    "oracle": "policies/reference-oracle/referencePolicyOracle.js",
+    "auditorOverridesUsedAsLabels": false,
+    "note": "Auditor FORCE_ALLOW/FORCE_DENY decisions are governance acts recorded in the dynamic-authorization system. They are never training labels."
+  },
+  "promptVersion": "dias-recommendation-prompt-v1",
+  "responseSchemaVersion": "dias-recommendation-response-v1",
+  "generation": {
+    "familiesPlanned": {
+      "cleanAllow": {
+        "families": 900,
+        "variants": 2,
+        "mix": [
+          {
+            "pool": "plain",
+            "weight": 0.55
+          },
+          {
+            "pool": "verbose",
+            "weight": 0.1
+          },
+          {
+            "pool": "contradictory",
+            "weight": 0.2
+          },
+          {
+            "pool": "injection",
+            "weight": 0.15
+          }
+        ]
+      },
+      "singleViolation": {
+        "familiesPerClause": 110,
+        "variants": 2,
+        "mix": [
+          {
+            "pool": "plain",
+            "weight": 0.55
+          },
+          {
+            "pool": "verbose",
+            "weight": 0.1
+          },
+          {
+            "pool": "contradictory",
+            "weight": 0.2
+          },
+          {
+            "pool": "injection",
+            "weight": 0.15
+          }
+        ]
+      },
+      "multiViolation": {
+        "families": 1000,
+        "variants": 2,
+        "mix": [
+          {
+            "pool": "plain",
+            "weight": 0.55
+          },
+          {
+            "pool": "verbose",
+            "weight": 0.1
+          },
+          {
+            "pool": "contradictory",
+            "weight": 0.2
+          },
+          {
+            "pool": "injection",
+            "weight": 0.15
+          }
+        ]
+      },
+      "nearMiss": {
+        "familiesPerKind": 110,
+        "variants": 2,
+        "mix": [
+          {
+            "pool": "plain",
+            "weight": 0.55
+          },
+          {
+            "pool": "verbose",
+            "weight": 0.1
+          },
+          {
+            "pool": "contradictory",
+            "weight": 0.2
+          },
+          {
+            "pool": "injection",
+            "weight": 0.15
+          }
+        ]
+      },
+      "adversarial": {
+        "families": 1000,
+        "variants": 2,
+        "mix": [
+          {
+            "pool": "contradictory",
+            "weight": 0.5
+          },
+          {
+            "pool": "injection",
+            "weight": 0.5
+          }
+        ]
+      },
+      "oodParaphrase": {
+        "families": 420,
+        "variants": 2,
+        "mix": [
+          {
+            "pool": "plain",
+            "weight": 1
+          }
+        ]
+      },
+      "workflow": {
+        "families": 60,
+        "variants": 1,
+        "mix": [
+          {
+            "pool": "plain",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    "rawExamples": 10513,
+    "duplicatePromptsDropped": 0,
+    "pooledExamples": 10513,
+    "splitWeights": {
+      "train": 0.7,
+      "validation": 0.1,
+      "test": 0.2
+    },
+    "setSizeTargets": {
+      "validation": 400,
+      "decision": 600,
+      "perReason": 60,
+      "adversarial": 400,
+      "ood": 400,
+      "multiRule": 400,
+      "workflow": 60
+    }
+  },
+  "sets": {
+    "train": {
+      "examples": 5254,
+      "allow": 2627,
+      "deny": 2627,
+      "allowShare": 0.5,
+      "families": 2815,
+      "reasonCodes": {
+        "POLICY_SATISFIED": 2627,
+        "CRED_NOT_ACTIVE": 387,
+        "RBAC_NO_PERMISSION": 722,
+        "INSUFFICIENT_CLEARANCE": 225,
+        "JUVENILE_PROTECTED": 322,
+        "NOT_ASSIGNED": 230,
+        "CROSS_JURISDICTION": 284,
+        "SEALED_RECORD": 265,
+        "VICTIM_DATA_NOT_NECESSARY": 192
+      },
+      "scenarios": {
+        "clean-allow": 1200,
+        "multi-violation": 845,
+        "near-miss:jurisdiction-boundary": 265,
+        "adversarial-on-allow": 652,
+        "near-miss:rbac-adjacent": 266,
+        "near-miss:juvenile-authorization": 223,
+        "single-violation": 884,
+        "near-miss:clearance-boundary": 254,
+        "adversarial-on-deny": 425,
+        "near-miss:assignment-exemption": 240
+      },
+      "justificationKinds": {
+        "plain": 2242,
+        "injection": 1177,
+        "contradictory": 1413,
+        "verbose": 422
+      },
+      "reviewFlags": {
+        "INSTRUCTION_IN_JUSTIFICATION": 1177,
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 1734,
+        "SEALED_RECORD_COURT_REVIEW": 391
+      }
+    },
+    "validation-balanced": {
+      "examples": 400,
+      "allow": 200,
+      "deny": 200,
+      "allowShare": 0.5,
+      "families": 304,
+      "reasonCodes": {
+        "INSUFFICIENT_CLEARANCE": 22,
+        "RBAC_NO_PERMISSION": 35,
+        "POLICY_SATISFIED": 200,
+        "NOT_ASSIGNED": 28,
+        "SEALED_RECORD": 17,
+        "JUVENILE_PROTECTED": 36,
+        "VICTIM_DATA_NOT_NECESSARY": 20,
+        "CRED_NOT_ACTIVE": 26,
+        "CROSS_JURISDICTION": 16
+      },
+      "scenarios": {
+        "near-miss:clearance-boundary": 22,
+        "adversarial-on-deny": 41,
+        "single-violation": 57,
+        "clean-allow": 91,
+        "multi-violation": 57,
+        "near-miss:juvenile-authorization": 26,
+        "near-miss:jurisdiction-boundary": 15,
+        "near-miss:assignment-exemption": 26,
+        "adversarial-on-allow": 54,
+        "near-miss:rbac-adjacent": 11
+      },
+      "justificationKinds": {
+        "plain": 178,
+        "injection": 84,
+        "verbose": 29,
+        "contradictory": 109
+      },
+      "reviewFlags": {
+        "INSTRUCTION_IN_JUSTIFICATION": 84,
+        "SEALED_RECORD_COURT_REVIEW": 24,
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 127
+      }
+    },
+    "test-decision-balanced": {
+      "examples": 600,
+      "allow": 300,
+      "deny": 300,
+      "allowShare": 0.5,
+      "families": 465,
+      "reasonCodes": {
+        "JUVENILE_PROTECTED": 44,
+        "RBAC_NO_PERMISSION": 97,
+        "POLICY_SATISFIED": 300,
+        "CRED_NOT_ACTIVE": 41,
+        "SEALED_RECORD": 25,
+        "NOT_ASSIGNED": 21,
+        "CROSS_JURISDICTION": 21,
+        "INSUFFICIENT_CLEARANCE": 32,
+        "VICTIM_DATA_NOT_NECESSARY": 19
+      },
+      "scenarios": {
+        "near-miss:juvenile-authorization": 34,
+        "multi-violation": 88,
+        "adversarial-on-allow": 64,
+        "clean-allow": 161,
+        "near-miss:rbac-adjacent": 30,
+        "adversarial-on-deny": 51,
+        "near-miss:jurisdiction-boundary": 21,
+        "near-miss:clearance-boundary": 20,
+        "single-violation": 103,
+        "near-miss:assignment-exemption": 28
+      },
+      "justificationKinds": {
+        "plain": 272,
+        "injection": 130,
+        "contradictory": 153,
+        "verbose": 45
+      },
+      "reviewFlags": {
+        "INSTRUCTION_IN_JUSTIFICATION": 130,
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 185,
+        "SEALED_RECORD_COURT_REVIEW": 40
+      }
+    },
+    "test-reason-balanced": {
+      "examples": 540,
+      "allow": 60,
+      "deny": 480,
+      "allowShare": 0.1111,
+      "families": 412,
+      "reasonCodes": {
+        "POLICY_SATISFIED": 60,
+        "SEALED_RECORD": 60,
+        "INSUFFICIENT_CLEARANCE": 60,
+        "NOT_ASSIGNED": 60,
+        "JUVENILE_PROTECTED": 60,
+        "RBAC_NO_PERMISSION": 60,
+        "CRED_NOT_ACTIVE": 60,
+        "CROSS_JURISDICTION": 60,
+        "VICTIM_DATA_NOT_NECESSARY": 60
+      },
+      "scenarios": {
+        "adversarial-on-allow": 18,
+        "single-violation": 180,
+        "adversarial-on-deny": 90,
+        "multi-violation": 126,
+        "near-miss:clearance-boundary": 20,
+        "near-miss:rbac-adjacent": 10,
+        "near-miss:assignment-exemption": 25,
+        "clean-allow": 26,
+        "near-miss:jurisdiction-boundary": 24,
+        "near-miss:juvenile-authorization": 21
+      },
+      "justificationKinds": {
+        "injection": 132,
+        "contradictory": 134,
+        "plain": 239,
+        "verbose": 35
+      },
+      "reviewFlags": {
+        "INSTRUCTION_IN_JUSTIFICATION": 132,
+        "SEALED_RECORD_COURT_REVIEW": 74,
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 162
+      }
+    },
+    "test-adversarial": {
+      "examples": 389,
+      "allow": 185,
+      "deny": 204,
+      "allowShare": 0.4756,
+      "families": 200,
+      "reasonCodes": {
+        "RBAC_NO_PERMISSION": 40,
+        "INSUFFICIENT_CLEARANCE": 21,
+        "POLICY_SATISFIED": 185,
+        "JUVENILE_PROTECTED": 30,
+        "VICTIM_DATA_NOT_NECESSARY": 30,
+        "SEALED_RECORD": 30,
+        "CROSS_JURISDICTION": 9,
+        "CRED_NOT_ACTIVE": 22,
+        "NOT_ASSIGNED": 22
+      },
+      "scenarios": {
+        "adversarial-on-deny": 204,
+        "adversarial-on-allow": 185
+      },
+      "justificationKinds": {
+        "contradictory": 195,
+        "injection": 194
+      },
+      "reviewFlags": {
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 237,
+        "INSTRUCTION_IN_JUSTIFICATION": 194,
+        "SEALED_RECORD_COURT_REVIEW": 30
+      }
+    },
+    "test-ood-paraphrase": {
+      "examples": 400,
+      "allow": 200,
+      "deny": 200,
+      "allowShare": 0.5,
+      "families": 307,
+      "reasonCodes": {
+        "POLICY_SATISFIED": 200,
+        "NOT_ASSIGNED": 26,
+        "CROSS_JURISDICTION": 13,
+        "JUVENILE_PROTECTED": 18,
+        "INSUFFICIENT_CLEARANCE": 28,
+        "RBAC_NO_PERMISSION": 47,
+        "CRED_NOT_ACTIVE": 28,
+        "VICTIM_DATA_NOT_NECESSARY": 23,
+        "SEALED_RECORD": 17
+      },
+      "scenarios": {
+        "ood-paraphrase": 400
+      },
+      "justificationKinds": {
+        "paraphrase": 400
+      },
+      "reviewFlags": {
+        "INSTRUCTION_IN_JUSTIFICATION": 87,
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 78,
+        "SEALED_RECORD_COURT_REVIEW": 17
+      }
+    },
+    "test-multi-rule": {
+      "examples": 370,
+      "allow": 0,
+      "deny": 370,
+      "allowShare": 0,
+      "families": 190,
+      "reasonCodes": {
+        "CRED_NOT_ACTIVE": 100,
+        "RBAC_NO_PERMISSION": 155,
+        "JUVENILE_PROTECTED": 37,
+        "VICTIM_DATA_NOT_NECESSARY": 18,
+        "SEALED_RECORD": 45,
+        "NOT_ASSIGNED": 6,
+        "CROSS_JURISDICTION": 9
+      },
+      "scenarios": {
+        "multi-violation": 370
+      },
+      "justificationKinds": {
+        "contradictory": 75,
+        "plain": 194,
+        "verbose": 38,
+        "injection": 63
+      },
+      "reviewFlags": {
+        "UNVERIFIED_CLAIM_IN_JUSTIFICATION": 93,
+        "SEALED_RECORD_COURT_REVIEW": 104,
+        "INSTRUCTION_IN_JUSTIFICATION": 63
+      }
+    },
+    "workflow-evaluation": {
+      "examples": 60,
+      "allow": 31,
+      "deny": 29,
+      "allowShare": 0.5167,
+      "families": 60,
+      "reasonCodes": {
+        "POLICY_SATISFIED": 31,
+        "RBAC_NO_PERMISSION": 6,
+        "INSUFFICIENT_CLEARANCE": 2,
+        "CROSS_JURISDICTION": 8,
+        "SEALED_RECORD": 4,
+        "NOT_ASSIGNED": 2,
+        "VICTIM_DATA_NOT_NECESSARY": 2,
+        "JUVENILE_PROTECTED": 2,
+        "CRED_NOT_ACTIVE": 3
+      },
+      "scenarios": {
+        "workflow": 60
+      },
+      "justificationKinds": {
+        "plain": 60
+      },
+      "reviewFlags": {
+        "SEALED_RECORD_COURT_REVIEW": 4
+      }
+    }
+  },
+  "artifacts": {
+    "train.jsonl": {
+      "file": "train.jsonl",
+      "lines": 5254,
+      "sha256": "b19fb31278ce0b52e94119a6e50d5545f4c9046390c5c62d7620e389573835ee"
+    },
+    "train.cases.jsonl": {
+      "file": "train.cases.jsonl",
+      "lines": 5254,
+      "sha256": "d5767641fc4f156397222d1237e56c8c01bf2fe7b0f35f20cad0c4fd06112c91"
+    },
+    "validation-balanced.jsonl": {
+      "file": "validation-balanced.jsonl",
+      "lines": 400,
+      "sha256": "e36e37624602561cc0844d41a0430dd0e01f258f7695b76ad85439a3b603cd0e"
+    },
+    "validation-balanced.cases.jsonl": {
+      "file": "validation-balanced.cases.jsonl",
+      "lines": 400,
+      "sha256": "802d970f54a3efa5128f994f4428475c81d89242159a2c6d77be1210978eae88"
+    },
+    "test-decision-balanced.jsonl": {
+      "file": "test-decision-balanced.jsonl",
+      "lines": 600,
+      "sha256": "7efcb8b1f0d1fc158e56369e60dc9878af1978e601c28fee0e73984c46623489"
+    },
+    "test-decision-balanced.cases.jsonl": {
+      "file": "test-decision-balanced.cases.jsonl",
+      "lines": 600,
+      "sha256": "91e909ee2a49a04ebaabd6cd3281c38105bba590ca7cbca08aaa9562439e5bf6"
+    },
+    "test-reason-balanced.jsonl": {
+      "file": "test-reason-balanced.jsonl",
+      "lines": 540,
+      "sha256": "a53b9dceb493ec5fd19ea1cee97fc60f5146428f878e3b286e9c6cccfc09c371"
+    },
+    "test-reason-balanced.cases.jsonl": {
+      "file": "test-reason-balanced.cases.jsonl",
+      "lines": 540,
+      "sha256": "388235c030d88f987ddd425e5dd405c30ee3f173b3b53f4d0d15178c36f1e3e4"
+    },
+    "test-adversarial.jsonl": {
+      "file": "test-adversarial.jsonl",
+      "lines": 389,
+      "sha256": "acbc55e6c7585d5285b02d0baf289d43beb3a4ba579d617189cac83c0be422b7"
+    },
+    "test-adversarial.cases.jsonl": {
+      "file": "test-adversarial.cases.jsonl",
+      "lines": 389,
+      "sha256": "f3fa70d9c42e95459e7e41f64092c8a21f1d2b12ac785bee7b30341bb3b5e726"
+    },
+    "test-ood-paraphrase.jsonl": {
+      "file": "test-ood-paraphrase.jsonl",
+      "lines": 400,
+      "sha256": "2712b1cadd4aa79def31b6eaf6d588b27b074c46ef1437acd7781886aa138e35"
+    },
+    "test-ood-paraphrase.cases.jsonl": {
+      "file": "test-ood-paraphrase.cases.jsonl",
+      "lines": 400,
+      "sha256": "312b20be460f4c404abf4c5eeeefba437b5adfc5bd4f77fa2708fb3c3ab8c476"
+    },
+    "test-multi-rule.jsonl": {
+      "file": "test-multi-rule.jsonl",
+      "lines": 370,
+      "sha256": "9589dc1cd84d88e3a0fa77471bdf48b5a80ea2d0240a1bf8c25d250726dd390c"
+    },
+    "test-multi-rule.cases.jsonl": {
+      "file": "test-multi-rule.cases.jsonl",
+      "lines": 370,
+      "sha256": "90dd853458c11af586c7745e7361ad86435c893345ad7992ae4b14f6c00d06e0"
+    },
+    "workflow-evaluation.jsonl": {
+      "file": "workflow-evaluation.jsonl",
+      "lines": 60,
+      "sha256": "86268cf78a1c5236eff3d8cee7639bc92f133b6e27e455181e8afded4b27e418"
+    },
+    "workflow-evaluation.cases.jsonl": {
+      "file": "workflow-evaluation.cases.jsonl",
+      "lines": 60,
+      "sha256": "df7797d6ab1a35c8723452cd7ecb738410abd6afb99db6b8395b3f209a89d9ed"
+    },
+    "valid.jsonl": {
+      "file": "valid.jsonl",
+      "lines": 400,
+      "sha256": "e36e37624602561cc0844d41a0430dd0e01f258f7695b76ad85439a3b603cd0e"
+    },
+    "test.jsonl": {
+      "file": "test.jsonl",
+      "lines": 600,
+      "sha256": "7efcb8b1f0d1fc158e56369e60dc9878af1978e601c28fee0e73984c46623489"
+    }
+  },
+  "humanReview": {
+    "file": "human-review-sample.csv",
+    "rows": 161,
+    "strata": 55,
+    "reviewStatus": "pending_manual_review",
+    "claim": "NOT REVIEWED. This file is a stratified sample prepared for review. No part of this repository may describe the dataset as human-reviewed until a person has filled in reviewer_verdict for these rows."
+  },
+  "labelSourceHashes": {
+    "policies/dias-governance-policy-v1.json": "1568f45a422c3ffdbbe75286b89c2cbb0d57c04b1e7dfbe8178c4787d0f62dca",
+    "policies/lib/bundle.js": "1ec974bbee670cc86b89e4ca930b951279bf8022b0b44ee8df22546b0a62550d",
+    "policies/reference-oracle/referencePolicyOracle.js": "ac7db29a0c9442d5a9bbd662f690835f46991d8c0a9a806e925737f1830d83a8",
+    "backend/src/dias/recommendationPrompt.js": "daae145c99403fb158ed88d64e8b31523ca70ad0ce2d3cc5a9c01046a8c201ff",
+    "backend/src/dias/policyContextProvider.js": "0eb729bed95509608bfabdebad9c7aa7ed9895b0ef304f85cb51db76bcb4cd48",
+    "chaincode/crimerecords/lib/dias/verifiedRequest.js": "63648ae89fdb83a2c473bd205d732b9d6efdd654e78aacf6356c33a94a8809ae",
+    "chaincode/crimerecords/lib/dias/recommendationSchema.js": "f640ff7c1d5e41eb5dffc17f5b22d074e461498ef6547c72cd4089b4dd9b6279",
+    "experiments/dias-finetuning/v2/generate.js": "a6f1e53f91b1221217f150d162fd85111cd2a04733413dbc435a4f348f2042c2",
+    "experiments/dias-finetuning/v2/lib/example.js": "ff4d3ccc3ce2a981c461581bd87f9e0480375fa00d80a1cb2957aacef09d86e8",
+    "experiments/dias-finetuning/v2/lib/justifications.js": "0e5f0b2fbf312c39e6b470d0d00f26e2ed9233be240460f76b2d92664f18bdf6",
+    "experiments/dias-finetuning/v2/lib/scenarios.js": "d9b872f92deedb3e9e4d69ab04198a6e2ec8c735ade23652fb836dbd5a294228",
+    "experiments/dias-finetuning/v2/lib/world.js": "378045ba82227467bcb640b7ca5d71ae25d77e87fbdb96a8c5db15bb185acb7d",
+    "experiments/dias-finetuning/v2/lib/plan.js": "6402fd43115c55b50cb0e3f867308d2fb39cf01c74f8f717645ac6d1f8b0085e",
+    "experiments/dias-finetuning/v2/lib/families.js": "3d59098e87f71d242da8fc6bb2df45f8e0600728aed8493e3c9585e8e2e03e7a",
+    "experiments/dias-finetuning/v2/lib/identifiers.js": "e1329be2f53e1101222faec427e7423cdc6dca1a5be104909459feb7382846bb",
+    "experiments/dias-finetuning/v2/lib/rng.js": "af9bd8f3097f5a638fcad750cd5bef86ef76cfd46a4b7a958e901d42612c2185",
+    "experiments/dias-finetuning/v2/lib/assemble.js": "433906b37fe88afd774640ff26fddb6ad3dfab84f1949429d2238dfa2e9850dd"
+  },
+  "knownExclusions": {
+    "INVALID_PURPOSE": "Excluded. The API and the chaincode reject an out-of-vocabulary purpose before a request is committed, so the live model can never see one. See docs/policies/policy-open-questions.md section 7."
+  },
+  "distributionClaim": "SYNTHETIC. The class balance and scenario mix are chosen for training and measurement, not observed from deployment. No production prevalence is known for this system, so no set here should be read as production-like."
+}

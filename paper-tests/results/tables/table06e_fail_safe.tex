@@ -1,0 +1,9 @@
+% Generated from experiment result JSON. Do not edit by hand.
+\toprule
+Failure injected & Observed behaviour & Authorization state & Unauthorized Allow & Record released & Recovery mechanism & Safe \\
+\midrule
+model server unavailable & no decision (HTTP 202) & left pending & no & no & service restart & yes \\
+AI listener unavailable & no decision (HTTP 202) & left pending & no & no & supervisor restart & yes \\
+peers below endorsement majority & refused (HTTP 500) & no decision & no & no & component restored & yes \\
+protected-record storage unavailable & release endpoint HTTP 410 & no decision & no & no & component restored & yes \\
+\bottomrule

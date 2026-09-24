@@ -1,0 +1,183 @@
+{
+  "generatedAtUtc": "2026-08-06T16:29:03.433Z",
+  "environment": {
+    "network": "5 department orgs (Police, Forensics, Prosecution, Court, Audit)",
+    "orderer": "single-node etcdraft",
+    "stateDatabase": "CouchDB per peer",
+    "endorsementPolicy": "MAJORITY Endorsement (3 of 5)",
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "ordererBatchTimeoutMs": 2000,
+    "note": "Latencies are client-observed and include REST, gateway, endorsement, ordering, and commit-wait. Single-host Docker (Colima) — not a distributed deployment."
+  },
+  "workload": {
+    "requestsPerSeed": 10,
+    "seeds": [
+      7,
+      21,
+      42,
+      99,
+      123
+    ]
+  },
+  "buildLatency": {
+    "perSeed": [
+      {
+        "seed": 7,
+        "n": 10,
+        "meanMs": 2072.62,
+        "p50Ms": 2073.26,
+        "p95Ms": 2083.02,
+        "minMs": 2064.48,
+        "maxMs": 2083.02
+      },
+      {
+        "seed": 21,
+        "n": 10,
+        "meanMs": 2073.91,
+        "p50Ms": 2074.3,
+        "p95Ms": 2083.32,
+        "minMs": 2059.92,
+        "maxMs": 2083.32
+      },
+      {
+        "seed": 42,
+        "n": 10,
+        "meanMs": 2080.85,
+        "p50Ms": 2078.15,
+        "p95Ms": 2132.17,
+        "minMs": 2065.71,
+        "maxMs": 2132.17
+      },
+      {
+        "seed": 99,
+        "n": 10,
+        "meanMs": 2062.51,
+        "p50Ms": 2066.52,
+        "p95Ms": 2076.55,
+        "minMs": 2050.77,
+        "maxMs": 2076.55
+      },
+      {
+        "seed": 123,
+        "n": 10,
+        "meanMs": 2064.73,
+        "p50Ms": 2062.68,
+        "p95Ms": 2085.04,
+        "minMs": 2049.74,
+        "maxMs": 2085.04
+      }
+    ],
+    "aggregate": {
+      "n": 50,
+      "meanMs": 2070.92,
+      "p50Ms": 2072.69,
+      "p95Ms": 2083.32,
+      "minMs": 2049.74,
+      "maxMs": 2132.17
+    },
+    "marginalP50Ms": 72.69,
+    "note": "End-to-end p50 includes the orderer's 2000 ms BatchTimeout. marginalP50Ms is the remainder: policy evaluation, explanation artifact construction, endorsement by 3 of 5 orgs, validation, and commit."
+  },
+  "verifyLatency": {
+    "perSeed": [
+      {
+        "seed": 7,
+        "n": 10,
+        "meanMs": 5.49,
+        "p50Ms": 4.84,
+        "p95Ms": 10.84,
+        "minMs": 3.82,
+        "maxMs": 10.84
+      },
+      {
+        "seed": 21,
+        "n": 10,
+        "meanMs": 4.36,
+        "p50Ms": 4.62,
+        "p95Ms": 6,
+        "minMs": 3.44,
+        "maxMs": 6
+      },
+      {
+        "seed": 42,
+        "n": 10,
+        "meanMs": 3.66,
+        "p50Ms": 3.52,
+        "p95Ms": 4.8,
+        "minMs": 3.22,
+        "maxMs": 4.8
+      },
+      {
+        "seed": 99,
+        "n": 10,
+        "meanMs": 4.17,
+        "p50Ms": 4.05,
+        "p95Ms": 5.46,
+        "minMs": 3.74,
+        "maxMs": 5.46
+      },
+      {
+        "seed": 123,
+        "n": 10,
+        "meanMs": 4.3,
+        "p50Ms": 3.84,
+        "p95Ms": 6.91,
+        "minMs": 3.51,
+        "maxMs": 6.91
+      }
+    ],
+    "aggregate": {
+      "n": 50,
+      "meanMs": 4.4,
+      "p50Ms": 3.99,
+      "p95Ms": 6.5,
+      "minMs": 3.22,
+      "maxMs": 10.84
+    }
+  },
+  "storage": {
+    "meanBytes": 857,
+    "minBytes": 856,
+    "maxBytes": 858,
+    "note": "Serialized committed audit record (decision + minimized subject + environment commitments + explanation artifact + explanation hash)."
+  },
+  "paperSimulationBaseline": {
+    "buildLatencyP50Ms": 11.1,
+    "verifyLatencyP50Ms": 2.5,
+    "storagePerEventBytes": 353.5,
+    "source": "SEBA-XAI paper, Section IV-F (local permissioned simulation)"
+  },
+  "attackReplay": [
+    {
+      "attack": "explanation-hash substitution",
+      "mechanism": "reviewer presents a modified explanation artifact",
+      "detectedBy": "on-chain explanation hash recomputation",
+      "detected": true
+    },
+    {
+      "attack": "off-chain record tampering",
+      "mechanism": "record payload rewritten in agency storage after commitment",
+      "detectedBy": "payload hash vs on-chain commitment",
+      "detected": true
+    },
+    {
+      "attack": "unauthorized audit-record injection",
+      "mechanism": "oversight org attempts to author a police case record",
+      "detectedBy": "chaincode clientIdentity MSP check (not endorsement policy alone)",
+      "detected": true
+    },
+    {
+      "attack": "request backdating",
+      "mechanism": "client supplies its own decision timestamp",
+      "detectedBy": "schema allow-list + chaincode uses stub.getDateTimestamp()",
+      "detected": true
+    },
+    {
+      "attack": "approval-token exposure (replay precondition)",
+      "mechanism": "check whether a raw approval token is readable from the ledger",
+      "detectedBy": "chaincode stores only sha256(token)",
+      "detected": true
+    }
+  ]
+}

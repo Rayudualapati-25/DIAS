@@ -1,0 +1,22 @@
+[config] JWT_SECRET not set — using a dev-only default. Do not deploy like this.
+
+========================================================================
+EXPERIMENT 03 — security, end-to-end workflows and reliability
+========================================================================
+  preflight OK — paper-freeze-v1 (working tree dirty)
+
+  A. tamper / security
+    11/11 checks behaved as intended
+
+  B/C. Allow / Deny / Escalate end to end
+    Allow      allow/POLICY_SATISFIED  released=true
+    Deny       deny/CRED_NOT_ACTIVE  released=false
+    Escalate   escalate/MODEL_INPUT_DISAGREEMENT  released=false
+
+  D. audit-originated escalation
+EXP-03 failed: TypeError: fetch failed
+    at node:internal/deps/undici/undici:13510:13
+    at async api (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/paper-tests/common.js:51:15)
+    at async raise (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/paper-tests/03-security-e2e-reliability.js:63:13)
+    at async partAuditOriginated (/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/paper-tests/03-security-e2e-reliability.js:178:20)
+    at async /Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/paper-tests/03-security-e2e-reliability.js:488:116

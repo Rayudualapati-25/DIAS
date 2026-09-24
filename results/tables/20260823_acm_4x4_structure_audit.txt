@@ -1,0 +1,29 @@
+SEBA-XAI ACM manuscript structure audit
+Date: 2026-08-23
+Source: papers/final_paper/SEBA_XAI_ACM_6page.tex
+
+SEBA-XAI Design and Methodology: 4 subsections
+1. Trust and storage boundary
+2. Formal request model
+3. Contextual policy evaluation
+4. Explanation and audit integrity
+
+Implementation and Experimental Setup: 4 subsections
+1. Chaincode, gateway, and vault
+2. Fabric deployment
+3. Experimental workloads
+4. Measurement and integrity protocol
+
+Automated check: PASS (methodology=4, implementation=4)
+Tectonic compile: PASS
+Compiled pages including references: 5 (limit: 6)
+Figures: 3
+Tables: 2
+Numbered equation groups: 5
+Undefined citations or references: 0
+Overfull hbox/vbox warnings: 0/0
+Evidence gates:
+- decisive-rule checker: 12/12 rules fired; 10/12 subset-safe
+- quantitative Figure 3 reproduction: consistent with recorded artifact
+
+No empirical value was added or changed for this structural revision.

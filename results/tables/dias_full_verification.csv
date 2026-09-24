@@ -1,0 +1,8 @@
+check,scope,passed,failed,status,evidence
+chaincode_tests,unit_contract_and_policy,211,0,passed,experiments/runs/20260910_dias_full_verification/verification.json
+backend_tests,unit_plus_live_api,111,0,passed,experiments/runs/20260910_dias_full_verification/verification.json
+frontend_tests,pure_view_model_and_storage,11,0,passed,experiments/runs/20260910_dias_full_verification/verification.json
+workflow_scenarios,offline_baseline_proposed_ablations,27,0,passed,experiments/runs/20260910_dias_workflow_comparison/metrics.json
+live_acceptance,hyperledger_fabric_plus_qwen,9,0,passed,experiments/runs/20260910_dias_live_fabric/verification.json
+browser_qa,requester_auditor_responsive_journey,3,0,passed,experiments/runs/20260910_dias_full_verification/verification.json
+repository_checks,publication_compose_shell,1,0,passed,experiments/runs/20260910_dias_full_verification/verification.json
