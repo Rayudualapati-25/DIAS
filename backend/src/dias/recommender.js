@@ -19,6 +19,7 @@ const {
 } = require('../../../chaincode/crimerecords/lib/dias/verifiedRequest');
 const { PROMPT_VERSION, buildRecommendationMessages } = require('./recommendationPrompt');
 const { parseRecommendation } = require('./recommendationContract');
+const trace = require('../util/trace');
 
 const PROVENANCE_SCHEMA_VERSION = 'dias-recommendation-provenance-v1';
 const DEFAULTS = Object.freeze({ maxPromptChars: 24000, maxTokens: 256, timeoutMs: 60000 });
@@ -159,6 +160,15 @@ function createRecommender({
       promptTokens: Number.isInteger(usage.prompt_tokens) ? usage.prompt_tokens : null,
       completionTokens: Number.isInteger(usage.completion_tokens) ? usage.completion_tokens : null,
     };
+    const cachedTokens = usage.prompt_tokens_details?.cached_tokens;
+    trace.emit('model.response', {
+      requestId,
+      promptChars,
+      promptTokens: usageProvenance.promptTokens,
+      completionTokens: usageProvenance.completionTokens,
+      cachedPromptTokens: Number.isInteger(cachedTokens) ? cachedTokens : null,
+      inferenceMs: inference,
+    });
     if (typeof content !== 'string') {
       return finish(GENERATION_STATUS.INVALID_OUTPUT, {
         provenance: { ...promptProvenance, usage: usageProvenance, errorCode: 'no_message_content', errorDetail: detail(reply.text) },

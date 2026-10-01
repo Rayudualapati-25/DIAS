@@ -42,11 +42,16 @@ describe('DIAS access workflow', () => {
       expect(JSON.parse(ctx._events[0].payload)).to.include({ nextStep: 'AUDITOR_DECISION' });
     });
 
-    it('writes nothing about the LLM or the justification to the ledger', async () => {
+    it('writes the LLM recommendation value but none of its reasoning or provenance', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      await world.decide(request.requestId, 'FORCE_ALLOW', 'NOT_AGREED');
+      await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY');
       const ledgerText = [...world.ledger._state.keys(), ...world.ledger._state.values()].join('\n');
-      expect(ledgerText).to.not.match(/recommendation|justification|provenance|attestation|llm-decider/i);
+      expect(ledgerText).to.match(/"llmRecommendation":"DENY"/);
+      // The value only: no reason text, no reason code, no model or policy provenance,
+      // no justification, and nothing from the retired AI organisation.
+      expect(ledgerText).to.not.match(
+        /justification|provenance|attestation|llm-decider|reasonCode|policy_refs|modelId|promptHash/i
+      );
       expect(world.ledger._privateState.size).to.equal(0);
     });
   });
@@ -54,7 +59,7 @@ describe('DIAS access workflow', () => {
   describe('decision log: auditor FORCE_ALLOW that agreed with an LLM ALLOW', () => {
     it('grants access, records AGREED, and creates no dynamic authorization', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED');
+      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW');
       expect(result.auditorDecision).to.include({
         requestId: request.requestId, recordId: 'FIR-1', decision: 'FORCE_ALLOW', llmAgreement: 'AGREED',
         authorizationCreated: false,
@@ -74,7 +79,7 @@ describe('DIAS access workflow', () => {
   describe('decision log: auditor FORCE_DENY that agreed with an LLM DENY', () => {
     it('denies access without creating a dynamic authorization', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      const { result } = await world.decide(request.requestId, 'FORCE_DENY', 'AGREED');
+      const { result } = await world.decide(request.requestId, 'FORCE_DENY', 'DENY');
       expect(result.accessOutcome).to.include({ outcome: 'DENIED', basis: 'AUDITOR_DECISION' });
       expect(result.auditorDecision).to.include({ llmAgreement: 'AGREED', authorizationCreated: false });
       expect(result.dynamicAuthorization).to.equal(null);
@@ -106,6 +111,7 @@ describe('DIAS access workflow', () => {
       expect(authorization.auditorDecision).to.deep.equal({
         auditorDecisionId: decision.auditorDecision.auditorDecisionId,
         decision: 'FORCE_ALLOW',
+        llmRecommendation: 'DENY',
         llmAgreement: 'NOT_AGREED',
       });
       expect(authorization.createdBy).to.include({ username: 'sp.test', mspId: 'AuditMSP', role: 'sp' });
@@ -123,13 +129,13 @@ describe('DIAS access workflow', () => {
   describe('decision log: auditor FORCE_DENY that did not agree with an LLM ALLOW', () => {
     it('denies access, records NOT_AGREED, and creates no dynamic authorization', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      const { result } = await world.decide(request.requestId, 'FORCE_DENY', 'NOT_AGREED');
+      const { result } = await world.decide(request.requestId, 'FORCE_DENY', 'ALLOW');
       expect(result.accessOutcome.outcome).to.equal('DENIED');
       expect(result.auditorDecision).to.include({ llmAgreement: 'NOT_AGREED', authorizationCreated: false });
       expect(result.dynamicAuthorization).to.equal(null);
       await expect(world.decide(
         (await world.submit(INSPECTOR, { recordId: 'FIR-2' })).result.requestId,
-        'FORCE_DENY', 'NOT_AGREED', { validUntilUtc: '2026-09-01T00:00:00Z' }
+        'FORCE_DENY', 'ALLOW', { validUntilUtc: '2026-09-01T00:00:00Z' }
       )).to.be.rejectedWith(/applies only when a dynamic authorization is created/);
     });
   });
@@ -137,10 +143,10 @@ describe('DIAS access workflow', () => {
   describe('decision log: no LLM recommendation', () => {
     it('lets the auditor decide and never creates a dynamic authorization', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'NO_RECOMMENDATION', {
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'UNAVAILABLE', {
         validUntilUtc: '2026-09-01T00:00:00Z',
       })).to.be.rejectedWith(/applies only when a dynamic authorization is created/);
-      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'NO_RECOMMENDATION');
+      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'UNAVAILABLE');
       expect(result.accessOutcome.outcome).to.equal('GRANTED');
       expect(result.auditorDecision).to.include({ llmAgreement: 'NO_RECOMMENDATION', authorizationCreated: false });
       expect(result.dynamicAuthorization).to.equal(null);
@@ -152,9 +158,9 @@ describe('DIAS access workflow', () => {
   describe('public decision log', () => {
     it('lets any signed-in member read who asked for what and what was decided', async () => {
       const granted = (await world.submit(INSPECTOR)).result;
-      await world.decide(granted.requestId, 'FORCE_ALLOW', 'NOT_AGREED');
+      await world.decide(granted.requestId, 'FORCE_ALLOW', 'DENY');
       const denied = (await world.submit(CONSTABLE, { recordId: 'FIR-2' })).result;
-      await world.decide(denied.requestId, 'FORCE_DENY', 'AGREED');
+      await world.decide(denied.requestId, 'FORCE_DENY', 'DENY');
 
       const { result: entries } = await world.run(CONSTABLE, world.nextTx('QUERY'),
         (ctx) => world.contracts.access.QueryAccessDecisions(ctx, '50'));
@@ -163,15 +169,18 @@ describe('DIAS access workflow', () => {
       const first = entries.find((entry) => entry.requestId === granted.requestId);
       expect(first).to.include({
         recordId: 'FIR-1', caseId: 'CASE-1', action: 'view', purpose: 'investigation',
-        outcome: 'GRANTED', basis: 'AUDITOR_DECISION', decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED',
+        outcome: 'GRANTED', basis: 'AUDITOR_DECISION', decision: 'FORCE_ALLOW',
+        llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
       });
       expect(first.requester).to.include({ username: 'insp.test', organization: 'police', role: 'inspector' });
       expect(first.auditor).to.include({ username: 'sp.test', role: 'sp' });
       expect(first.createdAuthorizationId).to.match(/^AUTH-/);
-      // Nothing about the LLM's own answer, and no identity hashes.
-      expect(JSON.stringify(entries)).to.not.match(/identityHash|reasonCode|recommendation"/i);
+      // The recommendation value, but none of the LLM's reasoning, and no identity hashes.
+      expect(JSON.stringify(entries)).to.not.match(/identityHash|reasonCode|policy_refs|modelId/i);
       expect(entries.find((entry) => entry.requestId === denied.requestId))
-        .to.include({ outcome: 'DENIED', decision: 'FORCE_DENY', llmAgreement: 'AGREED' });
+        .to.include({
+          outcome: 'DENIED', decision: 'FORCE_DENY', llmRecommendation: 'DENY', llmAgreement: 'AGREED',
+        });
     });
 
     it('shows an automatic grant as decided by its dynamic authorization', async () => {
@@ -182,7 +191,8 @@ describe('DIAS access workflow', () => {
         (ctx) => world.contracts.access.QueryAccessDecisions(ctx, '50'));
       const automatic = entries.find((entry) => entry.requestId === repeat.requestId);
       expect(automatic).to.include({
-        outcome: 'GRANTED', basis: 'DYNAMIC_AUTHORIZATION', decision: null, llmAgreement: null,
+        outcome: 'GRANTED', basis: 'DYNAMIC_AUTHORIZATION', decision: null,
+        llmRecommendation: null, llmAgreement: null,
         authorizationId: authorization.authorizationId,
       });
       expect(automatic.auditor).to.equal(null);
@@ -192,7 +202,7 @@ describe('DIAS access workflow', () => {
       const times = { 'FIR-1': '2026-09-01T09:00:00.000Z', 'FIR-2': '2026-09-01T10:00:00.000Z' };
       for (const recordId of ['FIR-1', 'FIR-2']) {
         const request = (await world.submit(INSPECTOR, { recordId })).result;
-        await world.decide(request.requestId, 'FORCE_DENY', 'AGREED', { timestamp: times[recordId] });
+        await world.decide(request.requestId, 'FORCE_DENY', 'DENY', { timestamp: times[recordId] });
       }
       const { result: entries } = await world.run(INSPECTOR, world.nextTx('QUERY'),
         (ctx) => world.contracts.access.QueryAccessDecisions(ctx, '1'));
@@ -324,7 +334,7 @@ describe('DIAS access workflow', () => {
 
     it('rejects an expiry when no dynamic authorization is created', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED', { validUntilUtc: '2026-09-01T00:00:00Z' }))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { validUntilUtc: '2026-09-01T00:00:00Z' }))
         .to.be.rejectedWith(/applies only when a dynamic authorization is created/);
     });
   });
@@ -333,7 +343,7 @@ describe('DIAS access workflow', () => {
     it('never revokes other authorizations', async () => {
       const { authorization } = await world.createAuthorization();
       const { result: other } = await world.submit(INSPECTOR, { recordId: 'FIR-2' });
-      const { result } = await world.decide(other.requestId, 'FORCE_DENY', 'NOT_AGREED');
+      const { result } = await world.decide(other.requestId, 'FORCE_DENY', 'ALLOW');
       expect(result.accessOutcome.outcome).to.equal('DENIED');
       expect(world.readState('diasAuthorization', authorization.authorizationId).status).to.equal('active');
       const { result: repeat } = await world.submit(INSPECTOR);

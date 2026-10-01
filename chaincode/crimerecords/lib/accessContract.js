@@ -8,11 +8,16 @@
  *    authorization for it. A match grants access without auditor review; a miss
  *    waits for the auditor.
  * 2. SubmitAuditorDecision (AuditMSP district head) commits FORCE_ALLOW or
- *    FORCE_DENY and whether that decision agreed with the LLM recommendation shown
- *    to the auditor. The LLM runs in the application backend, and its
- *    recommendation is never written to the ledger. A FORCE_ALLOW that did not
- *    agree with the LLM (an LLM DENY) creates an exact-record dynamic
- *    authorization. The access outcome is recorded last.
+ *    FORCE_DENY together with the LLM recommendation the auditor was shown:
+ *    ALLOW, DENY, or UNAVAILABLE when the backend had no recommendation to show.
+ *    The LLM runs in the application backend, but its recommendation is
+ *    committed here, so the ledger records what was recommended as well as what
+ *    was decided. Agreement is derived from the two, never supplied. A
+ *    FORCE_ALLOW over an LLM DENY creates an exact-record dynamic authorization.
+ *    The access outcome is recorded last.
+ *
+ *    Only the recommendation value is committed. Its free-text reason, its
+ *    reason code and its model provenance stay off the ledger.
  *
  * Every stage is an ordered lifecycle event under the request ID. This contract
  * never evaluates governance policy.
@@ -54,6 +59,12 @@ const LLM_AGREEMENT = Object.freeze({
   NOT_AGREED: 'NOT_AGREED',
   NO_RECOMMENDATION: 'NO_RECOMMENDATION',
 });
+/** What the backend shows the auditor. UNAVAILABLE covers every generation failure. */
+const LLM_RECOMMENDATION = Object.freeze({
+  ALLOW: 'ALLOW',
+  DENY: 'DENY',
+  UNAVAILABLE: 'UNAVAILABLE',
+});
 const MAX_REASON = 500;
 const ORG_TO_MSP = Object.freeze({
   police: MSP.POLICE,
@@ -71,6 +82,20 @@ const REQUEST_INPUT_SCHEMA = Object.freeze({
 
 const shortTxId = (ctx) => ctx.stub.getTxID().slice(0, 16);
 const token = (value) => String(value || '').trim().toUpperCase().replace(/[-\s]+/g, '_');
+
+/**
+ * Agreement is derived here from the committed recommendation and the auditor
+ * decision, so the ledger can never hold an agreement value that contradicts the
+ * recommendation recorded beside it.
+ */
+function agreementFor(decision, llmRecommendation) {
+  if (llmRecommendation === LLM_RECOMMENDATION.UNAVAILABLE) {
+    return LLM_AGREEMENT.NO_RECOMMENDATION;
+  }
+  const auditorAllows = decision === 'FORCE_ALLOW';
+  const llmAllows = llmRecommendation === LLM_RECOMMENDATION.ALLOW;
+  return auditorAllows === llmAllows ? LLM_AGREEMENT.AGREED : LLM_AGREEMENT.NOT_AGREED;
+}
 
 function parseJsonArgument(text, label) {
   try {
@@ -225,8 +250,8 @@ class AccessContract extends Contract {
   }
 
   async _writeOutcome(ctx, {
-    request, outcome, basis, auditorDecisionId = null, matchedAuthorization = null,
-    createdAuthorizationId = null, timestamp,
+    request, outcome, basis, auditorDecisionId = null, llmRecommendation = null,
+    matchedAuthorization = null, createdAuthorizationId = null, timestamp,
   }) {
     const txId = ctx.stub.getTxID();
     const outcomeId = `OUTCOME-${shortTxId(ctx)}`;
@@ -243,6 +268,7 @@ class AccessContract extends Contract {
       outcome,
       basis,
       auditorDecisionId,
+      llmRecommendation,
       authorizationId: matchedAuthorization ? matchedAuthorization.authorizationId : null,
       authorizationGeneration: matchedAuthorization ? matchedAuthorization.generation : null,
       originatingRequestId: matchedAuthorization ? matchedAuthorization.originatingRequestId : null,
@@ -267,6 +293,7 @@ class AccessContract extends Contract {
       decisionAuthority: basis === 'DYNAMIC_AUTHORIZATION' ? 'dynamic-authorization' : 'auditor',
       authorizationId: record.authorizationId,
       auditorDecisionId,
+      llmRecommendation,
       subject: {
         username: request.requester.username,
         identityHash: request.requester.identityHash,
@@ -285,6 +312,7 @@ class AccessContract extends Contract {
           outcome,
           basis,
           auditorDecisionId,
+          llmRecommendation,
           authorizationId: record.authorizationId,
           createdAuthorizationId,
           recordId: request.recordId,
@@ -484,7 +512,8 @@ class AccessContract extends Contract {
   }
 
   async _createAuthorization(ctx, {
-    request, auditorDecisionId, decision, llmAgreement, actor, validUntilUtc, timestamp, txId,
+    request, auditorDecisionId, decision, llmRecommendation, llmAgreement, actor,
+    validUntilUtc, timestamp, txId,
   }) {
     const scopeKey = this._key(ctx, AUTHORIZATION_SCOPE_KEY, request.authorizationScopeHash);
     const index = await this._read(ctx, scopeKey);
@@ -497,7 +526,7 @@ class AccessContract extends Contract {
       scope: request.authorizationScope,
       verifiedRequest: request.verifiedRequest,
       originatingRequestId: request.requestId,
-      auditorDecision: { auditorDecisionId, decision, llmAgreement },
+      auditorDecision: { auditorDecisionId, decision, llmRecommendation, llmAgreement },
       validUntilUtc,
       previous,
     });
@@ -539,6 +568,7 @@ class AccessContract extends Contract {
       validUntilUtc: created.validUntilUtc,
       originatingRequestId: request.requestId,
       auditorDecisionId,
+      llmRecommendation,
       llmAgreement,
       supersedesAuthorizationId: created.supersedesAuthorizationId,
     };
@@ -565,20 +595,21 @@ class AccessContract extends Contract {
   }
 
   /**
-   * Step 2 — an AuditMSP district head commits the final decision and whether it
-   * agreed with the LLM recommendation the auditor was shown. NO_RECOMMENDATION
-   * means the backend had no valid recommendation to show.
+   * Step 2 — an AuditMSP district head commits the final decision together with
+   * the LLM recommendation the auditor was shown. UNAVAILABLE means the backend
+   * had no valid recommendation to show, which the ledger records as such.
    */
-  async SubmitAuditorDecision(ctx, requestId, decisionText, llmAgreementText, validUntilUtc) {
+  async SubmitAuditorDecision(ctx, requestId, decisionText, llmRecommendationText, validUntilUtc) {
     const caller = this._requireAuditor(ctx, 'SubmitAuditorDecision');
     const decision = token(decisionText);
     if (!AUDITOR_DECISIONS.includes(decision)) {
       throw new Error('auditor decision must be one of [FORCE_ALLOW, FORCE_DENY]');
     }
-    const llmAgreement = token(llmAgreementText);
-    if (!Object.values(LLM_AGREEMENT).includes(llmAgreement)) {
-      throw new Error('llmAgreement must be one of [AGREED, NOT_AGREED, NO_RECOMMENDATION]');
+    const llmRecommendation = token(llmRecommendationText);
+    if (!Object.values(LLM_RECOMMENDATION).includes(llmRecommendation)) {
+      throw new Error('llmRecommendation must be one of [ALLOW, DENY, UNAVAILABLE]');
     }
+    const llmAgreement = agreementFor(decision, llmRecommendation);
     const request = await this._getRequest(ctx, requestId);
     this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
     const identityHash = sha256(caller.id);
@@ -596,7 +627,8 @@ class AccessContract extends Contract {
     const actor = actorFrom(caller, identityHash);
     const authorization = createsAuthorization
       ? await this._createAuthorization(ctx, {
-        request, auditorDecisionId, decision, llmAgreement, actor, validUntilUtc, timestamp, txId,
+        request, auditorDecisionId, decision, llmRecommendation, llmAgreement, actor,
+        validUntilUtc, timestamp, txId,
       })
       : null;
     const createdAuthorizationId = authorization ? authorization.authorization.authorizationId : null;
@@ -608,6 +640,7 @@ class AccessContract extends Contract {
       recordId: request.recordId,
       auditor: { ...actor, stableUserId: stableUserId(caller.mspId, caller.enrollmentId) },
       decision,
+      llmRecommendation,
       llmAgreement,
       verifiedRequestHash: request.verifiedRequestHash,
       authorizationCreated: createsAuthorization,
@@ -622,6 +655,7 @@ class AccessContract extends Contract {
       outcome: decision === 'FORCE_ALLOW' ? 'GRANTED' : 'DENIED',
       basis: 'AUDITOR_DECISION',
       auditorDecisionId,
+      llmRecommendation,
       createdAuthorizationId,
       timestamp,
     });
@@ -635,6 +669,7 @@ class AccessContract extends Contract {
           auditorMsp: caller.mspId,
           auditorRole: caller.role,
           decision,
+          llmRecommendation,
           llmAgreement,
           verifiedRequestHash: request.verifiedRequestHash,
           auditorDecisionHash: auditorDecision.auditorDecisionHash,
@@ -650,6 +685,7 @@ class AccessContract extends Contract {
       ...request,
       status: decision === 'FORCE_ALLOW' ? REQUEST_STATUS.GRANTED : REQUEST_STATUS.DENIED,
       auditorReviewStatus: decision,
+      llmRecommendation,
       llmAgreement,
       auditorDecisionId,
       outcomeId: outcome.record.outcomeId,
@@ -662,6 +698,7 @@ class AccessContract extends Contract {
       stages: [...events.map((event) => event.type), ...(authorization ? authorization.extraStages : [])],
       nextStep: null,
       outcome: outcome.record.outcome,
+      llmRecommendation,
       llmAgreement,
       createdAuthorizationId,
     });
@@ -794,11 +831,12 @@ class AccessContract extends Contract {
 
   /**
    * The public decision log: for every settled request, who asked for which
-   * record and what was decided — by an auditor, with its LLM agreement, or
-   * automatically by a dynamic authorization. Readable by every identity on the
-   * channel, because "who decided what, and for whom" is exactly what the shared
-   * ledger exists to make checkable. It carries no identity hash, no
-   * justification, and nothing the LLM produced.
+   * record, what was decided — by an auditor, or automatically by a dynamic
+   * authorization — and the LLM recommendation that decision was taken against,
+   * which is UNAVAILABLE when the backend had none to show. Readable by every
+   * identity on the channel, because "who decided what, and for whom" is exactly
+   * what the shared ledger exists to make checkable. It carries no identity hash,
+   * no justification, and none of the LLM's reasoning or model provenance.
    *
    * The scan reads every outcome and returns the newest `limit`, which is
    * adequate for a research prototype, not for a production log.
@@ -841,6 +879,7 @@ class AccessContract extends Contract {
         basis: outcome.basis,
         auditor: decision ? { username: decision.auditor.username, role: decision.auditor.role } : null,
         decision: decision ? decision.decision : null,
+        llmRecommendation: decision ? decision.llmRecommendation : null,
         llmAgreement: decision ? decision.llmAgreement : null,
         authorizationId: outcome.authorizationId,
         createdAuthorizationId: outcome.createdAuthorizationId,
@@ -890,4 +929,6 @@ class AccessContract extends Contract {
 module.exports = AccessContract;
 module.exports.REQUEST_STATUS = REQUEST_STATUS;
 module.exports.LLM_AGREEMENT = LLM_AGREEMENT;
+module.exports.LLM_RECOMMENDATION = LLM_RECOMMENDATION;
+module.exports.agreementFor = agreementFor;
 module.exports.historyTimestamp = historyTimestamp;

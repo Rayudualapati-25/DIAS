@@ -45,7 +45,11 @@ export function buildShell(user, onSignOut) {
   const content = el('main', { class: 'content', id: 'module-content' });
   const navLinks = new Map();
 
-  const nav = el('nav', { class: 'sidebar' },
+  const nav = el('nav', { class: 'sidebar', 'aria-label': 'Portal sections' },
+    el('div', { class: 'sidebar-intro' },
+      el('span', { class: 'sidebar-intro-label' }, 'WORKSPACE'),
+      el('strong', {}, 'Explore services'),
+      el('small', {}, 'Choose a task or review an existing request.')),
     groupModules(visibleModules(user)).map((bucket) =>
       el('div', { class: 'nav-group' },
         el('h4', { class: 'nav-group-title' }, bucket.group),
@@ -61,13 +65,16 @@ export function buildShell(user, onSignOut) {
 
   const header = el('header', { class: 'topbar' },
     el('div', { class: 'brand' },
-      el('span', { class: 'brand-mark', 'aria-hidden': 'true' }, 'CR'),
+      el('span', { class: 'brand-mark', 'aria-hidden': 'true' }, 'D'),
       el('div', { class: 'brand-copy' },
-        el('strong', {}, 'Crime Records Access Network'),
-        el('small', {},
-          el('span', { class: 'network-dot', 'aria-hidden': 'true' }),
-          'diaschannel · Hyperledger Fabric'))),
+        el('strong', {}, 'DIAS'),
+        el('small', {}, 'Access service portal'))),
+    el('div', { class: 'topbar-context' },
+      el('span', { class: 'network-dot', 'aria-hidden': 'true' }),
+      'Crime Records Access Network'),
     el('div', { class: 'session' },
+      el('span', { class: 'session-avatar', 'aria-hidden': 'true' },
+        (user.displayName || user.username || 'U').trim().charAt(0).toUpperCase()),
       el('div', { class: 'who' },
         el('span', {}, user.displayName || user.username),
         el('small', {}, `${ORG_LABEL[user.org] || user.org} · ${user.role}`)),
@@ -82,6 +89,8 @@ export function buildShell(user, onSignOut) {
 
     for (const [id, link] of navLinks) {
       link.classList.toggle('active', id === moduleId);
+      if (id === moduleId) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     }
 
     if (!module) {
@@ -100,6 +109,8 @@ export function buildShell(user, onSignOut) {
 
     replace(content,
       el('div', { class: 'module-head' },
+        el('div', { class: 'module-eyebrow' }, 'Workspace',
+          el('span', { 'aria-hidden': 'true' }, ' / '), module.group || 'Services'),
         el('h1', {}, module.title),
         module.summary && el('p', { class: 'module-summary' }, module.summary)));
     try {

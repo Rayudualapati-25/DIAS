@@ -10,9 +10,11 @@ const fs = require('fs');
 const path = require('path');
 const grpc = require('@grpc/grpc-js');
 const { connect, signers } = require('@hyperledger/fabric-gateway');
+const { newCommitError } = require('@hyperledger/fabric-gateway/dist/commiterror');
 const crypto = require('crypto');
 const { NETWORK_DIR, ORG_CONFIG, CHANNEL, CHAINCODE } = require('../config');
 const { withCommitRetry } = require('./commitErrors');
+const trace = require('../util/trace');
 
 const grpcClients = new Map();   // org -> grpc.Client (shared per org)
 const gateways = new Map();      // username -> Gateway
@@ -79,14 +81,53 @@ const utf8 = new TextDecoder();
 
 async function evaluate(org, user, contractName, fn, ...args) {
   const contract = getContract(org, user, contractName);
+  const started = trace.now();
   const result = await contract.evaluateTransaction(fn, ...args);
+  if (trace.enabled()) {
+    trace.emit('fabric.evaluate', { org, contract: contractName, fn, ms: trace.now() - started });
+  }
   return JSON.parse(utf8.decode(result));
+}
+
+/**
+ * The same steps as fabric-gateway's Contract.submit — endorse, submit to the
+ * orderer, wait for the commit status, fail on an unsuccessful status — with the
+ * time of each step written to the experiment trace. Used only while tracing is
+ * on, so the normal path is the library's own call.
+ */
+async function submitStaged(contract, contractName, fn, options) {
+  const started = trace.now();
+  const transaction = await contract.newProposal(fn, options).endorse();
+  const endorsed = trace.now();
+  const submitted = await transaction.submit();
+  const accepted = trace.now();
+  const status = await submitted.getStatus();
+  const committed = trace.now();
+  const firstArgument = options.arguments && options.arguments[0];
+  trace.emit('fabric.submit', {
+    contract: contractName,
+    fn,
+    arg0: typeof firstArgument === 'string' ? firstArgument.slice(0, 80) : null,
+    txId: status.transactionId,
+    blockNumber: String(status.blockNumber),
+    code: status.code,
+    successful: status.successful,
+    startedAt: started,
+    endorseMs: endorsed - started,
+    ordererSubmitMs: accepted - endorsed,
+    commitWaitMs: committed - accepted,
+    totalMs: committed - started,
+  });
+  if (!status.successful) throw newCommitError(status);
+  return submitted.getResult();
 }
 
 /** Submit and wait for commit; a commit conflict is proposed again (see commitErrors.js). */
 async function submit(org, user, contractName, fn, ...args) {
   const contract = getContract(org, user, contractName);
-  const result = await withCommitRetry(() => contract.submitTransaction(fn, ...args));
+  const result = await withCommitRetry(() => (trace.enabled()
+    ? submitStaged(contract, contractName, fn, { arguments: args })
+    : contract.submitTransaction(fn, ...args)));
   return JSON.parse(utf8.decode(result));
 }
 
@@ -116,6 +157,7 @@ async function submitWithTransient(
 module.exports = {
   evaluate,
   submit,
+  submitStaged,
   submitWithTransient,
   EVIDENCE_ENDORSERS,
 };

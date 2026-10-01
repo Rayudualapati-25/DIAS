@@ -176,6 +176,10 @@ export const api = {
     request: (body) => request('POST', '/access/request', body),
     accessRequest: (requestId) => request('GET', `/access/request/${requestId}`),
     requestTrail: (requestId) => request('GET', `/access/request/${requestId}/trail`),
+    // The "why" behind one decision. Everyone reads the model's structured
+    // account; its free text comes back only for the requester and auditors.
+    requestRecommendation: (requestId) =>
+      request('GET', `/access/request/${requestId}/recommendation`),
     forRecord: (recordId) => request('GET', `/access/record/${recordId}`),
     decision: (recordId, decisionId) =>
       request('GET', `/access/decision/${recordId}/${decisionId}`),

@@ -63,14 +63,25 @@ export function loginView(onSignedIn) {
     el('span', {}, role),
     el('code', {}, `@${user}`)));
 
-  return el('div', { class: 'login-wrap' },
-    el('h1', {}, 'Crime Records Access Network'),
-    hint('Permissioned Hyperledger Fabric network for inter-agency access governance. ',
-      'No application password database is used.'),
-    card('Select a local Fabric identity',
-      'Development mode: certificates and private keys are held by this local backend. '
-      + 'Production users should prove possession of a client-held key.', form,
-      el('div', { class: 'demo-users' },
-        el('h3', {}, 'Enrolled demo identities'),
-        el('div', { class: 'account-grid' }, chips))));
+  return el('div', { class: 'login-page' },
+    el('header', { class: 'login-topbar' },
+      el('span', { class: 'brand-mark', 'aria-hidden': 'true' }, 'D'),
+      el('strong', {}, 'DIAS'),
+      el('span', { class: 'login-topbar-divider', 'aria-hidden': 'true' }),
+      el('span', {}, 'Crime Records Access Network')),
+    el('main', { class: 'login-wrap' },
+      el('section', { class: 'login-intro' },
+        el('span', { class: 'login-kicker' }, 'SECURE ACCESS PORTAL'),
+        el('h1', {}, 'The right access. A clear decision trail.'),
+        hint('Request protected records, review exceptions, and trace every decision in one place.'),
+        el('div', { class: 'login-features' },
+          el('div', {}, el('strong', {}, 'Request'), el('span', {}, 'Submit a record access request')),
+          el('div', {}, el('strong', {}, 'Review'), el('span', {}, 'Make an accountable decision')),
+          el('div', {}, el('strong', {}, 'Trace'), el('span', {}, 'Follow the recorded outcome')))),
+      card('Sign in to DIAS',
+        'Select your enrolled identity to enter the portal.', form,
+        el('div', { class: 'demo-users' },
+          el('h3', {}, 'Enrolled demo identities'),
+          el('div', { class: 'account-grid' }, chips)),
+        hint('Prototype mode: this backend holds demo identity keys. Production deployment requires independent key custody.'))));
 }

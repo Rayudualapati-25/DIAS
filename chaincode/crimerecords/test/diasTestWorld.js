@@ -5,8 +5,9 @@
  *
  * One committed ledger that every signed transaction reads from and writes back
  * to. A transaction that throws writes nothing, as on Fabric. The LLM runs in the
- * application backend, so this world only submits requests and auditor decisions
- * with their LLM agreement; nothing about the LLM reaches the ledger.
+ * application backend, so this world submits requests and auditor decisions
+ * carrying the recommendation value the auditor was shown — ALLOW, DENY, or
+ * UNAVAILABLE. Nothing else about the LLM reaches the ledger.
  */
 
 const AccessContract = require('../lib/accessContract');
@@ -120,11 +121,11 @@ function createDiasWorld() {
       ), { timestamp });
     },
 
-    decide(requestId, decision, llmAgreement = 'AGREED', {
+    decide(requestId, decision, llmRecommendation = 'ALLOW', {
       validUntilUtc = '', caller = CALLERS.auditor, timestamp,
     } = {}) {
       return run(caller, nextTx('AUDIT'), (ctx) => contracts.access.SubmitAuditorDecision(
-        ctx, requestId, decision, llmAgreement, validUntilUtc
+        ctx, requestId, decision, llmRecommendation, validUntilUtc
       ), { timestamp });
     },
 
@@ -137,8 +138,7 @@ function createDiasWorld() {
     /** Request, then an auditor FORCE_ALLOW that did not agree with an LLM DENY. */
     async createAuthorization(caller = CALLERS.inspector, options = {}) {
       const { result: request } = await world.submit(caller, options);
-      const { result } = await world.decide(
-        request.requestId, 'FORCE_ALLOW', 'NOT_AGREED', { validUntilUtc: options.validUntilUtc || '' }
+      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY', { validUntilUtc: options.validUntilUtc || '' }
       );
       return { request, decision: result, authorization: result.dynamicAuthorization };
     },

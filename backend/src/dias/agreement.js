@@ -1,12 +1,15 @@
 'use strict';
 
 /**
- * Whether an auditor decision agreed with the LLM recommendation shown for it.
+ * The LLM recommendation an auditor decision was taken against, and whether the
+ * decision agreed with it.
  *
- * The backend derives this from the stored recommendation; the browser never
- * supplies it. The value is committed on the ledger with the decision, and it is
- * what lets the chaincode create a dynamic authorization only for an auditor
- * FORCE_ALLOW that did not agree with an LLM DENY.
+ * The backend reads both from the stored recommendation; the browser never
+ * supplies either. Only the recommendation value is sent to the chaincode, which
+ * commits it and derives the agreement itself, so the ledger cannot hold an
+ * agreement that contradicts the recommendation beside it. That committed
+ * recommendation is also what lets the chaincode create a dynamic authorization
+ * only for an auditor FORCE_ALLOW over an LLM DENY.
  */
 
 const LLM_AGREEMENT = Object.freeze({
@@ -15,12 +18,30 @@ const LLM_AGREEMENT = Object.freeze({
   NO_RECOMMENDATION: 'NO_RECOMMENDATION',
 });
 
+/** What the ledger records as the recommendation. Every failure is UNAVAILABLE. */
+const LLM_RECOMMENDATION = Object.freeze({
+  ALLOW: 'ALLOW',
+  DENY: 'DENY',
+  UNAVAILABLE: 'UNAVAILABLE',
+});
+
 const AUDITOR_DECISIONS = Object.freeze(['FORCE_ALLOW', 'FORCE_DENY']);
 
 function hasRecommendation(recommendation) {
   return Boolean(recommendation)
     && recommendation.generationStatus === 'OK'
     && ['ALLOW', 'DENY'].includes(recommendation.recommendation);
+}
+
+/**
+ * The recommendation value committed on the ledger. A generation that did not
+ * produce a usable ALLOW or DENY — the model was unreachable, timed out, broke
+ * the response schema, overflowed the context, or never ran because the review
+ * could not be saved — is recorded as UNAVAILABLE.
+ */
+function llmRecommendationFor(recommendation) {
+  return hasRecommendation(recommendation)
+    ? recommendation.recommendation : LLM_RECOMMENDATION.UNAVAILABLE;
 }
 
 function llmAgreementFor(recommendation, decision) {
@@ -46,8 +67,10 @@ function createsAuthorization(decision, llmAgreement) {
 module.exports = {
   AUDITOR_DECISIONS,
   LLM_AGREEMENT,
+  LLM_RECOMMENDATION,
   createsAuthorization,
   hasRecommendation,
   llmAgreementFor,
+  llmRecommendationFor,
   requiresAuditorReason,
 };

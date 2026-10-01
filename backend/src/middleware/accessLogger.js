@@ -107,6 +107,14 @@ function describe(snapshot) {
       },
     };
   }
+  // Who opened the model's reasoning behind a decision is itself worth logging.
+  const recommendationMatch = path.match(/^\/access\/request\/([^/]+)\/recommendation$/);
+  if (recommendationMatch) {
+    return {
+      action: 'dias.recommendation.read',
+      target: { requestId: recommendationMatch[1] },
+    };
+  }
   const accessRequestMatch = path.match(/^\/access\/request\/([^/]+)(\/trail)?$/);
   if (accessRequestMatch) {
     return {
@@ -186,9 +194,13 @@ function withResponseTarget(described, responseTarget) {
       extra.processingPath = responseTarget.processingPath;
     }
   }
-  if (described.action === 'dias.auditor.decision'
-      && typeof responseTarget.llmAgreement === 'string') {
-    extra.llmAgreement = responseTarget.llmAgreement;
+  if (described.action === 'dias.auditor.decision') {
+    if (typeof responseTarget.llmRecommendation === 'string') {
+      extra.llmRecommendation = responseTarget.llmRecommendation;
+    }
+    if (typeof responseTarget.llmAgreement === 'string') {
+      extra.llmAgreement = responseTarget.llmAgreement;
+    }
   }
   return Object.keys(extra).length === 0 ? described.target : { ...described.target, ...extra };
 }

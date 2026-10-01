@@ -11,11 +11,12 @@
  *   2. otherwise this backend asks the LLM for an advisory ALLOW/DENY
  *      recommendation and keeps it off-chain for the auditor screen;
  *   3. an auditor issues FORCE_ALLOW or FORCE_DENY, which is the final word. The
- *      backend commits the decision together with whether it agreed with the LLM.
+ *      backend commits the decision together with the recommendation the auditor
+ *      was shown — ALLOW, DENY, or UNAVAILABLE when there was none.
  *
- * A recommendation is never returned as a decision, and it is never written to
- * the ledger. The only 201 "decided" response comes from an access outcome
- * committed on Fabric.
+ * A recommendation is never returned as a decision. Its value is committed with
+ * the auditor decision; its reason text and model provenance stay off-chain. The
+ * only 201 "decided" response comes from an access outcome committed on Fabric.
  */
 
 const express = require('express');
@@ -25,8 +26,9 @@ const { ok, fail, asyncRoute } = require('../util/respond');
 const { requireAuth, requireRole } = require('../middleware/auth');
 const { getDiasRuntime } = require('../dias/runtime');
 const { RECOMMENDATION_STATE } = require('../dias/reviewStore');
+const { mayReadReasonText, recommendationDetail } = require('../dias/recommendationDetail');
 const {
-  createsAuthorization, llmAgreementFor, requiresAuditorReason,
+  createsAuthorization, llmAgreementFor, llmRecommendationFor, requiresAuditorReason,
 } = require('../dias/agreement');
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } =
   require('../../../chaincode/crimerecords/lib/policy/policyV1');
@@ -194,6 +196,28 @@ router.get('/decision-log', asyncRoute(async (req, res) => {
   return ok(res, { entries, storage: 'fabric-ledger' });
 }));
 
+/**
+ * The "why" behind one decision, opened from the decision log.
+ *
+ * Any signed-in identity reads the model's structured account — the reason code,
+ * the policy clauses it cited, what it said was missing, the review flags, and
+ * why there was no recommendation when there was none. The free-text reason is
+ * case narrative, so it is returned only to the officer who made the request and
+ * to an audit-organisation district head; everyone else gets `reasonVisible:
+ * false` and no text. Nothing about how the recommendation was produced is
+ * returned: no timings, no token counts, no model or policy provenance.
+ */
+router.get('/request/:requestId/recommendation', asyncRoute(async (req, res) => {
+  const { requestId } = req.params;
+  if (!SAFE_ID.test(requestId || '')) return fail(res, 'requestId has invalid format');
+  const { store } = getDiasRuntime();
+  const entry = store.read(requestId);
+  return ok(res, recommendationDetail(entry, {
+    requestId,
+    reasonVisible: mayReadReasonText(req.user, entry, AUDITOR_ROLES),
+  }));
+}));
+
 router.get('/record/:recordId', asyncRoute(async (req, res) => {
   const decisions = await fabric.evaluate(
     req.user.org, req.user.fabricUser, CONTRACT, 'QueryDecisionsByRecord', req.params.recordId);
@@ -225,12 +249,12 @@ router.get('/auditor/:requestId', requireRole(...AUDITOR_ROLES), asyncRoute(asyn
 }));
 
 /**
- * The final decision. The backend, not the browser, works out whether it agreed
- * with the stored LLM recommendation, and commits that with the decision. A
- * reason is required whenever the auditor did not simply agree with the LLM; it
- * is kept off-chain with the review. `validUntilUtc` is accepted only where a
- * dynamic authorization is created: FORCE_ALLOW that did not agree with an LLM
- * DENY.
+ * The final decision. The backend, not the browser, reads the stored LLM
+ * recommendation and commits its value with the decision; the chaincode derives
+ * the agreement from the two. A reason is required whenever the auditor did not
+ * simply agree with the LLM; it is kept off-chain with the review.
+ * `validUntilUtc` is accepted only where a dynamic authorization is created:
+ * FORCE_ALLOW over an LLM DENY.
  */
 const auditorDecisionSchema = z.object({
   decision: z.enum(['FORCE_ALLOW', 'FORCE_DENY']),
@@ -250,7 +274,9 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
       error: 'the LLM recommendation for this request is still being prepared; try again shortly',
     };
   }
-  const llmAgreement = llmAgreementFor(entry ? entry.recommendation : null, decision);
+  const storedRecommendation = entry ? entry.recommendation : null;
+  const llmRecommendation = llmRecommendationFor(storedRecommendation);
+  const llmAgreement = llmAgreementFor(storedRecommendation, decision);
   if (requiresAuditorReason(llmAgreement) && reason.length === 0) {
     return {
       status: 400,
@@ -262,12 +288,13 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   }
   const result = await ledger.submit(
     user.org, user.fabricUser, CONTRACT, 'SubmitAuditorDecision',
-    requestId, decision, llmAgreement, validUntilUtc || ''
+    requestId, decision, llmRecommendation, validUntilUtc || ''
   );
   if (entry) {
     store.update(requestId, {
       auditorNote: {
         decision,
+        llmRecommendation,
         llmAgreement,
         reason: reason || null,
         auditorUsername: user.username || user.fabricUser,
@@ -276,7 +303,7 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
       },
     });
   }
-  return { status: 201, data: result, llmAgreement };
+  return { status: 201, data: result, llmRecommendation, llmAgreement };
 }
 
 router.post('/auditor/:requestId/decision', requireRole(...AUDITOR_ROLES),
@@ -286,7 +313,10 @@ router.post('/auditor/:requestId/decision', requireRole(...AUDITOR_ROLES),
       user: req.user, requestId: req.params.requestId, body: req.body, store: getDiasRuntime().store,
     });
     if (outcome.error) return fail(res, outcome.error, outcome.status);
-    res.locals.accessEventTarget = { llmAgreement: outcome.llmAgreement };
+    res.locals.accessEventTarget = {
+      llmRecommendation: outcome.llmRecommendation,
+      llmAgreement: outcome.llmAgreement,
+    };
     return ok(res, outcome.data, outcome.status);
   }));
 

@@ -3,10 +3,11 @@
 /**
  * DIAS access routes: request submission and the auditor decision.
  *
- * The LLM runs in this backend and its recommendation stays off-chain. What the
- * routes must get right is what reaches the ledger: the request without the
- * justification, and the auditor decision with an LLM agreement the backend
- * derived itself from the stored recommendation.
+ * The LLM runs in this backend. What the routes must get right is what reaches
+ * the ledger: the request without the justification, and the auditor decision
+ * carrying the recommendation value the backend read from the stored review —
+ * ALLOW, DENY, or UNAVAILABLE. Everything else the model produced stays
+ * off-chain.
  */
 
 const fs = require('fs');
@@ -181,12 +182,13 @@ describe('DIAS access routes', () => {
       storedReview('REQ-10', { recommendationState: 'ready', recommendation: recommendation('ALLOW') });
       const ledger = ledgerRecording();
       const outcome = await decideWith('REQ-10', { decision: 'FORCE_ALLOW' }, ledger);
-      expect(outcome).to.include({ status: 201, llmAgreement: 'AGREED' });
+      expect(outcome).to.include({ status: 201, llmRecommendation: 'ALLOW', llmAgreement: 'AGREED' });
       expect(ledger.calls[0]).to.deep.equal([
-        'audit', 'sp.north', 'AccessContract', 'SubmitAuditorDecision', 'REQ-10', 'FORCE_ALLOW', 'AGREED', '',
+        'audit', 'sp.north', 'AccessContract', 'SubmitAuditorDecision', 'REQ-10', 'FORCE_ALLOW', 'ALLOW', '',
       ]);
       expect(store.read('REQ-10').auditorNote).to.include({
-        decision: 'FORCE_ALLOW', llmAgreement: 'AGREED', reason: null, auditorUsername: 'sp.north', txId: 'tx-1',
+        decision: 'FORCE_ALLOW', llmRecommendation: 'ALLOW', llmAgreement: 'AGREED', reason: null,
+        auditorUsername: 'sp.north', txId: 'tx-1',
       });
     });
 
@@ -199,9 +201,9 @@ describe('DIAS access routes', () => {
       const outcome = await decideWith('REQ-11', {
         decision: 'FORCE_ALLOW', reason: 'Verified supervisor tasking.', validUntilUtc: '2026-12-01T00:00:00Z',
       }, ledger);
-      expect(outcome).to.include({ status: 201, llmAgreement: 'NOT_AGREED' });
+      expect(outcome).to.include({ status: 201, llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED' });
       expect(ledger.calls).to.have.length(1);
-      expect(ledger.calls[0].slice(4)).to.deep.equal(['REQ-11', 'FORCE_ALLOW', 'NOT_AGREED', '2026-12-01T00:00:00Z']);
+      expect(ledger.calls[0].slice(4)).to.deep.equal(['REQ-11', 'FORCE_ALLOW', 'DENY', '2026-12-01T00:00:00Z']);
       expect(store.read('REQ-11').auditorNote.reason).to.equal('Verified supervisor tasking.');
     });
 
@@ -215,10 +217,10 @@ describe('DIAS access routes', () => {
       expect(withExpiry.error).to.match(/applies only when a dynamic authorization is created/);
       const outcome = await decideWith('REQ-12', { decision: 'FORCE_DENY', reason: 'Restricted inquiry.' }, ledger);
       expect(outcome.llmAgreement).to.equal('NOT_AGREED');
-      expect(ledger.calls[0][6]).to.equal('NOT_AGREED');
+      expect(ledger.calls[0][6]).to.equal('ALLOW');
     });
 
-    it('commits NO_RECOMMENDATION after a failed generation, or when no review exists', async () => {
+    it('commits UNAVAILABLE after a failed generation, or when no review exists', async () => {
       storedReview('REQ-13', {
         recommendationState: 'ready',
         recommendation: { ...recommendation('ALLOW'), generationStatus: 'UNAVAILABLE', recommendation: null },
@@ -228,7 +230,7 @@ describe('DIAS access routes', () => {
       expect(failed.llmAgreement).to.equal('NO_RECOMMENDATION');
       const absent = await decideWith('REQ-14', { decision: 'FORCE_DENY', reason: 'No recommendation was prepared.' }, ledger);
       expect(absent.llmAgreement).to.equal('NO_RECOMMENDATION');
-      expect(ledger.calls.map((call) => call[6])).to.deep.equal(['NO_RECOMMENDATION', 'NO_RECOMMENDATION']);
+      expect(ledger.calls.map((call) => call[6])).to.deep.equal(['UNAVAILABLE', 'UNAVAILABLE']);
     });
 
     it('waits while the recommendation is still being prepared and never commits', async () => {
@@ -239,14 +241,15 @@ describe('DIAS access routes', () => {
       expect(ledger.calls).to.deep.equal([]);
     });
 
-    it('ignores any agreement value the browser tries to send', async () => {
+    it('ignores any recommendation or agreement value the browser tries to send', async () => {
       storedReview('REQ-16', { recommendationState: 'ready', recommendation: recommendation('DENY') });
       const ledger = ledgerRecording();
       const outcome = await decideWith('REQ-16', {
-        decision: 'FORCE_ALLOW', llmAgreement: 'AGREED', reason: 'Supervisor tasking.',
+        decision: 'FORCE_ALLOW', llmRecommendation: 'ALLOW', llmAgreement: 'AGREED',
+        reason: 'Supervisor tasking.',
       }, ledger);
       expect(outcome.llmAgreement).to.equal('NOT_AGREED');
-      expect(ledger.calls[0][6]).to.equal('NOT_AGREED');
+      expect(ledger.calls[0][6]).to.equal('DENY');
     });
 
     it('rejects an unknown decision before anything reaches the ledger', async () => {

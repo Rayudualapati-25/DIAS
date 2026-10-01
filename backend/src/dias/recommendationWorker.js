@@ -15,6 +15,7 @@ const {
   verifiedRequestHash,
 } = require('../../../chaincode/crimerecords/lib/dias/verifiedRequest');
 const { RECOMMENDATION_STATE } = require('./reviewStore');
+const trace = require('../util/trace');
 
 /** The stored, auditor-facing view of one recommender result. */
 function recommendationRecord(result) {
@@ -40,6 +41,7 @@ function createRecommendationWorker({ store, recommender, log = console }) {
   async function generate(requestId) {
     const entry = store.read(requestId);
     if (!entry || entry.recommendationState !== RECOMMENDATION_STATE.PENDING) return null;
+    trace.emit('recommendation.started', { requestId });
     let result;
     if (verifiedRequestHash(entry.verifiedRequest) !== entry.verifiedRequestHash) {
       // Facts that do not hash to the committed value are not something a
@@ -61,6 +63,14 @@ function createRecommendationWorker({ store, recommender, log = console }) {
     }
     const record = recommendationRecord(result);
     store.update(requestId, { recommendationState: RECOMMENDATION_STATE.READY, recommendation: record });
+    trace.emit('recommendation.ready', {
+      requestId,
+      generationStatus: record.generationStatus,
+      recommendation: record.recommendation,
+      reasonCode: record.reasonCode,
+      latencyMs: record.provenance.latencyMs,
+      usage: record.provenance.usage || null,
+    });
     const summary = record.generationStatus === 'OK'
       ? `recommends ${record.recommendation} (${record.reasonCode})`
       : `no recommendation: ${record.generationStatus} (${record.errorCode})`;
@@ -98,6 +108,7 @@ function createRecommendationWorker({ store, recommender, log = console }) {
   function enqueue(requestId) {
     if (queued.has(requestId)) return queue;
     queued.add(requestId);
+    trace.emit('recommendation.enqueued', { requestId, queued: queued.size });
     queue = queue
       .then(() => generate(requestId))
       .catch((error) => recordFailure(requestId, error))

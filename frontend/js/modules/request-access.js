@@ -321,6 +321,7 @@ export default {
     const requestCard = card('Request access to the selected case file',
       'Your organization, role, clearance and case assignment come from your Fabric identity.',
       slot({ class: 'selected-record' }), requestForm);
+    requestCard.classList.add('request-card');
     const selectedLine = requestCard.querySelector('.selected-record');
     requestCard.hidden = true;
 
@@ -416,8 +417,8 @@ export default {
       found,
       requestCard,
       outcome,
-      subheading('History'),
-      recentCard,
-      documentsCard);
+      el('section', { class: 'request-history' },
+        subheading('History'),
+        el('div', { class: 'grid' }, recentCard, documentsCard)));
   },
 };

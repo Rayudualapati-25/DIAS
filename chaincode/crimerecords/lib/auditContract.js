@@ -101,6 +101,7 @@ function summarize(request, auditorDecision, outcome) {
       username: auditorDecision.auditor.username,
       role: auditorDecision.auditor.role,
       decision: auditorDecision.decision,
+      llmRecommendation: auditorDecision.llmRecommendation,
       llmAgreement: auditorDecision.llmAgreement,
       txId: auditorDecision.txId,
     } : { status: request.auditorReviewStatus },

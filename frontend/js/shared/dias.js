@@ -123,6 +123,14 @@ export function llmAgreement(recommendation, decision) {
     ? LLM_AGREEMENT.AGREED : LLM_AGREEMENT.NOT_AGREED;
 }
 
+/** How the ledger's committed recommendation value reads in the decision log. */
+export function recommendationLabel(value) {
+  if (value === 'ALLOW') return 'the LLM recommended ALLOW';
+  if (value === 'DENY') return 'the LLM recommended DENY';
+  if (value === 'UNAVAILABLE') return 'no LLM recommendation was available';
+  return 'the LLM was not consulted';
+}
+
 export function agreementLabel(value) {
   if (value === LLM_AGREEMENT.AGREED) return 'agreed with the LLM';
   if (value === LLM_AGREEMENT.NOT_AGREED) return 'did not agree with the LLM';

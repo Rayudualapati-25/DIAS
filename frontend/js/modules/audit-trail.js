@@ -16,7 +16,7 @@ import {
   slot, replace, el, detailTable, callout,
 } from '../core/components.js';
 import { dateTime, shortHash } from '../core/format.js';
-import { agreementLabel } from '../shared/dias.js';
+import { agreementLabel, recommendationLabel } from '../shared/dias.js';
 
 const show = (value) => (value === undefined || value === null || value === '' ? '—' : String(value));
 const statusTone = (status) => (status === 'granted' ? 'allow' : status === 'denied' ? 'deny' : 'pending');
@@ -64,6 +64,8 @@ function requestTrailCard(trail) {
       ? detailTable([
         ['Auditor', mono(show(decision.auditor && decision.auditor.username))],
         ['Decision', badge(show(decision.decision), decision.decision === 'FORCE_ALLOW' ? 'allow' : 'deny')],
+        ['LLM recommendation on the ledger', el('div', {}, mono(show(decision.llmRecommendation)),
+          el('small', { class: 'block' }, recommendationLabel(decision.llmRecommendation)))],
         ['Agreement with the LLM', el('div', {}, mono(show(decision.llmAgreement)),
           el('small', { class: 'block' }, agreementLabel(decision.llmAgreement)))],
         ['Dynamic authorization created', show(decision.createdAuthorizationId || 'no')],

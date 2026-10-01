@@ -62,33 +62,35 @@ describe('DIAS access workflow safeguards', () => {
   describe('auditor decision stage', () => {
     it('allows only AuditMSP district heads, with a valid decision and LLM agreement', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED', { caller: INSPECTOR }))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: INSPECTOR }))
         .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED', { caller: CALLERS.districtJudge }))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: CALLERS.districtJudge }))
         .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED', { caller: FORMER_AI_IDENTITY }))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: FORMER_AI_IDENTITY }))
         .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
       const stationHead = {
         identityId: 'ci.test', mspId: 'AuditMSP',
         attrs: { role: 'circle-inspector', jurisdiction: 'district-north', clearance: 'high', credentialStatus: 'active' },
       };
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED', { caller: stationHead }))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: stationHead }))
         .to.be.rejectedWith(/requires role in/);
-      await expect(world.decide(request.requestId, 'MAYBE', 'AGREED'))
+      await expect(world.decide(request.requestId, 'MAYBE', 'ALLOW'))
         .to.be.rejectedWith(/one of \[FORCE_ALLOW, FORCE_DENY\]/);
       await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'PARTLY'))
-        .to.be.rejectedWith(/llmAgreement must be one of \[AGREED, NOT_AGREED, NO_RECOMMENDATION\]/);
+        .to.be.rejectedWith(/llmRecommendation must be one of \[ALLOW, DENY, UNAVAILABLE\]/);
       await expect(world.decide(request.requestId, 'FORCE_ALLOW', ''))
-        .to.be.rejectedWith(/llmAgreement must be one of/);
-      const { result } = await world.decide(request.requestId, 'force-allow', 'not agreed');
-      expect(result.auditorDecision).to.include({ decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED' });
-      await expect(world.decide(request.requestId, 'FORCE_DENY', 'AGREED'))
+        .to.be.rejectedWith(/llmRecommendation must be one of/);
+      const { result } = await world.decide(request.requestId, 'force-allow', 'deny');
+      expect(result.auditorDecision).to.include({
+        decision: 'FORCE_ALLOW', llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
+      });
+      await expect(world.decide(request.requestId, 'FORCE_DENY', 'DENY'))
         .to.be.rejectedWith(/is not awaiting-auditor/);
     });
 
     it('prevents a requester from deciding their own request', async () => {
       const { result: request } = await world.submit(CALLERS.auditor);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'NOT_AGREED'))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'DENY'))
         .to.be.rejectedWith(/cannot decide their own request/);
     });
 
@@ -96,7 +98,7 @@ describe('DIAS access workflow safeguards', () => {
       const { result: request } = await world.submit(INSPECTOR);
       const profile = world.readState('user', 'insp.test');
       await world.putState('user', ['insp.test'], { ...profile, credentialStatus: 'suspended' });
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED'))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW'))
         .to.be.rejectedWith(/verified request facts changed/);
     });
 
@@ -133,7 +135,7 @@ describe('DIAS access workflow safeguards', () => {
       expect(pending[0].request.requestId).to.equal(request.requestId);
       const review = await call(CALLERS.auditor, (ctx) => world.contracts.access.GetAuditorReview(ctx, request.requestId));
       expect(Object.keys(review)).to.deep.equal(['request']);
-      await world.decide(request.requestId, 'FORCE_DENY', 'AGREED');
+      await world.decide(request.requestId, 'FORCE_DENY', 'DENY');
       expect(await call(CALLERS.auditor, queue)).to.deep.equal([]);
     });
 
@@ -159,7 +161,7 @@ describe('DIAS access workflow safeguards', () => {
 
     it('limits access decisions to their subject and district heads', async () => {
       const { result: request } = await world.submit(INSPECTOR);
-      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'AGREED');
+      const { result } = await world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW');
       const decisionId = result.accessOutcome.outcomeId;
       const get = (ctx) => world.contracts.access.GetDecision(ctx, 'FIR-1', decisionId);
       expect((await call(INSPECTOR, get)).status).to.equal('granted');

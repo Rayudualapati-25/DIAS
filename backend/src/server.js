@@ -13,6 +13,7 @@ const accessRoutes = require('./routes/access');
 const auditRoutes = require('./routes/audit');
 const { accessLogger } = require('./middleware/accessLogger');
 const { getDiasRuntime } = require('./dias/runtime');
+const trace = require('./util/trace');
 
 const app = express();
 
@@ -29,6 +30,20 @@ app.use(cors({
 // A full-document upload is base64 JSON. The route still enforces a 5 MiB PDF
 // limit; this slightly larger parser limit accounts for base64 expansion.
 app.use(express.json({ limit: '8mb' }));
+
+// Experiment timing only: one trace line per API call when DIAS_TRACE_FILE is set.
+app.use('/api', (req, res, next) => {
+  if (!trace.enabled()) return next();
+  const startedAt = trace.now();
+  res.on('finish', () => trace.emit('http', {
+    method: req.method,
+    path: req.originalUrl.split('?')[0],
+    status: res.statusCode,
+    startedAt,
+    ms: trace.now() - startedAt,
+  }));
+  return next();
+});
 
 // Records authenticated API calls as Fabric transactions. Mounted before the
 // routes so it sees every request; it submits after the response is sent.

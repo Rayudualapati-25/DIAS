@@ -109,6 +109,7 @@ function createAuthorization({
     auditorDecision: {
       auditorDecisionId: auditorDecision.auditorDecisionId,
       decision: auditorDecision.decision,
+      llmRecommendation: auditorDecision.llmRecommendation || null,
       llmAgreement: auditorDecision.llmAgreement,
     },
     createdBy: auditor,

@@ -92,7 +92,7 @@ const FABRIC_BIN = path.resolve(NETWORK_DIR, '..', '..', 'fabric-samples', 'bin'
 
 // caPort/caName are what fabric-ca-client needs to register and enrol a new
 // user into that department; they mirror network/compose/compose-ca.yaml.
-const ORG_CONFIG = Object.freeze({
+const BASE_ORG_CONFIG = Object.freeze({
   police: {
     mspId: 'PoliceMSP',
     domain: 'police.example.com',
@@ -134,6 +134,50 @@ const ORG_CONFIG = Object.freeze({
     caName: 'ca-audit',
   },
 });
+
+const PEER_ENDPOINT = /^[A-Za-z0-9.-]+:\d{1,5}$/;
+
+/**
+ * Peer addresses for a backend that does not run next to the peers.
+ *
+ * The multi-machine testbed runs this backend on its own VM, where each
+ * organization's peer is reached by host name over the Docker overlay network:
+ * FABRIC_PEER_ENDPOINTS='{"police":"peer0.police.example.com:7051", ...}'.
+ * Unset, every organization keeps its localhost address.
+ */
+function parsePeerEndpoints(text, orgs) {
+  if (!text || text.trim() === '') return {};
+  let parsed;
+  try {
+    parsed = JSON.parse(text);
+  } catch (_err) {
+    throw new Error('[config] FABRIC_PEER_ENDPOINTS must be a JSON object of org -> host:port');
+  }
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    throw new Error('[config] FABRIC_PEER_ENDPOINTS must be a JSON object of org -> host:port');
+  }
+  for (const [org, endpoint] of Object.entries(parsed)) {
+    if (!Object.prototype.hasOwnProperty.call(orgs, org)) {
+      throw new Error(`[config] FABRIC_PEER_ENDPOINTS names an unknown organization: ${org}`);
+    }
+    if (typeof endpoint !== 'string' || !PEER_ENDPOINT.test(endpoint)) {
+      throw new Error(`[config] FABRIC_PEER_ENDPOINTS.${org} must be host:port`);
+    }
+  }
+  return parsed;
+}
+
+function withPeerEndpoints(orgs, overrides) {
+  return Object.freeze(Object.fromEntries(Object.entries(orgs).map(([org, cfg]) => [
+    org,
+    Object.freeze(overrides[org] ? { ...cfg, peerEndpoint: overrides[org] } : { ...cfg }),
+  ])));
+}
+
+const ORG_CONFIG = withPeerEndpoints(
+  BASE_ORG_CONFIG,
+  parsePeerEndpoints(process.env.FABRIC_PEER_ENDPOINTS, BASE_ORG_CONFIG)
+);
 
 module.exports = Object.freeze({
   NODE_ENV,
@@ -179,6 +223,7 @@ module.exports = Object.freeze({
   VAULT_DIR,
   FABRIC_BIN,
   ORG_CONFIG,
+  parsePeerEndpoints,
 
   // DIAS recommendation model endpoint. Defaults to port 8081 so a DIAS run
   // never contends with the SEAL v6 server on 8080.

@@ -43,7 +43,10 @@ function created(overrides = {}) {
     scope: scope(),
     verifiedRequest: verified(),
     originatingRequestId: 'REQ-1',
-    auditorDecision: { auditorDecisionId: 'AUD-TX-1', decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED' },
+    auditorDecision: {
+      auditorDecisionId: 'AUD-TX-1', decision: 'FORCE_ALLOW',
+      llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
+    },
     validUntilUtc: null,
     previous: null,
     ...overrides,
@@ -80,9 +83,11 @@ describe('DIAS dynamic authorization creation', () => {
     expect(authorization.stateVersion).to.equal(1);
     expect(authorization.originatingRequestId).to.equal('REQ-1');
     expect(authorization.auditorDecision).to.deep.equal({
-      auditorDecisionId: 'AUD-TX-1', decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED',
+      auditorDecisionId: 'AUD-TX-1', decision: 'FORCE_ALLOW',
+      llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
     });
-    expect(authorization).to.not.have.any.keys('originalLlmRecommendation', 'policyBundle');
+    // The recommendation value it overrode, and nothing else the model produced.
+    expect(authorization).to.not.have.any.keys('policyBundle', 'recommendationProvenance');
     expect(authorization.createdBy).to.deep.equal(AUDITOR);
     expect(authorization.conditionsHash).to.equal(verifiedRequestHash(verified()));
   });

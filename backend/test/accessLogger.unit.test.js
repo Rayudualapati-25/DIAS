@@ -43,8 +43,11 @@ describe('accessLogger.describe', () => {
       target: { requestId: 'REQ-1', decision: 'FORCE_ALLOW' },
     });
     expect(JSON.stringify(entry)).to.not.contain('sensitive rationale');
-    expect(withResponseTarget(entry, { llmAgreement: 'NOT_AGREED' })).to.deep.equal({
-      requestId: 'REQ-1', decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED',
+    expect(withResponseTarget(entry, {
+      llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
+    })).to.deep.equal({
+      requestId: 'REQ-1', decision: 'FORCE_ALLOW',
+      llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
     });
     expect(classify(snapshot('GET', '/access/auditor/pending')))
       .to.deep.equal({ action: 'dias.auditor.queue.read', target: null });
@@ -73,6 +76,10 @@ describe('accessLogger.describe', () => {
     });
     expect(classify(snapshot('GET', '/access/request/REQ-1/trail'))).to.deep.equal({
       action: 'access.request.trail', target: { requestId: 'REQ-1' },
+    });
+    // Opening the model's reasoning behind a decision is its own logged action.
+    expect(classify(snapshot('GET', '/access/request/REQ-1/recommendation'))).to.deep.equal({
+      action: 'dias.recommendation.read', target: { requestId: 'REQ-1' },
     });
     expect(classify(snapshot('GET', '/access/dynamic-authorizations', {
       query: { status: 'all' },
