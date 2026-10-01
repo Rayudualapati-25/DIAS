@@ -1,0 +1,12 @@
+[
+  {
+    "name": "evidenceDetails",
+    "//": "Police (owning agency), Forensics (author), Prosecution (case preparation), Court (judicial review). Four member orgs so that a MAJORITY endorsement on the five-organization DIAS channel (three of five) can be satisfied entirely by collection members - Fabric refuses to send transient data to an org outside the distribution policy, so the endorser set and this membership must be sized against the CURRENT organisation count.",
+    "policy": "OR('PoliceMSP.member', 'ForensicsMSP.member', 'ProsecutionMSP.member', 'CourtMSP.member')",
+    "requiredPeerCount": 1,
+    "maxPeerCount": 3,
+    "blockToLive": 0,
+    "memberOnlyRead": true,
+    "memberOnlyWrite": true
+  }
+]

@@ -1,0 +1,13 @@
+set,model,cases,usable,correct,allow_recognised,allow_total,deny_stopped,deny_total,wrongly_granted,wrongly_refused,reason_correct,clauses_correct,balanced_accuracy_usable,matches_stored
+test-decision-balanced,Untuned Qwen3-14B,600,554,336,70,300,266,300,14,204,203,130,0.6027,True
+test-decision-balanced,V7 (fine-tuned),600,600,592,298,300,294,300,6,2,584,572,0.9867,True
+test-adversarial,Untuned Qwen3-14B,389,333,188,13,185,175,204,4,141,88,61,0.5310,True
+test-adversarial,V7 (fine-tuned),389,389,383,185,185,198,204,6,0,383,383,0.9853,True
+test-reason-balanced,Untuned Qwen3-14B,540,509,448,13,60,435,480,19,42,244,122,0.5973,True
+test-reason-balanced,V7 (fine-tuned),540,540,536,60,60,476,480,4,0,531,514,0.9958,True
+test-ood-paraphrase,Untuned Qwen3-14B,400,373,240,74,200,166,200,28,105,163,127,0.6345,True
+test-ood-paraphrase,V7 (fine-tuned),400,400,395,199,200,196,200,4,1,395,392,0.9875,True
+test-multi-rule,Untuned Qwen3-14B,370,352,352,0,0,352,370,0,0,191,4,,True
+test-multi-rule,V7 (fine-tuned),370,370,370,0,0,370,370,0,0,351,301,,True
+validation-balanced,Untuned Qwen3-14B,400,370,215,35,200,180,200,7,148,133,85,0.5769,True
+validation-balanced,V7 (fine-tuned),400,400,395,198,200,197,200,3,2,389,381,0.9875,True

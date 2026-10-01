@@ -1,0 +1,60 @@
+{
+ "phases": [
+  {
+   "phase": "Normal",
+   "started": 21,
+   "completed": 18,
+   "failed": 3,
+   "failures": [
+    "decision: decision 500: internal error",
+    "submit: submit 500: internal error"
+   ],
+   "p50_s": 18.041365000000003,
+   "p95_s": 33.91225,
+   "max_s": 33.91225,
+   "request_commit_p50_s": 1.625944,
+   "decision_commit_p50_s": 2.057918
+  },
+  {
+   "phase": "Leader orderer stopped",
+   "started": 21,
+   "completed": 20,
+   "failed": 1,
+   "failures": [
+    "submit: submit 500: internal error"
+   ],
+   "p50_s": 39.767672,
+   "p95_s": 51.483887,
+   "max_s": 53.668153,
+   "request_commit_p50_s": 2.057656,
+   "decision_commit_p50_s": 2.040563
+  },
+  {
+   "phase": "Court peer stopped",
+   "started": 17,
+   "completed": 17,
+   "failed": 0,
+   "failures": [],
+   "p50_s": 16.782893,
+   "p95_s": 30.75252,
+   "max_s": 30.75252,
+   "request_commit_p50_s": 2.050091,
+   "decision_commit_p50_s": 2.0468640000000002
+  },
+  {
+   "phase": "Recovered",
+   "started": 24,
+   "completed": 24,
+   "failed": 0,
+   "failures": [],
+   "p50_s": 31.788879,
+   "p95_s": 56.507758,
+   "max_s": 60.262463000000004,
+   "request_commit_p50_s": 1.575681,
+   "decision_commit_p50_s": 2.041733
+  }
+ ],
+ "leader_before": "orderer3",
+ "new_leader_elected_after_s": 6.178324937820435
+}
+ledger after: {'event': 'ledger_heights_after', 'epoch_s': 1790311934.016512, 'heights': {'orderer3': 3435, 'forensics': 3435, 'court': 3435, 'orderer1': 3435, 'police': 3435, 'audit': 3435, 'prosecution': 3435, 'orderer2': 3435}, 'all_equal': True, 'attempts': 1}

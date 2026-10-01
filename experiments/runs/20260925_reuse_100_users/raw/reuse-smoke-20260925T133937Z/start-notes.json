@@ -1,0 +1,3 @@
+{"run": "reuse-smoke-20260925T133937Z", "plan": "testbed/reuse/generated/reuse-smoke-plan.json", "startedBy": "testbed/scripts/start_reuse.sh",
+ "backendTraceBefore": {"enqueued": 1337, "ready": 1337, "requests": 1337, "decisions": 1335},
+ "note": "Requests minus decisions in the backend trace come from the two E7 decisions that timed out during the leader failover; the ledger kept one E7 request waiting for an auditor. It is on a world record outside this plan and was left as E7 ended."}

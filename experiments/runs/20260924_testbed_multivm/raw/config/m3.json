@@ -1,0 +1,295 @@
+{
+  "name": "dias-m3",
+  "networks": {
+    "diasnet": {
+      "external": true,
+      "name": "diasnet"
+    }
+  },
+  "volumes": {
+    "ca-court": {},
+    "ca-audit": {},
+    "orderer3": {},
+    "couchdb-court": {},
+    "peer0-court": {},
+    "couchdb-audit": {},
+    "peer0-audit": {}
+  },
+  "services": {
+    "ca-court": {
+      "image": "hyperledger/fabric-ca:1.5.22",
+      "container_name": "ca-court",
+      "hostname": "ca-court",
+      "environment": [
+        "FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server",
+        "FABRIC_CA_SERVER_CA_NAME=ca-court",
+        "FABRIC_CA_SERVER_TLS_ENABLED=true",
+        "FABRIC_CA_SERVER_PORT=7054",
+        "FABRIC_CA_SERVER_CSR_HOSTS=ca-court,localhost",
+        "FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17054"
+      ],
+      "command": "sh -c 'fabric-ca-server start -b admin:adminpw -d'",
+      "volumes": [
+        "ca-court:/etc/hyperledger/fabric-ca-server"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "ca-audit": {
+      "image": "hyperledger/fabric-ca:1.5.22",
+      "container_name": "ca-audit",
+      "hostname": "ca-audit",
+      "environment": [
+        "FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server",
+        "FABRIC_CA_SERVER_CA_NAME=ca-audit",
+        "FABRIC_CA_SERVER_TLS_ENABLED=true",
+        "FABRIC_CA_SERVER_PORT=7054",
+        "FABRIC_CA_SERVER_CSR_HOSTS=ca-audit,localhost",
+        "FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17054"
+      ],
+      "command": "sh -c 'fabric-ca-server start -b admin:adminpw -d'",
+      "volumes": [
+        "ca-audit:/etc/hyperledger/fabric-ca-server"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "orderer3.example.com": {
+      "image": "hyperledger/fabric-orderer:2.5.16",
+      "container_name": "orderer3.example.com",
+      "hostname": "orderer3.example.com",
+      "environment": [
+        "FABRIC_LOGGING_SPEC=INFO",
+        "ORDERER_GENERAL_LISTENADDRESS=0.0.0.0",
+        "ORDERER_GENERAL_LISTENPORT=7050",
+        "ORDERER_GENERAL_LOCALMSPID=OrdererMSP",
+        "ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp",
+        "ORDERER_GENERAL_TLS_ENABLED=true",
+        "ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key",
+        "ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt",
+        "ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]",
+        "ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt",
+        "ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key",
+        "ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]",
+        "ORDERER_GENERAL_BOOTSTRAPMETHOD=none",
+        "ORDERER_CHANNELPARTICIPATION_ENABLED=true",
+        "ORDERER_ADMIN_TLS_ENABLED=true",
+        "ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt",
+        "ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key",
+        "ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]",
+        "ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]",
+        "ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7053",
+        "ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:9443",
+        "ORDERER_METRICS_PROVIDER=prometheus"
+      ],
+      "working_dir": "/root",
+      "command": "orderer",
+      "volumes": [
+        "/Users/venkatrayudu/dias-testbed/organizations/ordererOrganizations/example.com/orderers/orderer3.example.com/msp:/var/hyperledger/orderer/msp:ro",
+        "/Users/venkatrayudu/dias-testbed/organizations/ordererOrganizations/example.com/orderers/orderer3.example.com/tls:/var/hyperledger/orderer/tls:ro",
+        "orderer3:/var/hyperledger/production/orderer"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "couchdb-court": {
+      "image": "couchdb:3.4.2",
+      "container_name": "couchdb-court",
+      "hostname": "couchdb-court",
+      "environment": [
+        "COUCHDB_USER=admin",
+        "COUCHDB_PASSWORD=adminpw"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD-SHELL",
+          "curl -sf http://localhost:5984/_up || exit 1"
+        ],
+        "interval": "3s",
+        "timeout": "3s",
+        "retries": 30
+      },
+      "volumes": [
+        "couchdb-court:/opt/couchdb/data"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "peer0.court.example.com": {
+      "image": "hyperledger/fabric-peer:2.5.16",
+      "container_name": "peer0.court.example.com",
+      "hostname": "peer0.court.example.com",
+      "depends_on": {
+        "couchdb-court": {
+          "condition": "service_healthy"
+        }
+      },
+      "environment": [
+        "FABRIC_CFG_PATH=/etc/hyperledger/peercfg",
+        "FABRIC_LOGGING_SPEC=INFO",
+        "CORE_PEER_TLS_ENABLED=true",
+        "CORE_PEER_PROFILE_ENABLED=false",
+        "CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt",
+        "CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key",
+        "CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt",
+        "CORE_PEER_ID=peer0.court.example.com",
+        "CORE_PEER_ADDRESS=peer0.court.example.com:10051",
+        "CORE_PEER_LISTENADDRESS=0.0.0.0:10051",
+        "CORE_PEER_CHAINCODEADDRESS=peer0.court.example.com:10052",
+        "CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052",
+        "CORE_PEER_GOSSIP_BOOTSTRAP=peer0.court.example.com:10051",
+        "CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.court.example.com:10051",
+        "CORE_PEER_LOCALMSPID=CourtMSP",
+        "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp",
+        "CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:9447",
+        "CORE_METRICS_PROVIDER=prometheus",
+        "CORE_CHAINCODE_EXECUTETIMEOUT=900s",
+        "CORE_CHAINCODE_INSTALLTIMEOUT=900s",
+        "CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock",
+        "CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=diasnet",
+        "CORE_LEDGER_STATE_STATEDATABASE=CouchDB",
+        "CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-court:5984",
+        "CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin",
+        "CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw"
+      ],
+      "working_dir": "/root",
+      "command": "peer node start",
+      "volumes": [
+        "/Users/venkatrayudu/dias-testbed/organizations/peerOrganizations/court.example.com/peers/peer0.court.example.com:/etc/hyperledger/fabric:ro",
+        "peer0-court:/var/hyperledger/production",
+        "/Users/venkatrayudu/dias-testbed/config:/etc/hyperledger/peercfg:ro",
+        "/var/run/docker.sock:/host/var/run/docker.sock"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "couchdb-audit": {
+      "image": "couchdb:3.4.2",
+      "container_name": "couchdb-audit",
+      "hostname": "couchdb-audit",
+      "environment": [
+        "COUCHDB_USER=admin",
+        "COUCHDB_PASSWORD=adminpw"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD-SHELL",
+          "curl -sf http://localhost:5984/_up || exit 1"
+        ],
+        "interval": "3s",
+        "timeout": "3s",
+        "retries": 30
+      },
+      "volumes": [
+        "couchdb-audit:/opt/couchdb/data"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "peer0.audit.example.com": {
+      "image": "hyperledger/fabric-peer:2.5.16",
+      "container_name": "peer0.audit.example.com",
+      "hostname": "peer0.audit.example.com",
+      "depends_on": {
+        "couchdb-audit": {
+          "condition": "service_healthy"
+        }
+      },
+      "environment": [
+        "FABRIC_CFG_PATH=/etc/hyperledger/peercfg",
+        "FABRIC_LOGGING_SPEC=INFO",
+        "CORE_PEER_TLS_ENABLED=true",
+        "CORE_PEER_PROFILE_ENABLED=false",
+        "CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt",
+        "CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key",
+        "CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt",
+        "CORE_PEER_ID=peer0.audit.example.com",
+        "CORE_PEER_ADDRESS=peer0.audit.example.com:11051",
+        "CORE_PEER_LISTENADDRESS=0.0.0.0:11051",
+        "CORE_PEER_CHAINCODEADDRESS=peer0.audit.example.com:11052",
+        "CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052",
+        "CORE_PEER_GOSSIP_BOOTSTRAP=peer0.audit.example.com:11051",
+        "CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.audit.example.com:11051",
+        "CORE_PEER_LOCALMSPID=AuditMSP",
+        "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp",
+        "CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:9448",
+        "CORE_METRICS_PROVIDER=prometheus",
+        "CORE_CHAINCODE_EXECUTETIMEOUT=900s",
+        "CORE_CHAINCODE_INSTALLTIMEOUT=900s",
+        "CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock",
+        "CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=diasnet",
+        "CORE_LEDGER_STATE_STATEDATABASE=CouchDB",
+        "CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-audit:5984",
+        "CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=admin",
+        "CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw"
+      ],
+      "working_dir": "/root",
+      "command": "peer node start",
+      "volumes": [
+        "/Users/venkatrayudu/dias-testbed/organizations/peerOrganizations/audit.example.com/peers/peer0.audit.example.com:/etc/hyperledger/fabric:ro",
+        "peer0-audit:/var/hyperledger/production",
+        "/Users/venkatrayudu/dias-testbed/config:/etc/hyperledger/peercfg:ro",
+        "/var/run/docker.sock:/host/var/run/docker.sock"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "cadvisor-m3": {
+      "image": "gcr.io/cadvisor/cadvisor:v0.49.1",
+      "container_name": "cadvisor-m3",
+      "hostname": "cadvisor-m3",
+      "privileged": true,
+      "devices": [
+        "/dev/kmsg"
+      ],
+      "command": [
+        "--docker_only=true",
+        "--housekeeping_interval=5s",
+        "--store_container_labels=false",
+        "--whitelisted_container_labels=com.docker.compose.service",
+        "--disable_metrics=percpu,sched,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl,cpuset,advtcp,memory_numa,process"
+      ],
+      "volumes": [
+        "/:/rootfs:ro",
+        "/var/run:/var/run:ro",
+        "/sys:/sys:ro",
+        "/var/lib/docker/:/var/lib/docker:ro",
+        "/dev/disk/:/dev/disk:ro"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "node-exporter-m3": {
+      "image": "prom/node-exporter:v1.8.2",
+      "container_name": "node-exporter-m3",
+      "hostname": "node-exporter-m3",
+      "pid": "host",
+      "command": [
+        "--path.rootfs=/host"
+      ],
+      "volumes": [
+        "/:/host:ro,rslave"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+2026-09-25T04:36:02Z start (E5=e5-burst-20260924T174213Z, E7=e7-fault-20260925T043602Z, E3=e3-ledger-20260925T043602Z)
+REQ-e9a04ffc63dc8f0f: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-762aeaafcc71b944: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-f8d9ad317ffb4c20: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-dd152e59e5b0b613: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+REQ-afd5d22fab38bf2e: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-ea6460ed037abc91: load DENY/INSUFFICIENT_CLEARANCE alone DENY/INSUFFICIENT_CLEARANCE
+REQ-1e56cc916c7197e2: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-c8cb39f447dfed0c: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-932ca371c00c38d0: load DENY/INSUFFICIENT_CLEARANCE alone DENY/INSUFFICIENT_CLEARANCE
+REQ-b12b8f6d29c73a22: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+REQ-99de4549761f602e: load DENY/INSUFFICIENT_CLEARANCE alone DENY/INSUFFICIENT_CLEARANCE
+REQ-cf49195f3fc6b14a: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-fd1de8ab4d2b5d2e: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+REQ-9e84db4e8be62c20: load DENY/INSUFFICIENT_CLEARANCE alone DENY/INSUFFICIENT_CLEARANCE
+REQ-b701a4868a354f0f: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+REQ-da83d643604e1d00: load DENY/INSUFFICIENT_CLEARANCE alone DENY/INSUFFICIENT_CLEARANCE
+REQ-96e14c9b4a6bceff: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-0bdb935f0897e40b: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+REQ-45e2bb784392f489: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+REQ-352bcab02962b64f: load DENY/RBAC_NO_PERMISSION alone DENY/RBAC_NO_PERMISSION
+REQ-59a9770fee1c88a4: load ALLOW/POLICY_SATISFIED alone ALLOW/POLICY_SATISFIED
+{"replayed":21,"sameDecision":21,"sameReason":21,"identicalOutput":21}
+2026-09-25T04:38:38Z replay of E5 errors done
+{"label":"after-e6","at":1790311123475.7766,"atUtc":"2026-09-25T04:38:43.475Z","results":[{"fn":"QueryPendingAuditorRequests","samples":10,"meanMs":234.78447265625,"p50Ms":218.932861328125,"maxMs":393.592529296875,"responseBytes":2,"items":0},{"fn":"QueryAccessDecisions","samples":10,"meanMs":161.96298828125,"p50Ms":153.9794921875,"maxMs":210.1923828125,"responseBytes":32733,"items":50},{"fn":"GetRequest","samples":10,"meanMs":2.491259765625,"p50Ms":2.3828125,"maxMs":2.999755859375,"responseBytes":2265,"items":null}]}
+2026-09-25T04:38:43Z probe after-e6 done
+{"event": "raft_leader_before", "epoch_s": 1790311123.703066, "node": "orderer3"}
+{"event": "load_start_estimated", "epoch_s": 1790311125.632716, "t0": 1790311155.6327062}
+{"event": "stopped", "epoch_s": 1790311335.778665, "container": "orderer3.example.com", "code": 0}
+{"event": "raft_leader_now", "epoch_s": 1790311347.786845, "node": "orderer1"}
+{"event": "started", "epoch_s": 1790311515.9662058, "container": "orderer3.example.com", "code": 0}
+{"event": "stopped", "epoch_s": 1790311516.22318, "container": "peer0.court.example.com", "code": 0}
+{"event": "raft_leader_now", "epoch_s": 1790311528.230834, "node": "orderer1"}
+{"event": "started", "epoch_s": 1790311695.932791, "container": "peer0.court.example.com", "code": 0}
+{"event": "raft_leader_now", "epoch_s": 1790311707.9386199, "node": "orderer1"}
+{"event": "load_finished", "epoch_s": 1790311914.0076191, "exit_code": "0"}
+{"event": "ledger_heights_after", "epoch_s": 1790311934.016512, "heights": {"orderer3": 3435, "forensics": 3435, "court": 3435, "orderer1": 3435, "police": 3435, "audit": 3435, "prosecution": 3435, "orderer2": 3435}, "all_equal": true, "attempts": 1}
+{"event": "raft_leader_after", "epoch_s": 1790311934.018741, "node": "orderer1"}
+{"event": "chain_info_after", "epoch_s": 1790311936.083976, "info": {"police": {"height": 3435, "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=", "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="}, "forensics": {"height": 3435, "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=", "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="}, "prosecution": {"height": 3435, "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=", "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="}, "court": {"height": 3435, "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=", "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="}, "audit": {"height": 3435, "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=", "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="}}, "same_hash": true}
+{"event": "network_restored", "epoch_s": 1790311941.3254201, "running": {"orderer1.example.com": true, "orderer2.example.com": true, "orderer3.example.com": true, "peer0.police.example.com": true, "peer0.forensics.example.com": true, "peer0.prosecution.example.com": true, "peer0.court.example.com": true, "peer0.audit.example.com": true}}
+{"event": "problems", "epoch_s": 1790311941.358689, "items": []}
+2026-09-25T04:52:21Z E7 done: e7-fault-20260925T043602Z
+{"label":"after-e7","at":1790311975961.3162,"atUtc":"2026-09-25T04:52:55.961Z","results":[{"fn":"QueryPendingAuditorRequests","samples":10,"meanMs":235.990185546875,"p50Ms":233.786865234375,"maxMs":277.1767578125,"responseBytes":2251,"items":1},{"fn":"QueryAccessDecisions","samples":10,"meanMs":166.167529296875,"p50Ms":160.159912109375,"maxMs":237.21923828125,"responseBytes":32768,"items":50},{"fn":"GetRequest","samples":10,"meanMs":2.9855712890625,"p50Ms":3.13818359375,"maxMs":3.406494140625,"responseBytes":2318,"items":null}]}
+2026-09-25T04:52:56Z probe after-e7 done
+[eval] qwen3-14b-dias-v7-testbed-llm-alone :: test-decision-balanced (600 examples)
+  25/600  50/600  75/600  100/600  125/600  150/600  175/600  200/600  225/600  250/600  275/600  300/600  325/600  350/600  375/600  400/600  425/600  450/600  475/600  500/600  525/600  550/600  575/600  600/600  valid 600/600  accuracy 0.986667  macroF1 0.986666  falseALLOW 6  falseDENY 2  p95 9191.7 ms
+
+written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20260924_testbed_multivm/raw/e4-llm-alone
+2026-09-25T06:15:26Z E4 done
+level 10 done: W1 90.962/s p50 104.397 ms; W2 72.936/s p50 130.707 ms; R1 2145.611/s p50 4.372 ms; R2 2.281/s p50 4346.538 ms
+level 25 done: W1 112.127/s p50 189.088 ms; W2 81.989/s p50 291.892 ms; R1 2405.004/s p50 10.108 ms; R2 1.195/s p50 20692.895 ms
+level 50 done: W1 122.699/s p50 218.254 ms; W2 90.646/s p50 541.705 ms; R1 2488.671/s p50 19.022 ms; R2 0/s p50 null ms
+level 75 done: W1 89.145/s p50 280.15 ms; W2 85.096/s p50 864.634 ms; R1 2507.524/s p50 28.9 ms; R2 0/s p50 null ms
+level 100 done: W1 63.256/s p50 404.018 ms; W2 76.655/s p50 1273.103 ms; R1 2508.593/s p50 39.345 ms; R2 0/s p50 null ms
+2026-09-25T06:40:06Z E3 done: e3-ledger-20260925T043602Z
+{"label":"after-e3","at":1790318535146.218,"atUtc":"2026-09-25T06:42:15.146Z","results":[{"fn":"QueryPendingAuditorRequests","samples":10,"meanMs":5938.5894775390625,"p50Ms":5380.066650390625,"maxMs":10124.61376953125,"responseBytes":2251,"items":1},{"fn":"QueryAccessDecisions","samples":10,"meanMs":3509.0988037109373,"p50Ms":3495.01220703125,"maxMs":3643.768798828125,"responseBytes":32924,"items":50},{"fn":"GetRequest","samples":10,"meanMs":3.2640869140625,"p50Ms":3.261474609375,"maxMs":3.90771484375,"responseBytes":2329,"items":null}]}
+2026-09-25T06:42:15Z probe after-e3 done
+2026-09-25T06:42:15Z ALL REMAINING EXPERIMENTS DONE

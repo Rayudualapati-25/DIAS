@@ -1,0 +1,44 @@
+{
+  "run": "e6-steady-20260925T023853Z",
+  "window_utc": [
+    "2026-09-25T02:39:54.615Z",
+    "2026-09-25T03:40:24.179Z"
+  ],
+  "all_checks_pass": true,
+  "checks": {
+    "rows_match_plan": {
+      "planned": 369,
+      "rows": 369,
+      "unique": 369,
+      "completed": 369,
+      "run_json_completed": 369,
+      "run_json_failed": 0,
+      "failed_ids": [],
+      "pass": true
+    },
+    "facts_match_plan": {
+      "mismatched_ids": [],
+      "pass": true
+    },
+    "prompt_cache": {
+      "answers": 369,
+      "max_cached_tokens": 397,
+      "answers_above_shared_prefix": 0,
+      "pass": true
+    },
+    "power": {
+      "samples": 121,
+      "not_ac_high_power": 0,
+      "max_gap_s": 31.0,
+      "pass": true
+    },
+    "recorder_gaps_s": {
+      "mac": 5.067000150680542,
+      "m1": 5.016999959945679,
+      "m2": 5.01800012588501,
+      "m3": 5.0320000648498535,
+      "m4": 5.0299999713897705,
+      "pass": true
+    }
+  }
+}

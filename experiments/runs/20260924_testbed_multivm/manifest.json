@@ -1,0 +1,421 @@
+{
+  "captured_utc": "2026-09-25T06:48:07Z",
+  "host": {
+    "machine": "M5 (the Mac: runs the four VMs and the MLX model server)",
+    "cpu": "Apple M3 Max",
+    "cores": 16,
+    "performance_cores": 12,
+    "efficiency_cores": 4,
+    "memory_bytes": 68719476736,
+    "macos": "27.0",
+    "lima": "limactl version 2.1.4",
+    "docker_cli": "29.6.2"
+  },
+  "vms": [
+    {
+      "machine": "m1",
+      "vcpus": 3,
+      "memory_bytes": 6189420544,
+      "kernel": "7.0.0-27-generic",
+      "os": "Ubuntu 26.04 LTS",
+      "docker": "29.8.1",
+      "swarm_node_id": "yd96p0gqkthtourpo4ecju9kb",
+      "containers": [
+        {
+          "container": "ca-orderer",
+          "image": "hyperledger/fabric-ca:1.5.22",
+          "image_id": "sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72",
+          "repo_digests": [
+            "hyperledger/fabric-ca@sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72"
+          ]
+        },
+        {
+          "container": "ca-police",
+          "image": "hyperledger/fabric-ca:1.5.22",
+          "image_id": "sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72",
+          "repo_digests": [
+            "hyperledger/fabric-ca@sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72"
+          ]
+        },
+        {
+          "container": "cadvisor-m1",
+          "image": "gcr.io/cadvisor/cadvisor:v0.49.1",
+          "image_id": "sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388",
+          "repo_digests": [
+            "gcr.io/cadvisor/cadvisor@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388"
+          ]
+        },
+        {
+          "container": "couchdb-police",
+          "image": "couchdb:3.4.2",
+          "image_id": "sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59",
+          "repo_digests": [
+            "couchdb@sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59"
+          ]
+        },
+        {
+          "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+          "image": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-b2636d7df2fe60ec944a262186d5b41fe42d7bc62ee2553ac44b11dfcc050a91",
+          "image_id": "sha256:8e50eb019d32f594f44fa18c83facc254b62ae70128f1244c36221341c7b6f48",
+          "repo_digests": [
+            "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-b2636d7df2fe60ec944a262186d5b41fe42d7bc62ee2553ac44b11dfcc050a91@sha256:8e50eb019d32f594f44fa18c83facc254b62ae70128f1244c36221341c7b6f48"
+          ]
+        },
+        {
+          "container": "node-exporter-m1",
+          "image": "prom/node-exporter:v1.8.2",
+          "image_id": "sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706",
+          "repo_digests": [
+            "prom/node-exporter@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706"
+          ]
+        },
+        {
+          "container": "orderer1.example.com",
+          "image": "hyperledger/fabric-orderer:2.5.16",
+          "image_id": "sha256:e322c57331d37e0a35ffae3cb3d3265a0e852211c0f801f2514cc15b964ffc93",
+          "repo_digests": [
+            "hyperledger/fabric-orderer@sha256:e322c57331d37e0a35ffae3cb3d3265a0e852211c0f801f2514cc15b964ffc93"
+          ]
+        },
+        {
+          "container": "peer0.police.example.com",
+          "image": "hyperledger/fabric-peer:2.5.16",
+          "image_id": "sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0",
+          "repo_digests": [
+            "hyperledger/fabric-peer@sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0"
+          ]
+        }
+      ]
+    },
+    {
+      "machine": "m2",
+      "vcpus": 3,
+      "memory_bytes": 6189416448,
+      "kernel": "7.0.0-27-generic",
+      "os": "Ubuntu 26.04 LTS",
+      "docker": "29.8.1",
+      "swarm_node_id": "ol7n28vp64c5o75wh3kpda7j8",
+      "containers": [
+        {
+          "container": "ca-forensics",
+          "image": "hyperledger/fabric-ca:1.5.22",
+          "image_id": "sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72",
+          "repo_digests": [
+            "hyperledger/fabric-ca@sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72"
+          ]
+        },
+        {
+          "container": "ca-prosecution",
+          "image": "hyperledger/fabric-ca:1.5.22",
+          "image_id": "sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72",
+          "repo_digests": [
+            "hyperledger/fabric-ca@sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72"
+          ]
+        },
+        {
+          "container": "cadvisor-m2",
+          "image": "gcr.io/cadvisor/cadvisor:v0.49.1",
+          "image_id": "sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388",
+          "repo_digests": [
+            "gcr.io/cadvisor/cadvisor@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388"
+          ]
+        },
+        {
+          "container": "couchdb-forensics",
+          "image": "couchdb:3.4.2",
+          "image_id": "sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59",
+          "repo_digests": [
+            "couchdb@sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59"
+          ]
+        },
+        {
+          "container": "couchdb-prosecution",
+          "image": "couchdb:3.4.2",
+          "image_id": "sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59",
+          "repo_digests": [
+            "couchdb@sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59"
+          ]
+        },
+        {
+          "container": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+          "image": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-ea04a915a3a795a76f3d21166d74ece3026370dc91015da0db3a0792496118c4",
+          "image_id": "sha256:875b89ed76f4375a70fc50112580f0251276d4a3b21f478af17d7114b21a3c29",
+          "repo_digests": [
+            "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-ea04a915a3a795a76f3d21166d74ece3026370dc91015da0db3a0792496118c4@sha256:875b89ed76f4375a70fc50112580f0251276d4a3b21f478af17d7114b21a3c29"
+          ]
+        },
+        {
+          "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+          "image": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-2f32de43800f72803f5ad6f41eff131c28a33d0701fc789e42433be6e91453c3",
+          "image_id": "sha256:2d9bdf448b2d3079726cb4d0d0bfd557dab9b58084e5a8d9e7275b687eddf1f8",
+          "repo_digests": [
+            "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-2f32de43800f72803f5ad6f41eff131c28a33d0701fc789e42433be6e91453c3@sha256:2d9bdf448b2d3079726cb4d0d0bfd557dab9b58084e5a8d9e7275b687eddf1f8"
+          ]
+        },
+        {
+          "container": "node-exporter-m2",
+          "image": "prom/node-exporter:v1.8.2",
+          "image_id": "sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706",
+          "repo_digests": [
+            "prom/node-exporter@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706"
+          ]
+        },
+        {
+          "container": "orderer2.example.com",
+          "image": "hyperledger/fabric-orderer:2.5.16",
+          "image_id": "sha256:e322c57331d37e0a35ffae3cb3d3265a0e852211c0f801f2514cc15b964ffc93",
+          "repo_digests": [
+            "hyperledger/fabric-orderer@sha256:e322c57331d37e0a35ffae3cb3d3265a0e852211c0f801f2514cc15b964ffc93"
+          ]
+        },
+        {
+          "container": "peer0.forensics.example.com",
+          "image": "hyperledger/fabric-peer:2.5.16",
+          "image_id": "sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0",
+          "repo_digests": [
+            "hyperledger/fabric-peer@sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0"
+          ]
+        },
+        {
+          "container": "peer0.prosecution.example.com",
+          "image": "hyperledger/fabric-peer:2.5.16",
+          "image_id": "sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0",
+          "repo_digests": [
+            "hyperledger/fabric-peer@sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0"
+          ]
+        }
+      ]
+    },
+    {
+      "machine": "m3",
+      "vcpus": 3,
+      "memory_bytes": 6189416448,
+      "kernel": "7.0.0-27-generic",
+      "os": "Ubuntu 26.04 LTS",
+      "docker": "29.8.1",
+      "swarm_node_id": "2ys83eyr1te7rikd1kn3dke0p",
+      "containers": [
+        {
+          "container": "ca-audit",
+          "image": "hyperledger/fabric-ca:1.5.22",
+          "image_id": "sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72",
+          "repo_digests": [
+            "hyperledger/fabric-ca@sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72"
+          ]
+        },
+        {
+          "container": "ca-court",
+          "image": "hyperledger/fabric-ca:1.5.22",
+          "image_id": "sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72",
+          "repo_digests": [
+            "hyperledger/fabric-ca@sha256:a70b6ba64a08b4d856802fe1fa66af9f2e03a26a63ceaff0de7c852ca7178b72"
+          ]
+        },
+        {
+          "container": "cadvisor-m3",
+          "image": "gcr.io/cadvisor/cadvisor:v0.49.1",
+          "image_id": "sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388",
+          "repo_digests": [
+            "gcr.io/cadvisor/cadvisor@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388"
+          ]
+        },
+        {
+          "container": "couchdb-audit",
+          "image": "couchdb:3.4.2",
+          "image_id": "sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59",
+          "repo_digests": [
+            "couchdb@sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59"
+          ]
+        },
+        {
+          "container": "couchdb-court",
+          "image": "couchdb:3.4.2",
+          "image_id": "sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59",
+          "repo_digests": [
+            "couchdb@sha256:2817ad50b5c5cf7461f5963670466197426605a790a19a6208068c509a2d8a59"
+          ]
+        },
+        {
+          "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+          "image": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-44c2dc7d5cd1b348c4ce7e6cfe7270686099f952ab234fe0cc6f164c964a3c65",
+          "image_id": "sha256:1025eb88e7250ef5307da02070d2b80ed6091b8adef078e958ecf6dfbf53efad",
+          "repo_digests": [
+            "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-44c2dc7d5cd1b348c4ce7e6cfe7270686099f952ab234fe0cc6f164c964a3c65@sha256:1025eb88e7250ef5307da02070d2b80ed6091b8adef078e958ecf6dfbf53efad"
+          ]
+        },
+        {
+          "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+          "image": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-d49b37d13f6ccf1412d8519ae535026f853c375cbfdad4cc95565c4ecb425fb9",
+          "image_id": "sha256:6d2482cc8feb07f0bb1ec31f2e7e0daa26b35e124665882d80e0d53a5791ee6f",
+          "repo_digests": [
+            "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f-d49b37d13f6ccf1412d8519ae535026f853c375cbfdad4cc95565c4ecb425fb9@sha256:6d2482cc8feb07f0bb1ec31f2e7e0daa26b35e124665882d80e0d53a5791ee6f"
+          ]
+        },
+        {
+          "container": "node-exporter-m3",
+          "image": "prom/node-exporter:v1.8.2",
+          "image_id": "sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706",
+          "repo_digests": [
+            "prom/node-exporter@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706"
+          ]
+        },
+        {
+          "container": "orderer3.example.com",
+          "image": "hyperledger/fabric-orderer:2.5.16",
+          "image_id": "sha256:e322c57331d37e0a35ffae3cb3d3265a0e852211c0f801f2514cc15b964ffc93",
+          "repo_digests": [
+            "hyperledger/fabric-orderer@sha256:e322c57331d37e0a35ffae3cb3d3265a0e852211c0f801f2514cc15b964ffc93"
+          ]
+        },
+        {
+          "container": "peer0.audit.example.com",
+          "image": "hyperledger/fabric-peer:2.5.16",
+          "image_id": "sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0",
+          "repo_digests": [
+            "hyperledger/fabric-peer@sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0"
+          ]
+        },
+        {
+          "container": "peer0.court.example.com",
+          "image": "hyperledger/fabric-peer:2.5.16",
+          "image_id": "sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0",
+          "repo_digests": [
+            "hyperledger/fabric-peer@sha256:09ee75042de9983bfde31ca88a5bf033386351f10a990e4c48264ee50172dee0"
+          ]
+        }
+      ]
+    },
+    {
+      "machine": "m4",
+      "vcpus": 3,
+      "memory_bytes": 6189420544,
+      "kernel": "7.0.0-27-generic",
+      "os": "Ubuntu 26.04 LTS",
+      "docker": "29.8.1",
+      "swarm_node_id": "olbafhxwy199gz2a3drx51wgz",
+      "containers": [
+        {
+          "container": "cadvisor-m4",
+          "image": "gcr.io/cadvisor/cadvisor:v0.49.1",
+          "image_id": "sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388",
+          "repo_digests": [
+            "gcr.io/cadvisor/cadvisor@sha256:3cde6faf0791ebf7b41d6f8ae7145466fed712ea6f252c935294d2608b1af388"
+          ]
+        },
+        {
+          "container": "dias-backend",
+          "image": "6d3c2316adb4",
+          "image_id": "",
+          "repo_digests": []
+        },
+        {
+          "container": "node-exporter-m4",
+          "image": "prom/node-exporter:v1.8.2",
+          "image_id": "sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706",
+          "repo_digests": [
+            "prom/node-exporter@sha256:4032c6d5bfd752342c3e631c2f1de93ba6b86c41db6b167b9a35372c139e7706"
+          ]
+        },
+        {
+          "container": "prometheus",
+          "image": "prom/prometheus:v3.13.1",
+          "image_id": "sha256:3c42b892cf723fa54d2f262c37a0e1f80aa8c8ddb1da7b9b0df9455a35a7f893",
+          "repo_digests": [
+            "prom/prometheus@sha256:3c42b892cf723fa54d2f262c37a0e1f80aa8c8ddb1da7b9b0df9455a35a7f893"
+          ]
+        }
+      ]
+    }
+  ],
+  "vm_network": "Lima user-v2 network (VM-to-VM), Docker Swarm overlay 'diasnet' (MTU 1400)",
+  "fabric": {
+    "channel": "diaschannel",
+    "orderers": "3 x etcdraft (orderer1 on M1, orderer2 on M2, orderer3 on M3)",
+    "peers": "5 (police on M1; forensics, prosecution on M2; court, audit on M3), CouchDB state database each",
+    "batch": {
+      "BatchTimeout": "2s",
+      "MaxMessageCount": 10,
+      "PreferredMaxBytes": "512 KB"
+    },
+    "endorsement_policy": "MAJORITY Endorsement (3 of 5)",
+    "configtx_sha256": "58cb52610d78a64d737c347e76c8a138201f1f2997b6f2747817c241baaac058",
+    "chaincode": {
+      "name": "diasrecords",
+      "version": "2.3",
+      "sequence": 1,
+      "package_sha256": "adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+      "source_tree_sha256": "b43a89e45614ed908ba853513e07e9d6fed8fe4889401f5a5d9a6e1d14db49bf",
+      "on_chain": "request facts and hashes; auditor decision with the LLM recommendation value (ALLOW/DENY/UNAVAILABLE) and the agreement the contract derives from both",
+      "off_chain": "justification text, the LLM's reason text, reason code, clause references, provenance"
+    }
+  },
+  "backend": {
+    "image": "dias-backend:testbed",
+    "image_source_sha256_now": "beee5259c53ad92ae6172b0c7b791a89e9ec6419f20da2068bfbb4d6251cb4be",
+    "trace": "DIAS_TRACE_FILE on (timing of every ledger call, queue and model call)"
+  },
+  "model": {
+    "server": "mlx_lm.server 0.31.3 on the Mac GPU, 127.0.0.1:8081, HF_HUB_OFFLINE=1",
+    "base_model": "mlx-community/Qwen3-14B-4bit",
+    "base_revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+    "adapter": "qwen3-14b-dias-lora-v7",
+    "adapter_sha256": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+    "decoding": {
+      "temperature": 0,
+      "top_p": 1,
+      "max_tokens": 512,
+      "thinking": "disabled"
+    },
+    "prompt_cache": "server default (10 entries); every request in a run has distinct facts",
+    "workers": "1 (the backend answers recommendations one at a time)"
+  },
+  "plans": {
+    "burst_and_steady_sha256": "014ef11876099b7098b9525d11f99fd40c801cb525c0195147afd316fedd159e",
+    "fault_plan_sha256": "62b4f8b4815b89e1cc7da6b8194f398644197d1b1b61f435304e1e4d362eb37a"
+  },
+  "git": {
+    "head": "7de0a20c26882196e0c777589a0af6d275a64130",
+    "tracked_diff_sha256": "6d2ba85e590adb2bd25e600e4e21b9419e40d7911891dd0e2af1a2c0d1867b37",
+    "changed_files": [
+      "M backend/src/config.js",
+      " M backend/src/dias/agreement.js",
+      " M backend/src/dias/recommendationWorker.js",
+      " M backend/src/dias/recommender.js",
+      " M backend/src/fabric/gateway.js",
+      " M backend/src/middleware/accessLogger.js",
+      " M backend/src/routes/access.js",
+      " M backend/src/server.js",
+      " M backend/test/accessDias.unit.test.js",
+      " M backend/test/accessLogger.unit.test.js",
+      " M chaincode/crimerecords/lib/accessContract.js",
+      " M chaincode/crimerecords/lib/auditContract.js",
+      " M chaincode/crimerecords/lib/dias/authorization.js",
+      " M chaincode/crimerecords/test/diasAccessSecurity.test.js",
+      " M chaincode/crimerecords/test/diasAccessWorkflow.test.js",
+      " M chaincode/crimerecords/test/diasAuthorization.test.js",
+      " M chaincode/crimerecords/test/diasTestWorld.js",
+      " M frontend/js/core/api.js",
+      " M frontend/js/modules/audit-trail.js",
+      " M frontend/js/modules/decision-log.js",
+      " M frontend/js/shared/dias.js",
+      "?? backend/src/dias/recommendationDetail.js",
+      "?? backend/src/util/trace.js",
+      "?? backend/test/diasRecommendationDetail.unit.test.js",
+      "?? backend/test/testbedInstrumentation.unit.test.js",
+      "?? experiments/cross-dataset/",
+      "?? experiments/plans/20260924_multi_vm_experiments_plan.md",
+      "?? experiments/runs/20260924_cross_dataset/",
+      "?? experiments/runs/20260924_testbed_multivm/",
+      "?? reports/iteration/iter_054_dias_multi_vm_remaining_experiments.md",
+      "?? results/plots/dias-testbed/",
+      "?? results/tables/dias_testbed_accuracy.csv",
+      "?? results/tables/dias_testbed_e3_functions.csv",
+      "?? results/tables/dias_testbed_e4_summary.json",
+      "?? results/tables/dias_testbed_e5_levels.csv",
+      "?? results/tables/dias_testbed_e6_summary.json",
+      "?? results/tables/dias_testbed_e7_summary.json",
+      "?? results/tables/dias_testbed_ledger_growth.json",
+      "?? testbed/"
+    ]
+  }
+}

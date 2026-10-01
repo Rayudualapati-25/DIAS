@@ -1,0 +1,38 @@
+{
+ "checks": {
+  "rows": 2400,
+  "planned": 2400,
+  "missing": 0,
+  "duplicates": 0,
+  "failed": 0,
+  "failures": [],
+  "facts_mismatched": 0
+ },
+ "model_on_reviewed_requests": {
+  "reviewed": 1896,
+  "valid": 1895,
+  "correct": 1799,
+  "overrides_of_model_deny": 72
+ },
+ "ledger_check": {
+  "created_by_rows": 72,
+  "on_ledger_for_plan": 72,
+  "only_on_ledger": [],
+  "mismatched": [],
+  "pass": true
+ },
+ "records": 300,
+ "approved_records": 72
+}
+r=0 no-reuse               requests   300 reviews   300 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=0 exact-record           requests   300 reviews   300 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=0 property-fingerprint   requests   300 reviews   252 avoided    48 (16.0%) other-record grants 48 other-user grants 0
+r=1 no-reuse               requests   600 reviews   600 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=1 exact-record           requests   600 reviews   528 avoided    72 (12.0%) other-record grants 0 other-user grants 0
+r=1 property-fingerprint   requests   600 reviews   480 avoided   120 (20.0%) other-record grants 96 other-user grants 0
+r=3 no-reuse               requests  1200 reviews  1200 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=3 exact-record           requests  1200 reviews   984 avoided   216 (18.0%) other-record grants 0 other-user grants 0
+r=3 property-fingerprint   requests  1200 reviews   936 avoided   264 (22.0%) other-record grants 192 other-user grants 0
+r=7 no-reuse               requests  2400 reviews  2400 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=7 exact-record           requests  2400 reviews  1896 avoided   504 (21.0%) other-record grants 0 other-user grants 0
+r=7 property-fingerprint   requests  2400 reviews  1848 avoided   552 (23.0%) other-record grants 384 other-user grants 0

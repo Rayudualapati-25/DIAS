@@ -1,0 +1,32 @@
+{
+ "checks": {
+  "rows": 36,
+  "planned": 36,
+  "missing": 0,
+  "duplicates": 0,
+  "failed": 0,
+  "failures": [],
+  "facts_mismatched": 0
+ },
+ "model_on_reviewed_requests": {
+  "reviewed": 22,
+  "valid": 22,
+  "correct": 21,
+  "overrides_of_model_deny": 7
+ },
+ "ledger_check": {
+  "created_by_rows": 7,
+  "on_ledger_for_plan": 7,
+  "only_on_ledger": [],
+  "mismatched": [],
+  "pass": true
+ },
+ "records": 12,
+ "approved_records": 7
+}
+r=0 no-reuse               requests    12 reviews    12 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=0 exact-record           requests    12 reviews    12 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=0 property-fingerprint   requests    12 reviews     8 avoided     4 (33.33%) other-record grants 4 other-user grants 0
+r=1 no-reuse               requests    24 reviews    24 avoided     0 (0.0%) other-record grants 0 other-user grants 0
+r=1 exact-record           requests    24 reviews    17 avoided     7 (29.17%) other-record grants 0 other-user grants 0
+r=1 property-fingerprint   requests    24 reviews    11 avoided    13 (54.17%) other-record grants 10 other-user grants 0

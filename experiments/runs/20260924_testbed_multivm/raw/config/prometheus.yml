@@ -1,0 +1,58 @@
+# Prometheus for the DIAS multi-VM testbed (runs on M4).
+#
+# Every target is reached by container name over the diasnet overlay network.
+# The `machine` label names the VM that hosts the target, so every series can
+# be grouped per machine (M1–M4) as well as per container.
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: cadvisor
+    static_configs:
+      - targets: ["cadvisor-m1:8080"]
+        labels: { machine: m1 }
+      - targets: ["cadvisor-m2:8080"]
+        labels: { machine: m2 }
+      - targets: ["cadvisor-m3:8080"]
+        labels: { machine: m3 }
+      - targets: ["cadvisor-m4:8080"]
+        labels: { machine: m4 }
+
+  - job_name: node
+    static_configs:
+      - targets: ["node-exporter-m1:9100"]
+        labels: { machine: m1 }
+      - targets: ["node-exporter-m2:9100"]
+        labels: { machine: m2 }
+      - targets: ["node-exporter-m3:9100"]
+        labels: { machine: m3 }
+      - targets: ["node-exporter-m4:9100"]
+        labels: { machine: m4 }
+
+  - job_name: orderer
+    static_configs:
+      - targets: ["orderer1.example.com:9443"]
+        labels: { machine: m1, node: orderer1 }
+      - targets: ["orderer2.example.com:9443"]
+        labels: { machine: m2, node: orderer2 }
+      - targets: ["orderer3.example.com:9443"]
+        labels: { machine: m3, node: orderer3 }
+
+  - job_name: peer
+    static_configs:
+      - targets: ["peer0.police.example.com:9444"]
+        labels: { machine: m1, org: police }
+      - targets: ["peer0.forensics.example.com:9445"]
+        labels: { machine: m2, org: forensics }
+      - targets: ["peer0.prosecution.example.com:9446"]
+        labels: { machine: m2, org: prosecution }
+      - targets: ["peer0.court.example.com:9447"]
+        labels: { machine: m3, org: court }
+      - targets: ["peer0.audit.example.com:9448"]
+        labels: { machine: m3, org: audit }
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+        labels: { machine: m4 }

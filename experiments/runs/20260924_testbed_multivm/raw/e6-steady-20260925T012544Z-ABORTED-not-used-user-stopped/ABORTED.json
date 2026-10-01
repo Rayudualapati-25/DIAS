@@ -1,0 +1,14 @@
+{
+  "aborted_run": "e6-steady-20260925T012544Z",
+  "reason": "stopped at the user's request; the load generator was stopped at 01:30:36 UTC (07:00:36 IST), about 4 minutes after the workflows began at 01:26:44 UTC; E6 will be rerun from the same plan in the office",
+  "workflows_completed_before_stop": 22,
+  "requests_on_ledger": 25,
+  "requests_on_ledger_not_in_rows": 3,
+  "left_pending": [
+    "REQ-d574ae151c84d139",
+    "REQ-2f75bc46a1867dd9",
+    "REQ-dfd63f72efa622df"
+  ],
+  "left_pending_note": "recommendations are ready but no auditor decision was written; close them with testbed/load/close-pending.js before the next run (testbed/scripts/start_e6.sh does this)",
+  "source": "backend trace: 25 CreateAccessRequest and 22 SubmitAuditorDecision submits between 01:25:44 and 01:31:01 UTC; last backend event 01:31:01 UTC"
+}

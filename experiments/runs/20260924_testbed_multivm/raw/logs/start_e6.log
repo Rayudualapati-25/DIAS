@@ -1,0 +1,16 @@
+== 1. checks
+dias-m1 clock minus Mac clock: +0.024 s
+dias-m2 clock minus Mac clock: +0.039 s
+dias-m3 clock minus Mac clock: +0.027 s
+dias-m4 clock minus Mac clock: +0.026 s
+== 2. wait until the backend has no recommendation in preparation
+== 3. close requests left open by a stopped attempt
+REQ-2f75bc46a1867dd9: 201
+REQ-d574ae151c84d139: 201
+REQ-dfd63f72efa622df: 201
+{"closed":3,"stillPending":0}
+requests created: 887 | decisions written: 887
+== 4. start E6
+started e6-steady-20260925T023853Z at 02:38:53 UTC; the workflows end about 63 minutes later
+follow it:   docker --context lima-dias-m4 logs -f loadgen-e6
+when done:   bash testbed/scripts/run_remaining.sh   then   bash testbed/scripts/finalize.sh

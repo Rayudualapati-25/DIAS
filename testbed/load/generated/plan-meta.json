@@ -1,0 +1,43 @@
+{
+  "seed": 20260924,
+  "levels": [
+    10,
+    25,
+    50,
+    75,
+    100
+  ],
+  "repetitions": 3,
+  "warmup": 5,
+  "steadyRatePerMinute": 6,
+  "steadyMinutes": 60,
+  "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+  "allowCycle": [
+    "judge.rana",
+    "io.krishnan",
+    "insp.sharma",
+    "pp.mehta",
+    "judge.rana",
+    "io.krishnan",
+    "insp.sharma",
+    "pp.mehta",
+    "insp.singh",
+    "dir.iyer"
+  ],
+  "denyCycle": [
+    "sho.reddy",
+    "const.verma",
+    "insp.rathore",
+    "analyst.rao",
+    "dc.nair",
+    "clerk.das",
+    "insp.sharma",
+    "io.krishnan",
+    "insp.singh",
+    "dir.iyer",
+    "pp.mehta",
+    "judge.rana"
+  ],
+  "planSha256": "014ef11876099b7098b9525d11f99fd40c801cb525c0195147afd316fedd159e",
+  "generatedBy": "testbed/load/plan.js"
+}

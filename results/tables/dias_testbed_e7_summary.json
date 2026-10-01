@@ -1,0 +1,279 @@
+{
+  "phases": [
+    {
+      "phase": "Normal",
+      "started": 21,
+      "completed": 18,
+      "failed": 3,
+      "failures": [
+        "decision: decision 500: internal error",
+        "submit: submit 500: internal error"
+      ],
+      "p50_s": 18.041365000000003,
+      "p95_s": 33.91225,
+      "max_s": 33.91225,
+      "request_commit_p50_s": 1.625944,
+      "decision_commit_p50_s": 2.057918
+    },
+    {
+      "phase": "Leader orderer stopped",
+      "started": 21,
+      "completed": 20,
+      "failed": 1,
+      "failures": [
+        "submit: submit 500: internal error"
+      ],
+      "p50_s": 39.767672,
+      "p95_s": 51.483887,
+      "max_s": 53.668153,
+      "request_commit_p50_s": 2.057656,
+      "decision_commit_p50_s": 2.040563
+    },
+    {
+      "phase": "Court peer stopped",
+      "started": 17,
+      "completed": 17,
+      "failed": 0,
+      "failures": [],
+      "p50_s": 16.782893,
+      "p95_s": 30.75252,
+      "max_s": 30.75252,
+      "request_commit_p50_s": 2.050091,
+      "decision_commit_p50_s": 2.0468640000000002
+    },
+    {
+      "phase": "Recovered",
+      "started": 24,
+      "completed": 24,
+      "failed": 0,
+      "failures": [],
+      "p50_s": 31.788879,
+      "p95_s": 56.507758,
+      "max_s": 60.262463000000004,
+      "request_commit_p50_s": 1.575681,
+      "decision_commit_p50_s": 2.041733
+    }
+  ],
+  "timeline": [
+    {
+      "event": "raft_leader_before",
+      "epoch_s": 1790311123.703066,
+      "node": "orderer3"
+    },
+    {
+      "event": "load_start_estimated",
+      "epoch_s": 1790311125.632716,
+      "t0": 1790311155.6327062
+    },
+    {
+      "event": "stopped",
+      "epoch_s": 1790311335.778665,
+      "container": "orderer3.example.com",
+      "code": 0
+    },
+    {
+      "event": "raft_leader_now",
+      "epoch_s": 1790311347.786845,
+      "node": "orderer1"
+    },
+    {
+      "event": "started",
+      "epoch_s": 1790311515.9662058,
+      "container": "orderer3.example.com",
+      "code": 0
+    },
+    {
+      "event": "stopped",
+      "epoch_s": 1790311516.22318,
+      "container": "peer0.court.example.com",
+      "code": 0
+    },
+    {
+      "event": "raft_leader_now",
+      "epoch_s": 1790311528.230834,
+      "node": "orderer1"
+    },
+    {
+      "event": "started",
+      "epoch_s": 1790311695.932791,
+      "container": "peer0.court.example.com",
+      "code": 0
+    },
+    {
+      "event": "raft_leader_now",
+      "epoch_s": 1790311707.9386199,
+      "node": "orderer1"
+    },
+    {
+      "event": "load_finished",
+      "epoch_s": 1790311914.0076191,
+      "exit_code": "0"
+    },
+    {
+      "event": "ledger_heights_after",
+      "epoch_s": 1790311934.016512,
+      "heights": {
+        "orderer3": 3435,
+        "forensics": 3435,
+        "court": 3435,
+        "orderer1": 3435,
+        "police": 3435,
+        "audit": 3435,
+        "prosecution": 3435,
+        "orderer2": 3435
+      },
+      "all_equal": true,
+      "attempts": 1
+    },
+    {
+      "event": "raft_leader_after",
+      "epoch_s": 1790311934.018741,
+      "node": "orderer1"
+    },
+    {
+      "event": "chain_info_after",
+      "epoch_s": 1790311936.083976,
+      "info": {
+        "police": {
+          "height": 3435,
+          "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+          "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+        },
+        "forensics": {
+          "height": 3435,
+          "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+          "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+        },
+        "prosecution": {
+          "height": 3435,
+          "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+          "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+        },
+        "court": {
+          "height": 3435,
+          "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+          "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+        },
+        "audit": {
+          "height": 3435,
+          "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+          "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+        }
+      },
+      "same_hash": true
+    },
+    {
+      "event": "network_restored",
+      "epoch_s": 1790311941.3254201,
+      "running": {
+        "orderer1.example.com": true,
+        "orderer2.example.com": true,
+        "orderer3.example.com": true,
+        "peer0.police.example.com": true,
+        "peer0.forensics.example.com": true,
+        "peer0.prosecution.example.com": true,
+        "peer0.court.example.com": true,
+        "peer0.audit.example.com": true
+      }
+    },
+    {
+      "event": "problems",
+      "epoch_s": 1790311941.358689,
+      "items": []
+    }
+  ],
+  "leader_before": "orderer3",
+  "leader_changes_after_stop": [
+    {
+      "observed_by": "orderer1",
+      "epoch_s": 1790311341.946796,
+      "from": "3",
+      "to": "0",
+      "seconds_after_stop": 6.168130874633789
+    },
+    {
+      "observed_by": "orderer2",
+      "epoch_s": 1790311341.956949,
+      "from": "3",
+      "to": "0",
+      "seconds_after_stop": 6.178283929824829
+    },
+    {
+      "observed_by": "orderer1",
+      "epoch_s": 1790311341.95699,
+      "from": "0",
+      "to": "1",
+      "seconds_after_stop": 6.178324937820435
+    },
+    {
+      "observed_by": "orderer2",
+      "epoch_s": 1790311341.957916,
+      "from": "0",
+      "to": "1",
+      "seconds_after_stop": 6.179250955581665
+    },
+    {
+      "observed_by": "orderer2",
+      "epoch_s": 1790311347.725806,
+      "from": "1",
+      "to": "0",
+      "seconds_after_stop": 11.94714093208313
+    },
+    {
+      "observed_by": "orderer2",
+      "epoch_s": 1790311357.485663,
+      "from": "0",
+      "to": "1",
+      "seconds_after_stop": 21.706997871398926
+    }
+  ],
+  "new_leader_elected_after_s": 6.178324937820435,
+  "ledger_after": {
+    "event": "ledger_heights_after",
+    "epoch_s": 1790311934.016512,
+    "heights": {
+      "orderer3": 3435,
+      "forensics": 3435,
+      "court": 3435,
+      "orderer1": 3435,
+      "police": 3435,
+      "audit": 3435,
+      "prosecution": 3435,
+      "orderer2": 3435
+    },
+    "all_equal": true,
+    "attempts": 1
+  },
+  "chain_info_after": {
+    "event": "chain_info_after",
+    "epoch_s": 1790311936.083976,
+    "info": {
+      "police": {
+        "height": 3435,
+        "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+        "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+      },
+      "forensics": {
+        "height": 3435,
+        "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+        "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+      },
+      "prosecution": {
+        "height": 3435,
+        "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+        "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+      },
+      "court": {
+        "height": 3435,
+        "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+        "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+      },
+      "audit": {
+        "height": 3435,
+        "currentBlockHash": "ptQN8QW5wLiExh34DRbpKf6h9ExDv9mS6mY7j4vPyxs=",
+        "previousBlockHash": "xPs0RKuaRrYbh92IdBHxlk53bLtRruPQ4qjXIfUAfjk="
+      }
+    },
+    "same_hash": true
+  }
+}

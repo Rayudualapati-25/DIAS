@@ -1,0 +1,106 @@
+{
+  "name": "dias-m4",
+  "networks": {
+    "diasnet": {
+      "external": true,
+      "name": "diasnet"
+    }
+  },
+  "volumes": {
+    "prometheus-data": {},
+    "backend-data": {
+      "name": "dias-backend-data"
+    }
+  },
+  "services": {
+    "prometheus": {
+      "image": "prom/prometheus:v3.13.1",
+      "container_name": "prometheus",
+      "hostname": "prometheus",
+      "command": [
+        "--config.file=/etc/prometheus/prometheus.yml",
+        "--storage.tsdb.path=/prometheus",
+        "--storage.tsdb.retention.time=60d"
+      ],
+      "volumes": [
+        "/Users/venkatrayudu/dias-testbed/monitor/prometheus.yml:/etc/prometheus/prometheus.yml:ro",
+        "prometheus-data:/prometheus"
+      ],
+      "ports": [
+        "19090:9090"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "dias-backend": {
+      "image": "dias-backend:testbed",
+      "container_name": "dias-backend",
+      "hostname": "dias-backend",
+      "env_file": [
+        "/Users/venkatrayudu/dias-testbed/backend.env"
+      ],
+      "environment": [
+        "FABRIC_PEER_ENDPOINTS={\"police\":\"peer0.police.example.com:7051\",\"forensics\":\"peer0.forensics.example.com:8051\",\"prosecution\":\"peer0.prosecution.example.com:9051\",\"court\":\"peer0.court.example.com:10051\",\"audit\":\"peer0.audit.example.com:11051\"}"
+      ],
+      "volumes": [
+        "/Users/venkatrayudu/dias-testbed/organizations:/app/network/organizations:ro",
+        "backend-data:/data"
+      ],
+      "extra_hosts": [
+        "host.lima.internal:192.168.104.2"
+      ],
+      "ports": [
+        "13001:3001"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "cadvisor-m4": {
+      "image": "gcr.io/cadvisor/cadvisor:v0.49.1",
+      "container_name": "cadvisor-m4",
+      "hostname": "cadvisor-m4",
+      "privileged": true,
+      "devices": [
+        "/dev/kmsg"
+      ],
+      "command": [
+        "--docker_only=true",
+        "--housekeeping_interval=5s",
+        "--store_container_labels=false",
+        "--whitelisted_container_labels=com.docker.compose.service",
+        "--disable_metrics=percpu,sched,tcp,udp,disk,diskIO,hugetlb,referenced_memory,cpu_topology,resctrl,cpuset,advtcp,memory_numa,process"
+      ],
+      "volumes": [
+        "/:/rootfs:ro",
+        "/var/run:/var/run:ro",
+        "/sys:/sys:ro",
+        "/var/lib/docker/:/var/lib/docker:ro",
+        "/dev/disk/:/dev/disk:ro"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    },
+    "node-exporter-m4": {
+      "image": "prom/node-exporter:v1.8.2",
+      "container_name": "node-exporter-m4",
+      "hostname": "node-exporter-m4",
+      "pid": "host",
+      "command": [
+        "--path.rootfs=/host"
+      ],
+      "volumes": [
+        "/:/host:ro,rslave"
+      ],
+      "networks": [
+        "diasnet"
+      ],
+      "restart": "unless-stopped"
+    }
+  }
+}

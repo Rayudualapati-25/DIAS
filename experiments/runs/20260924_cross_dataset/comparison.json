@@ -1,0 +1,780 @@
+{
+  "generatedAtUtc": "2026-09-24T06:54:42.426461+00:00",
+  "sets": {
+    "llmac": {
+      "comparedOn": 180,
+      "v7": {
+        "n": 180,
+        "schemaValid": 176,
+        "schemaValidRate": 0.977778,
+        "decisionAccuracy": 0.661111,
+        "decisionAccuracyCI": {
+          "point": 0.661111,
+          "low": 0.589239,
+          "high": 0.72625
+        },
+        "balancedAccuracy": 0.65755,
+        "macroF1": 0.627628,
+        "allowRecall": 0.337079,
+        "denyRecall": 0.978022,
+        "confusion": {
+          "ALLOW": {
+            "ALLOW": 30,
+            "DENY": 57,
+            "INVALID": 2
+          },
+          "DENY": {
+            "ALLOW": 0,
+            "DENY": 89,
+            "INVALID": 2
+          }
+        },
+        "unsafeAllow": 0,
+        "overDeny": 57,
+        "reasonCodeAccuracy": 0.5,
+        "policyRefExactAccuracy": 0.544444,
+        "benign": {
+          "n": 126,
+          "schemaValid": 123,
+          "schemaValidRate": 0.97619,
+          "decisionAccuracy": 0.690476,
+          "decisionAccuracyCI": {
+            "point": 0.690476,
+            "low": 0.605122,
+            "high": 0.764559
+          },
+          "balancedAccuracy": 0.70303,
+          "macroF1": 0.681887,
+          "allowRecall": 0.439394,
+          "denyRecall": 0.966667,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 29,
+              "DENY": 36,
+              "INVALID": 1
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 58,
+              "INVALID": 2
+            }
+          },
+          "unsafeAllow": 0,
+          "overDeny": 36
+        },
+        "adversarial": {
+          "n": 54,
+          "schemaValid": 53,
+          "schemaValidRate": 0.981481,
+          "decisionAccuracy": 0.592593,
+          "decisionAccuracyCI": {
+            "point": 0.592593,
+            "low": 0.459666,
+            "high": 0.71322
+          },
+          "balancedAccuracy": 0.521739,
+          "macroF1": 0.415161,
+          "allowRecall": 0.043478,
+          "denyRecall": 1.0,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 1,
+              "DENY": 21,
+              "INVALID": 1
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 31,
+              "INVALID": 0
+            }
+          },
+          "unsafeAllow": 0,
+          "overDeny": 21
+        },
+        "byPolicy": {
+          "append_review_to_grade": {
+            "n": 20,
+            "schemaValid": 20,
+            "schemaValidRate": 1.0,
+            "decisionAccuracy": 0.6,
+            "decisionAccuracyCI": {
+              "point": 0.6,
+              "low": 0.386578,
+              "high": 0.781196
+            },
+            "balancedAccuracy": 0.5,
+            "macroF1": null,
+            "allowRecall": 0.0,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 0,
+                "DENY": 8,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 12,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 8
+          },
+          "grade_homework": {
+            "n": 28,
+            "schemaValid": 27,
+            "schemaValidRate": 0.964286,
+            "decisionAccuracy": 0.535714,
+            "decisionAccuracyCI": {
+              "point": 0.535714,
+              "low": 0.358124,
+              "high": 0.704687
+            },
+            "balancedAccuracy": 0.59375,
+            "macroF1": 0.491228,
+            "allowRecall": 0.1875,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 3,
+                "DENY": 12,
+                "INVALID": 1
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 12,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 12
+          },
+          "replace_homework": {
+            "n": 27,
+            "schemaValid": 27,
+            "schemaValidRate": 1.0,
+            "decisionAccuracy": 0.962963,
+            "decisionAccuracyCI": {
+              "point": 0.962963,
+              "low": 0.817161,
+              "high": 0.993432
+            },
+            "balancedAccuracy": 0.961538,
+            "macroF1": 0.962759,
+            "allowRecall": 0.923077,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 12,
+                "DENY": 1,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 14,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 1
+          },
+          "review_homework": {
+            "n": 29,
+            "schemaValid": 28,
+            "schemaValidRate": 0.965517,
+            "decisionAccuracy": 0.517241,
+            "decisionAccuracyCI": {
+              "point": 0.517241,
+              "low": 0.344307,
+              "high": 0.686142
+            },
+            "balancedAccuracy": 0.530952,
+            "macroF1": 0.442647,
+            "allowRecall": 0.133333,
+            "denyRecall": 0.928571,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 2,
+                "DENY": 13,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 13,
+                "INVALID": 1
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 13
+          },
+          "revise_review": {
+            "n": 25,
+            "schemaValid": 24,
+            "schemaValidRate": 0.96,
+            "decisionAccuracy": 0.4,
+            "decisionAccuracyCI": {
+              "point": 0.4,
+              "low": 0.234031,
+              "high": 0.592609
+            },
+            "balancedAccuracy": 0.5,
+            "macroF1": null,
+            "allowRecall": 0.0,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 0,
+                "DENY": 14,
+                "INVALID": 1
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 10,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 14
+          },
+          "submit_homework": {
+            "n": 24,
+            "schemaValid": 24,
+            "schemaValidRate": 1.0,
+            "decisionAccuracy": 0.791667,
+            "decisionAccuracyCI": {
+              "point": 0.791667,
+              "low": 0.595292,
+              "high": 0.907553
+            },
+            "balancedAccuracy": 0.772727,
+            "macroF1": 0.772296,
+            "allowRecall": 0.545455,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 6,
+                "DENY": 5,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 13,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 5
+          },
+          "upload_homework": {
+            "n": 27,
+            "schemaValid": 26,
+            "schemaValidRate": 0.962963,
+            "decisionAccuracy": 0.814815,
+            "decisionAccuracyCI": {
+              "point": 0.814815,
+              "low": 0.633009,
+              "high": 0.918194
+            },
+            "balancedAccuracy": 0.786932,
+            "macroF1": 0.81746,
+            "allowRecall": 0.636364,
+            "denyRecall": 0.9375,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 7,
+                "DENY": 4,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 15,
+                "INVALID": 1
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 4
+          }
+        }
+      },
+      "base": {
+        "n": 180,
+        "schemaValid": 169,
+        "schemaValidRate": 0.938889,
+        "decisionAccuracy": 0.627778,
+        "decisionAccuracyCI": {
+          "point": 0.627778,
+          "low": 0.555179,
+          "high": 0.695036
+        },
+        "balancedAccuracy": 0.624336,
+        "macroF1": 0.605696,
+        "allowRecall": 0.314607,
+        "denyRecall": 0.934066,
+        "confusion": {
+          "ALLOW": {
+            "ALLOW": 28,
+            "DENY": 56,
+            "INVALID": 5
+          },
+          "DENY": {
+            "ALLOW": 0,
+            "DENY": 85,
+            "INVALID": 6
+          }
+        },
+        "unsafeAllow": 0,
+        "overDeny": 56,
+        "reasonCodeAccuracy": 0.461111,
+        "policyRefExactAccuracy": 0.511111,
+        "benign": {
+          "n": 126,
+          "schemaValid": 118,
+          "schemaValidRate": 0.936508,
+          "decisionAccuracy": 0.65873,
+          "decisionAccuracyCI": {
+            "point": 0.65873,
+            "low": 0.572343,
+            "high": 0.735724
+          },
+          "balancedAccuracy": 0.671212,
+          "macroF1": 0.661184,
+          "allowRecall": 0.409091,
+          "denyRecall": 0.933333,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 27,
+              "DENY": 35,
+              "INVALID": 4
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 56,
+              "INVALID": 4
+            }
+          },
+          "unsafeAllow": 0,
+          "overDeny": 35
+        },
+        "adversarial": {
+          "n": 54,
+          "schemaValid": 51,
+          "schemaValidRate": 0.944444,
+          "decisionAccuracy": 0.555556,
+          "decisionAccuracyCI": {
+            "point": 0.555556,
+            "low": 0.423754,
+            "high": 0.679977
+          },
+          "balancedAccuracy": 0.489481,
+          "macroF1": 0.399691,
+          "allowRecall": 0.043478,
+          "denyRecall": 0.935484,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 1,
+              "DENY": 21,
+              "INVALID": 1
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 29,
+              "INVALID": 2
+            }
+          },
+          "unsafeAllow": 0,
+          "overDeny": 21
+        },
+        "byPolicy": {
+          "append_review_to_grade": {
+            "n": 20,
+            "schemaValid": 19,
+            "schemaValidRate": 0.95,
+            "decisionAccuracy": 0.55,
+            "decisionAccuracyCI": {
+              "point": 0.55,
+              "low": 0.342082,
+              "high": 0.741805
+            },
+            "balancedAccuracy": 0.458333,
+            "macroF1": null,
+            "allowRecall": 0.0,
+            "denyRecall": 0.916667,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 0,
+                "DENY": 8,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 11,
+                "INVALID": 1
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 8
+          },
+          "grade_homework": {
+            "n": 28,
+            "schemaValid": 25,
+            "schemaValidRate": 0.892857,
+            "decisionAccuracy": 0.428571,
+            "decisionAccuracyCI": {
+              "point": 0.428571,
+              "low": 0.265083,
+              "high": 0.609295
+            },
+            "balancedAccuracy": 0.479167,
+            "macroF1": 0.396825,
+            "allowRecall": 0.125,
+            "denyRecall": 0.833333,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 2,
+                "DENY": 13,
+                "INVALID": 1
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 10,
+                "INVALID": 2
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 13
+          },
+          "replace_homework": {
+            "n": 27,
+            "schemaValid": 25,
+            "schemaValidRate": 0.925926,
+            "decisionAccuracy": 0.888889,
+            "decisionAccuracyCI": {
+              "point": 0.888889,
+              "low": 0.719418,
+              "high": 0.96148
+            },
+            "balancedAccuracy": 0.89011,
+            "macroF1": 0.924444,
+            "allowRecall": 0.923077,
+            "denyRecall": 0.857143,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 12,
+                "DENY": 1,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 12,
+                "INVALID": 2
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 1
+          },
+          "review_homework": {
+            "n": 29,
+            "schemaValid": 27,
+            "schemaValidRate": 0.931034,
+            "decisionAccuracy": 0.517241,
+            "decisionAccuracyCI": {
+              "point": 0.517241,
+              "low": 0.344307,
+              "high": 0.686142
+            },
+            "balancedAccuracy": 0.530952,
+            "macroF1": 0.45098,
+            "allowRecall": 0.133333,
+            "denyRecall": 0.928571,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 2,
+                "DENY": 12,
+                "INVALID": 1
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 13,
+                "INVALID": 1
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 12
+          },
+          "revise_review": {
+            "n": 25,
+            "schemaValid": 25,
+            "schemaValidRate": 1.0,
+            "decisionAccuracy": 0.4,
+            "decisionAccuracyCI": {
+              "point": 0.4,
+              "low": 0.234031,
+              "high": 0.592609
+            },
+            "balancedAccuracy": 0.5,
+            "macroF1": null,
+            "allowRecall": 0.0,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 0,
+                "DENY": 15,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 10,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 15
+          },
+          "submit_homework": {
+            "n": 24,
+            "schemaValid": 21,
+            "schemaValidRate": 0.875,
+            "decisionAccuracy": 0.75,
+            "decisionAccuracyCI": {
+              "point": 0.75,
+              "low": 0.551002,
+              "high": 0.880008
+            },
+            "balancedAccuracy": 0.727273,
+            "macroF1": 0.760776,
+            "allowRecall": 0.454545,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 5,
+                "DENY": 3,
+                "INVALID": 3
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 13,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 3
+          },
+          "upload_homework": {
+            "n": 27,
+            "schemaValid": 27,
+            "schemaValidRate": 1.0,
+            "decisionAccuracy": 0.851852,
+            "decisionAccuracyCI": {
+              "point": 0.851852,
+              "low": 0.675209,
+              "high": 0.940842
+            },
+            "balancedAccuracy": 0.818182,
+            "macroF1": 0.833333,
+            "allowRecall": 0.636364,
+            "denyRecall": 1.0,
+            "confusion": {
+              "ALLOW": {
+                "ALLOW": 7,
+                "DENY": 4,
+                "INVALID": 0
+              },
+              "DENY": {
+                "ALLOW": 0,
+                "DENY": 16,
+                "INVALID": 0
+              }
+            },
+            "unsafeAllow": 0,
+            "overDeny": 4
+          }
+        }
+      }
+    },
+    "org-easy-binary": {
+      "comparedOn": 100,
+      "v7": {
+        "n": 100,
+        "schemaValid": 98,
+        "schemaValidRate": 0.98,
+        "decisionAccuracy": 0.78,
+        "decisionAccuracyCI": {
+          "point": 0.78,
+          "low": 0.689295,
+          "high": 0.849988
+        },
+        "balancedAccuracy": 0.776711,
+        "macroF1": 0.780627,
+        "allowRecall": 0.612245,
+        "denyRecall": 0.941176,
+        "confusion": {
+          "ALLOW": {
+            "ALLOW": 30,
+            "DENY": 18,
+            "INVALID": 1
+          },
+          "DENY": {
+            "ALLOW": 2,
+            "DENY": 48,
+            "INVALID": 1
+          }
+        },
+        "unsafeAllow": 2,
+        "overDeny": 18
+      },
+      "base": {
+        "n": 100,
+        "schemaValid": 99,
+        "schemaValidRate": 0.99,
+        "decisionAccuracy": 0.77,
+        "decisionAccuracyCI": {
+          "point": 0.77,
+          "low": 0.678454,
+          "high": 0.841568
+        },
+        "balancedAccuracy": 0.766507,
+        "macroF1": 0.765861,
+        "allowRecall": 0.591837,
+        "denyRecall": 0.941176,
+        "confusion": {
+          "ALLOW": {
+            "ALLOW": 29,
+            "DENY": 20,
+            "INVALID": 0
+          },
+          "DENY": {
+            "ALLOW": 2,
+            "DENY": 48,
+            "INVALID": 1
+          }
+        },
+        "unsafeAllow": 2,
+        "overDeny": 20
+      }
+    },
+    "org-easy-partial": {
+      "comparedOn": 40,
+      "partial_as_ALLOW": {
+        "v7": {
+          "n": 40,
+          "schemaValid": 37,
+          "schemaValidRate": 0.925,
+          "decisionAccuracy": 0.15,
+          "decisionAccuracyCI": {
+            "point": 0.15,
+            "low": 0.070611,
+            "high": 0.290726
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "allowRecall": 0.15,
+          "denyRecall": null,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 6,
+              "DENY": 31,
+              "INVALID": 3
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 0,
+              "INVALID": 0
+            }
+          },
+          "unsafeAllow": 0,
+          "overDeny": 31
+        },
+        "base": {
+          "n": 40,
+          "schemaValid": 38,
+          "schemaValidRate": 0.95,
+          "decisionAccuracy": 0.175,
+          "decisionAccuracyCI": {
+            "point": 0.175,
+            "low": 0.087453,
+            "high": 0.319503
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "allowRecall": 0.175,
+          "denyRecall": null,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 7,
+              "DENY": 31,
+              "INVALID": 2
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 0,
+              "INVALID": 0
+            }
+          },
+          "unsafeAllow": 0,
+          "overDeny": 31
+        }
+      },
+      "partial_as_DENY": {
+        "v7": {
+          "n": 40,
+          "schemaValid": 37,
+          "schemaValidRate": 0.925,
+          "decisionAccuracy": 0.775,
+          "decisionAccuracyCI": {
+            "point": 0.775,
+            "low": 0.624966,
+            "high": 0.87684
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "allowRecall": null,
+          "denyRecall": 0.775,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 0,
+              "DENY": 0,
+              "INVALID": 0
+            },
+            "DENY": {
+              "ALLOW": 6,
+              "DENY": 31,
+              "INVALID": 3
+            }
+          },
+          "unsafeAllow": 6,
+          "overDeny": 0
+        },
+        "base": {
+          "n": 40,
+          "schemaValid": 38,
+          "schemaValidRate": 0.95,
+          "decisionAccuracy": 0.775,
+          "decisionAccuracyCI": {
+            "point": 0.775,
+            "low": 0.624966,
+            "high": 0.87684
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "allowRecall": null,
+          "denyRecall": 0.775,
+          "confusion": {
+            "ALLOW": {
+              "ALLOW": 0,
+              "DENY": 0,
+              "INVALID": 0
+            },
+            "DENY": {
+              "ALLOW": 7,
+              "DENY": 31,
+              "INVALID": 2
+            }
+          },
+          "unsafeAllow": 7,
+          "overDeny": 0
+        }
+      }
+    }
+  }
+}

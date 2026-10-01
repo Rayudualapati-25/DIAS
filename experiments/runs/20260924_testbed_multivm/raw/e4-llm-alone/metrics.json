@@ -1,0 +1,3025 @@
+{
+  "label": "qwen3-14b-dias-v7-testbed-llm-alone",
+  "evaluatedAtUtc": "2026-09-25T04:52:56.360Z",
+  "model": {
+    "modelId": "qwen3-14b-dias-v7",
+    "modelFamily": "qwen3",
+    "baseModel": "mlx-community/Qwen3-14B-4bit",
+    "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+    "quantization": "4bit",
+    "adapterId": "qwen3-14b-dias-lora-v7",
+    "adapterHash": "348f4ca5707e35afda2b35522ab6bb7c0527d84be23de80253a0c358ae1fd43d",
+    "servedModel": "default_model",
+    "url": "http://127.0.0.1:8081/v1",
+    "adapterPath": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7"
+  },
+  "decoding": {
+    "temperature": 0,
+    "topP": 1,
+    "maxTokens": 512,
+    "thinking": "disabled"
+  },
+  "promptVersion": "dias-recommendation-prompt-v1",
+  "responseSchemaVersion": "dias-recommendation-response-v1",
+  "policyBundle": {
+    "bundleId": "dias-governance-policy",
+    "version": "v1",
+    "bundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0"
+  },
+  "dataset": "experiments/dias-finetuning/data-v2-binary",
+  "harness": "backend/src/dias/recommender.js (the live recommendation path)",
+  "durationSeconds": 4949.9,
+  "sets": {
+    "test-decision-balanced": {
+      "examples": 600,
+      "schemaValid": 600,
+      "schemaValidRate": 1,
+      "schemaValidCI": {
+        "point": 1,
+        "low": 0.993638,
+        "high": 1
+      },
+      "invalid": 0,
+      "statusCounts": {
+        "OK": 600
+      },
+      "decisionAccuracy": 0.986667,
+      "decisionAccuracyCI": {
+        "point": 0.986667,
+        "low": 0.973912,
+        "high": 0.993229
+      },
+      "balancedAccuracy": 0.986667,
+      "macroF1": 0.986666,
+      "confusionMatrix": {
+        "ALLOW": {
+          "ALLOW": 298,
+          "DENY": 2
+        },
+        "DENY": {
+          "ALLOW": 6,
+          "DENY": 294
+        }
+      },
+      "allow": {
+        "truePositive": 298,
+        "falsePositive": 6,
+        "falseNegative": 2,
+        "precision": 0.980263,
+        "recall": 0.993333,
+        "f1": 0.986755
+      },
+      "deny": {
+        "truePositive": 294,
+        "falsePositive": 2,
+        "falseNegative": 6,
+        "precision": 0.993243,
+        "recall": 0.98,
+        "f1": 0.986577
+      },
+      "falseAllow": {
+        "count": 6,
+        "ofDenyExamples": 0.02,
+        "ofAllValid": 0.01,
+        "ci": {
+          "point": 0.02,
+          "low": 0.009198,
+          "high": 0.04294
+        }
+      },
+      "falseDeny": {
+        "count": 2,
+        "ofAllowExamples": 0.006667,
+        "ofAllValid": 0.003333,
+        "ci": {
+          "point": 0.006667,
+          "low": 0.00183,
+          "high": 0.023978
+        }
+      },
+      "reasonCodeAccuracy": 0.973333,
+      "policyRefAccuracy": 0.953333,
+      "reviewFlagAccuracy": 0.998333,
+      "decisionAndReasonAccuracy": 0.973333,
+      "fullyCorrectRate": 0.953333,
+      "latencyMs": {
+        "count": 600,
+        "mean": 8249.7,
+        "median": 8333.9,
+        "p95": 9191.7,
+        "p99": 9974.5,
+        "max": 12050.8
+      },
+      "errorCategories": {
+        "false-allow": 6,
+        "right-decision-wrong-reason:RBAC_NO_PERMISSION": 6,
+        "right-decision-wrong-reason:VICTIM_DATA_NOT_NECESSARY": 2,
+        "false-deny": 2
+      },
+      "byScenario": {
+        "adversarial-on-allow": {
+          "examples": 64,
+          "schemaValid": 64,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.943374,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 64
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.943374,
+            "high": 1
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 64,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 0
+            }
+          },
+          "allow": {
+            "truePositive": 64,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": null,
+            "ofAllValid": 0,
+            "ci": null
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.056626
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 64,
+            "mean": 8671.9,
+            "median": 8647.4,
+            "p95": 9025.8,
+            "p99": 9164,
+            "max": 9164
+          }
+        },
+        "adversarial-on-deny": {
+          "examples": 51,
+          "schemaValid": 51,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.929951,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 51
+          },
+          "decisionAccuracy": 0.980392,
+          "decisionAccuracyCI": {
+            "point": 0.980392,
+            "low": 0.896952,
+            "high": 0.99653
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 0,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 1,
+              "DENY": 50
+            }
+          },
+          "allow": {
+            "truePositive": 0,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null
+          },
+          "deny": {
+            "truePositive": 50,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.980392,
+            "f1": 0.990099
+          },
+          "falseAllow": {
+            "count": 1,
+            "ofDenyExamples": 0.019608,
+            "ofAllValid": 0.019608,
+            "ci": {
+              "point": 0.019608,
+              "low": 0.00347,
+              "high": 0.103048
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": null,
+            "ofAllValid": 0,
+            "ci": null
+          },
+          "reasonCodeAccuracy": 0.980392,
+          "policyRefAccuracy": 0.980392,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.980392,
+          "fullyCorrectRate": 0.980392,
+          "latencyMs": {
+            "count": 51,
+            "mean": 7908.8,
+            "median": 7821.1,
+            "p95": 8790.5,
+            "p99": 10397.9,
+            "max": 10397.9
+          }
+        },
+        "clean-allow": {
+          "examples": 161,
+          "schemaValid": 161,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.976695,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 161
+          },
+          "decisionAccuracy": 0.987578,
+          "decisionAccuracyCI": {
+            "point": 0.987578,
+            "low": 0.955843,
+            "high": 0.996587
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 159,
+              "DENY": 2
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 0
+            }
+          },
+          "allow": {
+            "truePositive": 159,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.987578,
+            "f1": 0.99375
+          },
+          "deny": {
+            "truePositive": 0,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": null,
+            "ofAllValid": 0,
+            "ci": null
+          },
+          "falseDeny": {
+            "count": 2,
+            "ofAllowExamples": 0.012422,
+            "ofAllValid": 0.012422,
+            "ci": {
+              "point": 0.012422,
+              "low": 0.003413,
+              "high": 0.044157
+            }
+          },
+          "reasonCodeAccuracy": 0.987578,
+          "policyRefAccuracy": 0.987578,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.987578,
+          "fullyCorrectRate": 0.987578,
+          "latencyMs": {
+            "count": 161,
+            "mean": 8394,
+            "median": 8412.8,
+            "p95": 8913.3,
+            "p99": 9240.4,
+            "max": 9289.6
+          }
+        },
+        "multi-violation": {
+          "examples": 88,
+          "schemaValid": 88,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.958171,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 88
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.958171,
+            "high": 1
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 0,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 88
+            }
+          },
+          "allow": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          "deny": {
+            "truePositive": 88,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.041829
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": null,
+            "ofAllValid": 0,
+            "ci": null
+          },
+          "reasonCodeAccuracy": 0.909091,
+          "policyRefAccuracy": 0.784091,
+          "reviewFlagAccuracy": 0.988636,
+          "decisionAndReasonAccuracy": 0.909091,
+          "fullyCorrectRate": 0.784091,
+          "latencyMs": {
+            "count": 88,
+            "mean": 8789.5,
+            "median": 8807.5,
+            "p95": 9974.5,
+            "p99": 12050.8,
+            "max": 12050.8
+          }
+        },
+        "near-miss": {
+          "examples": 133,
+          "schemaValid": 133,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.971927,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 133
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.971927,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 75,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 58
+            }
+          },
+          "allow": {
+            "truePositive": 75,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 58,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.06212
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.048726
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 133,
+            "mean": 8076.7,
+            "median": 8284.6,
+            "p95": 8775.1,
+            "p99": 8930.6,
+            "max": 9531.7
+          }
+        },
+        "single-violation": {
+          "examples": 103,
+          "schemaValid": 103,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.964044,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 103
+          },
+          "decisionAccuracy": 0.951456,
+          "decisionAccuracyCI": {
+            "point": 0.951456,
+            "low": 0.891358,
+            "high": 0.979089
+          },
+          "balancedAccuracy": null,
+          "macroF1": null,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 0,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 5,
+              "DENY": 98
+            }
+          },
+          "allow": {
+            "truePositive": 0,
+            "falsePositive": 5,
+            "falseNegative": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null
+          },
+          "deny": {
+            "truePositive": 98,
+            "falsePositive": 0,
+            "falseNegative": 5,
+            "precision": 1,
+            "recall": 0.951456,
+            "f1": 0.975124
+          },
+          "falseAllow": {
+            "count": 5,
+            "ofDenyExamples": 0.048544,
+            "ofAllValid": 0.048544,
+            "ci": {
+              "point": 0.048544,
+              "low": 0.020911,
+              "high": 0.108642
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": null,
+            "ofAllValid": 0,
+            "ci": null
+          },
+          "reasonCodeAccuracy": 0.951456,
+          "policyRefAccuracy": 0.941748,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.951456,
+          "fullyCorrectRate": 0.941748,
+          "latencyMs": {
+            "count": 103,
+            "mean": 7692.7,
+            "median": 7668.2,
+            "p95": 8484.4,
+            "p99": 9084.6,
+            "max": 9110.9
+          }
+        }
+      },
+      "byJustificationKind": {
+        "contradictory": {
+          "examples": 153,
+          "schemaValid": 153,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.975506,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 153
+          },
+          "decisionAccuracy": 0.986928,
+          "decisionAccuracyCI": {
+            "point": 0.986928,
+            "low": 0.953595,
+            "high": 0.996408
+          },
+          "balancedAccuracy": 0.986111,
+          "macroF1": 0.98686,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 81,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 2,
+              "DENY": 70
+            }
+          },
+          "allow": {
+            "truePositive": 81,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0.975904,
+            "recall": 1,
+            "f1": 0.987805
+          },
+          "deny": {
+            "truePositive": 70,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.972222,
+            "f1": 0.985915
+          },
+          "falseAllow": {
+            "count": 2,
+            "ofDenyExamples": 0.027778,
+            "ofAllValid": 0.013072,
+            "ci": {
+              "point": 0.027778,
+              "low": 0.007651,
+              "high": 0.095744
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.04528
+            }
+          },
+          "reasonCodeAccuracy": 0.986928,
+          "policyRefAccuracy": 0.96732,
+          "reviewFlagAccuracy": 0.993464,
+          "decisionAndReasonAccuracy": 0.986928,
+          "fullyCorrectRate": 0.96732,
+          "latencyMs": {
+            "count": 153,
+            "mean": 8432.3,
+            "median": 8622.6,
+            "p95": 9188.5,
+            "p99": 9748.6,
+            "max": 9927.8
+          }
+        },
+        "injection": {
+          "examples": 130,
+          "schemaValid": 130,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.971297,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 130
+          },
+          "decisionAccuracy": 0.992308,
+          "decisionAccuracyCI": {
+            "point": 0.992308,
+            "low": 0.957714,
+            "high": 0.998641
+          },
+          "balancedAccuracy": 0.992424,
+          "macroF1": 0.992307,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 64,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 1,
+              "DENY": 65
+            }
+          },
+          "allow": {
+            "truePositive": 64,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0.984615,
+            "recall": 1,
+            "f1": 0.992248
+          },
+          "deny": {
+            "truePositive": 65,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.984848,
+            "f1": 0.992366
+          },
+          "falseAllow": {
+            "count": 1,
+            "ofDenyExamples": 0.015152,
+            "ofAllValid": 0.007692,
+            "ci": {
+              "point": 0.015152,
+              "low": 0.00268,
+              "high": 0.080961
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.056626
+            }
+          },
+          "reasonCodeAccuracy": 0.976923,
+          "policyRefAccuracy": 0.969231,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.976923,
+          "fullyCorrectRate": 0.969231,
+          "latencyMs": {
+            "count": 130,
+            "mean": 8396,
+            "median": 8507.4,
+            "p95": 9289.6,
+            "p99": 10397.9,
+            "max": 10810.7
+          }
+        },
+        "plain": {
+          "examples": 272,
+          "schemaValid": 272,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.986073,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 272
+          },
+          "decisionAccuracy": 0.985294,
+          "decisionAccuracyCI": {
+            "point": 0.985294,
+            "low": 0.962804,
+            "high": 0.994267
+          },
+          "balancedAccuracy": 0.985281,
+          "macroF1": 0.985281,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 130,
+              "DENY": 2
+            },
+            "DENY": {
+              "ALLOW": 2,
+              "DENY": 138
+            }
+          },
+          "allow": {
+            "truePositive": 130,
+            "falsePositive": 2,
+            "falseNegative": 2,
+            "precision": 0.984848,
+            "recall": 0.984848,
+            "f1": 0.984848
+          },
+          "deny": {
+            "truePositive": 138,
+            "falsePositive": 2,
+            "falseNegative": 2,
+            "precision": 0.985714,
+            "recall": 0.985714,
+            "f1": 0.985714
+          },
+          "falseAllow": {
+            "count": 2,
+            "ofDenyExamples": 0.014286,
+            "ofAllValid": 0.007353,
+            "ci": {
+              "point": 0.014286,
+              "low": 0.003926,
+              "high": 0.050589
+            }
+          },
+          "falseDeny": {
+            "count": 2,
+            "ofAllowExamples": 0.015152,
+            "ofAllValid": 0.007353,
+            "ci": {
+              "point": 0.015152,
+              "low": 0.004165,
+              "high": 0.053561
+            }
+          },
+          "reasonCodeAccuracy": 0.974265,
+          "policyRefAccuracy": 0.944853,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.974265,
+          "fullyCorrectRate": 0.944853,
+          "latencyMs": {
+            "count": 272,
+            "mean": 8065.3,
+            "median": 8243.7,
+            "p95": 9140.2,
+            "p99": 9976.4,
+            "max": 12050.8
+          }
+        },
+        "verbose": {
+          "examples": 45,
+          "schemaValid": 45,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.921346,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 45
+          },
+          "decisionAccuracy": 0.977778,
+          "decisionAccuracyCI": {
+            "point": 0.977778,
+            "low": 0.884331,
+            "high": 0.996067
+          },
+          "balancedAccuracy": 0.977272,
+          "macroF1": 0.977734,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 23,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 1,
+              "DENY": 21
+            }
+          },
+          "allow": {
+            "truePositive": 23,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0.958333,
+            "recall": 1,
+            "f1": 0.978723
+          },
+          "deny": {
+            "truePositive": 21,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.954545,
+            "f1": 0.976744
+          },
+          "falseAllow": {
+            "count": 1,
+            "ofDenyExamples": 0.045455,
+            "ofAllValid": 0.022222,
+            "ci": {
+              "point": 0.045455,
+              "low": 0.008069,
+              "high": 0.217985
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.143121
+            }
+          },
+          "reasonCodeAccuracy": 0.911111,
+          "policyRefAccuracy": 0.911111,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.911111,
+          "fullyCorrectRate": 0.911111,
+          "latencyMs": {
+            "count": 45,
+            "mean": 8320.9,
+            "median": 8429,
+            "p95": 9124.3,
+            "p99": 9971.9,
+            "max": 9971.9
+          }
+        }
+      },
+      "byRole": {
+        "assistant-public-prosecutor": {
+          "examples": 36,
+          "schemaValid": 36,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.903578,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 36
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.903578,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 14,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 22
+            }
+          },
+          "allow": {
+            "truePositive": 14,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 22,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.14866
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.215317
+            }
+          },
+          "reasonCodeAccuracy": 0.972222,
+          "policyRefAccuracy": 0.972222,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.972222,
+          "fullyCorrectRate": 0.972222,
+          "latencyMs": {
+            "count": 36,
+            "mean": 8074.5,
+            "median": 8036,
+            "p95": 8974.7,
+            "p99": 9211.3,
+            "max": 9211.3
+          }
+        },
+        "chief-forensic-officer": {
+          "examples": 28,
+          "schemaValid": 28,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.879353,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 28
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.879353,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 11,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 17
+            }
+          },
+          "allow": {
+            "truePositive": 11,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 17,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.184324
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.25884
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 28,
+            "mean": 8259.8,
+            "median": 8323,
+            "p95": 9447.2,
+            "p99": 10810.7,
+            "max": 10810.7
+          }
+        },
+        "circle-inspector": {
+          "examples": 30,
+          "schemaValid": 30,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.886483,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 30
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.886483,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 16,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 14
+            }
+          },
+          "allow": {
+            "truePositive": 16,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 14,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.215317
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.193613
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 0.966667,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 0.966667,
+          "latencyMs": {
+            "count": 30,
+            "mean": 8242.3,
+            "median": 8369.4,
+            "p95": 8950.1,
+            "p99": 9374.7,
+            "max": 9374.7
+          }
+        },
+        "commissioner": {
+          "examples": 22,
+          "schemaValid": 22,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.85134,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 22
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.85134,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 13,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 9
+            }
+          },
+          "allow": {
+            "truePositive": 13,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 9,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.299153
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.228102
+            }
+          },
+          "reasonCodeAccuracy": 0.954545,
+          "policyRefAccuracy": 0.909091,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.954545,
+          "fullyCorrectRate": 0.909091,
+          "latencyMs": {
+            "count": 22,
+            "mean": 8165.7,
+            "median": 8336,
+            "p95": 8737.5,
+            "p99": 9164,
+            "max": 9164
+          }
+        },
+        "constable": {
+          "examples": 27,
+          "schemaValid": 27,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.875441,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 27
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.875441,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 14,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 13
+            }
+          },
+          "allow": {
+            "truePositive": 14,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 13,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.228102
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.215317
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 0.962963,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 0.962963,
+          "latencyMs": {
+            "count": 27,
+            "mean": 7979,
+            "median": 8103.7,
+            "p95": 9204.4,
+            "p99": 10004.8,
+            "max": 10004.8
+          }
+        },
+        "court-clerk": {
+          "examples": 25,
+          "schemaValid": 25,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.866804,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 25
+          },
+          "decisionAccuracy": 0.92,
+          "decisionAccuracyCI": {
+            "point": 0.92,
+            "low": 0.750335,
+            "high": 0.97778
+          },
+          "balancedAccuracy": 0.933334,
+          "macroF1": 0.918832,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 10,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 2,
+              "DENY": 13
+            }
+          },
+          "allow": {
+            "truePositive": 10,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0.833333,
+            "recall": 1,
+            "f1": 0.909091
+          },
+          "deny": {
+            "truePositive": 13,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.866667,
+            "f1": 0.928572
+          },
+          "falseAllow": {
+            "count": 2,
+            "ofDenyExamples": 0.133333,
+            "ofAllValid": 0.08,
+            "ci": {
+              "point": 0.133333,
+              "low": 0.03736,
+              "high": 0.378825
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.27754
+            }
+          },
+          "reasonCodeAccuracy": 0.92,
+          "policyRefAccuracy": 0.92,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.92,
+          "fullyCorrectRate": 0.92,
+          "latencyMs": {
+            "count": 25,
+            "mean": 8136.1,
+            "median": 8221.4,
+            "p95": 9056.1,
+            "p99": 9448.6,
+            "max": 9448.6
+          }
+        },
+        "defense-counsel": {
+          "examples": 30,
+          "schemaValid": 30,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.886483,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 30
+          },
+          "decisionAccuracy": 0.966667,
+          "decisionAccuracyCI": {
+            "point": 0.966667,
+            "low": 0.833292,
+            "high": 0.994092
+          },
+          "balancedAccuracy": 0.96875,
+          "macroF1": 0.96663,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 14,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 1,
+              "DENY": 15
+            }
+          },
+          "allow": {
+            "truePositive": 14,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0.933333,
+            "recall": 1,
+            "f1": 0.965517
+          },
+          "deny": {
+            "truePositive": 15,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.9375,
+            "f1": 0.967742
+          },
+          "falseAllow": {
+            "count": 1,
+            "ofDenyExamples": 0.0625,
+            "ofAllValid": 0.033333,
+            "ci": {
+              "point": 0.0625,
+              "low": 0.011119,
+              "high": 0.283293
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.215317
+            }
+          },
+          "reasonCodeAccuracy": 0.966667,
+          "policyRefAccuracy": 0.966667,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.966667,
+          "fullyCorrectRate": 0.966667,
+          "latencyMs": {
+            "count": 30,
+            "mean": 8252.5,
+            "median": 8301.2,
+            "p95": 9110.9,
+            "p99": 9976.4,
+            "max": 9976.4
+          }
+        },
+        "director-of-prosecution": {
+          "examples": 23,
+          "schemaValid": 23,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.856879,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 23
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.856879,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 13,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 10
+            }
+          },
+          "allow": {
+            "truePositive": 13,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 10,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.27754
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.228102
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 0.956522,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 0.956522,
+          "latencyMs": {
+            "count": 23,
+            "mean": 8286.2,
+            "median": 8430.2,
+            "p95": 8930.6,
+            "p99": 9289.6,
+            "max": 9289.6
+          }
+        },
+        "district-judge": {
+          "examples": 21,
+          "schemaValid": 21,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.845356,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 21
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.845356,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 16,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 5
+            }
+          },
+          "allow": {
+            "truePositive": 16,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 5,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.434491
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.193613
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 21,
+            "mean": 8402.7,
+            "median": 8399.1,
+            "p95": 8815.1,
+            "p99": 9027.2,
+            "max": 9027.2
+          }
+        },
+        "dsp": {
+          "examples": 20,
+          "schemaValid": 20,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.83887,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 20
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.83887,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 14,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 6
+            }
+          },
+          "allow": {
+            "truePositive": 14,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 6,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.390343
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.215317
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 20,
+            "mean": 8506.8,
+            "median": 8616.1,
+            "p95": 9370,
+            "p99": 9370,
+            "max": 9370
+          }
+        },
+        "inspector": {
+          "examples": 24,
+          "schemaValid": 24,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.862019,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 24
+          },
+          "decisionAccuracy": 0.916667,
+          "decisionAccuracyCI": {
+            "point": 0.916667,
+            "low": 0.741508,
+            "high": 0.976842
+          },
+          "balancedAccuracy": 0.9375,
+          "macroF1": 0.911111,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 14,
+              "DENY": 2
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 8
+            }
+          },
+          "allow": {
+            "truePositive": 14,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.875,
+            "f1": 0.933333
+          },
+          "deny": {
+            "truePositive": 8,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0.8,
+            "recall": 1,
+            "f1": 0.888889
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.324416
+            }
+          },
+          "falseDeny": {
+            "count": 2,
+            "ofAllowExamples": 0.125,
+            "ofAllValid": 0.083333,
+            "ci": {
+              "point": 0.125,
+              "low": 0.034977,
+              "high": 0.360233
+            }
+          },
+          "reasonCodeAccuracy": 0.916667,
+          "policyRefAccuracy": 0.916667,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.916667,
+          "fullyCorrectRate": 0.916667,
+          "latencyMs": {
+            "count": 24,
+            "mean": 8271,
+            "median": 8399.9,
+            "p95": 8919.9,
+            "p99": 9200.1,
+            "max": 9200.1
+          }
+        },
+        "investigating-officer": {
+          "examples": 28,
+          "schemaValid": 28,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.879353,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 28
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.879353,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 19,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 9
+            }
+          },
+          "allow": {
+            "truePositive": 19,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 9,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.299153
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.168184
+            }
+          },
+          "reasonCodeAccuracy": 0.964286,
+          "policyRefAccuracy": 0.964286,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.964286,
+          "fullyCorrectRate": 0.964286,
+          "latencyMs": {
+            "count": 28,
+            "mean": 8340.9,
+            "median": 8440,
+            "p95": 9025.8,
+            "p99": 9156.3,
+            "max": 9156.3
+          }
+        },
+        "judge": {
+          "examples": 17,
+          "schemaValid": 17,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.815676,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 17
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.815676,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 10,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 7
+            }
+          },
+          "allow": {
+            "truePositive": 10,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 7,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.354339
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.27754
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 0.882353,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 0.882353,
+          "latencyMs": {
+            "count": 17,
+            "mean": 8410.5,
+            "median": 8439.5,
+            "p95": 9892.1,
+            "p99": 9892.1,
+            "max": 9892.1
+          }
+        },
+        "lab-analyst": {
+          "examples": 57,
+          "schemaValid": 57,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.936859,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 57
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.936859,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 11,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 46
+            }
+          },
+          "allow": {
+            "truePositive": 11,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 46,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.077076
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.25884
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 0.929825,
+          "reviewFlagAccuracy": 0.982456,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 0.929825,
+          "latencyMs": {
+            "count": 57,
+            "mean": 8469.9,
+            "median": 8310.5,
+            "p95": 9971.9,
+            "p99": 12050.8,
+            "max": 12050.8
+          }
+        },
+        "lab-assistant": {
+          "examples": 22,
+          "schemaValid": 22,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.85134,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 22
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.85134,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 10,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 12
+            }
+          },
+          "allow": {
+            "truePositive": 10,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 12,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.242501
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.27754
+            }
+          },
+          "reasonCodeAccuracy": 0.954545,
+          "policyRefAccuracy": 0.954545,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.954545,
+          "fullyCorrectRate": 0.954545,
+          "latencyMs": {
+            "count": 22,
+            "mean": 8217.9,
+            "median": 8336.5,
+            "p95": 9203.7,
+            "p99": 9540.3,
+            "max": 9540.3
+          }
+        },
+        "lab-director": {
+          "examples": 43,
+          "schemaValid": 43,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.917987,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 43
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.917987,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 15,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 28
+            }
+          },
+          "allow": {
+            "truePositive": 15,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 28,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.120647
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.203889
+            }
+          },
+          "reasonCodeAccuracy": 0.906977,
+          "policyRefAccuracy": 0.883721,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.906977,
+          "fullyCorrectRate": 0.883721,
+          "latencyMs": {
+            "count": 43,
+            "mean": 8228.5,
+            "median": 8238.4,
+            "p95": 9264.8,
+            "p99": 9974.5,
+            "max": 9974.5
+          }
+        },
+        "magistrate": {
+          "examples": 12,
+          "schemaValid": 12,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.757499,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 12
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.757499,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 8,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 4
+            }
+          },
+          "allow": {
+            "truePositive": 8,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 4,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.4899
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.324416
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 12,
+            "mean": 8227.3,
+            "median": 8352.4,
+            "p95": 8704.5,
+            "p99": 8704.5,
+            "max": 8704.5
+          }
+        },
+        "public-prosecutor": {
+          "examples": 19,
+          "schemaValid": 19,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.831816,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 19
+          },
+          "decisionAccuracy": 0.894737,
+          "decisionAccuracyCI": {
+            "point": 0.894737,
+            "low": 0.686054,
+            "high": 0.970642
+          },
+          "balancedAccuracy": 0.8,
+          "macroF1": 0.841666,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 14,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 2,
+              "DENY": 3
+            }
+          },
+          "allow": {
+            "truePositive": 14,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0.875,
+            "recall": 1,
+            "f1": 0.933333
+          },
+          "deny": {
+            "truePositive": 3,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.6,
+            "f1": 0.75
+          },
+          "falseAllow": {
+            "count": 2,
+            "ofDenyExamples": 0.4,
+            "ofAllValid": 0.105263,
+            "ci": {
+              "point": 0.4,
+              "low": 0.117618,
+              "high": 0.76928
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.215317
+            }
+          },
+          "reasonCodeAccuracy": 0.894737,
+          "policyRefAccuracy": 0.894737,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.894737,
+          "fullyCorrectRate": 0.894737,
+          "latencyMs": {
+            "count": 19,
+            "mean": 8356.7,
+            "median": 8412.3,
+            "p95": 8937.1,
+            "p99": 8937.1,
+            "max": 8937.1
+          }
+        },
+        "senior-analyst": {
+          "examples": 32,
+          "schemaValid": 32,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.892817,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 32
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.892817,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 13,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 19
+            }
+          },
+          "allow": {
+            "truePositive": 13,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 19,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.168184
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.228102
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 32,
+            "mean": 8093.6,
+            "median": 7936.4,
+            "p95": 9027.8,
+            "p99": 9628.7,
+            "max": 9628.7
+          }
+        },
+        "senior-public-prosecutor": {
+          "examples": 21,
+          "schemaValid": 21,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.845356,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 21
+          },
+          "decisionAccuracy": 0.952381,
+          "decisionAccuracyCI": {
+            "point": 0.952381,
+            "low": 0.773302,
+            "high": 0.991544
+          },
+          "balancedAccuracy": 0.9,
+          "macroF1": 0.929293,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 16,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 1,
+              "DENY": 4
+            }
+          },
+          "allow": {
+            "truePositive": 16,
+            "falsePositive": 1,
+            "falseNegative": 0,
+            "precision": 0.941176,
+            "recall": 1,
+            "f1": 0.969697
+          },
+          "deny": {
+            "truePositive": 4,
+            "falsePositive": 0,
+            "falseNegative": 1,
+            "precision": 1,
+            "recall": 0.8,
+            "f1": 0.888889
+          },
+          "falseAllow": {
+            "count": 1,
+            "ofDenyExamples": 0.2,
+            "ofAllValid": 0.047619,
+            "ci": {
+              "point": 0.2,
+              "low": 0.036223,
+              "high": 0.624472
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.193613
+            }
+          },
+          "reasonCodeAccuracy": 0.952381,
+          "policyRefAccuracy": 0.952381,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.952381,
+          "fullyCorrectRate": 0.952381,
+          "latencyMs": {
+            "count": 21,
+            "mean": 8431.3,
+            "median": 8405.1,
+            "p95": 9043.5,
+            "p99": 9084.6,
+            "max": 9084.6
+          }
+        },
+        "sp": {
+          "examples": 31,
+          "schemaValid": 31,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.889741,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 31
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.889741,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 18,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 13
+            }
+          },
+          "allow": {
+            "truePositive": 18,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 13,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.228102
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.175885
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 1,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 1,
+          "latencyMs": {
+            "count": 31,
+            "mean": 8165.8,
+            "median": 8409.3,
+            "p95": 9191.7,
+            "p99": 9240.4,
+            "max": 9240.4
+          }
+        },
+        "sub-inspector": {
+          "examples": 32,
+          "schemaValid": 32,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.892817,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 32
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.892817,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 15,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 17
+            }
+          },
+          "allow": {
+            "truePositive": 15,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 17,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.184324
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.203889
+            }
+          },
+          "reasonCodeAccuracy": 1,
+          "policyRefAccuracy": 0.96875,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 1,
+          "fullyCorrectRate": 0.96875,
+          "latencyMs": {
+            "count": 32,
+            "mean": 8069.6,
+            "median": 8255.1,
+            "p95": 8770.9,
+            "p99": 8810.6,
+            "max": 8810.6
+          }
+        }
+      },
+      "byOrganization": {
+        "court": {
+          "examples": 73,
+          "schemaValid": 73,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.950006,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 73
+          },
+          "decisionAccuracy": 0.972603,
+          "decisionAccuracyCI": {
+            "point": 0.972603,
+            "low": 0.905497,
+            "high": 0.992454
+          },
+          "balancedAccuracy": 0.965517,
+          "macroF1": 0.971032,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 44,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 2,
+              "DENY": 27
+            }
+          },
+          "allow": {
+            "truePositive": 44,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0.956522,
+            "recall": 1,
+            "f1": 0.977778
+          },
+          "deny": {
+            "truePositive": 27,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.931034,
+            "f1": 0.964285
+          },
+          "falseAllow": {
+            "count": 2,
+            "ofDenyExamples": 0.068966,
+            "ofAllValid": 0.027397,
+            "ci": {
+              "point": 0.068966,
+              "low": 0.019121,
+              "high": 0.219649
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.080298
+            }
+          },
+          "reasonCodeAccuracy": 0.972603,
+          "policyRefAccuracy": 0.958904,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.972603,
+          "fullyCorrectRate": 0.958904,
+          "latencyMs": {
+            "count": 73,
+            "mean": 8281.6,
+            "median": 8349.7,
+            "p95": 9027.2,
+            "p99": 10397.9,
+            "max": 10397.9
+          }
+        },
+        "forensics": {
+          "examples": 173,
+          "schemaValid": 173,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.978277,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 173
+          },
+          "decisionAccuracy": 1,
+          "decisionAccuracyCI": {
+            "point": 1,
+            "low": 0.978277,
+            "high": 1
+          },
+          "balancedAccuracy": 1,
+          "macroF1": 1,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 60,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 113
+            }
+          },
+          "allow": {
+            "truePositive": 60,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "deny": {
+            "truePositive": 113,
+            "falsePositive": 0,
+            "falseNegative": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.032879
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.060174
+            }
+          },
+          "reasonCodeAccuracy": 0.971098,
+          "policyRefAccuracy": 0.953757,
+          "reviewFlagAccuracy": 0.99422,
+          "decisionAndReasonAccuracy": 0.971098,
+          "fullyCorrectRate": 0.953757,
+          "latencyMs": {
+            "count": 173,
+            "mean": 8195.4,
+            "median": 8170.8,
+            "p95": 9299.3,
+            "p99": 9650.2,
+            "max": 9927.8
+          }
+        },
+        "police": {
+          "examples": 226,
+          "schemaValid": 226,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.983286,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 226
+          },
+          "decisionAccuracy": 0.99115,
+          "decisionAccuracyCI": {
+            "point": 0.99115,
+            "low": 0.968313,
+            "high": 0.99757
+          },
+          "balancedAccuracy": 0.992,
+          "macroF1": 0.991065,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 123,
+              "DENY": 2
+            },
+            "DENY": {
+              "ALLOW": 0,
+              "DENY": 101
+            }
+          },
+          "allow": {
+            "truePositive": 123,
+            "falsePositive": 0,
+            "falseNegative": 2,
+            "precision": 1,
+            "recall": 0.984,
+            "f1": 0.991935
+          },
+          "deny": {
+            "truePositive": 101,
+            "falsePositive": 2,
+            "falseNegative": 0,
+            "precision": 0.980583,
+            "recall": 1,
+            "f1": 0.990196
+          },
+          "falseAllow": {
+            "count": 0,
+            "ofDenyExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.036642
+            }
+          },
+          "falseDeny": {
+            "count": 2,
+            "ofAllowExamples": 0.016,
+            "ofAllValid": 0.00885,
+            "ci": {
+              "point": 0.016,
+              "low": 0.004399,
+              "high": 0.056464
+            }
+          },
+          "reasonCodeAccuracy": 0.982301,
+          "policyRefAccuracy": 0.960177,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.982301,
+          "fullyCorrectRate": 0.960177,
+          "latencyMs": {
+            "count": 226,
+            "mean": 8281.8,
+            "median": 8378.2,
+            "p95": 9204.4,
+            "p99": 10004.8,
+            "max": 12050.8
+          }
+        },
+        "prosecution": {
+          "examples": 128,
+          "schemaValid": 128,
+          "schemaValidRate": 1,
+          "schemaValidCI": {
+            "point": 1,
+            "low": 0.970862,
+            "high": 1
+          },
+          "invalid": 0,
+          "statusCounts": {
+            "OK": 128
+          },
+          "decisionAccuracy": 0.96875,
+          "decisionAccuracyCI": {
+            "point": 0.96875,
+            "low": 0.922401,
+            "high": 0.987782
+          },
+          "balancedAccuracy": 0.964913,
+          "macroF1": 0.96812,
+          "confusionMatrix": {
+            "ALLOW": {
+              "ALLOW": 71,
+              "DENY": 0
+            },
+            "DENY": {
+              "ALLOW": 4,
+              "DENY": 53
+            }
+          },
+          "allow": {
+            "truePositive": 71,
+            "falsePositive": 4,
+            "falseNegative": 0,
+            "precision": 0.946667,
+            "recall": 1,
+            "f1": 0.972603
+          },
+          "deny": {
+            "truePositive": 53,
+            "falsePositive": 0,
+            "falseNegative": 4,
+            "precision": 1,
+            "recall": 0.929825,
+            "f1": 0.963637
+          },
+          "falseAllow": {
+            "count": 4,
+            "ofDenyExamples": 0.070175,
+            "ofAllValid": 0.03125,
+            "ci": {
+              "point": 0.070175,
+              "low": 0.027626,
+              "high": 0.167004
+            }
+          },
+          "falseDeny": {
+            "count": 0,
+            "ofAllowExamples": 0,
+            "ofAllValid": 0,
+            "ci": {
+              "point": 0,
+              "low": 0,
+              "high": 0.05133
+            }
+          },
+          "reasonCodeAccuracy": 0.960938,
+          "policyRefAccuracy": 0.9375,
+          "reviewFlagAccuracy": 1,
+          "decisionAndReasonAccuracy": 0.960938,
+          "fullyCorrectRate": 0.9375,
+          "latencyMs": {
+            "count": 128,
+            "mean": 8248.1,
+            "median": 8379.5,
+            "p95": 8952,
+            "p99": 9289.6,
+            "max": 9540.3
+          }
+        }
+      }
+    }
+  }
+}

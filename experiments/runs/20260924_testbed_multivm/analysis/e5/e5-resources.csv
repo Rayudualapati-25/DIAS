@@ -1,0 +1,126 @@
+users,machine,container,cpu_mean_cores,cpu_max_cores,mem_max_mb
+10,m1,(whole VM),0.065,0.073,1014
+10,m2,(whole VM),0.096,0.104,1235
+10,m3,(whole VM),0.097,0.108,1245
+10,m4,(whole VM),0.034,0.041,972
+25,m1,(whole VM),0.065,0.085,1029
+25,m2,(whole VM),0.100,0.129,1255
+25,m3,(whole VM),0.098,0.122,1271
+25,m4,(whole VM),0.046,0.164,1236
+50,m1,(whole VM),0.080,0.120,1113
+50,m2,(whole VM),0.115,0.170,1316
+50,m3,(whole VM),0.115,0.168,1522
+50,m4,(whole VM),0.044,0.072,1048
+50,m1,ca-orderer,0.000,0.002,9
+50,m1,ca-police,0.000,0.000,9
+50,m1,cadvisor-m1,0.000,0.006,26
+50,m1,couchdb-police,0.015,0.151,83
+50,m1,dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.001,0.019,68
+50,m1,node-exporter-m1,0.000,0.011,10
+50,m1,orderer1.example.com,0.002,0.006,58
+50,m1,peer0.police.example.com,0.015,0.045,105
+50,m2,ca-forensics,0.000,0.004,9
+50,m2,ca-prosecution,0.000,0.000,9
+50,m2,cadvisor-m2,0.000,0.003,26
+50,m2,couchdb-forensics,0.013,0.104,70
+50,m2,couchdb-prosecution,0.013,0.104,69
+50,m2,dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.005,66
+50,m2,dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.005,65
+50,m2,node-exporter-m2,0.000,0.000,10
+50,m2,orderer2.example.com,0.002,0.006,58
+50,m2,peer0.forensics.example.com,0.013,0.032,100
+50,m2,peer0.prosecution.example.com,0.014,0.036,102
+50,m3,ca-audit,0.000,0.000,9
+50,m3,ca-court,0.000,0.000,9
+50,m3,cadvisor-m3,0.001,0.005,27
+50,m3,couchdb-audit,0.013,0.122,70
+50,m3,couchdb-court,0.013,0.120,71
+50,m3,dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.001,0.009,66
+50,m3,dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.007,64
+50,m3,node-exporter-m3,0.000,0.000,10
+50,m3,orderer3.example.com,0.005,0.013,71
+50,m3,peer0.audit.example.com,0.015,0.037,101
+50,m3,peer0.court.example.com,0.014,0.036,104
+50,m4,cadvisor-m4,0.000,0.007,26
+50,m4,dias-backend,0.003,0.037,78
+50,m4,loadgen-e5,0.005,0.013,57
+50,m4,node-exporter-m4,0.000,0.000,10
+50,m4,prometheus,0.004,0.015,84
+75,m1,(whole VM),0.081,0.132,1239
+75,m2,(whole VM),0.120,0.199,1463
+75,m3,(whole VM),0.119,0.195,1375
+75,m4,(whole VM),0.048,0.085,1027
+75,m1,ca-orderer,0.000,0.004,9
+75,m1,ca-police,0.000,0.002,9
+75,m1,cadvisor-m1,0.000,0.005,27
+75,m1,couchdb-police,0.015,0.057,87
+75,m1,dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.009,69
+75,m1,node-exporter-m1,0.004,0.014,10
+75,m1,orderer1.example.com,0.003,0.009,65
+75,m1,peer0.police.example.com,0.017,0.041,113
+75,m2,ca-forensics,0.000,0.002,9
+75,m2,ca-prosecution,0.000,0.002,9
+75,m2,cadvisor-m2,0.000,0.011,27
+75,m2,couchdb-forensics,0.013,0.053,87
+75,m2,couchdb-prosecution,0.013,0.053,85
+75,m2,dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.006,66
+75,m2,dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.017,66
+75,m2,node-exporter-m2,0.000,0.000,10
+75,m2,orderer2.example.com,0.002,0.006,65
+75,m2,peer0.forensics.example.com,0.016,0.040,107
+75,m2,peer0.prosecution.example.com,0.015,0.037,105
+75,m3,ca-audit,0.000,0.002,9
+75,m3,ca-court,0.000,0.004,9
+75,m3,cadvisor-m3,0.000,0.011,27
+75,m3,couchdb-audit,0.013,0.048,82
+75,m3,couchdb-court,0.013,0.048,83
+75,m3,dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.001,0.009,66
+75,m3,dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.013,67
+75,m3,node-exporter-m3,0.004,0.014,10
+75,m3,orderer3.example.com,0.003,0.011,75
+75,m3,peer0.audit.example.com,0.016,0.035,105
+75,m3,peer0.court.example.com,0.016,0.044,111
+75,m4,cadvisor-m4,0.001,0.009,27
+75,m4,dias-backend,0.003,0.037,89
+75,m4,loadgen-e5,0.006,0.016,63
+75,m4,node-exporter-m4,0.000,0.000,10
+75,m4,prometheus,0.006,0.017,86
+100,m1,(whole VM),0.082,0.154,1145
+100,m2,(whole VM),0.120,0.226,1400
+100,m3,(whole VM),0.121,0.221,1412
+100,m4,(whole VM),0.050,0.095,1054
+100,m1,ca-orderer,0.000,0.000,9
+100,m1,ca-police,0.000,0.000,10
+100,m1,cadvisor-m1,0.001,0.007,27
+100,m1,couchdb-police,0.015,0.051,89
+100,m1,dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.008,74
+100,m1,node-exporter-m1,0.000,0.000,10
+100,m1,orderer1.example.com,0.003,0.009,74
+100,m1,peer0.police.example.com,0.015,0.041,115
+100,m2,ca-forensics,0.000,0.000,9
+100,m2,ca-prosecution,0.000,0.001,9
+100,m2,cadvisor-m2,0.001,0.008,27
+100,m2,couchdb-forensics,0.014,0.048,84
+100,m2,couchdb-prosecution,0.014,0.049,80
+100,m2,dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.006,71
+100,m2,dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.005,70
+100,m2,node-exporter-m2,0.003,0.013,10
+100,m2,orderer2.example.com,0.003,0.012,69
+100,m2,peer0.forensics.example.com,0.014,0.038,111
+100,m2,peer0.prosecution.example.com,0.015,0.041,108
+100,m3,ca-audit,0.000,0.002,9
+100,m3,ca-court,0.000,0.000,9
+100,m3,cadvisor-m3,0.001,0.015,28
+100,m3,couchdb-audit,0.014,0.210,82
+100,m3,couchdb-court,0.014,0.050,90
+100,m3,dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.001,0.017,67
+100,m3,dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f,0.000,0.006,68
+100,m3,node-exporter-m3,0.000,0.007,10
+100,m3,orderer3.example.com,0.003,0.011,82
+100,m3,peer0.audit.example.com,0.016,0.040,111
+100,m3,peer0.court.example.com,0.014,0.045,113
+100,m4,cadvisor-m4,0.001,0.015,27
+100,m4,dias-backend,0.003,0.038,101
+100,m4,loadgen-e5,0.008,0.023,69
+100,m4,node-exporter-m4,0.003,0.013,11
+100,m4,prometheus,0.011,0.025,88

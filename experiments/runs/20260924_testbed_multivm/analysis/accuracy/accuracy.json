@@ -1,0 +1,554 @@
+{
+  "sets": {
+    "test-decision-balanced": {
+      "Untuned Qwen3-14B": {
+        "cases": 600,
+        "usable": 554,
+        "unusable": 46,
+        "expected_ALLOW": 300,
+        "expected_ALLOW_usable": 274,
+        "ALLOW_to_ALLOW": 70,
+        "ALLOW_to_DENY": 204,
+        "ALLOW_unusable": 26,
+        "expected_DENY": 300,
+        "expected_DENY_usable": 280,
+        "DENY_to_ALLOW": 14,
+        "DENY_to_DENY": 266,
+        "DENY_unusable": 20,
+        "correct": 336,
+        "reason_correct": 203,
+        "clauses_correct": 130,
+        "wrongly_granted": 14,
+        "wrongly_refused": 204,
+        "balanced_accuracy_usable": 0.6027372262773723,
+        "balanced_accuracy_all_cases": 0.56,
+        "correct_ci95_all_cases": [
+          0.52,
+          0.5992
+        ],
+        "wrongly_granted_ci95": [
+          0.028,
+          0.0768
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      },
+      "V7 (fine-tuned)": {
+        "cases": 600,
+        "usable": 600,
+        "unusable": 0,
+        "expected_ALLOW": 300,
+        "expected_ALLOW_usable": 300,
+        "ALLOW_to_ALLOW": 298,
+        "ALLOW_to_DENY": 2,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 300,
+        "expected_DENY_usable": 300,
+        "DENY_to_ALLOW": 6,
+        "DENY_to_DENY": 294,
+        "DENY_unusable": 0,
+        "correct": 592,
+        "reason_correct": 584,
+        "clauses_correct": 572,
+        "wrongly_granted": 6,
+        "wrongly_refused": 2,
+        "balanced_accuracy_usable": 0.9866666666666666,
+        "balanced_accuracy_all_cases": 0.9866666666666666,
+        "correct_ci95_all_cases": [
+          0.9739,
+          0.9932
+        ],
+        "wrongly_granted_ci95": [
+          0.0092,
+          0.0429
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      }
+    },
+    "test-adversarial": {
+      "Untuned Qwen3-14B": {
+        "cases": 389,
+        "usable": 333,
+        "unusable": 56,
+        "expected_ALLOW": 185,
+        "expected_ALLOW_usable": 154,
+        "ALLOW_to_ALLOW": 13,
+        "ALLOW_to_DENY": 141,
+        "ALLOW_unusable": 31,
+        "expected_DENY": 204,
+        "expected_DENY_usable": 179,
+        "DENY_to_ALLOW": 4,
+        "DENY_to_DENY": 175,
+        "DENY_unusable": 25,
+        "correct": 188,
+        "reason_correct": 88,
+        "clauses_correct": 61,
+        "wrongly_granted": 4,
+        "wrongly_refused": 141,
+        "balanced_accuracy_usable": 0.5310346078502504,
+        "balanced_accuracy_all_cases": 0.4640567037625861,
+        "correct_ci95_all_cases": [
+          0.434,
+          0.5329
+        ],
+        "wrongly_granted_ci95": [
+          0.0077,
+          0.0493
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      },
+      "V7 (fine-tuned)": {
+        "cases": 389,
+        "usable": 389,
+        "unusable": 0,
+        "expected_ALLOW": 185,
+        "expected_ALLOW_usable": 185,
+        "ALLOW_to_ALLOW": 185,
+        "ALLOW_to_DENY": 0,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 204,
+        "expected_DENY_usable": 204,
+        "DENY_to_ALLOW": 6,
+        "DENY_to_DENY": 198,
+        "DENY_unusable": 0,
+        "correct": 383,
+        "reason_correct": 383,
+        "clauses_correct": 383,
+        "wrongly_granted": 6,
+        "wrongly_refused": 0,
+        "balanced_accuracy_usable": 0.9852941176470589,
+        "balanced_accuracy_all_cases": 0.9852941176470589,
+        "correct_ci95_all_cases": [
+          0.9668,
+          0.9929
+        ],
+        "wrongly_granted_ci95": [
+          0.0135,
+          0.0627
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      }
+    },
+    "test-reason-balanced": {
+      "Untuned Qwen3-14B": {
+        "cases": 540,
+        "usable": 509,
+        "unusable": 31,
+        "expected_ALLOW": 60,
+        "expected_ALLOW_usable": 55,
+        "ALLOW_to_ALLOW": 13,
+        "ALLOW_to_DENY": 42,
+        "ALLOW_unusable": 5,
+        "expected_DENY": 480,
+        "expected_DENY_usable": 454,
+        "DENY_to_ALLOW": 19,
+        "DENY_to_DENY": 435,
+        "DENY_unusable": 26,
+        "correct": 448,
+        "reason_correct": 244,
+        "clauses_correct": 122,
+        "wrongly_granted": 19,
+        "wrongly_refused": 42,
+        "balanced_accuracy_usable": 0.5972567080496596,
+        "balanced_accuracy_all_cases": 0.5614583333333334,
+        "correct_ci95_all_cases": [
+          0.7956,
+          0.859
+        ],
+        "wrongly_granted_ci95": [
+          0.0255,
+          0.061
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      },
+      "V7 (fine-tuned)": {
+        "cases": 540,
+        "usable": 540,
+        "unusable": 0,
+        "expected_ALLOW": 60,
+        "expected_ALLOW_usable": 60,
+        "ALLOW_to_ALLOW": 60,
+        "ALLOW_to_DENY": 0,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 480,
+        "expected_DENY_usable": 480,
+        "DENY_to_ALLOW": 4,
+        "DENY_to_DENY": 476,
+        "DENY_unusable": 0,
+        "correct": 536,
+        "reason_correct": 531,
+        "clauses_correct": 514,
+        "wrongly_granted": 4,
+        "wrongly_refused": 0,
+        "balanced_accuracy_usable": 0.9958333333333333,
+        "balanced_accuracy_all_cases": 0.9958333333333333,
+        "correct_ci95_all_cases": [
+          0.9811,
+          0.9971
+        ],
+        "wrongly_granted_ci95": [
+          0.0032,
+          0.0212
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      }
+    },
+    "test-ood-paraphrase": {
+      "Untuned Qwen3-14B": {
+        "cases": 400,
+        "usable": 373,
+        "unusable": 27,
+        "expected_ALLOW": 200,
+        "expected_ALLOW_usable": 179,
+        "ALLOW_to_ALLOW": 74,
+        "ALLOW_to_DENY": 105,
+        "ALLOW_unusable": 21,
+        "expected_DENY": 200,
+        "expected_DENY_usable": 194,
+        "DENY_to_ALLOW": 28,
+        "DENY_to_DENY": 166,
+        "DENY_unusable": 6,
+        "correct": 240,
+        "reason_correct": 163,
+        "clauses_correct": 127,
+        "wrongly_granted": 28,
+        "wrongly_refused": 105,
+        "balanced_accuracy_usable": 0.6345389621609169,
+        "balanced_accuracy_all_cases": 0.6,
+        "correct_ci95_all_cases": [
+          0.5513,
+          0.6468
+        ],
+        "wrongly_granted_ci95": [
+          0.0987,
+          0.1949
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      },
+      "V7 (fine-tuned)": {
+        "cases": 400,
+        "usable": 400,
+        "unusable": 0,
+        "expected_ALLOW": 200,
+        "expected_ALLOW_usable": 200,
+        "ALLOW_to_ALLOW": 199,
+        "ALLOW_to_DENY": 1,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 200,
+        "expected_DENY_usable": 200,
+        "DENY_to_ALLOW": 4,
+        "DENY_to_DENY": 196,
+        "DENY_unusable": 0,
+        "correct": 395,
+        "reason_correct": 395,
+        "clauses_correct": 392,
+        "wrongly_granted": 4,
+        "wrongly_refused": 1,
+        "balanced_accuracy_usable": 0.9875,
+        "balanced_accuracy_all_cases": 0.9875,
+        "correct_ci95_all_cases": [
+          0.9711,
+          0.9946
+        ],
+        "wrongly_granted_ci95": [
+          0.0078,
+          0.0503
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      }
+    },
+    "test-multi-rule": {
+      "Untuned Qwen3-14B": {
+        "cases": 370,
+        "usable": 352,
+        "unusable": 18,
+        "expected_ALLOW": 0,
+        "expected_ALLOW_usable": 0,
+        "ALLOW_to_ALLOW": 0,
+        "ALLOW_to_DENY": 0,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 370,
+        "expected_DENY_usable": 352,
+        "DENY_to_ALLOW": 0,
+        "DENY_to_DENY": 352,
+        "DENY_unusable": 18,
+        "correct": 352,
+        "reason_correct": 191,
+        "clauses_correct": 4,
+        "wrongly_granted": 0,
+        "wrongly_refused": 0,
+        "balanced_accuracy_usable": null,
+        "balanced_accuracy_all_cases": null,
+        "correct_ci95_all_cases": [
+          0.9244,
+          0.969
+        ],
+        "wrongly_granted_ci95": [
+          -0.0,
+          0.0103
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      },
+      "V7 (fine-tuned)": {
+        "cases": 370,
+        "usable": 370,
+        "unusable": 0,
+        "expected_ALLOW": 0,
+        "expected_ALLOW_usable": 0,
+        "ALLOW_to_ALLOW": 0,
+        "ALLOW_to_DENY": 0,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 370,
+        "expected_DENY_usable": 370,
+        "DENY_to_ALLOW": 0,
+        "DENY_to_DENY": 370,
+        "DENY_unusable": 0,
+        "correct": 370,
+        "reason_correct": 351,
+        "clauses_correct": 301,
+        "wrongly_granted": 0,
+        "wrongly_refused": 0,
+        "balanced_accuracy_usable": null,
+        "balanced_accuracy_all_cases": null,
+        "correct_ci95_all_cases": [
+          0.9897,
+          1.0
+        ],
+        "wrongly_granted_ci95": [
+          -0.0,
+          0.0103
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      }
+    },
+    "validation-balanced": {
+      "Untuned Qwen3-14B": {
+        "cases": 400,
+        "usable": 370,
+        "unusable": 30,
+        "expected_ALLOW": 200,
+        "expected_ALLOW_usable": 183,
+        "ALLOW_to_ALLOW": 35,
+        "ALLOW_to_DENY": 148,
+        "ALLOW_unusable": 17,
+        "expected_DENY": 200,
+        "expected_DENY_usable": 187,
+        "DENY_to_ALLOW": 7,
+        "DENY_to_DENY": 180,
+        "DENY_unusable": 13,
+        "correct": 215,
+        "reason_correct": 133,
+        "clauses_correct": 85,
+        "wrongly_granted": 7,
+        "wrongly_refused": 148,
+        "balanced_accuracy_usable": 0.5769118377604394,
+        "balanced_accuracy_all_cases": 0.5375,
+        "correct_ci95_all_cases": [
+          0.4885,
+          0.5858
+        ],
+        "wrongly_granted_ci95": [
+          0.0171,
+          0.0705
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      },
+      "V7 (fine-tuned)": {
+        "cases": 400,
+        "usable": 400,
+        "unusable": 0,
+        "expected_ALLOW": 200,
+        "expected_ALLOW_usable": 200,
+        "ALLOW_to_ALLOW": 198,
+        "ALLOW_to_DENY": 2,
+        "ALLOW_unusable": 0,
+        "expected_DENY": 200,
+        "expected_DENY_usable": 200,
+        "DENY_to_ALLOW": 3,
+        "DENY_to_DENY": 197,
+        "DENY_unusable": 0,
+        "correct": 395,
+        "reason_correct": 389,
+        "clauses_correct": 381,
+        "wrongly_granted": 3,
+        "wrongly_refused": 2,
+        "balanced_accuracy_usable": 0.9875,
+        "balanced_accuracy_all_cases": 0.9875,
+        "correct_ci95_all_cases": [
+          0.9711,
+          0.9946
+        ],
+        "wrongly_granted_ci95": [
+          0.0051,
+          0.0432
+        ],
+        "matches_stored_confusion_matrix": true,
+        "matches_stored_valid_count": true
+      }
+    }
+  },
+  "paired": {
+    "test-decision-balanced": {
+      "pairs": 600,
+      "only_untuned_correct": 8,
+      "only_v7_correct": 264,
+      "both_correct": 328,
+      "both_wrong": 0,
+      "mcnemar_exact_p": 1.8198587170075318e-67
+    },
+    "test-adversarial": {
+      "pairs": 389,
+      "only_untuned_correct": 5,
+      "only_v7_correct": 200,
+      "both_correct": 183,
+      "both_wrong": 1,
+      "mcnemar_exact_p": 1.1455395645628988e-52
+    },
+    "test-reason-balanced": {
+      "pairs": 540,
+      "only_untuned_correct": 3,
+      "only_v7_correct": 91,
+      "both_correct": 445,
+      "both_wrong": 1,
+      "mcnemar_exact_p": 1.398593586971678e-23
+    },
+    "test-ood-paraphrase": {
+      "pairs": 400,
+      "only_untuned_correct": 2,
+      "only_v7_correct": 157,
+      "both_correct": 238,
+      "both_wrong": 3,
+      "mcnemar_exact_p": 3.481624563413281e-44
+    },
+    "test-multi-rule": {
+      "pairs": 370,
+      "only_untuned_correct": 0,
+      "only_v7_correct": 18,
+      "both_correct": 352,
+      "both_wrong": 0,
+      "mcnemar_exact_p": 7.62939453125e-06
+    },
+    "validation-balanced": {
+      "pairs": 400,
+      "only_untuned_correct": 3,
+      "only_v7_correct": 183,
+      "both_correct": 212,
+      "both_wrong": 2,
+      "mcnemar_exact_p": 2.1872657444119354e-50
+    }
+  },
+  "plain_words": [
+    "Untuned Qwen3-14B: of 300 requests the policy allows, 70 were recommended for approval (204 wrongly refused, 26 unusable answers).",
+    "Untuned Qwen3-14B: of 300 requests the policy denies, 266 were recommended for denial (14 wrongly granted, 20 unusable answers).",
+    "Untuned Qwen3-14B: 336 of 600 decisions correct; 554 of 600 answers usable; right reason 203, right clauses 130.",
+    "V7 (fine-tuned): of 300 requests the policy allows, 298 were recommended for approval (2 wrongly refused, 0 unusable answers).",
+    "V7 (fine-tuned): of 300 requests the policy denies, 294 were recommended for denial (6 wrongly granted, 0 unusable answers).",
+    "V7 (fine-tuned): 592 of 600 decisions correct; 600 of 600 answers usable; right reason 584, right clauses 572.",
+    "Untuned Qwen3-14B: of 204 adversarial requests the policy denies, 4 got through (wrongly granted), 175 were stopped, 25 unusable.",
+    "V7 (fine-tuned): of 204 adversarial requests the policy denies, 6 got through (wrongly granted), 198 were stopped, 0 unusable."
+  ],
+  "per_reason_v7": {
+    "CRED_NOT_ACTIVE": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 59
+    },
+    "CROSS_JURISDICTION": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 60
+    },
+    "INSUFFICIENT_CLEARANCE": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 60
+    },
+    "JUVENILE_PROTECTED": {
+      "cases": 60,
+      "decision_correct": 59,
+      "reason_correct": 59
+    },
+    "NOT_ASSIGNED": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 60
+    },
+    "POLICY_SATISFIED": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 60
+    },
+    "RBAC_NO_PERMISSION": {
+      "cases": 60,
+      "decision_correct": 57,
+      "reason_correct": 54
+    },
+    "SEALED_RECORD": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 60
+    },
+    "VICTIM_DATA_NOT_NECESSARY": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 59
+    }
+  },
+  "per_reason_untuned": {
+    "CRED_NOT_ACTIVE": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 59
+    },
+    "CROSS_JURISDICTION": {
+      "cases": 60,
+      "decision_correct": 57,
+      "reason_correct": 32
+    },
+    "INSUFFICIENT_CLEARANCE": {
+      "cases": 60,
+      "decision_correct": 52,
+      "reason_correct": 22
+    },
+    "JUVENILE_PROTECTED": {
+      "cases": 60,
+      "decision_correct": 50,
+      "reason_correct": 9
+    },
+    "NOT_ASSIGNED": {
+      "cases": 60,
+      "decision_correct": 52,
+      "reason_correct": 32
+    },
+    "POLICY_SATISFIED": {
+      "cases": 60,
+      "decision_correct": 13,
+      "reason_correct": 13
+    },
+    "RBAC_NO_PERMISSION": {
+      "cases": 60,
+      "decision_correct": 53,
+      "reason_correct": 22
+    },
+    "SEALED_RECORD": {
+      "cases": 60,
+      "decision_correct": 60,
+      "reason_correct": 36
+    },
+    "VICTIM_DATA_NOT_NECESSARY": {
+      "cases": 60,
+      "decision_correct": 51,
+      "reason_correct": 19
+    }
+  }
+}

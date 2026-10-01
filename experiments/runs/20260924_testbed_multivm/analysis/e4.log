@@ -1,0 +1,23 @@
+{
+ "cases": 600,
+ "usable": 600,
+ "correct": 592,
+ "same_decision_as_stored_v7_run": 600,
+ "identical_output_to_stored_v7_run": 600,
+ "time_per_recommendation_s": {
+  "mean": 8.249684543333332,
+  "p50": 8.333825000000001,
+  "p95": 9.188509,
+  "max": 12.050759
+ },
+ "stored_v7_run_time_per_recommendation_s": {
+  "mean": 7.788136575,
+  "p50": 7.726604,
+  "p95": 9.191586
+ },
+ "wall_clock_s": 4949.9,
+ "recommendations_per_min": 7.272874199478778,
+ "prompt_tokens_mean": 1926.0933333333332,
+ "completion_tokens_mean": 85.75166666666667,
+ "output_tokens_per_s": 10.39453887190918
+}

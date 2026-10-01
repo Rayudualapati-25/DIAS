@@ -1,0 +1,543 @@
+{
+  "plan": {
+    "label": "reuse-smoke-rusmkb",
+    "seed": 20260927,
+    "users": 4,
+    "siblingsPerBase": 2,
+    "rounds": 3,
+    "approvalProbability": 1,
+    "auditorRule": "FORCE_ALLOW over a model DENY only when the base request is approved; otherwise follow the model; deny an unusable recommendation",
+    "generatedBy": "testbed/reuse/plan.js",
+    "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+    "usersSha256": "8bed20a1083221db9f01f3e32e58d84d7434492cf017c9b4d63b1a67b9d194ab"
+  },
+  "checks": {
+    "rows": 36,
+    "planned": 36,
+    "missing": 0,
+    "duplicates": 0,
+    "failed": 0,
+    "failures": [],
+    "facts_mismatched": 0
+  },
+  "model_on_reviewed_requests": {
+    "reviewed": 22,
+    "valid": 22,
+    "correct": 21,
+    "overrides_of_model_deny": 7
+  },
+  "ledger_check": {
+    "created_by_rows": 7,
+    "on_ledger_for_plan": 7,
+    "only_on_ledger": [],
+    "mismatched": [],
+    "pass": true
+  },
+  "records": 12,
+  "approved_records": 7,
+  "approved_bases": 4,
+  "conditions": [
+    {
+      "repeats": 0,
+      "design": "no-reuse",
+      "requests": 12,
+      "reviews": 12,
+      "automatic_grants": 0,
+      "grants_on_approved_record": 0,
+      "grants_on_a_different_record": 0,
+      "grants_to_a_different_user": 0,
+      "authorizations_created": 0,
+      "reviews_avoided": 0,
+      "review_savings_pct": 0.0
+    },
+    {
+      "repeats": 0,
+      "design": "exact-record",
+      "requests": 12,
+      "reviews": 12,
+      "automatic_grants": 0,
+      "grants_on_approved_record": 0,
+      "grants_on_a_different_record": 0,
+      "grants_to_a_different_user": 0,
+      "authorizations_created": 7,
+      "reviews_avoided": 0,
+      "review_savings_pct": 0.0
+    },
+    {
+      "repeats": 0,
+      "design": "property-fingerprint",
+      "requests": 12,
+      "reviews": 8,
+      "automatic_grants": 4,
+      "grants_on_approved_record": 0,
+      "grants_on_a_different_record": 4,
+      "grants_to_a_different_user": 0,
+      "authorizations_created": 3,
+      "reviews_avoided": 4,
+      "review_savings_pct": 33.33
+    },
+    {
+      "repeats": 1,
+      "design": "no-reuse",
+      "requests": 24,
+      "reviews": 24,
+      "automatic_grants": 0,
+      "grants_on_approved_record": 0,
+      "grants_on_a_different_record": 0,
+      "grants_to_a_different_user": 0,
+      "authorizations_created": 0,
+      "reviews_avoided": 0,
+      "review_savings_pct": 0.0
+    },
+    {
+      "repeats": 1,
+      "design": "exact-record",
+      "requests": 24,
+      "reviews": 17,
+      "automatic_grants": 7,
+      "grants_on_approved_record": 7,
+      "grants_on_a_different_record": 0,
+      "grants_to_a_different_user": 0,
+      "authorizations_created": 7,
+      "reviews_avoided": 7,
+      "review_savings_pct": 29.17
+    },
+    {
+      "repeats": 1,
+      "design": "property-fingerprint",
+      "requests": 24,
+      "reviews": 11,
+      "automatic_grants": 13,
+      "grants_on_approved_record": 3,
+      "grants_on_a_different_record": 10,
+      "grants_to_a_different_user": 0,
+      "authorizations_created": 3,
+      "reviews_avoided": 13,
+      "review_savings_pct": 54.17
+    }
+  ],
+  "rounds": [
+    {
+      "round": 0,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 12,
+      "reused": 0,
+      "authorizationsCreated": 7,
+      "factsMismatched": 0,
+      "startedAt": 1790343999169.168,
+      "finishedAt": 1790344100076.623,
+      "durationMs": 100907.455,
+      "duration_min": 1.6817909166666667,
+      "model_inference_p50_s": 7.981196,
+      "reused_grant_p50_s": null
+    },
+    {
+      "round": 1,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 5,
+      "reused": 7,
+      "authorizationsCreated": 0,
+      "factsMismatched": 0,
+      "startedAt": 1790344110085.881,
+      "finishedAt": 1790344132188.725,
+      "durationMs": 22102.845,
+      "duration_min": 0.36838075000000003,
+      "model_inference_p50_s": 3.4652890000000003,
+      "reused_grant_p50_s": 2.086725
+    },
+    {
+      "round": 2,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 5,
+      "reused": 7,
+      "authorizationsCreated": 0,
+      "factsMismatched": 0,
+      "startedAt": 1790344142199.28,
+      "finishedAt": 1790344167094.362,
+      "durationMs": 24895.082,
+      "duration_min": 0.4149180333333333,
+      "model_inference_p50_s": 4.03157,
+      "reused_grant_p50_s": 2.073288
+    }
+  ],
+  "time": {
+    "reviewed_end_to_end": {
+      "n": 22,
+      "mean_s": 19.818362727272728,
+      "p50_s": 12.534928,
+      "p95_s": 33.22967
+    },
+    "reviewed_request_commit": {
+      "n": 22,
+      "mean_s": 2.071228090909091,
+      "p50_s": 2.059879,
+      "p95_s": 2.112917
+    },
+    "reviewed_queue_and_model": {
+      "n": 22,
+      "mean_s": 16.046750136363638,
+      "p50_s": 8.34399,
+      "p95_s": 29.080084
+    },
+    "reviewed_model_inference": {
+      "n": 22,
+      "mean_s": 6.1194061363636365,
+      "p50_s": 7.519687,
+      "p95_s": 8.520923
+    },
+    "reviewed_decision_commit": {
+      "n": 22,
+      "mean_s": 1.6915895454545455,
+      "p50_s": 2.0647249999999997,
+      "p95_s": 2.086074
+    },
+    "reused_end_to_end": {
+      "n": 14,
+      "mean_s": 2.0958868571428573,
+      "p50_s": 2.086036,
+      "p95_s": 2.134042
+    }
+  },
+  "run": {
+    "startedAtUtc": "2026-09-25T13:46:29.109Z",
+    "finishedAtUtc": "2026-09-25T13:49:37.102Z",
+    "totals": {
+      "requested": 36,
+      "completed": 36,
+      "failed": 0,
+      "reviewed": 22,
+      "reused": 14,
+      "authorizationsCreated": 7
+    },
+    "planSha256": "e79867e4bfce633261a8a589f3d4963b42d663ba5141c57c71fe6c4de3aabe19",
+    "codeSha256": {
+      "run.js": "167a58053107690490dfbaff2f2d47d6ca64c7b4b4a83ef4c36ababe9a327c3b",
+      "plan.js": "ae43fcecea18303b145b64b70f6e3c67ec92c7496eae51a1b56d0b18bf5ca6fd",
+      "seed.js": "b08f2ee967dfe8595aefc28b1446de62f0f0dd510a35ba9aee38e0d7eb2596d5",
+      "check-ledger.js": "2301da4733a92e2786e6508160148fc03339e07e2b1588165f8f8987e56ded57"
+    }
+  },
+  "resources": {
+    "window_s": [
+      1790343989.1096961,
+      1790344177.1025949
+    ],
+    "machines": {
+      "m1": {
+        "cpu_mean_cores": 0.10926335385103396,
+        "cpu_max_cores": 0.11799999999999386,
+        "mem_max_gb": 1.209065472
+      },
+      "m2": {
+        "cpu_mean_cores": 0.155031627947386,
+        "cpu_max_cores": 0.17201376110089078,
+        "mem_max_gb": 1.548742656
+      },
+      "m3": {
+        "cpu_mean_cores": 0.1551061847328261,
+        "cpu_max_cores": 0.17800000000002456,
+        "mem_max_gb": 1.633796096
+      },
+      "m4": {
+        "cpu_mean_cores": 0.06918074987108988,
+        "cpu_max_cores": 0.141228245649131,
+        "mem_max_gb": 1.111379968
+      }
+    },
+    "containers": [
+      {
+        "machine": "m1",
+        "container": "ca-orderer",
+        "cpu_mean_cores": 8.157894736842105e-05,
+        "cpu_max_cores": 0.0029,
+        "mem_max_mb": 8.765046784,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "ca-police",
+        "cpu_mean_cores": 0.0001236842105263158,
+        "cpu_max_cores": 0.0047,
+        "mem_max_mb": 9.351200768,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "cadvisor-m1",
+        "cpu_mean_cores": 4.473684210526315e-05,
+        "cpu_max_cores": 0.0006,
+        "mem_max_mb": 26.927431679999998,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.022457894736842107,
+        "cpu_max_cores": 0.067,
+        "mem_max_mb": 101.99498752,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0008578947368421052,
+        "cpu_max_cores": 0.012,
+        "mem_max_mb": 84.54668287999999,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "node-exporter-m1",
+        "cpu_mean_cores": 0.009755263157894737,
+        "cpu_max_cores": 0.0196,
+        "mem_max_mb": 10.56964608,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "orderer1.example.com",
+        "cpu_mean_cores": 0.00485,
+        "cpu_max_cores": 0.0168,
+        "mem_max_mb": 84.21113856000001,
+        "samples": 38
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.021315789473684208,
+        "cpu_max_cores": 0.0489,
+        "mem_max_mb": 225.3389824,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "ca-forensics",
+        "cpu_mean_cores": 8.157894736842105e-05,
+        "cpu_max_cores": 0.0029,
+        "mem_max_mb": 9.215934464,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "ca-prosecution",
+        "cpu_mean_cores": 5.263157894736842e-06,
+        "cpu_max_cores": 0.0001,
+        "mem_max_mb": 9.06493952,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "cadvisor-m2",
+        "cpu_mean_cores": 6.578947368421052e-05,
+        "cpu_max_cores": 0.0009,
+        "mem_max_mb": 27.39929088,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.021107894736842107,
+        "cpu_max_cores": 0.0599,
+        "mem_max_mb": 101.82721536,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.021171052631578948,
+        "cpu_max_cores": 0.0565,
+        "mem_max_mb": 92.51586048,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0010789473684210526,
+        "cpu_max_cores": 0.0101,
+        "mem_max_mb": 79.03117312,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.001118421052631579,
+        "cpu_max_cores": 0.0098,
+        "mem_max_mb": 77.57365248,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "node-exporter-m2",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 10.31798784,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "orderer2.example.com",
+        "cpu_mean_cores": 0.0035736842105263157,
+        "cpu_max_cores": 0.0093,
+        "mem_max_mb": 76.25244672,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.018878947368421054,
+        "cpu_max_cores": 0.0487,
+        "mem_max_mb": 202.0605952,
+        "samples": 38
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.018776315789473686,
+        "cpu_max_cores": 0.0479,
+        "mem_max_mb": 203.1091712,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "ca-audit",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 8.929673216,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "ca-court",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.02299648,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "cadvisor-m3",
+        "cpu_mean_cores": 0.00031052631578947366,
+        "cpu_max_cores": 0.0036,
+        "mem_max_mb": 39.78297344,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.017847368421052633,
+        "cpu_max_cores": 0.0561,
+        "mem_max_mb": 157.0766848,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.01956315789473684,
+        "cpu_max_cores": 0.0597,
+        "mem_max_mb": 91.4358272,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0017421052631578946,
+        "cpu_max_cores": 0.0109,
+        "mem_max_mb": 57.08447744,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0013368421052631578,
+        "cpu_max_cores": 0.0111,
+        "mem_max_mb": 79.54497536,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "node-exporter-m3",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 21.883781120000002,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "orderer3.example.com",
+        "cpu_mean_cores": 0.003697368421052632,
+        "cpu_max_cores": 0.01,
+        "mem_max_mb": 58.10159616,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.02126578947368421,
+        "cpu_max_cores": 0.0528,
+        "mem_max_mb": 208.4569088,
+        "samples": 38
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.019639473684210526,
+        "cpu_max_cores": 0.0535,
+        "mem_max_mb": 213.8046464,
+        "samples": 38
+      },
+      {
+        "machine": "m4",
+        "container": "cadvisor-m4",
+        "cpu_mean_cores": 0.0005552631578947368,
+        "cpu_max_cores": 0.0153,
+        "mem_max_mb": 28.3639808,
+        "samples": 38
+      },
+      {
+        "machine": "m4",
+        "container": "dias-backend",
+        "cpu_mean_cores": 0.004031578947368421,
+        "cpu_max_cores": 0.0283,
+        "mem_max_mb": 96.43753472,
+        "samples": 38
+      },
+      {
+        "machine": "m4",
+        "container": "loadgen-reuse-smoke",
+        "cpu_mean_cores": 0.0041729729729729735,
+        "cpu_max_cores": 0.0169,
+        "mem_max_mb": 40.71620608,
+        "samples": 37
+      },
+      {
+        "machine": "m4",
+        "container": "node-exporter-m4",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 10.684989439999999,
+        "samples": 38
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.004989473684210526,
+        "cpu_max_cores": 0.0108,
+        "mem_max_mb": 113.14135040000001,
+        "samples": 38
+      }
+    ],
+    "mac": {
+      "samples": 37,
+      "model_cpu_mean_cores": 0.1803783783783784,
+      "model_cpu_max_cores": 0.37,
+      "model_rss_max_gb": 3.0285824,
+      "gpu_utilization_mean_pct": 77.94594594594595
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "experiment": "Reuse experiment (reuse-smoke)",
+  "planFile": "testbed/reuse/generated/reuse-smoke-plan.json",
+  "planSha256": "61dc7e85ccb2bc4dbcedc4d3aa9be8c3f97b4d101f12b18575a23d14f8d084ce",
+  "codeSha256": {
+    "run.js": "6fb112d32cc3d11064668ce28be3ebb473a2be9db7ac109558157a7ff90ea7e0",
+    "plan.js": "daaef234810389ad7a73e62c07c850591d622b181e1de5d5a5968778ed0d0dcf",
+    "seed.js": "b08f2ee967dfe8595aefc28b1446de62f0f0dd510a35ba9aee38e0d7eb2596d5",
+    "check-ledger.js": "2301da4733a92e2786e6508160148fc03339e07e2b1588165f8f8987e56ded57"
+  },
+  "startedAt": 1790343591267.13,
+  "finishedAt": 1790343796656.317,
+  "startedAtUtc": "2026-09-25T13:39:51.267Z",
+  "finishedAtUtc": "2026-09-25T13:43:16.656Z",
+  "apiUrl": "http://dias-backend:3001/api",
+  "loadGeneratorHost": "515c6bd0b4b6",
+  "users": 4,
+  "rounds": [
+    {
+      "round": 0,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 12,
+      "reused": 0,
+      "authorizationsCreated": 6,
+      "factsMismatched": 0,
+      "startedAt": 1790343601362.528,
+      "finishedAt": 1790343707917.123,
+      "durationMs": 106554.595
+    },
+    {
+      "round": 1,
+      "requested": 12,
+      "completed": 6,
+      "failed": 6,
+      "reviewed": 6,
+      "reused": 0,
+      "authorizationsCreated": 0,
+      "factsMismatched": 0,
+      "startedAt": 1790343717925.459,
+      "finishedAt": 1790343749677.702,
+      "durationMs": 31752.243
+    },
+    {
+      "round": 2,
+      "requested": 12,
+      "completed": 6,
+      "failed": 6,
+      "reviewed": 6,
+      "reused": 0,
+      "authorizationsCreated": 0,
+      "factsMismatched": 0,
+      "startedAt": 1790343759690.966,
+      "finishedAt": 1790343786648.712,
+      "durationMs": 26957.746
+    }
+  ],
+  "totals": {
+    "requested": 36,
+    "completed": 24,
+    "failed": 12,
+    "reviewed": 24,
+    "reused": 0,
+    "authorizationsCreated": 6
+  },
+  "settleMs": 10000,
+  "cooldownMs": 10000,
+  "timeoutMs": 7200000,
+  "auditorPolicy": "automated, no human review time: FORCE_ALLOW over a model DENY only when the base request is approved; otherwise follow the model; deny an unusable recommendation"
+}

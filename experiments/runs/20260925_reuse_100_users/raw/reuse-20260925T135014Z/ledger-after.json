@@ -1,0 +1,1311 @@
+{
+  "label": "after",
+  "atUtc": "2026-09-25T18:03:05.323Z",
+  "plan": "reuse-100-users",
+  "ledgerAuthorizationsAll": 85,
+  "ledgerAuthorizationsByStatus": {
+    "active": 85
+  },
+  "planAuthorizations": 72,
+  "planAuthorizationsByStatus": {
+    "active": 72
+  },
+  "planAuthorizationList": [
+    {
+      "authorizationId": "AUTH-03776d94dbb49099",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-002-SIB1",
+        "purpose": "prosecution",
+        "recordId": "RU040-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt040.io"
+      },
+      "originatingRequestId": "REQ-3fd27b768209f107",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:20:18.795Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-0694201209fd7ee7",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-003",
+        "purpose": "prosecution",
+        "recordId": "RU016-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt016.io"
+      },
+      "originatingRequestId": "REQ-7d352f47f0b06e7a",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:53:52.304Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-0d0bcd4f800d824f",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001",
+        "purpose": "investigation",
+        "recordId": "RU096-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt096.judge"
+      },
+      "originatingRequestId": "REQ-2fdef041adff1ca8",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:18:23.947Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-0d7cc7c69e44fc07",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "investigation",
+        "recordId": "RU068-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt068.dir"
+      },
+      "originatingRequestId": "REQ-54bb2b83c5cd9662",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:30:04.719Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-0d889746743c0207",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "judicial-proceeding",
+        "recordId": "RU058-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt058.dc"
+      },
+      "originatingRequestId": "REQ-562c44f254b299db",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:03:13.032Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-11c99c2bae98b0a2",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "judicial-proceeding",
+        "recordId": "RU002-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt002.sho"
+      },
+      "originatingRequestId": "REQ-5af6959c09faf6ab",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:10:26.864Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-12901762d89d87ec",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "judicial-proceeding",
+        "recordId": "RU002-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt002.sho"
+      },
+      "originatingRequestId": "REQ-de4f22f746bfc195",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:23:14.077Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-145ad52523336b50",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "prosecution",
+        "recordId": "RU016-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt016.io"
+      },
+      "originatingRequestId": "REQ-4f1f0709c8777320",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:21:18.301Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-163c9a1a1aefa255",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "prosecution",
+        "recordId": "RU016-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt016.io"
+      },
+      "originatingRequestId": "REQ-7bc60fd75a6c9b45",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:08:24.020Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-2143c8abc6abc295",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "investigation",
+        "recordId": "RU054-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt054.insp"
+      },
+      "originatingRequestId": "REQ-80314c4ea2695633",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:13:39.737Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-21465ae550f698ee",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "investigation",
+        "recordId": "RU054-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt054.insp"
+      },
+      "originatingRequestId": "REQ-50fd2743708a16f7",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:26:21.392Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-27fbbd5e58366a3f",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RU100-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt100.const"
+      },
+      "originatingRequestId": "REQ-6712b023a7643425",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:15:21.250Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-2a0866bb82b51aca",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-002",
+        "purpose": "audit-review",
+        "recordId": "RU056-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt056.analyst"
+      },
+      "originatingRequestId": "REQ-37b8f31338c5545a",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:29:35.009Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-2e434e14cd220210",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "audit-review",
+        "recordId": "RU084-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt084.clerk"
+      },
+      "originatingRequestId": "REQ-b25b0e5d4642613c",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:05:24.230Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-306fbb8637b69dca",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "investigation",
+        "recordId": "RU068-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt068.dir"
+      },
+      "originatingRequestId": "REQ-33bec9a1774d208c",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:17:31.415Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-391d2a6946f3f3f7",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RU080-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt080.analyst"
+      },
+      "originatingRequestId": "REQ-3e4af8b7f336743d",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:18:59.959Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-41e2117cb3092e9e",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RU066-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt066.insp"
+      },
+      "originatingRequestId": "REQ-d6d96537617498d8",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:15:29.588Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-430209eca94574fe",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "audit-review",
+        "recordId": "RU088-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt088.io"
+      },
+      "originatingRequestId": "REQ-457f866c9412a75d",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:14:32.487Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-45da0a53be2648ba",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-002",
+        "purpose": "audit-review",
+        "recordId": "RU042-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt042.insp"
+      },
+      "originatingRequestId": "REQ-6792e630978f7288",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:59:25.463Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-45ffd3c3bb50c103",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-002-SIB2",
+        "purpose": "audit-review",
+        "recordId": "RU056-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt056.analyst"
+      },
+      "originatingRequestId": "REQ-f6b4d91189bec8b7",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:17:01.623Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-46e7049c4bf69a9e",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-002",
+        "purpose": "prosecution",
+        "recordId": "RU040-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt040.io"
+      },
+      "originatingRequestId": "REQ-1a875d037992861d",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:52:44.039Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-49c59aa508c98cb6",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "prosecution",
+        "recordId": "RU070-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt070.pp"
+      },
+      "originatingRequestId": "REQ-65511aec5b81879a",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:16:22.787Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-4a45543201f11956",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "audit-review",
+        "recordId": "RU036-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt036.clerk"
+      },
+      "originatingRequestId": "REQ-15755a3c9a3f3019",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:54:37.051Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-4b23f62fab1170fa",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-002-SIB1",
+        "purpose": "audit-review",
+        "recordId": "RU056-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt056.analyst"
+      },
+      "originatingRequestId": "REQ-e27504a0738392ad",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:03:47.137Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-5072fa89f0f47a18",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RU034-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt034.dc"
+      },
+      "originatingRequestId": "REQ-75f858cb53ec29fa",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:28:50.034Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-563ee353e8d66fd3",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001",
+        "purpose": "judicial-proceeding",
+        "recordId": "RU058-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt058.dc"
+      },
+      "originatingRequestId": "REQ-3c7149fd1a21f890",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:16:30.365Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-57f349c331122fa4",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RU066-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt066.insp"
+      },
+      "originatingRequestId": "REQ-f982efcad7f32a7d",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:02:08.117Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-5cbd6d71db6be14e",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001",
+        "purpose": "defense-preparation",
+        "recordId": "RU080-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt080.analyst"
+      },
+      "originatingRequestId": "REQ-737a8b3df1dc6770",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:05:54.894Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-5de3703518dd0d46",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "defense-preparation",
+        "recordId": "RU100-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt100.const"
+      },
+      "originatingRequestId": "REQ-da66dfd8ac50564b",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:01:59.036Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-5ef60ae7fe03f242",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001",
+        "purpose": "audit-review",
+        "recordId": "RU036-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt036.clerk"
+      },
+      "originatingRequestId": "REQ-15f1e9e64fa431e6",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:21:48.345Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-5f2e72fc703ff9db",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "audit-review",
+        "recordId": "RU088-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt088.io"
+      },
+      "originatingRequestId": "REQ-7636f99a5e7f991e",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:01:06.624Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-5f4c1aa4e5626262",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "prosecution",
+        "recordId": "RU024-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt024.judge"
+      },
+      "originatingRequestId": "REQ-d030f0b22d24be3c",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:54:25.797Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-60aec5c995c41431",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "prosecution",
+        "recordId": "RU070-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt070.pp"
+      },
+      "originatingRequestId": "REQ-31761560a14ee2f8",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:28:56.757Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-630b169bd876952c",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RU092-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt092.dir"
+      },
+      "originatingRequestId": "REQ-5c66b6d8e34ea09c",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:05:31.619Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-6426cfd5dfd5bbb5",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "defense-preparation",
+        "recordId": "RU092-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt092.dir"
+      },
+      "originatingRequestId": "REQ-7e1da66c4dd094d5",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:18:38.463Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-714c1bcd8f06c6f9",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-002-SIB1",
+        "purpose": "audit-review",
+        "recordId": "RU042-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt042.insp"
+      },
+      "originatingRequestId": "REQ-cf4877cb2b223bdd",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:13:00.249Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-72ecde2fff38b545",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001",
+        "purpose": "defense-preparation",
+        "recordId": "RU034-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt034.dc"
+      },
+      "originatingRequestId": "REQ-6fc81402dac5b839",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:16:15.853Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-73c380b7da33a590",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "audit-review",
+        "recordId": "RU084-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt084.clerk"
+      },
+      "originatingRequestId": "REQ-901c02e212386dba",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:31:03.286Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-75af04ac1c5556a7",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "investigation",
+        "recordId": "RU062-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt062.insp"
+      },
+      "originatingRequestId": "REQ-4bbb0e5cdf2971a5",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:22:09.355Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-787f22e8d67a1ef8",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001",
+        "purpose": "defense-preparation",
+        "recordId": "RU066-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt066.insp"
+      },
+      "originatingRequestId": "REQ-6cfa6b56aa62b381",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:28:06.503Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-78ecb16ea55b015a",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-002-SIB2",
+        "purpose": "prosecution",
+        "recordId": "RU040-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt040.io"
+      },
+      "originatingRequestId": "REQ-1d07e4386bff7344",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:07:20.200Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-7e67cefbd19a7248",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "audit-review",
+        "recordId": "RU084-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt084.clerk"
+      },
+      "originatingRequestId": "REQ-fb77d6c7e66a3280",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:18:31.678Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-7e85d0ef8ed1673b",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RU006-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt006.insp"
+      },
+      "originatingRequestId": "REQ-a088d753c55d299d",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:51:49.875Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-816e305fff0a3471",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-002-SIB1",
+        "purpose": "audit-review",
+        "recordId": "RU052-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt052.const"
+      },
+      "originatingRequestId": "REQ-b22f4797f32c25e0",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:56:49.892Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-8298b171dc60af48",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "audit-review",
+        "recordId": "RU036-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt036.clerk"
+      },
+      "originatingRequestId": "REQ-e465b41938f37177",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:08:55.540Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-84bd36d8928b8a47",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "prosecution",
+        "recordId": "RU010-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt010.dc"
+      },
+      "originatingRequestId": "REQ-453daf4ccb376c59",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:57:53.396Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-8b219ffad2a5fd9f",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RU080-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt080.analyst"
+      },
+      "originatingRequestId": "REQ-755a99ba18ec9c9c",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:31:32.494Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-8ecb3feee7777d9d",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001",
+        "purpose": "investigation",
+        "recordId": "RU068-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt068.dir"
+      },
+      "originatingRequestId": "REQ-09595a1d79353316",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:04:19.682Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-997c117cb020e14e",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-002-SIB2",
+        "purpose": "audit-review",
+        "recordId": "RU052-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt052.const"
+      },
+      "originatingRequestId": "REQ-bb86513ab844e4be",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:23:30.922Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-9c5d229349c76414",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "prosecution",
+        "recordId": "RU010-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt010.dc"
+      },
+      "originatingRequestId": "REQ-6b49827a172cfcb7",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:24:25.291Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-ad09aaa7a6f9b601",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-002",
+        "purpose": "audit-review",
+        "recordId": "RU052-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt052.const"
+      },
+      "originatingRequestId": "REQ-bf1c3b53c4dfb314",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:10:44.133Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-ad32390b30a76fcd",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-003",
+        "purpose": "audit-review",
+        "recordId": "RU088-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt088.io"
+      },
+      "originatingRequestId": "REQ-fa15160c0edc6e55",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:27:12.375Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-b073d3e45c680684",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001",
+        "purpose": "investigation",
+        "recordId": "RU062-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt062.insp"
+      },
+      "originatingRequestId": "REQ-c6cec8885d73656e",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:09:17.742Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-b327fad80784999b",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001",
+        "purpose": "investigation",
+        "recordId": "RU054-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt054.insp"
+      },
+      "originatingRequestId": "REQ-9c804807a84b7bef",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:00:08.063Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-ba9ec9156dd56439",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "judicial-proceeding",
+        "recordId": "RU002-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt002.sho"
+      },
+      "originatingRequestId": "REQ-39b4eb4f1fdf4cde",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:56:30.014Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-bcedc2a5002a0420",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-002-SIB2",
+        "purpose": "audit-review",
+        "recordId": "RU042-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt042.insp"
+      },
+      "originatingRequestId": "REQ-be3bd158e05903dd",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:25:42.837Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-cc59c4dbcfaffb0b",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003",
+        "purpose": "defense-preparation",
+        "recordId": "RU006-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt006.insp"
+      },
+      "originatingRequestId": "REQ-49201fc15cc58af4",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:06:21.921Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-cdba2bb427286346",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "prosecution",
+        "recordId": "RU024-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt024.judge"
+      },
+      "originatingRequestId": "REQ-62d6ded39a57bf95",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:08:47.742Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-dad6d4d3cd5f181e",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "prosecution",
+        "recordId": "RU070-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt070.pp"
+      },
+      "originatingRequestId": "REQ-87fb94784021fb95",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:03:04.758Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-df903869e8f3f40e",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001-SIB1",
+        "purpose": "investigation",
+        "recordId": "RU096-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt096.judge"
+      },
+      "originatingRequestId": "REQ-241cdc4109e363ff",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:05:16.623Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-e3c5a795960e9db4",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RU006-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt006.insp"
+      },
+      "originatingRequestId": "REQ-b9c5b01134964f33",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:19:24.757Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-ea72044c4cd081b8",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RU100-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt100.const"
+      },
+      "originatingRequestId": "REQ-5b943359dcbe6058",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:27:58.336Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-ea775ca684004963",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "prosecution",
+        "recordId": "RU024-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt024.judge"
+      },
+      "originatingRequestId": "REQ-2851adbe2d11b795",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:21:41.100Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-eb66ae3bdec0f0e5",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RU034-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt034.dc"
+      },
+      "originatingRequestId": "REQ-bebad3b579f439d7",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:02:57.128Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-ef947201e3ac74c8",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "investigation",
+        "recordId": "RU062-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt062.insp"
+      },
+      "originatingRequestId": "REQ-50f2d3fefce6fa4f",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:55:08.130Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f003c2c933d0a1f2",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "investigation",
+        "recordId": "RU096-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "CourtMSP::lt096.judge"
+      },
+      "originatingRequestId": "REQ-26edb0e836ac44a9",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:30:56.408Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f52d29024e7955a2",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RU092-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ForensicsMSP::lt092.dir"
+      },
+      "originatingRequestId": "REQ-8eb19951ecd884db",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:31:10.093Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f5f80b0da47a03b6",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "forensic-analysis",
+        "recordId": "RU086-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt086.insp"
+      },
+      "originatingRequestId": "REQ-62fba4a8f1d0d0f5",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:02:24.395Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f61be27f5ae6e936",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-001-SIB2",
+        "purpose": "judicial-proceeding",
+        "recordId": "RU058-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt058.dc"
+      },
+      "originatingRequestId": "REQ-599d4044ebb4117e",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:29:04.221Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f7bed8672a0deafa",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "prosecution",
+        "recordId": "RU010-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "ProsecutionMSP::lt010.dc"
+      },
+      "originatingRequestId": "REQ-38af49f921411da2",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:11:39.426Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f7fdb785addb79af",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003",
+        "purpose": "forensic-analysis",
+        "recordId": "RU086-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt086.insp"
+      },
+      "originatingRequestId": "REQ-cebe3dafc587daee",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:28:20.830Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-faf208a9a60c91b2",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "forensic-analysis",
+        "recordId": "RU086-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt086.insp"
+      },
+      "originatingRequestId": "REQ-c801e89768292991",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T14:15:44.624Z",
+      "validUntilUtc": null
+    }
+  ]
+}

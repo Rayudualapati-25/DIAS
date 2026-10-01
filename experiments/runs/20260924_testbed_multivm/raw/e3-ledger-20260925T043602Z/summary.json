@@ -1,0 +1,480 @@
+[
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 10,
+    "attempted": 5645,
+    "succeeded": 5645,
+    "failed": 0,
+    "durationS": 62.059,
+    "throughputPerS": 90.962,
+    "latencyMs": {
+      "mean": 108.013,
+      "p50": 104.397,
+      "p95": 124.764,
+      "max": 2079.61
+    },
+    "stagesMeanMs": {
+      "endorse": 39.353,
+      "ordererSubmit": 2.608,
+      "commitWait": 66.052
+    },
+    "startedAt": 1790316946798.489,
+    "finishedAt": 1790317008857.508,
+    "errors": []
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 10,
+    "attempted": 5645,
+    "succeeded": 5645,
+    "failed": 0,
+    "durationS": 77.397,
+    "throughputPerS": 72.936,
+    "latencyMs": {
+      "mean": 135.115,
+      "p50": 130.707,
+      "p95": 166.161,
+      "max": 2123.777
+    },
+    "stagesMeanMs": {
+      "endorse": 42.585,
+      "ordererSubmit": 2.85,
+      "commitWait": 89.68
+    },
+    "startedAt": 1790317029492.141,
+    "finishedAt": 1790317106888.935,
+    "errors": []
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 10,
+    "attempted": 64373,
+    "succeeded": 64373,
+    "failed": 0,
+    "durationS": 30.002,
+    "throughputPerS": 2145.611,
+    "latencyMs": {
+      "mean": 4.627,
+      "p50": 4.372,
+      "p95": 7.136,
+      "max": 23.941
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317127485.904,
+    "finishedAt": 1790317157488.082,
+    "errors": []
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 10,
+    "attempted": 71,
+    "succeeded": 71,
+    "failed": 0,
+    "durationS": 31.123,
+    "throughputPerS": 2.281,
+    "latencyMs": {
+      "mean": 4277.997,
+      "p50": 4346.538,
+      "p95": 4534.607,
+      "max": 4583.195
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317185642.24,
+    "finishedAt": 1790317216765.536,
+    "errors": []
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 25,
+    "attempted": 6973,
+    "succeeded": 6973,
+    "failed": 0,
+    "durationS": 62.188,
+    "throughputPerS": 112.127,
+    "latencyMs": {
+      "mean": 216.254,
+      "p50": 189.088,
+      "p95": 363.047,
+      "max": 2233.837
+    },
+    "stagesMeanMs": {
+      "endorse": 87.472,
+      "ordererSubmit": 3.655,
+      "commitWait": 125.127
+    },
+    "startedAt": 1790317236776.659,
+    "finishedAt": 1790317298965.051,
+    "errors": []
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 25,
+    "attempted": 6973,
+    "succeeded": 6973,
+    "failed": 0,
+    "durationS": 85.048,
+    "throughputPerS": 81.989,
+    "latencyMs": {
+      "mean": 298.377,
+      "p50": 291.892,
+      "p95": 432.514,
+      "max": 2210.359
+    },
+    "stagesMeanMs": {
+      "endorse": 108.36,
+      "ordererSubmit": 4.398,
+      "commitWait": 185.619
+    },
+    "startedAt": 1790317319728.941,
+    "finishedAt": 1790317404776.5,
+    "errors": []
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 25,
+    "attempted": 72161,
+    "succeeded": 72161,
+    "failed": 0,
+    "durationS": 30.005,
+    "throughputPerS": 2405.004,
+    "latencyMs": {
+      "mean": 10.309,
+      "p50": 10.108,
+      "p95": 15.259,
+      "max": 57.327
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317426270.386,
+    "finishedAt": 1790317456274.914,
+    "errors": []
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 25,
+    "attempted": 50,
+    "succeeded": 50,
+    "failed": 0,
+    "durationS": 41.833,
+    "throughputPerS": 1.195,
+    "latencyMs": {
+      "mean": 20605.868,
+      "p50": 20692.895,
+      "p95": 21759.029,
+      "max": 21888.993
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317485615.16,
+    "finishedAt": 1790317527447.907,
+    "errors": []
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 50,
+    "attempted": 7866,
+    "succeeded": 7866,
+    "failed": 0,
+    "durationS": 64.108,
+    "throughputPerS": 122.699,
+    "latencyMs": {
+      "mean": 389.385,
+      "p50": 218.254,
+      "p95": 1763.912,
+      "max": 6341.994
+    },
+    "stagesMeanMs": {
+      "endorse": 94.986,
+      "ordererSubmit": 4.09,
+      "commitWait": 290.308
+    },
+    "startedAt": 1790317547457.986,
+    "finishedAt": 1790317611565.937,
+    "errors": []
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 50,
+    "attempted": 7866,
+    "succeeded": 7866,
+    "failed": 0,
+    "durationS": 86.778,
+    "throughputPerS": 90.646,
+    "latencyMs": {
+      "mean": 540.144,
+      "p50": 541.705,
+      "p95": 652.402,
+      "max": 2249.499
+    },
+    "stagesMeanMs": {
+      "endorse": 118.14,
+      "ordererSubmit": 4.639,
+      "commitWait": 417.365
+    },
+    "startedAt": 1790317632602.416,
+    "finishedAt": 1790317719379.936,
+    "errors": []
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 50,
+    "attempted": 74674,
+    "succeeded": 74674,
+    "failed": 0,
+    "durationS": 30.006,
+    "throughputPerS": 2488.671,
+    "latencyMs": {
+      "mean": 19.705,
+      "p50": 19.022,
+      "p95": 29.676,
+      "max": 96.062
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317740253.894,
+    "finishedAt": 1790317770259.467,
+    "errors": []
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 50,
+    "attempted": 50,
+    "succeeded": 0,
+    "failed": 50,
+    "durationS": 30.058,
+    "throughputPerS": 0,
+    "latencyMs": {
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317799879.099,
+    "finishedAt": 1790317829936.674,
+    "errors": [
+      "1 CANCELLED: Call cancelled",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.001s,LB pick: 0.001s,remote_addr=10.20.0.33:11051"
+    ]
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 75,
+    "attempted": 5920,
+    "succeeded": 5920,
+    "failed": 0,
+    "durationS": 66.409,
+    "throughputPerS": 89.145,
+    "latencyMs": {
+      "mean": 782.969,
+      "p50": 280.15,
+      "p95": 3124.898,
+      "max": 20462.465
+    },
+    "stagesMeanMs": {
+      "endorse": 345.227,
+      "ordererSubmit": 4.37,
+      "commitWait": 433.372
+    },
+    "startedAt": 1790317849961.809,
+    "finishedAt": 1790317916370.601,
+    "errors": []
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 75,
+    "attempted": 5920,
+    "succeeded": 5920,
+    "failed": 0,
+    "durationS": 69.569,
+    "throughputPerS": 85.096,
+    "latencyMs": {
+      "mean": 876.894,
+      "p50": 864.634,
+      "p95": 1102.325,
+      "max": 1425.499
+    },
+    "stagesMeanMs": {
+      "endorse": 118.526,
+      "ordererSubmit": 4.631,
+      "commitWait": 753.737
+    },
+    "startedAt": 1790317937101.891,
+    "finishedAt": 1790318006670.462,
+    "errors": []
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 75,
+    "attempted": 75253,
+    "succeeded": 75253,
+    "failed": 0,
+    "durationS": 30.011,
+    "throughputPerS": 2507.524,
+    "latencyMs": {
+      "mean": 29.42,
+      "p50": 28.9,
+      "p95": 45.564,
+      "max": 122.061
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318027926.303,
+    "finishedAt": 1790318057937.182,
+    "errors": []
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 75,
+    "attempted": 75,
+    "succeeded": 0,
+    "failed": 75,
+    "durationS": 30.067,
+    "throughputPerS": 0,
+    "latencyMs": {
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318087770.623,
+    "finishedAt": 1790318117837.685,
+    "errors": [
+      "1 CANCELLED: Call cancelled",
+      "4 DEADLINE_EXCEEDED: evaluate timeout expired",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.001s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.001s,LB pick: 0.002s,remote_addr=10.20.0.33:11051"
+    ]
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 100,
+    "attempted": 4087,
+    "succeeded": 4087,
+    "failed": 0,
+    "durationS": 64.611,
+    "throughputPerS": 63.256,
+    "latencyMs": {
+      "mean": 1497.902,
+      "p50": 404.018,
+      "p95": 4647.66,
+      "max": 30887.205
+    },
+    "stagesMeanMs": {
+      "endorse": 900.639,
+      "ordererSubmit": 5.307,
+      "commitWait": 591.956
+    },
+    "startedAt": 1790318137854.483,
+    "finishedAt": 1790318202465.12,
+    "errors": []
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 100,
+    "attempted": 4087,
+    "succeeded": 4087,
+    "failed": 0,
+    "durationS": 53.317,
+    "throughputPerS": 76.655,
+    "latencyMs": {
+      "mean": 1262.233,
+      "p50": 1273.103,
+      "p95": 1520.485,
+      "max": 2155.978
+    },
+    "stagesMeanMs": {
+      "endorse": 139.473,
+      "ordererSubmit": 5.121,
+      "commitWait": 1117.639
+    },
+    "startedAt": 1790318223184.651,
+    "finishedAt": 1790318276501.658,
+    "errors": []
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 100,
+    "attempted": 75274,
+    "succeeded": 75274,
+    "failed": 0,
+    "durationS": 30.006,
+    "throughputPerS": 2508.593,
+    "latencyMs": {
+      "mean": 39.367,
+      "p50": 39.345,
+      "p95": 66.799,
+      "max": 200.779
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318296949.712,
+    "finishedAt": 1790318326956.178,
+    "errors": []
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 100,
+    "attempted": 100,
+    "succeeded": 0,
+    "failed": 100,
+    "durationS": 30.07,
+    "throughputPerS": 0,
+    "latencyMs": {
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318356538.662,
+    "finishedAt": 1790318386608.491,
+    "errors": [
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,LB pick: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.002s,LB pick: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.001s,LB pick: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.001s,time to current attempt start: 0.001s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051"
+    ]
+  }
+]

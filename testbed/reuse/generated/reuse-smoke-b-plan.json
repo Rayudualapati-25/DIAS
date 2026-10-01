@@ -1,0 +1,998 @@
+{
+  "meta": {
+    "label": "reuse-smoke-rusmkb",
+    "seed": 20260927,
+    "users": 4,
+    "siblingsPerBase": 2,
+    "rounds": 3,
+    "approvalProbability": 1,
+    "auditorRule": "FORCE_ALLOW over a model DENY only when the base request is approved; otherwise follow the model; deny an unusable recommendation",
+    "generatedBy": "testbed/reuse/plan.js",
+    "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+    "usersSha256": "8bed20a1083221db9f01f3e32e58d84d7434492cf017c9b4d63b1a67b9d194ab"
+  },
+  "bases": [
+    {
+      "base": "RUSMKB001",
+      "slot": 1,
+      "username": "lt001.judge",
+      "expected": "ALLOW",
+      "approveIfModelDenies": true
+    },
+    {
+      "base": "RUSMKB002",
+      "slot": 2,
+      "username": "lt002.sho",
+      "expected": "DENY",
+      "approveIfModelDenies": true
+    },
+    {
+      "base": "RUSMKB003",
+      "slot": 3,
+      "username": "lt003.io",
+      "expected": "ALLOW",
+      "approveIfModelDenies": true
+    },
+    {
+      "base": "RUSMKB004",
+      "slot": 4,
+      "username": "lt004.const",
+      "expected": "DENY",
+      "approveIfModelDenies": true
+    }
+  ],
+  "streams": [
+    {
+      "streamId": "RUSMKB001-BASE",
+      "base": "RUSMKB001",
+      "kind": "base",
+      "slot": 1,
+      "username": "lt001.judge",
+      "profile": "judge.rana",
+      "recordId": "RUSMKB001-BASE",
+      "caseId": "CASE-2026-001",
+      "worldRecordId": "REC-EVIDENCE-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": true,
+        "owningAgency": "police",
+        "recordId": "RUSMKB001-BASE",
+        "caseId": "CASE-2026-001",
+        "recordType": "evidence",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-Central",
+        "jurisdiction": "district-north"
+      },
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "expected": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "CourtMSP",
+          "organization": "court",
+          "role": "judge",
+          "rank": null,
+          "station": null,
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "evidence",
+          "caseId": "CASE-2026-001",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": true
+        },
+        "request": {
+          "action": "export",
+          "purpose": "forensic-analysis",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "0fb1d31a8980231f38a668df424ddc09892c3e86a3ed324a689c6592ec822afe",
+      "justification": "Reviewing RUSMKB001-BASE to export it for forensic-analysis; work item RUSMKB001-BASE."
+    },
+    {
+      "streamId": "RUSMKB001-SIB1",
+      "base": "RUSMKB001",
+      "kind": "sibling",
+      "slot": 1,
+      "username": "lt001.judge",
+      "profile": "judge.rana",
+      "recordId": "RUSMKB001-SIB1",
+      "caseId": "CASE-2026-001-SIB1",
+      "worldRecordId": "REC-EVIDENCE-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": true,
+        "owningAgency": "police",
+        "recordId": "RUSMKB001-SIB1",
+        "caseId": "CASE-2026-001-SIB1",
+        "recordType": "evidence",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-Central",
+        "jurisdiction": "district-north"
+      },
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "expected": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "CourtMSP",
+          "organization": "court",
+          "role": "judge",
+          "rank": null,
+          "station": null,
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "evidence",
+          "caseId": "CASE-2026-001-SIB1",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": true
+        },
+        "request": {
+          "action": "export",
+          "purpose": "forensic-analysis",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "679393c2f7cce6ee47ec2318d9026cd3322d59e125318a4160bae5f9e06dc0d6",
+      "justification": "Routine forensic-analysis step RUSMKB001-SIB1: export access to RUSMKB001-SIB1 is requested."
+    },
+    {
+      "streamId": "RUSMKB001-SIB2",
+      "base": "RUSMKB001",
+      "kind": "sibling",
+      "slot": 1,
+      "username": "lt001.judge",
+      "profile": "judge.rana",
+      "recordId": "RUSMKB001-SIB2",
+      "caseId": "CASE-2026-001-SIB2",
+      "worldRecordId": "REC-EVIDENCE-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": true,
+        "owningAgency": "police",
+        "recordId": "RUSMKB001-SIB2",
+        "caseId": "CASE-2026-001-SIB2",
+        "recordType": "evidence",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-Central",
+        "jurisdiction": "district-north"
+      },
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "expected": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "CourtMSP",
+          "organization": "court",
+          "role": "judge",
+          "rank": null,
+          "station": null,
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "evidence",
+          "caseId": "CASE-2026-001-SIB2",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": true
+        },
+        "request": {
+          "action": "export",
+          "purpose": "forensic-analysis",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "84d35c34bfb08a548ed0a931b81c0596e55e9532ec6b350ceaa58b8baf602fee",
+      "justification": "Request RUSMKB001-SIB2: forensic-analysis requires me to export record RUSMKB001-SIB2."
+    },
+    {
+      "streamId": "RUSMKB002-BASE",
+      "base": "RUSMKB002",
+      "kind": "base",
+      "slot": 2,
+      "username": "lt002.sho",
+      "profile": "sho.reddy",
+      "recordId": "RUSMKB002-BASE",
+      "caseId": "CASE-2026-003",
+      "worldRecordId": "REC-SOUTH-FIR-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB002-BASE",
+        "caseId": "CASE-2026-003",
+        "recordType": "fir",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-South",
+        "jurisdiction": "district-south"
+      },
+      "action": "annotate",
+      "purpose": "prosecution",
+      "expected": "DENY",
+      "expectedReasonCode": "CROSS_JURISDICTION",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "inspector",
+          "rank": "3",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "fir",
+          "caseId": "CASE-2026-003",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-South",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "annotate",
+          "purpose": "prosecution",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "5a80a055c93ea31e312a63ce6f5bd8ce7c164e0e4989ce1e582ae13ac2efecad",
+      "justification": "Routine prosecution step RUSMKB002-BASE: annotate access to RUSMKB002-BASE is requested."
+    },
+    {
+      "streamId": "RUSMKB002-SIB1",
+      "base": "RUSMKB002",
+      "kind": "sibling",
+      "slot": 2,
+      "username": "lt002.sho",
+      "profile": "sho.reddy",
+      "recordId": "RUSMKB002-SIB1",
+      "caseId": "CASE-2026-003-SIB1",
+      "worldRecordId": "REC-SOUTH-FIR-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB002-SIB1",
+        "caseId": "CASE-2026-003-SIB1",
+        "recordType": "fir",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-South",
+        "jurisdiction": "district-south"
+      },
+      "action": "annotate",
+      "purpose": "prosecution",
+      "expected": "DENY",
+      "expectedReasonCode": "CROSS_JURISDICTION",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "inspector",
+          "rank": "3",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "fir",
+          "caseId": "CASE-2026-003-SIB1",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-South",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "annotate",
+          "purpose": "prosecution",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "a76807983bc8fc77c5d11db1e8dd79b78cde80182236b603533d748eadacd405",
+      "justification": "Request RUSMKB002-SIB1: prosecution requires me to annotate record RUSMKB002-SIB1."
+    },
+    {
+      "streamId": "RUSMKB002-SIB2",
+      "base": "RUSMKB002",
+      "kind": "sibling",
+      "slot": 2,
+      "username": "lt002.sho",
+      "profile": "sho.reddy",
+      "recordId": "RUSMKB002-SIB2",
+      "caseId": "CASE-2026-003-SIB2",
+      "worldRecordId": "REC-SOUTH-FIR-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB002-SIB2",
+        "caseId": "CASE-2026-003-SIB2",
+        "recordType": "fir",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-South",
+        "jurisdiction": "district-south"
+      },
+      "action": "annotate",
+      "purpose": "prosecution",
+      "expected": "DENY",
+      "expectedReasonCode": "CROSS_JURISDICTION",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "inspector",
+          "rank": "3",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "fir",
+          "caseId": "CASE-2026-003-SIB2",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-South",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "annotate",
+          "purpose": "prosecution",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "d607a0b52e276a1913131efe70ec739cada7852f8ee0c545a5d7affbf6b5a630",
+      "justification": "Reviewing RUSMKB002-SIB2 to annotate it for prosecution; work item RUSMKB002-SIB2."
+    },
+    {
+      "streamId": "RUSMKB003-BASE",
+      "base": "RUSMKB003",
+      "kind": "base",
+      "slot": 3,
+      "username": "lt003.io",
+      "profile": "io.krishnan",
+      "recordId": "RUSMKB003-BASE",
+      "caseId": "CASE-2026-001",
+      "worldRecordId": "REC-EVIDENCE-002",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB003-BASE",
+        "caseId": "CASE-2026-001",
+        "recordType": "evidence",
+        "sensitivityLevel": "high",
+        "owningStation": "PS-Central",
+        "jurisdiction": "district-north"
+      },
+      "action": "annotate",
+      "purpose": "investigation",
+      "expected": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "investigating-officer",
+          "rank": "3",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": true
+        },
+        "resource": {
+          "recordType": "evidence",
+          "caseId": "CASE-2026-001",
+          "sensitivityLevel": "high",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "0c89b3ab6212e2adbead04cdda27aceffc5439f5ae34709fd8080914cd4de29c",
+      "justification": "Request RUSMKB003-BASE: investigation requires me to annotate record RUSMKB003-BASE."
+    },
+    {
+      "streamId": "RUSMKB003-SIB1",
+      "base": "RUSMKB003",
+      "kind": "sibling",
+      "slot": 3,
+      "username": "lt003.io",
+      "profile": "io.krishnan",
+      "recordId": "RUSMKB003-SIB1",
+      "caseId": "CASE-2026-001-SIB1",
+      "worldRecordId": "REC-EVIDENCE-002",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB003-SIB1",
+        "caseId": "CASE-2026-001-SIB1",
+        "recordType": "evidence",
+        "sensitivityLevel": "high",
+        "owningStation": "PS-Central",
+        "jurisdiction": "district-north"
+      },
+      "action": "annotate",
+      "purpose": "investigation",
+      "expected": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "investigating-officer",
+          "rank": "3",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": true
+        },
+        "resource": {
+          "recordType": "evidence",
+          "caseId": "CASE-2026-001-SIB1",
+          "sensitivityLevel": "high",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "a1d0f11a560b4ac3bea8f00881af7cbe2135ba8af6daa82c4d0c8d5491742b23",
+      "justification": "Routine investigation step RUSMKB003-SIB1: annotate access to RUSMKB003-SIB1 is requested."
+    },
+    {
+      "streamId": "RUSMKB003-SIB2",
+      "base": "RUSMKB003",
+      "kind": "sibling",
+      "slot": 3,
+      "username": "lt003.io",
+      "profile": "io.krishnan",
+      "recordId": "RUSMKB003-SIB2",
+      "caseId": "CASE-2026-001-SIB2",
+      "worldRecordId": "REC-EVIDENCE-002",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB003-SIB2",
+        "caseId": "CASE-2026-001-SIB2",
+        "recordType": "evidence",
+        "sensitivityLevel": "high",
+        "owningStation": "PS-Central",
+        "jurisdiction": "district-north"
+      },
+      "action": "annotate",
+      "purpose": "investigation",
+      "expected": "ALLOW",
+      "expectedReasonCode": "POLICY_SATISFIED",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "investigating-officer",
+          "rank": "3",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "high",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": true
+        },
+        "resource": {
+          "recordType": "evidence",
+          "caseId": "CASE-2026-001-SIB2",
+          "sensitivityLevel": "high",
+          "jurisdiction": "district-north",
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "annotate",
+          "purpose": "investigation",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "6510d8608be4d0026ecb3da20bcac05c70a740d7f96b0687710cb7dfb1eff79e",
+      "justification": "Need to annotate RUSMKB003-SIB2 as part of investigation duties (ticket RUSMKB003-SIB2)."
+    },
+    {
+      "streamId": "RUSMKB004-BASE",
+      "base": "RUSMKB004",
+      "kind": "base",
+      "slot": 4,
+      "username": "lt004.const",
+      "profile": "const.verma",
+      "recordId": "RUSMKB004-BASE",
+      "caseId": "CASE-2026-003",
+      "worldRecordId": "REC-SOUTH-FIR-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB004-BASE",
+        "caseId": "CASE-2026-003",
+        "recordType": "fir",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-South",
+        "jurisdiction": "district-south"
+      },
+      "action": "view",
+      "purpose": "audit-review",
+      "expected": "DENY",
+      "expectedReasonCode": "CROSS_JURISDICTION",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "low",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "fir",
+          "caseId": "CASE-2026-003",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-South",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "audit-review",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "e6860d25707cd9152a115f6861aa661e93334695fc17e0110a5a74c3d76a94a4",
+      "justification": "Request RUSMKB004-BASE: audit-review requires me to view record RUSMKB004-BASE."
+    },
+    {
+      "streamId": "RUSMKB004-SIB1",
+      "base": "RUSMKB004",
+      "kind": "sibling",
+      "slot": 4,
+      "username": "lt004.const",
+      "profile": "const.verma",
+      "recordId": "RUSMKB004-SIB1",
+      "caseId": "CASE-2026-003-SIB1",
+      "worldRecordId": "REC-SOUTH-FIR-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB004-SIB1",
+        "caseId": "CASE-2026-003-SIB1",
+        "recordType": "fir",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-South",
+        "jurisdiction": "district-south"
+      },
+      "action": "view",
+      "purpose": "audit-review",
+      "expected": "DENY",
+      "expectedReasonCode": "CROSS_JURISDICTION",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "low",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "fir",
+          "caseId": "CASE-2026-003-SIB1",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-South",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "audit-review",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "d7cb0040f8c0fbd54e170f18ebce564f0165e3243accc32ab07e6a60fa3f61d6",
+      "justification": "Need to view RUSMKB004-SIB1 as part of audit-review duties (ticket RUSMKB004-SIB1)."
+    },
+    {
+      "streamId": "RUSMKB004-SIB2",
+      "base": "RUSMKB004",
+      "kind": "sibling",
+      "slot": 4,
+      "username": "lt004.const",
+      "profile": "const.verma",
+      "recordId": "RUSMKB004-SIB2",
+      "caseId": "CASE-2026-003-SIB2",
+      "worldRecordId": "REC-SOUTH-FIR-001",
+      "record": {
+        "juvenileFlag": false,
+        "witnessFlag": false,
+        "victimProtectionFlag": false,
+        "owningAgency": "police",
+        "recordId": "RUSMKB004-SIB2",
+        "caseId": "CASE-2026-003-SIB2",
+        "recordType": "fir",
+        "sensitivityLevel": "medium",
+        "owningStation": "PS-South",
+        "jurisdiction": "district-south"
+      },
+      "action": "view",
+      "purpose": "audit-review",
+      "expected": "DENY",
+      "expectedReasonCode": "CROSS_JURISDICTION",
+      "verifiedRequest": {
+        "requester": {
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "role": "constable",
+          "rank": "1",
+          "station": "PS-Central",
+          "jurisdiction": "district-north",
+          "clearance": "low",
+          "credentialStatus": "active",
+          "assignedToRequestedCase": false
+        },
+        "resource": {
+          "recordType": "fir",
+          "caseId": "CASE-2026-003-SIB2",
+          "sensitivityLevel": "medium",
+          "jurisdiction": "district-south",
+          "owningAgency": "police",
+          "owningStation": "PS-South",
+          "sealed": false,
+          "juvenileFlag": false,
+          "witnessFlag": false,
+          "victimProtectionFlag": false
+        },
+        "request": {
+          "action": "view",
+          "purpose": "audit-review",
+          "emergencyFlag": false,
+          "approvalTokenPresent": false
+        }
+      },
+      "verifiedRequestHash": "aee517c805ddca3ed78a92819dde4cbb0800b7f52dee5c3f712e23433b1ab539",
+      "justification": "Routine audit-review step RUSMKB004-SIB2: view access to RUSMKB004-SIB2 is requested."
+    }
+  ],
+  "siblingCases": [
+    {
+      "caseId": "CASE-2026-001-SIB1",
+      "copyOf": "CASE-2026-001",
+      "body": {
+        "owningAgency": "police",
+        "jurisdiction": "district-north",
+        "status": "under-investigation",
+        "assignedUsers": [
+          "insp.sharma",
+          "io.krishnan",
+          "const.verma",
+          "analyst.rao",
+          "lt003.io",
+          "lt004.const",
+          "lt005.insp",
+          "lt008.analyst",
+          "lt011.io",
+          "lt013.insp",
+          "lt014.insp",
+          "lt016.io",
+          "lt023.io",
+          "lt025.insp",
+          "lt028.const",
+          "lt031.io",
+          "lt032.analyst",
+          "lt033.insp",
+          "lt038.insp",
+          "lt040.io",
+          "lt043.io",
+          "lt045.insp",
+          "lt051.io",
+          "lt052.const",
+          "lt053.insp",
+          "lt056.analyst",
+          "lt062.insp",
+          "lt063.io",
+          "lt064.io",
+          "lt065.insp",
+          "lt071.io",
+          "lt073.insp",
+          "lt076.const",
+          "lt080.analyst",
+          "lt083.io",
+          "lt085.insp",
+          "lt086.insp",
+          "lt088.io",
+          "lt091.io",
+          "lt093.insp",
+          "lt100.const"
+        ],
+        "protectedClassifications": []
+      }
+    },
+    {
+      "caseId": "CASE-2026-001-SIB2",
+      "copyOf": "CASE-2026-001",
+      "body": {
+        "owningAgency": "police",
+        "jurisdiction": "district-north",
+        "status": "under-investigation",
+        "assignedUsers": [
+          "insp.sharma",
+          "io.krishnan",
+          "const.verma",
+          "analyst.rao",
+          "lt003.io",
+          "lt004.const",
+          "lt005.insp",
+          "lt008.analyst",
+          "lt011.io",
+          "lt013.insp",
+          "lt014.insp",
+          "lt016.io",
+          "lt023.io",
+          "lt025.insp",
+          "lt028.const",
+          "lt031.io",
+          "lt032.analyst",
+          "lt033.insp",
+          "lt038.insp",
+          "lt040.io",
+          "lt043.io",
+          "lt045.insp",
+          "lt051.io",
+          "lt052.const",
+          "lt053.insp",
+          "lt056.analyst",
+          "lt062.insp",
+          "lt063.io",
+          "lt064.io",
+          "lt065.insp",
+          "lt071.io",
+          "lt073.insp",
+          "lt076.const",
+          "lt080.analyst",
+          "lt083.io",
+          "lt085.insp",
+          "lt086.insp",
+          "lt088.io",
+          "lt091.io",
+          "lt093.insp",
+          "lt100.const"
+        ],
+        "protectedClassifications": []
+      }
+    },
+    {
+      "caseId": "CASE-2026-003-SIB1",
+      "copyOf": "CASE-2026-003",
+      "body": {
+        "owningAgency": "police",
+        "jurisdiction": "district-south",
+        "status": "under-investigation",
+        "assignedUsers": [
+          "insp.singh",
+          "lt017.insp",
+          "lt018.insp",
+          "lt037.insp",
+          "lt042.insp",
+          "lt057.insp",
+          "lt066.insp",
+          "lt077.insp",
+          "lt090.insp",
+          "lt097.insp"
+        ],
+        "protectedClassifications": []
+      }
+    },
+    {
+      "caseId": "CASE-2026-003-SIB2",
+      "copyOf": "CASE-2026-003",
+      "body": {
+        "owningAgency": "police",
+        "jurisdiction": "district-south",
+        "status": "under-investigation",
+        "assignedUsers": [
+          "insp.singh",
+          "lt017.insp",
+          "lt018.insp",
+          "lt037.insp",
+          "lt042.insp",
+          "lt057.insp",
+          "lt066.insp",
+          "lt077.insp",
+          "lt090.insp",
+          "lt097.insp"
+        ],
+        "protectedClassifications": []
+      }
+    }
+  ],
+  "rounds": [
+    {
+      "round": 0,
+      "repeatsAfterRound": 0,
+      "order": {
+        "lt001.judge": [
+          "RUSMKB001-BASE",
+          "RUSMKB001-SIB2",
+          "RUSMKB001-SIB1"
+        ],
+        "lt002.sho": [
+          "RUSMKB002-BASE",
+          "RUSMKB002-SIB1",
+          "RUSMKB002-SIB2"
+        ],
+        "lt003.io": [
+          "RUSMKB003-SIB1",
+          "RUSMKB003-BASE",
+          "RUSMKB003-SIB2"
+        ],
+        "lt004.const": [
+          "RUSMKB004-SIB1",
+          "RUSMKB004-SIB2",
+          "RUSMKB004-BASE"
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "repeatsAfterRound": 1,
+      "order": {
+        "lt001.judge": [
+          "RUSMKB001-SIB1",
+          "RUSMKB001-SIB2",
+          "RUSMKB001-BASE"
+        ],
+        "lt002.sho": [
+          "RUSMKB002-SIB2",
+          "RUSMKB002-BASE",
+          "RUSMKB002-SIB1"
+        ],
+        "lt003.io": [
+          "RUSMKB003-SIB2",
+          "RUSMKB003-SIB1",
+          "RUSMKB003-BASE"
+        ],
+        "lt004.const": [
+          "RUSMKB004-SIB1",
+          "RUSMKB004-SIB2",
+          "RUSMKB004-BASE"
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "repeatsAfterRound": 2,
+      "order": {
+        "lt001.judge": [
+          "RUSMKB001-SIB1",
+          "RUSMKB001-SIB2",
+          "RUSMKB001-BASE"
+        ],
+        "lt002.sho": [
+          "RUSMKB002-SIB2",
+          "RUSMKB002-SIB1",
+          "RUSMKB002-BASE"
+        ],
+        "lt003.io": [
+          "RUSMKB003-BASE",
+          "RUSMKB003-SIB2",
+          "RUSMKB003-SIB1"
+        ],
+        "lt004.const": [
+          "RUSMKB004-BASE",
+          "RUSMKB004-SIB1",
+          "RUSMKB004-SIB2"
+        ]
+      }
+    }
+  ]
+}

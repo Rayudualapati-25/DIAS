@@ -1,0 +1,9 @@
+Untuned Qwen3-14B: of 300 requests the policy allows, 70 were recommended for approval (204 wrongly refused, 26 unusable answers).
+Untuned Qwen3-14B: of 300 requests the policy denies, 266 were recommended for denial (14 wrongly granted, 20 unusable answers).
+Untuned Qwen3-14B: 336 of 600 decisions correct; 554 of 600 answers usable; right reason 203, right clauses 130.
+V7 (fine-tuned): of 300 requests the policy allows, 298 were recommended for approval (2 wrongly refused, 0 unusable answers).
+V7 (fine-tuned): of 300 requests the policy denies, 294 were recommended for denial (6 wrongly granted, 0 unusable answers).
+V7 (fine-tuned): 592 of 600 decisions correct; 600 of 600 answers usable; right reason 584, right clauses 572.
+Untuned Qwen3-14B: of 204 adversarial requests the policy denies, 4 got through (wrongly granted), 175 were stopped, 25 unusable.
+V7 (fine-tuned): of 204 adversarial requests the policy denies, 6 got through (wrongly granted), 198 were stopped, 0 unusable.
+paired test (600 set): {'pairs': 600, 'only_untuned_correct': 8, 'only_v7_correct': 264, 'both_correct': 328, 'both_wrong': 0, 'mcnemar_exact_p': 1.8198587170075318e-67}

@@ -1,0 +1,6 @@
+{
+ "written": "2026-09-25T17:30Z (during round 7), by the operator session",
+ "observation": "Round 6 took 31.5 min against 28.6-28.9 min for rounds 1-5, because model inference was slower (median 8.26 s against 7.56-7.59 s); the ledger decision commit stayed at 2.07 s.",
+ "likely_cause": "Other work on the Mac during round 6: Mac CPU use of all processes 2.62 cores (1.49-2.29 in rounds 1-5), Mac memory 50.7 GB (48.2-49.0 GB); at 22:59 IST WindowServer used 73% of a core and ChatGPT/Codex computer-use services were active. The model server competes with them for the GPU.",
+ "effect": "Only the timing of reviewed requests in rounds 6-7; the counts (reviews, automatic grants, authorizations) do not depend on speed. Nothing was changed or stopped."
+}

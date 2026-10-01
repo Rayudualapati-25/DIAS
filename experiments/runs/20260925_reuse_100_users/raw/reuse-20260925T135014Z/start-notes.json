@@ -1,0 +1,12 @@
+{
+ "run": "reuse-20260925T135014Z",
+ "plan": "testbed/reuse/generated/reuse-100-users-plan.json",
+ "startedBy": "testbed/scripts/start_reuse.sh",
+ "backendTraceBefore": {
+  "enqueued": 1383,
+  "ready": 1383,
+  "requests": 1409,
+  "decisions": 1381
+ },
+ "note": "Requests minus decisions in the backend trace (1409 - 1381 = 28): the two E7 decisions that timed out during the leader failover, and the 26 requests the two reuse smoke runs had granted automatically by an exact-record authorization (such a request needs no auditor decision). The ledger also kept one E7 request waiting for an auditor; it is on a world record outside this plan and was left as E7 ended. The 13 authorizations on the ledger before this run were created by the smoke runs, on RUSMK/RUSMKB records outside this plan."
+}

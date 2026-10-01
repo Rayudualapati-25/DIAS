@@ -1,0 +1,49 @@
+{
+  "run": "e7-fault-20260925T043602Z",
+  "window_utc": [
+    "2026-09-25T04:39:15.285Z",
+    "2026-09-25T04:51:51.434Z"
+  ],
+  "all_checks_pass": true,
+  "checks": {
+    "rows_match_plan": {
+      "planned": 83,
+      "rows": 83,
+      "unique": 83,
+      "completed": 79,
+      "run_json_completed": 79,
+      "run_json_failed": 4,
+      "failed_ids": [
+        "E7-0018",
+        "E7-0022",
+        "E7-0019",
+        "E7-0021"
+      ],
+      "pass": true
+    },
+    "facts_match_plan": {
+      "mismatched_ids": [],
+      "pass": true
+    },
+    "prompt_cache": {
+      "answers": 81,
+      "max_cached_tokens": 390,
+      "answers_above_shared_prefix": 0,
+      "pass": true
+    },
+    "power": {
+      "samples": 25,
+      "not_ac_high_power": 0,
+      "max_gap_s": 31.0,
+      "pass": true
+    },
+    "recorder_gaps_s": {
+      "mac": 5.085000038146973,
+      "m1": 5.009000062942505,
+      "m2": 5.013000011444092,
+      "m3": 5.016000032424927,
+      "m4": 5.01800012588501,
+      "pass": true
+    }
+  }
+}

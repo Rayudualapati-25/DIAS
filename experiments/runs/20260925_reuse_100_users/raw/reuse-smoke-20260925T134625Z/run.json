@@ -1,0 +1,71 @@
+{
+  "experiment": "Reuse experiment (reuse-smoke-rusmkb)",
+  "planFile": "testbed/reuse/generated/reuse-smoke-b-plan.json",
+  "planSha256": "e79867e4bfce633261a8a589f3d4963b42d663ba5141c57c71fe6c4de3aabe19",
+  "codeSha256": {
+    "run.js": "167a58053107690490dfbaff2f2d47d6ca64c7b4b4a83ef4c36ababe9a327c3b",
+    "plan.js": "ae43fcecea18303b145b64b70f6e3c67ec92c7496eae51a1b56d0b18bf5ca6fd",
+    "seed.js": "b08f2ee967dfe8595aefc28b1446de62f0f0dd510a35ba9aee38e0d7eb2596d5",
+    "check-ledger.js": "2301da4733a92e2786e6508160148fc03339e07e2b1588165f8f8987e56ded57"
+  },
+  "startedAt": 1790343989109.696,
+  "finishedAt": 1790344177102.595,
+  "startedAtUtc": "2026-09-25T13:46:29.109Z",
+  "finishedAtUtc": "2026-09-25T13:49:37.102Z",
+  "apiUrl": "http://dias-backend:3001/api",
+  "loadGeneratorHost": "9e19121019db",
+  "users": 4,
+  "rounds": [
+    {
+      "round": 0,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 12,
+      "reused": 0,
+      "authorizationsCreated": 7,
+      "factsMismatched": 0,
+      "startedAt": 1790343999169.168,
+      "finishedAt": 1790344100076.623,
+      "durationMs": 100907.455
+    },
+    {
+      "round": 1,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 5,
+      "reused": 7,
+      "authorizationsCreated": 0,
+      "factsMismatched": 0,
+      "startedAt": 1790344110085.881,
+      "finishedAt": 1790344132188.725,
+      "durationMs": 22102.845
+    },
+    {
+      "round": 2,
+      "requested": 12,
+      "completed": 12,
+      "failed": 0,
+      "reviewed": 5,
+      "reused": 7,
+      "authorizationsCreated": 0,
+      "factsMismatched": 0,
+      "startedAt": 1790344142199.28,
+      "finishedAt": 1790344167094.362,
+      "durationMs": 24895.082
+    }
+  ],
+  "totals": {
+    "requested": 36,
+    "completed": 36,
+    "failed": 0,
+    "reviewed": 22,
+    "reused": 14,
+    "authorizationsCreated": 7
+  },
+  "settleMs": 10000,
+  "cooldownMs": 10000,
+  "timeoutMs": 7200000,
+  "auditorPolicy": "automated, no human review time: FORCE_ALLOW over a model DENY only when the base request is approved; otherwise follow the model; deny an unusable recommendation"
+}

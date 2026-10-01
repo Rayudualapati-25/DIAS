@@ -1,0 +1,17 @@
+{
+  "experiment": "E6 one-hour steady run",
+  "planFile": "steady-plan.json",
+  "startedAt": 1790303994615.433,
+  "lastArrivalAt": 1790307594507.433,
+  "finishedAt": 1790307624179.375,
+  "startedAtUtc": "2026-09-25T02:39:54.615Z",
+  "finishedAtUtc": "2026-09-25T03:40:24.179Z",
+  "apiUrl": "http://dias-backend:3001/api",
+  "loadGeneratorHost": "e6675fa528d2",
+  "arrivals": 369,
+  "completed": 369,
+  "failed": 0,
+  "ratePerMinute": 6,
+  "planSha256": "014ef11876099b7098b9525d11f99fd40c801cb525c0195147afd316fedd159e",
+  "auditorPolicy": "automated: follows the recommendation as soon as it is ready; no human review time"
+}

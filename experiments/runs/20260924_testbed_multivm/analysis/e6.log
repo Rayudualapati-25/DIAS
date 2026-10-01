@@ -1,0 +1,50 @@
+{
+ "arrivals": 369,
+ "completed": 369,
+ "failed": 0,
+ "operations_total": 4057,
+ "operations_succeeded": 4057,
+ "end_to_end_s": {
+  "mean": 27.848993785907858,
+  "p50": 24.333734,
+  "p95": 57.879677,
+  "max": 71.63654799999999
+ },
+ "throughput_workflows_per_min": 6.099906312283767,
+ "accuracy": {
+  "valid": 369,
+  "of": 369,
+  "correct": 358,
+  "reason_correct": 353
+ },
+ "machines": {
+  "m1": {
+   "cpu_mean_cores": 0.10663475303911692,
+   "cpu_max_cores": 0.17442093051165342,
+   "mem_max_gb": 1.113063424
+  },
+  "m2": {
+   "cpu_mean_cores": 0.15208922473965072,
+   "cpu_max_cores": 0.25,
+   "mem_max_gb": 1.403129856
+  },
+  "m3": {
+   "cpu_mean_cores": 0.17580385257034237,
+   "cpu_max_cores": 0.2864000000000118,
+   "mem_max_gb": 1.423470592
+  },
+  "m4": {
+   "cpu_mean_cores": 0.05363363309654787,
+   "cpu_max_cores": 0.08200000000000217,
+   "mem_max_gb": 1.1065344
+  }
+ },
+ "mac": {
+  "model_cpu_mean_cores": 0.1638125,
+  "model_cpu_max_cores": 0.367,
+  "model_rss_max_gb": 8.795521024,
+  "gpu_utilization_mean_pct": 85.76805555555555,
+  "mac_cpu_mean_cores": 2.454177777777778,
+  "samples": 720
+ }
+}

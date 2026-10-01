@@ -1,0 +1,465 @@
+{
+  "window_minutes": 60.49273236490885,
+  "arrivals": 369,
+  "completed": 369,
+  "failed": 0,
+  "operations": {
+    "Access request (ledger write)": {
+      "succeeded": 369,
+      "failed": 0
+    },
+    "LLM recommendation": {
+      "succeeded": 369,
+      "failed": 0
+    },
+    "Pending list (read)": {
+      "succeeded": 369,
+      "failed": 0
+    },
+    "Auditor review (read)": {
+      "succeeded": 369,
+      "failed": 0
+    },
+    "Auditor decision (ledger write)": {
+      "succeeded": 369,
+      "failed": 0
+    },
+    "Requester read-back (read)": {
+      "succeeded": 369,
+      "failed": 0
+    },
+    "Access-log entry (ledger write)": {
+      "succeeded": 1843,
+      "failed": 0
+    }
+  },
+  "operations_total": 4057,
+  "operations_succeeded": 4057,
+  "end_to_end_s": {
+    "mean": 27.848993785907858,
+    "p50": 24.333734,
+    "p95": 57.879677,
+    "max": 71.63654799999999
+  },
+  "components_mean_s": {
+    "request_commit": 1.5394634119241193,
+    "request_api": 0.0032801951219512235,
+    "queue_wait": 16.40443755160696,
+    "llm_inference": 7.9258096558265585,
+    "llm_prompt_check": 0.0007049019679454486,
+    "auditor_pickup": 0.23810932691289813,
+    "decision_commit": 1.7350805257452575,
+    "decision_api": 0.0020990271002710027
+  },
+  "throughput_workflows_per_min": 6.099906312283767,
+  "accuracy": {
+    "valid": 369,
+    "of": 369,
+    "correct": 358,
+    "reason_correct": 353
+  },
+  "read_latency_ms": {
+    "pending_list": {
+      "p50": 182.45,
+      "p95": 213.554
+    },
+    "auditor_review": {
+      "p50": 7.217,
+      "p95": 11.007
+    },
+    "read_back": {
+      "p50": 5.863,
+      "p95": 9.369
+    }
+  },
+  "machines": {
+    "m1": {
+      "cpu_mean_cores": 0.10663475303911692,
+      "cpu_max_cores": 0.17442093051165342,
+      "mem_max_gb": 1.113063424
+    },
+    "m2": {
+      "cpu_mean_cores": 0.15208922473965072,
+      "cpu_max_cores": 0.25,
+      "mem_max_gb": 1.403129856
+    },
+    "m3": {
+      "cpu_mean_cores": 0.17580385257034237,
+      "cpu_max_cores": 0.2864000000000118,
+      "mem_max_gb": 1.423470592
+    },
+    "m4": {
+      "cpu_mean_cores": 0.05363363309654787,
+      "cpu_max_cores": 0.08200000000000217,
+      "mem_max_gb": 1.1065344
+    }
+  },
+  "mac": {
+    "model_cpu_mean_cores": 0.1638125,
+    "model_cpu_max_cores": 0.367,
+    "model_rss_max_gb": 8.795521024,
+    "gpu_utilization_mean_pct": 85.76805555555555,
+    "mac_cpu_mean_cores": 2.454177777777778,
+    "samples": 720
+  },
+  "memory_drift_gb": {
+    "m1": {
+      "first_5_min": 1.0649080949508196,
+      "last_5_min": 1.0762045439999999,
+      "change": 0.011296449049180257
+    },
+    "m2": {
+      "first_5_min": 1.331924454819672,
+      "last_5_min": 1.3521589589333334,
+      "change": 0.020234504113661345
+    },
+    "m3": {
+      "first_5_min": 1.3590863737704917,
+      "last_5_min": 1.3795177130666665,
+      "change": 0.0204313392961748
+    },
+    "m4": {
+      "first_5_min": 1.0354613466229508,
+      "last_5_min": 1.0463003306666667,
+      "change": 0.010838984043715971
+    }
+  },
+  "mac_memory_drift_gb": {
+    "model_rss": {
+      "first_5_min": 8.795059495050848,
+      "last_5_min": 8.527290784542373,
+      "change": -0.2677687105084754
+    },
+    "mac_used": {
+      "first_5_min": 50.36621768461017,
+      "last_5_min": 50.01329882684746,
+      "change": -0.3529188577627096
+    }
+  },
+  "by_10_minutes": [
+    {
+      "minutes": "0-10",
+      "started": 67,
+      "completed": 67,
+      "end_to_end_p50_s": 36.459552,
+      "end_to_end_p95_s": 63.088860000000004
+    },
+    {
+      "minutes": "10-20",
+      "started": 64,
+      "completed": 64,
+      "end_to_end_p50_s": 22.677657,
+      "end_to_end_p95_s": 45.364534
+    },
+    {
+      "minutes": "20-30",
+      "started": 65,
+      "completed": 65,
+      "end_to_end_p50_s": 23.962464,
+      "end_to_end_p95_s": 43.107727
+    },
+    {
+      "minutes": "30-40",
+      "started": 55,
+      "completed": 55,
+      "end_to_end_p50_s": 18.708872,
+      "end_to_end_p95_s": 49.972727
+    },
+    {
+      "minutes": "40-50",
+      "started": 61,
+      "completed": 61,
+      "end_to_end_p50_s": 29.79341,
+      "end_to_end_p95_s": 67.885315
+    },
+    {
+      "minutes": "50-60",
+      "started": 57,
+      "completed": 57,
+      "end_to_end_p50_s": 17.81682,
+      "end_to_end_p95_s": 35.47335700000001
+    }
+  ],
+  "containers": [
+    {
+      "machine": "m1",
+      "container": "ca-orderer",
+      "cpu_mean_cores": 3.2551724137931036e-05,
+      "cpu_max_cores": 0.0042,
+      "mem_max_mb": 8.765046784,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "ca-police",
+      "cpu_mean_cores": 4.2482758620689655e-05,
+      "cpu_max_cores": 0.0045,
+      "mem_max_mb": 9.613344768,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "cadvisor-m1",
+      "cpu_mean_cores": 0.00037048275862068964,
+      "cpu_max_cores": 0.0098,
+      "mem_max_mb": 27.40977664,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "couchdb-police",
+      "cpu_mean_cores": 0.020177655172413794,
+      "cpu_max_cores": 0.4393,
+      "mem_max_mb": 98.34594304000001,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+      "cpu_mean_cores": 0.0010006896551724139,
+      "cpu_max_cores": 0.0133,
+      "mem_max_mb": 71.58628352,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "node-exporter-m1",
+      "cpu_mean_cores": 0.0034907586206896555,
+      "cpu_max_cores": 0.0351,
+      "mem_max_mb": 10.76887552,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "orderer1.example.com",
+      "cpu_mean_cores": 0.003428413793103448,
+      "cpu_max_cores": 0.0127,
+      "mem_max_mb": 77.66802431999999,
+      "samples": 725
+    },
+    {
+      "machine": "m1",
+      "container": "peer0.police.example.com",
+      "cpu_mean_cores": 0.02363986206896552,
+      "cpu_max_cores": 0.0683,
+      "mem_max_mb": 124.3611136,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "ca-forensics",
+      "cpu_mean_cores": 2.7310344827586205e-05,
+      "cpu_max_cores": 0.0032,
+      "mem_max_mb": 9.215934464,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "ca-prosecution",
+      "cpu_mean_cores": 9.655172413793103e-06,
+      "cpu_max_cores": 0.0019,
+      "mem_max_mb": 9.06493952,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "cadvisor-m2",
+      "cpu_mean_cores": 0.0007195862068965517,
+      "cpu_max_cores": 0.0076,
+      "mem_max_mb": 27.74532096,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "couchdb-forensics",
+      "cpu_mean_cores": 0.01780344827586207,
+      "cpu_max_cores": 0.4188,
+      "mem_max_mb": 93.61686528,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "couchdb-prosecution",
+      "cpu_mean_cores": 0.018715310344827586,
+      "cpu_max_cores": 0.6234,
+      "mem_max_mb": 87.05277952,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+      "cpu_mean_cores": 0.000773655172413793,
+      "cpu_max_cores": 0.0129,
+      "mem_max_mb": 70.03439104,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+      "cpu_mean_cores": 0.0008026206896551724,
+      "cpu_max_cores": 0.0344,
+      "mem_max_mb": 68.80755712,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "node-exporter-m2",
+      "cpu_mean_cores": 0.0008751724137931034,
+      "cpu_max_cores": 0.0161,
+      "mem_max_mb": 10.468982784,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "orderer2.example.com",
+      "cpu_mean_cores": 0.003989655172413793,
+      "cpu_max_cores": 0.0224,
+      "mem_max_mb": 69.42621695999999,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "peer0.forensics.example.com",
+      "cpu_mean_cores": 0.02099710344827586,
+      "cpu_max_cores": 0.0722,
+      "mem_max_mb": 110.2053376,
+      "samples": 725
+    },
+    {
+      "machine": "m2",
+      "container": "peer0.prosecution.example.com",
+      "cpu_mean_cores": 0.021973655172413793,
+      "cpu_max_cores": 0.0769,
+      "mem_max_mb": 108.4227584,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "ca-audit",
+      "cpu_mean_cores": 0.0,
+      "cpu_max_cores": 0.0,
+      "mem_max_mb": 8.929673216,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "ca-court",
+      "cpu_mean_cores": 1.6551724137931033e-05,
+      "cpu_max_cores": 0.005,
+      "mem_max_mb": 9.277800448,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "cadvisor-m3",
+      "cpu_mean_cores": 0.0011784827586206897,
+      "cpu_max_cores": 0.0194,
+      "mem_max_mb": 27.8396928,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "couchdb-audit",
+      "cpu_mean_cores": 0.03102468965517241,
+      "cpu_max_cores": 0.6622,
+      "mem_max_mb": 90.04122112,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "couchdb-court",
+      "cpu_mean_cores": 0.018093655172413795,
+      "cpu_max_cores": 0.4691,
+      "mem_max_mb": 87.26249471999999,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+      "cpu_mean_cores": 0.0029706206896551726,
+      "cpu_max_cores": 0.0423,
+      "mem_max_mb": 80.48869376,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+      "cpu_mean_cores": 0.0008118620689655172,
+      "cpu_max_cores": 0.0369,
+      "mem_max_mb": 69.86661887999999,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "node-exporter-m3",
+      "cpu_mean_cores": 0.0008609655172413793,
+      "cpu_max_cores": 0.0227,
+      "mem_max_mb": 10.70596096,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "orderer3.example.com",
+      "cpu_mean_cores": 0.005452413793103448,
+      "cpu_max_cores": 0.0287,
+      "mem_max_mb": 77.61559552,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "peer0.audit.example.com",
+      "cpu_mean_cores": 0.03179889655172414,
+      "cpu_max_cores": 0.1423,
+      "mem_max_mb": 122.99796479999999,
+      "samples": 725
+    },
+    {
+      "machine": "m3",
+      "container": "peer0.court.example.com",
+      "cpu_mean_cores": 0.021252689655172415,
+      "cpu_max_cores": 0.0648,
+      "mem_max_mb": 111.8830592,
+      "samples": 725
+    },
+    {
+      "machine": "m4",
+      "container": "cadvisor-m4",
+      "cpu_mean_cores": 0.000968,
+      "cpu_max_cores": 0.0208,
+      "mem_max_mb": 28.017950719999998,
+      "samples": 725
+    },
+    {
+      "machine": "m4",
+      "container": "dias-backend",
+      "cpu_mean_cores": 0.00426,
+      "cpu_max_cores": 0.052,
+      "mem_max_mb": 95.93421823999999,
+      "samples": 725
+    },
+    {
+      "machine": "m4",
+      "container": "loadgen-e6",
+      "cpu_mean_cores": 0.0030948965517241375,
+      "cpu_max_cores": 0.0229,
+      "mem_max_mb": 55.68987136,
+      "samples": 725
+    },
+    {
+      "machine": "m4",
+      "container": "node-exporter-m4",
+      "cpu_mean_cores": 0.001671448275862069,
+      "cpu_max_cores": 0.02,
+      "mem_max_mb": 10.93664768,
+      "samples": 725
+    },
+    {
+      "machine": "m4",
+      "container": "prometheus",
+      "cpu_mean_cores": 0.009356275862068966,
+      "cpu_max_cores": 0.2897,
+      "mem_max_mb": 159.383552,
+      "samples": 725
+    }
+  ]
+}

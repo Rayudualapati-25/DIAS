@@ -1,0 +1,1540 @@
+[
+  {
+    "users": 10,
+    "repetitions": 3,
+    "requested": 30,
+    "completed": 30,
+    "failed": 0,
+    "facts_match_plan": 30,
+    "end_to_end_s": {
+      "mean": 43.8585998,
+      "p50": 40.537353,
+      "p95": 77.70168,
+      "max": 80.921137,
+      "p50_rep_mean": 39.82278133333333,
+      "p50_rep_sd": 0.7620328219337628,
+      "p95_rep_mean": 78.77374766666667,
+      "p95_rep_sd": 1.8596944261932733
+    },
+    "components_mean_s": {
+      "request_commit": 0.10290103333333334,
+      "request_api": 0.0105044,
+      "queue_wait": 33.991839884440104,
+      "llm_inference": 7.6583299333333335,
+      "llm_prompt_check": 0.0006043277343749651,
+      "auditor_pickup": 0.048118554492187014,
+      "decision_commit": 2.0436884666666666,
+      "decision_api": 0.002604300000000012
+    },
+    "components_p95_s": {
+      "request_commit": 0.12016500000000001,
+      "request_api": 0.016685000000000002,
+      "queue_wait": 67.99716015625,
+      "llm_inference": 8.291592000000001,
+      "llm_prompt_check": 0.0008350722656250583,
+      "auditor_pickup": 0.09703310546874895,
+      "decision_commit": 2.0560039999999997,
+      "decision_api": 0.0036519999999998164
+    },
+    "ledger_stages_mean_s": {
+      "request_endorse": 0.0472515,
+      "request_order_submit": 0.0036885666666666666,
+      "request_commit_wait": 0.05196103333333334,
+      "decision_endorse": 0.0143771,
+      "decision_order_submit": 0.0023522,
+      "decision_commit_wait": 2.026959166666667
+    },
+    "split_check_max_abs_s": 3.300000000126602e-05,
+    "notify_delay_s": {
+      "mean": 0.04069712115885368,
+      "max": 0.09932494335937372
+    },
+    "traced": 30,
+    "throughput_workflows_per_min": {
+      "mean": 7.619666666666667,
+      "sd": 0.17724653264121534,
+      "per_repetition": [
+        7.415,
+        7.722,
+        7.722
+      ]
+    },
+    "llm": {
+      "inference_mean_s": 7.6583299333333335,
+      "inference_p95_s": 8.291592000000001,
+      "prompt_tokens_mean": 1915.4333333333334,
+      "cached_prompt_tokens_mean": 308.46666666666664,
+      "completion_tokens_mean": 86.93333333333334,
+      "output_tokens_per_inference_s": 11.351474027640265,
+      "capacity_per_min": 7.833988118294096
+    },
+    "ledger_tx_per_s": 0.3621383299957839,
+    "accuracy": {
+      "valid": 30,
+      "of": 30,
+      "correct": 30,
+      "reason_correct": 30,
+      "allow_correct": 15,
+      "allow_total": 15,
+      "deny_correct": 15,
+      "deny_total": 15,
+      "correct_ci95": [
+        0.886486605238548,
+        1.0
+      ]
+    },
+    "machines": {
+      "m1": {
+        "cpu_mean_cores": 0.06510654052878122,
+        "cpu_max_cores": 0.07280873704844576,
+        "mem_max_mb": 1014.337536
+      },
+      "m2": {
+        "cpu_mean_cores": 0.0959588937095212,
+        "cpu_max_cores": 0.10360828866309282,
+        "mem_max_mb": 1235.345408
+      },
+      "m3": {
+        "cpu_mean_cores": 0.09710067740364192,
+        "cpu_max_cores": 0.10760000000000007,
+        "mem_max_mb": 1245.384704
+      },
+      "m4": {
+        "cpu_mean_cores": 0.033507690398681005,
+        "cpu_max_cores": 0.04079999999999988,
+        "mem_max_mb": 972.484608
+      }
+    },
+    "containers_top": [],
+    "containers_all": []
+  },
+  {
+    "users": 25,
+    "repetitions": 3,
+    "requested": 75,
+    "completed": 75,
+    "failed": 0,
+    "facts_match_plan": 75,
+    "end_to_end_s": {
+      "mean": 97.2128082,
+      "p50": 97.065355,
+      "p95": 179.91226500000002,
+      "max": 187.313826,
+      "p50_rep_mean": 96.929319,
+      "p50_rep_sd": 1.9112903388308076,
+      "p95_rep_mean": 178.2865396666667,
+      "p95_rep_sd": 2.1366705709307077
+    },
+    "components_mean_s": {
+      "request_commit": 0.15921133333333332,
+      "request_api": 0.01944564,
+      "queue_wait": 87.60569819010416,
+      "llm_inference": 7.32902488,
+      "llm_prompt_check": 0.0005466141406249881,
+      "auditor_pickup": 0.05473682242187523,
+      "decision_commit": 2.0414674666666666,
+      "decision_api": 0.0026697333333333393
+    },
+    "components_p95_s": {
+      "request_commit": 0.258027,
+      "request_api": 0.03224199999999999,
+      "queue_wait": 170.03666796875,
+      "llm_inference": 8.059697,
+      "llm_prompt_check": 0.0006198320312496435,
+      "auditor_pickup": 0.10483106250000361,
+      "decision_commit": 2.053671,
+      "decision_api": 0.00388799999999992
+    },
+    "ledger_stages_mean_s": {
+      "request_endorse": 0.06855982666666667,
+      "request_order_submit": 0.005647786666666667,
+      "request_commit_wait": 0.08500369333333332,
+      "decision_endorse": 0.013979706666666668,
+      "decision_order_submit": 0.00231152,
+      "decision_commit_wait": 2.025176253333333
+    },
+    "split_check_max_abs_s": 1.3999999995576218e-05,
+    "notify_delay_s": {
+      "mean": 0.04732230242187523,
+      "max": 0.10843010351562407
+    },
+    "traced": 75,
+    "throughput_workflows_per_min": {
+      "mean": 8.089333333333334,
+      "sd": 0.10809872031311643,
+      "per_repetition": [
+        8.212,
+        8.048,
+        8.008
+      ]
+    },
+    "llm": {
+      "inference_mean_s": 7.32902488,
+      "inference_p95_s": 8.059697,
+      "prompt_tokens_mean": 1919.08,
+      "cached_prompt_tokens_mean": 304.85333333333335,
+      "completion_tokens_mean": 82.70666666666666,
+      "output_tokens_per_inference_s": 11.284811829792378,
+      "capacity_per_min": 8.186017429254212
+    },
+    "ledger_tx_per_s": 0.4035646145369716,
+    "accuracy": {
+      "valid": 75,
+      "of": 75,
+      "correct": 71,
+      "reason_correct": 71,
+      "allow_correct": 36,
+      "allow_total": 39,
+      "deny_correct": 35,
+      "deny_total": 36,
+      "correct_ci95": [
+        0.8707401276633778,
+        0.9790665723987743
+      ]
+    },
+    "machines": {
+      "m1": {
+        "cpu_mean_cores": 0.06542508136398713,
+        "cpu_max_cores": 0.08522727272727229,
+        "mem_max_mb": 1029.308416
+      },
+      "m2": {
+        "cpu_mean_cores": 0.09963329629137767,
+        "cpu_max_cores": 0.1292258451690344,
+        "mem_max_mb": 1255.370752
+      },
+      "m3": {
+        "cpu_mean_cores": 0.09759709047086322,
+        "cpu_max_cores": 0.12200000000000003,
+        "mem_max_mb": 1271.07072
+      },
+      "m4": {
+        "cpu_mean_cores": 0.046113837845018234,
+        "cpu_max_cores": 0.1640262441990718,
+        "mem_max_mb": 1235.582976
+      }
+    },
+    "containers_top": [],
+    "containers_all": []
+  },
+  {
+    "users": 50,
+    "repetitions": 3,
+    "requested": 150,
+    "completed": 150,
+    "failed": 0,
+    "facts_match_plan": 150,
+    "end_to_end_s": {
+      "mean": 191.64584330666668,
+      "p50": 189.993766,
+      "p95": 355.017837,
+      "max": 370.642637,
+      "p50_rep_mean": 189.52954933333334,
+      "p50_rep_sd": 0.46259561174889297,
+      "p95_rep_mean": 354.8660563333333,
+      "p95_rep_sd": 1.1502343381595403
+    },
+    "components_mean_s": {
+      "request_commit": 0.25794330666666665,
+      "request_api": 0.040324693333333335,
+      "queue_wait": 181.89311389160156,
+      "llm_inference": 7.3472080533333335,
+      "llm_prompt_check": 0.0005640348828125086,
+      "auditor_pickup": 0.06108782684895947,
+      "decision_commit": 2.04295108,
+      "decision_api": 0.002642866666666656
+    },
+    "components_p95_s": {
+      "request_commit": 0.432664,
+      "request_api": 0.06329599999999999,
+      "queue_wait": 344.4911279296875,
+      "llm_inference": 8.254697,
+      "llm_prompt_check": 0.0006529121093753929,
+      "auditor_pickup": 0.10420018945310684,
+      "decision_commit": 2.052076,
+      "decision_api": 0.003673999999999978
+    },
+    "ledger_stages_mean_s": {
+      "request_endorse": 0.10952602666666666,
+      "request_order_submit": 0.0048265466666666665,
+      "request_commit_wait": 0.14359073333333333,
+      "decision_endorse": 0.01310116,
+      "decision_order_submit": 0.0022757066666666665,
+      "decision_commit_wait": 2.0275743066666667
+    },
+    "split_check_max_abs_s": 1.3000000006286427e-05,
+    "notify_delay_s": {
+      "mean": 0.05384571351562614,
+      "max": 0.10101318750000791
+    },
+    "traced": 150,
+    "throughput_workflows_per_min": {
+      "mean": 8.115,
+      "sd": 0.023895606290697365,
+      "per_repetition": [
+        8.094,
+        8.141,
+        8.11
+      ]
+    },
+    "llm": {
+      "inference_mean_s": 7.3472080533333335,
+      "inference_p95_s": 8.254697,
+      "prompt_tokens_mean": 1920.1,
+      "cached_prompt_tokens_mean": 302.8466666666667,
+      "completion_tokens_mean": 83.87333333333333,
+      "output_tokens_per_inference_s": 11.415674188684651,
+      "capacity_per_min": 8.165740482917794
+    },
+    "ledger_tx_per_s": 0.4030836619229621,
+    "accuracy": {
+      "valid": 150,
+      "of": 150,
+      "correct": 148,
+      "reason_correct": 148,
+      "allow_correct": 73,
+      "allow_total": 75,
+      "deny_correct": 75,
+      "deny_total": 75,
+      "correct_ci95": [
+        0.9526930908928354,
+        0.9963358708817246
+      ]
+    },
+    "machines": {
+      "m1": {
+        "cpu_mean_cores": 0.08006591013395638,
+        "cpu_max_cores": 0.11999999999999972,
+        "mem_max_mb": 1112.989696
+      },
+      "m2": {
+        "cpu_mean_cores": 0.11488416226159141,
+        "cpu_max_cores": 0.17039999999999972,
+        "mem_max_mb": 1316.048896
+      },
+      "m3": {
+        "cpu_mean_cores": 0.11548501997548327,
+        "cpu_max_cores": 0.16840673626945074,
+        "mem_max_mb": 1522.311168
+      },
+      "m4": {
+        "cpu_mean_cores": 0.04388179174841297,
+        "cpu_max_cores": 0.07199999999999988,
+        "mem_max_mb": 1047.568384
+      }
+    },
+    "containers_top": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.014973676416142171,
+        "cpu_max_cores": 0.0454,
+        "mem_max_mb": 105.381888
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.014671038504257682,
+        "cpu_max_cores": 0.0373,
+        "mem_max_mb": 100.99884032
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.014553424657534246,
+        "cpu_max_cores": 0.151,
+        "mem_max_mb": 82.62778879999999
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.013825851536467974,
+        "cpu_max_cores": 0.0362,
+        "mem_max_mb": 104.13408256
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.013605710847834135,
+        "cpu_max_cores": 0.0358,
+        "mem_max_mb": 101.63847168000001
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.013277054794520548,
+        "cpu_max_cores": 0.122,
+        "mem_max_mb": 69.6778752
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.013182617549055906,
+        "cpu_max_cores": 0.0324,
+        "mem_max_mb": 100.21240832
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.013047334320621991,
+        "cpu_max_cores": 0.1041,
+        "mem_max_mb": 68.75512832
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.012862430581266196,
+        "cpu_max_cores": 0.1205,
+        "mem_max_mb": 70.82082304000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.012599981488337651,
+        "cpu_max_cores": 0.1041,
+        "mem_max_mb": 69.6778752
+      },
+      {
+        "machine": "m4",
+        "container": "loadgen-e5",
+        "cpu_mean_cores": 0.005473843021103295,
+        "cpu_max_cores": 0.0125,
+        "mem_max_mb": 57.21030656
+      },
+      {
+        "machine": "m3",
+        "container": "orderer3.example.com",
+        "cpu_mean_cores": 0.004925703443169197,
+        "cpu_max_cores": 0.0126,
+        "mem_max_mb": 71.18782464
+      }
+    ],
+    "containers_all": [
+      {
+        "machine": "m4",
+        "container": "loadgen-e5",
+        "cpu_mean_cores": 0.005473843021103295,
+        "cpu_max_cores": 0.0125,
+        "mem_max_mb": 57.21030656
+      },
+      {
+        "machine": "m4",
+        "container": "dias-backend",
+        "cpu_mean_cores": 0.0029784987041836354,
+        "cpu_max_cores": 0.0371,
+        "mem_max_mb": 78.07696895999999
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.004456784524250277,
+        "cpu_max_cores": 0.0149,
+        "mem_max_mb": 84.38939648
+      },
+      {
+        "machine": "m4",
+        "container": "cadvisor-m4",
+        "cpu_mean_cores": 0.0004197519437245464,
+        "cpu_max_cores": 0.0066,
+        "mem_max_mb": 25.81594112
+      },
+      {
+        "machine": "m4",
+        "container": "node-exporter-m4",
+        "cpu_mean_cores": 6.756756756756758e-07,
+        "cpu_max_cores": 0.0001,
+        "mem_max_mb": 9.961472
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0006972510181414291,
+        "cpu_max_cores": 0.019,
+        "mem_max_mb": 68.11549695999999
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.014973676416142171,
+        "cpu_max_cores": 0.0454,
+        "mem_max_mb": 105.381888
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.014553424657534246,
+        "cpu_max_cores": 0.151,
+        "mem_max_mb": 82.62778879999999
+      },
+      {
+        "machine": "m1",
+        "container": "orderer1.example.com",
+        "cpu_mean_cores": 0.0023882173269159567,
+        "cpu_max_cores": 0.0063,
+        "mem_max_mb": 58.405683200000006
+      },
+      {
+        "machine": "m1",
+        "container": "cadvisor-m1",
+        "cpu_mean_cores": 0.00024674194742687895,
+        "cpu_max_cores": 0.0064,
+        "mem_max_mb": 25.637683199999998
+      },
+      {
+        "machine": "m1",
+        "container": "node-exporter-m1",
+        "cpu_mean_cores": 0.0004479452054794521,
+        "cpu_max_cores": 0.0109,
+        "mem_max_mb": 9.73602816
+      },
+      {
+        "machine": "m1",
+        "container": "ca-orderer",
+        "cpu_mean_cores": 2.808219178082192e-05,
+        "cpu_max_cores": 0.0019,
+        "mem_max_mb": 8.765046784
+      },
+      {
+        "machine": "m1",
+        "container": "ca-police",
+        "cpu_mean_cores": 3.4246575342465754e-06,
+        "cpu_max_cores": 0.0003,
+        "mem_max_mb": 9.351200768
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0004163828211773417,
+        "cpu_max_cores": 0.0072,
+        "mem_max_mb": 64.18333696
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0008308589411329138,
+        "cpu_max_cores": 0.0095,
+        "mem_max_mb": 66.19660288
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.013825851536467974,
+        "cpu_max_cores": 0.0362,
+        "mem_max_mb": 104.13408256
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.014671038504257682,
+        "cpu_max_cores": 0.0373,
+        "mem_max_mb": 100.99884032
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.012862430581266196,
+        "cpu_max_cores": 0.1205,
+        "mem_max_mb": 70.82082304000001
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.013277054794520548,
+        "cpu_max_cores": 0.122,
+        "mem_max_mb": 69.6778752
+      },
+      {
+        "machine": "m3",
+        "container": "orderer3.example.com",
+        "cpu_mean_cores": 0.004925703443169197,
+        "cpu_max_cores": 0.0126,
+        "mem_max_mb": 71.18782464
+      },
+      {
+        "machine": "m3",
+        "container": "node-exporter-m3",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.551478784
+      },
+      {
+        "machine": "m3",
+        "container": "cadvisor-m3",
+        "cpu_mean_cores": 0.001152082562014069,
+        "cpu_max_cores": 0.0051,
+        "mem_max_mb": 27.2105472
+      },
+      {
+        "machine": "m3",
+        "container": "ca-court",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.015656448000001
+      },
+      {
+        "machine": "m3",
+        "container": "ca-audit",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.02299648
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.00043870788596815993,
+        "cpu_max_cores": 0.0046,
+        "mem_max_mb": 64.70762496
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.00041214365049981484,
+        "cpu_max_cores": 0.0046,
+        "mem_max_mb": 65.67231488
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.013182617549055906,
+        "cpu_max_cores": 0.0324,
+        "mem_max_mb": 100.21240832
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.013605710847834135,
+        "cpu_max_cores": 0.0358,
+        "mem_max_mb": 101.63847168000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.012599981488337651,
+        "cpu_max_cores": 0.1041,
+        "mem_max_mb": 69.6778752
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.013047334320621991,
+        "cpu_max_cores": 0.1041,
+        "mem_max_mb": 68.75512832
+      },
+      {
+        "machine": "m2",
+        "container": "orderer2.example.com",
+        "cpu_mean_cores": 0.0023298315438726397,
+        "cpu_max_cores": 0.0063,
+        "mem_max_mb": 58.143539200000006
+      },
+      {
+        "machine": "m2",
+        "container": "node-exporter-m2",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.813622784
+      },
+      {
+        "machine": "m2",
+        "container": "cadvisor-m2",
+        "cpu_mean_cores": 0.0001644946316179193,
+        "cpu_max_cores": 0.0027,
+        "mem_max_mb": 25.931284480000002
+      },
+      {
+        "machine": "m2",
+        "container": "ca-forensics",
+        "cpu_mean_cores": 2.4657534246575342e-05,
+        "cpu_max_cores": 0.0035,
+        "mem_max_mb": 9.215934464
+      },
+      {
+        "machine": "m2",
+        "container": "ca-prosecution",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.06493952
+      }
+    ]
+  },
+  {
+    "users": 75,
+    "repetitions": 3,
+    "requested": 225,
+    "completed": 225,
+    "failed": 0,
+    "facts_match_plan": 225,
+    "end_to_end_s": {
+      "mean": 282.5008959111111,
+      "p50": 282.678023,
+      "p95": 526.887654,
+      "max": 554.271767,
+      "p50_rep_mean": 283.17533299999997,
+      "p50_rep_sd": 2.0623023968310554,
+      "p95_rep_mean": 530.8177000000001,
+      "p95_rep_sd": 3.537004459597442
+    },
+    "components_mean_s": {
+      "request_commit": 0.3382255511111111,
+      "request_api": 0.06091512,
+      "queue_wait": 272.6728389268663,
+      "llm_inference": 7.3224780222222225,
+      "llm_prompt_check": 0.000592597352430534,
+      "auditor_pickup": 0.05895379578124987,
+      "decision_commit": 2.0442075777777777,
+      "decision_api": 0.0026766399999999958
+    },
+    "components_p95_s": {
+      "request_commit": 0.571898,
+      "request_api": 0.10579100000000005,
+      "queue_wait": 516.3453640136719,
+      "llm_inference": 8.112879,
+      "llm_prompt_check": 0.0008608222656248472,
+      "auditor_pickup": 0.10479392382812433,
+      "decision_commit": 2.053391,
+      "decision_api": 0.003735999999999876
+    },
+    "ledger_stages_mean_s": {
+      "request_endorse": 0.13091249333333332,
+      "request_order_submit": 0.006512137777777777,
+      "request_commit_wait": 0.20080090666666664,
+      "decision_endorse": 0.012473893333333333,
+      "decision_order_submit": 0.0021602711111111113,
+      "decision_commit_wait": 2.0295734177777778
+    },
+    "split_check_max_abs_s": 1.699999999254942e-05,
+    "notify_delay_s": {
+      "mean": 0.05169982244791653,
+      "max": 0.10761104296875419
+    },
+    "traced": 225,
+    "throughput_workflows_per_min": {
+      "mean": 8.159666666666666,
+      "sd": 0.048952357791360306,
+      "per_repetition": [
+        8.214,
+        8.146,
+        8.119
+      ]
+    },
+    "llm": {
+      "inference_mean_s": 7.3224780222222225,
+      "inference_p95_s": 8.112879,
+      "prompt_tokens_mean": 1919.6177777777777,
+      "cached_prompt_tokens_mean": 305.70222222222225,
+      "completion_tokens_mean": 83.60888888888888,
+      "output_tokens_per_inference_s": 11.418114009376746,
+      "capacity_per_min": 8.19328436347716
+    },
+    "ledger_tx_per_s": 0.41206387638364345,
+    "accuracy": {
+      "valid": 225,
+      "of": 225,
+      "correct": 220,
+      "reason_correct": 215,
+      "allow_correct": 110,
+      "allow_total": 114,
+      "deny_correct": 110,
+      "deny_total": 111,
+      "correct_ci95": [
+        0.9490435537578787,
+        0.990471519476837
+      ]
+    },
+    "machines": {
+      "m1": {
+        "cpu_mean_cores": 0.08115231702407115,
+        "cpu_max_cores": 0.13202112337974056,
+        "mem_max_mb": 1239.044096
+      },
+      "m2": {
+        "cpu_mean_cores": 0.11972261874519441,
+        "cpu_max_cores": 0.199223906868824,
+        "mem_max_mb": 1462.960128
+      },
+      "m3": {
+        "cpu_mean_cores": 0.11915480773024223,
+        "cpu_max_cores": 0.19477662680478397,
+        "mem_max_mb": 1375.002624
+      },
+      "m4": {
+        "cpu_mean_cores": 0.04803658805071189,
+        "cpu_max_cores": 0.08478643417053272,
+        "mem_max_mb": 1027.325952
+      }
+    },
+    "containers_top": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.01673042042042042,
+        "cpu_max_cores": 0.0405,
+        "mem_max_mb": 113.246208
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.016112347802347802,
+        "cpu_max_cores": 0.0352,
+        "mem_max_mb": 105.381888
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.01598923832923833,
+        "cpu_max_cores": 0.0441,
+        "mem_max_mb": 111.149056
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.01589053508053508,
+        "cpu_max_cores": 0.0395,
+        "mem_max_mb": 106.6401792
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.01502048048048048,
+        "cpu_max_cores": 0.0366,
+        "mem_max_mb": 104.82614271999999
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.014535719355719358,
+        "cpu_max_cores": 0.0572,
+        "mem_max_mb": 86.54946304
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.013296494676494677,
+        "cpu_max_cores": 0.0529,
+        "mem_max_mb": 87.0842368
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.0132499453999454,
+        "cpu_max_cores": 0.0484,
+        "mem_max_mb": 83.099648
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.013235877695877696,
+        "cpu_max_cores": 0.0479,
+        "mem_max_mb": 82.03010048
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.013144903084903084,
+        "cpu_max_cores": 0.0528,
+        "mem_max_mb": 85.22825728000001
+      },
+      {
+        "machine": "m4",
+        "container": "loadgen-e5",
+        "cpu_mean_cores": 0.006340384930384931,
+        "cpu_max_cores": 0.016,
+        "mem_max_mb": 62.925045759999996
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.005566352716352717,
+        "cpu_max_cores": 0.0171,
+        "mem_max_mb": 85.62671616
+      }
+    ],
+    "containers_all": [
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0003620884520884521,
+        "cpu_max_cores": 0.0087,
+        "mem_max_mb": 69.4157312
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.01673042042042042,
+        "cpu_max_cores": 0.0405,
+        "mem_max_mb": 113.246208
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.014535719355719358,
+        "cpu_max_cores": 0.0572,
+        "mem_max_mb": 86.54946304
+      },
+      {
+        "machine": "m1",
+        "container": "orderer1.example.com",
+        "cpu_mean_cores": 0.002608916188916189,
+        "cpu_max_cores": 0.0095,
+        "mem_max_mb": 64.93831168
+      },
+      {
+        "machine": "m1",
+        "container": "cadvisor-m1",
+        "cpu_mean_cores": 0.00015975975975975976,
+        "cpu_max_cores": 0.0053,
+        "mem_max_mb": 26.990346239999997
+      },
+      {
+        "machine": "m1",
+        "container": "node-exporter-m1",
+        "cpu_mean_cores": 0.00370050505050505,
+        "cpu_max_cores": 0.0141,
+        "mem_max_mb": 10.154409983999999
+      },
+      {
+        "machine": "m1",
+        "container": "ca-orderer",
+        "cpu_mean_cores": 2.575757575757576e-05,
+        "cpu_max_cores": 0.0038,
+        "mem_max_mb": 8.765046784
+      },
+      {
+        "machine": "m1",
+        "container": "ca-police",
+        "cpu_mean_cores": 1.481026481026481e-05,
+        "cpu_max_cores": 0.0019,
+        "mem_max_mb": 9.351200768
+      },
+      {
+        "machine": "m4",
+        "container": "loadgen-e5",
+        "cpu_mean_cores": 0.006340384930384931,
+        "cpu_max_cores": 0.016,
+        "mem_max_mb": 62.925045759999996
+      },
+      {
+        "machine": "m4",
+        "container": "dias-backend",
+        "cpu_mean_cores": 0.002923988533988534,
+        "cpu_max_cores": 0.0371,
+        "mem_max_mb": 89.43304704
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.005566352716352717,
+        "cpu_max_cores": 0.0171,
+        "mem_max_mb": 85.62671616
+      },
+      {
+        "machine": "m4",
+        "container": "cadvisor-m4",
+        "cpu_mean_cores": 0.0009121102921102921,
+        "cpu_max_cores": 0.009,
+        "mem_max_mb": 26.74917376
+      },
+      {
+        "machine": "m4",
+        "container": "node-exporter-m4",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 10.191110144
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0004953235053235054,
+        "cpu_max_cores": 0.0174,
+        "mem_max_mb": 66.2700032
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.00048180999180999175,
+        "cpu_max_cores": 0.0062,
+        "mem_max_mb": 65.93445888000001
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.01589053508053508,
+        "cpu_max_cores": 0.0395,
+        "mem_max_mb": 106.6401792
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.01502048048048048,
+        "cpu_max_cores": 0.0366,
+        "mem_max_mb": 104.82614271999999
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.013296494676494677,
+        "cpu_max_cores": 0.0529,
+        "mem_max_mb": 87.0842368
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.013144903084903084,
+        "cpu_max_cores": 0.0528,
+        "mem_max_mb": 85.22825728000001
+      },
+      {
+        "machine": "m2",
+        "container": "orderer2.example.com",
+        "cpu_mean_cores": 0.0022628555828555826,
+        "cpu_max_cores": 0.0059,
+        "mem_max_mb": 64.60276736
+      },
+      {
+        "machine": "m2",
+        "container": "node-exporter-m2",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.920577536
+      },
+      {
+        "machine": "m2",
+        "container": "cadvisor-m2",
+        "cpu_mean_cores": 0.00038535626535626534,
+        "cpu_max_cores": 0.0109,
+        "mem_max_mb": 27.13714688
+      },
+      {
+        "machine": "m2",
+        "container": "ca-forensics",
+        "cpu_mean_cores": 3.212121212121212e-05,
+        "cpu_max_cores": 0.0022,
+        "mem_max_mb": 9.215934464
+      },
+      {
+        "machine": "m2",
+        "container": "ca-prosecution",
+        "cpu_mean_cores": 3.836472836472836e-05,
+        "cpu_max_cores": 0.0024,
+        "mem_max_mb": 9.32708352
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0004300709800709801,
+        "cpu_max_cores": 0.0132,
+        "mem_max_mb": 67.08789248
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0008734944034944035,
+        "cpu_max_cores": 0.0085,
+        "mem_max_mb": 65.54648576
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.01598923832923833,
+        "cpu_max_cores": 0.0441,
+        "mem_max_mb": 111.149056
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.016112347802347802,
+        "cpu_max_cores": 0.0352,
+        "mem_max_mb": 105.381888
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.0132499453999454,
+        "cpu_max_cores": 0.0484,
+        "mem_max_mb": 83.099648
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.013235877695877696,
+        "cpu_max_cores": 0.0479,
+        "mem_max_mb": 82.03010048
+      },
+      {
+        "machine": "m3",
+        "container": "orderer3.example.com",
+        "cpu_mean_cores": 0.003260647010647011,
+        "cpu_max_cores": 0.0112,
+        "mem_max_mb": 75.00464128
+      },
+      {
+        "machine": "m3",
+        "container": "node-exporter-m3",
+        "cpu_mean_cores": 0.00431908817908818,
+        "cpu_max_cores": 0.0144,
+        "mem_max_mb": 10.182721536
+      },
+      {
+        "machine": "m3",
+        "container": "cadvisor-m3",
+        "cpu_mean_cores": 0.00047666939666939664,
+        "cpu_max_cores": 0.0114,
+        "mem_max_mb": 26.885488640000002
+      },
+      {
+        "machine": "m3",
+        "container": "ca-court",
+        "cpu_mean_cores": 4.506415506415506e-05,
+        "cpu_max_cores": 0.0035,
+        "mem_max_mb": 9.019850752
+      },
+      {
+        "machine": "m3",
+        "container": "ca-audit",
+        "cpu_mean_cores": 2.745290745290745e-05,
+        "cpu_max_cores": 0.0015,
+        "mem_max_mb": 9.252634624
+      }
+    ]
+  },
+  {
+    "users": 100,
+    "repetitions": 3,
+    "requested": 300,
+    "completed": 300,
+    "failed": 0,
+    "facts_match_plan": 300,
+    "end_to_end_s": {
+      "mean": 373.45278852666667,
+      "p50": 372.27681,
+      "p95": 699.812857,
+      "max": 737.6645,
+      "p50_rep_mean": 370.139635,
+      "p50_rep_sd": 2.4400924111949154,
+      "p95_rep_mean": 698.0067479999999,
+      "p95_rep_sd": 2.0572623123586102
+    },
+    "components_mean_s": {
+      "request_commit": 0.42052585333333337,
+      "request_api": 0.08628206666666666,
+      "queue_wait": 363.51249574951174,
+      "llm_inference": 7.325145296666666,
+      "llm_prompt_check": 0.0006217256315104168,
+      "auditor_pickup": 0.05977584485677186,
+      "decision_commit": 2.04524314,
+      "decision_api": 0.0026917833333333454
+    },
+    "components_p95_s": {
+      "request_commit": 0.701665,
+      "request_api": 0.13965999999999998,
+      "queue_wait": 689.6226921386718,
+      "llm_inference": 8.114863999999999,
+      "llm_prompt_check": 0.00091393945312484,
+      "auditor_pickup": 0.1067139335937472,
+      "decision_commit": 2.0549079999999997,
+      "decision_api": 0.0038289999999997237
+    },
+    "ledger_stages_mean_s": {
+      "request_endorse": 0.17249046,
+      "request_order_submit": 0.00640054,
+      "request_commit_wait": 0.24163486666666667,
+      "decision_endorse": 0.012324096666666668,
+      "decision_order_submit": 0.0021556533333333336,
+      "decision_commit_wait": 2.0307633333333333
+    },
+    "split_check_max_abs_s": 1.5000000013969839e-05,
+    "notify_delay_s": {
+      "mean": 0.05231794819010519,
+      "max": 0.1028408105468843
+    },
+    "traced": 300,
+    "throughput_workflows_per_min": {
+      "mean": 8.164333333333333,
+      "sd": 0.028676354952004265,
+      "per_repetition": [
+        8.191,
+        8.134,
+        8.168
+      ]
+    },
+    "llm": {
+      "inference_mean_s": 7.325145296666666,
+      "inference_p95_s": 8.114863999999999,
+      "prompt_tokens_mean": 1918.8466666666666,
+      "cached_prompt_tokens_mean": 307.45666666666665,
+      "completion_tokens_mean": 83.66,
+      "output_tokens_per_inference_s": 11.420933867082443,
+      "capacity_per_min": 8.19026865273929
+    },
+    "ledger_tx_per_s": 0.4069158570369662,
+    "accuracy": {
+      "valid": 300,
+      "of": 300,
+      "correct": 290,
+      "reason_correct": 288,
+      "allow_correct": 145,
+      "allow_total": 150,
+      "deny_correct": 145,
+      "deny_total": 150,
+      "correct_ci95": [
+        0.9397381739273791,
+        0.9817950527459094
+      ]
+    },
+    "machines": {
+      "m1": {
+        "cpu_mean_cores": 0.0815362436465993,
+        "cpu_max_cores": 0.15401848221786585,
+        "mem_max_mb": 1145.09824
+      },
+      "m2": {
+        "cpu_mean_cores": 0.11988351655550693,
+        "cpu_max_cores": 0.2260180814465155,
+        "mem_max_mb": 1399.52128
+      },
+      "m3": {
+        "cpu_mean_cores": 0.1213922325543693,
+        "cpu_max_cores": 0.22127080665813248,
+        "mem_max_mb": 1412.05504
+      },
+      "m4": {
+        "cpu_mean_cores": 0.04993249529274732,
+        "cpu_max_cores": 0.09479999999999969,
+        "mem_max_mb": 1054.375936
+      }
+    },
+    "containers_top": [
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.015761838208071085,
+        "cpu_max_cores": 0.0395,
+        "mem_max_mb": 111.25391359999999
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.01539436628409231,
+        "cpu_max_cores": 0.0413,
+        "mem_max_mb": 115.44821759999999
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.014894366284092311,
+        "cpu_max_cores": 0.0511,
+        "mem_max_mb": 89.1813888
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.0147900160434407,
+        "cpu_max_cores": 0.0412,
+        "mem_max_mb": 108.4227584
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.014230427002344809,
+        "cpu_max_cores": 0.0446,
+        "mem_max_mb": 113.03649279999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.014085835493027271,
+        "cpu_max_cores": 0.2099,
+        "mem_max_mb": 81.97767168
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.014068286437122053,
+        "cpu_max_cores": 0.0482,
+        "mem_max_mb": 83.69733631999999
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.014006105763297543,
+        "cpu_max_cores": 0.049,
+        "mem_max_mb": 79.88051968
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.013880735530050599,
+        "cpu_max_cores": 0.038,
+        "mem_max_mb": 111.149056
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.013744591509317538,
+        "cpu_max_cores": 0.05,
+        "mem_max_mb": 89.90490623999999
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.010520421448846106,
+        "cpu_max_cores": 0.0246,
+        "mem_max_mb": 87.70289664
+      },
+      {
+        "machine": "m4",
+        "container": "loadgen-e5",
+        "cpu_mean_cores": 0.007810918795507837,
+        "cpu_max_cores": 0.0226,
+        "mem_max_mb": 69.32135936
+      }
+    ],
+    "containers_all": [
+      {
+        "machine": "m4",
+        "container": "loadgen-e5",
+        "cpu_mean_cores": 0.007810918795507837,
+        "cpu_max_cores": 0.0226,
+        "mem_max_mb": 69.32135936
+      },
+      {
+        "machine": "m4",
+        "container": "dias-backend",
+        "cpu_mean_cores": 0.0030902042453412313,
+        "cpu_max_cores": 0.0377,
+        "mem_max_mb": 101.22952704000001
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.010520421448846106,
+        "cpu_max_cores": 0.0246,
+        "mem_max_mb": 87.70289664
+      },
+      {
+        "machine": "m4",
+        "container": "cadvisor-m4",
+        "cpu_mean_cores": 0.0011208688140194989,
+        "cpu_max_cores": 0.015,
+        "mem_max_mb": 26.97986048
+      },
+      {
+        "machine": "m4",
+        "container": "node-exporter-m4",
+        "cpu_mean_cores": 0.002765842897692213,
+        "cpu_max_cores": 0.0131,
+        "mem_max_mb": 10.60110336
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.00031296124892015305,
+        "cpu_max_cores": 0.0076,
+        "mem_max_mb": 74.30209536
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.01539436628409231,
+        "cpu_max_cores": 0.0413,
+        "mem_max_mb": 115.44821759999999
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.014894366284092311,
+        "cpu_max_cores": 0.0511,
+        "mem_max_mb": 89.1813888
+      },
+      {
+        "machine": "m1",
+        "container": "orderer1.example.com",
+        "cpu_mean_cores": 0.0026874367518203135,
+        "cpu_max_cores": 0.0095,
+        "mem_max_mb": 73.90363648
+      },
+      {
+        "machine": "m1",
+        "container": "cadvisor-m1",
+        "cpu_mean_cores": 0.0008482506479081821,
+        "cpu_max_cores": 0.0067,
+        "mem_max_mb": 27.242004480000002
+      },
+      {
+        "machine": "m1",
+        "container": "node-exporter-m1",
+        "cpu_mean_cores": 2.2831050228310505e-07,
+        "cpu_max_cores": 0.0001,
+        "mem_max_mb": 10.07157248
+      },
+      {
+        "machine": "m1",
+        "container": "ca-orderer",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 8.765046784
+      },
+      {
+        "machine": "m1",
+        "container": "ca-police",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.613344768
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0003216092805133901,
+        "cpu_max_cores": 0.0056,
+        "mem_max_mb": 68.39861248000001
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0008517771195853388,
+        "cpu_max_cores": 0.0167,
+        "mem_max_mb": 67.01449216
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.014230427002344809,
+        "cpu_max_cores": 0.0446,
+        "mem_max_mb": 113.03649279999999
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.015761838208071085,
+        "cpu_max_cores": 0.0395,
+        "mem_max_mb": 111.25391359999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.013744591509317538,
+        "cpu_max_cores": 0.05,
+        "mem_max_mb": 89.90490623999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.014085835493027271,
+        "cpu_max_cores": 0.2099,
+        "mem_max_mb": 81.97767168
+      },
+      {
+        "machine": "m3",
+        "container": "orderer3.example.com",
+        "cpu_mean_cores": 0.0033435394298407996,
+        "cpu_max_cores": 0.0106,
+        "mem_max_mb": 82.42855936
+      },
+      {
+        "machine": "m3",
+        "container": "node-exporter-m3",
+        "cpu_mean_cores": 7.374429223744293e-05,
+        "cpu_max_cores": 0.0071,
+        "mem_max_mb": 10.075766784
+      },
+      {
+        "machine": "m3",
+        "container": "cadvisor-m3",
+        "cpu_mean_cores": 0.0010375694187338023,
+        "cpu_max_cores": 0.0148,
+        "mem_max_mb": 27.609006079999997
+      },
+      {
+        "machine": "m3",
+        "container": "ca-court",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.277800448
+      },
+      {
+        "machine": "m3",
+        "container": "ca-audit",
+        "cpu_mean_cores": 1.050228310502283e-05,
+        "cpu_max_cores": 0.0018,
+        "mem_max_mb": 8.929673216
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.00036378501789460695,
+        "cpu_max_cores": 0.0047,
+        "mem_max_mb": 69.51010304
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.forensics.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0004456158213007528,
+        "cpu_max_cores": 0.0063,
+        "mem_max_mb": 71.13539584
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.013880735530050599,
+        "cpu_max_cores": 0.038,
+        "mem_max_mb": 111.149056
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.0147900160434407,
+        "cpu_max_cores": 0.0412,
+        "mem_max_mb": 108.4227584
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.014068286437122053,
+        "cpu_max_cores": 0.0482,
+        "mem_max_mb": 83.69733631999999
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.014006105763297543,
+        "cpu_max_cores": 0.049,
+        "mem_max_mb": 79.88051968
+      },
+      {
+        "machine": "m2",
+        "container": "orderer2.example.com",
+        "cpu_mean_cores": 0.0031330834258916453,
+        "cpu_max_cores": 0.0119,
+        "mem_max_mb": 69.49961728
+      },
+      {
+        "machine": "m2",
+        "container": "node-exporter-m2",
+        "cpu_mean_cores": 0.002727594718005677,
+        "cpu_max_cores": 0.0133,
+        "mem_max_mb": 9.974054912
+      },
+      {
+        "machine": "m2",
+        "container": "cadvisor-m2",
+        "cpu_mean_cores": 0.0008669659385412811,
+        "cpu_max_cores": 0.0081,
+        "mem_max_mb": 27.09520384
+      },
+      {
+        "machine": "m2",
+        "container": "ca-forensics",
+        "cpu_mean_cores": 0.0,
+        "cpu_max_cores": 0.0,
+        "mem_max_mb": 9.215934464
+      },
+      {
+        "machine": "m2",
+        "container": "ca-prosecution",
+        "cpu_mean_cores": 2.9680365296803653e-06,
+        "cpu_max_cores": 0.0013,
+        "mem_max_mb": 9.06493952
+      }
+    ]
+  }
+]

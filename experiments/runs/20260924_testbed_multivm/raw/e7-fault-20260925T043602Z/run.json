@@ -1,0 +1,17 @@
+{
+  "experiment": "E7 fault test",
+  "planFile": "fault-plan.json",
+  "startedAt": 1790311155285.698,
+  "lastArrivalAt": 1790311866710.698,
+  "finishedAt": 1790311911434.094,
+  "startedAtUtc": "2026-09-25T04:39:15.285Z",
+  "finishedAtUtc": "2026-09-25T04:51:51.434Z",
+  "apiUrl": "http://dias-backend:3001/api",
+  "loadGeneratorHost": "abd1bc33cdcd",
+  "arrivals": 83,
+  "completed": 79,
+  "failed": 4,
+  "ratePerMinute": 6,
+  "planSha256": "62b4f8b4815b89e1cc7da6b8194f398644197d1b1b61f435304e1e4d362eb37a",
+  "auditorPolicy": "automated: follows the recommendation as soon as it is ready; no human review time"
+}

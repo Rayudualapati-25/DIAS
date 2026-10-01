@@ -1,0 +1,21 @@
+function,in_flight,succeeded,failed,throughput_per_s,p50_ms,p95_ms,endorse_ms,orderer_submit_ms,commit_wait_ms
+W1 CreateAccessRequest,10,5645,0,90.962,104.397,124.764,39.353,2.608,66.052
+W1 CreateAccessRequest,25,6973,0,112.127,189.088,363.047,87.472,3.655,125.127
+W1 CreateAccessRequest,50,7866,0,122.699,218.254,1763.912,94.986,4.09,290.308
+W1 CreateAccessRequest,75,5920,0,89.145,280.15,3124.898,345.227,4.37,433.372
+W1 CreateAccessRequest,100,4087,0,63.256,404.018,4647.66,900.639,5.307,591.956
+W2 SubmitAuditorDecision,10,5645,0,72.936,130.707,166.161,42.585,2.85,89.68
+W2 SubmitAuditorDecision,25,6973,0,81.989,291.892,432.514,108.36,4.398,185.619
+W2 SubmitAuditorDecision,50,7866,0,90.646,541.705,652.402,118.14,4.639,417.365
+W2 SubmitAuditorDecision,75,5920,0,85.096,864.634,1102.325,118.526,4.631,753.737
+W2 SubmitAuditorDecision,100,4087,0,76.655,1273.103,1520.485,139.473,5.121,1117.639
+R1 GetRequest,10,64373,0,2145.611,4.372,7.136,,,
+R1 GetRequest,25,72161,0,2405.004,10.108,15.259,,,
+R1 GetRequest,50,74674,0,2488.671,19.022,29.676,,,
+R1 GetRequest,75,75253,0,2507.524,28.9,45.564,,,
+R1 GetRequest,100,75274,0,2508.593,39.345,66.799,,,
+R2 QueryAccessDecisions,10,71,0,2.281,4346.538,4534.607,,,
+R2 QueryAccessDecisions,25,50,0,1.195,20692.895,21759.029,,,
+R2 QueryAccessDecisions,50,0,50,0,,,,,
+R2 QueryAccessDecisions,75,0,75,0,,,,,
+R2 QueryAccessDecisions,100,0,100,0,,,,,

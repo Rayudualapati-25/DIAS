@@ -1,0 +1,26 @@
+[
+  {
+    "component": "LLM recommendation (model alone)",
+    "per_minute": 7.272874199478778
+  },
+  {
+    "component": "Whole approval/deny workflow (100 users)",
+    "per_minute": 8.164333333333333
+  },
+  {
+    "component": "Decision log, newest 50 (ledger read)",
+    "per_minute": 136.86
+  },
+  {
+    "component": "Auditor decision (ledger write)",
+    "per_minute": 5438.76
+  },
+  {
+    "component": "Create request (ledger write)",
+    "per_minute": 7361.94
+  },
+  {
+    "component": "Read one request (ledger)",
+    "per_minute": 150515.58
+  }
+]

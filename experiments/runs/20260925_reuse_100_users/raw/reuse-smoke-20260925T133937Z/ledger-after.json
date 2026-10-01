@@ -1,0 +1,123 @@
+{
+  "label": "after",
+  "atUtc": "2026-09-25T13:44:43.707Z",
+  "plan": "reuse-smoke",
+  "ledgerAuthorizationsAll": 6,
+  "ledgerAuthorizationsByStatus": {
+    "active": 6
+  },
+  "planAuthorizations": 6,
+  "planAuthorizationsByStatus": {
+    "active": 6
+  },
+  "planAuthorizationList": [
+    {
+      "authorizationId": "AUTH-8fbd7c96cdd98512",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "defense-preparation",
+        "recordId": "RUSMK004-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt004.const"
+      },
+      "originatingRequestId": "REQ-2be210ad3db0ab00",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:40:26.607Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-a0f1cdf009dcc748",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003-SIB2",
+        "purpose": "forensic-analysis",
+        "recordId": "RUSMK002-SIB2",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt002.sho"
+      },
+      "originatingRequestId": "REQ-989e31d19b95f9d5",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:41:05.093Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-a6dcc0b2f99c66a1",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "defense-preparation",
+        "recordId": "RUSMK004-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt004.const"
+      },
+      "originatingRequestId": "REQ-06d757d0a687c45b",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:40:57.874Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-c1f5e35bb2766618",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003",
+        "purpose": "forensic-analysis",
+        "recordId": "RUSMK002-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt002.sho"
+      },
+      "originatingRequestId": "REQ-2af197401313447a",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:41:37.711Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-e89486c47b6b3928",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "export",
+        "caseId": "CASE-2026-003-SIB1",
+        "purpose": "forensic-analysis",
+        "recordId": "RUSMK002-SIB1",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt002.sho"
+      },
+      "originatingRequestId": "REQ-ce5f9eec5eda8819",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:40:33.482Z",
+      "validUntilUtc": null
+    },
+    {
+      "authorizationId": "AUTH-f8a52f54c2cfcd00",
+      "status": "active",
+      "generation": 1,
+      "scope": {
+        "action": "view",
+        "caseId": "CASE-2026-003",
+        "purpose": "defense-preparation",
+        "recordId": "RUSMK004-BASE",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::lt004.const"
+      },
+      "originatingRequestId": "REQ-056198fbdff3bf43",
+      "llmRecommendation": "DENY",
+      "llmAgreement": "NOT_AGREED",
+      "createdAtUtc": "2026-09-25T13:41:30.091Z",
+      "validUntilUtc": null
+    }
+  ]
+}

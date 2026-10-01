@@ -1,0 +1,42 @@
+{
+  "10": {
+    "orderer_block_fill_s": 2.001080890092592,
+    "peer_endorsement_s": 0.003626106970196845,
+    "peer_block_processing_s": 0.0007247995962963044,
+    "blocks": 57.001884853669864,
+    "transactions": 85.50282728050479,
+    "tx_per_block": 1.4999999999999998
+  },
+  "25": {
+    "orderer_block_fill_s": 2.0008172301250013,
+    "peer_endorsement_s": 0.004046003905879535,
+    "peer_block_processing_s": 0.000692674804743187,
+    "blocks": 149.65929021413575,
+    "transactions": 224.4889353212036,
+    "tx_per_block": 1.4999999999999998
+  },
+  "50": {
+    "orderer_block_fill_s": 1.9213684083700215,
+    "peer_endorsement_s": 0.0031949890346090254,
+    "peer_block_processing_s": 0.0006847620789115637,
+    "blocks": 298.029573199909,
+    "transactions": 447.04435979986357,
+    "tx_per_block": 1.5000000000000002
+  },
+  "75": {
+    "orderer_block_fill_s": 2.0008921306328795,
+    "peer_endorsement_s": 0.003091131132927788,
+    "peer_block_processing_s": 0.0007165245466663184,
+    "blocks": 448.80746348794327,
+    "transactions": 681.7420733014492,
+    "tx_per_block": 1.5190078792434418
+  },
+  "100": {
+    "orderer_block_fill_s": 2.000959514796301,
+    "peer_endorsement_s": 0.0030137310834058035,
+    "peer_block_processing_s": 0.0007054881589225599,
+    "blocks": 598.0755004063058,
+    "transactions": 897.1132506094586,
+    "tx_per_block": 1.5
+  }
+}

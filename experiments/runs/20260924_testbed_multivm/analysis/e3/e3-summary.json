@@ -1,0 +1,1869 @@
+[
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 10,
+    "attempted": 5645,
+    "succeeded": 5645,
+    "failed": 0,
+    "durationS": 62.059,
+    "throughputPerS": 90.962,
+    "latencyMs": {
+      "mean": 108.013,
+      "p50": 104.397,
+      "p95": 124.764,
+      "max": 2079.61
+    },
+    "stagesMeanMs": {
+      "endorse": 39.353,
+      "ordererSubmit": 2.608,
+      "commitWait": 66.052
+    },
+    "startedAt": 1790316946798.489,
+    "finishedAt": 1790317008857.508,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 0.9954524377219169,
+      "m2": 1.555692360300751,
+      "m3": 1.501029741101696,
+      "m4": 0.2535495436227897
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.382400000000003,
+      "m2": 2.0903999999999976,
+      "m3": 2.0763999999999974,
+      "m4": 0.3308529364698333
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.271599104,
+      "m2": 1.480593408,
+      "m3": 1.512218624,
+      "m4": 1.120493568
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.5422076923076923,
+        "mem_max_mb": 106.32560640000001
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.5271692307692308,
+        "mem_max_mb": 102.20470272
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.5238692307692308,
+        "mem_max_mb": 102.85481984
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.5176384615384616,
+        "mem_max_mb": 96.77307904000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.5084153846153846,
+        "mem_max_mb": 103.09599232
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.3457153846153846,
+        "mem_max_mb": 141.6626176
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.02224317367754408
+      },
+      "peer_endorsement": {
+        "forensics": 0.0169957639461726,
+        "police": 0.010269035718193627,
+        "audit": 0.017348852516673067,
+        "prosecution": 0.019335792188131317,
+        "court": 0.019491083719884332
+      },
+      "peer_block_processing": {
+        "forensics": 0.009530134510556634,
+        "court": 0.009600328213051817,
+        "police": 0.0052464021055662205,
+        "audit": 0.009913561802303256,
+        "prosecution": 0.009738520934740884
+      }
+    }
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 10,
+    "attempted": 5645,
+    "succeeded": 5645,
+    "failed": 0,
+    "durationS": 77.397,
+    "throughputPerS": 72.936,
+    "latencyMs": {
+      "mean": 135.115,
+      "p50": 130.707,
+      "p95": 166.161,
+      "max": 2123.777
+    },
+    "stagesMeanMs": {
+      "endorse": 42.585,
+      "ordererSubmit": 2.85,
+      "commitWait": 89.68
+    },
+    "startedAt": 1790317029492.141,
+    "finishedAt": 1790317106888.935,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.00496249825737,
+      "m2": 1.5880750996684025,
+      "m3": 1.7602999774155927,
+      "m4": 0.19984819135315762
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.3314402271727441,
+      "m2": 2.0947999999999967,
+      "m3": 2.2123999999999957,
+      "m4": 0.24320000000000164
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.297408,
+      "m2": 1.5205376,
+      "m3": 1.508225024,
+      "m4": 1.136349184
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.7020066666666668,
+        "mem_max_mb": 117.85994240000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.6471466666666666,
+        "mem_max_mb": 113.6656384
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.6339466666666667,
+        "mem_max_mb": 109.4713344
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.62814,
+        "mem_max_mb": 111.25391359999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.6262000000000001,
+        "mem_max_mb": 113.6656384
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.36056000000000005,
+        "mem_max_mb": 160.2224128
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.019858764402672046
+      },
+      "peer_endorsement": {
+        "forensics": 0.013350027365414279,
+        "police": 0.00817372297546007,
+        "audit": 0.022979780941221162,
+        "prosecution": 0.013537846861779612,
+        "court": 0.012196875197227654
+      },
+      "peer_block_processing": {
+        "forensics": 0.0055546153295238185,
+        "court": 0.005513500196190482,
+        "police": 0.0034381610323809216,
+        "audit": 0.0011141676297710139,
+        "prosecution": 0.005505148832061073
+      }
+    }
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 10,
+    "attempted": 64373,
+    "succeeded": 64373,
+    "failed": 0,
+    "durationS": 30.002,
+    "throughputPerS": 2145.611,
+    "latencyMs": {
+      "mean": 4.627,
+      "p50": 4.372,
+      "p95": 7.136,
+      "max": 23.941
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317127485.904,
+    "finishedAt": 1790317157488.082,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 0.8628780872543279,
+      "m2": 0.876469793012013,
+      "m3": 0.6736900953115658,
+      "m4": 0.6099820292270267
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.712000000000004,
+      "m2": 1.5020000000000027,
+      "m3": 1.1032000000000006,
+      "m4": 1.1509841574651876
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.140363264,
+      "m2": 1.429581824,
+      "m3": 1.47894272,
+      "m4": 1.300021248
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.7452333333333333,
+        "mem_max_mb": 157.3912576
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.5129166666666667,
+        "mem_max_mb": 79.74420479999999
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.43488333333333334,
+        "mem_max_mb": 139.3557504
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.4221333333333333,
+        "mem_max_mb": 137.9926016
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.29555,
+        "mem_max_mb": 74.79492608
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.27795,
+        "mem_max_mb": 78.10842624
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "forensics": 0.001599555703211666,
+        "police": 0.0019187591982495452,
+        "prosecution": 0.0018766019615525115,
+        "court": 0.0017273206198118558
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 10,
+    "attempted": 71,
+    "succeeded": 71,
+    "failed": 0,
+    "durationS": 31.123,
+    "throughputPerS": 2.281,
+    "latencyMs": {
+      "mean": 4277.997,
+      "p50": 4346.538,
+      "p95": 4534.607,
+      "max": 4583.195
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317185642.24,
+    "finishedAt": 1790317216765.536,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 0.07269325805587692,
+      "m2": 0.10542305608153693,
+      "m3": 1.1317725105467864,
+      "m4": 0.07148082423385058
+    },
+    "machines_cpu_max_cores": {
+      "m1": 0.08559999999999945,
+      "m2": 0.12599999999999908,
+      "m3": 2.141371309704783,
+      "m4": 0.19033909149072545
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.1357184,
+      "m2": 1.425014784,
+      "m3": 1.60454656,
+      "m4": 1.166020608
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 1.33385,
+        "mem_max_mb": 88.04892672
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.68795,
+        "mem_max_mb": 218.628096
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.18921666666666667,
+        "mem_max_mb": 176.5801984
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.01315,
+        "mem_max_mb": 157.3912576
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.012133333333333335,
+        "mem_max_mb": 110.9393408
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.011116666666666665,
+        "mem_max_mb": 139.77518080000002
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "audit": 4.320625814649999
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 25,
+    "attempted": 6973,
+    "succeeded": 6973,
+    "failed": 0,
+    "durationS": 62.188,
+    "throughputPerS": 112.127,
+    "latencyMs": {
+      "mean": 216.254,
+      "p50": 189.088,
+      "p95": 363.047,
+      "max": 2233.837
+    },
+    "stagesMeanMs": {
+      "endorse": 87.472,
+      "ordererSubmit": 3.655,
+      "commitWait": 125.127
+    },
+    "startedAt": 1790317236776.659,
+    "finishedAt": 1790317298965.051,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.20042670157051,
+      "m2": 1.7806176786641974,
+      "m3": 1.7802337987441335,
+      "m4": 0.2963446487530769
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.677200000000002,
+      "m2": 2.380000000000007,
+      "m3": 2.344400000000004,
+      "m4": 0.3800000000000023
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.225576448,
+      "m2": 1.559912448,
+      "m3": 1.551618048,
+      "m4": 1.219411968
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.7062923076923078,
+        "mem_max_mb": 120.79595520000001
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.6245153846153847,
+        "mem_max_mb": 115.2385024
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.6127923076923077,
+        "mem_max_mb": 119.9570944
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.6110769230769231,
+        "mem_max_mb": 117.1259392
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.6047769230769231,
+        "mem_max_mb": 119.013376
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.4249384615384616,
+        "mem_max_mb": 171.2324608
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.07361259496708468
+      },
+      "peer_endorsement": {
+        "forensics": 0.04451642168463844,
+        "police": 0.016701098261437747,
+        "audit": 0.04667613988400852,
+        "prosecution": 0.04337645912350853,
+        "court": 0.04498586886313846
+      },
+      "peer_block_processing": {
+        "forensics": 0.019145486798518494,
+        "court": 0.01939534203555558,
+        "police": 0.008604997642072268,
+        "audit": 0.018739291289968606,
+        "prosecution": 0.019478700642072216
+      }
+    }
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 25,
+    "attempted": 6973,
+    "succeeded": 6973,
+    "failed": 0,
+    "durationS": 85.048,
+    "throughputPerS": 81.989,
+    "latencyMs": {
+      "mean": 298.377,
+      "p50": 291.892,
+      "p95": 432.514,
+      "max": 2210.359
+    },
+    "stagesMeanMs": {
+      "endorse": 108.36,
+      "ordererSubmit": 4.398,
+      "commitWait": 185.619
+    },
+    "startedAt": 1790317319728.941,
+    "finishedAt": 1790317404776.5,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.1421281006374402,
+      "m2": 1.8928769354491537,
+      "m3": 1.9730095726582293,
+      "m4": 0.23242217154842976
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.4812000000000034,
+      "m2": 2.359600000000012,
+      "m3": 2.449599999999998,
+      "m4": 0.2864458313330103
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.283743744,
+      "m2": 1.604993024,
+      "m3": 1.593409536,
+      "m4": 1.218809856
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.8673470588235294,
+        "mem_max_mb": 130.8622848
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.7683352941176471,
+        "mem_max_mb": 127.50684159999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.7485588235294118,
+        "mem_max_mb": 126.77283840000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.746929411764706,
+        "mem_max_mb": 122.8931072
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.746564705882353,
+        "mem_max_mb": 126.877696
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.3674235294117647,
+        "mem_max_mb": 211.4977792
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.11043541584370213
+      },
+      "peer_endorsement": {
+        "forensics": 0.05487356903454447,
+        "police": 0.023995624722020773,
+        "audit": 0.03317932661423327,
+        "prosecution": 0.05167393643802904,
+        "court": 0.04904108659143063
+      },
+      "peer_block_processing": {
+        "forensics": 0.008673768671191523,
+        "court": 0.00832358709214496,
+        "police": 0.004369471113808723,
+        "audit": 0.0018534683074581488,
+        "prosecution": 0.00837430693481466
+      }
+    }
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 25,
+    "attempted": 72161,
+    "succeeded": 72161,
+    "failed": 0,
+    "durationS": 30.005,
+    "throughputPerS": 2405.004,
+    "latencyMs": {
+      "mean": 10.309,
+      "p50": 10.108,
+      "p95": 15.259,
+      "max": 57.327
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317426270.386,
+    "finishedAt": 1790317456274.914,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.0189063137921774,
+      "m2": 0.9039068537203159,
+      "m3": 0.7257239071347135,
+      "m4": 0.6653038184815487
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.7647999999999917,
+      "m2": 1.1516000000000042,
+      "m3": 1.1058672959244915,
+      "m4": 1.1781413769652365
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.206943744,
+      "m2": 1.510096896,
+      "m3": 1.559089152,
+      "m4": 1.324703744
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.8428,
+        "mem_max_mb": 187.9048192
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.5540166666666667,
+        "mem_max_mb": 80.67743743999999
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.31961666666666666,
+        "mem_max_mb": 166.0944384
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.31426666666666664,
+        "mem_max_mb": 169.7644544
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.22248333333333334,
+        "mem_max_mb": 76.32584704000001
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.20725000000000002,
+        "mem_max_mb": 174.2733312
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "forensics": 0.0019096060537191822,
+        "police": 0.0035094854630094508,
+        "prosecution": 0.002158207743921141,
+        "court": 0.0020178494802027365
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 25,
+    "attempted": 50,
+    "succeeded": 50,
+    "failed": 0,
+    "durationS": 41.833,
+    "throughputPerS": 1.195,
+    "latencyMs": {
+      "mean": 20605.868,
+      "p50": 20692.895,
+      "p95": 21759.029,
+      "max": 21888.993
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317485615.16,
+    "finishedAt": 1790317527447.907,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 0.06804195460343618,
+      "m2": 0.09679905617640815,
+      "m3": 1.3954394915062778,
+      "m4": 0.06400042896308192
+    },
+    "machines_cpu_max_cores": {
+      "m1": 0.08279999999999973,
+      "m2": 0.11480000000000246,
+      "m3": 2.226267152058246,
+      "m4": 0.18999999999999717
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.174360064,
+      "m2": 1.512349696,
+      "m3": 2.11687424,
+      "m4": 1.171488768
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 1.450925,
+        "mem_max_mb": 104.74225664
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.6367625,
+        "mem_max_mb": 325.6877056
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.16543750000000002,
+        "mem_max_mb": 532.8863232
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.0137125,
+        "mem_max_mb": 188.6388224
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.0128,
+        "mem_max_mb": 110.5199104
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.0124375,
+        "mem_max_mb": 165.9895808
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "audit": 20.633198823920008
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 50,
+    "attempted": 7866,
+    "succeeded": 7866,
+    "failed": 0,
+    "durationS": 64.108,
+    "throughputPerS": 122.699,
+    "latencyMs": {
+      "mean": 389.385,
+      "p50": 218.254,
+      "p95": 1763.912,
+      "max": 6341.994
+    },
+    "stagesMeanMs": {
+      "endorse": 94.986,
+      "ordererSubmit": 4.09,
+      "commitWait": 290.308
+    },
+    "startedAt": 1790317547457.986,
+    "finishedAt": 1790317611565.937,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.39274711773718,
+      "m2": 1.8154661991175405,
+      "m3": 1.8296073755719746,
+      "m4": 0.2938026805760272
+    },
+    "machines_cpu_max_cores": {
+      "m1": 2.0063999999999957,
+      "m2": 2.4774972996759685,
+      "m3": 2.4536000000000024,
+      "m4": 0.38400000000000206
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.29189888,
+      "m2": 1.683423232,
+      "m3": 1.644498944,
+      "m4": 1.242853376
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.8684923076923077,
+        "mem_max_mb": 134.6371584
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.7228076923076923,
+        "mem_max_mb": 126.98255359999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.7081923076923077,
+        "mem_max_mb": 141.1383296
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.7066153846153846,
+        "mem_max_mb": 125.0951168
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.7044307692307693,
+        "mem_max_mb": 124.9902592
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.5166076923076923,
+        "mem_max_mb": 211.07834880000001
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.06941164188582541
+      },
+      "peer_endorsement": {
+        "forensics": 0.04899078543252182,
+        "police": 0.023619198501017215,
+        "audit": 0.05142869302057772,
+        "prosecution": 0.049240838337070644,
+        "court": 0.04907184894908874
+      },
+      "peer_block_processing": {
+        "forensics": 0.01896270129554649,
+        "court": 0.01968050389370634,
+        "police": 0.01300135965052351,
+        "audit": 0.018953581677197795,
+        "prosecution": 0.019161942796472143
+      }
+    }
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 50,
+    "attempted": 7866,
+    "succeeded": 7866,
+    "failed": 0,
+    "durationS": 86.778,
+    "throughputPerS": 90.646,
+    "latencyMs": {
+      "mean": 540.144,
+      "p50": 541.705,
+      "p95": 652.402,
+      "max": 2249.499
+    },
+    "stagesMeanMs": {
+      "endorse": 118.14,
+      "ordererSubmit": 4.639,
+      "commitWait": 417.365
+    },
+    "startedAt": 1790317632602.416,
+    "finishedAt": 1790317719379.936,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.160878381473479,
+      "m2": 1.8658583731032161,
+      "m3": 1.9798670319496883,
+      "m4": 0.23857960912206064
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.3932000000000027,
+      "m2": 2.2716000000000123,
+      "m3": 2.4295999999999958,
+      "m4": 0.277200000000002
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.24719104,
+      "m2": 1.607184384,
+      "m3": 1.64067328,
+      "m4": 1.24092416
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.77175,
+        "mem_max_mb": 125.51454720000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.7215222222222222,
+        "mem_max_mb": 119.3279488
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.6977388888888889,
+        "mem_max_mb": 116.49679359999999
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.678,
+        "mem_max_mb": 116.391936
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.6769333333333334,
+        "mem_max_mb": 139.984896
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.4015222222222222,
+        "mem_max_mb": 232.4692992
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.06505212997792229
+      },
+      "peer_endorsement": {
+        "forensics": 0.05012659901620805,
+        "police": 0.021124306841126074,
+        "audit": 0.03332536304898598,
+        "prosecution": 0.050159566699070984,
+        "court": 0.04815647031165742
+      },
+      "peer_block_processing": {
+        "forensics": 0.008286631235824661,
+        "court": 0.008327264914838588,
+        "police": 0.0045573872295720155,
+        "audit": 0.002037866712162188,
+        "prosecution": 0.008053610991935349
+      }
+    }
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 50,
+    "attempted": 74674,
+    "succeeded": 74674,
+    "failed": 0,
+    "durationS": 30.006,
+    "throughputPerS": 2488.671,
+    "latencyMs": {
+      "mean": 19.705,
+      "p50": 19.022,
+      "p95": 29.676,
+      "max": 96.062
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317740253.894,
+    "finishedAt": 1790317770259.467,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.1555046456407918,
+      "m2": 0.3554298897313131,
+      "m3": 0.2769731110998961,
+      "m4": 0.6884910977349786
+    },
+    "machines_cpu_max_cores": {
+      "m1": 2.0711999999999997,
+      "m2": 0.45925511061326185,
+      "m3": 0.5399136138217976,
+      "m4": 1.18
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.219567616,
+      "m2": 1.56813312,
+      "m3": 1.589665792,
+      "m4": 1.350393856
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 1.0713833333333334,
+        "mem_max_mb": 223.2418304
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.7094166666666667,
+        "mem_max_mb": 85.74205952
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.10333333333333333,
+        "mem_max_mb": 201.53630719999998
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.09546666666666666,
+        "mem_max_mb": 201.1168768
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.06621666666666666,
+        "mem_max_mb": 215.90179840000002
+      },
+      {
+        "machine": "m2",
+        "container": "dev-peer0.prosecution.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.06596666666666666,
+        "mem_max_mb": 78.42299904000001
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "forensics": 0.001807767769841507,
+        "police": 0.006807328327628393,
+        "prosecution": 0.002081372390188976,
+        "court": 0.0020485510617612775
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 50,
+    "attempted": 50,
+    "succeeded": 0,
+    "failed": 50,
+    "durationS": 30.058,
+    "throughputPerS": 0,
+    "latencyMs": {
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790317799879.099,
+    "finishedAt": 1790317829936.674,
+    "errors": [
+      "1 CANCELLED: Call cancelled",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.001s,LB pick: 0.001s,remote_addr=10.20.0.33:11051"
+    ],
+    "machines_cpu_mean_cores": {
+      "m1": 0.07051292002444019,
+      "m2": 0.10251422712281154,
+      "m3": 1.2222993520463024,
+      "m4": 0.06462596632863608
+    },
+    "machines_cpu_max_cores": {
+      "m1": 0.0807903051633808,
+      "m2": 0.12717965125579367,
+      "m3": 2.2323571771483532,
+      "m4": 0.17557893052833493
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.20635392,
+      "m2": 1.528786944,
+      "m3": 2.218995712,
+      "m4": 1.175097344
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 1.4891166666666666,
+        "mem_max_mb": 135.790592
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.6459166666666666,
+        "mem_max_mb": 453.1945472
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.14821666666666666,
+        "mem_max_mb": 555.0112767999999
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.0126,
+        "mem_max_mb": 196.2934272
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.012433333333333333,
+        "mem_max_mb": 110.72962559999999
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.0113,
+        "mem_max_mb": 221.45925119999998
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {},
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 75,
+    "attempted": 5920,
+    "succeeded": 5920,
+    "failed": 0,
+    "durationS": 66.409,
+    "throughputPerS": 89.145,
+    "latencyMs": {
+      "mean": 782.969,
+      "p50": 280.15,
+      "p95": 3124.898,
+      "max": 20462.465
+    },
+    "stagesMeanMs": {
+      "endorse": 345.227,
+      "ordererSubmit": 4.37,
+      "commitWait": 433.372
+    },
+    "startedAt": 1790317849961.809,
+    "finishedAt": 1790317916370.601,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.060625128128078,
+      "m2": 1.3558044999045122,
+      "m3": 2.38794584177989,
+      "m4": 0.22783004537009327
+    },
+    "machines_cpu_max_cores": {
+      "m1": 2.120775844831043,
+      "m2": 2.487999999999988,
+      "m3": 2.5397142971469777,
+      "m4": 0.4160000000000042
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.27690752,
+      "m2": 1.61196032,
+      "m3": 2.820489216,
+      "m4": 1.24381184
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.8644692307692308,
+        "mem_max_mb": 152.25323519999998
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.5937076923076923,
+        "mem_max_mb": 135.05658880000001
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.5017538461538462,
+        "mem_max_mb": 133.3788672
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.4956461538461539,
+        "mem_max_mb": 127.29712640000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.49052307692307695,
+        "mem_max_mb": 123.10282240000001
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.4151076923076923,
+        "mem_max_mb": 452.77511680000003
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.0729013991189651
+      },
+      "peer_endorsement": {
+        "forensics": 0.050688501672271576,
+        "police": 0.0267130467108754,
+        "audit": 1.7077202748302194,
+        "prosecution": 0.048118628681440644,
+        "court": 0.048034678215464074
+      },
+      "peer_block_processing": {
+        "forensics": 0.018878821374764668,
+        "court": 0.017989834733333217,
+        "police": 0.01731736806206914,
+        "audit": 0.01827335130601091,
+        "prosecution": 0.018977635367458903
+      }
+    }
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 75,
+    "attempted": 5920,
+    "succeeded": 5920,
+    "failed": 0,
+    "durationS": 69.569,
+    "throughputPerS": 85.096,
+    "latencyMs": {
+      "mean": 876.894,
+      "p50": 864.634,
+      "p95": 1102.325,
+      "max": 1425.499
+    },
+    "stagesMeanMs": {
+      "endorse": 118.526,
+      "ordererSubmit": 4.631,
+      "commitWait": 753.737
+    },
+    "startedAt": 1790317937101.891,
+    "finishedAt": 1790318006670.462,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.0238794657559596,
+      "m2": 1.748091971061276,
+      "m3": 1.8500815709457805,
+      "m4": 0.22514458093705975
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.4654344695151253,
+      "m2": 2.236799999999988,
+      "m3": 2.4515999999999987,
+      "m4": 0.28759999999999936
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.290252288,
+      "m2": 1.63588096,
+      "m3": 2.65279488,
+      "m4": 1.2346368
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.8771142857142857,
+        "mem_max_mb": 145.9617792
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.7670714285714286,
+        "mem_max_mb": 128.3457024
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.7560071428571428,
+        "mem_max_mb": 136.839168
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.7536214285714287,
+        "mem_max_mb": 130.547712
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.7385357142857142,
+        "mem_max_mb": 161.7952768
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.39482142857142855,
+        "mem_max_mb": 242.1161984
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.10780148710214736
+      },
+      "peer_endorsement": {
+        "forensics": 0.04304892762905615,
+        "police": 0.02245745487535565,
+        "audit": 0.03512776340215069,
+        "prosecution": 0.04196696413040329,
+        "court": 0.04817890218840029
+      },
+      "peer_block_processing": {
+        "forensics": 0.007816384317290577,
+        "court": 0.008388683875000056,
+        "police": 0.004447234878136137,
+        "audit": 0.0021969773536804683,
+        "prosecution": 0.007690166998204554
+      }
+    }
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 75,
+    "attempted": 75253,
+    "succeeded": 75253,
+    "failed": 0,
+    "durationS": 30.011,
+    "throughputPerS": 2507.524,
+    "latencyMs": {
+      "mean": 29.42,
+      "p50": 28.9,
+      "p95": 45.564,
+      "max": 122.061
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318027926.303,
+    "finishedAt": 1790318057937.182,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.5461618720129786,
+      "m2": 1.0390692954364698,
+      "m3": 1.0063999999999995,
+      "m4": 0.5992800283693764
+    },
+    "machines_cpu_max_cores": {
+      "m1": 2.2225334080179224,
+      "m2": 1.710400000000002,
+      "m3": 1.811600000000002,
+      "m4": 1.1768000000000047
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.242464256,
+      "m2": 1.604337664,
+      "m3": 1.680601088,
+      "m4": 1.304809472
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 1.2686333333333335,
+        "mem_max_mb": 238.6558976
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.6759499999999999,
+        "mem_max_mb": 87.10520831999999
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.14603333333333332,
+        "mem_max_mb": 118.1745152
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.11423333333333334,
+        "mem_max_mb": 207.4083328
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.10898333333333333,
+        "mem_max_mb": 231.94501119999998
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0783,
+        "mem_max_mb": 76.58799104
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "forensics": 0.002110580202775793,
+        "police": 0.009415648465300538,
+        "prosecution": 0.002461393475228644,
+        "court": 0.0022165285772706572
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 75,
+    "attempted": 75,
+    "succeeded": 0,
+    "failed": 75,
+    "durationS": 30.067,
+    "throughputPerS": 0,
+    "latencyMs": {
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318087770.623,
+    "finishedAt": 1790318117837.685,
+    "errors": [
+      "1 CANCELLED: Call cancelled",
+      "4 DEADLINE_EXCEEDED: evaluate timeout expired",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.001s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.001s,LB pick: 0.002s,remote_addr=10.20.0.33:11051"
+    ],
+    "machines_cpu_mean_cores": {
+      "m1": 0.06954502468078996,
+      "m2": 0.10634095108586945,
+      "m3": 1.057674617912246,
+      "m4": 0.08684482667277907
+    },
+    "machines_cpu_max_cores": {
+      "m1": 0.08278344331133292,
+      "m2": 0.1224000000000035,
+      "m3": 2.2696539307861565,
+      "m4": 0.232344237383027
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.20195072,
+      "m2": 1.556824064,
+      "m3": 2.408595456,
+      "m4": 1.191374848
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 1.7245333333333335,
+        "mem_max_mb": 167.247872
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.45943333333333336,
+        "mem_max_mb": 577.5556607999999
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.0684,
+        "mem_max_mb": 503.21162239999995
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.012033333333333333,
+        "mem_max_mb": 111.25391359999999
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.011116666666666665,
+        "mem_max_mb": 202.4800256
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.009833333333333333,
+        "mem_max_mb": 233.5178752
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {},
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "W1 CreateAccessRequest",
+    "level": 100,
+    "attempted": 4087,
+    "succeeded": 4087,
+    "failed": 0,
+    "durationS": 64.611,
+    "throughputPerS": 63.256,
+    "latencyMs": {
+      "mean": 1497.902,
+      "p50": 404.018,
+      "p95": 4647.66,
+      "max": 30887.205
+    },
+    "stagesMeanMs": {
+      "endorse": 900.639,
+      "ordererSubmit": 5.307,
+      "commitWait": 591.956
+    },
+    "startedAt": 1790318137854.483,
+    "finishedAt": 1790318202465.12,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 0.625134095365316,
+      "m2": 0.6565977883604976,
+      "m3": 2.380825798689713,
+      "m4": 0.12819036365679318
+    },
+    "machines_cpu_max_cores": {
+      "m1": 2.1336534613845535,
+      "m2": 2.190799999999996,
+      "m3": 2.5079999999999982,
+      "m4": 0.3760451254150512
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.342312448,
+      "m2": 1.670729728,
+      "m3": 3.0959616,
+      "m4": 1.228525568
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.9600153846153846,
+        "mem_max_mb": 182.976512
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.47155384615384616,
+        "mem_max_mb": 566.3358976000001
+      },
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.4304538461538462,
+        "mem_max_mb": 148.5832192
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.38933076923076926,
+        "mem_max_mb": 123.10282240000001
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.36704615384615386,
+        "mem_max_mb": 150.05122559999998
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.3549,
+        "mem_max_mb": 1191.8534246400002
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.09087948019796824
+      },
+      "peer_endorsement": {
+        "forensics": 0.05409187683861774,
+        "police": 0.025860472578627343,
+        "audit": 1.9051329405877477,
+        "prosecution": 0.0547525617862618,
+        "court": 0.0515815126844626
+      },
+      "peer_block_processing": {
+        "forensics": 0.02144858144062565,
+        "court": 0.019475613539822936,
+        "police": 0.016361703815189907,
+        "audit": 0.019333845860248357,
+        "prosecution": 0.01956327255421653
+      }
+    }
+  },
+  {
+    "round": "W2 SubmitAuditorDecision",
+    "level": 100,
+    "attempted": 4087,
+    "succeeded": 4087,
+    "failed": 0,
+    "durationS": 53.317,
+    "throughputPerS": 76.655,
+    "latencyMs": {
+      "mean": 1262.233,
+      "p50": 1273.103,
+      "p95": 1520.485,
+      "max": 2155.978
+    },
+    "stagesMeanMs": {
+      "endorse": 139.473,
+      "ordererSubmit": 5.121,
+      "commitWait": 1117.639
+    },
+    "startedAt": 1790318223184.651,
+    "finishedAt": 1790318276501.658,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.1567167905276436,
+      "m2": 1.6875396729244718,
+      "m3": 1.9137682544975112,
+      "m4": 0.20982497656697827
+    },
+    "machines_cpu_max_cores": {
+      "m1": 1.6443999999999994,
+      "m2": 2.4043847015522517,
+      "m3": 2.5960730995321315,
+      "m4": 0.2732000000000022
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.267044352,
+      "m2": 1.676251136,
+      "m3": 1.801027584,
+      "m4": 1.214558208
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "couchdb-police",
+        "cpu_mean_cores": 0.9745727272727273,
+        "mem_max_mb": 143.44519680000002
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-forensics",
+        "cpu_mean_cores": 0.8438545454545455,
+        "mem_max_mb": 138.09745919999997
+      },
+      {
+        "machine": "m2",
+        "container": "couchdb-prosecution",
+        "cpu_mean_cores": 0.7991272727272727,
+        "mem_max_mb": 125.1999744
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 0.7816181818181818,
+        "mem_max_mb": 178.782208
+      },
+      {
+        "machine": "m3",
+        "container": "couchdb-court",
+        "cpu_mean_cores": 0.7600363636363636,
+        "mem_max_mb": 121.110528
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.34134545454545456,
+        "mem_max_mb": 245.4716416
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {
+        "m1": 0.0751476673375973
+      },
+      "peer_endorsement": {
+        "forensics": 0.05512427122216285,
+        "police": 0.02170890123664974,
+        "audit": 0.03971134299871946,
+        "prosecution": 0.05419255109178702,
+        "court": 0.05926423503580474
+      },
+      "peer_block_processing": {
+        "forensics": 0.008847980027638333,
+        "court": 0.008266016738035063,
+        "police": 0.004661629715365269,
+        "audit": 0.002410660731457732,
+        "prosecution": 0.009079122756344947
+      }
+    }
+  },
+  {
+    "round": "R1 GetRequest",
+    "level": 100,
+    "attempted": 75274,
+    "succeeded": 75274,
+    "failed": 0,
+    "durationS": 30.006,
+    "throughputPerS": 2508.593,
+    "latencyMs": {
+      "mean": 39.367,
+      "p50": 39.345,
+      "p95": 66.799,
+      "max": 200.779
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318296949.712,
+    "finishedAt": 1790318326956.178,
+    "errors": [],
+    "machines_cpu_mean_cores": {
+      "m1": 1.067402164984364,
+      "m2": 0.5515577573609111,
+      "m3": 0.39560940349998874,
+      "m4": 0.6363010798373835
+    },
+    "machines_cpu_max_cores": {
+      "m1": 2.121200000000005,
+      "m2": 0.6868000000000006,
+      "m3": 0.7818436312737412,
+      "m4": 1.1797415689882824
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.253011456,
+      "m2": 1.59096832,
+      "m3": 1.678757888,
+      "m4": 1.305071616
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 1.1983833333333334,
+        "mem_max_mb": 238.2364672
+      },
+      {
+        "machine": "m1",
+        "container": "dev-peer0.police.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.6286333333333334,
+        "mem_max_mb": 85.78400256
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.2033,
+        "mem_max_mb": 204.47232
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.court.example.com",
+        "cpu_mean_cores": 0.17683333333333331,
+        "mem_max_mb": 221.249536
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.court.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.116,
+        "mem_max_mb": 77.00742144
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.forensics.example.com",
+        "cpu_mean_cores": 0.10635,
+        "mem_max_mb": 219.3620992
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {
+        "forensics": 0.0025172286531558027,
+        "police": 0.007569453131833921,
+        "prosecution": 0.0030910033264010656,
+        "court": 0.0025750991828357773
+      },
+      "peer_block_processing": {}
+    }
+  },
+  {
+    "round": "R2 QueryAccessDecisions",
+    "level": 100,
+    "attempted": 100,
+    "succeeded": 0,
+    "failed": 100,
+    "durationS": 30.07,
+    "throughputPerS": 0,
+    "latencyMs": {
+      "mean": null,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "stagesMeanMs": {
+      "endorse": null,
+      "ordererSubmit": null,
+      "commitWait": null
+    },
+    "startedAt": 1790318356538.662,
+    "finishedAt": 1790318386608.491,
+    "errors": [
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,LB pick: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.006s,metadata filters: 0.002s,LB pick: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.001s,LB pick: 0.002s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.001s,time to current attempt start: 0.001s,LB pick: 0.001s,remote_addr=10.20.0.33:11051",
+      "4 DEADLINE_EXCEEDED: Deadline exceeded after 30.005s,metadata filters: 0.002s,LB pick: 0.001s,remote_addr=10.20.0.33:11051"
+    ],
+    "machines_cpu_mean_cores": {
+      "m1": 0.0765085761992701,
+      "m2": 0.10439932000785997,
+      "m3": 1.1282267463585824,
+      "m4": 0.07657547865454621
+    },
+    "machines_cpu_max_cores": {
+      "m1": 0.0919999999999925,
+      "m2": 0.1256000000000006,
+      "m3": 2.281599999999986,
+      "m4": 0.21120000000000347
+    },
+    "machines_mem_max_gb": {
+      "m1": 1.210056704,
+      "m2": 1.57331456,
+      "m3": 2.642137088,
+      "m4": 1.163493376
+    },
+    "top_containers_cpu_mean_cores": [
+      {
+        "machine": "m3",
+        "container": "couchdb-audit",
+        "cpu_mean_cores": 1.5233833333333333,
+        "mem_max_mb": 170.6033152
+      },
+      {
+        "machine": "m3",
+        "container": "peer0.audit.example.com",
+        "cpu_mean_cores": 0.6266333333333334,
+        "mem_max_mb": 707.9985152
+      },
+      {
+        "machine": "m3",
+        "container": "dev-peer0.audit.example.com-diasrecords_2.3-adc3472e0c7f6d13d4110347673ef872d67a85cc3bf855bedad93020a127f59f",
+        "cpu_mean_cores": 0.1748833333333333,
+        "mem_max_mb": 543.0575104
+      },
+      {
+        "machine": "m2",
+        "container": "peer0.prosecution.example.com",
+        "cpu_mean_cores": 0.012799999999999999,
+        "mem_max_mb": 204.996608
+      },
+      {
+        "machine": "m1",
+        "container": "peer0.police.example.com",
+        "cpu_mean_cores": 0.011349999999999999,
+        "mem_max_mb": 235.3004544
+      },
+      {
+        "machine": "m4",
+        "container": "prometheus",
+        "cpu_mean_cores": 0.010466666666666666,
+        "mem_max_mb": 111.25391359999999
+      }
+    ],
+    "fabric_metrics_mean_s": {
+      "orderer_block_fill": {},
+      "peer_endorsement": {},
+      "peer_block_processing": {}
+    }
+  }
+]
