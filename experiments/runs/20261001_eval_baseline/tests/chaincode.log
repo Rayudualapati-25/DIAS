@@ -1,0 +1,331 @@
+
+> crimerecords@1.0.0 test
+> nyc mocha --recursive 'test/**/*.test.js'
+
+
+
+  architecture guard: the DIAS runtime has no policy engine
+    ✔ the deployed contracts never load the retained rule engine or disagreement guard
+    ✔ the chaincode package excludes every retained policy-engine module
+    ✔ runtime modules stay inside the package and never reach the offline oracle or guard
+    ✔ loads the DIAS modules for verified requests, authorization, and lifecycle
+    ✔ never loads an LLM recommendation, provenance, or model-registration module
+
+  rank ladder
+    ✔ orders each department from low to high
+    ✔ gives every role in every department a rank
+    ✔ never compares ranks across departments
+
+  authority resolution
+    ✔ makes the highest-ranked officer at a station its head
+    ✔ makes the highest-ranked officer in a district its head
+    ✔ keeps departments separate
+    ✔ routes a request to the station head when that head has the clearance
+    ✔ routes past a station head who lacks the clearance, up to the district head
+    ✔ skips the station tier for a requester with no station
+    ✔ never routes a request to the requester themselves
+    ✔ returns nothing when no authority in reach holds the clearance
+
+  canonical ledger state
+    the serializer is independent of insertion order
+      ✔ produces identical bytes for the same content inserted in any order
+      ✔ survives the spread that caused the divergence
+      ✔ canonicalises nested objects and preserves array order
+      ✔ still distinguishes different content
+      ✔ refuses anything that is not a JSON object
+      ✔ writes the canonical bytes through putJson
+    no contract may bypass the serializer
+      ✔ accessContract.js writes JSON state only through putJson
+      ✔ accessContract.js never serialises STATE with JSON.stringify
+      ✔ accessContract.js builds no event payload from spread state
+      ✔ auditContract.js writes JSON state only through putJson
+      ✔ auditContract.js never serialises STATE with JSON.stringify
+      ✔ auditContract.js builds no event payload from spread state
+      ✔ governanceContract.js writes JSON state only through putJson
+      ✔ governanceContract.js never serialises STATE with JSON.stringify
+      ✔ governanceContract.js builds no event payload from spread state
+      ✔ recordContract.js writes JSON state only through putJson
+      ✔ recordContract.js never serialises STATE with JSON.stringify
+      ✔ recordContract.js builds no event payload from spread state
+      ✔ userContract.js writes JSON state only through putJson
+      ✔ userContract.js never serialises STATE with JSON.stringify
+      ✔ userContract.js builds no event payload from spread state
+      ✔ every contract imports the shared writer
+
+  DIAS access workflow safeguards
+    request submission
+      ✔ commits the structured action and purpose and keeps identity out of the verified request
+      ✔ rejects invalid request fields
+      ✔ binds the request to the certificate-matched UserProfile
+    auditor decision stage
+      ✔ allows only AuditMSP district heads, with a valid decision and LLM agreement
+      ✔ prevents a requester from deciding their own request
+      ✔ rejects a decision when governed facts changed after the request
+      ✔ bounds revocation reasons and identifiers
+    read access
+      ✔ limits a request to its requester and district heads
+      ✔ shows district heads the pending queue with the committed request only
+      ✔ lets district heads query authorizations and their history
+      ✔ limits access decisions to their subject and district heads
+
+  DIAS access workflow
+    request log
+      ✔ records who asked for which record and waits for the auditor
+      ✔ writes the LLM recommendation value but none of its reasoning or provenance
+    decision log: auditor FORCE_ALLOW that agreed with an LLM ALLOW
+      ✔ grants access, records AGREED, and creates no dynamic authorization
+    decision log: auditor FORCE_DENY that agreed with an LLM DENY
+      ✔ denies access without creating a dynamic authorization
+    decision log: auditor FORCE_ALLOW that did not agree with an LLM DENY
+      ✔ grants access and creates an exact-record dynamic authorization
+    decision log: auditor FORCE_DENY that did not agree with an LLM ALLOW
+      ✔ denies access, records NOT_AGREED, and creates no dynamic authorization
+    decision log: no LLM recommendation
+      ✔ lets the auditor decide and never creates a dynamic authorization
+    public decision log
+      ✔ lets any signed-in member read who asked for what and what was decided
+      ✔ shows an automatic grant as decided by its dynamic authorization
+      ✔ returns the newest entries first and refuses an out-of-range limit
+    reuse of an active dynamic authorization
+      ✔ grants a repeat request with the auditor recorded as skipped
+    no broad reuse
+      ✔ does not reuse the authorization for another record, action, purpose, or user
+      ✔ does not reuse the authorization after a governed fact changes
+    explicit revocation
+      ✔ requires a district head and a reason, records the change, and stops reuse
+      ✔ creates a new generation when a revoked scope is approved again
+    expiry
+      ✔ stops reuse after validUntilUtc and records the expiry transition
+      ✔ rejects an expiry when no dynamic authorization is created
+    FORCE_DENY
+      ✔ never revokes other authorizations
+
+  AuditContract
+    GetRequestAuditTrail
+      ✔ reconstructs a reviewed request that created a dynamic authorization
+      ✔ reconstructs a reused authorization with the auditor skipped, and a later revocation
+      ✔ lets the requester read their own trail and refuses other identities
+    record-level trail and verification
+      ✔ lists the DIAS requests and release grants for a record
+      ✔ confirms a matching payload hash and flags a tampered one
+    direct-ledger access events
+      ✔ derives the actor from the signing identity and stores the event
+      ✔ allows reviewers to query and rejects ordinary departments
+      ✔ rejects malformed event fields and limits
+
+  DIAS dynamic authorization scope
+    ✔ is exact: user, record, case, action, and purpose each change the scope
+
+  DIAS dynamic authorization creation
+    ✔ records the originating request, auditor decision, LLM agreement, scope, and conditions
+    ✔ is refused unless the auditor FORCE_ALLOW did not agree with an LLM DENY
+    ✔ validates identifiers, auditor identity, and expiry
+    ✔ increments the generation when it replaces an earlier authorization
+
+  DIAS dynamic authorization matching
+    ✔ matches only an active, unexpired authorization with unchanged conditions
+    ✔ does not match when no authorization or a different scope is stored
+    ✔ reports revoked, superseded, expired, and changed-condition misses
+
+  DIAS dynamic authorization state transitions
+    ✔ revokes without mutating the previous state
+    ✔ expires and supersedes with an incremented state version
+
+  DIAS lifecycle events
+    ✔ writes ordered, transaction-bound events under the request ID
+    ✔ keeps request event streams isolated even when IDs share a prefix
+    ✔ stores authorization events in their own key space
+    ✔ emits one chaincode event naming every committed stage
+
+  DIAS verified request
+    ✔ builds the documented shape with booleans and nulls normalized
+    ✔ rejects missing groups, extra fields, and wrong types
+    ✔ hashes independently of key order
+
+  DIAS recommendation schema
+    ✔ accepts a valid response and normalizes key order
+    ✔ allows only binary recommendations with matching reason codes
+    ✔ validates lists against the registered policy vocabulary
+    ✔ separates generation failures from recommendations
+
+  GovernanceContract
+    ✔ creates and queries a department
+    ✔ blocks anyone outside the district authority
+    ✔ creates, reads and lists a governed case
+    ✔ validates case ownership and protected classifications
+    ✔ lets a supervisor assign users without duplicates
+    ✔ rejects unauthorized case creation and assignment
+    ✔ records prosecution/court workflow metadata with valid transitions
+    ✔ rejects invalid court workflow transitions
+    who may create a department
+      ✔ accepts a district head of the authority organisation
+      ✔ refuses a working officer of that department
+      ✔ refuses a station head, who is not a district authority
+
+  canonical request facts drive the deterministic safety check
+    TEST 1 - the model read the request the way it was committed
+      ✔ keeps the model result when action, purpose, decision and reason all agree
+    TEST 2 - the model read a different operation than the one invoked
+      ✔ escalates when the canonical action is view and the model says export
+      ✔ evaluates policy on the canonical action, not the one the model reported
+      ✔ escalates when the model reports a different purpose than the one committed
+    TEST 3 - trusted context implies DENY, the model proposes ALLOW
+      ✔ escalates rather than granting
+    TEST 4 - trusted context implies ALLOW, the model proposes DENY
+      ✔ escalates rather than denying
+    TEST 5 - the decision matches but the reason code conflicts
+      ✔ escalates an ALLOW carried by a denial reason code
+      ✔ escalates a reason code the policy did not reach, even at the same decision
+    TEST 6 - purpose is established independently of the model
+      ✔ takes the purpose the requester committed, never the model classification
+      ✔ never shows the canonical operation or purpose to the model
+      ✔ rejects a purpose outside the policy vocabulary before inference
+    TEST 7 - the explanation describes the escalation, not the proposal
+      ✔ explains a policy disagreement without reusing the proposed ALLOW reason
+      ✔ explains an input disagreement in its own terms
+      ✔ records the committed request, not the model reading, in parsedRequest
+    TEST 8 - disagreement never substitutes the deterministic outcome
+      ✔ escalates instead of adopting the policy outcome: model ALLOW against a policy DENY
+      ✔ escalates instead of adopting the policy outcome: model DENY against a policy ALLOW
+      ✔ escalates instead of adopting the policy outcome: model DENY against a policy DENY for a different reason
+      ✔ escalates instead of adopting the policy outcome: model misread the operation
+      ✔ exhaustively: no advisory over the whole reason vocabulary ever yields a
+      ✔ never lets the model emit a system reason code itself
+
+  DIAS dynamic access policy
+    canonical request fingerprint
+      ✔ is stable across record and case identifiers when properties and assignment match
+      ✔ changes when any governed match field changes
+    rule provenance
+      ✔ creates a versioned active rule only for DENY to FORCE_ALLOW
+
+  policyEngine (crime-policy-v2)
+    ✔ allows a fully compliant request with decisive attributes
+    ✔ denies when the credential is not active (rule 1)
+    ✔ denies a missing or unknown purpose (rule 2)
+    ✔ denies when RBAC gives the role no such permission (rule 3)
+    ✔ does not let an AuditMSP title inherit an operational PoliceMSP role
+    ✔ escalates a sealed record to the court for everyone outside it (rule 4)
+    ✔ lets the court open its own sealed record without escalation (rule 4)
+    ✔ denies juvenile records outside the narrow legal exception (rule 5)
+    ✔ denies victim-protected raw content to forensics (rule 5b)
+    ✔ denies any request that crosses a district, for every role (rule 6)
+    ✔ has no emergency override of any kind
+    ✔ denies unassigned officers with a counterfactual (rule 7)
+    ✔ exempts cross-case roles from assignment but never from jurisdiction
+    ✔ denies insufficient clearance rather than escalating (rule 8)
+    ✔ treats a missing clearance attribute as no clearance (rule 8)
+    ✔ never blocks on the witness flag alone
+    ✔ is deterministic: same input, same output
+
+  structured explanation materialization
+    ✔ defines explanation details for every active reason code
+    ✔ TEST 1 - materializes the correct ALLOW explanation
+    ✔ TEST 2 - materializes the correct DENY explanation
+    ✔ TEST 3 - materializes the correct normal ESCALATE explanation
+    ✔ TEST 4 - explains MODEL_POLICY_DISAGREEMENT from proposed ALLOW
+    ✔ TEST 5 - explains MODEL_POLICY_DISAGREEMENT from proposed DENY
+    ✔ materializes MODEL_INPUT_DISAGREEMENT from the effective input-conflict reason
+    ✔ TEST 6 - rejects a model decision that conflicts with its reason
+    ✔ TEST 7 - detects tampered explanation text after the attacker recomputes outputHash
+    ✔ TEST 8 - detects tampered decisiveAttributes after the attacker recomputes outputHash
+    ✔ TEST 9 - detects a tampered counterfactual after the attacker recomputes outputHash
+    ✔ TEST 10 - rejects an unknown reason code
+    ✔ exhaustively matches each model reason explanation to the policy evidence
+    ✔ gives every system-generated escalation a policy-condition counterfactual
+
+  RecordContract
+    CreateCaseRecord
+      ✔ creates a record for an authorized police role
+      ✔ rejects non-police MSPs
+      ✔ allows a constable to file (CCTNS station data entry)
+      ✔ still rejects police roles outside the filing set
+      ✔ rejects a caller with no role attribute
+      ✔ rejects unknown fields (allow-list, not denylist)
+      ✔ rejects a malformed content hash and a bad enum
+      ✔ rejects non-boolean flags (type checking, not presence checking)
+      ✔ rejects duplicates
+    AttachEvidenceHash
+      ✔ attaches evidence for a forensics analyst
+      ✔ writes transient detail to the private collection only
+      ✔ rejects police callers and bad hashes
+      ✔ rejects duplicate evidence ids and missing records
+      ✔ reads private detail back for a collection member
+      ✔ blocks non-collection orgs from reading private detail
+      ✔ errors when no private detail was supplied
+      ✔ lists attached evidence
+      ✔ records custody transfers and enforces the current custodian
+      ✔ rejects invalid custody destinations and unknown evidence
+    SealRecord / UnsealRecord
+      ✔ lets a judge seal and unseal without mutating history
+      ✔ rejects double-sealing and non-court callers
+    QueryRecords (case-file search)
+      ✔ finds every record belonging to a case
+      ✔ combines filters
+      ✔ finds one case file by its identifier for any role, public index fields only
+      ✔ rejects a malformed record identifier filter
+      ✔ returns an empty list when nothing matches
+      ✔ refuses an unfiltered search and unknown filter fields
+      ✔ requires an identity with a role
+    GetRecord
+      ✔ errors for a missing record (real-shim empty Buffer semantics)
+      ✔ limits ungated metadata to the owning station or AuditMSP
+    ALLOW-gated metadata and full-document requests
+      ✔ releases metadata only for the exact granted view decision
+      ✔ runs the complete request, owner upload, and requester read workflow
+      ✔ rejects document upload by the wrong organization or station
+      ✔ validates PDF commitments and keeps releases identity-bound
+    AuthorizeRecordRead
+      ✔ returns only the governed off-chain reference after an identity-bound grant
+      ✔ rejects a caller without an identity-bound grant
+    release re-checks the grant basis
+      ✔ refuses release after the requester credential is suspended
+      ✔ releases a dynamic-authorization grant only while that authorization is active and unexpired
+      ✔ never releases raw content on a grant for a different action
+
+  UserContract
+    ✔ creates an identity-backed authorization profile without secrets
+    ✔ requires the department administrator and matching department mapping
+    ✔ rejects duplicates, malformed JSON and unknown fields
+    ✔ reads, lists and reports existence
+    ✔ authenticates only the matching certificate, MSP, role and profile attributes
+    ✔ keeps status changes and history on the ledger
+    ✔ rejects invalid status and non-admin status changes
+    genesis bootstrap
+      ✔ lets an AuditMSP administrator admit the very first user
+      ✔ closes the bootstrap as soon as one user exists
+      ✔ never opens the bootstrap to an organisation other than the authority
+      ✔ once a district head exists, they admit users to any department
+
+
+  211 passing (76ms)
+
+--------------------------|---------|----------|---------|---------|--------------------------------
+File                      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s              
+--------------------------|---------|----------|---------|---------|--------------------------------
+All files                 |   92.29 |    84.32 |   93.51 |   93.79 |                                
+ lib                      |   95.45 |    84.84 |   99.13 |   96.94 |                                
+  accessContract.js       |   94.33 |    82.62 |     100 |   96.58 | ...140,184-185,193,200,536-555 
+  auditContract.js        |   96.33 |       80 |     100 |   96.96 | 61-64                          
+  governanceContract.js   |   95.28 |    80.55 |     100 |      98 | 65,118                         
+  recordContract.js       |   96.81 |    90.85 |     100 |   97.44 | 101,164,175,180,215,426,468    
+  userContract.js         |   94.18 |    84.37 |    92.3 |   95.23 | 89,113,129,180                 
+ lib/dias                 |   98.77 |    95.27 |     100 |   98.63 |                                
+  authorization.js        |     100 |    96.15 |     100 |     100 | 112,176                        
+  keys.js                 |     100 |      100 |     100 |     100 |                                
+  lifecycle.js            |     100 |    66.66 |     100 |     100 | 37-39                          
+  recommendationSchema.js |    97.5 |    97.36 |     100 |   97.29 | 79                             
+  verifiedRequest.js      |   96.96 |    96.77 |     100 |   96.55 | 76                             
+ lib/policy               |   77.93 |    76.67 |   72.34 |   80.69 |                                
+  authority.js            |   90.38 |     87.5 |    90.9 |     100 | 75,87,97,100,115               
+  controlledDecision.js   |   74.35 |       92 |   41.17 |   73.68 | 19-63,87                       
+  dynamicPolicy.js        |   82.85 |    81.63 |     100 |   83.87 | 33,97,108,114,117              
+  llmDecisionProtocol.js  |    59.4 |    55.43 |   77.77 |   62.76 | ...124,127,132,136,139,149-190 
+  policyEngine.js         |     100 |    95.74 |     100 |     100 | 38,128                         
+  policyV1.js             |     100 |      100 |     100 |     100 |                                
+  reasonDecisions.js      |     100 |      100 |     100 |     100 |                                
+ lib/util                 |    94.2 |    88.23 |     100 |   93.93 |                                
+  identity.js             |     100 |    84.21 |     100 |     100 | 54-56                          
+  state.js                |     100 |      100 |     100 |     100 |                                
+  validate.js             |    91.3 |    88.63 |     100 |   90.69 | 42,56,63,75                    
+--------------------------|---------|----------|---------|---------|--------------------------------

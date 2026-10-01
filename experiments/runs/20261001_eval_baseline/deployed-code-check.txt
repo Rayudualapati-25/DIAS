@@ -1,0 +1,43 @@
+# Deployed code vs tag eval-baseline-2026-10-01 (commit 2336bb4)
+# Captured 2026-10-01T18:13:14Z on the author's Mac. Paths under ~ are outside the repository.
+# Excluded from every comparison: node_modules, coverage, .nyc_output, backend data, wallets.
+
+## ~/dias-testbed/chaincode-staging/src (package installed as diasrecords 2.3) vs chaincode/crimerecords
+Only in chaincode/crimerecords/lib/policy: controlledDecision.js
+Only in chaincode/crimerecords/lib/policy: dynamicPolicy.js
+Only in chaincode/crimerecords/lib/policy: llmDecisionProtocol.js
+Only in chaincode/crimerecords/lib/policy: policyEngine.js
+Only in chaincode/crimerecords/lib/policy: reasonDecisions.js
+Only in chaincode/crimerecords: test
+staging tree hash file: chaincode source tree sha256: b43a89e45614ed908ba853513e07e9d6fed8fe4889401f5a5d9a6e1d14db49bf
+
+## ~/dias-testbed/build/app/backend (backend image) vs backend
+Only in backend: test
+
+## ~/dias-testbed/build/app/chaincode/crimerecords/lib (backend image) vs chaincode/crimerecords/lib
+
+## ~/dias-testbed/build/app/policies/lib (backend image) vs policies/lib
+
+## ~/dias-testbed/build/app/policies/reference-oracle (backend image) vs policies/reference-oracle
+
+## ~/dias-testbed/build/app/testbed/seed (backend image) vs testbed/seed
+
+## ~/dias-testbed/build/app/testbed/load (backend image) vs testbed/load
+
+## ~/dias-testbed/build/app/frontend (backend image) vs frontend
+Files ~/dias-testbed/build/app/frontend/css/base.css and frontend/css/base.css differ
+Files ~/dias-testbed/build/app/frontend/css/components.css and frontend/css/components.css differ
+Files ~/dias-testbed/build/app/frontend/css/layout.css and frontend/css/layout.css differ
+Files ~/dias-testbed/build/app/frontend/index.html and frontend/index.html differ
+Files ~/dias-testbed/build/app/frontend/js/modules/request-access.js and frontend/js/modules/request-access.js differ
+Files ~/dias-testbed/build/app/frontend/js/views/login.js and frontend/js/views/login.js differ
+Files ~/dias-testbed/build/app/frontend/js/views/shell.js and frontend/js/views/shell.js differ
+
+## Changed lines per differing frontend file (diff lines starting with < or >)
+css/base.css                     58
+css/components.css               81
+css/layout.css                   155
+index.html                       4
+js/modules/request-access.js     7
+js/views/login.js                31
+js/views/shell.js                23

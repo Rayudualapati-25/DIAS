@@ -1,0 +1,255 @@
+
+> crime-records-backend@1.0.0 test
+> mocha --require test/setup.unit.js 'test/**/*.unit.test.js' --timeout 30000
+
+
+
+  DIAS access routes
+    request submission
+      ✔ commits the request with no justification and no transient data
+      ✔ retries only the pre-submit peer-convergence mismatch
+      ✔ does not retry unrelated Fabric failures
+      ✔ queues the LLM recommendation once the off-chain review is saved
+      ✔ still answers for a committed request when its off-chain review cannot be saved
+      ✔ requires a justification between 3 and 2000 characters
+    auditor review view
+      ✔ joins the committed request with the off-chain justification and recommendation
+    auditor decision
+      ✔ commits AGREED when the auditor follows the LLM, without requiring a reason
+      ✔ commits NOT_AGREED for FORCE_ALLOW over an LLM DENY, with a reason and optional expiry
+      ✔ commits NOT_AGREED for FORCE_DENY over an LLM ALLOW and refuses an expiry there
+      ✔ commits UNAVAILABLE after a failed generation, or when no review exists
+      ✔ waits while the recommendation is still being prepared and never commits
+      ✔ ignores any recommendation or agreement value the browser tries to send
+      ✔ rejects an unknown decision before anything reaches the ledger
+
+  accessLogger.describe
+    ✔ records a DIAS request action and correlates its Fabric request ID
+    ✔ classifies a direct record lookup as a search for that identifier
+    ✔ records auditor decisions without the auditor reason
+    ✔ gives retired SEAL-era routes only a generic action and never their request body
+    ✔ names current DIAS request and authorization routes
+    ✔ names a case read and current request audit routes
+    ✔ records a gated metadata read as its own action with the decision that unlocked it
+    ✔ records reading one decision against its record and decision
+    ✔ does not mistake the document-request routes for a record called "document-requests"
+    ✔ records a full-document request against its record and decision
+    ✔ names the case list instead of a generic api path
+    ✔ keeps existing classifications unchanged
+
+  DIAS backend architecture guard
+    ✔ resolves a non-trivial graph for every entry point
+    ✔ does not reach policies/reference-oracle/referencePolicyOracle.js — the offline reference oracle must never judge a live recommendation
+    ✔ does not reach chaincode/crimerecords/lib/policy/policyEngine.js — the SEAL deterministic policy engine must not run in the live path
+    ✔ does not reach chaincode/crimerecords/lib/policy/controlledDecision.js — SEAL controlled-decision logic must not run in the live path
+    ✔ does not reach chaincode/crimerecords/lib/policy/llmDecisionProtocol.js — the SEAL decision protocol enforced engine/model agreement
+    ✔ does not reach chaincode/crimerecords/lib/policy/dynamicPolicy.js — SEAL property-fingerprint dynamic policy is replaced by exact-record authorization
+    ✔ does not reach backend/src/llm/policyDecision.js — the SEAL runtime guard overrode the model recommendation
+    ✔ does not reach backend/src/llm/groundedPolicyPrompt.js — DIAS has exactly one prompt implementation
+    ✔ does not reach backend/src/llm/explain.js — SEAL explanation rewording reads decision fields DIAS never writes
+    ✔ does not reach backend/src/llm/ollama.js — the SEAL wording model is not part of the DIAS runtime
+    ✔ reaches the DIAS recommender from the access routes, inside the backend
+    ✔ has no separate AI-organisation listener or recommendation signer left to run
+    ✔ has no SEAL listener left to run
+    ✔ keeps ESCALATE out of the live recommendation vocabulary
+
+  backend/chaincode contract compatibility
+    ✔ finds the gateway calls it is supposed to check
+    ✔ names only contracts that exist in the chaincode
+    ✔ calls only methods the deployed contracts expose
+    ✔ still calls the DIAS workflow methods the redesign introduced
+    ✔ no longer calls the AI-organisation recommendation or model-registration methods
+    ✔ no longer calls any SEAL-era access method
+
+  DIAS backend recommendation path
+    LLM agreement
+      ✔ is AGREED when the auditor follows the LLM and NOT_AGREED otherwise
+      ✔ is NO_RECOMMENDATION without a valid recommendation
+      ✔ requires a reason unless agreed, and creates an authorization only for FORCE_ALLOW over a DENY
+    review store
+      ✔ keeps the justification and a pending recommendation for a committed request
+      ✔ replaces entries without mutating what an earlier read returned
+      ✔ rejects unsafe request identifiers and reports missing entries
+      ✔ skips an unreadable entry when listing, so one damaged file cannot stop the backend
+    recommendation worker
+      ✔ stores a schema-valid recommendation in the auditor-facing shape
+      ✔ stores a failed generation as a status with no recommendation
+      ✔ never prompts the LLM with facts that do not match the committed hash
+      ✔ records an unexpected error instead of leaving the auditor waiting
+      ✔ answers requests one at a time, each once, and resumes pending entries
+
+  DIAS recommendation response contract
+    ✔ accepts a valid ALLOW and a valid DENY response
+    ✔ records the limited formatting tolerances it applied
+    ✔ rejects ESCALATE and any third recommendation value
+    ✔ rejects extra keys, missing keys, and non-JSON text
+    ✔ rejects a reason code that belongs to the other recommendation
+    ✔ rejects unknown or duplicate policy references and unknown review flags
+    ✔ bounds free-text fields
+
+  DIAS policy context provider
+    ✔ supplies the complete bundle and narrows RBAC to the requester role
+    ✔ marks an undefined role instead of inventing permissions
+    ✔ hashes the context deterministically and per role
+    ✔ reports POLICY_CONTEXT_UNAVAILABLE when the bundle cannot be loaded
+    ✔ exposes the registered bundle vocabulary needed for schema validation
+
+  DIAS recommendation prompt
+    ✔ is versioned and states the advisory authority boundary
+    ✔ supplies the authoritative structured action and purpose
+    ✔ never includes identity fields that are not policy facts
+    ✔ keeps prompt-injection text inside the untrusted justification block
+    ✔ neutralizes attempts to close the justification block early
+    ✔ includes every clause reference and the requester role permissions
+    ✔ is deterministic for identical inputs
+    ✔ rejects a malformed verified request
+
+  decision log recommendation detail
+    who may read the model free text
+      ✔ lets the officer who made the request read it
+      ✔ lets an audit-organisation district head read it
+      ✔ refuses a district head of any other organisation
+      ✔ refuses any other signed-in identity, and a missing user or entry
+    what the view returns
+      ✔ gives everyone the structured account and withholds the free text
+      ✔ adds the free text for a caller who may read it
+      ✔ never returns timings, token counts or model and policy provenance
+      ✔ says why there was no recommendation, and offers nothing to read
+      ✔ reports a recommendation still being prepared
+      ✔ reports a request whose review was never stored
+
+  DIAS recommender
+    ✔ returns a schema-valid recommendation with application-generated provenance
+    ✔ keeps the model recommendation even when the offline reference oracle disagrees
+    ✔ reports UNAVAILABLE without a recommendation when the server cannot be reached
+    ✔ reports UNAVAILABLE on a timeout and on a non-context HTTP error
+    ✔ reports INVALID_OUTPUT for malformed or out-of-contract model text
+    ✔ reports POLICY_CONTEXT_UNAVAILABLE when the policy bundle cannot be assembled
+    ✔ reports CONTEXT_OVERFLOW before calling the model when the prompt exceeds its budget
+
+  Fabric commit conflicts
+    ✔ recognises only MVCC and phantom-read commit failures as conflicts
+    ✔ proposes the transaction again after a conflict and returns the committed result
+    ✔ gives up after the retry budget and rethrows the conflict
+    ✔ never retries a chaincode refusal or any other failure
+    ✔ answers a conflict that survives the retries with 409 and a plain explanation
+
+  cross-surface invariants
+    endorsement capacity vs private data collection membership
+      ✔ reads the organization count from the channel profile
+      ✔ 'evidenceDetails' has enough members to satisfy MAJORITY endorsement
+      ✔ the evidence endorser set is drawn only from evidenceDetails members
+      ✔ no collection names an organization outside the DIAS channel
+      ✔ recordContract mirrors the evidenceDetails distribution policy
+    explanation schema headroom
+      ✔ the decisiveAttributes cap is identical on both sides of the wire
+      ✔ no reason can emit more decisive attributes than the validators accept
+    model budget
+      ✔ the backend recommender reads the one configurable model budget
+    reason vocabulary
+      ✔ every reason code has explanation details
+      ✔ the model may not emit a system-generated reason
+      ✔ the request schema derives its vocabulary from the policy tables
+    authorization gates agree between API and chaincode
+      ✔ record-filing roles are identical
+      ✔ audit-trail roles are derived from the same policy tables on both sides
+
+  template renderer (baseline and fallback)
+    ✔ states the outcome, the reason and the decisive attributes
+    ✔ includes the counterfactual when there is one
+    ✔ is deterministic
+    ✔ handles an unknown reason code without crashing
+
+  prompt construction
+    ✔ includes the decision, reason and decisive attributes
+    ✔ never sends case contents or personal identifiers to the model
+
+  grounding validation
+    ✔ accepts a faithful explanation
+    ✔ rejects text that contradicts the recorded decision
+    ✔ rejects invented identifiers
+    ✔ rejects an invented record type that was not supplied to the wording model
+    ✔ allows the record and case ids that really belong to this decision
+    ✔ rejects assistant filler and AI self-reference
+    ✔ rejects text that is too short to explain anything
+    ✔ rejects calling an escalated decision final (it is pending review)
+    ✔ accepts an escalated explanation that says review is pending
+    ✔ rejects blaming a factor that did not decide the request
+    ✔ accepts an RBAC denial that blames the right thing
+    ✔ warns but still accepts text that drops the counterfactual
+
+  policy model attestation
+    ✔ creates a verifiable Ed25519 signature over the complete decision binding
+    ✔ fails verification after any trusted context value changes
+    ✔ cryptographically binds the effective decision
+    ✔ cryptographically binds the reasonCode
+    ✔ cryptographically binds the explanation text
+    ✔ cryptographically binds the decisiveAttributes
+    ✔ cryptographically binds the counterfactual
+    ✔ rejects a non-Ed25519 signing key
+
+  fine-tuned policy decision client
+    ✔ keeps authenticated attributes separate from the untrusted query
+    ✔ accepts a structurally consistent model decision
+    ✔ rejects a model decision that contradicts its reason code
+    ✔ rejects system-generated reason codes when they come directly from the model
+    ✔ sends a policy-disagreeing model result to AuditMSP instead of trusting it
+    ✔ accepts a deterministic policy-disagreement escalation artifact
+    ✔ keeps a Qwen result unchanged when it matches the policy safety check
+    ✔ escalates when the model reads a different operation than the one committed
+    ✔ escalates when the model reads a different purpose than the one committed
+    ✔ never puts the canonical operation or purpose in the model prompt
+    ✔ rejects a decision whose recorded request is not the one committed
+    ✔ rejects a decision whose recorded purpose is not the one committed
+    ✔ still rejects a materialized artifact whose decision was tampered with
+    ✔ rejects a materialized artifact whose explanation text was tampered with
+    ✔ rejects a materialized artifact whose decisive attributes were tampered with
+    ✔ rejects a materialized artifact whose counterfactual was tampered with
+    ✔ rejects extra compact-output fields instead of accepting free-form explanations
+    ✔ rejects model attempts to change ledger resource attributes
+    ✔ requires strict JSON without markdown or hidden reasoning
+    ✔ returns a validated decision with audit hashes from the MLX service
+    ✔ rejects an adapter whose local bytes do not match the registered digest
+    ✔ does not invoke inference when adapter verification fails
+
+  case-file lookup
+    ✔ finds a case file through the public index for an officer outside the owning station
+    ✔ answers 404 when the index holds no such case file
+    ✔ refuses a malformed identifier before reaching the ledger
+    ✔ returns only the public index fields even if more come back
+
+  officer administration guard
+    ✔ lets a district head of the authority organisation admit officers to any department
+    ✔ refuses everyone else before a certificate is issued
+
+  security configuration
+    ✔ fails fast when production has no JWT secret
+    ✔ retains a loudly warned fallback for local development only
+    ✔ defaults CORS to the local API origin and accepts an explicit origin (62ms)
+    ✔ rejects a wildcard CORS configuration
+    ✔ allows only mutually exclusive LLM and legacy policy modes (94ms)
+    ✔ resolves a relative agency vault path from the repository root
+    ✔ allows same-origin or originless requests and rejects other origins
+    ✔ emits CORS headers only for the configured browser origin
+
+  Fabric CA enrolment secrets
+    ✔ generates distinct URL-safe 256-bit secrets
+
+  testbed instrumentation
+    peer addresses
+      ✔ keeps every localhost peer address when FABRIC_PEER_ENDPOINTS is unset
+      ✔ accepts host:port overrides for known organizations only
+    trace
+      ✔ writes nothing while it is off
+      ✔ appends one JSON line per event with rounded durations
+    staged submit
+      ✔ endorses, submits and waits for the commit, then returns the result
+      ✔ throws the library CommitError on an unsuccessful commit status
+
+  off-chain PDF vault
+    ✔ stores PDF bytes, reads them back, and returns a stable SHA-256 commitment
+    ✔ rejects empty, non-PDF, oversized, and duplicate uploads
+
+
+  184 passing (468ms)
+

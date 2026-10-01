@@ -1,0 +1,572 @@
+
+> dias-dataset-v2@2.0.0 test
+> node --test test/checks.test.js test/generate.test.js test/metrics.test.js test/ablations.test.js test/subsets.test.js test/v6Adapter.test.js test/scopeAblation.test.js
+
+TAP version 13
+# Subtest: the control is exactly what the live prompt module produces
+ok 1 - the control is exactly what the live prompt module produces
+  ---
+  duration_ms: 3.64325
+  type: 'test'
+  ...
+# Subtest: every ablation leaves the system prompt untouched
+ok 2 - every ablation leaves the system prompt untouched
+  ---
+  duration_ms: 2.147875
+  type: 'test'
+  ...
+# Subtest: each ablation changes only its own section
+ok 3 - each ablation changes only its own section
+  ---
+  duration_ms: 1.603625
+  type: 'test'
+  ...
+# Subtest: the redacted information is genuinely gone
+ok 4 - the redacted information is genuinely gone
+  ---
+  duration_ms: 0.231541
+  type: 'test'
+  ...
+# Subtest: redaction keeps the JSON parseable and the keys present
+ok 5 - redaction keeps the JSON parseable and the keys present
+  ---
+  duration_ms: 0.474792
+  type: 'test'
+  ...
+# Subtest: no-action-purpose keeps the fields it is not ablating
+ok 6 - no-action-purpose keeps the fields it is not ablating
+  ---
+  duration_ms: 0.429708
+  type: 'test'
+  ...
+# Subtest: no ablated prompt contains the answer
+ok 7 - no ablated prompt contains the answer
+  ---
+  duration_ms: 1.865458
+  type: 'test'
+  ...
+# Subtest: every ablation declares what it expects, so a result can be judged
+ok 8 - every ablation declares what it expects, so a result can be judged
+  ---
+  duration_ms: 0.074584
+  type: 'test'
+  ...
+# Subtest: schema check rejects a third recommendation class
+ok 9 - schema check rejects a third recommendation class
+  ---
+  duration_ms: 1.513458
+  type: 'test'
+  ...
+# Subtest: schema check rejects a reason code that contradicts the recommendation
+ok 10 - schema check rejects a reason code that contradicts the recommendation
+  ---
+  duration_ms: 0.437083
+  type: 'test'
+  ...
+# Subtest: label reproduction detects a flipped label
+ok 11 - label reproduction detects a flipped label
+  ---
+  duration_ms: 4.478
+  type: 'test'
+  ...
+# Subtest: label reproduction detects a review flag added without justification for it
+ok 12 - label reproduction detects a review flag added without justification for it
+  ---
+  duration_ms: 2.265583
+  type: 'test'
+  ...
+# Subtest: balance check detects a skewed set
+ok 13 - balance check detects a skewed set
+  ---
+  duration_ms: 23.6345
+  type: 'test'
+  ...
+# Subtest: duplicate check detects a prompt repeated inside one set
+ok 14 - duplicate check detects a prompt repeated inside one set
+  ---
+  duration_ms: 0.473
+  type: 'test'
+  ...
+# Subtest: duplicate check detects a training prompt reappearing in test
+ok 15 - duplicate check detects a training prompt reappearing in test
+  ---
+  duration_ms: 0.560959
+  type: 'test'
+  ...
+# Subtest: duplicate check tolerates the same example in two views of the test split
+ok 16 - duplicate check tolerates the same example in two views of the test split
+  ---
+  duration_ms: 0.159417
+  type: 'test'
+  ...
+# Subtest: feature leakage detects the same facts phrased differently across splits
+ok 17 - feature leakage detects the same facts phrased differently across splits
+  ---
+  duration_ms: 1.798375
+  type: 'test'
+  ...
+# Subtest: family leakage detects a near-miss pair split across train and test
+ok 18 - family leakage detects a near-miss pair split across train and test
+  ---
+  duration_ms: 1.730333
+  type: 'test'
+  ...
+# Subtest: template leakage detects held-out phrasing used in training
+ok 19 - template leakage detects held-out phrasing used in training
+  ---
+  duration_ms: 36.921625
+  type: 'test'
+  ...
+# Subtest: template leakage detects an OOD set contaminated with trained phrasing
+ok 20 - template leakage detects an OOD set contaminated with trained phrasing
+  ---
+  duration_ms: 36.157584
+  type: 'test'
+  ...
+# Subtest: identifier check detects v1-style usernames containing the role and split
+ok 21 - identifier check detects v1-style usernames containing the role and split
+  ---
+  duration_ms: 0.693875
+  type: 'test'
+  ...
+# Subtest: identifier check detects a record id that spells out the reason code
+ok 22 - identifier check detects a record id that spells out the reason code
+  ---
+  duration_ms: 0.326167
+  type: 'test'
+  ...
+# Subtest: predictiveness check detects v1-style per-reason identifier ranges
+ok 23 - predictiveness check detects v1-style per-reason identifier ranges
+  ---
+  duration_ms: 39.056875
+  type: 'test'
+  ...
+# Subtest: predictiveness check does not flag ordinary sampling noise
+ok 24 - predictiveness check does not flag ordinary sampling noise
+  ---
+  duration_ms: 3.788833
+  type: 'test'
+  ...
+# Subtest: coverage check detects a missing reason code
+ok 25 - coverage check detects a missing reason code
+  ---
+  duration_ms: 84.693542
+  type: 'test'
+  ...
+# Subtest: vocabulary coverage detects a clearance level that never appears
+ok 26 - vocabulary coverage detects a clearance level that never appears
+  ---
+  duration_ms: 36.155042
+  type: 'test'
+  ...
+# Subtest: precedence check detects references listed out of order
+ok 27 - precedence check detects references listed out of order
+  ---
+  duration_ms: 36.688583
+  type: 'test'
+  ...
+# Subtest: precedence check detects a dataset with no multi-clause example at all
+ok 28 - precedence check detects a dataset with no multi-clause example at all
+  ---
+  duration_ms: 35.866792
+  type: 'test'
+  ...
+# Subtest: explanation grounding detects a reason citing a clause the label omits
+ok 29 - explanation grounding detects a reason citing a clause the label omits
+  ---
+  duration_ms: 0.471166
+  type: 'test'
+  ...
+# Subtest: independence check detects a field that never varies
+ok 30 - independence check detects a field that never varies
+  ---
+  duration_ms: 1.885292
+  type: 'test'
+  ...
+# Subtest: independence check detects a distractor that predicts the label
+ok 31 - independence check detects a distractor that predicts the label
+  ---
+  duration_ms: 2.654875
+  type: 'test'
+  ...
+# Subtest: scenario presence detects training with no adversarial text
+ok 32 - scenario presence detects training with no adversarial text
+  ---
+  duration_ms: 22.88725
+  type: 'test'
+  ...
+# Subtest: the same seed produces byte-identical examples
+ok 33 - the same seed produces byte-identical examples
+  ---
+  duration_ms: 224.204958
+  type: 'test'
+  ...
+# Subtest: a different seed produces a different dataset
+ok 34 - a different seed produces a different dataset
+  ---
+  duration_ms: 190.448625
+  type: 'test'
+  ...
+# Subtest: independent rng streams do not disturb each other
+ok 35 - independent rng streams do not disturb each other
+  ---
+  duration_ms: 0.153125
+  type: 'test'
+  ...
+# Subtest: identifiers carry no ordering a reader could exploit
+ok 36 - identifiers carry no ordering a reader could exploit
+  ---
+  duration_ms: 0.206791
+  type: 'test'
+  ...
+# Subtest: clean-allow scenarios really are ALLOW under the oracle
+ok 37 - clean-allow scenarios really are ALLOW under the oracle
+  ---
+  duration_ms: 4.03575
+  type: 'test'
+  ...
+# Subtest: each single-violation constructor produces its own clause and no other reason
+ok 38 - each single-violation constructor produces its own clause and no other reason
+  ---
+  duration_ms: 4.234541
+  type: 'test'
+  ...
+# Subtest: near-miss pairs differ in label but share almost everything else
+ok 39 - near-miss pairs differ in label but share almost everything else
+  ---
+  duration_ms: 2.064333
+  type: 'test'
+  ...
+# Subtest: multi-violation scenarios really apply every clause they name
+ok 40 - multi-violation scenarios really apply every clause they name
+  ---
+  duration_ms: 1.822875
+  type: 'test'
+  ...
+# Subtest: cross-jurisdiction uses two real districts, never a derived string
+ok 41 - cross-jurisdiction uses two real districts, never a derived string
+  ---
+  duration_ms: 1.004417
+  type: 'test'
+  ...
+# Subtest: review flags come from the justification family declaration
+ok 42 - review flags come from the justification family declaration
+  ---
+  duration_ms: 0.627375
+  type: 'test'
+  ...
+# Subtest: a sealed record adds the court-review flag on top of the text flags
+ok 43 - a sealed record adds the court-review flag on top of the text flags
+  ---
+  duration_ms: 0.128834
+  type: 'test'
+  ...
+# Subtest: every justification family declares flags and renders every template
+ok 44 - every justification family declares flags and renders every template
+  ---
+  duration_ms: 0.139584
+  type: 'test'
+  ...
+# Subtest: held-out template families are disjoint from trainable ones
+ok 45 - held-out template families are disjoint from trainable ones
+  ---
+  duration_ms: 0.044541
+  type: 'test'
+  ...
+# Subtest: split assignment is stable when families are added
+ok 46 - split assignment is stable when families are added
+  ---
+  duration_ms: 0.124958
+  type: 'test'
+  ...
+# Subtest: split assignment respects the declared weights in aggregate
+ok 47 - split assignment respects the declared weights in aggregate
+  ---
+  duration_ms: 3.668416
+  type: 'test'
+  ...
+# Subtest: no example ever carries an ESCALATE label or an evidence requirement
+ok 48 - no example ever carries an ESCALATE label or an evidence requirement
+  ---
+  duration_ms: 98.826375
+  type: 'test'
+  ...
+# Subtest: INVALID_PURPOSE never appears, because the runtime cannot produce it
+ok 49 - INVALID_PURPOSE never appears, because the runtime cannot produce it
+  ---
+  duration_ms: 211.102875
+  type: 'test'
+  ...
+# Subtest: a perfect run scores 1 everywhere and reports no unsafe errors
+ok 50 - a perfect run scores 1 everywhere and reports no unsafe errors
+  ---
+  duration_ms: 0.86375
+  type: 'test'
+  ...
+# Subtest: an always-DENY model scores 0.5 balanced accuracy, not the class prior
+ok 51 - an always-DENY model scores 0.5 balanced accuracy, not the class prior
+  ---
+  duration_ms: 0.643417
+  type: 'test'
+  ...
+# Subtest: an unparseable answer is an absent decision, never a safe DENY
+ok 52 - an unparseable answer is an absent decision, never a safe DENY
+  ---
+  duration_ms: 0.142208
+  type: 'test'
+  ...
+# Subtest: false ALLOW and false DENY are counted separately and not averaged
+ok 53 - false ALLOW and false DENY are counted separately and not averaged
+  ---
+  duration_ms: 0.1065
+  type: 'test'
+  ...
+# Subtest: the confusion matrix matches a hand count
+ok 54 - the confusion matrix matches a hand count
+  ---
+  duration_ms: 0.315625
+  type: 'test'
+  ...
+# Subtest: per-class precision, recall and F1 follow their definitions
+ok 55 - per-class precision, recall and F1 follow their definitions
+  ---
+  duration_ms: 0.060833
+  type: 'test'
+  ...
+# Subtest: joint accuracy is stricter than decision accuracy alone
+ok 56 - joint accuracy is stricter than decision accuracy alone
+  ---
+  duration_ms: 0.12025
+  type: 'test'
+  ...
+# Subtest: a fully correct response satisfies every joint metric
+ok 57 - a fully correct response satisfies every joint metric
+  ---
+  duration_ms: 0.066583
+  type: 'test'
+  ...
+# Subtest: review-flag accuracy ignores ordering, because the flag set is unordered
+ok 58 - review-flag accuracy ignores ordering, because the flag set is unordered
+  ---
+  duration_ms: 0.301042
+  type: 'test'
+  ...
+# Subtest: confidence intervals are reported and widen on small samples
+ok 59 - confidence intervals are reported and widen on small samples
+  ---
+  duration_ms: 0.277875
+  type: 'test'
+  ...
+# Subtest: latency percentiles are ordered and drawn from the observed values
+ok 60 - latency percentiles are ordered and drawn from the observed values
+  ---
+  duration_ms: 0.273208
+  type: 'test'
+  ...
+# Subtest: error categories separate unsafe errors from wrong explanations
+ok 61 - error categories separate unsafe errors from wrong explanations
+  ---
+  duration_ms: 0.126583
+  type: 'test'
+  ...
+# Subtest: grouping computes each group independently
+ok 62 - grouping computes each group independently
+  ---
+  duration_ms: 5.473375
+  type: 'test'
+  ...
+# Subtest: an empty run reports nulls rather than dividing by zero
+ok 63 - an empty run reports nulls rather than dividing by zero
+  ---
+  duration_ms: 0.050708
+  type: 'test'
+  ...
+# Subtest: exact-record scope distinguishes two records with identical properties
+ok 64 - exact-record scope distinguishes two records with identical properties
+  ---
+  duration_ms: 0.810834
+  type: 'test'
+  ...
+# Subtest: the property fingerprint does NOT — which is the defect being measured
+ok 65 - the property fingerprint does NOT — which is the defect being measured
+  ---
+  duration_ms: 0.174541
+  type: 'test'
+  ...
+# Subtest: both scopes still distinguish a different action or purpose
+ok 66 - both scopes still distinguish a different action or purpose
+  ---
+  duration_ms: 0.097417
+  type: 'test'
+  ...
+# Subtest: an exact-record approval never reaches a second record
+ok 67 - an exact-record approval never reaches a second record
+  ---
+  duration_ms: 0.252458
+  type: 'test'
+  ...
+# Subtest: a property-fingerprint approval does reach a second record
+ok 68 - a property-fingerprint approval does reach a second record
+  ---
+  duration_ms: 0.201542
+  type: 'test'
+  ...
+# Subtest: only a model DENY the auditor overrides creates an authorization
+ok 69 - only a model DENY the auditor overrides creates an authorization
+  ---
+  duration_ms: 0.170541
+  type: 'test'
+  ...
+# Subtest: every request is accounted for: skipped or reviewed, never both, never neither
+ok 70 - every request is accounted for: skipped or reviewed, never both, never neither
+  ---
+  duration_ms: 1.211583
+  type: 'test'
+  ...
+# Subtest: with no siblings the two designs are identical, and the report must say so
+ok 71 - with no siblings the two designs are identical, and the report must say so
+  ---
+  duration_ms: 0.942458
+  type: 'test'
+  ...
+# Subtest: both arms replay the identical stream, so the difference is the scope alone
+ok 72 - both arms replay the identical stream, so the difference is the scope alone
+  ---
+  duration_ms: 0.845292
+  type: 'test'
+  ...
+# Subtest: the stream is deterministic from its seed
+ok 73 - the stream is deterministic from its seed
+  ---
+  duration_ms: 0.398208
+  type: 'test'
+  ...
+# Subtest: each subset has the size it claims
+ok 74 - each subset has the size it claims
+  ---
+  duration_ms: 0.466708
+  type: 'test'
+  ...
+# Subtest: subsets are nested, so a learning curve measures added data
+ok 75 - subsets are nested, so a learning curve measures added data
+  ---
+  duration_ms: 1.606084
+  type: 'test'
+  ...
+# Subtest: every subset is drawn only from the training pool
+ok 76 - every subset is drawn only from the training pool
+  ---
+  duration_ms: 1.62775
+  type: 'test'
+  ...
+# Subtest: no subset contains a duplicate
+ok 77 - no subset contains a duplicate
+  ---
+  duration_ms: 0.426416
+  type: 'test'
+  ...
+# Subtest: every subset stays balanced
+ok 78 - every subset stays balanced
+  ---
+  duration_ms: 0.644125
+  type: 'test'
+  ...
+# Subtest: every subset still covers every reason code and scenario in the pool
+ok 79 - every subset still covers every reason code and scenario in the pool
+  ---
+  duration_ms: 5.3425
+  type: 'test'
+  ...
+# Subtest: every subset keeps adversarial text, which is a minority and easy to lose
+ok 80 - every subset keeps adversarial text, which is a minority and easy to lose
+  ---
+  duration_ms: 0.349583
+  type: 'test'
+  ...
+# Subtest: the training lines match their audit records, line for line
+ok 81 - the training lines match their audit records, line for line
+  ---
+  duration_ms: 73.075916
+  type: 'test'
+  ...
+# Subtest: the manifest records a hash for every subset file
+ok 82 - the manifest records a hash for every subset file
+  ---
+  duration_ms: 26.127084
+  type: 'test'
+  ...
+# Subtest: escalate becomes an absent recommendation, never a DENY
+ok 83 - escalate becomes an absent recommendation, never a DENY
+  ---
+  duration_ms: 0.668333
+  type: 'test'
+  ...
+# Subtest: allow and deny map to the binary classes
+ok 84 - allow and deny map to the binary classes
+  ---
+  duration_ms: 0.174709
+  type: 'test'
+  ...
+# Subtest: reason codes carry across, and an unknown one is an invalid answer
+ok 85 - reason codes carry across, and an unknown one is an invalid answer
+  ---
+  duration_ms: 0.068791
+  type: 'test'
+  ...
+# Subtest: fields V6 does not produce are left empty rather than fabricated
+ok 86 - fields V6 does not produce are left empty rather than fabricated
+  ---
+  duration_ms: 0.362584
+  type: 'test'
+  ...
+# Subtest: unparseable and non-JSON answers are INVALID_OUTPUT
+ok 87 - unparseable and non-JSON answers are INVALID_OUTPUT
+  ---
+  duration_ms: 0.075792
+  type: 'test'
+  ...
+# Subtest: a thinking block and a code fence are tolerated, as they are for V7
+ok 88 - a thinking block and a code fence are tolerated, as they are for V7
+  ---
+  duration_ms: 0.123416
+  type: 'test'
+  ...
+# Subtest: the action and purpose are withheld from the V6 prompt, as SEAL intended
+ok 89 - the action and purpose are withheld from the V6 prompt, as SEAL intended
+  ---
+  duration_ms: 0.267833
+  type: 'test'
+  ...
+# Subtest: every policy-relevant fact survives the re-projection
+ok 90 - every policy-relevant fact survives the re-projection
+  ---
+  duration_ms: 0.190375
+  type: 'test'
+  ...
+# Subtest: the V6 prompt never contains the answer
+ok 91 - the V6 prompt never contains the answer
+  ---
+  duration_ms: 0.334542
+  type: 'test'
+  ...
+# Subtest: every adaptation is documented, so the comparison can be judged
+ok 92 - every adaptation is documented, so the comparison can be judged
+  ---
+  duration_ms: 0.396584
+  type: 'test'
+  ...
+# Subtest: the code map covers exactly the reason codes the v2 policy defines
+ok 93 - the code map covers exactly the reason codes the v2 policy defines
+  ---
+  duration_ms: 2.607792
+  type: 'test'
+  ...
+1..93
+# tests 93
+# suites 0
+# pass 93
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 793.8205
