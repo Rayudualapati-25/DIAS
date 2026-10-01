@@ -8,7 +8,7 @@
 ## Ground rules
 
 1. **Branch.** All work happens on `feat/dias-v3-integrity`. Never push to or merge into `main`. `main` stays equal to the evaluated baseline until the experiments are rerun on the new code.
-2. **Commits.** One commit or a few per step. Message format: `<type>: <description>`, then a body with What, Why and Tests. No co-author trailers and no tool-attribution lines in commits, pull requests or files.
+2. **Commits.** One commit or a few per step. Message format: `<type>: <description>`, then a body with What, Why and Tests. No co-author trailers and no tool-attribution lines in commits, pull requests, branch names or files.
 3. **Test first.** For each change: write a failing test, make it pass, then run the package's full suite. Keep the baseline suites green (211 / 184 / 27 / 39 / 93, validator 25/25) apart from tests that the new design deliberately replaces; record each replaced test and the reason.
 4. **Iteration reports.** After each step, write `reports/iteration/iter_0NN_<topic>.md` with: what changed, what worked, what is still weak, what comes next. Numbering continues from 058 (057 is the baseline). Numbers 055 and 056 exist only on the author's machine.
 5. **Ignored names.** `.gitignore` silently drops report and plan files whose names contain `paper`, `manuscript`, `latex`, `rewrite`, `figure`, `svg`, `acm_`, `claim_aligned`, `results_reference_style` or `professor_review`. Do not use these words in new file names. Run `git status` after writing a file to confirm it is tracked.
@@ -16,6 +16,8 @@
 7. **No invented numbers.** Anything that needs the Fabric network, the four testbed VMs or the MLX model server is marked **NOT RUN — needs the author's Mac**, with the exact command to run.
 8. **Model.** Training stays stopped. V7 is not activated, and no model is served.
 9. **Other networks.** Never point scripts at `wt-dias` or `crime-records-network`.
+10. **Network design.** Do not add an AI organization to the network; this was a design decision on 2026-09-15. The recommendation service signs with its own key and is not a Fabric organization.
+11. **Final report.** Use plain language: short headings, numbered steps and bullets. For each step, give what changed, the test results and what is still weak. Then list the work that needs the author's Mac and give the pull-request link.
 
 ## Setup
 
