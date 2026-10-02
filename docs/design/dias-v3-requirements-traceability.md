@@ -59,7 +59,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | I01 | Table V contracts and transactions | OK | 15 | planned (table update) |
 | I02 | Identity and role from the certificate and committed profile | OK | — | done (baseline) |
 | I03 | Success reported only after commit | OK | — | done (baseline) |
-| I04 | Access-log entries defined and measured | PART | 6 | planned (step 6) |
+| I04 | Access-log entries defined and measured | PART | 6 | done (step 6; `accessLogger.unit.test.js`; replay −47.6% / −68.1% writes) |
 | I05 | Prompt marks facts as authoritative and J as untrusted | OK | 5 | done (prompt v2; v1 frozen and checked against every tracked prompt) |
 | I06 | Response schema check; failure is a status, not a DENY | OK | — | done (baseline) |
 | I07 | Review store tamper-evident and protected | PART | 9, 13 | planned |

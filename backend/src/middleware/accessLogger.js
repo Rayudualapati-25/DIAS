@@ -13,6 +13,11 @@
 
 const fabric = require('../fabric/gateway');
 
+const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
+
+/** A body value copied into a log target only when it is a plain identifier. */
+const identifier = (value) => (typeof value === 'string' && SAFE_ID.test(value) ? value : null);
+
 /**
  * Map a request to a stable action name and a safe target.
  * Returns null for requests that are not worth logging (health checks, statics).
@@ -77,6 +82,13 @@ function describe(snapshot) {
       // "Get details" after an ALLOW: the decision that unlocked the metadata is the signal.
       return { action: 'record.metadata.read', target: { recordId, decisionId: metadataMatch[1] } };
     }
+    const custodyMatch = rest.match(/^\/evidence\/([^/]+)\/custody$/);
+    if (custodyMatch) {
+      return {
+        action: method === 'POST' ? 'evidence.custody.transfer' : 'evidence.custody.read',
+        target: { recordId, evidenceId: custodyMatch[1] },
+      };
+    }
     if (rest.endsWith('/detail')) return { action: 'evidence.detail.read', target: { recordId } };
     if (rest === '/evidence') {
       return {
@@ -91,6 +103,39 @@ function describe(snapshot) {
 
   // Cases
   if (path === '/cases' && method === 'GET') return { action: 'case.list', target: null };
+  if (path === '/cases' && method === 'POST') {
+    return { action: 'case.create', target: { caseId: identifier(req.body.caseId) } };
+  }
+  const caseActionMatch = path.match(/^\/cases\/([^/]+)\/(assign|workflow)$/);
+  if (caseActionMatch) {
+    const caseId = caseActionMatch[1];
+    if (caseActionMatch[2] === 'assign') {
+      return { action: 'case.assign', target: { caseId, userId: identifier(req.body.userId) } };
+    }
+    return method === 'POST'
+      ? { action: 'case.workflow.advance', target: { caseId, nextStatus: identifier(req.body.nextStatus) } }
+      : { action: 'case.workflow.read', target: { caseId } };
+  }
+
+  // Users and departments
+  if (path === '/users') {
+    return method === 'POST'
+      ? { action: 'user.create', target: { username: identifier(req.body.username) } }
+      : { action: 'user.list', target: null };
+  }
+  const userMatch = path.match(/^\/users\/([^/]+)(?:\/(history|status))?$/);
+  if (userMatch) {
+    const username = userMatch[1];
+    if (userMatch[2] === 'status') {
+      return { action: 'user.status', target: { username, status: identifier(req.body.status) } };
+    }
+    return { action: userMatch[2] ? 'user.history.read' : 'user.read', target: { username } };
+  }
+  if (path === '/departments') {
+    return method === 'POST'
+      ? { action: 'department.create', target: { departmentId: identifier(req.body.departmentId) } }
+      : { action: 'department.list', target: null };
+  }
   const caseReadMatch = path.match(/^\/cases\/([^/]+)$/);
   if (caseReadMatch && method === 'GET') {
     return { action: 'case.read', target: { caseId: caseReadMatch[1] } };
@@ -107,6 +152,7 @@ function describe(snapshot) {
       },
     };
   }
+  if (path === '/access/decision-log') return { action: 'dias.decision-log.read', target: null };
   // Who opened the model's reasoning behind a decision is itself worth logging.
   const recommendationMatch = path.match(/^\/access\/request\/([^/]+)\/recommendation$/);
   if (recommendationMatch) {
@@ -175,6 +221,7 @@ function describe(snapshot) {
   if (path.startsWith('/audit/request-trail/')) {
     return { action: 'audit.request-trail.read', target: { requestId: path.split('/').pop() } };
   }
+  if (path === '/audit/access-log/verify') return { action: 'audit.accesslog.verify', target: null };
   if (path.startsWith('/audit/access-log')) {
     return { action: 'audit.accesslog.read', target: null };
   }
@@ -204,6 +251,98 @@ function withResponseTarget(described, responseTarget) {
   }
   return Object.keys(extra).length === 0 ? described.target : { ...described.target, ...extra };
 }
+
+/**
+ * Logging policy (docs/design/dias-v3-ledger-schema.md §12).
+ *
+ *   SENSITIVE     reads of protected or personal data, identity events and
+ *                 searches: logged in every mode, because the read itself leaves
+ *                 no other trace;
+ *   LEDGER_WRITE  calls that submit their own transaction: a success is already
+ *                 its own ledger record, so it is logged only when refused or
+ *                 failed;
+ *   ROUTINE       low-value reads: logged only when refused or failed.
+ *
+ * DIAS_ACCESS_LOG_MODE=security applies the classes (the v3 default);
+ * DIAS_ACCESS_LOG_MODE=all logs every attributable call, as v2 did, so v2 runs
+ * can be reproduced. An action without a class is treated as SENSITIVE.
+ */
+const LOG_CLASS = Object.freeze({
+  SENSITIVE: 'sensitive',
+  LEDGER_WRITE: 'ledger-write',
+  ROUTINE: 'routine',
+});
+const { SENSITIVE, LEDGER_WRITE, ROUTINE } = LOG_CLASS;
+
+const ACTION_CLASS = Object.freeze({
+  'auth.login': SENSITIVE,
+  'auth.login_failed': SENSITIVE,
+  'auth.whoami': ROUTINE,
+  'record.search': SENSITIVE,
+  'record.create': LEDGER_WRITE,
+  'record.read': SENSITIVE,
+  'record.metadata.read': SENSITIVE,
+  'record.seal': LEDGER_WRITE,
+  'record.unseal': LEDGER_WRITE,
+  'payload.release': SENSITIVE,
+  'document.request.list': ROUTINE,
+  'document.request.create': LEDGER_WRITE,
+  'document.upload': LEDGER_WRITE,
+  'document.release': SENSITIVE,
+  'evidence.attach': LEDGER_WRITE,
+  'evidence.list': SENSITIVE,
+  'evidence.detail.read': SENSITIVE,
+  'evidence.custody.transfer': LEDGER_WRITE,
+  'evidence.custody.read': SENSITIVE,
+  'case.list': ROUTINE,
+  'case.read': SENSITIVE,
+  'case.create': LEDGER_WRITE,
+  'case.assign': LEDGER_WRITE,
+  'case.workflow.advance': LEDGER_WRITE,
+  'case.workflow.read': SENSITIVE,
+  'user.list': SENSITIVE,
+  'user.read': SENSITIVE,
+  'user.history.read': SENSITIVE,
+  'user.create': LEDGER_WRITE,
+  'user.status': LEDGER_WRITE,
+  'department.list': ROUTINE,
+  'department.create': LEDGER_WRITE,
+  'access.request': LEDGER_WRITE,
+  'access.request.read': SENSITIVE,
+  'access.request.trail': SENSITIVE,
+  'dias.decision-log.read': SENSITIVE,
+  'dias.recommendation.read': SENSITIVE,
+  'dias.auditor.queue.read': SENSITIVE,
+  'dias.auditor.review.read': SENSITIVE,
+  'dias.auditor.decision': LEDGER_WRITE,
+  'dias.authorization.list': SENSITIVE,
+  'dias.authorization.read': SENSITIVE,
+  'dias.authorization.history': SENSITIVE,
+  'dias.authorization.revoke': LEDGER_WRITE,
+  'decision.read': SENSITIVE,
+  'decision.list': SENSITIVE,
+  'audit.trail.read': SENSITIVE,
+  'audit.verify.payload': SENSITIVE,
+  'audit.request-trail.read': SENSITIVE,
+  'audit.accesslog.read': SENSITIVE,
+  'audit.accesslog.verify': SENSITIVE,
+});
+
+const logClassOf = (action) => ACTION_CLASS[action] || SENSITIVE;
+
+function shouldLog({ mode, action, status }) {
+  if (mode === 'all') return true;
+  return logClassOf(action) === SENSITIVE || status >= 400;
+}
+
+function parseAccessLogMode(value) {
+  if (value === undefined || value === null || value === '') return 'security';
+  if (value === 'security' || value === 'all') return value;
+  throw new Error('[config] DIAS_ACCESS_LOG_MODE must be "security" or "all"');
+}
+
+/** Read once at start-up so a bad value stops the server instead of every request. */
+const ACCESS_LOG_MODE = parseAccessLogMode(process.env.DIAS_ACCESS_LOG_MODE);
 
 function outcomeFor(status, action) {
   if (status >= 500) return 'error';
@@ -236,6 +375,7 @@ function accessLogger(req, res, next) {
       const action = described.action === 'auth.login' && res.statusCode !== 200
         ? 'auth.login_failed'
         : described.action;
+      if (!shouldLog({ mode: ACCESS_LOG_MODE, action, status: res.statusCode })) return;
 
       await fabric.submit(
         user.org, user.fabricUser, 'AuditContract', 'RecordAccessEvent',
@@ -250,4 +390,14 @@ function accessLogger(req, res, next) {
   next();
 }
 
-module.exports = { accessLogger, describe, withResponseTarget };
+module.exports = {
+  ACCESS_LOG_MODE,
+  ACTION_CLASS,
+  LOG_CLASS,
+  accessLogger,
+  describe,
+  logClassOf,
+  parseAccessLogMode,
+  shouldLog,
+  withResponseTarget,
+};

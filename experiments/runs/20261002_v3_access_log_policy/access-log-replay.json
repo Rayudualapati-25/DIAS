@@ -1,0 +1,250 @@
+{
+  "experiment": "v3-access-log-policy-replay",
+  "kind": "offline replay of recorded testbed HTTP traffic through the backend classifier",
+  "modes": {
+    "all": "v2 behaviour: every attributable call, classified by eval-baseline-2026-10-01",
+    "security": "v3 default (design §12), classified by the current backend"
+  },
+  "results": [
+    {
+      "trace": "experiments/runs/20260924_testbed_multivm/raw/backend-trace.jsonl",
+      "onlyEventsAfter": null,
+      "sinceTrace": null,
+      "httpCalls": 5613,
+      "notLoggable": 3,
+      "ledgerSubmits": {
+        "total": 8278,
+        "byFunction": {
+          "CreateAccessRequest": 1337,
+          "RecordAccessEvent": 5606,
+          "SubmitAuditorDecision": 1335
+        }
+      },
+      "accessLogWrites": {
+        "observed": 5606,
+        "replayedAllMode": 5610,
+        "replayedSecurityMode": 2939,
+        "shareOfLedgerSubmitsObserved": 0.6772,
+        "perWorkflowObserved": 4.193,
+        "perWorkflowSecurityMode": 2.198,
+        "replayMatchesObservedPerAction": false,
+        "mismatches": [
+          {
+            "action": "dias.auditor.queue.read",
+            "observed": 539,
+            "replayed": 541
+          },
+          {
+            "action": "dias.auditor.review.read",
+            "observed": 1322,
+            "replayed": 1324
+          }
+        ],
+        "callsWithoutRecordedWrite": [
+          {
+            "action": "dias.auditor.queue.read",
+            "at": 1790311338205.919,
+            "path": "/api/access/auditor/pending"
+          },
+          {
+            "action": "dias.auditor.review.read",
+            "at": 1790311338212.627,
+            "path": "/api/access/auditor/REQ-d45e3b0988183cd4"
+          },
+          {
+            "action": "dias.auditor.queue.read",
+            "at": 1790311346251.082,
+            "path": "/api/access/auditor/pending"
+          },
+          {
+            "action": "dias.auditor.review.read",
+            "at": 1790311346259.032,
+            "path": "/api/access/auditor/REQ-3c3b51cca9e3e1e5"
+          }
+        ],
+        "recordedWritesWithoutCallInWindow": 0
+      },
+      "byAction": [
+        {
+          "action": "access.request",
+          "observed": 1338,
+          "allModeV2Classifier": 1338
+        },
+        {
+          "action": "access.request.read",
+          "observed": 537,
+          "allModeV2Classifier": 537
+        },
+        {
+          "action": "auth.login",
+          "observed": 533,
+          "allModeV2Classifier": 533
+        },
+        {
+          "action": "dias.auditor.decision",
+          "observed": 1337,
+          "allModeV2Classifier": 1337
+        },
+        {
+          "action": "dias.auditor.queue.read",
+          "observed": 539,
+          "allModeV2Classifier": 541
+        },
+        {
+          "action": "dias.auditor.review.read",
+          "observed": 1322,
+          "allModeV2Classifier": 1324
+        }
+      ],
+      "securityModeByAction": {
+        "auth.login": 533,
+        "dias.auditor.review.read": 1324,
+        "access.request.read": 537,
+        "dias.auditor.queue.read": 541,
+        "dias.auditor.decision": 2,
+        "access.request": 2
+      },
+      "measuredCostOfAccessLogWrites": {
+        "totalMs": {
+          "n": 5606,
+          "mean": 1568.663,
+          "p50": 2036.735,
+          "p95": 2071.4,
+          "max": 9306.707
+        },
+        "endorseMs": {
+          "n": 5606,
+          "mean": 13.698,
+          "p50": 6.8,
+          "p95": 53.484,
+          "max": 253.256
+        },
+        "ordererSubmitMs": {
+          "n": 5606,
+          "mean": 6.777,
+          "p50": 2.265,
+          "p95": 5.515,
+          "max": 9238.082
+        },
+        "commitWaitMs": {
+          "n": 5606,
+          "mean": 1548.188,
+          "p50": 2027.391,
+          "p95": 2060.81,
+          "max": 2847.05
+        },
+        "failed": 0
+      },
+      "workflowsCreated": 1337
+    },
+    {
+      "trace": "experiments/runs/20260925_reuse_100_users/raw/reuse-20260925T135014Z/backend-trace.jsonl",
+      "onlyEventsAfter": 1790311913461.521,
+      "sinceTrace": "experiments/runs/20260924_testbed_multivm/raw/backend-trace.jsonl",
+      "httpCalls": 6491,
+      "notLoggable": 1,
+      "ledgerSubmits": {
+        "total": 10904,
+        "byFunction": {
+          "RecordAccessEvent": 6490,
+          "CreateAccessRequest": 2472,
+          "SubmitAuditorDecision": 1942
+        }
+      },
+      "accessLogWrites": {
+        "observed": 6490,
+        "replayedAllMode": 6490,
+        "replayedSecurityMode": 2072,
+        "shareOfLedgerSubmitsObserved": 0.5952,
+        "perWorkflowObserved": 2.625,
+        "perWorkflowSecurityMode": 0.838,
+        "replayMatchesObservedPerAction": true,
+        "mismatches": [],
+        "callsWithoutRecordedWrite": [],
+        "recordedWritesWithoutCallInWindow": 0
+      },
+      "byAction": [
+        {
+          "action": "access.request",
+          "observed": 2472,
+          "allModeV2Classifier": 2472
+        },
+        {
+          "action": "api.access.decision-log",
+          "observed": 1,
+          "allModeV2Classifier": 1
+        },
+        {
+          "action": "auth.login",
+          "observed": 127,
+          "allModeV2Classifier": 127
+        },
+        {
+          "action": "dias.auditor.decision",
+          "observed": 1942,
+          "allModeV2Classifier": 1942
+        },
+        {
+          "action": "dias.auditor.queue.read",
+          "observed": 1,
+          "allModeV2Classifier": 1
+        },
+        {
+          "action": "dias.auditor.review.read",
+          "observed": 1942,
+          "allModeV2Classifier": 1942
+        },
+        {
+          "action": "dias.authorization.list",
+          "observed": 1,
+          "allModeV2Classifier": 1
+        },
+        {
+          "action": "document.request.list",
+          "observed": 4,
+          "allModeV2Classifier": 4
+        }
+      ],
+      "securityModeByAction": {
+        "auth.login": 127,
+        "dias.auditor.review.read": 1942,
+        "dias.authorization.list": 1,
+        "dias.auditor.queue.read": 1,
+        "dias.decision-log.read": 1
+      },
+      "measuredCostOfAccessLogWrites": {
+        "totalMs": {
+          "n": 6490,
+          "mean": 1760.221,
+          "p50": 2043.809,
+          "p95": 2079.52,
+          "max": 5800.664
+        },
+        "endorseMs": {
+          "n": 6490,
+          "mean": 17.055,
+          "p50": 7.196,
+          "p95": 73.601,
+          "max": 309.902
+        },
+        "ordererSubmitMs": {
+          "n": 6490,
+          "mean": 2.633,
+          "p50": 2.24,
+          "p95": 4.983,
+          "max": 29.608
+        },
+        "commitWaitMs": {
+          "n": 6490,
+          "mean": 1740.533,
+          "p50": 2033.986,
+          "p95": 2070.542,
+          "max": 5791.494
+        },
+        "failed": 0
+      },
+      "workflowsCreated": 2472
+    }
+  ],
+  "node": "v22.20.0"
+}

@@ -286,3 +286,4 @@ The backend remains part of the trusted base, because it holds every demonstrati
 
 - 2026-10-01 — first frozen version.
 - 2026-10-01 (step 3) — separate code `DIAS_AUDITOR_CLEARANCE` for a clearance failure, and the HTTP mapping of codes.
+- 2026-10-02 (step 6) — logging classes are listed per action in `backend/src/middleware/accessLogger.js` (`ACTION_CLASS`). An action without a class is treated as sensitive, and a refused or failed call of any class is logged.
