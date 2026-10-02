@@ -7,12 +7,64 @@
  * view model is what stops a screen from showing "DENY" as though access had
  * been refused when no auditor has looked at it yet.
  *
- * The LLM runs in the backend. Its recommendation reaches this screen from the
- * backend's off-chain review store; the ledger records only the request and the
- * auditor decision with whether it agreed with the LLM.
+ * The model runs behind the recommendation service. The complete recommendation
+ * object stays off-chain; before review its digest h_M, value, generation status
+ * and request bindings are committed on the ledger (κ). Agreement is computed by
+ * the contract against κ, never against what the backend reports (paper Eq. 3),
+ * and these helpers recompute the digests so a screen can show a mismatch.
  */
 
-import { hashText, isDigest } from './commitments.js';
+import { hashCanonical, hashText, isDigest } from './commitments.js';
+
+const BOUND_FIELDS = Object.freeze([
+  'contextHash', 'claimsHash', 'justificationHash', 'policyVersion', 'policyHash', 'modelVersion',
+]);
+
+/**
+ * Is the recommendation object shown to the auditor the one committed on the
+ * ledger before review (κ)? Recomputed here, independently of the backend:
+ * h_M, the value, the status, the request and every binding (paper §IV-D).
+ */
+export function recommendationIntegrity(review) {
+  const commitment = review?.commitment || null;
+  const object = review?.recommendationObject || null;
+  if (!commitment) return { status: 'no-commitment', problems: [] };
+  if (!object) return { status: 'missing-object', problems: ['the committed recommendation object is not available'] };
+  const problems = [];
+  let computed = null;
+  try {
+    computed = hashCanonical('recommendation', object);
+  } catch {
+    problems.push('the displayed object cannot be put in canonical form');
+  }
+  if (computed !== commitment.recommendationHash) {
+    problems.push('h_M of the displayed object differs from the committed recommendationHash');
+  }
+  if (object.recommendation !== commitment.recommendation) problems.push('recommendation differs from the commitment');
+  if (object.generationStatus !== commitment.generationStatus) problems.push('generation status differs from the commitment');
+  if (object.requestId !== commitment.requestId) problems.push('request differs from the commitment');
+  for (const field of BOUND_FIELDS) {
+    if ((object.provenance || {})[field] !== commitment[field]) problems.push(`${field} differs from the commitment`);
+  }
+  return { status: problems.length === 0 ? 'verified' : 'mismatch', problems, computed };
+}
+
+/**
+ * The recommendation a decision is compared with: the committed κ when there
+ * is one (with the explanation text of the verified object), otherwise the
+ * stored failure record, otherwise none.
+ */
+export function committedRecommendation(review) {
+  const commitment = review?.commitment;
+  if (commitment) {
+    return {
+      ...(review.recommendation || {}),
+      generationStatus: commitment.generationStatus,
+      recommendation: commitment.recommendation,
+    };
+  }
+  return review?.recommendation || null;
+}
 
 /**
  * Does the justification digest the ledger committed (h_J) belong to the text
@@ -228,12 +280,21 @@ export function decisionAvailability(review, viewerUsername) {
         + 'must decide it — the chaincode refuses a decision by the requester.',
     };
   }
-  if (review.recommendationState === 'pending') {
+  if (['pending', 'signed'].includes(review.recommendationState)) {
     return {
       allowed: false,
       reason: 'recommendation-pending',
-      message: 'The LLM recommendation is still being prepared. The decision is recorded '
-        + 'together with whether it agreed with the LLM, so it waits for that answer.',
+      message: 'The LLM recommendation is still being prepared or committed to the ledger. '
+        + 'The decision is compared with the committed recommendation, so it waits for it.',
+    };
+  }
+  const integrity = recommendationIntegrity(review);
+  if (integrity.status === 'mismatch' || integrity.status === 'missing-object') {
+    return {
+      allowed: false,
+      reason: 'integrity-mismatch',
+      message: `The recommendation shown here does not match its ledger commitment (${integrity.problems.join('; ')}). `
+        + 'No decision can be recorded until it is restored.',
     };
   }
   return { allowed: true, reason: null, message: null };

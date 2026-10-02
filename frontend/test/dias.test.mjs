@@ -267,3 +267,64 @@ test('checks the committed justification digest against the text the requester s
   assert.equal(altered.status, 'mismatch');
   assert.equal(dias.justificationCommitmentView(text, {}).status, 'absent');
 });
+
+function committedReview(overrides = {}) {
+  const recommendationObject = {
+    schemaVersion: 'dias-recommendation-object-v1', requestId: 'REQ-1', generationStatus: 'OK',
+    recommendation: 'DENY', output: { recommendation: 'DENY', reason: 'Not assigned.' }, error: null,
+    provenance: {
+      contextHash: '1'.repeat(64), claimsHash: '2'.repeat(64), justificationHash: '3'.repeat(64),
+      policyVersion: 'dias-governance-policy-v1', policyHash: '4'.repeat(64), modelVersion: 'base@rev',
+    },
+  };
+  return { recommendationObject, recommendationState: 'committed', ...overrides };
+}
+
+test('verifies the displayed recommendation against its ledger commitment in the browser', async () => {
+  const dias = await import('../js/shared/dias.js');
+  const { hashCanonical } = await import('../js/shared/commitments.js');
+  const review = committedReview();
+  const object = review.recommendationObject;
+  review.commitment = {
+    requestId: 'REQ-1', recommendation: 'DENY', generationStatus: 'OK',
+    recommendationHash: hashCanonical('recommendation', object), ...object.provenance,
+  };
+  assert.equal(dias.recommendationIntegrity(review).status, 'verified');
+
+  const edited = { ...review, recommendationObject: { ...object, output: { ...object.output, reason: 'edited' } } };
+  const mismatch = dias.recommendationIntegrity(edited);
+  assert.equal(mismatch.status, 'mismatch');
+  assert.deepEqual(mismatch.problems, ['h_M of the displayed object differs from the committed recommendationHash']);
+  assert.equal(dias.recommendationIntegrity({ ...review, recommendationObject: null }).status, 'missing-object');
+  assert.equal(dias.recommendationIntegrity({ ...review, commitment: null }).status, 'no-commitment');
+});
+
+test('blocks a decision on a mismatch, a missing object, or a commitment not yet on the ledger', async () => {
+  const dias = await import('../js/shared/dias.js');
+  const { hashCanonical } = await import('../js/shared/commitments.js');
+  const base = committedReview({ request: { requester: { username: 'insp.test' } } });
+  base.commitment = {
+    requestId: 'REQ-1', recommendation: 'DENY', generationStatus: 'OK',
+    recommendationHash: hashCanonical('recommendation', base.recommendationObject), ...base.recommendationObject.provenance,
+  };
+  assert.equal(dias.decisionAvailability(base, 'sp.north').allowed, true);
+  const edited = { ...base, recommendationObject: { ...base.recommendationObject, recommendation: 'ALLOW' } };
+  assert.deepEqual(
+    [dias.decisionAvailability(edited, 'sp.north').allowed, dias.decisionAvailability(edited, 'sp.north').reason],
+    [false, 'integrity-mismatch'],
+  );
+  assert.equal(dias.decisionAvailability({ ...base, recommendationObject: null }, 'sp.north').reason, 'integrity-mismatch');
+  assert.equal(dias.decisionAvailability({ ...base, recommendationState: 'signed', commitment: null }, 'sp.north').reason,
+    'recommendation-pending');
+});
+
+test('derives the consequences of a decision from the committed recommendation', async () => {
+  const dias = await import('../js/shared/dias.js');
+  const review = { commitment: { recommendation: 'DENY', generationStatus: 'OK' }, recommendation: { generationStatus: 'OK', recommendation: 'ALLOW' } };
+  const committed = dias.committedRecommendation(review);
+  assert.equal(committed.recommendation, 'DENY');
+  assert.equal(dias.willCreateAuthorization(committed, 'FORCE_ALLOW'), true);
+  const failed = dias.committedRecommendation({ commitment: { recommendation: null, generationStatus: 'CONTEXT_OVERFLOW' } });
+  assert.equal(dias.llmAgreement(failed, 'FORCE_ALLOW'), 'NO_RECOMMENDATION');
+  assert.equal(dias.committedRecommendation({ commitment: null, recommendation: null }), null);
+});

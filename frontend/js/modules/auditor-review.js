@@ -2,12 +2,14 @@
  * DIAS auditor console.
  *
  * Every request that no active dynamic authorization settled arrives here. The
- * backend asks the LLM for an advisory recommendation and shows it here — or
- * shows that it is still being prepared, or that none could be produced. The
- * AuditMSP reviewer sees all verified facts, the untrusted justification as
- * submitted, and the model's answer clearly marked as advisory, and is the only
- * actor who can decide. The ledger records the decision and whether it agreed
- * with the LLM; the recommendation itself stays off-chain.
+ * recommendation service produces an advisory recommendation and its signed
+ * commitment κ is written to the ledger before review; this screen shows the
+ * recommendation — or that it is still being prepared, or that none could be
+ * produced — and recomputes its digest against κ in the browser. The AuditMSP
+ * reviewer sees all verified facts, the untrusted justification as submitted,
+ * and the model's answer clearly marked as advisory, and is the only actor who
+ * can decide. The ledger records the decision and its agreement with κ; the
+ * recommendation object itself stays off-chain.
  *
  * Two things this screen must never do: present the model's answer as an
  * outcome, and let an auditor create a dynamic authorization without knowing it.
@@ -25,6 +27,7 @@ import { count, dateTime, shortHash } from '../core/format.js';
 import {
   reviewSummary, authorizationView, agreementLabel, decisionAvailability, llmAgreement,
   willCreateAuthorization, requiresOverrideReason, authorizationOutcomeNote,
+  recommendationIntegrity, committedRecommendation, justificationCommitmentView,
 } from '../shared/dias.js';
 import { auditorRequestFromSearch } from '../shared/auditor-handoff.js';
 
@@ -88,6 +91,45 @@ function requestTable(item) {
   ]);
 }
 
+/**
+ * Whether the recommendation shown is the one committed on the ledger before
+ * review. Recomputed in this browser (recommendationIntegrity), not taken from
+ * the backend.
+ */
+function integrityCallout(review) {
+  const integrity = recommendationIntegrity(review);
+  const commitment = review.commitment || {};
+  if (integrity.status === 'verified') {
+    return callout('good', 'Checked against the ledger',
+      hint('This is the recommendation committed before review: commitment ', mono(show(commitment.commitmentId)),
+        ' · h_M ', mono(shortHash(commitment.recommendationHash, 16)),
+        ' · signed by key ', mono(shortHash(commitment.signerKeyId, 12)), '.'));
+  }
+  if (integrity.status === 'no-commitment') {
+    return callout('info', 'No recommendation was committed on the ledger',
+      hint('The decision will be recorded as NO_RECOMMENDATION, and a reason is required.'));
+  }
+  return callout('bad', 'This recommendation does not match the ledger',
+    ...integrity.problems.map((problem) => hint(problem)),
+    hint('No decision can be recorded until the committed recommendation object is restored.'));
+}
+
+/** Whether the justification shown is the text whose fingerprint (h_J) the ledger holds. */
+function justificationFingerprint(text, request) {
+  if (typeof text !== 'string') {
+    return hint('The text is not available here; the ledger holds only its fingerprint.');
+  }
+  const commitment = justificationCommitmentView(text, request);
+  if (commitment.status === 'match') {
+    return hint('Off-chain text; its fingerprint on the ledger, ', mono(shortHash(commitment.committed, 16)),
+      ', matches what is shown.');
+  }
+  if (commitment.status === 'mismatch') {
+    return hint('Warning: this text does not match the fingerprint committed on the ledger.');
+  }
+  return hint('Off-chain text; this request carries no fingerprint on the ledger.');
+}
+
 /** The model's answer, or a plain statement that there is none yet or at all. */
 function recommendationCard(item, { onRefresh }) {
   const view = item.recommendation;
@@ -118,7 +160,7 @@ function recommendationCard(item, { onRefresh }) {
         ' · this recommendation cannot grant or deny access.')),
     detailTable([
       ['Explanation', show(item.llmReason)],
-      ['Stored', 'in the backend only; not written to the ledger'],
+      ['Stored', 'off-chain; its digest h_M was committed on the ledger before review'],
       ['Policy references', view.policyRefs.length > 0
         ? el('div', {}, ...view.policyRefs.map((ref) => badge(ref, 'neutral'))) : '—'],
       ['Missing evidence', view.missingEvidence.length > 0
@@ -211,6 +253,8 @@ export default {
       if (!review) return;
       const item = reviewSummary(review);
       const availability = decisionAvailability(review, user.username);
+      // Consequences follow the recommendation committed on the ledger (κ).
+      const committed = committedRecommendation(review);
       const reason = textarea('auditorReason', {
         maxlength: '500',
         rows: '3',
@@ -230,13 +274,13 @@ export default {
        */
       const renderConsequences = () => {
         replace(consequence, ...['FORCE_ALLOW', 'FORCE_DENY'].map((decision) => {
-          const creates = willCreateAuthorization(review.recommendation, decision);
+          const creates = willCreateAuthorization(committed, decision);
           return callout(creates ? 'warn' : 'info',
             `${decision.replace('_', ' ')} — ${creates
               ? 'creates a dynamic authorization' : 'no dynamic authorization'}`,
-            hint(authorizationOutcomeNote(review.recommendation, decision)),
-            hint('The ledger will record: ', agreementLabel(llmAgreement(review.recommendation, decision)), '.'),
-            hint(requiresOverrideReason(review.recommendation, decision)
+            hint(authorizationOutcomeNote(committed, decision)),
+            hint('The ledger will record: ', agreementLabel(llmAgreement(committed, decision)), '.'),
+            hint(requiresOverrideReason(committed, decision)
               ? 'A reason is REQUIRED for this combination.'
               : 'A reason is optional here.'));
         }));
@@ -254,7 +298,7 @@ export default {
               : hint('Press "Refresh recommendation" above once it is ready.')));
           return;
         }
-        if (requiresOverrideReason(review.recommendation, decision)
+        if (requiresOverrideReason(committed, decision)
             && reason.value.trim().length === 0) {
           replace(problem, callout('bad', 'A reason is required',
             hint(`${decision.replace('_', ' ')} here differs from the model, or no `
@@ -294,7 +338,7 @@ export default {
                 ' now grants exactly this user, record, case, action and purpose automatically '
                 + 'while the governed conditions are unchanged.'))
             : callout('info', 'No dynamic authorization created',
-              hint(authorizationOutcomeNote(review.recommendation, decision))));
+              hint(authorizationOutcomeNote(committed, decision))));
         queueRegion.reload();
         authorizationsRegion.reload();
       };
@@ -315,6 +359,7 @@ export default {
               + '— dj.north, cfo.north or dp.north — and open the request again.')
             : null),
         recommendationCard(item, { onRefresh: () => showReview(requestId) }),
+        integrityCallout(review),
         subheading('Verified requester facts'),
         verifiedFactsTable(item),
         subheading('Requested record'),
@@ -324,8 +369,8 @@ export default {
         subheading('User justification (untrusted)'),
         callout('info', 'Written by the requester',
           el('p', { class: 'justification' }, show(item.justification)),
-          hint('Kept in the backend and given to the LLM; not written to the ledger. ',
-            'Claims here are not verified facts.')),
+          justificationFingerprint(item.justification, review.request),
+          hint('Claims here are not verified facts.')),
         el('label', { class: 'field' },
           el('span', { class: 'field-label' }, 'Auditor reason'), reason),
         problem,

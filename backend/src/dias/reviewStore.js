@@ -17,7 +17,20 @@ const path = require('path');
 
 const REVIEW_SCHEMA_VERSION = 'dias-offchain-review-v1';
 const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
-const RECOMMENDATION_STATE = Object.freeze({ PENDING: 'pending', READY: 'ready' });
+/**
+ * pending: waiting for the recommendation service; signed: M and κ stored, κ not
+ * yet confirmed on the ledger; committed: κ on the ledger; commit-rejected: the
+ * ledger refused κ for a lasting reason; failed: the service could not answer.
+ * `ready` is the v2 state, kept so entries written before v3 still read.
+ */
+const RECOMMENDATION_STATE = Object.freeze({
+  PENDING: 'pending',
+  SIGNED: 'signed',
+  COMMITTED: 'committed',
+  COMMIT_REJECTED: 'commit-rejected',
+  FAILED: 'failed',
+  READY: 'ready',
+});
 
 function createReviewStore(dir, { now = () => new Date(), log = console } = {}) {
   if (!dir) throw new Error('review store requires a directory');
@@ -59,6 +72,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
       requesterClaimsHash: request.requesterClaimsHash,
       justification,
       justificationHash: request.justificationHash,
+      policyVersion: request.policyVersion ?? null,
+      policyHash: request.policyHash ?? null,
       recommendationState: RECOMMENDATION_STATE.PENDING,
       recommendation: null,
       auditorNote: null,

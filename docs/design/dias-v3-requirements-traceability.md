@@ -35,26 +35,26 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M04 | `h_J` recorded on-chain with the request | MISS | 9 | done (step 9; contract, backend, browser recomputation) |
 | M05 | Active policy version recorded in the request | MISS | 8 | done (step 8; `diasPolicyBinding.test.js`) |
 | M06 | Reuse requires the active policy version | MISS | 8 | done (step 8; `POLICY_CHANGED` miss) |
-| M07 | κ committed before review | MISS | 10 | planned (step 10) |
-| M08 | One active κ per request; mismatched `h_C` or `v_P` rejected | MISS | 10 | planned (step 10) |
-| M09 | Specific generation status on-chain | PART | 10 | planned (step 10) |
-| M10 | Auditor interface verifies H(M) = `h_M` and M against κ before deciding | MISS | 10, 15 | planned |
+| M07 | κ committed before review | MISS | 10 | done (step 10; `diasRecommendationCommitment.test.js`, `diasBackendRecommendation.unit.test.js`) |
+| M08 | One active κ per request; mismatched `h_C` or `v_P` rejected | MISS | 10 | done (step 10; idempotent retry, conflict and binding rejections write nothing) |
+| M09 | Specific generation status on-chain | PART | 10 | done (step 10; all five statuses kept in κ and in the decision) |
+| M10 | Auditor interface verifies H(M) = `h_M` and M against κ before deciding | MISS | 10, 15 | backend and browser done (step 10; `recommendationIntegrity.unit.test.js`, `accessDias.unit.test.js`, `dias.test.mjs`); screen check in step 15 |
 | M11 | Note stored off-chain before the decision; `h_N` in the transaction | MISS | 11 | planned (step 11) |
-| M12 | Contract derives agreement from κ; backend supplies neither q nor g | PART | 10 | planned (step 10) |
-| M13 | Fail-closed decision checks | PART | 3, 8, 10, 11 | planned |
-| M14 | Authorization only for FORCE ALLOW over a valid DENY | OK | 10 | planned (re-derived from κ) |
-| M15 | Authorization stores `v_P` and the κ reference | PART | 8, 10 | `v_P` done (step 8); κ reference in step 10 |
+| M12 | Contract derives agreement from κ; backend supplies neither q nor g | PART | 10 | done (step 10; Eq. 3 table over every combination; no recommendation parameter) |
+| M13 | Fail-closed decision checks | PART | 3, 8, 10, 11 | steps 3, 8 and 10 done; note requirement in step 11 |
+| M14 | Authorization only for FORCE ALLOW over a valid DENY | OK | 10 | done (step 10; derived from κ, Eq. 3 table) |
+| M15 | Authorization stores `v_P` and the κ reference | PART | 8, 10 | done (steps 8 and 10; κ id and `h_M` on the authorization) |
 | M16 | Authorization lifecycle, revocation reason, supersession | OK | — | done (baseline) |
 | M17 | Policy change stops reuse; reissue under the new policy | MISS | 8 | done (step 8; reissue supersedes) |
-| M18 | Lifecycle events for recommendation commitment and agreement derivation | PART | 10 | planned (step 10) |
-| M19 | Off-chain objects verifiable against on-chain hashes | MISS | 9–11 | planned |
+| M18 | Lifecycle events for recommendation commitment and agreement derivation | PART | 10 | done (step 10; `diasAccessWorkflow.test.js`, `diasAuditTrail.test.js`) |
+| M19 | Off-chain objects verifiable against on-chain hashes | MISS | 9–11 | `h_J` and `h_M` done (steps 9, 10); `h_N` and audit reconstruction in step 11 |
 | M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | done (steps 4 and 8; `diasRelease.test.js`, `diasPolicyBinding.test.js`) |
 | M21 | Trust model states the backend's role | TEXT/PART | 12 | planned (step 12 + text) |
-| M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | planned (step 10) |
+| M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | done (step 10; κ in the audit trail without the review store) |
 | M23 | No self-review | OK | 3 | done (step 3; `diasAuditorAuthority.test.js`) |
 | M24 | Auditor authority: AuditMSP district head, active credential, district | PART | 3 | done (step 3; `diasAuditorAuthority.test.js`, `chaincodeErrors.unit.test.js`) |
 | M25 | Counterfactual explanation (C3) | MISS | 14 | planned (step 14) |
-| M26 | Two pre-review commits and one atomic final commit (Algorithm 1) | PART | 10 | planned (step 10) |
+| M26 | Two pre-review commits and one atomic final commit (Algorithm 1) | PART | 10 | done (step 10; three transactions in `diasAuditTrail.test.js`); note staging in step 11 |
 | M27 | Pending requests end (expiry, cancellation, late decisions) | MISS | 7 | done (step 7; `diasRequestLifecycle.test.js`, `expirySweeper.unit.test.js`); policy-change expiry in step 8 |
 | I01 | Table V contracts and transactions | OK | 15 | planned (table update) |
 | I02 | Identity and role from the certificate and committed profile | OK | — | done (baseline) |
@@ -62,13 +62,13 @@ Each requirement traces: paper requirement → current behavior → required cha
 | I04 | Access-log entries defined and measured | PART | 6 | done (step 6; `accessLogger.unit.test.js`; replay −47.6% / −68.1% writes) |
 | I05 | Prompt marks facts as authoritative and J as untrusted | OK | 5 | done (prompt v2; v1 frozen and checked against every tracked prompt) |
 | I06 | Response schema check; failure is a status, not a DENY | OK | — | done (baseline) |
-| I07 | Review store tamper-evident and protected | PART | 9, 13 | planned |
+| I07 | Review store tamper-evident and protected | PART | 9, 13 | justification and recommendation tamper-evident (steps 9, 10); note in 11; encryption in 13 |
 | I08 | No written-policy engine in the contract | OK | 14 | planned (guard kept) |
 | A01 | Final PDF download re-checks the grant | MISS | 4 | done (step 4; `diasRelease.test.js`, `documentRelease.unit.test.js`) |
 | A02 | Record history, evidence and decision log restricted | MISS | 13 | planned (step 13) |
 | A03 | Explanation and off-chain object access defined and enforced | PART | 13 | planned (step 13) |
 | A04 | Off-chain review data encrypted | MISS | 13 | planned (step 13) |
-| A05 | Signed recommendation provenance; no AI organization | MISS | 12 | planned (step 12) |
+| A05 | Signed recommendation provenance; no AI organization | MISS | 10, 12 | signing, signer registry, revocation and replay rejection done (step 10); separate process in step 12 |
 | A06 | Maximum authorization validity (null expiry never ends) | OUT | — | open researcher decision |
 | A07 | Identity and record id inside C (§IV-C) | TEXT | — | text fix |
 | A08 | Result numbers (23.75%, 60.27%, E7 failures, Fig. 13 memory, loss range) | TEXT | — | text fix |
@@ -146,6 +146,13 @@ Each entry: current behavior → required change; files; tests; evidence; accept
   - every combination yields the agreement of Eq. (3);
   - only FORCE_ALLOW over a committed OK DENY creates an authorization;
   - a duplicate commitment is idempotent and a conflicting one is rejected without writes.
+
+- **Done (step 10):**
+  - `CommitRecommendation` with the six checks of design §6, each rejection writing nothing;
+  - `SubmitAuditorDecision(requestId, decision, noteHash, validUntilUtc)` reads κ through `recommendationOf`;
+  - the decision, outcome and authorization carry the κ id, `h_M` and the specific status;
+  - `RECOMMENDATION_COMMITTED` and `AGREEMENT_DERIVED` events.
+- **Evidence:** `diasRecommendationCommitment.test.js` (signer registry, acceptance, rejection, replay, Eq. 3 over 4 decision/recommendation pairs, 4 failure statuses and the no-κ case).
 
 ### M10 — Auditor-side verification
 - **Paper:** §IV-D; Algorithm 1 line 16.

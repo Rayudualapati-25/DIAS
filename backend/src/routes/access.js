@@ -8,15 +8,17 @@
  *      chaincode commits who asked for which record and checks the latest active
  *      dynamic authorization in the same transaction — an exact match grants at
  *      once, with the auditor recorded as skipped;
- *   2. otherwise this backend asks the LLM for an advisory ALLOW/DENY
- *      recommendation and keeps it off-chain for the auditor screen;
+ *   2. otherwise the recommendation service produces an advisory ALLOW/DENY
+ *      recommendation; the object M stays off-chain and its signed commitment κ
+ *      (value, specific status, h_M, bindings) is committed before review;
  *   3. an auditor issues FORCE_ALLOW or FORCE_DENY, which is the final word. The
- *      backend commits the decision together with the recommendation the auditor
- *      was shown — ALLOW, DENY, or UNAVAILABLE when there was none.
+ *      backend refuses a decision while M does not match κ, and sends only the
+ *      decision, the note digest h_N and any expiry; the chaincode derives the
+ *      agreement from κ (paper Eq. 3).
  *
- * A recommendation is never returned as a decision. Its value is committed with
- * the auditor decision; its reason text and model provenance stay off-chain. The
- * only 201 "decided" response comes from an access outcome committed on Fabric.
+ * A recommendation is never returned as a decision. Its reason text, the note
+ * and the model provenance stay off-chain. The only 201 "decided" response comes
+ * from an access outcome committed on Fabric.
  */
 
 const express = require('express');
@@ -26,9 +28,13 @@ const { ok, fail, asyncRoute } = require('../util/respond');
 const { requireAuth, requireRole } = require('../middleware/auth');
 const { getDiasRuntime } = require('../dias/runtime');
 const { RECOMMENDATION_STATE } = require('../dias/reviewStore');
+const { checkRecommendationIntegrity } = require('../dias/recommendationIntegrity');
+const {
+  recommendationOf,
+} = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
 const { mayReadReasonText, recommendationDetail } = require('../dias/recommendationDetail');
 const {
-  createsAuthorization, llmAgreementFor, llmRecommendationFor, requiresAuditorReason,
+  createsAuthorization, llmAgreementFor, requiresAuditorReason,
 } = require('../dias/agreement');
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } =
   require('../../../chaincode/crimerecords/lib/policy/policyV1');
@@ -78,16 +84,21 @@ async function submitAccessRequest(user, args, {
 }
 
 /**
- * The auditor-facing view of one committed request: the ledger request plus
- * what the backend holds off-chain — the requester's justification and the LLM
- * recommendation, or the fact that it is still being prepared or was never made.
+ * The auditor-facing view of one committed request: the ledger request and its
+ * recommendation commitment κ, the off-chain justification and recommendation
+ * object M, and whether M matches κ (design §6). The browser recomputes the same
+ * integrity check itself; the backend refuses a decision unless it passes.
  */
-function reviewView(request, entry) {
+function reviewView(request, commitment, entry) {
+  const recommendationObject = entry ? entry.recommendationObject || null : null;
   return {
     request,
+    commitment: commitment || null,
     justification: entry ? entry.justification : null,
     recommendationState: entry ? entry.recommendationState : 'not-generated',
     recommendation: entry ? entry.recommendation : null,
+    recommendationObject,
+    integrity: checkRecommendationIntegrity({ commitment: commitment || null, recommendationObject }),
     auditorNote: entry ? entry.auditorNote : null,
   };
 }
@@ -274,23 +285,25 @@ router.get('/auditor/pending', requireRole(...AUDITOR_ROLES), asyncRoute(async (
   const pending = await fabric.evaluate(
     req.user.org, req.user.fabricUser, CONTRACT, 'QueryPendingAuditorRequests');
   const { store } = getDiasRuntime();
-  return ok(res, pending.map(({ request }) => reviewView(request, store.read(request.requestId))));
+  return ok(res, pending.map(({ request, commitment }) => (
+    reviewView(request, commitment, store.read(request.requestId)))));
 }));
 
 router.get('/auditor/:requestId', requireRole(...AUDITOR_ROLES), asyncRoute(async (req, res) => {
-  const { request } = await fabric.evaluate(
+  const { request, commitment } = await fabric.evaluate(
     req.user.org, req.user.fabricUser, CONTRACT, 'GetAuditorReview', req.params.requestId);
   const { store } = getDiasRuntime();
-  return ok(res, reviewView(request, store.read(request.requestId)));
+  return ok(res, reviewView(request, commitment, store.read(request.requestId)));
 }));
 
 /**
- * The final decision. The backend, not the browser, reads the stored LLM
- * recommendation and commits its value with the decision; the chaincode derives
- * the agreement from the two. A reason is required whenever the auditor did not
- * simply agree with the LLM; it is kept off-chain with the review.
- * `validUntilUtc` is accepted only where a dynamic authorization is created:
- * FORCE_ALLOW over an LLM DENY.
+ * The final decision. The chaincode derives the agreement from κ, the
+ * recommendation committed before review; the backend reads κ only to refuse a
+ * decision on a recommendation object that does not match it, and to ask for a
+ * reason early. A reason is required whenever the auditor did not simply agree
+ * with the committed recommendation; it stays off-chain and only its digest h_N
+ * is sent. `validUntilUtc` is accepted only where a dynamic authorization is
+ * created: FORCE_ALLOW over a committed DENY.
  */
 const auditorDecisionSchema = z.object({
   decision: z.enum(['FORCE_ALLOW', 'FORCE_DENY']),
@@ -311,15 +324,32 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   const { decision, validUntilUtc } = parsed.data;
   const reason = (parsed.data.reason || '').trim();
   const entry = store.read(requestId);
-  if (entry && entry.recommendationState === RECOMMENDATION_STATE.PENDING) {
+  if (entry && [RECOMMENDATION_STATE.PENDING, RECOMMENDATION_STATE.SIGNED].includes(entry.recommendationState)) {
     return {
       status: 409,
-      error: 'the LLM recommendation for this request is still being prepared; try again shortly',
+      error: 'the LLM recommendation for this request is still being prepared or committed; try again shortly',
     };
   }
-  const storedRecommendation = entry ? entry.recommendation : null;
-  const llmRecommendation = llmRecommendationFor(storedRecommendation);
-  const llmAgreement = llmAgreementFor(storedRecommendation, decision);
+  // The recommendation the decision is compared with is the one committed on the
+  // ledger before review (κ), and the auditor may decide only on the object that
+  // matches it (paper §IV-D).
+  const { commitment } = await ledger.evaluate(user.org, user.fabricUser, CONTRACT, 'GetAuditorReview', requestId);
+  if (commitment) {
+    const integrity = checkRecommendationIntegrity({
+      commitment, recommendationObject: entry ? entry.recommendationObject : null,
+    });
+    if (integrity.status !== 'verified') {
+      return {
+        status: 409,
+        error: integrity.status === 'missing-object'
+          ? 'the committed recommendation object is not available, so it cannot be verified; no decision can be recorded'
+          : `the stored recommendation does not match its ledger commitment (${integrity.problems.join('; ')}); `
+            + 'no decision can be recorded until it is restored',
+      };
+    }
+  }
+  const { llmRecommendation, generationStatus } = recommendationOf(commitment || null);
+  const llmAgreement = llmAgreementFor({ generationStatus, recommendation: llmRecommendation }, decision);
   if (requiresAuditorReason(llmAgreement) && reason.length === 0) {
     return {
       status: 400,
@@ -329,11 +359,13 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   if (validUntilUtc && !createsAuthorization(decision, llmAgreement)) {
     return { status: 400, error: 'validUntilUtc applies only when a dynamic authorization is created' };
   }
+  // h_N: only the note's digest reaches the ledger (design §4, §7).
+  const noteHash = reason ? hashText(DOMAINS.NOTE, reason) : '';
   let result;
   try {
     result = await ledger.submit(
       user.org, user.fabricUser, CONTRACT, 'SubmitAuditorDecision',
-      requestId, decision, llmRecommendation, validUntilUtc || ''
+      requestId, decision, noteHash, validUntilUtc || ''
     );
   } catch (error) {
     // The deadline passed, or the policy changed, while the auditor was
@@ -350,15 +382,17 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
       auditorNote: {
         decision,
         llmRecommendation,
+        generationStatus,
         llmAgreement,
         reason: reason || null,
+        noteHash: noteHash || null,
         auditorUsername: user.username || user.fabricUser,
         decidedAtUtc: result.auditorDecision.decidedAtUtc,
         txId: result.auditorDecision.txId,
       },
     });
   }
-  return { status: 201, data: result, llmRecommendation, llmAgreement };
+  return { status: 201, data: result, llmRecommendation, generationStatus, llmAgreement };
 }
 
 router.post('/auditor/:requestId/decision', requireRole(...AUDITOR_ROLES),

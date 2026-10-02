@@ -18,6 +18,12 @@ const {
   POLICY_VERSION_SCHEMA_VERSION, activeKey, assertPolicyHash, assertPolicyVersion,
   readActivePolicy, readPolicyVersion, versionKey,
 } = require('./dias/policyRegistry');
+const {
+  SIGNER_KEY, SIGNER_SCHEMA_VERSION, normalizedPublicKeyPem, signerKeyIdOf,
+} = require('./dias/recommendationCommitment');
+const { assertDigest } = require('./dias/commitments');
+
+const MAX_REASON = 500;
 
 const DEPARTMENT_KEY = 'department';
 const CASE_KEY = 'case';
@@ -335,6 +341,71 @@ class GovernanceContract extends Contract {
 
   async QueryPolicyVersions(ctx) {
     return this._queryAll(ctx, POLICY_VERSION_KEY);
+  }
+
+  /**
+   * Register the recommendation service's Ed25519 public key (design §6.1). Its
+   * identifier is the SHA-256 of the DER public key, computed here, so the key
+   * and the identifier a commitment names cannot disagree. Rotation: register the
+   * new key, switch the service, then revoke the old key.
+   */
+  async RegisterRecommendationSigner(ctx, publicKeyPem, label) {
+    const { caller } = await requireActiveDistrictHead(ctx, { action: 'RegisterRecommendationSigner' });
+    const keyId = signerKeyIdOf(publicKeyPem);
+    if (label && !SAFE_ID.test(label)) throw new Error('label has invalid format');
+    const key = ctx.stub.createCompositeKey(SIGNER_KEY, [keyId]);
+    const existing = await ctx.stub.getState(key);
+    if (existing && existing.length > 0) {
+      throw new Error(`recommendation signer '${keyId}' is already registered`);
+    }
+    const signer = {
+      docType: SIGNER_KEY,
+      schemaVersion: SIGNER_SCHEMA_VERSION,
+      keyId,
+      algorithm: 'Ed25519',
+      publicKeyPem: normalizedPublicKeyPem(publicKeyPem),
+      label: label || null,
+      status: 'active',
+      registeredBy: actorFrom(caller, sha256(caller.id)),
+      registeredAtUtc: ctx.stub.getDateTimestamp().toISOString(),
+      registrationTxId: ctx.stub.getTxID(),
+      revokedBy: null,
+      revokedAtUtc: null,
+      revocationReason: null,
+      revocationTxId: null,
+    };
+    await putJson(ctx, key, signer);
+    ctx.stub.setEvent('DiasRecommendationSignerRegistered', Buffer.from(JSON.stringify({ keyId })));
+    return JSON.stringify(signer);
+  }
+
+  async RevokeRecommendationSigner(ctx, keyId, reason) {
+    const { caller } = await requireActiveDistrictHead(ctx, { action: 'RevokeRecommendationSigner' });
+    assertDigest(keyId, 'keyId');
+    if (typeof reason !== 'string' || reason.trim().length === 0) {
+      throw new Error('a revocation reason is required');
+    }
+    if (reason.length > MAX_REASON) throw new Error(`revocation reason must be at most ${MAX_REASON} characters`);
+    const key = ctx.stub.createCompositeKey(SIGNER_KEY, [keyId]);
+    const data = await ctx.stub.getState(key);
+    if (!data || data.length === 0) throw new Error(`recommendation signer '${keyId}' is not registered`);
+    const signer = JSON.parse(data.toString());
+    if (signer.status !== 'active') throw new Error(`recommendation signer '${keyId}' is not active`);
+    const revoked = {
+      ...signer,
+      status: 'revoked',
+      revokedBy: actorFrom(caller, sha256(caller.id)),
+      revokedAtUtc: ctx.stub.getDateTimestamp().toISOString(),
+      revocationReason: reason,
+      revocationTxId: ctx.stub.getTxID(),
+    };
+    await putJson(ctx, key, revoked);
+    ctx.stub.setEvent('DiasRecommendationSignerRevoked', Buffer.from(JSON.stringify({ keyId })));
+    return JSON.stringify(revoked);
+  }
+
+  async QueryRecommendationSigners(ctx) {
+    return this._queryAll(ctx, SIGNER_KEY);
   }
 
   async _queryAll(ctx, type) {

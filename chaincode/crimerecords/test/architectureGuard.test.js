@@ -75,7 +75,18 @@ describe('architecture guard: the DIAS runtime has no policy engine', () => {
     }
   });
 
-  it('never loads an LLM recommendation, provenance, or model-registration module', () => {
-    expect(graph.filter((file) => /recommendation|provenance|policyContract/i.test(file))).to.deep.equal([]);
+  /**
+   * v3 replaces the v2 rule "no recommendation module at all": the contract now
+   * commits a signed recommendation and verifies its provenance (design §6). What
+   * must still never run in chaincode is the model itself: no response parser, no
+   * prompt, no network call, and no model or AI-organisation registration.
+   */
+  it('loads only the recommendation commitment, never a model, parser, prompt or registration', () => {
+    const recommendationModules = graph.filter((file) => /recommendation|provenance/i.test(file));
+    expect(recommendationModules).to.deep.equal(['lib/dias/recommendationCommitment.js']);
+    expect(graph).to.not.include('lib/dias/recommendationSchema.js');
+    expect(graph.filter((file) => /policyContract|modelRegistry|aiOrg/i.test(file))).to.deep.equal([]);
+    const source = fs.readFileSync(path.join(PACKAGE_ROOT, 'lib/dias/recommendationCommitment.js'), 'utf8');
+    expect(source).to.not.match(/fetch\(|require\('https?'\)|reason_code|SYSTEM_PROMPT|chat\/completions/);
   });
 });

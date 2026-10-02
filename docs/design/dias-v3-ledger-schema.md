@@ -288,3 +288,9 @@ The backend remains part of the trusted base, because it holds every demonstrati
 - 2026-10-01 (step 3) — separate code `DIAS_AUDITOR_CLEARANCE` for a clearance failure, and the HTTP mapping of codes.
 - 2026-10-02 (step 8) — policy version identifier is `<bundleId>-<version>` (`dias-governance-policy-v1`); its v3 digest is `9c66ce9e…`. The prompt still shows the bundle's original undomained digest `796013dd…`, because the prompt text is model input. Both are functions of the same bundle.
 - 2026-10-02 (step 6) — logging classes are listed per action in `backend/src/middleware/accessLogger.js` (`ACTION_CLASS`). An action without a class is treated as sensitive, and a refused or failed call of any class is logged.
+- 2026-10-02 (step 10) — implementation details fixed while building κ:
+  - the signing key is read from a PEM file named by `DIAS_RECOMMENDER_SIGNING_KEY_FILE` (default `backend/data/dias-recommender-signing-key.pem`, ignored by Git), not from a variable holding the key;
+  - the signer registry transactions (§6.1) were built with step 10, because κ cannot be verified without them; the separate service process stays in step 12;
+  - `GetAuditorReview` and `QueryPendingAuditorRequests` return `{request, commitment}`, so the review screen reads κ from the ledger;
+  - the contract accepts and validates `noteHash` from step 10, but requires it only from step 11; until then the backend enforces the reason.
+  - M (`dias-recommendation-object-v1`) replaces unpaired surrogates in model text with U+FFFD before hashing, because canonical JSON cannot encode them.

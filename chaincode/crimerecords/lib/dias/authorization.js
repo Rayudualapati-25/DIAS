@@ -81,7 +81,7 @@ function assertSafeIds(ids) {
  */
 function createAuthorization({
   txId, timestamp, auditor, scope, verifiedRequest, originatingRequestId,
-  auditorDecision, validUntilUtc, previous, policy,
+  auditorDecision, validUntilUtc, previous, policy, recommendationCommitment = null,
 }) {
   if (!policy || !policy.policyVersion || !policy.policyHash) {
     throw new Error('a dynamic authorization requires the policy binding it is issued under');
@@ -113,6 +113,9 @@ function createAuthorization({
     conditionsHash: verifiedRequestHash(verifiedRequest),
     policyVersion: policy.policyVersion,
     policyHash: policy.policyHash,
+    recommendationCommitmentId: recommendationCommitment
+      ? recommendationCommitment.recommendationCommitmentId : null,
+    recommendationHash: recommendationCommitment ? recommendationCommitment.recommendationHash : null,
     originatingRequestId,
     auditorDecision: {
       auditorDecisionId: auditorDecision.auditorDecisionId,

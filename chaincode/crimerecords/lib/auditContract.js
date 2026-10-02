@@ -18,6 +18,7 @@ const { SEAL_AUTHORITY_ROLES, DISTRICT_HEAD_ROLES } = require('./policy/policyV1
 const KEYS = require('./dias/keys');
 const { readAuthorizationEvents, readRequestEvents } = require('./dias/lifecycle');
 const { AUTHORIZATION_KEY } = require('./dias/authorization');
+const { COMMITMENT_KEY } = require('./dias/recommendationCommitment');
 
 const ACCESS_EVENT_KEY = 'accessEvent';
 
@@ -84,7 +85,7 @@ function transactionsOf(events) {
   }, []);
 }
 
-function summarize(request, auditorDecision, outcome) {
+function summarize(request, auditorDecision, outcome, commitment) {
   return {
     requestId: request.requestId,
     requester: request.requester.username,
@@ -106,6 +107,13 @@ function summarize(request, auditorDecision, outcome) {
       txId: auditorDecision.txId,
     } : { status: request.auditorReviewStatus },
     createdAuthorizationId: request.createdAuthorizationId,
+    recommendation: commitment ? {
+      commitmentId: commitment.commitmentId,
+      recommendation: commitment.recommendation,
+      generationStatus: commitment.generationStatus,
+      recommendationHash: commitment.recommendationHash,
+      txId: commitment.txId,
+    } : null,
     outcome: outcome ? { outcome: outcome.outcome, basis: outcome.basis, txId: outcome.txId } : null,
   };
 }
@@ -247,6 +255,7 @@ class AuditContract extends Contract {
     const lifecycle = await readRequestEvents(ctx, requestId);
     const auditorDecision = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.AUDITOR_DECISION, [requestId]));
     const outcome = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.OUTCOME, [requestId]));
+    const recommendationCommitment = await readJson(ctx, ctx.stub.createCompositeKey(COMMITMENT_KEY, [requestId]));
 
     const related = [
       ['checked-by-this-request', request.dynamicAuthorizationCheck.authorizationId],
@@ -266,10 +275,11 @@ class AuditContract extends Contract {
     return JSON.stringify({
       requestId,
       viewer: reviewer ? 'reviewer' : 'requester',
-      summary: summarize(request, auditorDecision, outcome),
+      summary: summarize(request, auditorDecision, outcome, recommendationCommitment),
       request,
       lifecycle,
       transactions: transactionsOf(lifecycle),
+      recommendationCommitment,
       auditorDecision,
       accessOutcome: outcome,
       dynamicAuthorizations,

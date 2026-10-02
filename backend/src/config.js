@@ -251,4 +251,15 @@ module.exports = Object.freeze({
   // How often the backend records the expiry of requests past their review
   // deadline (design §8). 0 disables the sweeper.
   DIAS_EXPIRY_SWEEP_SECONDS: Number(process.env.DIAS_EXPIRY_SWEEP_SECONDS || 300),
+
+  // The recommendation service's Ed25519 signing key (design §6.1). Its public
+  // key must be registered on the ledger (scripts/dias/register-recommender-key.js).
+  DIAS_RECOMMENDER_SIGNING_KEY_FILE: resolveFromRepo(
+    process.env.DIAS_RECOMMENDER_SIGNING_KEY_FILE,
+    path.join(REPO_ROOT, 'backend', 'data', 'dias-recommender-signing-key.pem')
+  ),
+  // The identity that relays signed commitments to the ledger. Any member may;
+  // the commitment's authority is its signature.
+  DIAS_RELAY_ORG: process.env.DIAS_RELAY_ORG || process.env.AUTH_ORG || 'audit',
+  DIAS_RELAY_USER: process.env.DIAS_RELAY_USER || process.env.AUTH_USER || 'sp.north',
 });

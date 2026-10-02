@@ -36,6 +36,8 @@ function committed(requestId, overrides = {}) {
     requesterClaims,
     requesterClaimsHash: requesterClaimsHash(requesterClaims),
     justificationHash: hashText('justification', overrides.justificationText || 'why'),
+    policyVersion: 'dias-governance-policy-v1',
+    policyHash: '9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81',
     ...overrides,
   };
 }
@@ -131,26 +133,170 @@ describe('DIAS backend recommendation path', () => {
     });
   });
 
-  describe('recommendation worker', () => {
-    it('stores a schema-valid recommendation in the auditor-facing shape', async () => {
-      store.create({ request: committed('REQ-3', { justificationText: 'Reviewing the FIR.' }), justification: 'Reviewing the FIR.' });
-      const asked = [];
-      const recommender = {
-        recommend: async (input) => {
-          asked.push(input);
-          return okResult(validOutput({ recommendation: 'DENY', reason_code: 'NOT_ASSIGNED', policy_refs: ['GP-ASSIGN:C1@v1'] }));
-        },
-        unavailable: () => failureResult('unused'),
+  describe('recommendation worker (v3: service, commitment, ledger)', () => {
+    const RELAY = Object.freeze({ org: 'audit', fabricUser: 'sp.north' });
+
+    function signedCommitment(requestId, overrides = {}) {
+      return {
+        contextHash: '1'.repeat(64), claimsHash: '2'.repeat(64), justificationHash: '3'.repeat(64),
+        policyVersion: 'dias-governance-policy-v1', policyHash: '4'.repeat(64), recommendation: 'DENY',
+        generationStatus: 'OK', modelVersion: 'base@rev', recommendationHash: '5'.repeat(64),
+        signerKeyId: '6'.repeat(64), signature: `${'A'.repeat(86)}==`, ...overrides,
       };
-      const worker = createRecommendationWorker({ store, recommender, log: silent });
-      await worker.enqueue('REQ-3');
-      expect(asked[0]).to.include({ requestId: 'REQ-3', justification: 'Reviewing the FIR.' });
+    }
+
+    function fakeService(result = okResult(validOutput({ recommendation: 'DENY', reason_code: 'NOT_ASSIGNED' }))) {
+      const calls = [];
+      return {
+        calls,
+        recommend: async (input) => {
+          calls.push(input);
+          return {
+            recommendationObject: { requestId: input.requestId, generationStatus: result.generationStatus },
+            recommendationHash: '5'.repeat(64),
+            commitment: signedCommitment(input.requestId, {
+              recommendation: result.recommendation ? result.recommendation.recommendation : null,
+              generationStatus: result.generationStatus,
+            }),
+            result,
+          };
+        },
+      };
+    }
+
+    function fakeLedger({ submitError = null, onLedger = null } = {}) {
+      const calls = [];
+      let failures = submitError ? 1 : 0;
+      return {
+        calls,
+        submit: async (org, user, contract, fn, requestId, json) => {
+          calls.push([org, user, contract, fn, requestId]);
+          if (failures > 0) { failures -= 1; throw submitError; }
+          return { commitmentId: `KAPPA-${requestId}`, txId: `tx-${requestId}`, ...JSON.parse(json) };
+        },
+        evaluate: async (org, user, contract, fn) => {
+          calls.push([org, user, contract, fn]);
+          return typeof onLedger === 'function' ? onLedger() : onLedger;
+        },
+      };
+    }
+
+    const worker = (service, ledger) => createRecommendationWorker({
+      store, service, ledger, relay: RELAY, log: silent,
+    });
+
+    it('asks the service, stores M and the signed commitment, then commits it before review', async () => {
+      store.create({ request: committed('REQ-3'), justification: 'why' });
+      const service = fakeService();
+      const ledger = fakeLedger();
+      await worker(service, ledger).enqueue('REQ-3');
       const entry = store.read('REQ-3');
-      expect(entry.recommendationState).to.equal('ready');
-      expect(entry.recommendation).to.include({
-        generationStatus: 'OK', recommendation: 'DENY', reasonCode: 'NOT_ASSIGNED', errorCode: null,
+      expect(entry).to.include({ recommendationState: 'committed', commitmentId: 'KAPPA-REQ-3' });
+      expect(entry.commitment.recommendation).to.equal('DENY');
+      expect(entry.recommendationObject).to.include({ requestId: 'REQ-3' });
+      expect(entry.recommendation).to.include({ generationStatus: 'OK', recommendation: 'DENY', reasonCode: 'NOT_ASSIGNED' });
+      expect(ledger.calls[0]).to.deep.equal(['audit', 'sp.north', 'AccessContract', 'CommitRecommendation', 'REQ-3']);
+    });
+
+    it('gives the service the committed inputs and the digests the ledger holds for them', async () => {
+      store.create({ request: committed('REQ-7', { justificationText: 'Reviewing the FIR.', policyVersion: 'dias-governance-policy-v1', policyHash: '4'.repeat(64) }), justification: 'Reviewing the FIR.' });
+      const service = fakeService();
+      await worker(service, fakeLedger()).enqueue('REQ-7');
+      const [input] = service.calls;
+      expect(input).to.include({
+        requestId: 'REQ-7', justification: 'Reviewing the FIR.',
+        justificationHash: hashText('justification', 'Reviewing the FIR.'),
+        policyVersion: 'dias-governance-policy-v1', policyHash: '4'.repeat(64),
       });
-      expect(entry.recommendation.policyRefs).to.deep.equal(['GP-ASSIGN:C1@v1']);
+      expect(input.verifiedRequest).to.deep.equal(verifiedRequestFixture());
+      expect(input.requesterClaims).to.deep.equal({ emergencyDeclared: true });
+      expect(input.verifiedRequestHash).to.equal(verifiedRequestHash(verifiedRequestFixture()));
+    });
+
+    it('keeps a specific failure status in the auditor view and still commits it', async () => {
+      store.create({ request: committed('REQ-4'), justification: 'why' });
+      const ledger = fakeLedger();
+      await worker(fakeService(failureResult('server_unreachable')), ledger).enqueue('REQ-4');
+      const entry = store.read('REQ-4');
+      expect(entry.recommendationState).to.equal('committed');
+      expect(entry.recommendation).to.include({
+        generationStatus: 'UNAVAILABLE', recommendation: null, errorCode: 'server_unreachable',
+      });
+      expect(entry.commitment).to.include({ generationStatus: 'UNAVAILABLE', recommendation: null });
+    });
+
+    it('marks a commitment the ledger refuses for a lasting reason as commit-rejected', async () => {
+      store.create({ request: committed('REQ-9'), justification: 'why' });
+      const expired = Object.assign(new Error('endorse failed'), {
+        details: [{ message: 'DIAS_REQUEST_EXPIRED: the review deadline has passed' }],
+      });
+      await worker(fakeService(), fakeLedger({ submitError: expired })).enqueue('REQ-9');
+      expect(store.read('REQ-9')).to.include({
+        recommendationState: 'commit-rejected', commitError: 'DIAS_REQUEST_EXPIRED: the review deadline has passed',
+      });
+    });
+
+    it('keeps a signed commitment after an uncertain failure and later resubmits it unchanged', async () => {
+      store.create({ request: committed('REQ-10'), justification: 'why' });
+      const service = fakeService();
+      const timeout = new Error('commit status deadline exceeded');
+      await worker(service, fakeLedger({ submitError: timeout, onLedger: null })).enqueue('REQ-10');
+      const signed = store.read('REQ-10');
+      expect(signed.recommendationState).to.equal('signed');
+      const retried = worker(service, fakeLedger());
+      expect(retried.resumePending()).to.equal(1);
+      await retried.idle();
+      const entry = store.read('REQ-10');
+      expect(entry.recommendationState).to.equal('committed');
+      expect(entry.commitment).to.deep.equal(signed.commitment);
+      expect(service.calls).to.have.length(1);
+    });
+
+    it('recognizes a commitment that reached the ledger although the response was lost', async () => {
+      store.create({ request: committed('REQ-11'), justification: 'why' });
+      const timeout = new Error('commit status deadline exceeded');
+      const ledger = fakeLedger({
+        submitError: timeout,
+        onLedger: () => ({ commitmentId: 'KAPPA-REQ-11', txId: 'tx-11', ...store.read('REQ-11').commitment }),
+      });
+      await worker(fakeService(), ledger).enqueue('REQ-11');
+      expect(store.read('REQ-11')).to.include({ recommendationState: 'committed', commitmentId: 'KAPPA-REQ-11' });
+    });
+
+    it('records a service failure as failed, so the auditor is not left waiting', async () => {
+      store.create({ request: committed('REQ-5'), justification: 'why' });
+      const broken = { recommend: async () => { throw new Error('signing key unavailable'); } };
+      await worker(broken, fakeLedger()).enqueue('REQ-5');
+      const entry = store.read('REQ-5');
+      expect(entry.recommendationState).to.equal('failed');
+      expect(entry.recommendation).to.include({ generationStatus: 'UNAVAILABLE', errorCode: 'recommendation_failed' });
+    });
+
+    it('answers requests one at a time, each once, and resumes pending and signed entries', async () => {
+      for (const id of ['REQ-6', 'REQ-7']) store.create({ request: committed(id), justification: 'why' });
+      store.create({ request: committed('REQ-8'), justification: 'why' });
+      store.update('REQ-8', { recommendationState: 'committed' });
+      let running = 0;
+      let maxRunning = 0;
+      const order = [];
+      const service = fakeService();
+      const slow = {
+        recommend: async (input) => {
+          running += 1;
+          maxRunning = Math.max(maxRunning, running);
+          order.push(input.requestId);
+          await new Promise((resolve) => setTimeout(resolve, 5));
+          running -= 1;
+          return service.recommend(input);
+        },
+      };
+      const queue = worker(slow, fakeLedger());
+      expect(queue.resumePending()).to.equal(2);
+      queue.enqueue('REQ-6');
+      await queue.idle();
+      expect(maxRunning).to.equal(1);
+      expect(order.sort()).to.deep.equal(['REQ-6', 'REQ-7']);
+      expect(store.list().every((entry) => entry.recommendationState === 'committed')).to.equal(true);
     });
 
     it('stores a failed generation as a status with no recommendation', () => {
@@ -158,100 +304,6 @@ describe('DIAS backend recommendation path', () => {
       expect(record).to.include({
         generationStatus: 'UNAVAILABLE', recommendation: null, reasonCode: null, errorCode: 'server_unreachable',
       });
-    });
-
-    it('never prompts the LLM with facts that do not match the committed hash', async () => {
-      store.create({ request: committed('REQ-4', { verifiedRequestHash: '0'.repeat(64) }), justification: 'why' });
-      let prompted = false;
-      const recommender = {
-        recommend: async () => {
-          prompted = true;
-          return okResult();
-        },
-        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
-      };
-      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-4');
-      expect(prompted).to.equal(false);
-      expect(store.read('REQ-4').recommendation.errorCode).to.equal('verified_request_hash_mismatch');
-    });
-
-    it('never prompts the LLM with claims that do not match the committed claims hash', async () => {
-      store.create({ request: committed('REQ-6', { requesterClaimsHash: '1'.repeat(64) }), justification: 'why' });
-      let prompted = false;
-      const recommender = {
-        recommend: async () => { prompted = true; return okResult(); },
-        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
-      };
-      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-6');
-      expect(prompted).to.equal(false);
-      expect(store.read('REQ-6').recommendation.errorCode).to.equal('requester_claims_hash_mismatch');
-    });
-
-    it('never prompts the LLM with a justification that does not match the committed h_J', async () => {
-      store.create({ request: committed('REQ-8'), justification: 'altered after commit' });
-      let prompted = false;
-      const recommender = {
-        recommend: async () => { prompted = true; return okResult(); },
-        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
-      };
-      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-8');
-      expect(prompted).to.equal(false);
-      expect(store.read('REQ-8').recommendation.errorCode).to.equal('justification_hash_mismatch');
-    });
-
-    it('gives the model the committed facts, the claims and the justification, separately', async () => {
-      store.create({ request: committed('REQ-7', { justificationText: 'Reviewing the FIR.' }), justification: 'Reviewing the FIR.' });
-      let received = null;
-      const recommender = {
-        recommend: async (input) => { received = input; return okResult(); },
-        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
-      };
-      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-7');
-      expect(received).to.deep.equal({
-        requestId: 'REQ-7',
-        verifiedRequest: verifiedRequestFixture(),
-        requesterClaims: { emergencyDeclared: true },
-        justification: 'Reviewing the FIR.',
-      });
-      expect(store.read('REQ-7').requesterClaims).to.deep.equal({ emergencyDeclared: true });
-    });
-
-    it('records an unexpected error instead of leaving the auditor waiting', async () => {
-      store.create({ request: committed('REQ-5'), justification: 'why' });
-      const recommender = {
-        recommend: async () => { throw new Error('boom'); },
-        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
-      };
-      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-5');
-      expect(store.read('REQ-5')).to.include({ recommendationState: 'ready' });
-      expect(store.read('REQ-5').recommendation.errorCode).to.equal('recommendation_failed');
-    });
-
-    it('answers requests one at a time, each once, and resumes pending entries', async () => {
-      for (const id of ['REQ-6', 'REQ-7']) store.create({ request: committed(id), justification: 'why' });
-      store.create({ request: committed('REQ-8'), justification: 'why' });
-      store.update('REQ-8', { recommendationState: 'ready', recommendation: recommendationRecord(okResult()) });
-      let running = 0;
-      let maxRunning = 0;
-      const order = [];
-      const recommender = {
-        recommend: async ({ requestId }) => {
-          running += 1;
-          maxRunning = Math.max(maxRunning, running);
-          order.push(requestId);
-          await new Promise((resolve) => setTimeout(resolve, 5));
-          running -= 1;
-          return okResult();
-        },
-        unavailable: () => failureResult('unused'),
-      };
-      const worker = createRecommendationWorker({ store, recommender, log: silent });
-      expect(worker.resumePending()).to.equal(2);
-      worker.enqueue('REQ-6');
-      await worker.idle();
-      expect(maxRunning).to.equal(1);
-      expect(order.sort()).to.deep.equal(['REQ-6', 'REQ-7']);
-      expect(store.list().every((entry) => entry.recommendationState === 'ready')).to.equal(true);
     });
   });
 });

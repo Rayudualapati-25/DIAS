@@ -104,11 +104,23 @@ describe('DIAS backend architecture guard', () => {
     }
   });
 
-  it('has no separate AI-organisation listener or recommendation signer left to run', () => {
+  /**
+   * v3 replaces the v2 rule "no recommendation signer at all": the recommendation
+   * service now signs its output so the ledger can verify it (design §6.1). What
+   * must still hold is that it is not an AI organisation: the retired listener and
+   * attestation modules stay gone, and the service has no Fabric identity, so no
+   * path from it reaches the Fabric gateway or the offline oracle.
+   */
+  it('has no AI-organisation listener, and the recommendation signer has no Fabric identity', () => {
     for (const retired of ['backend/src/ai/start.js', 'backend/src/dias/recommendationService.js',
       'backend/src/dias/attestation.js', 'backend/src/routes/explain.js']) {
       expect(fs.existsSync(path.join(REPO_ROOT, retired)), `${retired} still exists`).to.equal(false);
     }
+    const service = requireGraph('backend/src/recommender-service/service.js');
+    for (const forbidden of ['backend/src/fabric/gateway.js', 'policies/reference-oracle/referencePolicyOracle.js']) {
+      expect(service.has(path.join(REPO_ROOT, forbidden)), `the service reaches ${forbidden}`).to.equal(false);
+    }
+    expect(service.has(path.join(REPO_ROOT, 'backend/src/dias/recommender.js'))).to.equal(false);
   });
 
   it('has no SEAL listener left to run', () => {

@@ -90,27 +90,25 @@ describe('DIAS access workflow safeguards', () => {
   });
 
   describe('auditor decision stage', () => {
-    it('allows only AuditMSP district heads, with a valid decision and LLM agreement', async () => {
+    it('allows only AuditMSP district heads and takes the recommendation from the commitment', async () => {
+      // v3 replaces the v2 checks on a caller-supplied recommendation: the decision
+      // has no recommendation parameter, and malformed recommendation values are
+      // refused when κ is committed (diasRecommendationCommitment.test.js).
       const { result: request } = await world.submit(INSPECTOR);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: INSPECTOR }))
-        .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: CALLERS.districtJudge }))
-        .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: FORMER_AI_IDENTITY }))
-        .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
+      await world.commit(request.requestId, world.commitmentFor(request.requestId, { recommendation: 'DENY' }));
+      for (const caller of [INSPECTOR, CALLERS.districtJudge, FORMER_AI_IDENTITY]) {
+        await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'DENY', { caller }))
+          .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
+      }
       const stationHead = {
         identityId: 'ci.test', mspId: 'AuditMSP',
         attrs: { role: 'circle-inspector', jurisdiction: 'district-north', clearance: 'high', credentialStatus: 'active' },
       };
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'ALLOW', { caller: stationHead }))
+      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'DENY', { caller: stationHead }))
         .to.be.rejectedWith(/requires role in/);
-      await expect(world.decide(request.requestId, 'MAYBE', 'ALLOW'))
+      await expect(world.decide(request.requestId, 'MAYBE', 'DENY'))
         .to.be.rejectedWith(/one of \[FORCE_ALLOW, FORCE_DENY\]/);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', 'PARTLY'))
-        .to.be.rejectedWith(/llmRecommendation must be one of \[ALLOW, DENY, UNAVAILABLE\]/);
-      await expect(world.decide(request.requestId, 'FORCE_ALLOW', ''))
-        .to.be.rejectedWith(/llmRecommendation must be one of/);
-      const { result } = await world.decide(request.requestId, 'force-allow', 'deny');
+      const { result } = await world.decide(request.requestId, 'force-allow', 'DENY');
       expect(result.auditorDecision).to.include({
         decision: 'FORCE_ALLOW', llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED',
       });
@@ -155,16 +153,19 @@ describe('DIAS access workflow safeguards', () => {
         .to.be.rejectedWith(/invalid format/);
     });
 
-    it('shows district heads the pending queue with the committed request only', async () => {
+    it('shows district heads the pending queue with the committed request and its commitment', async () => {
       const { result: request } = await world.submit(INSPECTOR);
       const queue = (ctx) => world.contracts.access.QueryPendingAuditorRequests(ctx);
       await expect(call(INSPECTOR, queue)).to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
       const pending = await call(CALLERS.auditor, queue);
       expect(pending).to.have.length(1);
-      expect(Object.keys(pending[0])).to.deep.equal(['request']);
+      expect(Object.keys(pending[0])).to.deep.equal(['request', 'commitment']);
       expect(pending[0].request.requestId).to.equal(request.requestId);
+      expect(pending[0].commitment).to.equal(null);
+      await world.commit(request.requestId, world.commitmentFor(request.requestId, { recommendation: 'DENY' }));
       const review = await call(CALLERS.auditor, (ctx) => world.contracts.access.GetAuditorReview(ctx, request.requestId));
-      expect(Object.keys(review)).to.deep.equal(['request']);
+      expect(Object.keys(review)).to.deep.equal(['request', 'commitment']);
+      expect(review.commitment).to.include({ recommendation: 'DENY', generationStatus: 'OK' });
       await world.decide(request.requestId, 'FORCE_DENY', 'DENY');
       expect(await call(CALLERS.auditor, queue)).to.deep.equal([]);
     });

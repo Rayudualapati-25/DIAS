@@ -1,29 +1,33 @@
 'use strict';
 
 /**
- * LLM recommendations generated inside the backend.
+ * Recommendations, committed before review (design §6, §11).
  *
- * Once a request is committed and waits for the auditor, the backend asks the
- * LLM for an advisory ALLOW/DENY recommendation and keeps the answer off-chain
- * for the auditor screen. Requests are answered one at a time so the local model
- * server is never flooded, and entries a restart left pending are answered again.
- * A failed generation is stored as a status with no recommendation; the auditor
- * still decides.
+ * Once a request is committed and waits for the auditor, the worker asks the
+ * recommendation service for an advisory recommendation. The service returns
+ * the recommendation object M and a signed commitment κ. The worker stores both
+ * (state `signed`) BEFORE submitting κ, so a crash or a lost response never loses
+ * what was signed: a `signed` entry is resubmitted unchanged, which the contract
+ * treats as a safe retry, and an uncertain submission is resolved by reading κ
+ * back from the ledger.
+ *
+ * States: pending → signed → committed, or commit-rejected when the ledger
+ * refuses κ for a reason a retry cannot fix (expired, stale policy, mismatch),
+ * or failed when the service itself could not answer. Requests are answered one
+ * at a time so the model server is never flooded.
  */
 
-const {
-  verifiedRequestHash,
-} = require('../../../chaincode/crimerecords/lib/dias/verifiedRequest');
-const {
-  requesterClaimsHash, validateRequesterClaims,
-} = require('../../../chaincode/crimerecords/lib/dias/requesterClaims');
-const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
 const { RECOMMENDATION_STATE } = require('./reviewStore');
+const { sameCommitment } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
 const trace = require('../util/trace');
+
+const CONTRACT = 'AccessContract';
+const LASTING_REFUSAL = /DIAS_(REQUEST_EXPIRED|STALE_POLICY|COMMITMENT_MISMATCH|COMMITMENT_CONFLICT|SIGNATURE_INVALID|SIGNER_INACTIVE|LEGACY_RECORD)|is not awaiting-auditor|does not exist/;
 
 /** The stored, auditor-facing view of one recommender result. */
 function recommendationRecord(result) {
   const output = result.recommendation;
+  const provenance = result.provenance || {};
   return {
     generationStatus: result.generationStatus,
     recommendation: output ? output.recommendation : null,
@@ -32,104 +36,120 @@ function recommendationRecord(result) {
     policyRefs: output ? output.policy_refs : [],
     missingEvidence: output ? output.missing_evidence : [],
     reviewFlags: output ? output.review_flags : [],
-    errorCode: result.provenance.errorCode || null,
-    provenance: result.provenance,
+    errorCode: provenance.errorCode || null,
+    provenance,
   };
 }
 
-/** Why the stored inputs cannot be used, or null when they match their commitments. */
-function inputMismatch(entry) {
-  if (verifiedRequestHash(entry.verifiedRequest) !== entry.verifiedRequestHash) {
-    return {
-      errorCode: 'verified_request_hash_mismatch',
-      errorDetail: 'the stored verified request does not hash to the committed verifiedRequestHash',
-    };
+/** The contract's sentence from a gateway error, or the error message. */
+function chaincodeMessage(error) {
+  if (error && Array.isArray(error.details) && error.details.length > 0) {
+    return error.details.map((detail) => String(detail.message).replace(/^chaincode response \d+,\s*/i, ''))
+      .join('; ');
   }
-  if (validateRequesterClaims(entry.requesterClaims).length > 0
-      || requesterClaimsHash(entry.requesterClaims) !== entry.requesterClaimsHash) {
-    return {
-      errorCode: 'requester_claims_hash_mismatch',
-      errorDetail: 'the stored requester claims do not hash to the committed requesterClaimsHash',
-    };
-  }
-  if (typeof entry.justification !== 'string'
-      || hashText(DOMAINS.JUSTIFICATION, entry.justification) !== entry.justificationHash) {
-    return {
-      errorCode: 'justification_hash_mismatch',
-      errorDetail: 'the stored justification does not hash to the committed justificationHash',
-    };
-  }
-  return null;
+  return String((error && error.message) || error);
 }
 
-function createRecommendationWorker({ store, recommender, log = console }) {
-  if (!store || !recommender) throw new Error('recommendation worker requires a store and a recommender');
+function serviceInput(requestId, entry) {
+  return {
+    requestId,
+    verifiedRequest: entry.verifiedRequest,
+    verifiedRequestHash: entry.verifiedRequestHash,
+    requesterClaims: entry.requesterClaims,
+    requesterClaimsHash: entry.requesterClaimsHash,
+    justification: entry.justification,
+    justificationHash: entry.justificationHash,
+    policyVersion: entry.policyVersion,
+    policyHash: entry.policyHash,
+  };
+}
+
+function createRecommendationWorker({ store, service, ledger, relay, log = console }) {
+  if (!store || !service || !ledger || !relay) {
+    throw new Error('recommendation worker requires a store, a recommendation service, a ledger and a relay identity');
+  }
   let queue = Promise.resolve();
   const queued = new Set();
 
-  async function generate(requestId) {
-    const entry = store.read(requestId);
-    if (!entry || entry.recommendationState !== RECOMMENDATION_STATE.PENDING) return null;
+  async function produce(requestId, entry) {
     trace.emit('recommendation.started', { requestId });
-    // Facts or claims that do not hash to the committed values are not something
-    // a recommendation may be based on.
-    const mismatch = inputMismatch(entry);
-    let result;
-    if (mismatch) {
-      result = recommender.unavailable({
-        requestId,
-        verifiedRequestHash: entry.verifiedRequestHash,
-        requesterClaimsHash: entry.requesterClaimsHash || null,
-        justificationHash: null,
-        generationStatus: 'UNAVAILABLE',
-        errorCode: mismatch.errorCode,
-        errorDetail: mismatch.errorDetail,
-      });
-    } else {
-      result = await recommender.recommend({
-        requestId,
-        verifiedRequest: entry.verifiedRequest,
-        requesterClaims: entry.requesterClaims,
-        justification: entry.justification,
-      });
-    }
-    const record = recommendationRecord(result);
-    store.update(requestId, { recommendationState: RECOMMENDATION_STATE.READY, recommendation: record });
+    const produced = await service.recommend(serviceInput(requestId, entry));
+    const record = recommendationRecord(produced.result);
+    const latencyMs = record.provenance.latencyMs || null;
     trace.emit('recommendation.ready', {
       requestId,
       generationStatus: record.generationStatus,
       recommendation: record.recommendation,
       reasonCode: record.reasonCode,
-      latencyMs: record.provenance.latencyMs,
+      latencyMs,
       usage: record.provenance.usage || null,
     });
-    const summary = record.generationStatus === 'OK'
-      ? `recommends ${record.recommendation} (${record.reasonCode})`
-      : `no recommendation: ${record.generationStatus} (${record.errorCode})`;
-    log.log(`[dias] ${requestId} -> ${summary}; ${record.provenance.latencyMs.total} ms`);
-    return record;
+    return store.update(requestId, {
+      recommendationState: RECOMMENDATION_STATE.SIGNED,
+      recommendation: record,
+      recommendationObject: produced.recommendationObject,
+      recommendationHash: produced.recommendationHash,
+      commitment: produced.commitment,
+      generationMetrics: { latencyMs, usage: record.provenance.usage || null },
+    });
   }
 
-  /**
-   * An unexpected error must not leave the entry pending, because the auditor
-   * cannot decide while a recommendation is still expected.
-   */
+  async function commit(requestId, entry) {
+    try {
+      const committed = await ledger.submit(
+        relay.org, relay.fabricUser, CONTRACT, 'CommitRecommendation', requestId, JSON.stringify(entry.commitment)
+      );
+      store.update(requestId, {
+        recommendationState: RECOMMENDATION_STATE.COMMITTED,
+        commitmentId: committed.commitmentId,
+        commitmentTxId: committed.txId,
+      });
+      log.log(`[dias] ${requestId} -> committed ${entry.commitment.generationStatus} ${entry.commitment.recommendation || ''}`);
+      return;
+    } catch (error) {
+      const message = chaincodeMessage(error);
+      // An uncertain failure (timeout, lost response) may still have committed κ.
+      const onLedger = await ledger.evaluate(
+        relay.org, relay.fabricUser, CONTRACT, 'GetRecommendationCommitment', requestId
+      ).catch(() => null);
+      if (onLedger && sameCommitment(onLedger, entry.commitment)) {
+        store.update(requestId, {
+          recommendationState: RECOMMENDATION_STATE.COMMITTED,
+          commitmentId: onLedger.commitmentId,
+          commitmentTxId: onLedger.txId,
+        });
+        return;
+      }
+      if (LASTING_REFUSAL.test(message)) {
+        store.update(requestId, { recommendationState: RECOMMENDATION_STATE.COMMIT_REJECTED, commitError: message });
+        log.error(`[dias] ${requestId} commitment refused: ${message}`);
+        return;
+      }
+      // Leave it signed: the next enqueue or restart resubmits it unchanged.
+      log.error(`[dias] ${requestId} commitment not confirmed, will retry: ${message}`);
+    }
+  }
+
+  async function generate(requestId) {
+    let entry = store.read(requestId);
+    if (!entry) return;
+    if (entry.recommendationState === RECOMMENDATION_STATE.PENDING) entry = await produce(requestId, entry);
+    if (entry.recommendationState === RECOMMENDATION_STATE.SIGNED) await commit(requestId, entry);
+  }
+
+  /** The service could not answer at all: the auditor decides without a recommendation. */
   function recordFailure(requestId, error) {
     log.error(`[dias] ${requestId} recommendation failed: ${error.message}`);
     try {
       const entry = store.read(requestId);
       if (!entry || entry.recommendationState !== RECOMMENDATION_STATE.PENDING) return;
-      const result = recommender.unavailable({
-        requestId,
-        verifiedRequestHash: entry.verifiedRequestHash,
-        justificationHash: null,
-        generationStatus: 'UNAVAILABLE',
-        errorCode: 'recommendation_failed',
-        errorDetail: error.message,
-      });
       store.update(requestId, {
-        recommendationState: RECOMMENDATION_STATE.READY,
-        recommendation: recommendationRecord(result),
+        recommendationState: RECOMMENDATION_STATE.FAILED,
+        recommendation: recommendationRecord({
+          generationStatus: 'UNAVAILABLE',
+          recommendation: null,
+          provenance: { errorCode: 'recommendation_failed', errorDetail: String(error.message).slice(0, 300) },
+        }),
       });
     } catch (storeError) {
       log.error(`[dias] ${requestId} failure could not be stored: ${storeError.message}`);
@@ -148,12 +168,13 @@ function createRecommendationWorker({ store, recommender, log = console }) {
     return queue;
   }
 
-  /** Answer every entry a previous process left pending. */
+  /** Answer every entry a previous process left pending, and resubmit every signed one. */
   function resumePending() {
-    const pending = store.list()
-      .filter((entry) => entry.recommendationState === RECOMMENDATION_STATE.PENDING);
-    for (const entry of pending) enqueue(entry.requestId);
-    return pending.length;
+    const unfinished = store.list().filter((entry) => [
+      RECOMMENDATION_STATE.PENDING, RECOMMENDATION_STATE.SIGNED,
+    ].includes(entry.recommendationState));
+    for (const entry of unfinished) enqueue(entry.requestId);
+    return unfinished.length;
   }
 
   return Object.freeze({ enqueue, resumePending, idle: () => queue });

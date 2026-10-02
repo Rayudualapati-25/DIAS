@@ -9,9 +9,11 @@ const { createDiasWorld } = require('./diasTestWorld');
 
 const INSPECTOR = CALLERS.inspector;
 const CONSTABLE = CALLERS.constable;
+// v3: the recommendation is committed before review and the agreement is a
+// lifecycle stage of its own (paper §IV-G; plan step 10).
 const REVIEWED_STAGES = Object.freeze([
-  'ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED',
-  'AUDITOR_DECISION_RECORDED', 'ACCESS_OUTCOME_RECORDED',
+  'ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED', 'RECOMMENDATION_COMMITTED',
+  'AUDITOR_DECISION_RECORDED', 'AGREEMENT_DERIVED', 'ACCESS_OUTCOME_RECORDED',
 ]);
 const stagesOf = (events) => events.map((event) => event.eventType);
 
@@ -119,8 +121,9 @@ describe('DIAS access workflow', () => {
       });
       expect(authorization.createdBy).to.include({ username: 'sp.test', mspId: 'AuditMSP', role: 'sp' });
       expect(world.eventTypes(request.requestId)).to.deep.equal([
-        'ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED', 'AUDITOR_DECISION_RECORDED',
-        'DYNAMIC_AUTHORIZATION_CREATED', 'ACCESS_OUTCOME_RECORDED',
+        'ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED', 'RECOMMENDATION_COMMITTED',
+        'AUDITOR_DECISION_RECORDED', 'AGREEMENT_DERIVED', 'DYNAMIC_AUTHORIZATION_CREATED',
+        'ACCESS_OUTCOME_RECORDED',
       ]);
       expect(stagesOf(world.authorizationEvents(authorization.authorizationId)))
         .to.deep.equal(['DYNAMIC_AUTHORIZATION_CREATED']);

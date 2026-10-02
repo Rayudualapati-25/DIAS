@@ -46,6 +46,7 @@
 | T14 | Table V | v2 transaction list | Design §5–§8 | Add `CommitRecommendation`, `ExpirePendingRequest`, `CancelAccessRequest` and the policy and signer governance transactions |
 | T15 | §IV-A | Auditor = "responsible oversight organization" | Design D-03 | State the district and clearance rule |
 | T16 | §IV-G | Release `v_P` check only for reused grants | Design §9 (plan default: all grants) | Say all grants |
+| T17 | §IV-D Eq. (2) | κ = (id(R), h_C, v_P, q, s, modelVersion, h_M) | Design §6; `lib/dias/recommendationCommitment.js` | v3 κ also binds h_K, h_J and the policy digest, and carries an Ed25519 signature from a registered recommendation-service key. Extend Eq. (2) or name these as implementation bindings, and state what a valid signature proves and does not prove (design §6.1) |
 
 ## 3. Decisions left to the author
 
@@ -58,3 +59,16 @@
 ## 4. Status
 
 This file is updated at the end of each plan step. The final state is in the last iteration report of the v3 series.
+
+Implemented and unit-tested so far (offline; no live run):
+
+| Step | Items in §1 now true in code |
+|---|---|
+| 3 | Auditor authority (T15 describes it) |
+| 4 | Final release re-check |
+| 5 | Claims kept out of C (T1 still applies to identity and record) |
+| 7, 8 | `v_P` binding; pending requests end |
+| 9 | `h_J` |
+| 10 | κ before review with signed provenance; five generation statuses; agreement from κ; lifecycle events; auditor-side H(M) check in the backend and the browser |
+
+Still to come: `h_N` and note-before-decision (step 11), counterfactuals (step 14). Every AFTER-RUN item stays open until the v3 experiments are run on the Mac.

@@ -51,10 +51,15 @@ const { readParameters, reviewDeadline } = require('./dias/parameters');
 const {
   isBoundTo, policyBinding, readActivePolicy, requireActivePolicy,
 } = require('./dias/policyRegistry');
+const { assertDigest } = require('./dias/commitments');
+const {
+  COMMITMENT_KEY, COMMITMENT_SCHEMA_VERSION, SIGNER_KEY, bindingMismatch, parseCommitmentInput,
+  provenancePayload, recommendationOf, sameCommitment, verifyProvenance,
+} = require('./dias/recommendationCommitment');
 
 const REQUEST_SCHEMA_VERSION = 'dias-access-request-v3';
-const AUDITOR_DECISION_SCHEMA_VERSION = 'dias-auditor-decision-v2';
-const OUTCOME_SCHEMA_VERSION = 'dias-access-outcome-v1';
+const AUDITOR_DECISION_SCHEMA_VERSION = 'dias-auditor-decision-v3';
+const OUTCOME_SCHEMA_VERSION = 'dias-access-outcome-v3';
 
 const REQUEST_STATUS = Object.freeze({
   AWAITING_AUDITOR: 'awaiting-auditor',
@@ -589,7 +594,7 @@ class AccessContract extends Contract {
 
   async _createAuthorization(ctx, {
     request, auditorDecisionId, decision, llmRecommendation, llmAgreement, actor,
-    validUntilUtc, timestamp, txId,
+    validUntilUtc, timestamp, txId, recommendationCommitmentId, recommendationHash,
   }) {
     const scopeKey = this._key(ctx, AUTHORIZATION_SCOPE_KEY, request.authorizationScopeHash);
     const index = await this._read(ctx, scopeKey);
@@ -606,6 +611,7 @@ class AccessContract extends Contract {
       validUntilUtc,
       previous,
       policy: { policyVersion: request.policyVersion, policyHash: request.policyHash },
+      recommendationCommitment: { recommendationCommitmentId, recommendationHash },
     });
     const supersedes = Boolean(previous)
       && [AUTHORIZATION_STATUS.ACTIVE, AUTHORIZATION_STATUS.EXPIRED].includes(previous.status);
@@ -644,6 +650,8 @@ class AccessContract extends Contract {
       conditionsHash: created.conditionsHash,
       policyVersion: created.policyVersion,
       policyHash: created.policyHash,
+      recommendationCommitmentId: created.recommendationCommitmentId,
+      recommendationHash: created.recommendationHash,
       validUntilUtc: created.validUntilUtc,
       originatingRequestId: request.requestId,
       auditorDecisionId,
@@ -674,21 +682,96 @@ class AccessContract extends Contract {
   }
 
   /**
-   * Step 2 — an AuditMSP district head commits the final decision together with
-   * the LLM recommendation the auditor was shown. UNAVAILABLE means the backend
-   * had no valid recommendation to show, which the ledger records as such.
+   * Step 2 (pre-review) — commit the recommendation κ before any auditor review
+   * (design §6). Any member identity may relay it: its authority comes from the
+   * recommendation service's signature, which binds it to this request, its
+   * committed hashes, its policy and this channel. One commitment per request; an
+   * identical resubmission is a safe retry that writes nothing.
    */
-  async SubmitAuditorDecision(ctx, requestId, decisionText, llmRecommendationText, validUntilUtc) {
+  async CommitRecommendation(ctx, requestId, commitmentJson) {
+    const caller = getCaller(ctx);
+    if (caller.role === null) throw new Error('unauthorized: caller identity has no role attribute');
+    const request = await this._getRequest(ctx, requestId);
+    this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
+    this._requireBeforeDeadline(request, ctx.stub.getDateTimestamp().toISOString());
+    this._requireCurrentSchema(request);
+    await this._requireCurrentPolicy(ctx, request);
+    const input = parseCommitmentInput(commitmentJson);
+    const mismatch = bindingMismatch(input, request);
+    if (mismatch) {
+      throw new Error(`DIAS_COMMITMENT_MISMATCH: ${mismatch} does not match access request '${requestId}'`);
+    }
+    const commitmentKey = this._key(ctx, COMMITMENT_KEY, requestId);
+    const existing = await this._read(ctx, commitmentKey);
+    if (existing) {
+      if (sameCommitment(existing, input)) return JSON.stringify(existing);
+      throw new Error(
+        `DIAS_COMMITMENT_CONFLICT: access request '${requestId}' already has commitment `
+        + `'${existing.commitmentId}', and a commitment is never replaced`
+      );
+    }
+    const signer = await this._read(ctx, this._key(ctx, SIGNER_KEY, input.signerKeyId));
+    if (!signer || signer.status !== 'active') {
+      throw new Error(`DIAS_SIGNER_INACTIVE: '${input.signerKeyId}' is not an active recommendation signer`);
+    }
+    const payload = provenancePayload({ channel: ctx.stub.getChannelID(), requestId, ...input });
+    if (!verifyProvenance({ publicKeyPem: signer.publicKeyPem, payload, signature: input.signature })) {
+      throw new Error('DIAS_SIGNATURE_INVALID: the recommendation signature does not verify for this request');
+    }
+    const timestamp = ctx.stub.getDateTimestamp().toISOString();
+    const actor = actorFrom(caller, sha256(caller.id));
+    const commitment = {
+      docType: COMMITMENT_KEY,
+      schemaVersion: COMMITMENT_SCHEMA_VERSION,
+      commitmentId: `KAPPA-${shortTxId(ctx)}`,
+      requestId,
+      ...input,
+      relayedBy: actor,
+      committedAtUtc: timestamp,
+      txId: ctx.stub.getTxID(),
+    };
+    await putJson(ctx, commitmentKey, commitment);
+    const events = [{
+      type: EVENT.RECOMMENDATION_COMMITTED,
+      data: {
+        commitmentId: commitment.commitmentId,
+        recommendation: input.recommendation,
+        generationStatus: input.generationStatus,
+        recommendationHash: input.recommendationHash,
+        modelVersion: input.modelVersion,
+        signerKeyId: input.signerKeyId,
+      },
+    }];
+    const { lastSeq } = await appendRequestEvents(ctx, {
+      requestId, lastSeq: request.lifecycleSeq, actor, events,
+    });
+    await putJson(ctx, this._key(ctx, KEYS.REQUEST, requestId), {
+      ...request, recommendationCommitmentId: commitment.commitmentId, lifecycleSeq: lastSeq,
+    });
+    emitLifecycle(ctx, {
+      requestId,
+      recordId: request.recordId,
+      stages: [EVENT.RECOMMENDATION_COMMITTED],
+      nextStep: 'AUDITOR_DECISION',
+      generationStatus: input.generationStatus,
+    });
+    return JSON.stringify(commitment);
+  }
+
+  /**
+   * Step 3 — an AuditMSP district head commits the binding decision. The
+   * recommendation it is compared with is read from κ, never supplied by the
+   * caller, and the contract derives the agreement (paper Eq. 3). `noteHash` is
+   * h_N, the digest of the auditor's off-chain note.
+   */
+  async SubmitAuditorDecision(ctx, requestId, decisionText, noteHash, validUntilUtc) {
     const caller = this._requireAuditor(ctx, 'SubmitAuditorDecision');
     const decision = token(decisionText);
     if (!AUDITOR_DECISIONS.includes(decision)) {
       throw new Error('auditor decision must be one of [FORCE_ALLOW, FORCE_DENY]');
     }
-    const llmRecommendation = token(llmRecommendationText);
-    if (!Object.values(LLM_RECOMMENDATION).includes(llmRecommendation)) {
-      throw new Error('llmRecommendation must be one of [ALLOW, DENY, UNAVAILABLE]');
-    }
-    const llmAgreement = agreementFor(decision, llmRecommendation);
+    const note = noteHash === undefined || noteHash === null || noteHash === '' ? null
+      : assertDigest(noteHash, 'noteHash');
     const request = await this._getRequest(ctx, requestId);
     this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
     this._requireBeforeDeadline(request, ctx.stub.getDateTimestamp().toISOString());
@@ -703,6 +786,9 @@ class AccessContract extends Contract {
     );
     await requireActiveDistrictHead(ctx, { action: 'SubmitAuditorDecision', record, caller });
     await this._assertFactsUnchanged(ctx, request);
+    const committed = recommendationOf(await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId)));
+    const { llmRecommendation, generationStatus, recommendationCommitmentId, recommendationHash } = committed;
+    const llmAgreement = agreementFor(decision, llmRecommendation);
     const createsAuthorization = decision === 'FORCE_ALLOW' && llmAgreement === LLM_AGREEMENT.NOT_AGREED;
     if (!createsAuthorization && validUntilUtc) {
       throw new Error('validUntilUtc applies only when a dynamic authorization is created');
@@ -714,7 +800,7 @@ class AccessContract extends Contract {
     const authorization = createsAuthorization
       ? await this._createAuthorization(ctx, {
         request, auditorDecisionId, decision, llmRecommendation, llmAgreement, actor,
-        validUntilUtc, timestamp, txId,
+        validUntilUtc, timestamp, txId, recommendationCommitmentId, recommendationHash,
       })
       : null;
     const createdAuthorizationId = authorization ? authorization.authorization.authorizationId : null;
@@ -727,7 +813,11 @@ class AccessContract extends Contract {
       auditor: { ...actor, stableUserId: stableUserId(caller.mspId, caller.enrollmentId) },
       decision,
       llmRecommendation,
+      generationStatus,
       llmAgreement,
+      recommendationCommitmentId,
+      recommendationHash,
+      noteHash: note,
       verifiedRequestHash: request.verifiedRequestHash,
       policyVersion: request.policyVersion,
       policyHash: request.policyHash,
@@ -757,10 +847,19 @@ class AccessContract extends Contract {
           auditorMsp: caller.mspId,
           auditorRole: caller.role,
           decision,
-          llmRecommendation,
-          llmAgreement,
+          noteHash: note,
           verifiedRequestHash: request.verifiedRequestHash,
           auditorDecisionHash: auditorDecision.auditorDecisionHash,
+        },
+      },
+      {
+        type: EVENT.AGREEMENT_DERIVED,
+        data: {
+          decision,
+          recommendationCommitmentId,
+          llmRecommendation,
+          generationStatus,
+          llmAgreement,
         },
       },
       ...(authorization ? [authorization.requestEvent] : []),
@@ -774,6 +873,7 @@ class AccessContract extends Contract {
       status: decision === 'FORCE_ALLOW' ? REQUEST_STATUS.GRANTED : REQUEST_STATUS.DENIED,
       auditorReviewStatus: decision,
       llmRecommendation,
+      generationStatus,
       llmAgreement,
       auditorDecisionId,
       outcomeId: outcome.record.outcomeId,
@@ -938,10 +1038,24 @@ class AccessContract extends Contract {
     return JSON.stringify(request);
   }
 
+  /** κ for one request, or null; readable by its requester and district heads. */
+  async GetRecommendationCommitment(ctx, requestId) {
+    const caller = getCaller(ctx);
+    const request = await this._getRequest(ctx, requestId);
+    const ownsRequest = request.requester.identityHash === sha256(caller.id);
+    const isAuditor = caller.mspId === MSP.AUDIT && DISTRICT_HEAD_ROLES.includes(caller.role);
+    if (!ownsRequest && !isAuditor) {
+      throw new Error('unauthorized: access request belongs to a different identity');
+    }
+    return JSON.stringify(await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId)));
+  }
+
+  /** The committed request and its recommendation commitment κ (null before one exists). */
   async GetAuditorReview(ctx, requestId) {
     this._requireAuditor(ctx, 'GetAuditorReview');
     const request = await this._getRequest(ctx, requestId);
-    return JSON.stringify({ request });
+    const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId));
+    return JSON.stringify({ request, commitment });
   }
 
   async QueryPendingAuditorRequests(ctx) {
@@ -951,7 +1065,10 @@ class AccessContract extends Contract {
     let result = await iterator.next();
     while (!result.done) {
       const request = JSON.parse(result.value.value.toString());
-      if (request.status === REQUEST_STATUS.AWAITING_AUDITOR) reviews.push({ request });
+      if (request.status === REQUEST_STATUS.AWAITING_AUDITOR) {
+        const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, request.requestId));
+        reviews.push({ request, commitment });
+      }
       result = await iterator.next();
     }
     await iterator.close();

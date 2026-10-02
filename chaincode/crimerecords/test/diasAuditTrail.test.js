@@ -37,16 +37,26 @@ describe('AuditContract', () => {
         username: 'sp.test', decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED',
       });
       expect(result.summary.outcome).to.include({ outcome: 'GRANTED', basis: 'AUDITOR_DECISION' });
+      // v3: request, pre-review commitment and decision are three transactions
+      // (paper Algorithm 1: two commits before review, one atomic final commit).
       expect(result.transactions.map((transaction) => transaction.stages)).to.deep.equal([
         ['ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED'],
-        ['AUDITOR_DECISION_RECORDED', 'DYNAMIC_AUTHORIZATION_CREATED', 'ACCESS_OUTCOME_RECORDED'],
+        ['RECOMMENDATION_COMMITTED'],
+        ['AUDITOR_DECISION_RECORDED', 'AGREEMENT_DERIVED', 'DYNAMIC_AUTHORIZATION_CREATED', 'ACCESS_OUTCOME_RECORDED'],
       ]);
-      expect(new Set(result.transactions.map((transaction) => transaction.txId)).size).to.equal(2);
+      expect(new Set(result.transactions.map((transaction) => transaction.txId)).size).to.equal(3);
+      expect(result.recommendationCommitment).to.include({
+        requestId: request.requestId, recommendation: 'DENY', generationStatus: 'OK',
+      });
+      expect(result.summary.recommendation).to.include({
+        recommendation: 'DENY', generationStatus: 'OK',
+        commitmentId: result.recommendationCommitment.commitmentId,
+      });
       expect(result.auditorDecision).to.include({ decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED' });
       expect(result.dynamicAuthorizations).to.have.length(1);
       expect(result.dynamicAuthorizations[0].relation).to.equal('created-by-this-request');
       expect(stagesOf(result.dynamicAuthorizations[0].events)).to.deep.equal(['DYNAMIC_AUTHORIZATION_CREATED']);
-      expect(result.requestKeyHistory).to.have.length(2);
+      expect(result.requestKeyHistory).to.have.length(3);
       expect(result).to.not.have.any.keys('llmRecommendation', 'privateText');
       expect(result.provenanceSource).to.match(/Hyperledger Fabric/);
     });

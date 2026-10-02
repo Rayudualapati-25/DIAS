@@ -46,7 +46,7 @@ ifneq ($(strip $(DOCKER_CONTEXT)),)
 export DOCKER_CONTEXT
 endif
 
-.PHONY: help all install check repo-check doctor up down deploy seed seed-users seed-domain seed-policy seed-records dias-demo-data backend model ollama test test-chaincode \
+.PHONY: help all install check repo-check doctor up down deploy seed seed-users seed-domain seed-policy seed-recommender seed-records dias-demo-data backend model ollama test test-chaincode \
         test-backend test-policies test-frontend test-dataset test-live \
         dias-all dias-channel dias-deploy dias-seed dias-model dias-backend \
         dias-acceptance dias-readiness dias-subsets \
@@ -195,6 +195,12 @@ seed-records:
 seed-policy:
 	CHANNEL=$(DIAS_CHANNEL) CHAINCODE=$(DIAS_CC_NAME) node scripts/dias/register-policy.js
 
+# Step 4 (v3): the recommendation service's signing key. Generated once (never
+# committed) and its public key registered, so its commitments verify on-chain.
+seed-recommender:
+	@test -f backend/data/dias-recommender-signing-key.pem || node scripts/dias/recommender-key.js
+	CHANNEL=$(DIAS_CHANNEL) CHAINCODE=$(DIAS_CC_NAME) node scripts/dias/register-recommender-key.js
+
 ollama:
 	scripts/setup-ollama.sh
 
@@ -230,7 +236,7 @@ dias-deploy:
 
 ## dias-seed: the identities, departments and active policy a fresh DIAS install
 ## needs. No case and no case file: those are created through the application.
-dias-seed: seed-users seed-domain seed-policy
+dias-seed: seed-users seed-domain seed-policy seed-recommender
 
 ## dias-demo-data: the two demo cases and three case files the live suites use
 ## (make smoke, make dias-acceptance). Not needed to use the application.
