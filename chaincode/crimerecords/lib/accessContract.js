@@ -47,6 +47,7 @@ const {
 const {
   REQUESTER_CLAIMS_SCHEMA_VERSION, buildRequesterClaims, requesterClaimsHash,
 } = require('./dias/requesterClaims');
+const { readParameters, reviewDeadline } = require('./dias/parameters');
 
 const REQUEST_SCHEMA_VERSION = 'dias-access-request-v3';
 const AUDITOR_DECISION_SCHEMA_VERSION = 'dias-auditor-decision-v2';
@@ -56,6 +57,19 @@ const REQUEST_STATUS = Object.freeze({
   AWAITING_AUDITOR: 'awaiting-auditor',
   GRANTED: 'granted',
   DENIED: 'denied',
+  EXPIRED: 'expired',
+  CANCELLED: 'cancelled',
+});
+/** The access-decision index status and authority for each outcome and basis. */
+const OUTCOME_STATUS = Object.freeze({
+  GRANTED: 'granted', DENIED: 'denied', EXPIRED: 'expired', CANCELLED: 'cancelled',
+});
+const DECISION_AUTHORITY = Object.freeze({
+  DYNAMIC_AUTHORIZATION: 'dynamic-authorization',
+  AUDITOR_DECISION: 'auditor',
+  REVIEW_DEADLINE_PASSED: 'review-deadline',
+  POLICY_VERSION_CHANGED: 'policy-change',
+  REQUESTER_CANCELLED: 'requester',
 });
 const AUDITOR_DECISIONS = Object.freeze(['FORCE_ALLOW', 'FORCE_DENY']);
 const LLM_AGREEMENT = Object.freeze({
@@ -180,6 +194,16 @@ class AccessContract extends Contract {
     }
   }
 
+  /** A pending request accepts no decision or commitment once its deadline has passed. */
+  _requireBeforeDeadline(request, timestamp) {
+    if (request.reviewDeadlineUtc && timestamp >= request.reviewDeadlineUtc) {
+      throw new Error(
+        `DIAS_REQUEST_EXPIRED: the review deadline ${request.reviewDeadlineUtc} of access request `
+        + `'${request.requestId}' has passed; it must be expired and requested again`
+      );
+    }
+  }
+
   _requireAuditor(ctx, action) {
     const caller = getCaller(ctx);
     requireMsp(caller, [MSP.AUDIT], action);
@@ -301,8 +325,8 @@ class AccessContract extends Contract {
       action: request.action,
       purpose: request.purpose,
       decision: granted ? 'allow' : 'deny',
-      status: granted ? 'granted' : 'denied',
-      decisionAuthority: basis === 'DYNAMIC_AUTHORIZATION' ? 'dynamic-authorization' : 'auditor',
+      status: OUTCOME_STATUS[outcome],
+      decisionAuthority: DECISION_AUTHORITY[basis],
       authorizationId: record.authorizationId,
       auditorDecisionId,
       llmRecommendation,
@@ -360,6 +384,7 @@ class AccessContract extends Contract {
     const txId = ctx.stub.getTxID();
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
     const requestId = `REQ-${shortTxId(ctx)}`;
+    const parameters = await readParameters(ctx);
     const requestKey = this._key(ctx, KEYS.REQUEST, requestId);
     if (await this._read(ctx, requestKey)) throw new Error(`access request '${requestId}' already exists`);
 
@@ -420,6 +445,7 @@ class AccessContract extends Contract {
       dynamicAuthorizationCheck,
       processingPath: matched ? 'dynamic-authorization' : 'auditor-review',
       status: matched ? REQUEST_STATUS.GRANTED : REQUEST_STATUS.AWAITING_AUDITOR,
+      reviewDeadlineUtc: matched ? null : reviewDeadline(timestamp, parameters),
       auditorReviewStatus: matched ? 'SKIPPED' : 'PENDING',
       llmAgreement: null,
       auditorDecisionId: null,
@@ -623,6 +649,7 @@ class AccessContract extends Contract {
     const llmAgreement = agreementFor(decision, llmRecommendation);
     const request = await this._getRequest(ctx, requestId);
     this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
+    this._requireBeforeDeadline(request, ctx.stub.getDateTimestamp().toISOString());
     const identityHash = sha256(caller.id);
     if (identityHash === request.requester.identityHash) {
       throw new Error('unauthorized: a requester cannot decide their own request');
@@ -721,6 +748,82 @@ class AccessContract extends Contract {
       auditorDecision,
       accessOutcome: outcome.record,
       dynamicAuthorization: authorization ? authorization.authorization : null,
+    });
+  }
+
+  /**
+   * Close a pending request without an auditor decision: its outcome, the
+   * access-decision index entry and the lifecycle events are written together.
+   */
+  async _closePending(ctx, request, { caller, outcome, basis, eventType, eventData, status, reviewStatus }) {
+    const timestamp = ctx.stub.getDateTimestamp().toISOString();
+    const actor = actorFrom(caller, sha256(caller.id));
+    const written = await this._writeOutcome(ctx, { request, outcome, basis, timestamp });
+    const events = [{ type: eventType, data: eventData }, written.event];
+    const { lastSeq } = await appendRequestEvents(ctx, {
+      requestId: request.requestId, lastSeq: request.lifecycleSeq, actor, events,
+    });
+    const stored = {
+      ...request,
+      status,
+      auditorReviewStatus: reviewStatus,
+      outcomeId: written.record.outcomeId,
+      lifecycleSeq: lastSeq,
+    };
+    await putJson(ctx, this._key(ctx, KEYS.REQUEST, request.requestId), stored);
+    emitLifecycle(ctx, {
+      requestId: request.requestId,
+      recordId: request.recordId,
+      stages: events.map((event) => event.type),
+      nextStep: null,
+      outcome,
+    });
+    return JSON.stringify({ request: stored, accessOutcome: written.record });
+  }
+
+  /**
+   * Record that a pending request passed its review deadline (design §8). Any
+   * member identity may submit it — the backend's sweeper does — because the
+   * contract decides from committed state whether the request is due.
+   */
+  async ExpirePendingRequest(ctx, requestId) {
+    const caller = getCaller(ctx);
+    if (caller.role === null) throw new Error('unauthorized: caller identity has no role attribute');
+    const request = await this._getRequest(ctx, requestId);
+    this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
+    const timestamp = ctx.stub.getDateTimestamp().toISOString();
+    if (!request.reviewDeadlineUtc || timestamp < request.reviewDeadlineUtc) {
+      throw new Error(
+        `access request '${requestId}' is not due to expire until ${request.reviewDeadlineUtc || 'never'}`
+      );
+    }
+    return this._closePending(ctx, request, {
+      caller,
+      outcome: 'EXPIRED',
+      basis: 'REVIEW_DEADLINE_PASSED',
+      eventType: EVENT.REQUEST_EXPIRED,
+      eventData: { reviewDeadlineUtc: request.reviewDeadlineUtc, basis: 'REVIEW_DEADLINE_PASSED' },
+      status: REQUEST_STATUS.EXPIRED,
+      reviewStatus: 'EXPIRED',
+    });
+  }
+
+  /** The requester withdraws a request that is still waiting for review. */
+  async CancelAccessRequest(ctx, requestId) {
+    const caller = getCaller(ctx);
+    const request = await this._getRequest(ctx, requestId);
+    if (request.requester.identityHash !== sha256(caller.id)) {
+      throw new Error('unauthorized: only the requester can cancel this request');
+    }
+    this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
+    return this._closePending(ctx, request, {
+      caller,
+      outcome: 'CANCELLED',
+      basis: 'REQUESTER_CANCELLED',
+      eventType: EVENT.REQUEST_CANCELLED,
+      eventData: { cancelledBy: request.requester.stableUserId },
+      status: REQUEST_STATUS.CANCELLED,
+      reviewStatus: 'CANCELLED',
     });
   }
 

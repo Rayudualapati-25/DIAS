@@ -161,6 +161,8 @@ function describe(snapshot) {
       target: { requestId: recommendationMatch[1] },
     };
   }
+  const cancelMatch = path.match(/^\/access\/request\/([^/]+)\/cancel$/);
+  if (cancelMatch) return { action: 'access.request.cancel', target: { requestId: cancelMatch[1] } };
   const accessRequestMatch = path.match(/^\/access\/request\/([^/]+)(\/trail)?$/);
   if (accessRequestMatch) {
     return {
@@ -309,6 +311,7 @@ const ACTION_CLASS = Object.freeze({
   'department.create': LEDGER_WRITE,
   'access.request': LEDGER_WRITE,
   'access.request.read': SENSITIVE,
+  'access.request.cancel': LEDGER_WRITE,
   'access.request.trail': SENSITIVE,
   'dias.decision-log.read': SENSITIVE,
   'dias.recommendation.read': SENSITIVE,

@@ -175,6 +175,8 @@ export const api = {
     // authorization settled it outright or whether an auditor must decide.
     request: (body) => request('POST', '/access/request', body),
     accessRequest: (requestId) => request('GET', `/access/request/${requestId}`),
+    // Withdraw a request that is still waiting for an auditor.
+    cancelRequest: (requestId) => request('POST', `/access/request/${requestId}/cancel`),
     requestTrail: (requestId) => request('GET', `/access/request/${requestId}/trail`),
     // The "why" behind one decision. Everyone reads the model's structured
     // account; its free text comes back only for the requester and auditors.

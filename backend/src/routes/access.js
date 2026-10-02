@@ -192,6 +192,14 @@ router.get('/request/:requestId', asyncRoute(async (req, res) => {
   return ok(res, request);
 }));
 
+/** The requester withdraws a request that is still waiting for review. */
+router.post('/request/:requestId/cancel', asyncRoute(async (req, res) => {
+  if (!SAFE_ID.test(req.params.requestId || '')) return fail(res, 'requestId has invalid format');
+  const cancelled = await fabric.submit(
+    req.user.org, req.user.fabricUser, CONTRACT, 'CancelAccessRequest', req.params.requestId);
+  return ok(res, cancelled);
+}));
+
 /** The full Fabric-reconstructed lifecycle of one request. */
 router.get('/request/:requestId/trail', asyncRoute(async (req, res) => {
   const trail = await fabric.evaluate(
@@ -279,6 +287,11 @@ const auditorDecisionSchema = z.object({
   validUntilUtc: z.string().datetime().optional(),
 });
 
+function isRequestExpired(error) {
+  const details = error && Array.isArray(error.details) ? error.details.map((d) => String(d.message)) : [];
+  return [...details, String(error && error.message)].some((text) => text.includes('DIAS_REQUEST_EXPIRED'));
+}
+
 async function decide({ user, requestId, body, ledger = fabric, store }) {
   const parsed = auditorDecisionSchema.safeParse(body || {});
   if (!parsed.success) return { status: 400, error: parsed.error.issues[0].message };
@@ -303,10 +316,21 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   if (validUntilUtc && !createsAuthorization(decision, llmAgreement)) {
     return { status: 400, error: 'validUntilUtc applies only when a dynamic authorization is created' };
   }
-  const result = await ledger.submit(
-    user.org, user.fabricUser, CONTRACT, 'SubmitAuditorDecision',
-    requestId, decision, llmRecommendation, validUntilUtc || ''
-  );
+  let result;
+  try {
+    result = await ledger.submit(
+      user.org, user.fabricUser, CONTRACT, 'SubmitAuditorDecision',
+      requestId, decision, llmRecommendation, validUntilUtc || ''
+    );
+  } catch (error) {
+    // The deadline passed while the auditor was reviewing. The refusal wrote
+    // nothing, so record the expiry now (best effort) and report the refusal.
+    if (isRequestExpired(error)) {
+      await ledger.submit(user.org, user.fabricUser, CONTRACT, 'ExpirePendingRequest', requestId)
+        .catch(() => {});
+    }
+    throw error;
+  }
   if (entry) {
     store.update(requestId, {
       auditorNote: {

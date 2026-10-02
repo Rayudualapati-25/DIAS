@@ -3,7 +3,11 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const { PORT, CORS_ORIGIN } = require('./config');
+const {
+  PORT, CORS_ORIGIN, AUTH_ORG, AUTH_USER, DIAS_EXPIRY_SWEEP_SECONDS,
+} = require('./config');
+const fabric = require('./fabric/gateway');
+const { createExpirySweeper } = require('./dias/expirySweeper');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const departmentRoutes = require('./routes/departments');
@@ -69,6 +73,12 @@ function startServer(port = PORT) {
   // Recommendations a previous process left unfinished are answered again, so an
   // auditor is never left waiting for one that will not arrive.
   const resumed = getDiasRuntime().worker.resumePending();
+  // Requests past their review deadline are closed on the ledger (design §8).
+  createExpirySweeper({
+    ledger: fabric,
+    identity: { org: AUTH_ORG, fabricUser: AUTH_USER },
+    intervalMs: DIAS_EXPIRY_SWEEP_SECONDS * 1000,
+  }).start();
   return app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`DIAS backend listening on http://localhost:${port}`

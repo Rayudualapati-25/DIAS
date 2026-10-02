@@ -247,4 +247,8 @@ module.exports = Object.freeze({
   DIAS_MODEL_QUANTIZATION: process.env.DIAS_MODEL_QUANTIZATION || '4bit',
   DIAS_ADAPTER_ID: process.env.DIAS_ADAPTER_ID || null,
   DIAS_ADAPTER_HASH: process.env.DIAS_ADAPTER_HASH || null,
+
+  // How often the backend records the expiry of requests past their review
+  // deadline (design §8). 0 disables the sweeper.
+  DIAS_EXPIRY_SWEEP_SECONDS: Number(process.env.DIAS_EXPIRY_SWEEP_SECONDS || 300),
 });

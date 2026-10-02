@@ -55,7 +55,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M24 | Auditor authority: AuditMSP district head, active credential, district | PART | 3 | done (step 3; `diasAuditorAuthority.test.js`, `chaincodeErrors.unit.test.js`) |
 | M25 | Counterfactual explanation (C3) | MISS | 14 | planned (step 14) |
 | M26 | Two pre-review commits and one atomic final commit (Algorithm 1) | PART | 10 | planned (step 10) |
-| M27 | Pending requests end (expiry, cancellation, late decisions) | MISS | 7 | planned (step 7) |
+| M27 | Pending requests end (expiry, cancellation, late decisions) | MISS | 7 | done (step 7; `diasRequestLifecycle.test.js`, `expirySweeper.unit.test.js`); policy-change expiry in step 8 |
 | I01 | Table V contracts and transactions | OK | 15 | planned (table update) |
 | I02 | Identity and role from the certificate and committed profile | OK | — | done (baseline) |
 | I03 | Success reported only after commit | OK | — | done (baseline) |

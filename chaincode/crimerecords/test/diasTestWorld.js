@@ -12,6 +12,7 @@
 
 const AccessContract = require('../lib/accessContract');
 const AuditContract = require('../lib/auditContract');
+const GovernanceContract = require('../lib/governanceContract');
 const RecordContract = require('../lib/recordContract');
 const {
   CALLERS, RECORD_META, buildMockContext, cloneInto, seedCase,
@@ -45,6 +46,7 @@ function createDiasWorld() {
   const contracts = {
     access: new AccessContract(),
     audit: new AuditContract(),
+    governance: new GovernanceContract(),
     records: new RecordContract(),
   };
   const counter = { value: 0 };
@@ -126,6 +128,20 @@ function createDiasWorld() {
     } = {}) {
       return run(caller, nextTx('AUDIT'), (ctx) => contracts.access.SubmitAuditorDecision(
         ctx, requestId, decision, llmRecommendation, validUntilUtc
+      ), { timestamp });
+    },
+
+    expire(requestId, { caller = CALLERS.constable, timestamp } = {}) {
+      return run(caller, nextTx('EXPIRE'), (ctx) => contracts.access.ExpirePendingRequest(ctx, requestId), { timestamp });
+    },
+
+    cancel(requestId, { caller = CALLERS.inspector, timestamp } = {}) {
+      return run(caller, nextTx('CANCEL'), (ctx) => contracts.access.CancelAccessRequest(ctx, requestId), { timestamp });
+    },
+
+    setParameters(parameters, { caller = CALLERS.auditor, timestamp } = {}) {
+      return run(caller, nextTx('PARAMS'), (ctx) => contracts.governance.SetDiasParameters(
+        ctx, JSON.stringify(parameters)
       ), { timestamp });
     },
 

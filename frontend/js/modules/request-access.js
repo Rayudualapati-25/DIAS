@@ -246,6 +246,7 @@ export default {
             ['Ledger status', badge(request.status, 'pending')],
             ['Action · purpose', `${request.action} · ${request.purpose}`],
             ['Submitted', dateTime(request.submittedAtUtc)],
+            ['Review deadline', request.reviewDeadlineUtc ? dateTime(request.reviewDeadlineUtc) : '—'],
           ]),
           callout('info', auditorHandoffWasOpened ? 'Auditor window opened' : 'Auditor window',
             hint('Sign in to the separate window as a district head of the authority '
@@ -255,6 +256,14 @@ export default {
             button('Check current status', { kind: 'ghost', onclick: () => recheckProgress() }),
             button('Open auditor decision window', {
               onclick: () => openAuditorReview(request.requestId),
+            }),
+            button('Cancel request', {
+              kind: 'danger',
+              onclick: async () => {
+                const cancelled = await attempt(
+                  () => api.access.cancelRequest(request.requestId), 'Request cancelled');
+                if (cancelled) await showProgress(cancelled.request);
+              },
             }))));
     };
 

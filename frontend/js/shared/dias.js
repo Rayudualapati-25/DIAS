@@ -12,11 +12,13 @@
  * auditor decision with whether it agreed with the LLM.
  */
 
-/** The three request statuses the chaincode can commit. */
+/** The request statuses the chaincode can commit. */
 export const STATUS = Object.freeze({
   AWAITING_AUDITOR: 'awaiting-auditor',
   GRANTED: 'granted',
   DENIED: 'denied',
+  EXPIRED: 'expired',
+  CANCELLED: 'cancelled',
 });
 
 /** Whether the auditor decision agreed with the LLM, as committed on the ledger. */
@@ -26,7 +28,7 @@ export const LLM_AGREEMENT = Object.freeze({
   NO_RECOMMENDATION: 'NO_RECOMMENDATION',
 });
 
-const FINAL = Object.freeze([STATUS.GRANTED, STATUS.DENIED]);
+const FINAL = Object.freeze([STATUS.GRANTED, STATUS.DENIED, STATUS.EXPIRED, STATUS.CANCELLED]);
 
 export function isSettled(request) {
   return FINAL.includes(request?.status);
@@ -42,15 +44,30 @@ export function progressLabel(request) {
   if (isAutomaticGrant(request)) return 'granted automatically by dynamic authorization';
   if (request?.status === STATUS.GRANTED) return 'granted by auditor';
   if (request?.status === STATUS.DENIED) return 'denied by auditor';
+  if (request?.status === STATUS.EXPIRED) return 'expired before an auditor decided';
+  if (request?.status === STATUS.CANCELLED) return 'cancelled by the requester';
   return 'waiting for auditor';
 }
 
 /** Who actually decided. Never the model. */
 export function decisionAuthorityLabel(request) {
   if (isAutomaticGrant(request)) return 'Active dynamic authorization';
+  if (request?.status === STATUS.EXPIRED) return 'Nobody: the review deadline passed';
+  if (request?.status === STATUS.CANCELLED) return 'Nobody: the requester cancelled';
   if (isSettled(request)) return 'AuditMSP auditor';
   return 'Not yet decided';
 }
+
+const OUTCOME_LABEL = Object.freeze({
+  granted: 'GRANTED', denied: 'DENIED', expired: 'EXPIRED', cancelled: 'CANCELLED',
+});
+const AUTHORITY_LABEL = Object.freeze({
+  'dynamic-authorization': 'Active dynamic authorization',
+  auditor: 'AuditMSP auditor',
+  'review-deadline': 'Review deadline',
+  'policy-change': 'Policy version change',
+  requester: 'Requester',
+});
 
 /**
  * A committed access decision, as its requester sees it: the outcome and who
@@ -64,10 +81,10 @@ export function accessDecisionView(decision) {
     decisionId: decision?.decisionId || null,
     requestId: decision?.requestId || null,
     recordId: decision?.recordId || null,
-    outcomeLabel: granted ? 'GRANTED' : 'DENIED',
+    outcomeLabel: OUTCOME_LABEL[decision?.status] || 'DENIED',
     granted,
     automatic,
-    authorityLabel: automatic ? 'Active dynamic authorization' : 'AuditMSP auditor',
+    authorityLabel: AUTHORITY_LABEL[decision?.decisionAuthority] || 'AuditMSP auditor',
     auditorDecisionId: decision?.auditorDecisionId || null,
     authorizationId: decision?.authorizationId || null,
     action: decision?.action || null,

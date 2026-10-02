@@ -234,3 +234,23 @@ test('says who may decide a request, before the auditor presses anything', () =>
   assert.equal(decisionAvailability(review('insp.sharma'), '').allowed, false);
   assert.equal(decisionAvailability(null, 'sp.north').allowed, false);
 });
+
+test('treats expired and cancelled requests as closed without any decision', async () => {
+  const dias = await import('../js/shared/dias.js');
+  for (const status of ['expired', 'cancelled']) {
+    assert.equal(dias.isSettled({ status }), true, status);
+    assert.equal(dias.isAutomaticGrant({ status }), false, status);
+  }
+  assert.equal(dias.progressLabel({ status: 'expired' }), 'expired before an auditor decided');
+  assert.equal(dias.progressLabel({ status: 'cancelled' }), 'cancelled by the requester');
+  assert.equal(dias.decisionAuthorityLabel({ status: 'expired' }), 'Nobody: the review deadline passed');
+  assert.equal(dias.decisionAuthorityLabel({ status: 'cancelled' }), 'Nobody: the requester cancelled');
+  const expired = dias.accessDecisionView({ status: 'expired', decisionAuthority: 'review-deadline', action: 'view' });
+  assert.equal(expired.outcomeLabel, 'EXPIRED');
+  assert.equal(expired.granted, false);
+  assert.equal(expired.releasesMetadata, false);
+  assert.equal(expired.authorityLabel, 'Review deadline');
+  const cancelled = dias.accessDecisionView({ status: 'cancelled', decisionAuthority: 'requester', action: 'view' });
+  assert.equal(cancelled.outcomeLabel, 'CANCELLED');
+  assert.equal(cancelled.authorityLabel, 'Requester');
+});

@@ -237,6 +237,7 @@ describe('access-log policy coverage', () => {
     ['GET', '/audit/trail/R-1'], ['POST', '/audit/verify-payload/R-1'], ['GET', '/audit/access-log'],
     ['GET', '/audit/access-log/verify'], ['GET', '/audit/request-trail/REQ-1'],
     ['POST', '/access/request'], ['GET', '/access/request/REQ-1'], ['GET', '/access/request/REQ-1/trail'],
+    ['POST', '/access/request/REQ-1/cancel'],
     ['GET', '/access/decision-log'], ['GET', '/access/request/REQ-1/recommendation'],
     ['GET', '/access/record/R-1'], ['GET', '/access/decision/R-1/D-1'],
     ['GET', '/access/auditor/pending'], ['GET', '/access/auditor/REQ-1'],

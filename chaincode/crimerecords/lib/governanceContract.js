@@ -5,9 +5,14 @@
 const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
 const { DISTRICT_HEAD_ROLES } = require('./policy/policyV1');
-const { validateAllowList, SAFE_ID } = require('./util/validate');
+const { validateAllowList, SAFE_ID, sha256 } = require('./util/validate');
 const { putJson } = require('./util/state');
 const { ROLES } = require('./policy/policyV1');
+const { requireActiveDistrictHead } = require('./dias/auditorAuthority');
+const { actorFrom } = require('./dias/lifecycle');
+const {
+  PARAMETERS_ID, PARAMETERS_KEY, PARAMETERS_SCHEMA_VERSION, readParameters, validateParameters,
+} = require('./dias/parameters');
 
 const DEPARTMENT_KEY = 'department';
 const CASE_KEY = 'case';
@@ -203,6 +208,38 @@ class GovernanceContract extends Contract {
     }
     await iterator.close();
     return JSON.stringify(items);
+  }
+
+  /**
+   * DIAS workflow parameters (design §8). Set by an active AuditMSP district
+   * head; each change is a new state version with its author and transaction.
+   */
+  async SetDiasParameters(ctx, parametersJson) {
+    const { caller } = await requireActiveDistrictHead(ctx, { action: 'SetDiasParameters' });
+    let input;
+    try {
+      input = JSON.parse(parametersJson);
+    } catch (_error) {
+      throw new Error('DIAS parameters must be valid JSON');
+    }
+    const parameters = validateParameters(input);
+    const stored = {
+      docType: PARAMETERS_KEY,
+      schemaVersion: PARAMETERS_SCHEMA_VERSION,
+      ...parameters,
+      setBy: actorFrom(caller, sha256(caller.id)),
+      setAtUtc: ctx.stub.getDateTimestamp().toISOString(),
+      txId: ctx.stub.getTxID(),
+    };
+    await putJson(ctx, ctx.stub.createCompositeKey(PARAMETERS_KEY, [PARAMETERS_ID]), stored);
+    ctx.stub.setEvent('DiasParametersChanged', Buffer.from(JSON.stringify({
+      pendingReviewTtlSeconds: parameters.pendingReviewTtlSeconds,
+    })));
+    return JSON.stringify(stored);
+  }
+
+  async GetDiasParameters(ctx) {
+    return JSON.stringify(await readParameters(ctx));
   }
 
   async _queryAll(ctx, type) {

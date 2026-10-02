@@ -199,7 +199,8 @@ describe('DIAS access workflow', () => {
     });
 
     it('returns the newest entries first and refuses an out-of-range limit', async () => {
-      const times = { 'FIR-1': '2026-09-01T09:00:00.000Z', 'FIR-2': '2026-09-01T10:00:00.000Z' };
+      // Both decisions fall inside the 72-hour review deadline of v3 (plan step 7).
+      const times = { 'FIR-1': '2026-08-06T09:00:00.000Z', 'FIR-2': '2026-08-06T10:00:00.000Z' };
       for (const recordId of ['FIR-1', 'FIR-2']) {
         const request = (await world.submit(INSPECTOR, { recordId })).result;
         await world.decide(request.requestId, 'FORCE_DENY', 'DENY', { timestamp: times[recordId] });

@@ -74,6 +74,29 @@ describe('DIAS access routes', () => {
     return Object.keys(fields).length > 0 ? store.update(requestId, fields) : store.read(requestId);
   }
 
+  describe('decisions on an overdue request', () => {
+    it('records the expiry and passes the refusal on when the deadline has passed', async () => {
+      storedReview('REQ-20', { recommendationState: 'ready', recommendation: recommendation('ALLOW') });
+      const calls = [];
+      const expired = Object.assign(new Error('endorse failed'), {
+        details: [{ message: 'DIAS_REQUEST_EXPIRED: the review deadline has passed' }],
+      });
+      const ledger = {
+        submit: async (...args) => {
+          calls.push(args.slice(3, 5));
+          if (args[3] === 'SubmitAuditorDecision') throw expired;
+          return { request: { status: 'expired' } };
+        },
+      };
+      await accessRouter.decide({
+        user: auditor, requestId: 'REQ-20', body: { decision: 'FORCE_ALLOW' }, ledger, store,
+      }).then(() => expect.fail('expected the refusal'), (error) => expect(error).to.equal(expired));
+      expect(calls).to.deep.equal([
+        ['SubmitAuditorDecision', 'REQ-20'], ['ExpirePendingRequest', 'REQ-20'],
+      ]);
+    });
+  });
+
   describe('request submission', () => {
     it('commits the request with no justification and no transient data', async () => {
       let captured;
