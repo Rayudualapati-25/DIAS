@@ -280,8 +280,9 @@ The backend remains part of the trusted base, because it holds every demonstrati
 
 ## 15. Error codes
 
-`DIAS_NO_ACTIVE_POLICY`, `DIAS_STALE_POLICY`, `DIAS_REQUEST_EXPIRED`, `DIAS_COMMITMENT_CONFLICT`, `DIAS_COMMITMENT_MISMATCH`, `DIAS_SIGNATURE_INVALID`, `DIAS_SIGNER_INACTIVE`, `DIAS_NOTE_REQUIRED`, `DIAS_AUDITOR_INACTIVE`, `DIAS_AUDITOR_OUT_OF_DISTRICT`, `DIAS_LEGACY_RECORD`. Each error message starts with its code, so the backend can map it without parsing prose.
+`DIAS_NO_ACTIVE_POLICY`, `DIAS_STALE_POLICY`, `DIAS_REQUEST_EXPIRED`, `DIAS_COMMITMENT_CONFLICT`, `DIAS_COMMITMENT_MISMATCH`, `DIAS_SIGNATURE_INVALID`, `DIAS_SIGNER_INACTIVE`, `DIAS_NOTE_REQUIRED`, `DIAS_AUDITOR_INACTIVE`, `DIAS_AUDITOR_OUT_OF_DISTRICT`, `DIAS_AUDITOR_CLEARANCE`, `DIAS_LEGACY_RECORD`. The backend maps authority codes to HTTP 403, timing and state conflicts to 409, and other refusals to 422. Each error message starts with its code, so the backend can map it without parsing prose.
 
 ## Change log
 
 - 2026-10-01 — first frozen version.
+- 2026-10-01 (step 3) — separate code `DIAS_AUDITOR_CLEARANCE` for a clearance failure, and the HTTP mapping of codes.

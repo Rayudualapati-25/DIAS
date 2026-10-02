@@ -51,8 +51,8 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | planned |
 | M21 | Trust model states the backend's role | TEXT/PART | 12 | planned (step 12 + text) |
 | M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | planned (step 10) |
-| M23 | No self-review | OK | 3 | done (baseline; retested) |
-| M24 | Auditor authority: AuditMSP district head, active credential, district | PART | 3 | planned (step 3) |
+| M23 | No self-review | OK | 3 | done (step 3; `diasAuditorAuthority.test.js`) |
+| M24 | Auditor authority: AuditMSP district head, active credential, district | PART | 3 | done (step 3; `diasAuditorAuthority.test.js`, `chaincodeErrors.unit.test.js`) |
 | M25 | Counterfactual explanation (C3) | MISS | 14 | planned (step 14) |
 | M26 | Two pre-review commits and one atomic final commit (Algorithm 1) | PART | 10 | planned (step 10) |
 | M27 | Pending requests end (expiry, cancellation, late decisions) | MISS | 7 | planned (step 7) |

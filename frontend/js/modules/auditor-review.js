@@ -248,8 +248,8 @@ export default {
           replace(problem, callout('bad', 'This request cannot be decided here',
             hint(availability.message),
             availability.reason === 'own-request'
-              ? hint('Sign in to this window as another district head — for example dj.north, '
-                + 'cfo.north, dp.north or sp.south — and open the request again.')
+              ? hint('Sign in to this window as another district head of the record\'s district '
+                + '— for example dj.north, cfo.north or dp.north — and open the request again.')
               : hint('Press "Refresh recommendation" above once it is ready.')));
           return;
         }
@@ -310,8 +310,8 @@ export default {
             : 'This request cannot be decided yet',
           hint(availability.message),
           availability.reason === 'own-request'
-            ? hint('Sign in to this window as another district head — dj.north, cfo.north, '
-              + 'dp.north or sp.south — and open the request again.')
+            ? hint('Sign in to this window as another district head of the record\'s district '
+              + '— dj.north, cfo.north or dp.north — and open the request again.')
             : null),
         recommendationCard(item, { onRefresh: () => showReview(requestId) }),
         subheading('Verified requester facts'),

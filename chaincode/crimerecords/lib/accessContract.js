@@ -29,6 +29,7 @@ const {
   SAFE_ID, hashObject, sha256, validateAllowList,
 } = require('./util/validate');
 const { putJson } = require('./util/state');
+const { requireActiveDistrictHead } = require('./dias/auditorAuthority');
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } = require('./policy/policyV1');
 const KEYS = require('./dias/keys');
 const {
@@ -616,6 +617,10 @@ class AccessContract extends Contract {
     if (identityHash === request.requester.identityHash) {
       throw new Error('unauthorized: a requester cannot decide their own request');
     }
+    const record = await this._mustRead(
+      ctx, this._key(ctx, KEYS.RECORD, request.recordId), `record '${request.recordId}'`
+    );
+    await requireActiveDistrictHead(ctx, { action: 'SubmitAuditorDecision', record, caller });
     await this._assertFactsUnchanged(ctx, request);
     const createsAuthorization = decision === 'FORCE_ALLOW' && llmAgreement === LLM_AGREEMENT.NOT_AGREED;
     if (!createsAuthorization && validUntilUtc) {
@@ -717,6 +722,10 @@ class AccessContract extends Contract {
     if (reason === null) throw new Error('a revocation reason is required');
     const key = this._key(ctx, AUTHORIZATION_KEY, authorizationId);
     const authorization = await this._mustRead(ctx, key, `dynamic authorization '${authorizationId}'`);
+    const record = await this._mustRead(
+      ctx, this._key(ctx, KEYS.RECORD, authorization.scope.recordId), `record '${authorization.scope.recordId}'`
+    );
+    await requireActiveDistrictHead(ctx, { action: 'RevokeDynamicAuthorization', record, caller });
     const txId = ctx.stub.getTxID();
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
     const actor = actorFrom(caller, sha256(caller.id));

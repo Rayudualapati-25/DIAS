@@ -24,7 +24,7 @@ function asyncRoute(handler) {
     } catch (err) {
       if (isCommitConflict(err)) return fail(res, COMMIT_CONFLICT_MESSAGE, 409);
       const message = extractChaincodeMessage(err);
-      if (message) return fail(res, message, 422);
+      if (message) return fail(res, message, statusForChaincodeMessage(message));
       // eslint-disable-next-line no-console
       console.error(`[api] ${req.method} ${req.originalUrl} failed:`, err);
       return fail(res, 'internal error', 500);
@@ -51,4 +51,20 @@ function extractChaincodeMessage(err) {
   return null;
 }
 
-module.exports = { ok, fail, asyncRoute };
+/**
+ * HTTP status for a chaincode refusal. DIAS error codes lead the message
+ * (docs/design/dias-v3-ledger-schema.md §15): an authority failure is 403, a
+ * request that is too late or conflicts with committed state is 409, and any
+ * other refusal (malformed input, a signature or note that fails validation) is
+ * 422.
+ */
+const FORBIDDEN = /\b(DIAS_AUDITOR_[A-Z_]+|unauthorized)\b/;
+const CONFLICT = /\bDIAS_(REQUEST_EXPIRED|STALE_POLICY|COMMITMENT_CONFLICT|NO_ACTIVE_POLICY|LEGACY_RECORD)\b/;
+
+function statusForChaincodeMessage(message) {
+  if (FORBIDDEN.test(message)) return 403;
+  if (CONFLICT.test(message)) return 409;
+  return 422;
+}
+
+module.exports = { ok, fail, asyncRoute, statusForChaincodeMessage };
