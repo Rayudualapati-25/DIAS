@@ -48,6 +48,9 @@ const {
   REQUESTER_CLAIMS_SCHEMA_VERSION, buildRequesterClaims, requesterClaimsHash,
 } = require('./dias/requesterClaims');
 const { readParameters, reviewDeadline } = require('./dias/parameters');
+const {
+  isBoundTo, policyBinding, readActivePolicy, requireActivePolicy,
+} = require('./dias/policyRegistry');
 
 const REQUEST_SCHEMA_VERSION = 'dias-access-request-v3';
 const AUDITOR_DECISION_SCHEMA_VERSION = 'dias-auditor-decision-v2';
@@ -275,14 +278,36 @@ class AccessContract extends Contract {
     }
   }
 
-  async _checkAuthorization(ctx, scopeHash, conditionsHash, timestamp) {
+  async _checkAuthorization(ctx, scopeHash, conditionsHash, timestamp, policyHash) {
     const index = await this._read(ctx, this._key(ctx, AUTHORIZATION_SCOPE_KEY, scopeHash));
     const authorization = index
       ? await this._read(ctx, this._key(ctx, AUTHORIZATION_KEY, index.authorizationId)) : null;
     return {
       authorization,
-      match: matchAuthorization(authorization, { scopeHash, conditionsHash, timestamp }),
+      match: matchAuthorization(authorization, { scopeHash, conditionsHash, timestamp, policyHash }),
     };
+  }
+
+  /** Only a request written by this contract version can be decided. */
+  _requireCurrentSchema(request) {
+    if (request.schemaVersion !== REQUEST_SCHEMA_VERSION || !request.policyHash) {
+      throw new Error(
+        `DIAS_LEGACY_RECORD: access request '${request.requestId}' has schema `
+        + `'${request.schemaVersion}' and cannot be decided by this contract version; request access again`
+      );
+    }
+  }
+
+  /** The request's policy must still be the active one. */
+  async _requireCurrentPolicy(ctx, request) {
+    const active = await requireActivePolicy(ctx);
+    if (!isBoundTo(request, active)) {
+      throw new Error(
+        `DIAS_STALE_POLICY: access request '${request.requestId}' was made under policy `
+        + `'${request.policyVersion}', but '${active.policyVersion}' is active; it must be requested again`
+      );
+    }
+    return active;
   }
 
   async _writeOutcome(ctx, {
@@ -303,6 +328,8 @@ class AccessContract extends Contract {
       purpose: request.purpose,
       outcome,
       basis,
+      policyVersion: request.policyVersion,
+      policyHash: request.policyHash,
       auditorDecisionId,
       llmRecommendation,
       authorizationId: matchedAuthorization ? matchedAuthorization.authorizationId : null,
@@ -327,6 +354,8 @@ class AccessContract extends Contract {
       decision: granted ? 'allow' : 'deny',
       status: OUTCOME_STATUS[outcome],
       decisionAuthority: DECISION_AUTHORITY[basis],
+      policyVersion: request.policyVersion,
+      policyHash: request.policyHash,
       authorizationId: record.authorizationId,
       auditorDecisionId,
       llmRecommendation,
@@ -372,6 +401,7 @@ class AccessContract extends Contract {
       parseJsonArgument(requestJson, 'access request'), REQUEST_INPUT_SCHEMA, 'access request'
     );
     const record = await this._mustRead(ctx, this._key(ctx, KEYS.RECORD, recordId), `record '${recordId}'`);
+    const activePolicy = await requireActivePolicy(ctx);
     const { profile, assigned, credentialStatus } = await this._requesterProfile(ctx, caller, record);
     const verifiedRequest = buildVerifiedRequest({
       subject: subjectFromProfile(caller.mspId, profile, credentialStatus),
@@ -400,7 +430,7 @@ class AccessContract extends Contract {
     });
     const scopeHash = hashScope(scope);
     const { authorization, match } = await this._checkAuthorization(
-      ctx, scopeHash, verifiedHash, timestamp
+      ctx, scopeHash, verifiedHash, timestamp, activePolicy.policyHash
     );
     const matched = match.outcome === MATCH_OUTCOME.MATCH;
     const requester = {
@@ -420,6 +450,8 @@ class AccessContract extends Contract {
       status: match.status || null,
       scopeHash,
       conditionsHash: verifiedHash,
+      policyVersion: activePolicy.policyVersion,
+      policyHash: activePolicy.policyHash,
       checkedAtUtc: timestamp,
     };
     const request = {
@@ -433,6 +465,7 @@ class AccessContract extends Contract {
       caseId: record.caseId,
       action: input.action,
       purpose: input.purpose,
+      ...policyBinding(activePolicy),
       verifiedRequestSchemaVersion: VERIFIED_REQUEST_SCHEMA_VERSION,
       verifiedRequest,
       verifiedRequestHash: verifiedHash,
@@ -566,6 +599,7 @@ class AccessContract extends Contract {
       auditorDecision: { auditorDecisionId, decision, llmRecommendation, llmAgreement },
       validUntilUtc,
       previous,
+      policy: { policyVersion: request.policyVersion, policyHash: request.policyHash },
     });
     const supersedes = Boolean(previous)
       && [AUTHORIZATION_STATUS.ACTIVE, AUTHORIZATION_STATUS.EXPIRED].includes(previous.status);
@@ -602,6 +636,8 @@ class AccessContract extends Contract {
       scope: created.scope,
       scopeHash: created.scopeHash,
       conditionsHash: created.conditionsHash,
+      policyVersion: created.policyVersion,
+      policyHash: created.policyHash,
       validUntilUtc: created.validUntilUtc,
       originatingRequestId: request.requestId,
       auditorDecisionId,
@@ -650,6 +686,8 @@ class AccessContract extends Contract {
     const request = await this._getRequest(ctx, requestId);
     this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
     this._requireBeforeDeadline(request, ctx.stub.getDateTimestamp().toISOString());
+    this._requireCurrentSchema(request);
+    await this._requireCurrentPolicy(ctx, request);
     const identityHash = sha256(caller.id);
     if (identityHash === request.requester.identityHash) {
       throw new Error('unauthorized: a requester cannot decide their own request');
@@ -685,6 +723,8 @@ class AccessContract extends Contract {
       llmRecommendation,
       llmAgreement,
       verifiedRequestHash: request.verifiedRequestHash,
+      policyVersion: request.policyVersion,
+      policyHash: request.policyHash,
       authorizationCreated: createsAuthorization,
       createdAuthorizationId,
       decidedAtUtc: timestamp,
@@ -792,17 +832,28 @@ class AccessContract extends Contract {
     const request = await this._getRequest(ctx, requestId);
     this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
-    if (!request.reviewDeadlineUtc || timestamp < request.reviewDeadlineUtc) {
+    const deadlinePassed = Boolean(request.reviewDeadlineUtc) && timestamp >= request.reviewDeadlineUtc;
+    // A request made under a policy that is no longer active can never be
+    // decided (design §5), so it may be closed at once.
+    const active = await readActivePolicy(ctx);
+    const policyChanged = Boolean(active) && !isBoundTo(request, active);
+    if (!deadlinePassed && !policyChanged) {
       throw new Error(
         `access request '${requestId}' is not due to expire until ${request.reviewDeadlineUtc || 'never'}`
       );
     }
+    const basis = deadlinePassed ? 'REVIEW_DEADLINE_PASSED' : 'POLICY_VERSION_CHANGED';
     return this._closePending(ctx, request, {
       caller,
       outcome: 'EXPIRED',
-      basis: 'REVIEW_DEADLINE_PASSED',
+      basis,
       eventType: EVENT.REQUEST_EXPIRED,
-      eventData: { reviewDeadlineUtc: request.reviewDeadlineUtc, basis: 'REVIEW_DEADLINE_PASSED' },
+      eventData: {
+        reviewDeadlineUtc: request.reviewDeadlineUtc,
+        basis,
+        requestPolicyVersion: request.policyVersion || null,
+        activePolicyVersion: active ? active.policyVersion : null,
+      },
       status: REQUEST_STATUS.EXPIRED,
       reviewStatus: 'EXPIRED',
     });

@@ -10,7 +10,20 @@ const { buildMockContext, cloneInto, seedCase, CALLERS, RECORD_META } = require(
 
 const contract = new RecordContract();
 
+// v3: every grant carries the policy it was issued under, and release requires
+// that policy to be the active one (plan step 8). These hand-built fixtures use
+// the same binding as the active policy they seed.
+const POLICY = Object.freeze({ policyVersion: 'dias-governance-policy-v1', policyHash: 'c'.repeat(64) });
+
+async function seedActivePolicy(ctx) {
+  await ctx.stub.putState(
+    ctx.stub.createCompositeKey('diasActivePolicy', ['current']),
+    Buffer.from(JSON.stringify({ docType: 'diasActivePolicy', ...POLICY, activationSeq: 1 }))
+  );
+}
+
 async function createRecord(ctx, recordId = 'FIR-1', meta = RECORD_META) {
+  await seedActivePolicy(ctx);
   const caseKey = ctx.stub.createCompositeKey('case', [meta.caseId]);
   const existingCase = await ctx.stub.getState(caseKey);
   if (!existingCase || existingCase.length === 0) await seedCase(ctx, meta.caseId);
@@ -330,7 +343,7 @@ describe('RecordContract', () => {
         Buffer.from(JSON.stringify({ fabricUser: caller.identityId, credentialStatus: 'active' }))
       );
       const decision = {
-        docType: 'accessDecision', decisionId: 'DECISION-1', recordId: 'FIR-1',
+        docType: 'accessDecision', decisionId: 'DECISION-1', recordId: 'FIR-1', ...POLICY,
         action, status,
         subject: { identityHash: sha256(requesterCtx.clientIdentity.getID()) },
       };
@@ -469,7 +482,7 @@ describe('RecordContract', () => {
         Buffer.from(JSON.stringify({ fabricUser: 'insp.test', credentialStatus: 'active' }))
       );
       const decision = {
-        docType: 'accessDecision', decisionId: 'D-1', recordId: 'FIR-1',
+        docType: 'accessDecision', decisionId: 'D-1', recordId: 'FIR-1', ...POLICY,
         status: 'granted', action: 'view',
         subject: {
           identityHash: sha256(ctx.clientIdentity.getID()),
@@ -501,7 +514,7 @@ describe('RecordContract', () => {
         Buffer.from(JSON.stringify({ fabricUser: 'insp.test', credentialStatus }))
       );
       const decision = {
-        docType: 'accessDecision', decisionId: 'D-1', recordId: 'FIR-1', caseId: 'CASE-1',
+        docType: 'accessDecision', decisionId: 'D-1', recordId: 'FIR-1', caseId: 'CASE-1', ...POLICY,
         status: 'granted', action, purpose: 'investigation',
         decisionAuthority: authorization ? 'dynamic-authorization' : 'auditor',
         authorizationId: authorization ? authorization.authorizationId : null,
@@ -520,7 +533,7 @@ describe('RecordContract', () => {
         };
         await ctx.stub.putState(
           ctx.stub.createCompositeKey('diasAuthorization', [authorization.authorizationId]),
-          Buffer.from(JSON.stringify({ scope, ...authorization }))
+          Buffer.from(JSON.stringify({ scope, ...POLICY, ...authorization }))
         );
       }
       return ctx;

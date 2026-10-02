@@ -39,7 +39,15 @@ const DEFAULT_PROFILES = Object.freeze([
   profileFor(CALLERS.constable, 'police'),
   profileFor(CALLERS.analyst, 'forensics'),
   profileFor(CALLERS.auditor, 'audit'),
+  profileFor(CALLERS.auditor2, 'audit'),
 ]);
+
+/** The policy every seeded world activates (its digest is the v3 policy digest of policies/). */
+const POLICY_V1 = Object.freeze({
+  policyVersion: 'dias-governance-policy-v1',
+  policyHash: '9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81',
+  bundleId: 'dias-governance-policy',
+});
 
 function createDiasWorld() {
   const ledger = buildMockContext({ mspId: 'PoliceMSP' });
@@ -93,7 +101,7 @@ function createDiasWorld() {
     run,
     nextTx,
 
-    async seed({ assignedUsers = [], profiles = DEFAULT_PROFILES } = {}) {
+    async seed({ assignedUsers = [], profiles = DEFAULT_PROFILES, policy = POLICY_V1 } = {}) {
       await run(CALLERS.inspector, 'SEED-RECORDS', async (ctx) => {
         await seedCase(ctx, 'CASE-1', { assignedUsers });
         for (const profile of profiles) {
@@ -106,7 +114,27 @@ function createDiasWorld() {
           ...RECORD_META, offChainReference: 'vault://police/FIR-2',
         }));
       });
+      if (policy) {
+        await world.registerPolicy(policy);
+        await world.activatePolicy(policy.policyVersion);
+      }
       return world;
+    },
+
+    registerPolicy({ policyVersion, policyHash, bundleId = 'dias-governance-policy' }, { caller = CALLERS.auditor } = {}) {
+      return run(caller, nextTx('POLREG'), (ctx) => contracts.governance.RegisterPolicyVersion(
+        ctx, policyVersion, policyHash, bundleId
+      ));
+    },
+
+    activatePolicy(policyVersion, { caller = CALLERS.auditor2 } = {}) {
+      return run(caller, nextTx('POLACT'), (ctx) => contracts.governance.ActivatePolicyVersion(ctx, policyVersion));
+    },
+
+    /** Register and activate a new policy version, retiring the current one. */
+    async changePolicy(policyVersion = 'dias-governance-policy-v2', policyHash = 'e'.repeat(64)) {
+      await world.registerPolicy({ policyVersion, policyHash });
+      return world.activatePolicy(policyVersion);
     },
 
     readRequest: (requestId) => readState('diasAccessRequest', requestId),
@@ -162,4 +190,4 @@ function createDiasWorld() {
   return world;
 }
 
-module.exports = { DEFAULT_PROFILES, createDiasWorld, profileFor };
+module.exports = { DEFAULT_PROFILES, POLICY_V1, createDiasWorld, profileFor };

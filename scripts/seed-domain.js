@@ -4,9 +4,9 @@
 /**
  * Deterministic ledger seed for departments and the initial demo cases.
  *
- * No policy or model is registered on the ledger: in DIAS the governance policy
- * bundle and the LLM live with the application backend, which records the model
- * identity with each off-chain recommendation.
+ * The governance policy is registered separately (scripts/dias/register-policy.js,
+ * `make seed-policy`): the ledger holds its version and digest, never its text.
+ * No model is registered on the ledger.
  */
 
 const fabric = require('../backend/src/fabric/gateway');

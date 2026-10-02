@@ -16,6 +16,7 @@ const {
   ROLES, RECORD_TYPES, SENSITIVITY, DISTRICT_HEAD_ROLES,
 } = require('./policy/policyV1');
 const { AUTHORIZATION_KEY } = require('./dias/authorization');
+const { isBoundTo, readActivePolicy } = require('./dias/policyRegistry');
 
 const RECORD_KEY = 'record';
 const ACCESS_KEY = 'accessDecision';
@@ -149,6 +150,17 @@ class RecordContract extends Contract {
     if (!profile || profile.credentialStatus !== 'active' || caller.credentialStatus !== 'active') {
       throw new Error('unauthorized: the requester credential is not active at release time');
     }
+    // Every grant is released only under the policy it was issued under (design §9).
+    if (!decision.policyHash) {
+      throw new Error('DIAS_LEGACY_RECORD: this grant carries no policy binding; request access again');
+    }
+    const activePolicy = await readActivePolicy(ctx);
+    if (!isBoundTo(decision, activePolicy)) {
+      throw new Error(
+        `DIAS_STALE_POLICY: this grant was issued under policy '${decision.policyVersion}', `
+        + 'which is no longer active; request access again'
+      );
+    }
     if (decision.decisionAuthority !== 'dynamic-authorization') return;
     const authorization = await this._readJson(
       ctx, ctx.stub.createCompositeKey(AUTHORIZATION_KEY, [decision.authorizationId || ''])
@@ -156,7 +168,7 @@ class RecordContract extends Contract {
     const now = ctx.stub.getDateTimestamp().toISOString();
     const active = Boolean(authorization) && authorization.status === 'active'
       && (authorization.validUntilUtc === null || now < authorization.validUntilUtc);
-    if (!active) {
+    if (!active || !isBoundTo(authorization, activePolicy)) {
       throw new Error('unauthorized: the dynamic authorization behind this grant is no longer active');
     }
     if (!scopeMatchesDecision(authorization.scope, decision)) {

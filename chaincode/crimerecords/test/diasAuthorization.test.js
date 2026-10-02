@@ -8,6 +8,8 @@ const {
 const { buildVerifiedRequest, verifiedRequestHash } = require('../lib/dias/verifiedRequest');
 
 const TIMESTAMP = '2026-08-05T12:00:00.000Z';
+// v3: every authorization is issued under, and matched against, a policy binding.
+const POLICY = Object.freeze({ policyVersion: 'dias-governance-policy-v1', policyHash: 'c'.repeat(64) });
 const AUDITOR = Object.freeze({
   username: 'sp.north', mspId: 'AuditMSP', role: 'sp', identityHash: 'a'.repeat(64),
 });
@@ -49,6 +51,7 @@ function created(overrides = {}) {
     },
     validUntilUtc: null,
     previous: null,
+    policy: POLICY,
     ...overrides,
   });
 }
@@ -57,6 +60,7 @@ const matchInput = (overrides = {}) => ({
   scopeHash: hashScope(scope()),
   conditionsHash: verifiedRequestHash(verified()),
   timestamp: '2026-08-06T00:00:00.000Z',
+  policyHash: POLICY.policyHash,
   ...overrides,
 });
 
@@ -162,5 +166,23 @@ describe('DIAS dynamic authorization state transitions', () => {
     expect(expired).to.include({ status: 'expired', stateVersion: 2, expiryTxId: 'T4' });
     const superseded = supersedeAuthorization(created(), { supersededByAuthorizationId: 'AUTH-2' });
     expect(superseded).to.include({ status: 'superseded', stateVersion: 2 });
+  });
+});
+
+describe('DIAS dynamic authorization policy binding (v3)', () => {
+  it('stores the policy it is issued under and refuses to be issued without one', () => {
+    expect(created()).to.include({ policyVersion: POLICY.policyVersion, policyHash: POLICY.policyHash });
+    expect(() => created({ policy: null })).to.throw(/requires the policy binding/);
+  });
+
+  it('reports POLICY_CHANGED, not a match, under another active policy', () => {
+    const result = matchAuthorization(created(), matchInput({ policyHash: 'd'.repeat(64) }));
+    expect(result.outcome).to.equal(MATCH_OUTCOME.POLICY_CHANGED);
+    expect(result.status).to.equal('active');
+  });
+
+  it('never matches an authorization of an older schema', () => {
+    const legacy = { ...created(), schemaVersion: 'dias-dynamic-authorization-v2' };
+    expect(matchAuthorization(legacy, matchInput()).outcome).to.equal(MATCH_OUTCOME.NO_AUTHORIZATION);
   });
 });

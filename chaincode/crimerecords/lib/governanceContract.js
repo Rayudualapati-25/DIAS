@@ -13,6 +13,11 @@ const { actorFrom } = require('./dias/lifecycle');
 const {
   PARAMETERS_ID, PARAMETERS_KEY, PARAMETERS_SCHEMA_VERSION, readParameters, validateParameters,
 } = require('./dias/parameters');
+const {
+  ACTIVE_POLICY_KEY, ACTIVE_POLICY_SCHEMA_VERSION, POLICY_STATUS, POLICY_VERSION_KEY,
+  POLICY_VERSION_SCHEMA_VERSION, activeKey, assertPolicyHash, assertPolicyVersion,
+  readActivePolicy, readPolicyVersion, versionKey,
+} = require('./dias/policyRegistry');
 
 const DEPARTMENT_KEY = 'department';
 const CASE_KEY = 'case';
@@ -240,6 +245,96 @@ class GovernanceContract extends Contract {
 
   async GetDiasParameters(ctx) {
     return JSON.stringify(await readParameters(ctx));
+  }
+
+  /**
+   * Register a governance policy version by the digest of its canonical bundle
+   * (design §5). The policy text never reaches the ledger.
+   */
+  async RegisterPolicyVersion(ctx, policyVersion, policyHash, bundleId) {
+    const { caller } = await requireActiveDistrictHead(ctx, { action: 'RegisterPolicyVersion' });
+    assertPolicyVersion(policyVersion);
+    assertPolicyHash(policyHash);
+    if (!SAFE_ID.test(bundleId || '')) throw new Error('bundleId has invalid format');
+    if (await readPolicyVersion(ctx, policyVersion)) {
+      throw new Error(`policy version '${policyVersion}' is already registered`);
+    }
+    const identityHash = sha256(caller.id);
+    const record = {
+      docType: POLICY_VERSION_KEY,
+      schemaVersion: POLICY_VERSION_SCHEMA_VERSION,
+      policyVersion,
+      policyHash,
+      bundleId,
+      status: POLICY_STATUS.REGISTERED,
+      registeredBy: actorFrom(caller, identityHash),
+      registeredAtUtc: ctx.stub.getDateTimestamp().toISOString(),
+      registrationTxId: ctx.stub.getTxID(),
+      activatedBy: null,
+      activatedAtUtc: null,
+      activationTxId: null,
+      retiredAtUtc: null,
+      retirementTxId: null,
+    };
+    await putJson(ctx, versionKey(ctx, policyVersion), record);
+    ctx.stub.setEvent('DiasPolicyRegistered', Buffer.from(JSON.stringify({ policyVersion, policyHash })));
+    return JSON.stringify(record);
+  }
+
+  /**
+   * Make a registered version the active policy. A second district head must do
+   * it (two-person rule, design D-02); the previous version is retired for good.
+   */
+  async ActivatePolicyVersion(ctx, policyVersion) {
+    const { caller } = await requireActiveDistrictHead(ctx, { action: 'ActivatePolicyVersion' });
+    assertPolicyVersion(policyVersion);
+    const version = await readPolicyVersion(ctx, policyVersion);
+    if (!version) throw new Error(`policy version '${policyVersion}' is not registered`);
+    if (version.status !== POLICY_STATUS.REGISTERED) {
+      throw new Error(`policy version '${policyVersion}' is ${version.status}; only a registered version can be activated`);
+    }
+    const identityHash = sha256(caller.id);
+    if (version.registeredBy.identityHash === identityHash) {
+      throw new Error('a policy version must be activated by a different district head than the one who registered it');
+    }
+    const timestamp = ctx.stub.getDateTimestamp().toISOString();
+    const txId = ctx.stub.getTxID();
+    const previous = await readActivePolicy(ctx);
+    if (previous) {
+      const retiring = await readPolicyVersion(ctx, previous.policyVersion);
+      await putJson(ctx, versionKey(ctx, previous.policyVersion), {
+        ...retiring, status: POLICY_STATUS.RETIRED, retiredAtUtc: timestamp, retirementTxId: txId,
+      });
+    }
+    const actor = actorFrom(caller, identityHash);
+    await putJson(ctx, versionKey(ctx, policyVersion), {
+      ...version, status: POLICY_STATUS.ACTIVE, activatedBy: actor, activatedAtUtc: timestamp, activationTxId: txId,
+    });
+    const active = {
+      docType: ACTIVE_POLICY_KEY,
+      schemaVersion: ACTIVE_POLICY_SCHEMA_VERSION,
+      policyVersion,
+      policyHash: version.policyHash,
+      bundleId: version.bundleId,
+      activationSeq: previous ? previous.activationSeq + 1 : 1,
+      previousPolicyVersion: previous ? previous.policyVersion : null,
+      activatedBy: actor,
+      activatedAtUtc: timestamp,
+      activationTxId: txId,
+    };
+    await putJson(ctx, activeKey(ctx), active);
+    ctx.stub.setEvent('DiasPolicyActivated', Buffer.from(JSON.stringify({
+      policyVersion, policyHash: version.policyHash,
+    })));
+    return JSON.stringify(active);
+  }
+
+  async GetActivePolicy(ctx) {
+    return JSON.stringify(await readActivePolicy(ctx));
+  }
+
+  async QueryPolicyVersions(ctx) {
+    return this._queryAll(ctx, POLICY_VERSION_KEY);
   }
 
   async _queryAll(ctx, type) {

@@ -287,9 +287,11 @@ const auditorDecisionSchema = z.object({
   validUntilUtc: z.string().datetime().optional(),
 });
 
-function isRequestExpired(error) {
+/** A refusal that means the request can never be decided: it must be closed instead. */
+function isClosedByLedger(error) {
   const details = error && Array.isArray(error.details) ? error.details.map((d) => String(d.message)) : [];
-  return [...details, String(error && error.message)].some((text) => text.includes('DIAS_REQUEST_EXPIRED'));
+  return [...details, String(error && error.message)]
+    .some((text) => /DIAS_(REQUEST_EXPIRED|STALE_POLICY)/.test(text));
 }
 
 async function decide({ user, requestId, body, ledger = fabric, store }) {
@@ -323,9 +325,10 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
       requestId, decision, llmRecommendation, validUntilUtc || ''
     );
   } catch (error) {
-    // The deadline passed while the auditor was reviewing. The refusal wrote
-    // nothing, so record the expiry now (best effort) and report the refusal.
-    if (isRequestExpired(error)) {
+    // The deadline passed, or the policy changed, while the auditor was
+    // reviewing. The refusal wrote nothing, so record the expiry now (best
+    // effort) and report the refusal.
+    if (isClosedByLedger(error)) {
       await ledger.submit(user.org, user.fabricUser, CONTRACT, 'ExpirePendingRequest', requestId)
         .catch(() => {});
     }

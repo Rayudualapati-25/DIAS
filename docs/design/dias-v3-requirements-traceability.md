@@ -33,8 +33,8 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M02 | Verified context C built from authenticated facts; `h_C` stored | OK | 5 | done (step 5; `diasSchema.test.js`, `diasAccessSecurity.test.js`) |
 | M03 | Requester claims kept out of the verified context | MISS | 5 | done (step 5); label invariance 8,013/8,013; V7 re-evaluation NOT RUN |
 | M04 | `h_J` recorded on-chain with the request | MISS | 9 | planned (step 9) |
-| M05 | Active policy version recorded in the request | MISS | 8 | planned (step 8) |
-| M06 | Reuse requires the active policy version | MISS | 8 | planned (step 8) |
+| M05 | Active policy version recorded in the request | MISS | 8 | done (step 8; `diasPolicyBinding.test.js`) |
+| M06 | Reuse requires the active policy version | MISS | 8 | done (step 8; `POLICY_CHANGED` miss) |
 | M07 | κ committed before review | MISS | 10 | planned (step 10) |
 | M08 | One active κ per request; mismatched `h_C` or `v_P` rejected | MISS | 10 | planned (step 10) |
 | M09 | Specific generation status on-chain | PART | 10 | planned (step 10) |
@@ -43,12 +43,12 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M12 | Contract derives agreement from κ; backend supplies neither q nor g | PART | 10 | planned (step 10) |
 | M13 | Fail-closed decision checks | PART | 3, 8, 10, 11 | planned |
 | M14 | Authorization only for FORCE ALLOW over a valid DENY | OK | 10 | planned (re-derived from κ) |
-| M15 | Authorization stores `v_P` and the κ reference | PART | 8, 10 | planned |
+| M15 | Authorization stores `v_P` and the κ reference | PART | 8, 10 | `v_P` done (step 8); κ reference in step 10 |
 | M16 | Authorization lifecycle, revocation reason, supersession | OK | — | done (baseline) |
-| M17 | Policy change stops reuse; reissue under the new policy | MISS | 8 | planned (step 8) |
+| M17 | Policy change stops reuse; reissue under the new policy | MISS | 8 | done (step 8; reissue supersedes) |
 | M18 | Lifecycle events for recommendation commitment and agreement derivation | PART | 10 | planned (step 10) |
 | M19 | Off-chain objects verifiable against on-chain hashes | MISS | 9–11 | planned |
-| M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | step 4 done (`diasRelease.test.js`); `v_P` in step 8 |
+| M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | done (steps 4 and 8; `diasRelease.test.js`, `diasPolicyBinding.test.js`) |
 | M21 | Trust model states the backend's role | TEXT/PART | 12 | planned (step 12 + text) |
 | M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | planned (step 10) |
 | M23 | No self-review | OK | 3 | done (step 3; `diasAuditorAuthority.test.js`) |

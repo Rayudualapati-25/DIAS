@@ -9,14 +9,16 @@
  * A later request reuses the authorization only when the stable requester
  * identity, the exact record and case, the action, and the purpose are identical;
  * the verified request facts are unchanged since approval; the authorization is
- * active; and it has not expired. Matching is exact and deterministic: no
- * similarity, no model, and no retrieval.
+ * active; it has not expired; and it was issued under the policy version that is
+ * active now (v3, design §5 and §9). Matching is exact and deterministic: no
+ * similarity, no model, and no retrieval. An authorization of an older schema
+ * never matches.
  */
 
 const { SAFE_ID, hashObject } = require('../util/validate');
 const { verifiedRequestHash } = require('./verifiedRequest');
 
-const AUTHORIZATION_SCHEMA_VERSION = 'dias-dynamic-authorization-v2';
+const AUTHORIZATION_SCHEMA_VERSION = 'dias-dynamic-authorization-v3';
 const SCOPE_VERSION = 'dias-authorization-scope-exact-record-v1';
 const AUTHORIZATION_KEY = 'diasAuthorization';
 const AUTHORIZATION_SCOPE_KEY = 'diasAuthorizationScope';
@@ -35,6 +37,7 @@ const MATCH_OUTCOME = Object.freeze({
   EXPIRED: 'EXPIRED',
   SUPERSEDED: 'SUPERSEDED',
   CONDITIONS_CHANGED: 'CONDITIONS_CHANGED',
+  POLICY_CHANGED: 'POLICY_CHANGED',
 });
 
 const stableUserId = (mspId, enrollmentId) => `${mspId}::${enrollmentId}`;
@@ -78,8 +81,11 @@ function assertSafeIds(ids) {
  */
 function createAuthorization({
   txId, timestamp, auditor, scope, verifiedRequest, originatingRequestId,
-  auditorDecision, validUntilUtc, previous,
+  auditorDecision, validUntilUtc, previous, policy,
 }) {
+  if (!policy || !policy.policyVersion || !policy.policyHash) {
+    throw new Error('a dynamic authorization requires the policy binding it is issued under');
+  }
   if (auditorDecision.decision !== 'FORCE_ALLOW') {
     throw new Error('a dynamic authorization requires an auditor FORCE_ALLOW decision');
   }
@@ -105,6 +111,8 @@ function createAuthorization({
     scopeHash: hashScope(scope),
     conditions: verifiedRequest,
     conditionsHash: verifiedRequestHash(verifiedRequest),
+    policyVersion: policy.policyVersion,
+    policyHash: policy.policyHash,
     originatingRequestId,
     auditorDecision: {
       auditorDecisionId: auditorDecision.auditorDecisionId,
@@ -128,7 +136,7 @@ function createAuthorization({
 }
 
 /** Compare a stored authorization with a new request. Pure; performs no writes. */
-function matchAuthorization(authorization, { scopeHash, conditionsHash, timestamp }) {
+function matchAuthorization(authorization, { scopeHash, conditionsHash, timestamp, policyHash }) {
   if (!authorization || authorization.schemaVersion !== AUTHORIZATION_SCHEMA_VERSION
       || authorization.scopeHash !== scopeHash) {
     return { outcome: MATCH_OUTCOME.NO_AUTHORIZATION, authorizationId: null };
@@ -153,6 +161,9 @@ function matchAuthorization(authorization, { scopeHash, conditionsHash, timestam
       ...reference,
       needsExpiryTransition: authorization.status === AUTHORIZATION_STATUS.ACTIVE,
     };
+  }
+  if (authorization.policyHash !== policyHash) {
+    return { outcome: MATCH_OUTCOME.POLICY_CHANGED, ...reference };
   }
   if (authorization.conditionsHash !== conditionsHash) {
     return { outcome: MATCH_OUTCOME.CONDITIONS_CHANGED, ...reference };

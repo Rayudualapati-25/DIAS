@@ -46,7 +46,7 @@ ifneq ($(strip $(DOCKER_CONTEXT)),)
 export DOCKER_CONTEXT
 endif
 
-.PHONY: help all install check repo-check doctor up down deploy seed seed-users seed-domain seed-records dias-demo-data backend model ollama test test-chaincode \
+.PHONY: help all install check repo-check doctor up down deploy seed seed-users seed-domain seed-policy seed-records dias-demo-data backend model ollama test test-chaincode \
         test-backend test-policies test-frontend test-dataset test-live \
         dias-all dias-channel dias-deploy dias-seed dias-model dias-backend \
         dias-acceptance dias-readiness dias-subsets \
@@ -190,6 +190,11 @@ seed-domain:
 seed-records:
 	CHANNEL=$(DIAS_CHANNEL) CHAINCODE=$(DIAS_CC_NAME) node scripts/seed-demo-records.js
 
+# Step 3 (v3): register the governance policy digest and activate it with two
+# different district heads. No request can be created until a policy is active.
+seed-policy:
+	CHANNEL=$(DIAS_CHANNEL) CHAINCODE=$(DIAS_CC_NAME) node scripts/dias/register-policy.js
+
 ollama:
 	scripts/setup-ollama.sh
 
@@ -223,9 +228,9 @@ dias-channel:
 dias-deploy:
 	cd network && ORG_SET=dias bash scripts/deployCC.sh $(DIAS_CHANNEL) $(DIAS_CC_NAME) $(DIAS_CC_VERSION) $(CC_SEQUENCE)
 
-## dias-seed: the identities and departments a fresh DIAS install needs. No case
-## and no case file: those are created through the application.
-dias-seed: seed-users seed-domain
+## dias-seed: the identities, departments and active policy a fresh DIAS install
+## needs. No case and no case file: those are created through the application.
+dias-seed: seed-users seed-domain seed-policy
 
 ## dias-demo-data: the two demo cases and three case files the live suites use
 ## (make smoke, make dias-acceptance). Not needed to use the application.

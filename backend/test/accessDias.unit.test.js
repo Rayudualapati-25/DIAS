@@ -97,6 +97,27 @@ describe('DIAS access routes', () => {
     });
   });
 
+  describe('decisions under a retired policy', () => {
+    it('closes the request and passes the refusal on', async () => {
+      storedReview('REQ-21', { recommendationState: 'ready', recommendation: recommendation('DENY') });
+      const calls = [];
+      const stale = Object.assign(new Error('endorse failed'), {
+        details: [{ message: 'DIAS_STALE_POLICY: made under a retired policy' }],
+      });
+      const ledger = {
+        submit: async (...args) => {
+          calls.push(args[3]);
+          if (args[3] === 'SubmitAuditorDecision') throw stale;
+          return {};
+        },
+      };
+      await accessRouter.decide({
+        user: auditor, requestId: 'REQ-21', body: { decision: 'FORCE_DENY' }, ledger, store,
+      }).then(() => expect.fail('expected the refusal'), (error) => expect(error).to.equal(stale));
+      expect(calls).to.deep.equal(['SubmitAuditorDecision', 'ExpirePendingRequest']);
+    });
+  });
+
   describe('request submission', () => {
     it('commits the request with no justification and no transient data', async () => {
       let captured;
