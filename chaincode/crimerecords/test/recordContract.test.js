@@ -501,19 +501,26 @@ describe('RecordContract', () => {
         Buffer.from(JSON.stringify({ fabricUser: 'insp.test', credentialStatus }))
       );
       const decision = {
-        docType: 'accessDecision', decisionId: 'D-1', recordId: 'FIR-1', status: 'granted', action,
+        docType: 'accessDecision', decisionId: 'D-1', recordId: 'FIR-1', caseId: 'CASE-1',
+        status: 'granted', action, purpose: 'investigation',
         decisionAuthority: authorization ? 'dynamic-authorization' : 'auditor',
         authorizationId: authorization ? authorization.authorizationId : null,
-        subject: { identityHash: sha256(ctx.clientIdentity.getID()) },
+        subject: { identityHash: sha256(ctx.clientIdentity.getID()), mspId: 'PoliceMSP', username: 'insp.test' },
       };
       await ctx.stub.putState(
         ctx.stub.createCompositeKey('accessDecision', ['FIR-1', 'D-1']),
         Buffer.from(JSON.stringify(decision))
       );
       if (authorization) {
+        // Every authorization the contract writes carries its exact scope; release
+        // compares it with the grant (plan step 4).
+        const scope = {
+          stableUserId: 'PoliceMSP::insp.test', recordId: 'FIR-1', caseId: 'CASE-1',
+          action, purpose: 'investigation',
+        };
         await ctx.stub.putState(
           ctx.stub.createCompositeKey('diasAuthorization', [authorization.authorizationId]),
-          Buffer.from(JSON.stringify(authorization))
+          Buffer.from(JSON.stringify({ scope, ...authorization }))
         );
       }
       return ctx;

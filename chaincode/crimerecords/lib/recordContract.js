@@ -75,6 +75,17 @@ const RECORD_SCHEMA = {
   },
 };
 
+/** The exact scope a reused grant was issued for, compared field by field. */
+function scopeMatchesDecision(scope, decision) {
+  const subject = decision.subject || {};
+  return Boolean(scope)
+    && scope.stableUserId === `${subject.mspId}::${subject.username}`
+    && scope.recordId === decision.recordId
+    && scope.caseId === decision.caseId
+    && scope.action === decision.action
+    && scope.purpose === decision.purpose;
+}
+
 class RecordContract extends Contract {
   constructor() {
     super('RecordContract');
@@ -128,7 +139,8 @@ class RecordContract extends Contract {
   /**
    * A committed grant is honoured only while its basis still holds: the requester's
    * credential is active at release time, and a grant issued by a dynamic
-   * authorization is released only while that authorization is active and unexpired.
+   * authorization is released only while that authorization is active, unexpired,
+   * and still scoped to exactly this requester, record, case, action and purpose.
    */
   async _requireCurrentGrantBasis(ctx, caller, decision) {
     const profile = await this._readJson(
@@ -146,6 +158,9 @@ class RecordContract extends Contract {
       && (authorization.validUntilUtc === null || now < authorization.validUntilUtc);
     if (!active) {
       throw new Error('unauthorized: the dynamic authorization behind this grant is no longer active');
+    }
+    if (!scopeMatchesDecision(authorization.scope, decision)) {
+      throw new Error('unauthorized: the dynamic authorization scope does not match this grant');
     }
   }
 
@@ -539,6 +554,9 @@ class RecordContract extends Contract {
     if (request.status !== 'ready') {
       throw new Error(`full document is not ready (status: ${request.status})`);
     }
+    // The grant is re-checked at the moment of release, not only when the PDF was
+    // requested: a suspension, revocation or expiry in between blocks the download.
+    await this._requireGrantedDecision(ctx, request.recordId, request.decisionId);
     return JSON.stringify({
       requestId,
       recordId: request.recordId,

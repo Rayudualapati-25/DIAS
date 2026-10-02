@@ -48,7 +48,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M17 | Policy change stops reuse; reissue under the new policy | MISS | 8 | planned (step 8) |
 | M18 | Lifecycle events for recommendation commitment and agreement derivation | PART | 10 | planned (step 10) |
 | M19 | Off-chain objects verifiable against on-chain hashes | MISS | 9–11 | planned |
-| M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | planned |
+| M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | step 4 done (`diasRelease.test.js`); `v_P` in step 8 |
 | M21 | Trust model states the backend's role | TEXT/PART | 12 | planned (step 12 + text) |
 | M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | planned (step 10) |
 | M23 | No self-review | OK | 3 | done (step 3; `diasAuditorAuthority.test.js`) |
@@ -64,7 +64,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | I06 | Response schema check; failure is a status, not a DENY | OK | — | done (baseline) |
 | I07 | Review store tamper-evident and protected | PART | 9, 13 | planned |
 | I08 | No written-policy engine in the contract | OK | 14 | planned (guard kept) |
-| A01 | Final PDF download re-checks the grant | MISS | 4 | planned (step 4) |
+| A01 | Final PDF download re-checks the grant | MISS | 4 | done (step 4; `diasRelease.test.js`, `documentRelease.unit.test.js`) |
 | A02 | Record history, evidence and decision log restricted | MISS | 13 | planned (step 13) |
 | A03 | Explanation and off-chain object access defined and enforced | PART | 13 | planned (step 13) |
 | A04 | Off-chain review data encrypted | MISS | 13 | planned (step 13) |

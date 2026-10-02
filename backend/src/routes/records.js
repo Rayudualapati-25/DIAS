@@ -163,21 +163,36 @@ router.post('/document-requests/:requestId/upload',
     return ok(res, { ...request, sizeBytes: commitment.sizeBytes });
   }));
 
-/** Release PDF bytes only after Fabric re-checks the original requester identity. */
-router.get('/document-requests/:requestId/content', asyncRoute(async (req, res) => {
-  const authorization = await fabric.evaluate(
-    req.user.org, req.user.fabricUser, 'RecordContract', 'AuthorizeRequestedDocumentRead',
-    req.params.requestId);
-  const stored = vault.readDocument(authorization.offChainReference);
+/**
+ * Release PDF bytes. The ledger first re-checks the whole grant at this moment —
+ * requester identity and credential, the decision, and for a reused grant its
+ * dynamic authorization — and only then is the vault read; the bytes are still
+ * compared with the committed content hash before delivery.
+ */
+async function releaseDocument({ user, requestId, ledger = fabric, vault: store = vault }) {
+  if (!SAFE_ID.test(requestId || '')) return { status: 400, error: 'requestId has invalid format' };
+  const authorization = await ledger.evaluate(
+    user.org, user.fabricUser, 'RecordContract', 'AuthorizeRequestedDocumentRead', requestId);
+  const stored = store.readDocument(authorization.offChainReference);
   if (stored.currentHash !== authorization.contentHash) {
-    return fail(res, 'PDF integrity check failed', 409);
+    return { status: 409, error: 'PDF integrity check failed' };
   }
-  return res.status(200).set({
-    'Content-Type': 'application/pdf',
-    'Content-Disposition': `inline; filename="${authorization.fileName}"`,
-    'Cache-Control': 'private, no-store',
-    'X-Content-Type-Options': 'nosniff',
-  }).send(stored.bytes);
+  return {
+    status: 200,
+    bytes: stored.bytes,
+    headers: {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="${authorization.fileName}"`,
+      'Cache-Control': 'private, no-store',
+      'X-Content-Type-Options': 'nosniff',
+    },
+  };
+}
+
+router.get('/document-requests/:requestId/content', asyncRoute(async (req, res) => {
+  const released = await releaseDocument({ user: req.user, requestId: req.params.requestId });
+  if (released.error) return fail(res, released.error, released.status);
+  return res.status(200).set(released.headers).send(released.bytes);
 }));
 
 const documentRequestSchema = z.object({ decisionId: z.string().regex(SAFE_ID) });
@@ -295,3 +310,4 @@ router.post('/:recordId/unseal', requireRole('judge', 'magistrate'), asyncRoute(
 
 module.exports = router;
 module.exports.lookupRecord = lookupRecord;
+module.exports.releaseDocument = releaseDocument;
