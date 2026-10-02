@@ -1,25 +1,27 @@
 'use strict';
 
 /**
- * The verified context C a DIAS request is evaluated on (dias-verified-context-v3).
+ * HISTORICAL — the v1 verified request (dias-verified-request-v1).
  *
- * Built only from committed Fabric state — the certificate-bound UserProfile, the
- * case assignment, the record metadata — and the requester's committed action and
- * purpose. Nothing the requester merely asserts belongs here: a self-declared
- * emergency is a requester claim (./requesterClaims.js), and v1's
- * approvalTokenPresent, which no mechanism ever set, is gone.
+ * Kept byte-for-byte so that prompt v1, the published dataset
+ * (experiments/dias-finetuning/data-v2-binary) and the evaluation that produced
+ * the reported V7 numbers stay reproducible. The v3 contract does not use it:
+ * v1 placed the self-declared emergencyFlag and a constant approvalTokenPresent
+ * inside the verified request. See ./verifiedRequest.js for the v3 context.
  *
- * Identity and record identifiers are deliberately absent: they are bound through
- * the request record and the exact scope σ (design decision D-01).
+ * The verified request a DIAS recommendation is based on.
  *
- * h_C is the canonical digest of C in the `context` domain
- * (docs/design/dias-v3-ledger-schema.md §4). The v1 shape survives only in
- * ./verifiedRequestV1.js for the historical prompt and dataset.
+ * Built only from committed Fabric state (certificate-bound UserProfile, Case
+ * assignment, record metadata) and the requester's committed action and purpose.
+ * The recommendation assistant, the synthetic dataset, and the ledger hash all use
+ * this exact shape, so what the model sees is what the ledger commits to.
+ * Identity (username, enrollment ID) and record/request identifiers are
+ * deliberately absent: they are audit facts, not policy facts.
  */
 
-const { DOMAINS, hashCanonical } = require('./commitments');
+const { hashObject } = require('../util/validate');
 
-const VERIFIED_REQUEST_SCHEMA_VERSION = 'dias-verified-context-v3';
+const VERIFIED_REQUEST_SCHEMA_VERSION = 'dias-verified-request-v1';
 
 const VERIFIED_REQUEST_FIELDS = Object.freeze({
   requester: Object.freeze([
@@ -30,17 +32,18 @@ const VERIFIED_REQUEST_FIELDS = Object.freeze({
     'recordType', 'caseId', 'sensitivityLevel', 'jurisdiction', 'owningAgency',
     'owningStation', 'sealed', 'juvenileFlag', 'witnessFlag', 'victimProtectionFlag',
   ]),
-  request: Object.freeze(['action', 'purpose']),
+  request: Object.freeze(['action', 'purpose', 'emergencyFlag', 'approvalTokenPresent']),
 });
 
 const BOOLEAN_FIELDS = Object.freeze([
-  'assignedToRequestedCase', 'sealed', 'juvenileFlag', 'witnessFlag', 'victimProtectionFlag',
+  'assignedToRequestedCase', 'sealed', 'juvenileFlag', 'witnessFlag',
+  'victimProtectionFlag', 'emergencyFlag', 'approvalTokenPresent',
 ]);
 const NULLABLE_FIELDS = Object.freeze(['rank', 'station', 'owningAgency', 'owningStation']);
 
 const orNull = (value) => (value === undefined || value === '' ? null : value);
 
-/** Assemble C from governed ledger facts, in canonical key order. */
+/** Assemble the verified request from governed ledger facts, in canonical key order. */
 function buildVerifiedRequest({ subject, record, requestContext, assignedToRequestedCase }) {
   return {
     requester: {
@@ -69,6 +72,8 @@ function buildVerifiedRequest({ subject, record, requestContext, assignedToReque
     request: {
       action: requestContext.action,
       purpose: requestContext.purpose,
+      emergencyFlag: Boolean(requestContext.emergencyFlag),
+      approvalTokenPresent: Boolean(requestContext.approvalTokenPresent),
     },
   };
 }
@@ -93,7 +98,7 @@ function fieldProblems(group, value) {
   });
 }
 
-/** Problems with a verified context; an empty list means it is well formed. */
+/** Problems with a verified request; an empty list means it is well formed. */
 function validateVerifiedRequest(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     return ['verified request must be an object'];
@@ -112,9 +117,8 @@ function orderedVerifiedRequest(value) {
   ));
 }
 
-/** h_C. */
 function verifiedRequestHash(value) {
-  return hashCanonical(DOMAINS.CONTEXT, orderedVerifiedRequest(value));
+  return hashObject(orderedVerifiedRequest(value));
 }
 
 module.exports = {

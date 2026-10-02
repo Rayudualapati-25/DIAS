@@ -5,7 +5,13 @@ const { createPolicyContextProvider } = require('../src/dias/policyContextProvid
 const { createRecommender } = require('../src/dias/recommender');
 const { loadBundle } = require('../../policies/lib/bundle');
 const { evaluateReference } = require('../../policies/reference-oracle/referencePolicyOracle');
-const { validOutput, verifiedRequestFixture } = require('./fixtures/diasFixtures');
+const {
+  requesterClaimsFixture, validOutput, verifiedRequestFixture, verifiedRequestV1Fixture,
+} = require('./fixtures/diasFixtures');
+const { hashText, hashCanonical } = require('../../chaincode/crimerecords/lib/dias/commitments');
+const { verifiedRequestHash } = require('../../chaincode/crimerecords/lib/dias/verifiedRequest');
+const verifiedRequestV1 = require('../../chaincode/crimerecords/lib/dias/verifiedRequestV1');
+const { sha256 } = require('../../policies/lib/bundle');
 
 const MODEL = Object.freeze({
   url: 'http://127.0.0.1:9/v1',
@@ -35,7 +41,10 @@ describe('DIAS recommender', () => {
     policyContextProvider, model: MODEL, fetchImpl, options,
   });
   const input = (overrides, justification = 'Reviewing the FIR for the open investigation.') => ({
-    requestId: 'REQ-0001', verifiedRequest: verifiedRequestFixture(overrides), justification,
+    requestId: 'REQ-0001',
+    verifiedRequest: verifiedRequestFixture(overrides),
+    requesterClaims: requesterClaimsFixture(),
+    justification,
   });
 
   it('returns a schema-valid recommendation with application-generated provenance', async () => {
@@ -44,11 +53,13 @@ describe('DIAS recommender', () => {
     expect(result.recommendation.recommendation).to.equal('ALLOW');
     const { provenance } = result;
     expect(provenance.requestId).to.equal('REQ-0001');
-    expect(provenance.promptVersion).to.equal('dias-recommendation-prompt-v1');
+    expect(provenance.promptVersion).to.equal('dias-recommendation-prompt-v2');
     expect(provenance.responseSchemaVersion).to.equal('dias-recommendation-response-v1');
     expect(provenance.policyBundleHash).to.equal(loadBundle().bundleHash);
-    expect(provenance.verifiedRequestHash).to.match(/^[0-9a-f]{64}$/);
-    expect(provenance.justificationHash).to.match(/^[0-9a-f]{64}$/);
+    expect(provenance.verifiedRequestHash).to.equal(verifiedRequestHash(verifiedRequestFixture()));
+    expect(provenance.requesterClaimsHash).to.equal(hashCanonical('claims', { emergencyDeclared: false }));
+    expect(provenance.justificationHash)
+      .to.equal(hashText('justification', 'Reviewing the FIR for the open investigation.'));
     expect(provenance.rawOutputHash).to.match(/^[0-9a-f]{64}$/);
     expect(provenance.usage).to.deep.equal({ promptTokens: 900, completionTokens: 60 });
     expect(provenance.latencyMs).to.have.keys('contextAssembly', 'inference', 'validation', 'total');
@@ -114,5 +125,34 @@ describe('DIAS recommender', () => {
     expect(called).to.equal(false);
     const serverOverflow = await make(replyWith('prompt exceeds maximum context length', { status: 400 })).recommend(input());
     expect(serverOverflow.generationStatus).to.equal('CONTEXT_OVERFLOW');
+  });
+
+  it('evaluates with the historical v1 prompt and provenance when asked to', async () => {
+    let sentPrompt = null;
+    const capture = async (url, request) => {
+      sentPrompt = JSON.parse(request.body).messages;
+      return replyWith(JSON.stringify(validOutput()))();
+    };
+    const historical = createRecommender({
+      policyContextProvider, model: MODEL, fetchImpl: capture, prompt: 'v1',
+    });
+    const verifiedRequest = verifiedRequestV1Fixture();
+    const result = await historical.recommend({
+      requestId: 'EVAL-1', verifiedRequest, justification: 'Reviewing the FIR.',
+    });
+    expect(result.generationStatus).to.equal('OK');
+    expect(result.provenance.promptVersion).to.equal('dias-recommendation-prompt-v1');
+    expect(result.provenance.verifiedRequestHash).to.equal(verifiedRequestV1.verifiedRequestHash(verifiedRequest));
+    expect(result.provenance.justificationHash).to.equal(sha256('Reviewing the FIR.'));
+    expect(result.provenance).to.not.have.property('requesterClaimsHash');
+    expect(sentPrompt[1].content).to.not.include('REQUESTER CLAIMS');
+  });
+
+  it('refuses an unknown prompt version and a v2 call without valid claims', async () => {
+    expect(() => createRecommender({ policyContextProvider, model: MODEL, prompt: 'v3' }))
+      .to.throw(/prompt must be one of v1, v2/);
+    const recommender = make(replyWith(JSON.stringify(validOutput())));
+    await recommender.recommend({ ...input(), requesterClaims: undefined })
+      .then(() => expect.fail('expected a refusal'), (error) => expect(error.message).to.match(/requester claims are invalid/));
   });
 });

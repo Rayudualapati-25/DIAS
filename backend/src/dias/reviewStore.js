@@ -55,6 +55,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
       requesterUsername: request.requester.username,
       verifiedRequest: request.verifiedRequest,
       verifiedRequestHash: request.verifiedRequestHash,
+      requesterClaims: request.requesterClaims,
+      requesterClaimsHash: request.requesterClaimsHash,
       justification,
       recommendationState: RECOMMENDATION_STATE.PENDING,
       recommendation: null,

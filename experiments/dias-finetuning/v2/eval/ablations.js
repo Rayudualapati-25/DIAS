@@ -20,7 +20,7 @@
  */
 
 const {
-  buildRecommendationMessages,
+  buildRecommendationMessagesV1: buildRecommendationMessages,
 } = require('../../../../backend/src/dias/recommendationPrompt');
 
 /**

@@ -17,12 +17,51 @@ const {
 const {
   verifiedRequestHash,
 } = require('../../../chaincode/crimerecords/lib/dias/verifiedRequest');
-const { PROMPT_VERSION, buildRecommendationMessages } = require('./recommendationPrompt');
+const verifiedRequestV1 = require('../../../chaincode/crimerecords/lib/dias/verifiedRequestV1');
+const {
+  requesterClaimsHash, validateRequesterClaims,
+} = require('../../../chaincode/crimerecords/lib/dias/requesterClaims');
+const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
+const {
+  PROMPT_VERSION, PROMPT_VERSION_V1, buildRecommendationMessages, buildRecommendationMessagesV1,
+} = require('./recommendationPrompt');
 const { parseRecommendation } = require('./recommendationContract');
 const trace = require('../util/trace');
 
 const PROVENANCE_SCHEMA_VERSION = 'dias-recommendation-provenance-v1';
 const DEFAULTS = Object.freeze({ maxPromptChars: 24000, maxTokens: 256, timeoutMs: 60000 });
+
+/**
+ * v2 is the live prompt (verified context plus a separate claims block). v1 is
+ * kept only so the published dataset's evaluation can be reproduced exactly: its
+ * inputs are v1-shaped and its provenance hashes follow the v1 rules.
+ */
+const PROMPTS = Object.freeze({
+  v2: Object.freeze({
+    version: PROMPT_VERSION,
+    build: ({ verifiedRequest, requesterClaims, policyContext, justification }) => (
+      buildRecommendationMessages({ verifiedRequest, requesterClaims, policyContext, justification })),
+    inputProvenance: ({ verifiedRequest, requesterClaims, justification }) => ({
+      verifiedRequestHash: verifiedRequestHash(verifiedRequest),
+      requesterClaimsHash: requesterClaimsHash(requesterClaims),
+      justificationHash: hashText(DOMAINS.JUSTIFICATION, String(justification ?? '')),
+    }),
+    checkInput: ({ requesterClaims }) => {
+      const problems = validateRequesterClaims(requesterClaims);
+      if (problems.length > 0) throw new Error(`requester claims are invalid: ${problems.join('; ')}`);
+    },
+  }),
+  v1: Object.freeze({
+    version: PROMPT_VERSION_V1,
+    build: ({ verifiedRequest, policyContext, justification }) => (
+      buildRecommendationMessagesV1({ verifiedRequest, policyContext, justification })),
+    inputProvenance: ({ verifiedRequest, justification }) => ({
+      verifiedRequestHash: verifiedRequestV1.verifiedRequestHash(verifiedRequest),
+      justificationHash: sha256(String(justification ?? '')),
+    }),
+    checkInput: () => {},
+  }),
+});
 const CONTEXT_OVERFLOW_PATTERN = /context|too long|maximum.*length|exceed/i;
 const MAX_ERROR_DETAIL = 300;
 
@@ -49,10 +88,15 @@ function createRecommender({
   now = () => new Date(),
   clock = () => performance.now(),
   options = {},
+  prompt = 'v2',
 }) {
   if (!policyContextProvider || !model || !model.url) {
     throw new Error('recommender requires a policy context provider and a model endpoint');
   }
+  if (!Object.prototype.hasOwnProperty.call(PROMPTS, prompt)) {
+    throw new Error(`prompt must be one of ${Object.keys(PROMPTS).sort().join(', ')}`);
+  }
+  const promptVersion = PROMPTS[prompt];
   const settings = { ...DEFAULTS, ...options };
 
   async function callModel(messages) {
@@ -75,16 +119,17 @@ function createRecommender({
     return { ok: response.ok, status: response.status, text };
   }
 
-  async function recommend({ requestId, verifiedRequest, justification }) {
+  async function recommend({ requestId, verifiedRequest, requesterClaims, justification }) {
     const startedAt = clock();
+    const input = { verifiedRequest, requesterClaims, justification };
+    promptVersion.checkInput(input);
     const provenance = {
       schemaVersion: PROVENANCE_SCHEMA_VERSION,
       requestId,
       ...modelProvenance(model),
-      promptVersion: PROMPT_VERSION,
+      promptVersion: promptVersion.version,
       responseSchemaVersion: RESPONSE_SCHEMA_VERSION,
-      verifiedRequestHash: verifiedRequestHash(verifiedRequest),
-      justificationHash: sha256(String(justification ?? '')),
+      ...promptVersion.inputProvenance(input),
       decoding: { temperature: 0, topP: 1, maxTokens: settings.maxTokens },
       inferenceStartedAtUtc: now().toISOString(),
     };
@@ -115,7 +160,7 @@ function createRecommender({
       policyBundleHash: policyContext.bundleHash,
       policyContextHash: policyContext.contextHash,
     };
-    const messages = buildRecommendationMessages({ verifiedRequest, policyContext, justification });
+    const messages = promptVersion.build({ ...input, policyContext });
     const promptChars = messages.reduce((total, message) => total + message.content.length, 0);
     const promptProvenance = { ...policyProvenance, promptHash: hashObject(messages), promptChars };
     const contextAssembly = round(contextReady - startedAt);
@@ -200,8 +245,8 @@ function createRecommender({
    * produces and no caller ever assembles provenance of its own.
    */
   function unavailable({
-    requestId, verifiedRequestHash: committedRequestHash, justificationHash,
-    generationStatus, errorCode, errorDetail,
+    requestId, verifiedRequestHash: committedRequestHash, requesterClaimsHash: committedClaimsHash = null,
+    justificationHash, generationStatus, errorCode, errorDetail,
   }) {
     const startedAt = clock();
     const startedAtUtc = now().toISOString();
@@ -212,9 +257,10 @@ function createRecommender({
         schemaVersion: PROVENANCE_SCHEMA_VERSION,
         requestId,
         ...modelProvenance(model),
-        promptVersion: PROMPT_VERSION,
+        promptVersion: promptVersion.version,
         responseSchemaVersion: RESPONSE_SCHEMA_VERSION,
         verifiedRequestHash: committedRequestHash,
+        ...(prompt === 'v2' ? { requesterClaimsHash: committedClaimsHash } : {}),
         justificationHash,
         decoding: { temperature: 0, topP: 1, maxTokens: settings.maxTokens },
         inferenceStartedAtUtc: startedAtUtc,

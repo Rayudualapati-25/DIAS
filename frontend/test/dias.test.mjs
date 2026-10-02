@@ -121,8 +121,9 @@ test('builds an auditor summary from the verified request, not from the justific
           owningAgency: 'police', owningStation: 'PS-Central',
           sealed: false, juvenileFlag: false, witnessFlag: false, victimProtectionFlag: false,
         },
-        request: { action: 'view', purpose: 'investigation', emergencyFlag: false },
+        request: { action: 'view', purpose: 'investigation' },
       },
+      requesterClaims: { emergencyDeclared: true },
     },
     recommendation: {
       ...denyRecommendation,
@@ -143,6 +144,9 @@ test('builds an auditor summary from the verified request, not from the justific
   assert.equal(summary.purpose, 'investigation');
   assert.equal(summary.recommendation.recommendation, 'DENY');
   assert.equal(summary.recommendation.advisory, true);
+  // A declared emergency is shown as the requester's claim, kept apart from the facts.
+  assert.equal(summary.emergencyDeclared, true);
+  assert.equal('emergencyFlag' in summary, false);
 });
 
 test('accepts only the auditable deny-to-force-allow authorization origin', () => {

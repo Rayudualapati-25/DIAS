@@ -9,6 +9,10 @@
  *     --url http://127.0.0.1:8081/v1 \
  *     --out experiments/runs/20260912_dias_qwen3_baseline
  *
+ * --prompt v1 (default) reproduces the published evaluation; --prompt v2 runs the
+ * v3 live prompt over the same cases through runner.v3InputsFor.
+ * --help prints this text and exits without contacting the model server.
+ *
  * Raw predictions are written per set so any metric can be recomputed without
  * rerunning inference, which is the expensive part.
  */
@@ -43,8 +47,19 @@ function parseArgs(argv) {
   return args;
 }
 
+const USAGE = `usage: evaluate.js --label NAME --url URL --out DIR [--prompt v1|v2] [--sets a,b]
+  [--limit N] [--max-tokens N] [--served-model NAME] [--adapter-path PATH] [--model-id ID]
+  [--adapter-id ID] [--adapter-hash SHA256] [--timeout MS] [--skip-existing]
+Runs a full model evaluation: hours of inference against the model server.`;
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args.help || args.h) {
+    process.stdout.write(`${USAGE}\n`);
+    return;
+  }
+  const prompt = args.prompt || 'v1';
+  if (!['v1', 'v2'].includes(prompt)) throw new Error('--prompt must be v1 or v2');
   const label = args.label || 'unnamed-model';
   const outDir = path.resolve(args.out || path.join('experiments', 'runs', `eval-${label}`));
   const datasetDir = args.dataset ? path.resolve(args.dataset) : DATASET;
@@ -65,6 +80,7 @@ async function main() {
     modelIdentity,
     maxTokens,
     timeoutMs: Number(args.timeout || 180000),
+    prompt,
   });
 
   fs.mkdirSync(path.join(outDir, 'predictions'), { recursive: true });
@@ -76,6 +92,7 @@ async function main() {
     adapterPath: args['adapter-path'] || null,
     maxTokens,
     datasetDir,
+    prompt,
   });
 
   const metrics = {};
@@ -102,6 +119,7 @@ async function main() {
       results = await evaluateSet({
         recommender,
         cases,
+        prompt,
         onProgress: (done, total) => process.stdout.write(`  ${done}/${total}\r`),
       });
       fs.writeFileSync(predictionsFile, `${results.map((r) => JSON.stringify(r)).join('\n')}\n`);

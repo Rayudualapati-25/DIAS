@@ -44,8 +44,11 @@ const {
 const {
   VERIFIED_REQUEST_SCHEMA_VERSION, buildVerifiedRequest, verifiedRequestHash,
 } = require('./dias/verifiedRequest');
+const {
+  REQUESTER_CLAIMS_SCHEMA_VERSION, buildRequesterClaims, requesterClaimsHash,
+} = require('./dias/requesterClaims');
 
-const REQUEST_SCHEMA_VERSION = 'dias-access-request-v2';
+const REQUEST_SCHEMA_VERSION = 'dias-access-request-v3';
 const AUDITOR_DECISION_SCHEMA_VERSION = 'dias-auditor-decision-v2';
 const OUTCOME_SCHEMA_VERSION = 'dias-access-outcome-v1';
 
@@ -75,10 +78,15 @@ const ORG_TO_MSP = Object.freeze({
   audit: MSP.AUDIT,
 });
 
+/**
+ * The requester's input. `action` and `purpose` are what is being asked for and
+ * enter the verified context; `emergencyDeclared` is the requester's own
+ * statement and is recorded as a claim, outside it (plan step 5).
+ */
 const REQUEST_INPUT_SCHEMA = Object.freeze({
   action: { type: 'string', required: true, enum: [...ACTIONS] },
   purpose: { type: 'string', required: true, enum: [...PURPOSES] },
-  emergencyFlag: { type: 'boolean', required: false, default: false },
+  emergencyDeclared: { type: 'boolean', required: false, default: false },
 });
 
 const shortTxId = (ctx) => ctx.stub.getTxID().slice(0, 16);
@@ -227,7 +235,10 @@ class AccessContract extends Contract {
     const verifiedRequest = buildVerifiedRequest({
       subject: subjectFromProfile(request.requester.mspId, profile, credentialStatus),
       record,
-      requestContext: request.verifiedRequest.request,
+      requestContext: {
+        action: request.verifiedRequest.request.action,
+        purpose: request.verifiedRequest.request.purpose,
+      },
       assignedToRequestedCase: assigned,
     });
     return { verifiedRequest, verifiedRequestHash: verifiedRequestHash(verifiedRequest) };
@@ -341,15 +352,11 @@ class AccessContract extends Contract {
     const verifiedRequest = buildVerifiedRequest({
       subject: subjectFromProfile(caller.mspId, profile, credentialStatus),
       record,
-      requestContext: {
-        action: input.action,
-        purpose: input.purpose,
-        emergencyFlag: input.emergencyFlag === true,
-        approvalTokenPresent: false,
-      },
+      requestContext: { action: input.action, purpose: input.purpose },
       assignedToRequestedCase: assigned,
     });
     const verifiedHash = verifiedRequestHash(verifiedRequest);
+    const requesterClaims = buildRequesterClaims({ emergencyDeclared: input.emergencyDeclared });
     const txId = ctx.stub.getTxID();
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
     const requestId = `REQ-${shortTxId(ctx)}`;
@@ -404,6 +411,9 @@ class AccessContract extends Contract {
       verifiedRequestSchemaVersion: VERIFIED_REQUEST_SCHEMA_VERSION,
       verifiedRequest,
       verifiedRequestHash: verifiedHash,
+      requesterClaimsSchemaVersion: REQUESTER_CLAIMS_SCHEMA_VERSION,
+      requesterClaims,
+      requesterClaimsHash: requesterClaimsHash(requesterClaims),
       committedCertificateCredentialStatus: caller.credentialStatus,
       authorizationScope: scope,
       authorizationScopeHash: scopeHash,

@@ -16,18 +16,24 @@ const {
   LLM_AGREEMENT, createsAuthorization, llmAgreementFor, requiresAuditorReason,
 } = require('../src/dias/agreement');
 const { verifiedRequestHash } = require('../../chaincode/crimerecords/lib/dias/verifiedRequest');
-const { validOutput, verifiedRequestFixture } = require('./fixtures/diasFixtures');
+const { requesterClaimsHash } = require('../../chaincode/crimerecords/lib/dias/requesterClaims');
+const {
+  requesterClaimsFixture, validOutput, verifiedRequestFixture,
+} = require('./fixtures/diasFixtures');
 
 const silent = Object.freeze({ log: () => {}, error: () => {} });
 
 function committed(requestId, overrides = {}) {
   const verifiedRequest = verifiedRequestFixture();
+  const requesterClaims = requesterClaimsFixture({ emergencyDeclared: true });
   return {
     requestId,
     recordId: 'FIR-1',
     requester: { username: 'insp.test' },
     verifiedRequest,
     verifiedRequestHash: verifiedRequestHash(verifiedRequest),
+    requesterClaims,
+    requesterClaimsHash: requesterClaimsHash(requesterClaims),
     ...overrides,
   };
 }
@@ -165,6 +171,35 @@ describe('DIAS backend recommendation path', () => {
       await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-4');
       expect(prompted).to.equal(false);
       expect(store.read('REQ-4').recommendation.errorCode).to.equal('verified_request_hash_mismatch');
+    });
+
+    it('never prompts the LLM with claims that do not match the committed claims hash', async () => {
+      store.create({ request: committed('REQ-6', { requesterClaimsHash: '1'.repeat(64) }), justification: 'why' });
+      let prompted = false;
+      const recommender = {
+        recommend: async () => { prompted = true; return okResult(); },
+        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
+      };
+      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-6');
+      expect(prompted).to.equal(false);
+      expect(store.read('REQ-6').recommendation.errorCode).to.equal('requester_claims_hash_mismatch');
+    });
+
+    it('gives the model the committed facts, the claims and the justification, separately', async () => {
+      store.create({ request: committed('REQ-7'), justification: 'Reviewing the FIR.' });
+      let received = null;
+      const recommender = {
+        recommend: async (input) => { received = input; return okResult(); },
+        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
+      };
+      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-7');
+      expect(received).to.deep.equal({
+        requestId: 'REQ-7',
+        verifiedRequest: verifiedRequestFixture(),
+        requesterClaims: { emergencyDeclared: true },
+        justification: 'Reviewing the FIR.',
+      });
+      expect(store.read('REQ-7').requesterClaims).to.deep.equal({ emergencyDeclared: true });
     });
 
     it('records an unexpected error instead of leaving the auditor waiting', async () => {

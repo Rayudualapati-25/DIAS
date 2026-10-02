@@ -2,9 +2,14 @@
 
 const { expect } = require('chai');
 const {
-  VERIFIED_REQUEST_FIELDS, buildVerifiedRequest, orderedVerifiedRequest,
+  VERIFIED_REQUEST_FIELDS, VERIFIED_REQUEST_SCHEMA_VERSION, buildVerifiedRequest, orderedVerifiedRequest,
   validateVerifiedRequest, verifiedRequestHash,
 } = require('../lib/dias/verifiedRequest');
+const verifiedRequestV1 = require('../lib/dias/verifiedRequestV1');
+const {
+  REQUESTER_CLAIMS_SCHEMA_VERSION, buildRequesterClaims, requesterClaimsHash, validateRequesterClaims,
+} = require('../lib/dias/requesterClaims');
+const { hashCanonical } = require('../lib/dias/commitments');
 const {
   FAILURE_STATUSES, normalizeRecommendation, validateRecommendationOutput,
 } = require('../lib/dias/recommendationSchema');
@@ -48,7 +53,11 @@ describe('DIAS verified request', () => {
     expect(value.requester.assignedToRequestedCase).to.equal(true);
     expect(value.resource.sealed).to.equal(false);
     expect(value.resource.witnessFlag).to.equal(true);
-    expect(value.request.emergencyFlag).to.equal(false);
+    // v3: the request part holds only what the requester asked for. A
+    // self-declared emergency is a claim, kept outside the verified context, and
+    // the approval flag no mechanism ever set is gone (plan step 5).
+    expect(value.request).to.deep.equal({ action: 'view', purpose: 'investigation' });
+    expect(VERIFIED_REQUEST_SCHEMA_VERSION).to.equal('dias-verified-context-v3');
     for (const [group, fields] of Object.entries(VERIFIED_REQUEST_FIELDS)) {
       expect(Object.keys(value[group])).to.deep.equal([...fields]);
     }
@@ -77,6 +86,61 @@ describe('DIAS verified request', () => {
     };
     expect(verifiedRequestHash(reordered)).to.equal(verifiedRequestHash(value));
     expect(Object.keys(orderedVerifiedRequest(reordered))).to.deep.equal(['requester', 'resource', 'request']);
+  });
+
+  it('hashes the ordered context in the context domain', () => {
+    const value = verified();
+    expect(verifiedRequestHash(value)).to.equal(hashCanonical('context', orderedVerifiedRequest(value)));
+  });
+
+  it('never carries a requester claim, even when one is passed in', () => {
+    const value = buildVerifiedRequest({
+      subject: verified().requester,
+      record: { ...verified().resource },
+      requestContext: { action: 'view', purpose: 'investigation', emergencyFlag: true, approvalTokenPresent: true },
+      assignedToRequestedCase: true,
+    });
+    expect(value.request).to.deep.equal({ action: 'view', purpose: 'investigation' });
+    const smuggled = verified();
+    smuggled.request.emergencyFlag = true;
+    expect(validateVerifiedRequest(smuggled)[0]).to.match(/request must contain exactly action, purpose/);
+  });
+});
+
+describe('DIAS requester claims', () => {
+  it('records the self-declared emergency as a claim with its own digest', () => {
+    const claims = buildRequesterClaims({ emergencyDeclared: true });
+    expect(claims).to.deep.equal({ emergencyDeclared: true });
+    expect(REQUESTER_CLAIMS_SCHEMA_VERSION).to.equal('dias-requester-claims-v1');
+    expect(validateRequesterClaims(claims)).to.deep.equal([]);
+    expect(requesterClaimsHash(claims)).to.equal(hashCanonical('claims', { emergencyDeclared: true }));
+    expect(requesterClaimsHash(buildRequesterClaims({}))).to.not.equal(requesterClaimsHash(claims));
+  });
+
+  it('defaults to no emergency and rejects anything but a boolean or extra fields', () => {
+    expect(buildRequesterClaims({})).to.deep.equal({ emergencyDeclared: false });
+    expect(validateRequesterClaims({ emergencyDeclared: 'yes' })).to.deep.equal(['claims.emergencyDeclared must be a boolean']);
+    expect(validateRequesterClaims({ emergencyDeclared: false, approvalTokenPresent: true })[0])
+      .to.match(/claims must contain exactly emergencyDeclared/);
+    expect(validateRequesterClaims(null)).to.deep.equal(['claims must be an object']);
+  });
+});
+
+describe('DIAS verified request v1 (historical, prompt v1 and the published dataset)', () => {
+  it('keeps the v1 shape with both flags inside the request group, unchanged', () => {
+    expect(verifiedRequestV1.VERIFIED_REQUEST_SCHEMA_VERSION).to.equal('dias-verified-request-v1');
+    expect([...verifiedRequestV1.VERIFIED_REQUEST_FIELDS.request])
+      .to.deep.equal(['action', 'purpose', 'emergencyFlag', 'approvalTokenPresent']);
+    const value = verifiedRequestV1.buildVerifiedRequest({
+      subject: verified().requester,
+      record: { ...verified().resource },
+      requestContext: { action: 'view', purpose: 'investigation', emergencyFlag: true },
+      assignedToRequestedCase: true,
+    });
+    expect(verifiedRequestV1.validateVerifiedRequest(value)).to.deep.equal([]);
+    expect(value.request).to.deep.equal({
+      action: 'view', purpose: 'investigation', emergencyFlag: true, approvalTokenPresent: false,
+    });
   });
 });
 

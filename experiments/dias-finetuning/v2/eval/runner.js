@@ -19,7 +19,17 @@ const path = require('path');
 
 const { createPolicyContextProvider } = require('../../../../backend/src/dias/policyContextProvider');
 const { createRecommender } = require('../../../../backend/src/dias/recommender');
-const { PROMPT_VERSION } = require('../../../../backend/src/dias/recommendationPrompt');
+const {
+  PROMPT_VERSION, PROMPT_VERSION_V1,
+} = require('../../../../backend/src/dias/recommendationPrompt');
+
+/**
+ * v1 reproduces the published evaluation exactly. v2 is the v3 live prompt; its
+ * cases go through v3InputsFor, because the dataset was built under the v1 schema.
+ */
+const PROMPT_VERSIONS = Object.freeze({ v1: PROMPT_VERSION_V1, v2: PROMPT_VERSION });
+const V2_INPUT_ADAPTER = 'v1 case -> v3 verified context (action, purpose) + requester claims '
+  + '(emergencyDeclared = emergencyFlag); approvalTokenPresent dropped';
 const {
   RESPONSE_SCHEMA_VERSION,
 } = require('../../../../chaincode/crimerecords/lib/dias/recommendationSchema');
@@ -42,23 +52,40 @@ function readCases(datasetDir, name) {
  * is off-chain, so nothing verifies it. It is recorded verbatim in the results
  * so a number can always be traced to the weights that produced it.
  */
-function createEvaluationRecommender({ url, servedModel, adapterPath, modelIdentity, maxTokens, timeoutMs }) {
+function createEvaluationRecommender({
+  url, servedModel, adapterPath, modelIdentity, maxTokens, timeoutMs, prompt = 'v1',
+}) {
   return createRecommender({
     policyContextProvider: createPolicyContextProvider({}),
     model: { ...modelIdentity, url, servedModel, adapterPath: adapterPath || null },
     options: { maxTokens, timeoutMs, maxPromptChars: 32000 },
+    prompt,
   });
 }
 
+/** The v3 inputs for a dataset case built under the v1 schema (plan step 5). */
+function v3InputsFor(example) {
+  const { requester, resource, request } = example.verifiedRequest;
+  return {
+    verifiedRequest: {
+      requester: { ...requester },
+      resource: { ...resource },
+      request: { action: request.action, purpose: request.purpose },
+    },
+    requesterClaims: { emergencyDeclared: request.emergencyFlag === true },
+  };
+}
+
 /** Run one set. Progress is reported so a long run is not a silent one. */
-async function evaluateSet({ recommender, cases, onProgress }) {
+async function evaluateSet({ recommender, cases, onProgress, prompt = 'v1' }) {
   const results = [];
   for (let i = 0; i < cases.length; i += 1) {
     const example = cases[i];
     const started = performance.now();
+    const inputs = prompt === 'v2' ? v3InputsFor(example) : { verifiedRequest: example.verifiedRequest };
     const outcome = await recommender.recommend({
       requestId: `EVAL-${example.exampleId}`,
-      verifiedRequest: example.verifiedRequest,
+      ...inputs,
       justification: example.justification,
     });
     results.push({
@@ -82,14 +109,17 @@ async function evaluateSet({ recommender, cases, onProgress }) {
 }
 
 /** Descriptive facts about the run, recorded alongside every number. */
-function runDescriptor({ label, modelIdentity, url, servedModel, adapterPath, maxTokens, datasetDir }) {
+function runDescriptor({
+  label, modelIdentity, url, servedModel, adapterPath, maxTokens, datasetDir, prompt = 'v1',
+}) {
   const { bundle, bundleHash } = loadBundle();
   return {
     label,
     evaluatedAtUtc: new Date().toISOString(),
     model: { ...modelIdentity, servedModel, url, adapterPath: adapterPath || null },
     decoding: { temperature: 0, topP: 1, maxTokens, thinking: 'disabled' },
-    promptVersion: PROMPT_VERSION,
+    promptVersion: PROMPT_VERSIONS[prompt],
+    inputAdapter: prompt === 'v2' ? V2_INPUT_ADAPTER : null,
     responseSchemaVersion: RESPONSE_SCHEMA_VERSION,
     policyBundle: { bundleId: bundle.bundleId, version: bundle.version, bundleHash },
     dataset: path.relative(process.cwd(), datasetDir),
@@ -97,4 +127,7 @@ function runDescriptor({ label, modelIdentity, url, servedModel, adapterPath, ma
   };
 }
 
-module.exports = { DEFAULT_SETS, createEvaluationRecommender, evaluateSet, readCases, runDescriptor };
+module.exports = {
+  DEFAULT_SETS, PROMPT_VERSIONS, createEvaluationRecommender, evaluateSet, readCases, runDescriptor,
+  v3InputsFor,
+};

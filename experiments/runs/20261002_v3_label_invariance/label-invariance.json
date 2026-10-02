@@ -1,0 +1,86 @@
+{
+  "experiment": "v3-label-invariance",
+  "kind": "offline deterministic check (reference oracle; no model, no ledger)",
+  "policy": {
+    "bundleId": "dias-governance-policy",
+    "version": "v1",
+    "bundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0"
+  },
+  "question": "Does removing emergencyFlag and approvalTokenPresent from the verified facts change any policy label?",
+  "perSet": {
+    "test-adversarial": {
+      "cases": 389,
+      "identical": 389,
+      "changed": 0,
+      "labelReproduced": 389,
+      "emergencyFlagTrue": 113,
+      "approvalTokenTrue": 125
+    },
+    "test-decision-balanced": {
+      "cases": 600,
+      "identical": 600,
+      "changed": 0,
+      "labelReproduced": 600,
+      "emergencyFlagTrue": 163,
+      "approvalTokenTrue": 143
+    },
+    "test-multi-rule": {
+      "cases": 370,
+      "identical": 370,
+      "changed": 0,
+      "labelReproduced": 370,
+      "emergencyFlagTrue": 92,
+      "approvalTokenTrue": 99
+    },
+    "test-ood-paraphrase": {
+      "cases": 400,
+      "identical": 400,
+      "changed": 0,
+      "labelReproduced": 400,
+      "emergencyFlagTrue": 110,
+      "approvalTokenTrue": 90
+    },
+    "test-reason-balanced": {
+      "cases": 540,
+      "identical": 540,
+      "changed": 0,
+      "labelReproduced": 540,
+      "emergencyFlagTrue": 139,
+      "approvalTokenTrue": 130
+    },
+    "train": {
+      "cases": 5254,
+      "identical": 5254,
+      "changed": 0,
+      "labelReproduced": 5254,
+      "emergencyFlagTrue": 1316,
+      "approvalTokenTrue": 1329
+    },
+    "validation-balanced": {
+      "cases": 400,
+      "identical": 400,
+      "changed": 0,
+      "labelReproduced": 400,
+      "emergencyFlagTrue": 92,
+      "approvalTokenTrue": 105
+    },
+    "workflow-evaluation": {
+      "cases": 60,
+      "identical": 60,
+      "changed": 0,
+      "labelReproduced": 60,
+      "emergencyFlagTrue": 15,
+      "approvalTokenTrue": 16
+    }
+  },
+  "totals": {
+    "cases": 8013,
+    "identical": 8013,
+    "changed": 0,
+    "labelReproduced": 8013,
+    "emergencyFlagTrue": 2040,
+    "approvalTokenTrue": 2037
+  },
+  "differences": [],
+  "node": "v22.20.0"
+}

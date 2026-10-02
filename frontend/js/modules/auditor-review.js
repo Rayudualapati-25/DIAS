@@ -82,7 +82,8 @@ function requestTable(item) {
   return detailTable([
     ['Action', show(item.action)],
     ['Purpose', show(item.purpose)],
-    ['Emergency flag asserted', yesNo(item.emergencyFlag)],
+    ['Emergency declared (requester claim, not verified)',
+      item.emergencyDeclared === null ? '—' : yesNo(item.emergencyDeclared)],
     ['Submitted', dateTime(item.submittedAtUtc)],
   ]);
 }

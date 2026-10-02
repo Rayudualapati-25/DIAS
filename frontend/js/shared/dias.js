@@ -242,7 +242,9 @@ export function reviewSummary(review) {
     victimProtectionFlag: resource.victimProtectionFlag,
     action: asked.action ?? request.action,
     purpose: asked.purpose ?? request.purpose,
-    emergencyFlag: asked.emergencyFlag,
+    // The requester's own statement, committed as a claim outside the verified
+    // context (v3); null on a request that carries no claims record.
+    emergencyDeclared: request.requesterClaims ? request.requesterClaims.emergencyDeclared : null,
     justification: review?.justification ?? null,
     llmReason: recommendation.reason ?? null,
     recommendationState: review?.recommendationState ?? 'not-generated',

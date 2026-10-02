@@ -6,6 +6,7 @@ const { expect } = chai;
 
 const { CALLERS } = require('./testHelpers');
 const { createDiasWorld } = require('./diasTestWorld');
+const { hashCanonical } = require('../lib/dias/commitments');
 
 const INSPECTOR = CALLERS.inspector;
 const FORMER_AI_IDENTITY = Object.freeze({
@@ -24,18 +25,28 @@ describe('DIAS access workflow safeguards', () => {
   });
 
   describe('request submission', () => {
-    it('commits the structured action and purpose and keeps identity out of the verified request', async () => {
+    it('commits the structured action and purpose and keeps identity out of the verified context', async () => {
       const { result } = await world.submit(INSPECTOR, {
-        action: 'export', purpose: 'prosecution', emergencyFlag: true,
+        action: 'export', purpose: 'prosecution', emergencyDeclared: true,
       });
-      expect(result.verifiedRequest.request).to.deep.equal({
-        action: 'export', purpose: 'prosecution', emergencyFlag: true, approvalTokenPresent: false,
-      });
+      // v3 (plan step 5): the self-declared emergency is a requester claim with
+      // its own digest, outside the verified context; there is no approval flag.
+      expect(result.verifiedRequest.request).to.deep.equal({ action: 'export', purpose: 'prosecution' });
+      expect(result.verifiedRequestSchemaVersion).to.equal('dias-verified-context-v3');
+      expect(result.requesterClaims).to.deep.equal({ emergencyDeclared: true });
+      expect(result.requesterClaimsHash).to.equal(hashCanonical('claims', { emergencyDeclared: true }));
+      expect(result.verifiedRequestHash)
+        .to.equal(hashCanonical('context', result.verifiedRequest));
       expect(result.verifiedRequest.requester).to.not.have.any.keys('username', 'enrollmentId');
       expect(result.requester).to.include({
         username: 'insp.test', stableUserId: 'PoliceMSP::insp.test', organization: 'police',
       });
-      expect(result).to.not.have.any.keys('justificationHash', 'justificationStorage', 'policyBundleAtSubmission');
+    });
+
+    it('refuses the retired v2 emergencyFlag input instead of reading it as a fact', async () => {
+      await expect(world.run(INSPECTOR, 'TX-OLDFLAG', (ctx) => world.contracts.access.CreateAccessRequest(
+        ctx, 'FIR-1', JSON.stringify({ action: 'view', purpose: 'investigation', emergencyFlag: true })
+      ))).to.be.rejectedWith(/unknown fields not permitted: emergencyFlag/);
     });
 
     it('rejects invalid request fields', async () => {

@@ -30,7 +30,8 @@ const path = require('path');
 
 const { loadBundle } = require('../../../policies/lib/bundle');
 const { createPolicyContextProvider } = require('../../../backend/src/dias/policyContextProvider');
-const { PROMPT_VERSION } = require('../../../backend/src/dias/recommendationPrompt');
+// The published dataset is defined by the frozen prompt v1.
+const { PROMPT_VERSION_V1: PROMPT_VERSION } = require('../../../backend/src/dias/recommendationPrompt');
 const {
   RESPONSE_SCHEMA_VERSION,
 } = require('../../../chaincode/crimerecords/lib/dias/recommendationSchema');

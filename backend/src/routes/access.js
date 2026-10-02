@@ -117,27 +117,44 @@ function openReview({ request, justification, store, worker, log = console }) {
 
 /**
  * `action` and `purpose` are canonical request facts: the chaincode validates
- * them against the policy vocabulary and commits them with the request.
- * `justification` is the requester's own free text; it stays in this backend,
- * goes to the LLM, and is shown to the auditor, but it is never written to the
- * ledger.
+ * them against the policy vocabulary and commits them in the verified context.
+ * `emergencyDeclared` is the requester's own statement and is committed as a
+ * claim, outside the verified context (plan step 5). `justification` is the
+ * requester's free text; it stays in this backend, goes to the LLM, and is shown
+ * to the auditor, but it is never written to the ledger.
  */
 const requestSchema = z.object({
   recordId: z.string().regex(SAFE_ID),
   action: z.enum(ACTIONS),
   purpose: z.enum(PURPOSES),
   justification: z.string().min(3).max(2000),
-  emergencyFlag: z.boolean().optional(),
+  emergencyDeclared: z.boolean().optional(),
 });
 
-router.post('/request', asyncRoute(async (req, res) => {
-  const parsed = requestSchema.safeParse(req.body);
-  if (!parsed.success) return fail(res, parsed.error.issues[0].message);
-  const { recordId, justification, action, purpose, emergencyFlag } = parsed.data;
+/** The validated request, split into what the contract receives and what stays here. */
+function parseAccessRequest(body) {
+  if (body && Object.prototype.hasOwnProperty.call(body, 'emergencyFlag')) {
+    return {
+      error: 'emergencyFlag was replaced by emergencyDeclared: it is the requester\'s claim, '
+        + 'not a verified fact',
+    };
+  }
+  const parsed = requestSchema.safeParse(body);
+  if (!parsed.success) return { error: parsed.error.issues[0].message };
+  const { recordId, justification, action, purpose, emergencyDeclared } = parsed.data;
+  return {
+    recordId,
+    justification,
+    contractInput: { action, purpose, emergencyDeclared: emergencyDeclared === true },
+  };
+}
 
-  const request = await submitAccessRequest(req.user, [
-    recordId, JSON.stringify({ action, purpose, emergencyFlag: emergencyFlag === true }),
-  ]);
+router.post('/request', asyncRoute(async (req, res) => {
+  const parsed = parseAccessRequest(req.body);
+  if (parsed.error) return fail(res, parsed.error);
+  const { recordId, justification, contractInput } = parsed;
+
+  const request = await submitAccessRequest(req.user, [recordId, JSON.stringify(contractInput)]);
 
   // The application access event is submitted after the HTTP response. Pass
   // the Fabric-generated identifier to that logger so an auditor can correlate
@@ -366,6 +383,7 @@ router.post('/dynamic-authorizations/:authorizationId/revoke', requireRole(...AU
 module.exports = router;
 module.exports.AUDITOR_ROLES = AUDITOR_ROLES;
 module.exports.requestSchema = requestSchema;
+module.exports.parseAccessRequest = parseAccessRequest;
 module.exports.decide = decide;
 module.exports.openReview = openReview;
 module.exports.reviewView = reviewView;

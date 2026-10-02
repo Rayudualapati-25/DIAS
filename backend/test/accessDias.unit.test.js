@@ -84,11 +84,36 @@ describe('DIAS access routes', () => {
         },
       };
       await accessRouter.submitAccessRequest(
-        requester, ['FIR-1', '{"action":"view","purpose":"investigation","emergencyFlag":false}'], { ledger }
+        requester, ['FIR-1', '{"action":"view","purpose":"investigation","emergencyDeclared":false}'], { ledger }
       );
       expect(captured.slice(0, 4)).to.deep.equal(['police', 'insp.test', 'AccessContract', 'CreateAccessRequest']);
       expect(captured).to.have.length(6);
       expect(captured.join(' ')).to.not.match(/justification/i);
+    });
+
+    it('sends the emergency as a requester claim, never as a verified fact', () => {
+      const parsed = accessRouter.parseAccessRequest({
+        recordId: 'FIR-1', action: 'view', purpose: 'investigation',
+        justification: 'Urgent: suspect may flee.', emergencyDeclared: true,
+      });
+      expect(parsed.error).to.equal(undefined);
+      expect(parsed.recordId).to.equal('FIR-1');
+      expect(parsed.justification).to.equal('Urgent: suspect may flee.');
+      expect(parsed.contractInput).to.deep.equal({
+        action: 'view', purpose: 'investigation', emergencyDeclared: true,
+      });
+      const plain = accessRouter.parseAccessRequest({
+        recordId: 'FIR-1', action: 'view', purpose: 'investigation', justification: 'Routine review.',
+      });
+      expect(plain.contractInput.emergencyDeclared).to.equal(false);
+    });
+
+    it('refuses the retired emergencyFlag field with a pointer to its replacement', () => {
+      const parsed = accessRouter.parseAccessRequest({
+        recordId: 'FIR-1', action: 'view', purpose: 'investigation',
+        justification: 'Routine review.', emergencyFlag: true,
+      });
+      expect(parsed.error).to.match(/emergencyFlag was replaced by emergencyDeclared/);
     });
 
     it('retries only the pre-submit peer-convergence mismatch', async () => {

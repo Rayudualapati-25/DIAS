@@ -20,8 +20,9 @@
  */
 
 const crypto = require('crypto');
+// The dataset is built with prompt v1, frozen; the live system uses prompt v2.
 const {
-  buildRecommendationMessages,
+  buildRecommendationMessagesV1: buildRecommendationMessages,
 } = require('../../../../backend/src/dias/recommendationPrompt');
 const {
   evaluateReference, referenceReason,

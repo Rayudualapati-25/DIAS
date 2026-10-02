@@ -113,9 +113,9 @@ function createDiasWorld() {
     authorizationEvents: (authorizationId) => eventsOf('diasAuthorizationEvent', authorizationId),
 
     submit(caller, {
-      recordId = 'FIR-1', action = 'view', purpose = 'investigation', emergencyFlag, timestamp,
+      recordId = 'FIR-1', action = 'view', purpose = 'investigation', emergencyDeclared, timestamp,
     } = {}) {
-      const input = { action, purpose, ...(emergencyFlag === undefined ? {} : { emergencyFlag }) };
+      const input = { action, purpose, ...(emergencyDeclared === undefined ? {} : { emergencyDeclared }) };
       return run(caller, nextTx('SUBMIT'), (ctx) => contracts.access.CreateAccessRequest(
         ctx, recordId, JSON.stringify(input)
       ), { timestamp });

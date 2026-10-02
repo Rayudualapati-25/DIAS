@@ -30,11 +30,11 @@ const inputsFor = (example) => ({
   justification: example.justification,
 });
 
-test('the control is exactly what the live prompt module produces', () => {
-  const { buildRecommendationMessages } = require('../../../../backend/src/dias/recommendationPrompt');
+test('the control is exactly the frozen v1 prompt the dataset was built with', () => {
+  const { buildRecommendationMessagesV1 } = require('../../../../backend/src/dias/recommendationPrompt');
   for (const example of examples) {
     const inputs = inputsFor(example);
-    assert.deepEqual(ablatedMessages('full', inputs), buildRecommendationMessages(inputs));
+    assert.deepEqual(ablatedMessages('full', inputs), buildRecommendationMessagesV1(inputs));
   }
 });
 

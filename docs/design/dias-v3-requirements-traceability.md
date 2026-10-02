@@ -30,8 +30,8 @@ Each requirement traces: paper requirement → current behavior → required cha
 | ID | Requirement | At baseline | Step | Progress |
 |---|---|---|---|---|
 | M01 | Exact-match reuse checked first, in the request transaction | OK | — | done (baseline) |
-| M02 | Verified context C built from authenticated facts; `h_C` stored | OK | 5 | planned (step 5) |
-| M03 | Requester claims kept out of the verified context | MISS | 5 | planned (step 5) |
+| M02 | Verified context C built from authenticated facts; `h_C` stored | OK | 5 | done (step 5; `diasSchema.test.js`, `diasAccessSecurity.test.js`) |
+| M03 | Requester claims kept out of the verified context | MISS | 5 | done (step 5); label invariance 8,013/8,013; V7 re-evaluation NOT RUN |
 | M04 | `h_J` recorded on-chain with the request | MISS | 9 | planned (step 9) |
 | M05 | Active policy version recorded in the request | MISS | 8 | planned (step 8) |
 | M06 | Reuse requires the active policy version | MISS | 8 | planned (step 8) |
@@ -60,7 +60,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | I02 | Identity and role from the certificate and committed profile | OK | — | done (baseline) |
 | I03 | Success reported only after commit | OK | — | done (baseline) |
 | I04 | Access-log entries defined and measured | PART | 6 | planned (step 6) |
-| I05 | Prompt marks facts as authoritative and J as untrusted | OK | 5 | planned (prompt v2) |
+| I05 | Prompt marks facts as authoritative and J as untrusted | OK | 5 | done (prompt v2; v1 frozen and checked against every tracked prompt) |
 | I06 | Response schema check; failure is a status, not a DENY | OK | — | done (baseline) |
 | I07 | Review store tamper-evident and protected | PART | 9, 13 | planned |
 | I08 | No written-policy engine in the contract | OK | 14 | planned (guard kept) |

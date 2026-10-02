@@ -14,6 +14,9 @@
 const {
   verifiedRequestHash,
 } = require('../../../chaincode/crimerecords/lib/dias/verifiedRequest');
+const {
+  requesterClaimsHash, validateRequesterClaims,
+} = require('../../../chaincode/crimerecords/lib/dias/requesterClaims');
 const { RECOMMENDATION_STATE } = require('./reviewStore');
 const trace = require('../util/trace');
 
@@ -33,6 +36,24 @@ function recommendationRecord(result) {
   };
 }
 
+/** Why the stored inputs cannot be used, or null when they match their commitments. */
+function inputMismatch(entry) {
+  if (verifiedRequestHash(entry.verifiedRequest) !== entry.verifiedRequestHash) {
+    return {
+      errorCode: 'verified_request_hash_mismatch',
+      errorDetail: 'the stored verified request does not hash to the committed verifiedRequestHash',
+    };
+  }
+  if (validateRequesterClaims(entry.requesterClaims).length > 0
+      || requesterClaimsHash(entry.requesterClaims) !== entry.requesterClaimsHash) {
+    return {
+      errorCode: 'requester_claims_hash_mismatch',
+      errorDetail: 'the stored requester claims do not hash to the committed requesterClaimsHash',
+    };
+  }
+  return null;
+}
+
 function createRecommendationWorker({ store, recommender, log = console }) {
   if (!store || !recommender) throw new Error('recommendation worker requires a store and a recommender');
   let queue = Promise.resolve();
@@ -42,22 +63,25 @@ function createRecommendationWorker({ store, recommender, log = console }) {
     const entry = store.read(requestId);
     if (!entry || entry.recommendationState !== RECOMMENDATION_STATE.PENDING) return null;
     trace.emit('recommendation.started', { requestId });
+    // Facts or claims that do not hash to the committed values are not something
+    // a recommendation may be based on.
+    const mismatch = inputMismatch(entry);
     let result;
-    if (verifiedRequestHash(entry.verifiedRequest) !== entry.verifiedRequestHash) {
-      // Facts that do not hash to the committed value are not something a
-      // recommendation may be based on.
+    if (mismatch) {
       result = recommender.unavailable({
         requestId,
         verifiedRequestHash: entry.verifiedRequestHash,
+        requesterClaimsHash: entry.requesterClaimsHash || null,
         justificationHash: null,
         generationStatus: 'UNAVAILABLE',
-        errorCode: 'verified_request_hash_mismatch',
-        errorDetail: 'the stored verified request does not hash to the committed verifiedRequestHash',
+        errorCode: mismatch.errorCode,
+        errorDetail: mismatch.errorDetail,
       });
     } else {
       result = await recommender.recommend({
         requestId,
         verifiedRequest: entry.verifiedRequest,
+        requesterClaims: entry.requesterClaims,
         justification: entry.justification,
       });
     }
