@@ -1,0 +1,28 @@
+{
+  "format": "dias-commitment-hash-v1",
+  "note": "Shared by the chaincode, backend and frontend tests. Digests marked shellReference were computed with printf | shasum -a 256, independently of any JavaScript implementation.",
+  "text": [
+    { "domain": "note", "text": "hello", "digest": "6d96bb684cf8e89271e5b2da8bd73b4854712ff286462e4e154e8ad64f321a0d", "shellReference": true },
+    { "domain": "justification", "text": "hello", "digest": "c7e5adf918d0199f5125c2aa01475cf964544b761b94ab2dea553031ee326f5d", "shellReference": true },
+    { "domain": "note", "text": "", "digest": "5f5e99ab6858220ee9be4a28a8e49bb8b2924dc989e563c1c410194162fa748a", "shellReference": true },
+    { "domain": "justification", "text": "café €", "digest": "8ab848cc7a8782d9cc22b94eae303240f39dd24c434ea213939be45c1f9f07fb", "shellReference": true }
+  ],
+  "json": [
+    { "domain": "context", "value": { "b": [true, null, "x"], "a": 1 }, "canonical": "{\"a\":1,\"b\":[true,null,\"x\"]}", "digest": "8fb2cacfeb03dc5948fd9ae49a46d0e88a8c2b423602a5dde67bcbfd4accefc6", "shellReference": true }
+  ],
+  "canonical": [
+    { "value": { "b": 2, "a": 1 }, "canonical": "{\"a\":1,\"b\":2}" },
+    { "value": { "outer": { "z": 1, "a": [3, 1, 2] }, "top": true }, "canonical": "{\"outer\":{\"a\":[3,1,2],\"z\":1},\"top\":true}" },
+    { "value": { "é": 1, "z": 2, "A": 3, "€": 4 }, "canonical": "{\"A\":3,\"z\":2,\"é\":1,\"€\":4}" },
+    { "value": { "ﬁ": 1, "😀": 2 }, "canonical": "{\"😀\":2,\"ﬁ\":1}", "why": "keys sort by UTF-16 code units (0xD83D < 0xFB01), not by code point" },
+    { "value": { "string": "€$\u000f\nA'B\"\\\\\"/", "literals": [null, true, false] }, "canonical": "{\"literals\":[null,true,false],\"string\":\"€$\\u000f\\nA'B\\\"\\\\\\\\\\\"/\"}", "why": "RFC 8785 section 3.2.2.2 string example" },
+    { "value": [0, -1, 9007199254740991, -9007199254740991], "canonical": "[0,-1,9007199254740991,-9007199254740991]" },
+    { "value": {}, "canonical": "{}" },
+    { "value": [], "canonical": "[]" }
+  ],
+  "rejected": [
+    { "value": 1.5, "why": "non-integer number" },
+    { "value": 9007199254740992, "why": "unsafe integer" },
+    { "value": { "a": [1, 2.25] }, "why": "nested non-integer number" }
+  ]
+}
