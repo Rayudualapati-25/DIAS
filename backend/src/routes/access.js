@@ -32,6 +32,7 @@ const {
 } = require('../dias/agreement');
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } =
   require('../../../chaincode/crimerecords/lib/policy/policyV1');
+const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
 
 const router = express.Router();
 router.use(requireAuth);
@@ -142,10 +143,20 @@ function parseAccessRequest(body) {
   const parsed = requestSchema.safeParse(body);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const { recordId, justification, action, purpose, emergencyDeclared } = parsed.data;
+  let justificationHash;
+  try {
+    // h_J over the exact text the requester sent (design §4); the text itself
+    // never reaches the ledger.
+    justificationHash = hashText(DOMAINS.JUSTIFICATION, justification);
+  } catch (error) {
+    return { error: 'justification cannot be committed: it contains an unpaired surrogate' };
+  }
   return {
     recordId,
     justification,
-    contractInput: { action, purpose, emergencyDeclared: emergencyDeclared === true },
+    contractInput: {
+      action, purpose, emergencyDeclared: emergencyDeclared === true, justificationHash,
+    },
   };
 }
 

@@ -17,6 +17,7 @@ const {
 } = require('../src/dias/agreement');
 const { verifiedRequestHash } = require('../../chaincode/crimerecords/lib/dias/verifiedRequest');
 const { requesterClaimsHash } = require('../../chaincode/crimerecords/lib/dias/requesterClaims');
+const { hashText } = require('../../chaincode/crimerecords/lib/dias/commitments');
 const {
   requesterClaimsFixture, validOutput, verifiedRequestFixture,
 } = require('./fixtures/diasFixtures');
@@ -34,6 +35,7 @@ function committed(requestId, overrides = {}) {
     verifiedRequestHash: verifiedRequestHash(verifiedRequest),
     requesterClaims,
     requesterClaimsHash: requesterClaimsHash(requesterClaims),
+    justificationHash: hashText('justification', overrides.justificationText || 'why'),
     ...overrides,
   };
 }
@@ -131,7 +133,7 @@ describe('DIAS backend recommendation path', () => {
 
   describe('recommendation worker', () => {
     it('stores a schema-valid recommendation in the auditor-facing shape', async () => {
-      store.create({ request: committed('REQ-3'), justification: 'Reviewing the FIR.' });
+      store.create({ request: committed('REQ-3', { justificationText: 'Reviewing the FIR.' }), justification: 'Reviewing the FIR.' });
       const asked = [];
       const recommender = {
         recommend: async (input) => {
@@ -185,8 +187,20 @@ describe('DIAS backend recommendation path', () => {
       expect(store.read('REQ-6').recommendation.errorCode).to.equal('requester_claims_hash_mismatch');
     });
 
+    it('never prompts the LLM with a justification that does not match the committed h_J', async () => {
+      store.create({ request: committed('REQ-8'), justification: 'altered after commit' });
+      let prompted = false;
+      const recommender = {
+        recommend: async () => { prompted = true; return okResult(); },
+        unavailable: (input) => ({ ...failureResult(input.errorCode) }),
+      };
+      await createRecommendationWorker({ store, recommender, log: silent }).enqueue('REQ-8');
+      expect(prompted).to.equal(false);
+      expect(store.read('REQ-8').recommendation.errorCode).to.equal('justification_hash_mismatch');
+    });
+
     it('gives the model the committed facts, the claims and the justification, separately', async () => {
-      store.create({ request: committed('REQ-7'), justification: 'Reviewing the FIR.' });
+      store.create({ request: committed('REQ-7', { justificationText: 'Reviewing the FIR.' }), justification: 'Reviewing the FIR.' });
       let received = null;
       const recommender = {
         recommend: async (input) => { received = input; return okResult(); },

@@ -42,16 +42,19 @@ describe('DIAS access workflow', () => {
       expect(JSON.parse(ctx._events[0].payload)).to.include({ nextStep: 'AUDITOR_DECISION' });
     });
 
-    it('writes the LLM recommendation value but none of its reasoning or provenance', async () => {
-      const { result: request } = await world.submit(INSPECTOR);
+    it('commits digests and the recommendation value, but never free text', async () => {
+      // v3 replaces the v2 rule "only the value": the ledger now also holds the
+      // justification digest h_J (and, from step 10, h_M and h_N). Free text stays
+      // off-chain: the justification, the model's reason, its clause list, and
+      // nothing from the retired AI organisation.
+      const justification = 'Witness statement needed for tomorrow\'s hearing.';
+      const { result: request } = await world.submit(INSPECTOR, { justification });
       await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY');
       const ledgerText = [...world.ledger._state.keys(), ...world.ledger._state.values()].join('\n');
       expect(ledgerText).to.match(/"llmRecommendation":"DENY"/);
-      // The value only: no reason text, no reason code, no model or policy provenance,
-      // no justification, and nothing from the retired AI organisation.
-      expect(ledgerText).to.not.match(
-        /justification|provenance|attestation|llm-decider|reasonCode|policy_refs|modelId|promptHash/i
-      );
+      expect(ledgerText).to.match(/"justificationHash":"[0-9a-f]{64}"/);
+      expect(ledgerText).to.not.include(justification);
+      expect(ledgerText).to.not.match(/attestation|llm-decider|reasonCode|policy_refs|promptHash/i);
       expect(world.ledger._privateState.size).to.equal(0);
     });
   });

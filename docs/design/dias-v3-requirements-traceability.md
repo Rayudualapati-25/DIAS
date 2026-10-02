@@ -32,7 +32,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M01 | Exact-match reuse checked first, in the request transaction | OK | — | done (baseline) |
 | M02 | Verified context C built from authenticated facts; `h_C` stored | OK | 5 | done (step 5; `diasSchema.test.js`, `diasAccessSecurity.test.js`) |
 | M03 | Requester claims kept out of the verified context | MISS | 5 | done (step 5); label invariance 8,013/8,013; V7 re-evaluation NOT RUN |
-| M04 | `h_J` recorded on-chain with the request | MISS | 9 | planned (step 9) |
+| M04 | `h_J` recorded on-chain with the request | MISS | 9 | done (step 9; contract, backend, browser recomputation) |
 | M05 | Active policy version recorded in the request | MISS | 8 | done (step 8; `diasPolicyBinding.test.js`) |
 | M06 | Reuse requires the active policy version | MISS | 8 | done (step 8; `POLICY_CHANGED` miss) |
 | M07 | κ committed before review | MISS | 10 | planned (step 10) |

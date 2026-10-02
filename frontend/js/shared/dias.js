@@ -12,6 +12,20 @@
  * auditor decision with whether it agreed with the LLM.
  */
 
+import { hashText, isDigest } from './commitments.js';
+
+/**
+ * Does the justification digest the ledger committed (h_J) belong to the text
+ * this requester sent? Recomputed in the browser, so a backend that altered the
+ * text before hashing it is caught by the requester (design §4).
+ */
+export function justificationCommitmentView(sentText, request) {
+  const committed = request?.justificationHash;
+  if (!isDigest(committed)) return { status: 'absent', committed: null, computed: null };
+  const computed = hashText('justification', sentText);
+  return { status: computed === committed ? 'match' : 'mismatch', committed, computed };
+}
+
 /** The request statuses the chaincode can commit. */
 export const STATUS = Object.freeze({
   AWAITING_AUDITOR: 'awaiting-auditor',

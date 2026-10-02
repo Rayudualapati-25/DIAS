@@ -23,7 +23,9 @@ import {
 } from '../shared/vocab.js';
 import { dateTime, shortHash } from '../core/format.js';
 import { loadRecentRequests, rememberRequest } from '../shared/recent-requests.js';
-import { accessDecisionView, isSettled, progressLabel } from '../shared/dias.js';
+import {
+  accessDecisionView, isSettled, justificationCommitmentView, progressLabel,
+} from '../shared/dias.js';
 import {
   prepareAuditorHandoff, completeAuditorHandoff, closeAuditorHandoff, openAuditorReview,
 } from '../shared/auditor-handoff.js';
@@ -299,9 +301,10 @@ export default {
         hint('3. On a miss, the backend asks the LLM for an advisory recommendation.'),
         hint('4. An auditor sees it and records the final decision on the ledger.')));
       let result;
+      const sentJustification = justification.trim();
       try {
         result = await api.access.request({
-          recordId: selected.recordId, action, purpose, justification: justification.trim(),
+          recordId: selected.recordId, action, purpose, justification: sentJustification,
         });
       } catch (error) {
         closeAuditorHandoff(auditorHandoff);
@@ -312,6 +315,18 @@ export default {
         return;
       }
       await showProgress(result);
+      // The ledger holds only the justification's fingerprint (h_J). Recomputing it
+      // here lets the requester confirm the text they wrote is the text committed.
+      const commitment = justificationCommitmentView(sentJustification, result);
+      if (commitment.status === 'match') {
+        outcome.append(callout('good', 'Your justification is committed unchanged',
+          hint('Its fingerprint on the ledger, ', mono(shortHash(commitment.committed, 16)),
+            ', matches the text you sent.')));
+      } else if (commitment.status === 'mismatch') {
+        outcome.append(callout('bad', 'The committed justification fingerprint does not match your text',
+          hint('Report this request: the text the auditor and the model receive may not be the '
+            + 'text you wrote.')));
+      }
     };
 
     const requestForm = form({

@@ -17,6 +17,7 @@ const {
 const {
   requesterClaimsHash, validateRequesterClaims,
 } = require('../../../chaincode/crimerecords/lib/dias/requesterClaims');
+const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
 const { RECOMMENDATION_STATE } = require('./reviewStore');
 const trace = require('../util/trace');
 
@@ -49,6 +50,13 @@ function inputMismatch(entry) {
     return {
       errorCode: 'requester_claims_hash_mismatch',
       errorDetail: 'the stored requester claims do not hash to the committed requesterClaimsHash',
+    };
+  }
+  if (typeof entry.justification !== 'string'
+      || hashText(DOMAINS.JUSTIFICATION, entry.justification) !== entry.justificationHash) {
+    return {
+      errorCode: 'justification_hash_mismatch',
+      errorDetail: 'the stored justification does not hash to the committed justificationHash',
     };
   }
   return null;

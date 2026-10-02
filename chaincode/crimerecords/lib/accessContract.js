@@ -26,7 +26,7 @@
 const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
 const {
-  SAFE_ID, hashObject, sha256, validateAllowList,
+  SAFE_ID, SHA256_HEX, hashObject, sha256, validateAllowList,
 } = require('./util/validate');
 const { putJson } = require('./util/state');
 const { requireActiveDistrictHead } = require('./dias/auditorAuthority');
@@ -99,11 +99,14 @@ const ORG_TO_MSP = Object.freeze({
  * The requester's input. `action` and `purpose` are what is being asked for and
  * enter the verified context; `emergencyDeclared` is the requester's own
  * statement and is recorded as a claim, outside it (plan step 5).
+ * `justificationHash` is h_J: the justification text stays off-chain and only
+ * its digest is committed (plan step 9, design §4).
  */
 const REQUEST_INPUT_SCHEMA = Object.freeze({
   action: { type: 'string', required: true, enum: [...ACTIONS] },
   purpose: { type: 'string', required: true, enum: [...PURPOSES] },
   emergencyDeclared: { type: 'boolean', required: false, default: false },
+  justificationHash: { type: 'string', required: true, pattern: SHA256_HEX },
 });
 
 const shortTxId = (ctx) => ctx.stub.getTxID().slice(0, 16);
@@ -472,6 +475,7 @@ class AccessContract extends Contract {
       requesterClaimsSchemaVersion: REQUESTER_CLAIMS_SCHEMA_VERSION,
       requesterClaims,
       requesterClaimsHash: requesterClaimsHash(requesterClaims),
+      justificationHash: input.justificationHash,
       committedCertificateCredentialStatus: caller.credentialStatus,
       authorizationScope: scope,
       authorizationScopeHash: scopeHash,
@@ -499,6 +503,8 @@ class AccessContract extends Contract {
         caseId: record.caseId,
         action: input.action,
         purpose: input.purpose,
+        justificationHash: input.justificationHash,
+        policyVersion: activePolicy.policyVersion,
         submittedAtUtc: timestamp,
         schemaVersion: REQUEST_SCHEMA_VERSION,
       },

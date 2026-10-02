@@ -17,6 +17,10 @@ const RecordContract = require('../lib/recordContract');
 const {
   CALLERS, RECORD_META, buildMockContext, cloneInto, seedCase,
 } = require('./testHelpers');
+const { hashText } = require('../lib/dias/commitments');
+
+/** The justification every test request carries unless a test supplies its own. */
+const DEFAULT_JUSTIFICATION = 'Reviewing the FIR for the open investigation.';
 
 function profileFor(caller, org, overrides = {}) {
   return {
@@ -144,8 +148,14 @@ function createDiasWorld() {
 
     submit(caller, {
       recordId = 'FIR-1', action = 'view', purpose = 'investigation', emergencyDeclared, timestamp,
+      justification = DEFAULT_JUSTIFICATION,
     } = {}) {
-      const input = { action, purpose, ...(emergencyDeclared === undefined ? {} : { emergencyDeclared }) };
+      const input = {
+        action,
+        purpose,
+        justificationHash: hashText('justification', justification),
+        ...(emergencyDeclared === undefined ? {} : { emergencyDeclared }),
+      };
       return run(caller, nextTx('SUBMIT'), (ctx) => contracts.access.CreateAccessRequest(
         ctx, recordId, JSON.stringify(input)
       ), { timestamp });
@@ -190,4 +200,6 @@ function createDiasWorld() {
   return world;
 }
 
-module.exports = { DEFAULT_PROFILES, POLICY_V1, createDiasWorld, profileFor };
+module.exports = {
+  DEFAULT_JUSTIFICATION, DEFAULT_PROFILES, POLICY_V1, createDiasWorld, profileFor,
+};

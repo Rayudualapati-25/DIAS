@@ -254,3 +254,16 @@ test('treats expired and cancelled requests as closed without any decision', asy
   assert.equal(cancelled.outcomeLabel, 'CANCELLED');
   assert.equal(cancelled.authorityLabel, 'Requester');
 });
+
+test('checks the committed justification digest against the text the requester sent', async () => {
+  const dias = await import('../js/shared/dias.js');
+  const { hashText } = await import('../js/shared/commitments.js');
+  const text = 'Reviewing the FIR for the open investigation.';
+  const committed = { justificationHash: hashText('justification', text) };
+  assert.deepEqual(dias.justificationCommitmentView(text, committed), {
+    status: 'match', committed: committed.justificationHash, computed: committed.justificationHash,
+  });
+  const altered = dias.justificationCommitmentView(`${text} `, committed);
+  assert.equal(altered.status, 'mismatch');
+  assert.equal(dias.justificationCommitmentView(text, {}).status, 'absent');
+});

@@ -6,7 +6,7 @@ const { expect } = chai;
 
 const { CALLERS } = require('./testHelpers');
 const { createDiasWorld } = require('./diasTestWorld');
-const { hashCanonical } = require('../lib/dias/commitments');
+const { hashCanonical, hashText } = require('../lib/dias/commitments');
 
 const INSPECTOR = CALLERS.inspector;
 const FORMER_AI_IDENTITY = Object.freeze({
@@ -43,9 +43,28 @@ describe('DIAS access workflow safeguards', () => {
       });
     });
 
+    it('commits the justification only as its digest (h_J)', async () => {
+      const { result } = await world.submit(INSPECTOR, { justification: 'Linked to an armed robbery.' });
+      expect(result.justificationHash).to.equal(hashText('justification', 'Linked to an armed robbery.'));
+      const ledgerText = [...world.ledger._state.values()].join('\n');
+      expect(ledgerText).to.not.include('Linked to an armed robbery.');
+      expect(world.requestEvents(result.requestId)[0].data.justificationHash).to.equal(result.justificationHash);
+    });
+
+    it('refuses a request without a well-formed justification digest', async () => {
+      const create = (body) => (ctx) => world.contracts.access.CreateAccessRequest(ctx, 'FIR-1', JSON.stringify(body));
+      await expect(world.run(INSPECTOR, 'TX-NOHASH', create({ action: 'view', purpose: 'investigation' })))
+        .to.be.rejectedWith(/missing required field 'justificationHash'/);
+      await expect(world.run(INSPECTOR, 'TX-BADHASH', create({
+        action: 'view', purpose: 'investigation', justificationHash: 'A'.repeat(64),
+      }))).to.be.rejectedWith(/'justificationHash' has invalid format/);
+    });
+
     it('refuses the retired v2 emergencyFlag input instead of reading it as a fact', async () => {
       await expect(world.run(INSPECTOR, 'TX-OLDFLAG', (ctx) => world.contracts.access.CreateAccessRequest(
-        ctx, 'FIR-1', JSON.stringify({ action: 'view', purpose: 'investigation', emergencyFlag: true })
+        ctx, 'FIR-1', JSON.stringify({
+          action: 'view', purpose: 'investigation', emergencyFlag: true, justificationHash: 'b'.repeat(64),
+        })
       ))).to.be.rejectedWith(/unknown fields not permitted: emergencyFlag/);
     });
 
@@ -55,7 +74,7 @@ describe('DIAS access workflow safeguards', () => {
       await expect(world.submit(INSPECTOR, { recordId: 'FIR 1' })).to.be.rejectedWith(/recordId has invalid format/);
       await expect(world.submit(INSPECTOR, { recordId: 'FIR-404' })).to.be.rejectedWith(/record 'FIR-404' does not exist/);
       const create = (body) => (ctx) => world.contracts.access.CreateAccessRequest(ctx, 'FIR-1', body);
-      await expect(world.run(INSPECTOR, 'TX-UNKNOWN', create('{"action":"view","purpose":"investigation","role":"sp"}')))
+      await expect(world.run(INSPECTOR, 'TX-UNKNOWN', create(`{"action":"view","purpose":"investigation","justificationHash":"${'b'.repeat(64)}","role":"sp"}`)))
         .to.be.rejectedWith(/unknown fields not permitted: role/);
       await expect(world.run(INSPECTOR, 'TX-BADJSON', create('{'))).to.be.rejectedWith(/must be valid JSON/);
     });

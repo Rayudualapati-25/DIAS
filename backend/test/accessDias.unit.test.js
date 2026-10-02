@@ -18,6 +18,7 @@ const { expect } = require('chai');
 const accessRouter = require('../src/routes/access');
 const { createReviewStore } = require('../src/dias/reviewStore');
 const { verifiedRequestFixture } = require('./fixtures/diasFixtures');
+const { hashText } = require('../../chaincode/crimerecords/lib/dias/commitments');
 
 const requester = Object.freeze({ org: 'police', fabricUser: 'insp.test', username: 'insp.test' });
 const auditor = Object.freeze({ org: 'audit', fabricUser: 'sp.north', username: 'sp.north' });
@@ -145,6 +146,7 @@ describe('DIAS access routes', () => {
       expect(parsed.justification).to.equal('Urgent: suspect may flee.');
       expect(parsed.contractInput).to.deep.equal({
         action: 'view', purpose: 'investigation', emergencyDeclared: true,
+        justificationHash: hashText('justification', 'Urgent: suspect may flee.'),
       });
       const plain = accessRouter.parseAccessRequest({
         recordId: 'FIR-1', action: 'view', purpose: 'investigation', justification: 'Routine review.',
