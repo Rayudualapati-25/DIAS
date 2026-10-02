@@ -67,4 +67,6 @@ function statusForChaincodeMessage(message) {
   return 422;
 }
 
-module.exports = { ok, fail, asyncRoute, statusForChaincodeMessage };
+module.exports = {
+  ok, fail, asyncRoute, extractChaincodeMessage, statusForChaincodeMessage,
+};

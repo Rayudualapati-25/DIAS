@@ -164,7 +164,7 @@ describe('DIAS access workflow safeguards', () => {
       expect(pending[0].commitment).to.equal(null);
       await world.commit(request.requestId, world.commitmentFor(request.requestId, { recommendation: 'DENY' }));
       const review = await call(CALLERS.auditor, (ctx) => world.contracts.access.GetAuditorReview(ctx, request.requestId));
-      expect(Object.keys(review)).to.deep.equal(['request', 'commitment']);
+      expect(Object.keys(review)).to.deep.equal(['request', 'commitment', 'decision']);
       expect(review.commitment).to.include({ recommendation: 'DENY', generationStatus: 'OK' });
       await world.decide(request.requestId, 'FORCE_DENY', 'DENY');
       expect(await call(CALLERS.auditor, queue)).to.deep.equal([]);

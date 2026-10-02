@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   LLM_AGREEMENT, STATUS, accessDecisionView, agreementLabel, authorizationView, authorizationOutcomeNote,
-  decisionAvailability,
+  decisionAvailability, decisionFailureView, offChainVerificationRows,
   decisionAuthorityLabel, isAutomaticGrant, isDenialOverrideAuthorization, isSettled,
   llmAgreement, progressLabel, recommendationView, requiresOverrideReason, reviewSummary,
   willCreateAuthorization,
@@ -327,4 +327,43 @@ test('derives the consequences of a decision from the committed recommendation',
   const failed = dias.committedRecommendation({ commitment: { recommendation: null, generationStatus: 'CONTEXT_OVERFLOW' } });
   assert.equal(dias.llmAgreement(failed, 'FORCE_ALLOW'), 'NO_RECOMMENDATION');
   assert.equal(dias.committedRecommendation({ commitment: null, recommendation: null }), null);
+});
+
+test('tells an unconfirmed decision apart from a refused or an already-made one', () => {
+  const unconfirmed = decisionFailureView({ status: 503, message: 'this decision is not confirmed: the ledger did not answer in time.' });
+  assert.equal(unconfirmed.tone, 'warn');
+  assert.match(unconfirmed.title, /not confirmed/);
+  assert.match(unconfirmed.lines.join(' '), /note is saved/);
+  assert.doesNotMatch(unconfirmed.lines.join(' '), /Nothing was recorded/);
+
+  const noResponse = decisionFailureView({ message: 'cannot reach the server — is the backend running?' });
+  assert.equal(noResponse.tone, 'warn');
+  assert.match(noResponse.lines.join(' '), /may not have received it/);
+  assert.doesNotMatch(noResponse.lines.join(' '), /Nothing was recorded/);
+
+  const decided = decisionFailureView({ status: 409, message: 'this request was already decided: FORCE_ALLOW in transaction tx-1' });
+  assert.equal(decided.tone, 'info');
+  assert.match(decided.title, /already decided/);
+
+  const refused = decisionFailureView({ status: 403, message: 'DIAS_AUDITOR_OUT_OF_DISTRICT: not your district' });
+  assert.equal(refused.tone, 'bad');
+  assert.match(refused.lines.join(' '), /Nothing was recorded/);
+  const mismatch = decisionFailureView({ status: 409, message: 'the stored recommendation does not match its ledger commitment' });
+  assert.equal(mismatch.tone, 'bad');
+});
+
+test('lists each off-chain object with its check against the ledger digest', () => {
+  const rows = offChainVerificationRows({
+    justification: { status: 'verified' },
+    recommendation: { status: 'mismatch', problems: ['h_M of the stored object differs'] },
+    note: { status: 'missing' },
+  });
+  assert.deepEqual(rows.map((row) => [row.object, row.status]), [
+    ['Justification (h_J)', 'verified'], ['Recommendation object (h_M)', 'mismatch'], ['Auditor note (h_N)', 'missing'],
+  ]);
+  assert.match(rows[1].label, /changed after/);
+  assert.match(rows[1].detail, /h_M/);
+  assert.match(rows[2].label, /missing/);
+  assert.deepEqual(offChainVerificationRows(null), []);
+  assert.match(offChainVerificationRows({ note: { status: 'not-committed' } })[0].label, /no digest/);
 });

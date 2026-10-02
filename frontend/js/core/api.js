@@ -71,7 +71,9 @@ async function request(method, path, body) {
     onSessionExpired();
     throw new Error('your session expired — please sign in again');
   }
-  if (!json.success) throw new Error(json.error || `request failed (${res.status})`);
+  // The status travels with the error, so a screen can tell a refusal (4xx)
+  // from an outcome the server could not confirm (503).
+  if (!json.success) throw Object.assign(new Error(json.error || `request failed (${res.status})`), { status: res.status });
   return json.data;
 }
 
@@ -92,7 +94,7 @@ async function requestBlob(path) {
   }
   if (!res.ok) {
     const body = await res.json().catch(() => null);
-    throw new Error(body?.error || `request failed (${res.status})`);
+    throw Object.assign(new Error(body?.error || `request failed (${res.status})`), { status: res.status });
   }
   return res.blob();
 }

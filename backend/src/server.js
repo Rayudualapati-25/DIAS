@@ -8,6 +8,7 @@ const {
 } = require('./config');
 const fabric = require('./fabric/gateway');
 const { createExpirySweeper } = require('./dias/expirySweeper');
+const { reconcileStagedNotes } = require('./dias/auditorNotes');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const departmentRoutes = require('./routes/departments');
@@ -73,6 +74,20 @@ function startServer(port = PORT) {
   // Recommendations a previous process left unfinished are answered again, so an
   // auditor is never left waiting for one that will not arrive.
   const resumed = getDiasRuntime().worker.resumePending();
+  // Auditor notes a previous process staged before an unconfirmed decision are
+  // settled against the ledger (design §11). It runs in the background: a ledger
+  // that is not reachable yet leaves the notes staged and is logged.
+  reconcileStagedNotes({
+    store: getDiasRuntime().store,
+    ledger: fabric,
+    identity: { org: AUTH_ORG, fabricUser: AUTH_USER },
+  }).then((summary) => {
+    // eslint-disable-next-line no-console
+    console.log(`[dias] staged auditor notes settled: ${JSON.stringify(summary)}`);
+  }).catch((error) => {
+    // eslint-disable-next-line no-console
+    console.error(`[dias] staged auditor notes could not be settled: ${error.message}`);
+  });
   // Requests past their review deadline are closed on the ledger (design §8).
   createExpirySweeper({
     ledger: fabric,

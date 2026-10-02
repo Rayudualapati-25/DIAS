@@ -70,5 +70,6 @@ Implemented and unit-tested so far (offline; no live run):
 | 7, 8 | `v_P` binding; pending requests end |
 | 9 | `h_J` |
 | 10 | κ before review with signed provenance; five generation statuses; agreement from κ; lifecycle events; auditor-side H(M) check in the backend and the browser |
+| 11 | `h_N` required for NOT_AGREED and NO_RECOMMENDATION; note stored before the decision; audit reconstruction verifies `h_J`, `h_M` and `h_N` |
 
-Still to come: `h_N` and note-before-decision (step 11), counterfactuals (step 14). Every AFTER-RUN item stays open until the v3 experiments are run on the Mac.
+Still to come: counterfactuals (step 14). Every AFTER-RUN item stays open until the v3 experiments are run on the Mac.

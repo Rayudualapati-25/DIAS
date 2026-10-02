@@ -3,10 +3,11 @@
 /**
  * Off-chain review store.
  *
- * The auditor screen needs two things the ledger deliberately does not hold: the
- * requester's written justification and the LLM recommendation this backend
- * generated. Both live here, one JSON file per request. The ledger keeps only who
- * requested which record and the auditor decision with its LLM agreement.
+ * The auditor screen needs what the ledger deliberately does not hold: the
+ * requester's written justification, the recommendation object M, and the
+ * auditor's note. All three live here, one JSON file per request; the ledger
+ * keeps only their digests (h_J, h_M in κ, h_N in the decision), so each can be
+ * checked against it.
  *
  * Every write replaces the whole entry through a temporary file and a rename, so
  * a reader never sees a half-written entry.
@@ -77,8 +78,62 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
       recommendationState: RECOMMENDATION_STATE.PENDING,
       recommendation: null,
       auditorNote: null,
+      stagedNotes: [],
       createdAtUtc: timestamp,
       updatedAtUtc: timestamp,
+    });
+  }
+
+  /**
+   * The entry for a request this store has no review for (the request never
+   * reached this backend, or its review was lost): it holds only notes, so a
+   * note can still be made durable before its decision.
+   */
+  function noteOnlyEntry(requestId, recordId) {
+    const timestamp = now().toISOString();
+    return {
+      schemaVersion: REVIEW_SCHEMA_VERSION,
+      requestId,
+      recordId: recordId ?? null,
+      justification: null,
+      recommendationState: null,
+      recommendation: null,
+      auditorNote: null,
+      stagedNotes: [],
+      createdAtUtc: timestamp,
+      updatedAtUtc: timestamp,
+    };
+  }
+
+  /**
+   * Stage an auditor note before its decision is submitted (design §11). A note
+   * staged again with the same digest replaces the earlier copy.
+   */
+  function stageNote(requestId, { noteHash, reason, decision, auditorUsername, recordId }) {
+    const current = read(requestId) || noteOnlyEntry(requestId, recordId);
+    const timestamp = now().toISOString();
+    const others = (current.stagedNotes || []).filter((note) => note.noteHash !== noteHash);
+    return write({
+      ...current,
+      stagedNotes: [...others, { noteHash, reason, decision, auditorUsername, stagedAtUtc: timestamp }],
+      updatedAtUtc: timestamp,
+    });
+  }
+
+  /**
+   * The decision is on the ledger: its note becomes the auditor note. A request
+   * is decided once, so no other staged note can ever commit and all are cleared.
+   */
+  function commitNote(requestId, note) {
+    return update(requestId, { auditorNote: { ...note, state: 'committed' }, stagedNotes: [] });
+  }
+
+  /** Remove one staged note whose digest can no longer be committed. */
+  function dropStagedNote(requestId, noteHash) {
+    const current = read(requestId);
+    if (!current) return null;
+    return update(requestId, {
+      stagedNotes: (current.stagedNotes || []).filter((note) => note.noteHash !== noteHash),
     });
   }
 
@@ -105,7 +160,9 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
       .filter(Boolean);
   }
 
-  return Object.freeze({ create, read, update, list, dir });
+  return Object.freeze({
+    create, read, update, list, stageNote, commitNote, dropStagedNote, dir,
+  });
 }
 
 module.exports = { RECOMMENDATION_STATE, REVIEW_SCHEMA_VERSION, createReviewStore };

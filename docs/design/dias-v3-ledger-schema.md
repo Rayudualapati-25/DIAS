@@ -294,3 +294,9 @@ The backend remains part of the trusted base, because it holds every demonstrati
   - `GetAuditorReview` and `QueryPendingAuditorRequests` return `{request, commitment}`, so the review screen reads κ from the ledger;
   - the contract accepts and validates `noteHash` from step 10, but requires it only from step 11; until then the backend enforces the reason.
   - M (`dias-recommendation-object-v1`) replaces unpaired surrogates in model text with U+FFFD before hashing, because canonical JSON cannot encode them.
+- 2026-10-02 (step 11) — note protocol details:
+  - `GetAuditorReview` returns `{request, commitment, decision}`, so the backend can read a decision back after an uncertain submission;
+  - the note is trimmed of surrounding whitespace before it is stored and hashed; the stored text is exactly the hashed text;
+  - when a request has no review entry, a note-only entry is created so the note is still durable before its decision;
+  - a decision whose outcome is unknown returns HTTP 503 and keeps its note staged; a decision on a request already decided returns 409 and settles the staged note;
+  - start-up reconciliation reads with the backend's own identity (`AUTH_ORG`/`AUTH_USER`, an AuditMSP district head by default), the same identity as the expiry sweeper.

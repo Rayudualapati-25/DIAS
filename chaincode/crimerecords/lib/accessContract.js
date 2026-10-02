@@ -85,7 +85,12 @@ const LLM_AGREEMENT = Object.freeze({
   NOT_AGREED: 'NOT_AGREED',
   NO_RECOMMENDATION: 'NO_RECOMMENDATION',
 });
-/** What the backend shows the auditor. UNAVAILABLE covers every generation failure. */
+/** Agreements whose decision must carry the auditor note digest h_N (design §7). */
+const NOTE_REQUIRED = Object.freeze([LLM_AGREEMENT.NOT_AGREED, LLM_AGREEMENT.NO_RECOMMENDATION]);
+/**
+ * The recommendation value a decision is compared with, read from κ. UNAVAILABLE
+ * covers a failed or missing generation; the specific status is kept beside it.
+ */
 const LLM_RECOMMENDATION = Object.freeze({
   ALLOW: 'ALLOW',
   DENY: 'DENY',
@@ -789,6 +794,12 @@ class AccessContract extends Contract {
     const committed = recommendationOf(await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId)));
     const { llmRecommendation, generationStatus, recommendationCommitmentId, recommendationHash } = committed;
     const llmAgreement = agreementFor(decision, llmRecommendation);
+    // h_N: a decision that departs from the committed recommendation, or has none
+    // to follow, must commit to the auditor's off-chain note (design §7).
+    if (NOTE_REQUIRED.includes(llmAgreement) && note === null) {
+      throw new Error(`DIAS_NOTE_REQUIRED: a decision recorded as ${llmAgreement} must carry the digest `
+        + 'of the auditor note (noteHash)');
+    }
     const createsAuthorization = decision === 'FORCE_ALLOW' && llmAgreement === LLM_AGREEMENT.NOT_AGREED;
     if (!createsAuthorization && validUntilUtc) {
       throw new Error('validUntilUtc applies only when a dynamic authorization is created');
@@ -1051,11 +1062,18 @@ class AccessContract extends Contract {
   }
 
   /** The committed request and its recommendation commitment κ (null before one exists). */
+  /**
+   * What an auditor reviews: the request, its pre-review commitment κ and, once
+   * decided, the decision with its note digest h_N. The backend reads the
+   * decision back after an uncertain submission to settle its staged note
+   * (design §11).
+   */
   async GetAuditorReview(ctx, requestId) {
     this._requireAuditor(ctx, 'GetAuditorReview');
     const request = await this._getRequest(ctx, requestId);
     const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId));
-    return JSON.stringify({ request, commitment });
+    const decision = await this._read(ctx, this._key(ctx, KEYS.AUDITOR_DECISION, requestId));
+    return JSON.stringify({ request, commitment, decision });
   }
 
   async QueryPendingAuditorRequests(ctx) {

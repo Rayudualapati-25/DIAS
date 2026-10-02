@@ -27,7 +27,7 @@ import { count, dateTime, shortHash } from '../core/format.js';
 import {
   reviewSummary, authorizationView, agreementLabel, decisionAvailability, llmAgreement,
   willCreateAuthorization, requiresOverrideReason, authorizationOutcomeNote,
-  recommendationIntegrity, committedRecommendation, justificationCommitmentView,
+  recommendationIntegrity, committedRecommendation, justificationCommitmentView, decisionFailureView,
 } from '../shared/dias.js';
 import { auditorRequestFromSearch } from '../shared/auditor-handoff.js';
 
@@ -256,7 +256,7 @@ export default {
       // Consequences follow the recommendation committed on the ledger (κ).
       const committed = committedRecommendation(review);
       const reason = textarea('auditorReason', {
-        maxlength: '500',
+        maxlength: '2000',
         rows: '3',
         placeholder: 'Reason for your decision',
         'aria-label': 'Auditor reason',
@@ -302,8 +302,8 @@ export default {
             && reason.value.trim().length === 0) {
           replace(problem, callout('bad', 'A reason is required',
             hint(`${decision.replace('_', ' ')} here differs from the model, or no `
-              + 'recommendation exists. Record why before deciding — the reason is kept '
-              + 'with this review in the backend.')));
+              + 'recommendation exists. Record why before deciding. The note is saved off-chain '
+              + 'first, and only its fingerprint is written to the ledger with the decision.')));
           reason.focus();
           return;
         }
@@ -313,9 +313,9 @@ export default {
         try {
           result = await api.access.auditorDecision(requestId, decision, reason.value.trim());
         } catch (error) {
-          replace(problem, callout('bad', 'The ledger refused this decision',
-            hint(error.message),
-            hint('Nothing was recorded. The request is still waiting for a decision.')));
+          const failure = decisionFailureView({ status: error.status, message: error.message });
+          replace(problem, callout(failure.tone, failure.title, ...failure.lines.map((line) => hint(line))));
+          if (failure.tone !== 'bad') queueRegion.reload();
           return;
         }
         toast(decision === 'FORCE_ALLOW' ? 'Request force-allowed' : 'Request force-denied', 'success');

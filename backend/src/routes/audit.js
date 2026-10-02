@@ -4,6 +4,7 @@ const express = require('express');
 const fabric = require('../fabric/gateway');
 const vault = require('../storage/vault');
 const { getDiasRuntime } = require('../dias/runtime');
+const { reviewerTrail } = require('../dias/offChainVerification');
 const { ok, asyncRoute } = require('../util/respond');
 const { requireAuth, requireRole } = require('../middleware/auth');
 
@@ -71,14 +72,14 @@ router.get('/access-log/verify', requireRole(...REVIEWER_ROLES), asyncRoute(asyn
 
 /**
  * Complete lifecycle of one access request: who requested which record, the
- * dynamic-authorization check, the auditor decision with its LLM agreement (or
- * the skip), authorization changes and the access outcome, each with the Fabric
- * transaction that committed it.
+ * dynamic-authorization check, the pre-review commitment κ, the auditor decision
+ * with its agreement (or the skip), authorization changes and the access
+ * outcome, each with the Fabric transaction that committed it.
  *
  * The chaincode authorises the trail itself, so no role guard is applied here
  * beyond authentication. A reviewer also receives the off-chain review — the
- * justification, the LLM recommendation and the auditor's reason — clearly
- * separated, because none of it is on the ledger.
+ * justification, the recommendation and the auditor's note — clearly separated,
+ * with each object checked against the digest the ledger committed for it.
  */
 router.get('/request-trail/:requestId', asyncRoute(async (req, res) => {
   const trail = await fabric.evaluate(
@@ -86,16 +87,7 @@ router.get('/request-trail/:requestId', asyncRoute(async (req, res) => {
     req.params.requestId);
   if (trail.viewer !== 'reviewer') return ok(res, trail);
   const entry = getDiasRuntime().store.read(trail.requestId);
-  return ok(res, {
-    ...trail,
-    offChainReview: entry ? {
-      storage: 'backend off-chain review store (not on the ledger)',
-      justification: entry.justification,
-      recommendationState: entry.recommendationState,
-      recommendation: entry.recommendation,
-      auditorNote: entry.auditorNote,
-    } : null,
-  });
+  return ok(res, reviewerTrail({ trail, entry }));
 }));
 
 module.exports = router;

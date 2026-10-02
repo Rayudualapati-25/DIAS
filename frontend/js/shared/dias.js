@@ -377,3 +377,65 @@ export function isDenialOverrideAuthorization(authorization) {
     && authorization.auditorDecision?.decision === 'FORCE_ALLOW'
     && authorization.auditorDecision?.llmAgreement === LLM_AGREEMENT.NOT_AGREED);
 }
+
+/**
+ * What the auditor screen says when a decision call fails. A 503 means the
+ * ledger did not answer in time: the decision may still commit and the note is
+ * saved. No status at all means no response reached the browser. In both cases
+ * saying "nothing was recorded" would be wrong.
+ */
+export function decisionFailureView({ status, message } = {}) {
+  const text = String(message || 'the decision could not be recorded');
+  if (status === 503) {
+    return {
+      tone: 'warn',
+      title: 'The decision is not confirmed yet',
+      lines: [text, 'Your note is saved. Reopen the request to see whether the decision was recorded '
+        + 'before deciding again.'],
+    };
+  }
+  if (status === undefined || status === null) {
+    return {
+      tone: 'warn',
+      title: 'The decision is not confirmed',
+      lines: [text, 'The server may not have received it. Reopen the request to see whether the decision '
+        + 'was recorded before deciding again.'],
+    };
+  }
+  if (/already decided/.test(text)) {
+    return { tone: 'info', title: 'This request was already decided', lines: [text] };
+  }
+  return {
+    tone: 'bad',
+    title: 'The ledger refused this decision',
+    lines: [text, 'Nothing was recorded. The request is still waiting for a decision.'],
+  };
+}
+
+const OFF_CHAIN_OBJECTS = Object.freeze([
+  ['justification', 'Justification (h_J)'],
+  ['recommendation', 'Recommendation object (h_M)'],
+  ['note', 'Auditor note (h_N)'],
+]);
+const VERIFICATION_LABELS = Object.freeze({
+  verified: 'matches the digest on the ledger',
+  mismatch: 'changed after it was committed: it does not match the digest on the ledger',
+  missing: 'its digest is on the ledger, but the stored copy is missing',
+  'not-committed': 'no digest on the ledger',
+});
+
+/** One row per off-chain object, from the backend's audit reconstruction. */
+export function offChainVerificationRows(verification) {
+  if (!verification) return [];
+  return OFF_CHAIN_OBJECTS
+    .filter(([key]) => verification[key])
+    .map(([key, object]) => {
+      const { status, problems = [] } = verification[key];
+      return {
+        object,
+        status,
+        label: VERIFICATION_LABELS[status] || `unknown result '${status}'`,
+        detail: problems.join('; '),
+      };
+    });
+}

@@ -24,7 +24,9 @@
 const express = require('express');
 const { z } = require('zod');
 const fabric = require('../fabric/gateway');
-const { ok, fail, asyncRoute } = require('../util/respond');
+const {
+  ok, fail, asyncRoute, extractChaincodeMessage,
+} = require('../util/respond');
 const { requireAuth, requireRole } = require('../middleware/auth');
 const { getDiasRuntime } = require('../dias/runtime');
 const { RECOMMENDATION_STATE } = require('../dias/reviewStore');
@@ -39,6 +41,10 @@ const {
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } =
   require('../../../chaincode/crimerecords/lib/policy/policyV1');
 const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
+const {
+  NOTE_MAX_CHARS, committedNoteRecord, normalizeNote, noteHashOf, settleStagedNotes,
+} = require('../dias/auditorNotes');
+const { isCommitConflict } = require('../fabric/commitErrors');
 
 const router = express.Router();
 router.use(requireAuth);
@@ -301,13 +307,14 @@ router.get('/auditor/:requestId', requireRole(...AUDITOR_ROLES), asyncRoute(asyn
  * recommendation committed before review; the backend reads κ only to refuse a
  * decision on a recommendation object that does not match it, and to ask for a
  * reason early. A reason is required whenever the auditor did not simply agree
- * with the committed recommendation; it stays off-chain and only its digest h_N
- * is sent. `validUntilUtc` is accepted only where a dynamic authorization is
- * created: FORCE_ALLOW over a committed DENY.
+ * with the committed recommendation. It is written to the review store before
+ * the decision is sent, and only its digest h_N reaches the ledger (design §11).
+ * `validUntilUtc` is accepted only where a dynamic authorization is created:
+ * FORCE_ALLOW over a committed DENY.
  */
 const auditorDecisionSchema = z.object({
   decision: z.enum(['FORCE_ALLOW', 'FORCE_DENY']),
-  reason: z.string().max(500).optional(),
+  reason: z.string().max(NOTE_MAX_CHARS).optional(),
   validUntilUtc: z.string().datetime().optional(),
 });
 
@@ -318,11 +325,76 @@ function isClosedByLedger(error) {
     .some((text) => /DIAS_(REQUEST_EXPIRED|STALE_POLICY)/.test(text));
 }
 
+/** The contract refused, or the transaction was invalidated: nothing was written. */
+const isDefiniteRefusal = (error) => Boolean(extractChaincodeMessage(error)) || isCommitConflict(error);
+
+/** What the screen needs after a decision that was confirmed by reading it back. */
+function recoveredResult(review) {
+  const recorded = review.decision;
+  return {
+    auditorDecision: recorded,
+    accessOutcome: {
+      outcome: recorded.decision === 'FORCE_ALLOW' ? 'GRANTED' : 'DENIED',
+      outcomeId: review.request.outcomeId ?? null,
+      basis: 'AUDITOR_DECISION',
+    },
+    dynamicAuthorization: recorded.createdAuthorizationId
+      ? { authorizationId: recorded.createdAuthorizationId } : null,
+    recoveredFromLedger: true,
+  };
+}
+
+/**
+ * The decision submission failed. A refusal from the contract wrote nothing; any
+ * other failure (a timeout, a lost response) may still have committed. The
+ * decision is read back: when it is this decision, it succeeded. Otherwise the
+ * note is dropped if it can never commit, and kept staged if the outcome is
+ * unknown, for the next attempt or the start-up reconciliation to settle.
+ */
+async function settleFailedDecision({ error, user, requestId, decision, noteHash, ledger, store }) {
+  const review = await ledger.evaluate(user.org, user.fabricUser, CONTRACT, 'GetAuditorReview', requestId)
+    .catch(() => null);
+  const recorded = review && review.decision;
+  if (recorded && recorded.decision === decision && (recorded.noteHash || '') === noteHash) {
+    if (noteHash) settleStagedNotes({ store, requestId, review });
+    return {
+      status: 201,
+      data: recoveredResult(review),
+      recoveredFromLedger: true,
+      llmRecommendation: recorded.llmRecommendation,
+      generationStatus: recorded.generationStatus,
+      llmAgreement: recorded.llmAgreement,
+    };
+  }
+  if (recorded) {
+    settleStagedNotes({ store, requestId, review });
+    throw error;
+  }
+  if (isDefiniteRefusal(error)) {
+    if (noteHash) store.dropStagedNote(requestId, noteHash);
+    // The deadline passed, or the policy changed, while the auditor was
+    // reviewing. The refusal wrote nothing, so record the expiry now (best
+    // effort) and report the refusal.
+    if (isClosedByLedger(error)) {
+      await ledger.submit(user.org, user.fabricUser, CONTRACT, 'ExpirePendingRequest', requestId)
+        .catch(() => {});
+    }
+    throw error;
+  }
+  // eslint-disable-next-line no-console
+  console.error(`[dias] ${requestId} decision not confirmed: ${error.message}`);
+  return {
+    status: 503,
+    error: 'this decision is not confirmed: the ledger did not answer in time. Your note is saved; reopen '
+      + 'the request to see whether the decision was recorded before deciding again',
+  };
+}
+
 async function decide({ user, requestId, body, ledger = fabric, store }) {
   const parsed = auditorDecisionSchema.safeParse(body || {});
   if (!parsed.success) return { status: 400, error: parsed.error.issues[0].message };
   const { decision, validUntilUtc } = parsed.data;
-  const reason = (parsed.data.reason || '').trim();
+  const reason = normalizeNote(parsed.data.reason);
   const entry = store.read(requestId);
   if (entry && [RECOMMENDATION_STATE.PENDING, RECOMMENDATION_STATE.SIGNED].includes(entry.recommendationState)) {
     return {
@@ -330,10 +402,20 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
       error: 'the LLM recommendation for this request is still being prepared or committed; try again shortly',
     };
   }
+  const review = await ledger.evaluate(user.org, user.fabricUser, CONTRACT, 'GetAuditorReview', requestId);
+  if (review.decision) {
+    // A request is decided once. A retry after a lost response lands here, and
+    // its staged note is settled against the decision the ledger holds.
+    settleStagedNotes({ store, requestId, review });
+    return {
+      status: 409,
+      error: `this request was already decided: ${review.decision.decision} in transaction ${review.decision.txId}`,
+    };
+  }
   // The recommendation the decision is compared with is the one committed on the
   // ledger before review (κ), and the auditor may decide only on the object that
   // matches it (paper §IV-D).
-  const { commitment } = await ledger.evaluate(user.org, user.fabricUser, CONTRACT, 'GetAuditorReview', requestId);
+  const { commitment } = review;
   if (commitment) {
     const integrity = checkRecommendationIntegrity({
       commitment, recommendationObject: entry ? entry.recommendationObject : null,
@@ -359,8 +441,15 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   if (validUntilUtc && !createsAuthorization(decision, llmAgreement)) {
     return { status: 400, error: 'validUntilUtc applies only when a dynamic authorization is created' };
   }
-  // h_N: only the note's digest reaches the ledger (design §4, §7).
-  const noteHash = reason ? hashText(DOMAINS.NOTE, reason) : '';
+  // h_N: the note is durable before the decision is sent, and only its digest
+  // reaches the ledger (design §4, §7, §11).
+  const noteHash = noteHashOf(reason);
+  const auditorUsername = user.username || user.fabricUser;
+  if (reason) {
+    store.stageNote(requestId, {
+      noteHash, reason, decision, auditorUsername, recordId: review.request && review.request.recordId,
+    });
+  }
   let result;
   try {
     result = await ledger.submit(
@@ -368,29 +457,12 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
       requestId, decision, noteHash, validUntilUtc || ''
     );
   } catch (error) {
-    // The deadline passed, or the policy changed, while the auditor was
-    // reviewing. The refusal wrote nothing, so record the expiry now (best
-    // effort) and report the refusal.
-    if (isClosedByLedger(error)) {
-      await ledger.submit(user.org, user.fabricUser, CONTRACT, 'ExpirePendingRequest', requestId)
-        .catch(() => {});
-    }
-    throw error;
+    return settleFailedDecision({ error, user, requestId, decision, noteHash, ledger, store });
   }
-  if (entry) {
-    store.update(requestId, {
-      auditorNote: {
-        decision,
-        llmRecommendation,
-        generationStatus,
-        llmAgreement,
-        reason: reason || null,
-        noteHash: noteHash || null,
-        auditorUsername: user.username || user.fabricUser,
-        decidedAtUtc: result.auditorDecision.decidedAtUtc,
-        txId: result.auditorDecision.txId,
-      },
-    });
+  if (reason || entry) {
+    store.commitNote(requestId, committedNoteRecord(result.auditorDecision || {}, {
+      decision, llmRecommendation, generationStatus, llmAgreement, reason, noteHash, auditorUsername,
+    }));
   }
   return { status: 201, data: result, llmRecommendation, generationStatus, llmAgreement };
 }

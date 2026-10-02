@@ -1,12 +1,13 @@
 /**
  * Audit trail of one record.
  *
- * The ledger holds two logs for every DIAS request: who requested which record
- * (with the action and purpose), and the auditor decision with whether it agreed
- * with the LLM. This screen reconstructs both from Fabric, lists the access
- * grants and the record's own state history, and — for reviewers — shows the
- * off-chain review the backend kept (justification, LLM recommendation, auditor
- * reason), clearly marked as not being on the ledger.
+ * The ledger holds the full life of every DIAS request: who requested which
+ * record (with the action and purpose), the recommendation committed before
+ * review (κ), and the auditor decision with its agreement. This screen
+ * reconstructs it from Fabric, lists the access grants and the record's own
+ * state history, and — for reviewers — shows the off-chain review the backend
+ * kept (justification, recommendation, auditor note), clearly marked as not
+ * being on the ledger, with each object checked against its ledger digest.
  */
 
 import { api } from '../core/api.js';
@@ -16,7 +17,7 @@ import {
   slot, replace, el, detailTable, callout,
 } from '../core/components.js';
 import { dateTime, shortHash } from '../core/format.js';
-import { agreementLabel, recommendationLabel } from '../shared/dias.js';
+import { agreementLabel, offChainVerificationRows, recommendationLabel } from '../shared/dias.js';
 
 const show = (value) => (value === undefined || value === null || value === '' ? '—' : String(value));
 const statusTone = (status) => (status === 'granted' ? 'allow' : status === 'denied' ? 'deny' : 'pending');
@@ -41,8 +42,23 @@ function offChainReviewBlock(review, request) {
           : `none (${show(rec.generationStatus)})`],
       ['Reason code', mono(show(rec.reasonCode))],
       ['LLM explanation', show(rec.reason)],
-      ['Auditor reason', show(review.auditorNote && review.auditorNote.reason)],
+      ['Auditor note', show(review.auditorNote && review.auditorNote.reason)],
     ]));
+}
+
+const VERIFICATION_TONE = Object.freeze({
+  verified: 'allow', mismatch: 'deny', missing: 'pending', 'not-committed': 'pending',
+});
+
+/** Each off-chain object against the digest the ledger committed for it. */
+function offChainVerificationBlock(verification) {
+  const rows = offChainVerificationRows(verification);
+  if (rows.length === 0) return hint('No verification is available for this request.');
+  return table(['Object', 'Check', 'Meaning'], rows.map((row) => [
+    row.object,
+    badge(row.status, VERIFICATION_TONE[row.status] || 'pending'),
+    row.detail ? el('div', {}, row.label, el('small', { class: 'block' }, row.detail)) : row.label,
+  ]));
 }
 
 function requestTrailCard(trail) {
@@ -80,7 +96,11 @@ function requestTrailCard(trail) {
       String(event.seq), event.eventType, mono(shortHash(event.txId, 14)), dateTime(event.timestamp),
     ])),
     trail.viewer === 'reviewer'
-      ? [subheading('Off-chain review'), offChainReviewBlock(trail.offChainReview, request)] : []);
+      ? [
+        subheading('Off-chain review'), offChainReviewBlock(trail.offChainReview, request),
+        subheading('Off-chain objects against their ledger digests'),
+        offChainVerificationBlock(trail.offChainVerification),
+      ] : []);
 }
 
 export default {
