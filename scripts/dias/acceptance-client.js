@@ -20,7 +20,7 @@ function createClient(baseUrl) {
     const headers = { 'Content-Type': 'application/json' };
     if (username) headers.Authorization = `Bearer ${await token(username)}`;
     const response = await fetch(`${baseUrl}${route}`, {
-      method,
+      method, signal: AbortSignal.timeout(180000),
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
     });
@@ -31,7 +31,7 @@ function createClient(baseUrl) {
   async function token(username) {
     if (!tokens.has(username)) {
       const response = await fetch(`${baseUrl}/auth/login`, {
-        method: 'POST',
+        signal: AbortSignal.timeout(30000), method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username }),
       });
@@ -50,10 +50,21 @@ function createClient(baseUrl) {
     api('POST', `/access/auditor/${requestId}/decision`, { username: auditor, body });
 
   /** Wait until the backend has finished preparing the LLM recommendation. */
-  async function readyReview(requestId, { timeoutMs = RECOMMENDATION_TIMEOUT_MS } = {}) {
+  async function readyReview(requestId, { timeoutMs = RECOMMENDATION_TIMEOUT_MS, auditor = 'sp.north' } = {}) {
     const deadline = Date.now() + timeoutMs;
     for (;;) {
-      const result = await review(requestId);
+      // The status route reads encrypted storage through the backend, without
+      // opening a review or appending one audit transaction per poll.
+      const prepared = await api('GET', `/access/auditor/pending/status?ids=${encodeURIComponent(requestId)}`, { username: auditor });
+      if (prepared.status !== 200 || !Array.isArray(prepared.data) || !prepared.data[0]) {
+        throw new Error(`preparation status ${requestId}: ${prepared.status} ${prepared.error}`);
+      }
+      if (prepared.data[0].preparing) {
+        if (Date.now() >= deadline) throw new Error(`no recommendation for ${requestId} within ${timeoutMs} ms`);
+        await sleep(POLL_MS);
+        continue;
+      }
+      const result = await review(requestId, auditor);
       // The request is committed through the requester's peer and read through
       // the auditor's peer.  Immediately after commit, the latter can briefly
       // return the chaincode's 422 "does not exist" until it receives the block.
@@ -71,7 +82,7 @@ function createClient(baseUrl) {
         await sleep(POLL_MS);
         continue;
       }
-      if (result.data.recommendationState === 'ready') return result.data;
+      if (['committed', 'failed', 'commit-rejected', 'not-generated'].includes(result.data.recommendationState)) return result.data;
       if (Date.now() > deadline) throw new Error(`no recommendation for ${requestId} within ${timeoutMs} ms`);
       await sleep(POLL_MS);
     }
@@ -96,7 +107,9 @@ const stagesOf = (trail) => (trail.lifecycle || []).map((event) => event.eventTy
 
 /** The ledger part of a trail, without the backend's off-chain section. */
 function ledgerOnly(trail) {
-  const { offChainReview, ...ledger } = trail;
+  // Both sections are added by the backend after it reads committed state.
+  // Verification describes checks on the off-chain payload, not ledger fields.
+  const { offChainReview, offChainVerification, ...ledger } = trail;
   return ledger;
 }
 

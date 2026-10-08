@@ -9,7 +9,7 @@
 # While E6 runs (about 65 minutes) send nothing else to the model server and keep the Mac awake.
 set -euo pipefail
 
-TB="${HOME}/dias-testbed"
+TB="${TB:-${HOME}/dias-testbed}"
 M4="lima-dias-m4"
 IMAGE="dias-backend:testbed"
 API="http://dias-backend:3001/api"
@@ -54,6 +54,8 @@ EOF
 done
 
 echo "== 2. wait until the backend has no recommendation in preparation"
+docker --context "${M4}" run --rm --network diasnet "${IMAGE}" node testbed/load/wait-idle.js \
+  || fail "recommendations are still being prepared or committed"
 for attempt in $(seq 1 60); do
   counts="$(trace_counts)" || fail "cannot read the backend trace"
   read -r enqueued ready _ _ <<< "${counts}"
@@ -76,8 +78,8 @@ echo "== 4. start E6"
 docker --context "${M4}" rm loadgen-e6 > /dev/null 2>&1 || true
 RUN="e6-steady-$(date -u +%Y%m%dT%H%M%SZ)"
 docker --context "${M4}" run -d --name loadgen-e6 --network diasnet \
-  -v dias-backend-data:/data:ro -v "${TB}/results:/results" \
-  "${IMAGE}" node testbed/load/run-steady.js --url "${API}" --review-dir /data/dias-reviews \
+  -v "${TB}/results:/results" \
+  "${IMAGE}" node testbed/load/run-steady.js --url "${API}" \
   --out "/results/${RUN}" --settle 60000 > /dev/null
 echo "${RUN}" > "${TB}/logs/e6-run-name"
 echo "started ${RUN} at $(date -u +%H:%M:%S) UTC; the workflows end about 63 minutes later"

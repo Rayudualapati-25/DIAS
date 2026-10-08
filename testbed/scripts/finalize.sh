@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 #
 # Collect every raw result into the run folder, run all analyses in order, and
-# build the report, the LaTeX tables, the paper draft and the figure set.
+# retain structured analyses, figures and observed provenance for later reporting.
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-TB="${HOME}/dias-testbed"
-RUNDIR="${REPO}/experiments/runs/20260924_testbed_multivm"
+TB="${TB:-${HOME}/dias-testbed}"
+RUNDIR="${RUNDIR:?Set RUNDIR to the fresh v3 research run directory}"
+CHAINCODE_DEFINITION="${CHAINCODE_DEFINITION:?Supply the deployed testbed querycommitted JSON}"
+MODEL_EVIDENCE="${MODEL_EVIDENCE:?Supply the passing testbed smoke JSON}"
+BASELINE_RUN="${BASELINE_RUN:?Supply the fresh v3 untuned evaluation directory}"
+PROPOSED_RUN="${PROPOSED_RUN:?Supply the fresh v3 proposed evaluation directory}"
+[ ! -e "${RUNDIR}/manifest.json" ] || { echo "manifest already exists; retain the earlier run" >&2; exit 1; }
 AN="${RUNDIR}/analysis"
 A="${REPO}/testbed/analysis"
 E5="$(cat "${TB}/logs/e5-run-name")"
@@ -47,8 +52,9 @@ done
 
 echo "== analyses"
 cd "${A}"
-python3 accuracy.py --out "${AN}/accuracy" > "${AN}/accuracy.log"
-python3 analyze_e4.py --run "${RUNDIR}/raw/e4-llm-alone" --out "${AN}/e4" > "${AN}/e4.log"
+mkdir -p "${AN}"
+python3 accuracy.py --baseline "${BASELINE_RUN}" --proposed "${PROPOSED_RUN}" --out "${AN}/accuracy" > "${AN}/accuracy.log"
+python3 analyze_e4.py --run "${RUNDIR}/raw/e4-llm-alone" --reference-run "${PROPOSED_RUN}" --out "${AN}/e4" > "${AN}/e4.log"
 CAP="$(python3 -c "import json;print(json.load(open('${AN}/e4/e4-summary.json'))['recommendations_per_min'])")"
 python3 analyze_e5.py --run "${RUNDIR}/raw/${E5}" --out "${AN}/e5" --container-stats "${CONTAINERS}" --llm-capacity "${CAP}" > "${AN}/e5.log"
 cp "${RUNDIR}/raw/${E5}/replay-errors.json" "${AN}/e5/replay-errors.json" 2>/dev/null || true
@@ -57,7 +63,7 @@ python3 analyze_e7.py --run "${RUNDIR}/raw/${E7}" --out "${AN}/e7" > "${AN}/e7.l
 python3 analyze_e3.py --run "${RUNDIR}/raw/${E3}" --container-stats "${CONTAINERS}" --out "${AN}/e3" > "${AN}/e3.log"
 
 echo "== ledger growth (request and decision counts from the run files, checked against the backend trace)"
-python3 - "${RUNDIR}" "${E5}" "${E6}" "${E7}" "${E3}" <<'EOF'
+MODEL_EVIDENCE="${MODEL_EVIDENCE}" python3 - "${RUNDIR}" "${E5}" "${E6}" "${E7}" "${E3}" <<'EOF'
 import glob, json, os, sys
 rundir, e5, e6, e7, e3 = sys.argv[1:6]
 def rows(path):
@@ -66,7 +72,10 @@ def counted(name):
     rs = rows(os.path.join(rundir, "raw", name, "requests.jsonl"))
     return (sum(1 for r in rs if r.get("submitStatus") == 202), sum(1 for r in rs if r.get("decisionStatus") == 201))
 add = lambda a, b: (a[0] + b[0], a[1] + b[1])
-smoke = (4, 4)
+smoke_report = json.load(open(os.environ["MODEL_EVIDENCE"]))
+smoke_rows = smoke_report["rows"]
+smoke = (sum(r.get("submitStatus") == 202 for r in smoke_rows),
+         sum(r.get("decisionStatus") == 201 for r in smoke_rows))
 # Each stopped E6 attempt left its written rows on the ledger plus the requests still open when it stopped
 # (not written as rows; counted from the backend trace into its ABORTED.json). All of them were closed with a
 # decision before the reported E6 started.
@@ -101,17 +110,10 @@ python3 ledger_growth.py --probes "${RUNDIR}/raw/probes/probes.jsonl" --counts "
 python3 capacity_figure.py --analysis "${AN}" > "${AN}/capacity.log"
 python3 testbed_diagram.py --out "${AN}/testbed"
 
-echo "== manifest, report, draft"
-python3 "${REPO}/testbed/scripts/capture_manifest.py" --out "${RUNDIR}/manifest.json"
-python3 make_report.py --results "${AN}" --out "${RUNDIR}" > /dev/null
-mkdir -p "${RUNDIR}/paper/figures/testbed"
-for f in accuracy/e1_quality_counts accuracy/e1_outcomes_counts accuracy/e2_adversarial_counts \
-         e5/e5_components_by_users e5/e5_latency_by_users e5/e5_throughput_by_users e5/e5_resources_by_users \
-         e6/e6_machines_cpu_memory e6/e6_operations e6/e6_latency_over_time e6/e6_containers \
-         e7/e7_fault_timeline e3/e3_throughput e3/e3_latency e3/e3_write_stages e4/e4_llm_time_per_recommendation \
-         growth/ledger_growth_reads capacity/capacity_by_component testbed/testbed_layout; do
-  cp "${AN}/${f}.pdf" "${AN}/${f}.png" "${RUNDIR}/paper/figures/testbed/" 2>/dev/null || echo "missing figure ${f}"
-done
-cp "${RUNDIR}/tables.tex" "${RUNDIR}/paper/tables.tex"
-python3 make_paper_draft.py --analysis "${AN}" --out "${RUNDIR}/paper/results_draft.tex"
-echo "== done: ${RUNDIR}"
+echo "== manifest"
+python3 "${REPO}/testbed/scripts/capture_manifest.py" --out "${RUNDIR}/manifest.json" \
+  --chaincode-definition "${CHAINCODE_DEFINITION}" --model-evidence "${MODEL_EVIDENCE}"
+# The previous report/manuscript generators contain September-specific system
+# descriptions. Keep them for archived reproduction; new v3 reporting belongs
+# to steps 17–18 and must be derived from this run's manifest and summaries.
+echo "== done: structured results in ${AN}, provenance in ${RUNDIR}/manifest.json"

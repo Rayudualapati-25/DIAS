@@ -36,12 +36,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", required=True)
     parser.add_argument("--out", required=True)
+    parser.add_argument("--reference-run", help="fresh proposed evaluation directory; historical default for archived reproduction")
     args = parser.parse_args()
     os.makedirs(args.out, exist_ok=True)
     rows = load(os.path.join(args.run, "predictions", "test-decision-balanced.jsonl"))
     with open(os.path.join(args.run, "metrics.json")) as handle:
         metrics = json.load(handle)
-    reference = {r["exampleId"]: r for r in load(REFERENCE)}
+    reference_file = os.path.join(args.reference_run, "predictions/test-decision-balanced.jsonl") if args.reference_run else REFERENCE
+    reference = {r["exampleId"]: r for r in load(reference_file)}
     latency = [r["latencyMs"] / 1000 for r in rows if r.get("latencyMs") is not None]
     completion = [r["completionTokens"] for r in rows if r.get("completionTokens")]
     prompt = [r["promptTokens"] for r in rows if r.get("promptTokens")]
@@ -54,6 +56,7 @@ def main():
     wall_s = metrics.get("durationSeconds") or sum(latency)
     ref_latency = [r["latencyMs"] / 1000 for r in reference.values() if r.get("latencyMs") is not None]
     summary = {
+        "reference_file": os.path.abspath(reference_file),
         "cases": len(rows),
         "usable": sum(1 for r in rows if r.get("status") == "OK"),
         "correct": correct,

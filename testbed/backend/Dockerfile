@@ -12,5 +12,7 @@ COPY policies/dias-governance-policy-v1.json policies/dias-governance-policy-v1.
 COPY frontend frontend
 COPY testbed/seed testbed/seed
 COPY testbed/load testbed/load
+COPY testbed/reuse testbed/reuse
+COPY scripts/dias scripts/dias
 EXPOSE 3001
 CMD ["node", "backend/src/server.js"]

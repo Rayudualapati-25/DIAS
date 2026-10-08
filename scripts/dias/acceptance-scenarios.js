@@ -12,16 +12,10 @@ const {
   check, ledgerOnly, notExercised, scenario, sleep, stagesOf,
 } = require('./acceptance-client');
 
-/**
- * LLM data as it would appear in ledger JSON: a field that carries a
- * recommendation, its reason code or policy references, provenance or an
- * attestation, the requester's justification, or the retired AI identity. Field
- * names are matched exactly, so the trail's own `provenanceSource` description
- * of where it read the ledger is not mistaken for LLM provenance.
- */
-const LLM_TRACES = /"(recommendation\w*|llmRecommendation\w*|reasonCode|policyRefs|reviewFlags|missingEvidence|provenance|attestation\w*|justification\w*)"\s*:|llm-decider/i;
+const { ledgerLeaks } = require('./ledger-privacy');
 const REQUEST_STAGES = ['ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED'];
-const REVIEWED_STAGES = [...REQUEST_STAGES, 'AUDITOR_DECISION_RECORDED', 'ACCESS_OUTCOME_RECORDED'];
+const RECOMMENDED_STAGES = [...REQUEST_STAGES, 'RECOMMENDATION_COMMITTED'];
+const REVIEWED_STAGES = [...RECOMMENDED_STAGES, 'AUDITOR_DECISION_RECORDED', 'AGREEMENT_DERIVED', 'ACCESS_OUTCOME_RECORDED'];
 
 const SPECS = Object.freeze({
   assigned: {
@@ -67,23 +61,25 @@ async function requestLog(client, spec) {
     check('ledger names the record, action and purpose', ledger.recordId === spec.body.recordId
       && ledger.action === spec.body.action && ledger.purpose === spec.body.purpose,
     `${ledger.recordId} ${ledger.action} ${ledger.purpose}`),
-    check('ledger request holds no justification', !/justification/i.test(JSON.stringify(ledger)), 'request JSON searched'),
+    check('ledger request commits h_J without justification text', /^[a-f0-9]{64}$/.test(ledger.justificationHash || '')
+      && ledger.justification === undefined, 'justification digest checked'),
   ], { requestId, txId: ledger.txId, submittedAtUtc: ledger.submittedAtUtc });
   return { result, requestId };
 }
 
-/** R2: the backend prepared the recommendation, and the ledger holds none of it. */
+/** R2: the backend signs a recommendation commitment; explanation text stays off-chain. */
 async function backendRecommendation(client, requestId) {
   const review = await client.readyReview(requestId);
   const trail = (await client.trail(requestId)).data || {};
   const rec = review.recommendation || {};
-  const result = scenario('R2', 'LLM recommendation in the backend, not on the ledger', [
-    check('recommendation prepared by the backend', review.recommendationState === 'ready', review.recommendationState),
+  const result = scenario('R2', 'Signed recommendation commitment and off-chain LLM explanation', [
+    check('recommendation prepared by the backend', review.recommendationState === 'committed', review.recommendationState),
     check('LLM produced a valid ALLOW or DENY', rec.generationStatus === 'OK' && ['ALLOW', 'DENY'].includes(rec.recommendation),
       `${rec.generationStatus} ${rec.recommendation} ${rec.reasonCode}`),
     check('auditor screen receives the justification', Boolean(review.justification), review.justification),
-    check('ledger lifecycle holds only the request stages', same(stagesOf(trail), REQUEST_STAGES), stagesOf(trail).join(',')),
-    check('ledger trail holds no LLM data', !LLM_TRACES.test(JSON.stringify(ledgerOnly(trail))), 'ledger trail JSON searched'),
+    check('ledger lifecycle includes the recommendation commitment', same(stagesOf(trail), RECOMMENDED_STAGES), stagesOf(trail).join(',')),
+    check('off-chain recommendation matches its commitment', review.integrity && review.integrity.status === 'verified', JSON.stringify(review.integrity)),
+    check('ledger trail contains no explanation payload', ledgerLeaks(ledgerOnly(trail)).length === 0, ledgerLeaks(ledgerOnly(trail)).join(',')),
   ], {
     requestId,
     recommendation: rec.recommendation,
@@ -253,6 +249,6 @@ async function overrideAllow(client, overriddenAllows, knownAllowSpec = SPECS.as
 }
 
 module.exports = {
-  LLM_TRACES, SPECS, agreedGrant, backendRecommendation, closeOne, closePending, exactRepeat,
+  ledgerLeaks, SPECS, agreedGrant, backendRecommendation, closeOne, closePending, exactRepeat,
   llmValue, nearMisses, overrideAllow, overrideCreatesAuthorization, requestLog, sleep, submitForReview,
 };

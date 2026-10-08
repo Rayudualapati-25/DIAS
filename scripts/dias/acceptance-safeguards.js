@@ -10,7 +10,7 @@
 const {
   check, ledgerOnly, notExercised, scenario, sleep,
 } = require('./acceptance-client');
-const { LLM_TRACES, closeOne, llmValue } = require('./acceptance-scenarios');
+const { ledgerLeaks, closeOne, llmValue } = require('./acceptance-scenarios');
 
 const describe = (response) => `${response.status} ${response.error || ''}`.trim();
 const matchOutcome = (response) => response.data && response.data.dynamicAuthorizationCheck
@@ -100,8 +100,18 @@ async function changedFacts(client) {
   if (!requestId) return scenario('R11', title, [check('request raised', false, describe(submitted))]);
   await client.readyReview(requestId);
   const sealed = await client.api('POST', `/records/${recordId}/seal`, { username: 'judge.rana' });
-  const stale = await client.decide(requestId, { decision: 'FORCE_ALLOW', reason: 'Approving after review.' });
-  const unsealed = await client.api('POST', `/records/${recordId}/unseal`, { username: 'judge.rana' });
+  let stale;
+  let unsealed;
+  try {
+    if (sealed.status !== 200) throw new Error(`fixture seal failed: ${describe(sealed)}`);
+    stale = await client.decide(requestId, { decision: 'FORCE_ALLOW', reason: 'Approving after review.' });
+  } finally {
+    // Restore this fixture even when the stale-decision request fails.
+    if (sealed.status === 200) {
+      unsealed = await client.api('POST', `/records/${recordId}/unseal`, { username: 'judge.rana' });
+      if (unsealed.status !== 200) throw new Error(`fixture restoration failed: ${describe(unsealed)}`);
+    }
+  }
   const fresh = await client.decide(requestId, { decision: 'FORCE_DENY', reason: 'Closing after the facts check.' });
   return scenario('R11', title, [
     check('record sealed after the recommendation', sealed.status === 200, describe(sealed)),
@@ -128,7 +138,7 @@ async function noRecommendation(offlineClient) {
   });
   const data = decided.data || {};
   return scenario('R12', title, [
-    check('backend stored a failed generation', review.recommendationState === 'ready'
+    check('backend stored a failed generation', review.recommendationState === 'committed'
       && rec.generationStatus === 'UNAVAILABLE' && rec.recommendation === null, `${rec.generationStatus} ${rec.errorCode}`),
     check('decision without a reason refused (400)', withoutReason.status === 400, describe(withoutReason)),
     check('decision committed with NO_RECOMMENDATION', decided.status === 201
@@ -155,16 +165,16 @@ async function accessLog(client, requestId, expectedAgreement) {
   ], { requestId, requestTxId: requested && requested.txId, decisionTxId: decided && decided.txId });
 }
 
-/** R14: no ledger trail holds a recommendation, reason, or justification. */
+/** R14: no ledger trail holds explanation, justification or note text. */
 async function noLlmOnLedger(client, requestIds) {
   const checks = [];
   for (const requestId of requestIds) {
     const trail = (await client.trail(requestId)).data || {};
-    checks.push(check(`${requestId}: ledger trail holds no LLM data`,
-      trail.requestId === requestId && !LLM_TRACES.test(JSON.stringify(ledgerOnly(trail))),
+    checks.push(check(`${requestId}: ledger trail holds no explanation payload`,
+      trail.requestId === requestId && ledgerLeaks(ledgerOnly(trail)).length === 0,
       (trail.lifecycle || []).map((event) => event.eventType).join(',')));
   }
-  return scenario('R14', 'The ledger holds no LLM recommendation, reason, or justification', checks, { requestIds });
+  return scenario('R14', 'The ledger commits values and hashes, without explanation, justification or note text', checks, { requestIds });
 }
 
 module.exports = {

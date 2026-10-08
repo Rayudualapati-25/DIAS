@@ -73,7 +73,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | A07 | Identity and record id inside C (§IV-C) | TEXT | — | text fix |
 | A08 | Result numbers (23.75%, 60.27%, E7 failures, Fig. 13 memory, loss range) | TEXT | — | text fix |
 | A09 | Scripted auditor disclosed for every experiment | TEXT/EXP | — | text fix; human study OUT |
-| A10 | Reproducibility: prepare-chaincode script, pinned Python, figure scripts, V6 preflight | MISS | 15, 19 | planned |
+| A10 | Reproducibility: prepare-chaincode script, pinned Python, figure scripts, V6 preflight | PART | 15, 19 | deterministic preparation, source staging and observed manifest inputs done (iteration 073); pinned Python and final reproduction remain step 19 |
 | A11 | Public-release hygiene: home paths, third-party PDFs, licences, legacy code | MISS | 19 | planned |
 | A12 | Model input change re-evaluated | EXP | 17 | planned (prepared, not run) |
 | A13 | v3 performance re-measured (reuse, load, faults, resources, ledger growth) | EXP | 17 | planned (prepared, not run) |

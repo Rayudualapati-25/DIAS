@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="10" failures="0" errors="0" skipped="0" time="3.468" timestamp="2026-10-08T11:52:58" hostname="localhost">
+  <testsuite name="org.dias.mobile.data.ActivitySmokeTest" tests="1" failures="0" errors="0" skipped="0" time="2.211" timestamp="2026-10-08T11:52:58" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="connectSignInCacheAndSignOutThroughScreen" classname="org.dias.mobile.data.ActivitySmokeTest" time="2.211" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.data.FoundationTest" tests="7" failures="0" errors="0" skipped="0" time="0.068" timestamp="2026-10-08T11:52:58" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="failedRefreshPreservesExistingSnapshot" classname="org.dias.mobile.data.FoundationTest" time="0.003" />
+    <testcase name="batchesPersistAcrossDatabaseReopen" classname="org.dias.mobile.data.FoundationTest" time="0.032" />
+    <testcase name="repeatedPageIsIdempotent" classname="org.dias.mobile.data.FoundationTest" time="0.002" />
+    <testcase name="failedPageTransactionPreservesRowsAndCursor" classname="org.dias.mobile.data.FoundationTest" time="0.001" />
+    <testcase name="hostAndAccountCachesAreIsolated" classname="org.dias.mobile.data.FoundationTest" time="0.028" />
+    <testcase name="offlineReadsWorkWhileNetworkOnlyAblationFails" classname="org.dias.mobile.data.FoundationTest" time="0.001" />
+    <testcase name="refreshReplacesRemovedCasesAndClearRemovesContinuation" classname="org.dias.mobile.data.FoundationTest" time="0.001" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.data.HostConnectionTest" tests="2" failures="0" errors="0" skipped="0" time="0.142" timestamp="2026-10-08T11:52:58" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="emulatorAliasToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.084" />
+    <testcase name="reverseForwardingToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.058" />
+  </testsuite>
+</testsuites>

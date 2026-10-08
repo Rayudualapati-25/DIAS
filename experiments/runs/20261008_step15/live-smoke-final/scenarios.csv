@@ -1,0 +1,5 @@
+id,title,status,checks_passed,checks_total
+R1,"Request log: who requested which record",PASS,5,5
+R2,"Signed recommendation commitment and off-chain LLM explanation",PASS,6,6
+S3,"Synthetic request closed with FORCE_DENY",PASS,5,5
+R14,"The ledger commits values and hashes, without explanation, justification or note text",PASS,1,1

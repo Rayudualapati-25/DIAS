@@ -22,6 +22,10 @@ const fabric = require(path.join(APP, 'backend/src/fabric/gateway'));
 const users = require(path.join(APP, 'backend/src/fabric/users'));
 const vault = require(path.join(APP, 'backend/src/storage/vault'));
 const world = require('./world');
+const config = require('../../backend/src/config');
+const { registerAndActivatePolicy } = require('../../backend/src/dias/policyRegistration');
+const { registerRecommenderKey } = require('../../backend/src/dias/signerRegistration');
+const { createRecommendationSigner } = require('../../backend/src/dias/recommendationSigner');
 
 const LOAD_USERS = JSON.parse(fs.readFileSync(path.join(APP, 'testbed/load/generated/users.json'), 'utf8'));
 
@@ -144,8 +148,16 @@ async function seedRecords() {
 }
 
 async function main() {
+  // Load the existing operator-managed key before mutating the ledger. Never
+  // replace it here: existing commitments must remain verifiable.
+  const signer = createRecommendationSigner({ privateKeyPem:
+    fs.readFileSync(config.DIAS_RECOMMENDER_SIGNING_KEY_FILE, 'utf8') });
   await seedUsers();
   await seedDepartments();
+  const registrar = { org: 'audit', fabricUser: 'sp.north' };
+  console.log('policy:', JSON.stringify(await registerAndActivatePolicy({ ledger: fabric, registrar,
+    activator: { org: 'audit', fabricUser: 'cfo.north' }, bundlePath: config.DIAS_POLICY_BUNDLE_PATH })));
+  console.log('recommendation signer:', JSON.stringify(await registerRecommenderKey({ ledger: fabric, registrar, signer })));
   await seedCases();
   await seedRecords();
 }

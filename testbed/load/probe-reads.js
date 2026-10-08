@@ -20,9 +20,9 @@ const { performance } = require('perf_hooks');
 const APP = path.resolve(__dirname, '..', '..');
 const grpc = require(path.join(APP, 'backend/node_modules/@grpc/grpc-js'));
 const { connect, signers } = require(path.join(APP, 'backend/node_modules/@hyperledger/fabric-gateway'));
-const { ORG_CONFIG, CHANNEL, CHAINCODE } = require(path.join(APP, 'backend/src/config'));
+const { ORG_CONFIG, CHANNEL, CHAINCODE, NETWORK_DIR } = require(path.join(APP, 'backend/src/config'));
 
-const ORGS_DIR = path.join(APP, 'network', 'organizations', 'peerOrganizations');
+const ORGS_DIR = path.join(NETWORK_DIR, 'organizations', 'peerOrganizations');
 const now = () => performance.timeOrigin + performance.now();
 
 function args(argv) {

@@ -9,8 +9,8 @@
 set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-TB="${HOME}/dias-testbed"
-RUNDIR="${REPO}/experiments/runs/20260924_testbed_multivm"
+TB="${TB:-${HOME}/dias-testbed}"
+RUNDIR="${RUNDIR:?Set RUNDIR to the fresh v3 research run directory}"
 E5="$(cat "${TB}/logs/e5-run-name")"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 E7="e7-fault-${STAMP}"
@@ -36,10 +36,10 @@ log "start (E5=${E5}, E7=${E7}, E3=${E3})"
 
 # 1. Determinism check of the E5 errors (the model server is idle now).
 docker --context lima-dias-m4 run --rm --network diasnet \
-  -v dias-backend-data:/data:ro -v "${TB}/results:/results" --env-file "${TB}/backend.env" \
+  -v dias-backend-data:/data:ro -v "${TB}/keys:/run/dias-keys:ro" -v "${TB}/results:/results" --env-file "${TB}/backend.env" \
   -e DIAS_TRACE_FILE= --add-host host.lima.internal:192.168.104.2 \
   dias-backend:testbed node testbed/load/replay-errors.js \
-  --rows "/results/${E5}/requests.jsonl" --review-dir /data/dias-reviews \
+  --rows "/results/${E5}/requests.jsonl" \
   --out "/results/${E5}/replay-errors.json" >> "${TB}/logs/remaining.log" 2>&1 || fail "replay of the E5 errors"
 [ -s "${TB}/results/${E5}/replay-errors.json" ] || fail "the replay wrote no replay-errors.json"
 log "replay of E5 errors done"
@@ -59,6 +59,7 @@ probe after-e7
 # 4. E4 the model alone on the 600 balanced test cases (on the Mac).
 (cd "${REPO}" && node experiments/dias-finetuning/v2/eval/evaluate.js \
   --label qwen3-14b-dias-v7-testbed-llm-alone --url http://127.0.0.1:8081/v1 \
+  --prompt v2 \
   --model-id qwen3-14b-dias-v7 --adapter-id qwen3-14b-dias-lora-v7 \
   --adapter-hash "$(shasum -a 256 "${ADAPTER}/adapters.safetensors" | cut -d' ' -f1)" \
   --adapter-path "${ADAPTER}" --sets test-decision-balanced \

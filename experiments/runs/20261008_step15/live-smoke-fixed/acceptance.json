@@ -1,0 +1,196 @@
+{
+  "artifactType": "dias-backend-llm-acceptance",
+  "startedAtUtc": "2026-10-08T12:17:20.168Z",
+  "finishedAtUtc": "2026-10-08T12:17:32.333Z",
+  "apiUrl": "http://localhost:3001/api",
+  "mode": "bounded-current-host-smoke",
+  "modelProvenance": {
+    "schemaVersion": "dias-recommendation-provenance-v1",
+    "requestId": "REQ-abb32d19f976b427",
+    "modelId": "qwen3-14b-4bit-untuned",
+    "modelFamily": "qwen3",
+    "baseModel": "mlx-community/Qwen3-14B-4bit",
+    "baseModelRevision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+    "quantization": "4bit",
+    "adapterId": null,
+    "adapterHash": null,
+    "servedModel": "default_model",
+    "promptVersion": "dias-recommendation-prompt-v2",
+    "responseSchemaVersion": "dias-recommendation-response-v1",
+    "verifiedRequestHash": "14fc85a27c346b038cbf41049e1d36aad293a9597995909525abde2ebd9dc26f",
+    "requesterClaimsHash": "5bd68d37861c3d1e987510d1b592bf4bc4c7f11d8a1e0fcc53167ba67d3751cf",
+    "justificationHash": "00296778f2ee0de361075f8a4e051091603dac694881f419eab61a7a912672a6",
+    "decoding": {
+      "temperature": 0,
+      "topP": 1,
+      "maxTokens": 512
+    },
+    "inferenceStartedAtUtc": "2026-10-08T12:17:22.182Z",
+    "policyBundleId": "dias-governance-policy",
+    "policyBundleVersion": "v1",
+    "policyBundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+    "policyContextHash": "d00c77d8aafa0df01609719a6e23db0aa4bf2a23085d8dc2a1ba1b741c967054",
+    "promptHash": "cfbc293e025232e20d0e084bf7badae0ba91244de6c3587e9af9a146c4d15fba",
+    "promptChars": 7799,
+    "usage": {
+      "promptTokens": 1947,
+      "completionTokens": 176
+    },
+    "rawOutputHash": "a6207a60135678122dff5449069fd9301677a6ea173ef18bfe5ee6a77431c13c",
+    "parserStatus": "OK",
+    "parserErrors": [],
+    "parserTolerances": [],
+    "generationStatus": "OK",
+    "latencyMs": {
+      "contextAssembly": 0.416,
+      "inference": 5513.507,
+      "validation": 0.247,
+      "total": 5514.271
+    },
+    "inferenceCompletedAtUtc": "2026-10-08T12:17:27.696Z"
+  },
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "notExercised": 0,
+    "total": 4
+  },
+  "checks": {
+    "passed": 13,
+    "total": 13
+  },
+  "requestIds": [
+    "REQ-abb32d19f976b427"
+  ],
+  "scenarios": [
+    {
+      "id": "R1",
+      "title": "Request log: who requested which record",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "backend accepted the request (202)",
+          "ok": true,
+          "detail": "202"
+        },
+        {
+          "name": "request waits for the auditor",
+          "ok": true,
+          "detail": "awaiting-auditor"
+        },
+        {
+          "name": "ledger names the requester",
+          "ok": true,
+          "detail": "{\"identityHash\":\"0d988179d8f8de94d7145aa3f61cd051b61250b0b3a5a46cfe3d950c4d7b78ab\",\"mspId\":\"PoliceMSP\",\"organization\":\"police\",\"role\":\"inspector\",\"stableUserId\":\"PoliceMSP::insp.rathore\",\"username\":\"insp.rathore\"}"
+        },
+        {
+          "name": "ledger names the record, action and purpose",
+          "ok": true,
+          "detail": "REC-FIR-001 annotate investigation"
+        },
+        {
+          "name": "ledger request commits h_J without justification text",
+          "ok": true,
+          "detail": "justification digest checked"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-abb32d19f976b427",
+        "txId": "abb32d19f976b427ef5cff22c10eb39967998eec9e2823a300977ba600194e37",
+        "submittedAtUtc": "2026-10-08T12:17:20.180Z"
+      }
+    },
+    {
+      "id": "R2",
+      "title": "Signed recommendation commitment and off-chain LLM explanation",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "recommendation prepared by the backend",
+          "ok": true,
+          "detail": "committed"
+        },
+        {
+          "name": "LLM produced a valid ALLOW or DENY",
+          "ok": true,
+          "detail": "OK DENY CRED_NOT_ACTIVE"
+        },
+        {
+          "name": "auditor screen receives the justification",
+          "ok": true,
+          "detail": "Step 15 synthetic smoke check; close with FORCE_DENY after verifying the signed recommendation."
+        },
+        {
+          "name": "ledger lifecycle includes the recommendation commitment",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,RECOMMENDATION_COMMITTED"
+        },
+        {
+          "name": "off-chain recommendation matches its commitment",
+          "ok": true,
+          "detail": "{\"status\":\"verified\",\"problems\":[],\"recommendationHash\":\"0e2fba02bb08a2df26e21da83cb411dda3b67bf0bc329cb550b2e9ca8963a816\"}"
+        },
+        {
+          "name": "ledger trail contains no explanation payload",
+          "ok": true,
+          "detail": ""
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-abb32d19f976b427",
+        "recommendation": "DENY",
+        "reasonCode": "CRED_NOT_ACTIVE",
+        "policyRefs": [
+          "GP-CRED:C1@v1",
+          "GP-PURPOSE:C1@v1",
+          "GP-RBAC:C1@v1",
+          "GP-RBAC:C2@v1",
+          "GP-JURIS:C1@v1",
+          "GP-ASSIGN:C1@v1",
+          "GP-CLEAR:C1@v1"
+        ],
+        "modelId": "qwen3-14b-4bit-untuned",
+        "latencyMs": {
+          "contextAssembly": 0.416,
+          "inference": 5513.507,
+          "validation": 0.247,
+          "total": 5514.271
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "title": "Synthetic request closed with FORCE_DENY",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "decision committed",
+          "ok": true,
+          "detail": "201"
+        }
+      ],
+      "evidence": {
+        "requestId": "REQ-abb32d19f976b427",
+        "llm": "DENY",
+        "llmAgreement": "AGREED"
+      }
+    },
+    {
+      "id": "R14",
+      "title": "The ledger commits values and hashes, without explanation, justification or note text",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "REQ-abb32d19f976b427: ledger trail holds no explanation payload",
+          "ok": true,
+          "detail": "ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,RECOMMENDATION_COMMITTED,AUDITOR_DECISION_RECORDED,AGREEMENT_DERIVED,ACCESS_OUTCOME_RECORDED"
+        }
+      ],
+      "evidence": {
+        "requestIds": [
+          "REQ-abb32d19f976b427"
+        ]
+      }
+    }
+  ]
+}

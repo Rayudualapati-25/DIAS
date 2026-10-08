@@ -1,0 +1,231 @@
+
+== 1. Observed channel membership and endorsement policy
+{
+  "members": [
+    "AuditMSP",
+    "CourtMSP",
+    "ForensicsMSP",
+    "PoliceMSP",
+    "ProsecutionMSP"
+  ],
+  "endorsement": {
+    "mod_policy": "Admins",
+    "policy": {
+      "type": 3,
+      "value": {
+        "rule": "MAJORITY",
+        "sub_policy": "Endorsement"
+      }
+    },
+    "version": "0"
+  }
+}
+
+== 2. Peer heights observed sequentially (writes may advance them during inspection)
+{"height":254,"currentBlockHash":"rpmRqpRVrR6btAjQX2iqWwzbRA/R310/uAm0ZeDnfig=","previousBlockHash":"UmHPksNXCvgA4+v9ZiXhrpEbjh/dWkr+Q0sRO1itVLQ=","organization":"police"}
+{"height":254,"currentBlockHash":"rpmRqpRVrR6btAjQX2iqWwzbRA/R310/uAm0ZeDnfig=","previousBlockHash":"UmHPksNXCvgA4+v9ZiXhrpEbjh/dWkr+Q0sRO1itVLQ=","organization":"forensics"}
+{"height":254,"currentBlockHash":"rpmRqpRVrR6btAjQX2iqWwzbRA/R310/uAm0ZeDnfig=","previousBlockHash":"UmHPksNXCvgA4+v9ZiXhrpEbjh/dWkr+Q0sRO1itVLQ=","organization":"prosecution"}
+{"height":254,"currentBlockHash":"rpmRqpRVrR6btAjQX2iqWwzbRA/R310/uAm0ZeDnfig=","previousBlockHash":"UmHPksNXCvgA4+v9ZiXhrpEbjh/dWkr+Q0sRO1itVLQ=","organization":"court"}
+{"height":254,"currentBlockHash":"rpmRqpRVrR6btAjQX2iqWwzbRA/R310/uAm0ZeDnfig=","previousBlockHash":"UmHPksNXCvgA4+v9ZiXhrpEbjh/dWkr+Q0sRO1itVLQ=","organization":"audit"}
+
+== 3. Committed chaincode definition and a decoded current block
+{
+	"sequence": 3,
+	"version": "2.5",
+	"endorsement_plugin": "escc",
+	"validation_plugin": "vscc",
+	"validation_parameter": "EiAvQ2hhbm5lbC9BcHBsaWNhdGlvbi9FbmRvcnNlbWVudA==",
+	"collections": {
+		"config": [
+			{
+				"Payload": {
+					"StaticCollectionConfig": {
+						"name": "evidenceDetails",
+						"member_orgs_policy": {
+							"Payload": {
+								"SignaturePolicy": {
+									"rule": {
+										"Type": {
+											"NOutOf": {
+												"n": 1,
+												"rules": [
+													{
+														"Type": {
+															"SignedBy": 0
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 1
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 2
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 3
+														}
+													}
+												]
+											}
+										}
+									},
+									"identities": [
+										{
+											"principal": "CglQb2xpY2VNU1A="
+										},
+										{
+											"principal": "CgxGb3JlbnNpY3NNU1A="
+										},
+										{
+											"principal": "Cg5Qcm9zZWN1dGlvbk1TUA=="
+										},
+										{
+											"principal": "CghDb3VydE1TUA=="
+										}
+									]
+								}
+							}
+						},
+						"required_peer_count": 1,
+						"maximum_peer_count": 3,
+						"member_only_read": true,
+						"member_only_write": true
+					}
+				}
+			}
+		]
+	},
+	"approvals": {
+		"AuditMSP": true,
+		"CourtMSP": true,
+		"ForensicsMSP": true,
+		"PoliceMSP": true,
+		"ProsecutionMSP": true
+	}
+}
+{"block":"253","transactions":2}
+observed endorsers: AuditMSP, PoliceMSP, ProsecutionMSP
+observed endorsers: AuditMSP, CourtMSP, ProsecutionMSP
+
+== 4. Current DIAS case summaries and decision commitments
+[
+  {
+    "caseId": "CASE-2026-001",
+    "owningAgency": "police",
+    "jurisdiction": "district-north",
+    "status": "under-investigation"
+  },
+  {
+    "caseId": "CASE-2026-002",
+    "owningAgency": "police",
+    "jurisdiction": "district-north",
+    "status": "under-investigation"
+  }
+]
+[
+  {
+    "requestId": "REQ-0f04bee24baa57ad",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "a025f92fb7af6135e7fe11e9e867a7f0a05236fa3e9d9e3d89c2fe45a8d7578b"
+  },
+  {
+    "requestId": "REQ-abb32d19f976b427",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "722a3fae43b9072998767f8f4d271fc1c7ab9e3595949a37e2e51d7f031168ea"
+  },
+  {
+    "requestId": "REQ-699ad5753d578717",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "cab694a3290a40d93129ecba7f74cfdfa68309ab322f0fec22f119610605ac0e"
+  },
+  {
+    "requestId": "REQ-a22428e3b07b50af",
+    "decision": "FORCE_ALLOW",
+    "outcome": "GRANTED",
+    "llmRecommendation": "ALLOW",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "d2e1966f04e847d840f69098d7f78aab2bd783e826c3b0c6de09b4fb4e95133d"
+  },
+  {
+    "requestId": "REQ-3c70c05a42742da0",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "ALLOW",
+    "llmAgreement": "NOT_AGREED",
+    "decisionTxId": "a72516dfb05f859a7e92f1293f8bf519b485b304d52f692a95f62223df6d8461"
+  },
+  {
+    "requestId": "REQ-c1192ac4d762165f",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "ALLOW",
+    "llmAgreement": "NOT_AGREED",
+    "decisionTxId": "85b5574d7395301b7ca40baa36c000df774b6cbe2bb6d20b553099f4e7f8b42b"
+  },
+  {
+    "requestId": "REQ-89789844c1f7d10c",
+    "decision": null,
+    "outcome": "CANCELLED",
+    "llmRecommendation": null,
+    "llmAgreement": null,
+    "decisionTxId": null
+  },
+  {
+    "requestId": "REQ-8bff190faf6a86e8",
+    "decision": null,
+    "outcome": "GRANTED",
+    "llmRecommendation": null,
+    "llmAgreement": null,
+    "decisionTxId": null
+  },
+  {
+    "requestId": "REQ-5b27fe370e0de35d",
+    "decision": "FORCE_ALLOW",
+    "outcome": "GRANTED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "NOT_AGREED",
+    "decisionTxId": "0f9afc98078d1e467587b45138f6fa8196eedad35402ea0ed9d64b93c3cc18c3"
+  },
+  {
+    "requestId": "REQ-09b823865a80b449",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "ALLOW",
+    "llmAgreement": "NOT_AGREED",
+    "decisionTxId": "e54764fbf981e395e9bd19ea36b60e2b5944490e4b498e7f943099b65bf2298a"
+  }
+]
+
+== 5. Running peer and state-database containers
+dev-peer0.court.example.com-diasrecords_2.5-ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210	
+dev-peer0.forensics.example.com-diasrecords_2.5-ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210	
+dev-peer0.police.example.com-diasrecords_2.5-ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210	
+dev-peer0.prosecution.example.com-diasrecords_2.5-ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210	
+dev-peer0.audit.example.com-diasrecords_2.5-ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210	
+peer0.audit.example.com	0.0.0.0:9448->9448/tcp, [::]:9448->9448/tcp, 7051/tcp, 0.0.0.0:11051->11051/tcp, [::]:11051->11051/tcp
+peer0.ai.example.com	0.0.0.0:9449->9449/tcp, [::]:9449->9449/tcp, 7051/tcp, 0.0.0.0:12051->12051/tcp, [::]:12051->12051/tcp
+peer0.prosecution.example.com	0.0.0.0:9051->9051/tcp, [::]:9051->9051/tcp, 7051/tcp, 0.0.0.0:9446->9446/tcp, [::]:9446->9446/tcp
+peer0.forensics.example.com	0.0.0.0:8051->8051/tcp, [::]:8051->8051/tcp, 7051/tcp, 0.0.0.0:9445->9445/tcp, [::]:9445->9445/tcp
+peer0.police.example.com	0.0.0.0:7051->7051/tcp, [::]:7051->7051/tcp, 0.0.0.0:9444->9444/tcp, [::]:9444->9444/tcp
+peer0.court.example.com	0.0.0.0:9447->9447/tcp, [::]:9447->9447/tcp, 7051/tcp, 0.0.0.0:10051->10051/tcp, [::]:10051->10051/tcp
+couchdb-audit	4369/tcp, 9100/tcp, 0.0.0.0:9984->5984/tcp, [::]:9984->5984/tcp
+couchdb-police	4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp, [::]:5984->5984/tcp
+couchdb-prosecution	4369/tcp, 9100/tcp, 0.0.0.0:7984->5984/tcp, [::]:7984->5984/tcp
+couchdb-ai	4369/tcp, 9100/tcp, 0.0.0.0:10984->5984/tcp, [::]:10984->5984/tcp
+couchdb-forensics	4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp, [::]:6984->5984/tcp
+couchdb-court	4369/tcp, 9100/tcp, 0.0.0.0:8984->5984/tcp, [::]:8984->5984/tcp
+
+Read-only evidence saved to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20261008_step15/ledger-inspection-final

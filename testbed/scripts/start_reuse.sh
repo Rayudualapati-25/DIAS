@@ -15,7 +15,7 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-TB="${HOME}/dias-testbed"
+TB="${TB:-${HOME}/dias-testbed}"
 M4="lima-dias-m4"
 IMAGE="dias-backend:testbed"
 API="http://dias-backend:3001/api"
@@ -53,6 +53,8 @@ PY
 done
 
 echo "== 2. wait until the backend has no recommendation in preparation"
+docker --context "${M4}" run --rm --network diasnet "${IMAGE}" node testbed/load/wait-idle.js \
+  || fail "recommendations are still being prepared or committed"
 for attempt in $(seq 1 60); do
   counts="$(docker --context "${M4}" exec dias-backend cat "${TRACE}" | python3 -c '
 import json, sys
@@ -96,8 +98,8 @@ JSON
 echo "== 4. start ${RUN}"
 docker --context "${M4}" rm "${CONTAINER}" > /dev/null 2>&1 || true
 docker --context "${M4}" run -d --name "${CONTAINER}" --network diasnet \
-  -v dias-backend-data:/data:ro -v "${TB}/results:/results" -v "${TB}/reuse:/app/testbed/reuse:ro" \
-  "${IMAGE}" node testbed/reuse/run.js --plan "${PLAN}" --url "${API}" --review-dir /data/dias-reviews \
+  -v "${TB}/results:/results" -v "${TB}/reuse:/app/testbed/reuse:ro" \
+  "${IMAGE}" node testbed/reuse/run.js --plan "${PLAN}" --url "${API}" \
   --out "/results/${RUN}" "${PACE[@]}" > /dev/null
 echo "${RUN}" > "${TB}/logs/${KIND}-run-name"
 if [ "${KIND}" = reuse ]; then

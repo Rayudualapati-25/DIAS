@@ -25,7 +25,7 @@ BASE_CHANNEL ?= crimechannel
 # channel has five organizations: the LLM runs in the application backend.
 DIAS_CHANNEL ?= diaschannel
 DIAS_CC_NAME ?= diasrecords
-DIAS_CC_VERSION ?= 2.2
+DIAS_CC_VERSION ?= 3.0
 DIAS_MODEL_PORT ?= 8081
 DIAS_MODEL_URL ?= http://127.0.0.1:$(DIAS_MODEL_PORT)/v1
 # Serve the untouched base by default. Point at an adapter directory to serve a

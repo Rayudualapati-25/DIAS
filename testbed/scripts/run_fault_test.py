@@ -192,9 +192,9 @@ def main():
         print(f"no Raft leader found (got {leader!r}); the test was not started", file=sys.stderr)
         return 1
     code, cid = docker("m4", "run", "-d", "--name", "loadgen-e7", "--network", "diasnet",
-                       "-v", "dias-backend-data:/data:ro", "-v", "/Users/venkatrayudu/dias-testbed/results:/results",
+                       "-v", "/Users/venkatrayudu/dias-testbed/results:/results",
                        "dias-backend:testbed", "node", "testbed/load/run-steady.js",
-                       "--url", "http://dias-backend:3001/api", "--review-dir", "/data/dias-reviews",
+                       "--url", "http://dias-backend:3001/api",
                        "--out", f"/results/{args.run_name}", "--plan", "fault-plan.json",
                        "--label", "E7 fault test", "--phase", "fault", "--settle", str(SETTLE_S * 1000))
     if code != 0:

@@ -1,0 +1,54 @@
+{
+  "completedAt": "2026-10-08T11:51:19.265Z",
+  "results": [
+    {
+      "dataset": "deterministic_synthetic_53_cases",
+      "baseline": {
+        "requests": 1,
+        "rows": 53,
+        "maxRowsPerResponse": 53
+      },
+      "batched": {
+        "requests": 3,
+        "rows": 53,
+        "maxRowsPerResponse": 20,
+        "batchSizes": [
+          20,
+          20,
+          13
+        ],
+        "exactCoverage": true
+      },
+      "noBatchAblation": {
+        "requests": 1,
+        "maxRowsPerResponse": 53
+      }
+    },
+    {
+      "dataset": "live_local_Fabric_cases",
+      "baseline": {
+        "requests": 1,
+        "rows": 2,
+        "maxRowsPerResponse": 2
+      },
+      "batched": {
+        "requests": 1,
+        "rows": 2,
+        "maxRowsPerResponse": 2,
+        "batchSizes": [
+          2
+        ],
+        "exactCoverage": true
+      },
+      "noBatchAblation": {
+        "requests": 1,
+        "maxRowsPerResponse": 2
+      }
+    }
+  ],
+  "limitations": [
+    "Counts are functional checks, not latency or throughput measurements.",
+    "The host reads the complete QueryCases result for every page.",
+    "Offline cache ablation is exercised separately on Android with real SQLite."
+  ]
+}

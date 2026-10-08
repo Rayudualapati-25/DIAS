@@ -30,14 +30,14 @@ test('an unusable recommendation is denied with a reason, even for an approved b
   }
 });
 
-test('south-district records go to the south SP, the rest to the requester\'s department head', () => {
+test('south-district records go to the south SP, the rest to the north Audit head', () => {
   const south = { record: { jurisdiction: 'district-south' } };
   const north = { record: { jurisdiction: 'district-north' } };
   assert.equal(auditorFor(south, { org: 'court' }), 'sp.south');
-  assert.equal(auditorFor(north, { org: 'court' }), 'dj.north');
+  assert.equal(auditorFor(north, { org: 'court' }), 'sp.north');
   assert.equal(auditorFor(north, { org: 'police' }), 'sp.north');
-  assert.equal(auditorFor(north, { org: 'forensics' }), 'cfo.north');
-  assert.equal(auditorFor(north, { org: 'prosecution' }), 'dp.north');
+  assert.equal(auditorFor(north, { org: 'forensics' }), 'sp.north');
+  assert.equal(auditorFor(north, { org: 'prosecution' }), 'sp.north');
 });
 
 test('an automatic grant is recognised with the status value the contract writes', () => {

@@ -11,7 +11,7 @@ set -euo pipefail
 TB=/testbed
 CHANNEL="${CHANNEL:-diaschannel}"
 CC_NAME="${CC_NAME:-diasrecords}"
-CC_VERSION="${CC_VERSION:-2.3}"
+CC_VERSION="${CC_VERSION:-3.0}"
 CC_SEQUENCE="${CC_SEQUENCE:-1}"
 SRC="${TB}/chaincode-staging/src"
 COLLECTIONS="${TB}/config/collections-config.json"
@@ -28,6 +28,10 @@ peer_env() {
   export CORE_PEER_MSPCONFIGPATH="${TB}/organizations/peerOrganizations/$1.example.com/users/Admin@$1.example.com/msp"
   export CORE_PEER_ADDRESS="peer0.$1.example.com:$3"
 }
+
+mkdir -p "${TB}/channel-artifacts"
+[ -f "${SRC}/index.js" ] || { echo "run prepare-chaincode.sh first" >&2; exit 1; }
+[ ! -e "${PKG}" ] || { echo "package already exists; select a new version label to retain earlier evidence" >&2; exit 1; }
 
 infoln "packaging ${CC_NAME} ${CC_VERSION}"
 peer lifecycle chaincode package "$PKG" --path "$SRC" --lang node --label "${CC_NAME}_${CC_VERSION}"
@@ -82,3 +86,6 @@ peer lifecycle chaincode commit -o orderer1.example.com:7050 --tls --cafile "$OR
   --collections-config "$COLLECTIONS" "${CONN[@]}"
 peer lifecycle chaincode querycommitted --channelID "$CHANNEL" --name "$CC_NAME"
 infoln "${CC_NAME} ${CC_VERSION} committed at sequence ${CC_SEQUENCE}"
+
+peer lifecycle chaincode querycommitted --channelID "$CHANNEL" --name "$CC_NAME" --output json \
+  > "${TB}/channel-artifacts/${CC_NAME}_${CC_VERSION}-committed.json"

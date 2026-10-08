@@ -46,7 +46,8 @@
       ],
       "volumes": [
         "/Users/venkatrayudu/dias-testbed/organizations:/app/network/organizations:ro",
-        "backend-data:/data"
+        "backend-data:/data",
+        "/Users/venkatrayudu/dias-testbed/keys:/run/dias-keys:ro"
       ],
       "extra_hosts": [
         "host.lima.internal:192.168.104.2"

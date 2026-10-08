@@ -1,0 +1,29 @@
+
+== 1. Observed channel membership and endorsement policy
+{
+  "members": [
+    "AuditMSP",
+    "CourtMSP",
+    "ForensicsMSP",
+    "PoliceMSP",
+    "ProsecutionMSP"
+  ],
+  "endorsement": {
+    "mod_policy": "Admins",
+    "policy": {
+      "type": 3,
+      "value": {
+        "rule": "MAJORITY",
+        "sub_policy": "Endorsement"
+      }
+    },
+    "version": "0"
+  }
+}
+
+== 2. Peer heights observed sequentially (writes may advance them during inspection)
+{"height":244,"currentBlockHash":"4beFWPmDf6SXt7TCanb2HJ6hb8tgRyVBEeC82hHhCYY=","previousBlockHash":"jR4zAeW7ilRpgS2threZHNalO1smd2tSnTd7othk8Tc=","organization":"police"}
+{"height":244,"currentBlockHash":"4beFWPmDf6SXt7TCanb2HJ6hb8tgRyVBEeC82hHhCYY=","previousBlockHash":"jR4zAeW7ilRpgS2threZHNalO1smd2tSnTd7othk8Tc=","organization":"forensics"}
+{"height":244,"currentBlockHash":"4beFWPmDf6SXt7TCanb2HJ6hb8tgRyVBEeC82hHhCYY=","previousBlockHash":"jR4zAeW7ilRpgS2threZHNalO1smd2tSnTd7othk8Tc=","organization":"prosecution"}
+{"height":244,"currentBlockHash":"4beFWPmDf6SXt7TCanb2HJ6hb8tgRyVBEeC82hHhCYY=","previousBlockHash":"jR4zAeW7ilRpgS2threZHNalO1smd2tSnTd7othk8Tc=","organization":"court"}
+{"height":244,"currentBlockHash":"4beFWPmDf6SXt7TCanb2HJ6hb8tgRyVBEeC82hHhCYY=","previousBlockHash":"jR4zAeW7ilRpgS2threZHNalO1smd2tSnTd7othk8Tc=","organization":"audit"}

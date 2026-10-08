@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: v3 hashes and committed recommendation values are allowed; plaintext explanation is rejected
+ok 1 - v3 hashes and committed recommendation values are allowed; plaintext explanation is rejected
+  ---
+  duration_ms: 0.68125
+  type: 'test'
+  ...
+# Subtest: acceptance expects the v3 commitment lifecycle and verifies the off-chain object
+ok 2 - acceptance expects the v3 commitment lifecycle and verifies the off-chain object
+  ---
+  duration_ms: 0.282959
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 37.516125

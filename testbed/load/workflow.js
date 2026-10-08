@@ -8,12 +8,11 @@
  *   review -> auditor commits the decision that follows the recommendation.
  *
  * The auditor is automated (it follows the recommendation as soon as it is
- * ready), so these times contain no human review time. Readiness is observed in
- * the backend's off-chain review store, which is mounted read-only; polling the
- * API instead would add one ledger audit write per poll.
+ * ready), so these times contain no human review time. Readiness is observed through the batched preparation-status API. That route
+ * makes no ledger call and writes no successful-read audit transaction. Review
+ * payloads stay encrypted and are opened once through the authorized API.
  */
 
-const fs = require('fs');
 const path = require('path');
 const { performance } = require('perf_hooks');
 
@@ -28,16 +27,17 @@ const round = (value) => (value == null ? null : Math.round(value * 1000) / 1000
 
 const { bundle } = loadBundle(path.join(APP, 'policies/dias-governance-policy-v1.json'));
 const RECORDS = new Map(world.RECORDS.map((record) => [record.recordId, record]));
-const DEPARTMENT_HEAD = Object.freeze({
-  police: 'sp.north', forensics: 'cfo.north', prosecution: 'dp.north', court: 'dj.north',
-});
-const AUDITORS = ['sp.north', 'sp.south', 'cfo.north', 'dp.north', 'dj.north'];
+const AUDITORS = ['sp.north', 'sp.south', 'dj.north'];
 
-/** The district head of the requester's department; south-district files go to the south SP. */
+/** Independent Audit district head; avoid reviewing the requester's own request. */
 function auditorFor(request, user) {
-  const record = RECORDS.get(request.recordId);
-  if (record && record.jurisdiction === 'district-south') return 'sp.south';
-  return DEPARTMENT_HEAD[user.org];
+  const record = request.record || RECORDS.get(request.recordId);
+  const auditor = record && record.jurisdiction === 'district-south' ? 'sp.south' : 'sp.north';
+  if ((user.username || request.username) === auditor) {
+    if (auditor === 'sp.south') throw new Error('no alternate south-district auditor in the testbed fixtures');
+    return 'dj.north';
+  }
+  return auditor;
 }
 
 function createClient(baseUrl) {
@@ -46,7 +46,7 @@ function createClient(baseUrl) {
   async function login(username) {
     if (tokens.has(username)) return tokens.get(username);
     const response = await fetch(`${baseUrl}/auth/login`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username }),
+      signal: AbortSignal.timeout(30000), method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username }),
     });
     const json = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(`login ${username}: ${response.status} ${json.error}`);
@@ -58,7 +58,7 @@ function createClient(baseUrl) {
     const token = await login(username);
     const startedAt = now();
     const response = await fetch(`${baseUrl}${route}`, {
-      method,
+      method, signal: AbortSignal.timeout(180000),
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
@@ -72,45 +72,73 @@ function createClient(baseUrl) {
     review: (requestId, auditor) => api('GET', `/access/auditor/${requestId}`, auditor),
     decide: (requestId, auditor, body) => api('POST', `/access/auditor/${requestId}/decision`, auditor, body),
     readRequest: (requestId, username) => api('GET', `/access/request/${requestId}`, username),
+    trail: (requestId, auditor) => api('GET', `/audit/request-trail/${requestId}`, auditor),
+    preparationStatus: (ids, auditor) => api('GET', `/access/auditor/pending/status?ids=${ids.map(encodeURIComponent).join(',')}`, auditor),
     pending: (auditor) => api('GET', '/access/auditor/pending', auditor),
   };
 }
 
-/** Watches the review store for recommendations that become ready. */
-function createWatcher(reviewDir, intervalMs = 100) {
+/** Poll readiness in bounded batches, without decrypting or opening reviews. */
+function createWatcher(client, intervalMs = 1000) {
+  if (!client || typeof client.preparationStatus !== 'function') throw new Error('watcher requires a status API client');
   const waiting = new Map();
   let timer = null;
-
-  function tick() {
-    for (const [requestId, waiter] of waiting) {
-      let entry = null;
-      try {
-        entry = JSON.parse(fs.readFileSync(path.join(reviewDir, `${requestId}.json`), 'utf8'));
-      } catch (error) {
-        if (error.code !== 'ENOENT' && !(error instanceof SyntaxError)) {
+  let ticking = false;
+  async function tick() {
+    if (ticking) return;
+    ticking = true;
+    try {
+      const groups = new Map();
+      for (const [requestId, waiter] of waiting) {
+        if (now() >= waiter.deadline) {
           waiting.delete(requestId);
-          waiter.reject(error);
+          waiter.reject(new Error(`recommendation ${requestId} not ready in time`));
           continue;
         }
+        if (!groups.has(waiter.auditor)) groups.set(waiter.auditor, []);
+        groups.get(waiter.auditor).push(requestId);
       }
-      if (entry && entry.recommendationState === 'ready') {
-        waiting.delete(requestId);
-        waiter.resolve({ entry, observedAt: now() });
-      } else if (now() > waiter.deadline) {
-        waiting.delete(requestId);
-        waiter.reject(new Error(`recommendation ${requestId} not ready in time`));
+      for (const [auditor, ids] of groups) {
+        for (let offset = 0; offset < ids.length; offset += 50) {
+          const batch = ids.slice(offset, offset + 50);
+          try {
+            const response = await client.preparationStatus(batch, auditor);
+            if (response.status !== 200 || !Array.isArray(response.data)) {
+              throw new Error(`preparation status ${response.status}: ${response.error || 'invalid response'}`);
+            }
+            for (const requestId of batch) {
+              const waiter = waiting.get(requestId);
+              if (!waiter) continue;
+              if (now() >= waiter.deadline) {
+                waiting.delete(requestId);
+                waiter.reject(new Error(`recommendation ${requestId} not ready in time`));
+                continue;
+              }
+              const status = response.data.find(item => item.requestId === requestId);
+              if (!status || typeof status.preparing !== 'boolean') throw new Error(`missing status for ${requestId}`);
+              if (!status.preparing) {
+                waiting.delete(requestId);
+                waiter.resolve({ observedAt: now() });
+              }
+            }
+          } catch (error) {
+            for (const requestId of batch) {
+              const waiter = waiting.get(requestId);
+              if (waiter) { waiting.delete(requestId); waiter.reject(error); }
+            }
+          }
+        }
       }
-    }
-    if (waiting.size === 0) {
-      clearInterval(timer);
-      timer = null;
+    } finally {
+      ticking = false;
+      if (!waiting.size) { clearInterval(timer); timer = null; }
     }
   }
-
   return {
-    wait(requestId, timeoutMs) {
+    wait(requestId, timeoutMs, auditor = 'sp.north') {
       return new Promise((resolve, reject) => {
-        waiting.set(requestId, { resolve, reject, deadline: now() + timeoutMs });
+        if (waiting.has(requestId)) { reject(new Error(`already watching ${requestId}`)); return; }
+        waiting.set(requestId, { resolve, reject, auditor, deadline: now() + timeoutMs });
         if (!timer) timer = setInterval(tick, intervalMs);
       });
     },
@@ -155,14 +183,8 @@ async function runWorkflow({
     row.requestId = submitted.data.requestId;
 
     row.stage = 'recommendation';
-    const { entry, observedAt } = await watcher.wait(row.requestId, timeoutMs);
+    const { observedAt } = await watcher.wait(row.requestId, timeoutMs, auditor);
     row.recommendationReadyMs = round(observedAt - t1);
-    row.verifiedRequestHash = entry.verifiedRequestHash;
-    row.plannedFactsMatch = entry.verifiedRequestHash === request.verifiedRequestHash;
-    const reference = referenceFor(entry.verifiedRequest);
-    row.expected = reference.recommendation;
-    row.expectedReasonCode = reference.reasonCode;
-
     row.stage = 'review';
     if (auditorListsPending) {
       const pending = await client.pending(auditor);
@@ -177,6 +199,17 @@ async function runWorkflow({
       row.error = `review ${reviewed.status}: ${reviewed.error}`;
       return row;
     }
+    const entry = reviewed.data.request;
+    row.verifiedRequestHash = entry.verifiedRequestHash;
+    row.plannedFactsMatch = entry.verifiedRequestHash === request.verifiedRequestHash;
+    const reference = referenceFor(entry.verifiedRequest);
+    row.expected = reference.recommendation;
+    row.expectedReasonCode = reference.reasonCode;
+    row.recommendationState = reviewed.data.recommendationState;
+    row.integrityStatus = reviewed.data.integrity && reviewed.data.integrity.status;
+    if (reviewed.data.commitment && row.integrityStatus !== 'verified') {
+      throw new Error(`recommendation integrity: ${row.integrityStatus}`);
+    }
     const recommendation = reviewed.data.recommendation || {};
     row.generationStatus = recommendation.generationStatus || null;
     row.recommendation = recommendation.recommendation || null;
@@ -184,7 +217,10 @@ async function runWorkflow({
     row.policyRefs = recommendation.policyRefs || [];
     row.modelLatencyMs = recommendation.provenance ? recommendation.provenance.latencyMs : null;
     row.adapterHash = recommendation.provenance ? recommendation.provenance.adapterHash : null;
-    const valid = row.generationStatus === 'OK' && ['ALLOW', 'DENY'].includes(row.recommendation);
+    row.modelId = recommendation.provenance ? recommendation.provenance.modelId : null;
+    row.promptVersion = recommendation.provenance ? recommendation.provenance.promptVersion : null;
+    if (extra.phase === 'smoke') row.modelProvenance = recommendation.provenance || null;
+    const valid = row.recommendationState === 'committed' && row.integrityStatus === 'verified' && row.generationStatus === 'OK' && ['ALLOW', 'DENY'].includes(row.recommendation);
     row.validRecommendation = valid;
     row.correct = valid ? row.recommendation === row.expected : false;
     row.reasonCorrect = valid ? row.reasonCode === row.expectedReasonCode : false;

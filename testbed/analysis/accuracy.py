@@ -200,13 +200,19 @@ def plot_adversarial(adv, out):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", required=True)
+    parser.add_argument("--baseline", help="baseline evaluation directory (omit only to reproduce the archived run)")
+    parser.add_argument("--proposed", help="proposed evaluation directory (omit only to reproduce the archived run)")
     args = parser.parse_args()
+    runs = {
+        "Untuned Qwen3-14B": args.baseline or RUNS["Untuned Qwen3-14B"],
+        "V7 (fine-tuned)": args.proposed or RUNS["V7 (fine-tuned)"],
+    }
     os.makedirs(args.out, exist_ok=True)
-    result = {"sets": {}, "paired": {}, "plain_words": [], "per_reason_v7": None}
+    result = {"source_runs": runs, "sets": {}, "paired": {}, "plain_words": [], "per_reason_v7": None}
     for set_name in SETS:
         result["sets"][set_name] = {}
         rows_by_model = {}
-        for model, run in RUNS.items():
+        for model, run in runs.items():
             rows = load(run, set_name)
             rows_by_model[model] = rows
             result["sets"][set_name][model] = score(rows)
@@ -245,8 +251,8 @@ def main():
         result["plain_words"].append(
             f"{model}: of {s['expected_DENY']} adversarial requests the policy denies, {s['DENY_to_ALLOW']} got through "
             f"(wrongly granted), {s['DENY_to_DENY']} were stopped, {s['DENY_unusable']} unusable.")
-    result["per_reason_v7"] = per_reason(load(RUNS["V7 (fine-tuned)"], "test-reason-balanced"))
-    result["per_reason_untuned"] = per_reason(load(RUNS["Untuned Qwen3-14B"], "test-reason-balanced"))
+    result["per_reason_v7"] = per_reason(load(runs["V7 (fine-tuned)"], "test-reason-balanced"))
+    result["per_reason_untuned"] = per_reason(load(runs["Untuned Qwen3-14B"], "test-reason-balanced"))
     with open(os.path.join(args.out, "accuracy.json"), "w") as handle:
         json.dump(result, handle, indent=2)
     with open(os.path.join(args.out, "accuracy-sets.csv"), "w", newline="") as handle:

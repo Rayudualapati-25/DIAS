@@ -11,14 +11,14 @@
  * under load: decision, reason code and the hash of the raw model output.
  *
  * Usage: node testbed/load/replay-errors.js --rows /results/<e5>/requests.jsonl \
- *          --review-dir /data/dias-reviews --out /results/<e5>/replay-errors.json
+ *          --out /results/<e5>/replay-errors.json
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const APP = path.resolve(__dirname, '..', '..');
-const { createDiasRuntime } = require(path.join(APP, 'backend/src/dias/runtime'));
+const { getDiasRuntime } = require(path.join(APP, 'backend/src/dias/runtime'));
 
 function args(argv) {
   const out = {};
@@ -30,19 +30,33 @@ function args(argv) {
 
 async function main() {
   const opts = args(process.argv.slice(2));
+  if (!opts.rows || !opts.out) throw new Error('--rows and --out are required');
+  if (fs.existsSync(opts.out)) throw new Error('replay output exists; retain the earlier evidence');
   const rows = fs.readFileSync(opts.rows, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
   const wrong = rows.filter((row) => row.phase === 'measured' && row.validRecommendation && !row.correct);
-  const { recommender } = createDiasRuntime();
+  if (opts['review-dir']) {
+    throw new Error('set DIAS_REVIEW_STORE_DIR and the existing encryption keys; --review-dir plaintext reads are retired');
+  }
+  const { recommender, store } = getDiasRuntime();
   const results = [];
   for (const row of wrong) {
-    const entry = JSON.parse(fs.readFileSync(path.join(opts['review-dir'], `${row.requestId}.json`), 'utf8'));
+    const entry = store.read(row.requestId);
+    if (!entry) throw new Error(`missing encrypted review ${row.requestId}`);
     const underLoad = entry.recommendation;
     const replay = await recommender.recommend({
       requestId: `${row.requestId}-replay`,
       verifiedRequest: entry.verifiedRequest,
       justification: entry.justification,
+      requesterClaims: entry.requesterClaims,
     });
     const alone = replay.recommendation || {};
+    if (replay.generationStatus !== 'OK') throw new Error(`replay ${row.requestId}: ${replay.generationStatus}`);
+    const provenance = ['modelId', 'baseModelRevision', 'adapterHash', 'promptVersion', 'policyBundleHash'];
+    for (const field of provenance) {
+      if (underLoad.provenance[field] !== replay.provenance[field]) {
+        throw new Error(`replay ${row.requestId}: ${field} differs; this is not a determinism check`);
+      }
+    }
     results.push({
       requestId: row.requestId,
       level: row.level,

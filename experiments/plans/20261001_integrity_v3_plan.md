@@ -44,7 +44,7 @@
 | 12 | Reduce trust in the backend. **Amended 2026-10-08:** the backend asks the LLM itself (see Amendments) | Signed recommendation provenance; request-to-recommendation test |
 | 13 | Strengthen privacy controls | Restricted histories, evidence, explanations and decision log |
 | 14 | Withdrawn: retain only the LLM explanation | Oracle absent from runtime; counterfactual computation, panels and extra review request removed |
-| 15 | Update backend, frontend and testbed | All components use the new schemas and transactions |
+| 15 | Update backend, frontend and testbed | Script integration done (iteration 073): focused/unit, staging and bounded Mac checks pass after Android connection gate (iteration 072). Four-VM execution remains step 16. |
 | 16 | Complete verification | Full test list below |
 | 17 | Rerun affected experiments | Offline experiments now; the rest prepared for the Mac |
 | 18 | Update the manuscript | Outside this repository; not part of this branch |

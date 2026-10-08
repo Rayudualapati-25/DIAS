@@ -1,0 +1,141 @@
+{
+  "completedAtUtc": "2026-10-08T12:36:38.179379+00:00",
+  "connectionGate": true,
+  "step15": "script upgrade completed; four-VM execution pending",
+  "regression": {
+    "chaincode": 341,
+    "backend": 319,
+    "policies": 27,
+    "frontend": 77,
+    "dataset": 104,
+    "total": 868,
+    "failed": 0
+  },
+  "scriptTests": {
+    "passed": 25,
+    "failed": 0
+  },
+  "manifestTests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "liveSmoke": {
+    "pass": 4,
+    "fail": 0,
+    "notExercised": 0,
+    "total": 4
+  },
+  "liveChecks": {
+    "passed": 17,
+    "total": 17
+  },
+  "sourceChaincodeVersion": "3.0",
+  "sourceNpmVersion": "3.0.0",
+  "deployedChaincode": {
+    "sequence": 3,
+    "version": "2.5",
+    "endorsement_plugin": "escc",
+    "validation_plugin": "vscc",
+    "validation_parameter": "EiAvQ2hhbm5lbC9BcHBsaWNhdGlvbi9FbmRvcnNlbWVudA==",
+    "collections": {
+      "config": [
+        {
+          "Payload": {
+            "StaticCollectionConfig": {
+              "name": "evidenceDetails",
+              "member_orgs_policy": {
+                "Payload": {
+                  "SignaturePolicy": {
+                    "rule": {
+                      "Type": {
+                        "NOutOf": {
+                          "n": 1,
+                          "rules": [
+                            {
+                              "Type": {
+                                "SignedBy": 0
+                              }
+                            },
+                            {
+                              "Type": {
+                                "SignedBy": 1
+                              }
+                            },
+                            {
+                              "Type": {
+                                "SignedBy": 2
+                              }
+                            },
+                            {
+                              "Type": {
+                                "SignedBy": 3
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "identities": [
+                      {
+                        "principal": "CglQb2xpY2VNU1A="
+                      },
+                      {
+                        "principal": "CgxGb3JlbnNpY3NNU1A="
+                      },
+                      {
+                        "principal": "Cg5Qcm9zZWN1dGlvbk1TUA=="
+                      },
+                      {
+                        "principal": "CghDb3VydE1TUA=="
+                      }
+                    ]
+                  }
+                }
+              },
+              "required_peer_count": 1,
+              "maximum_peer_count": 3,
+              "member_only_read": true,
+              "member_only_write": true
+            }
+          }
+        }
+      ]
+    },
+    "approvals": {
+      "AuditMSP": true,
+      "CourtMSP": true,
+      "ForensicsMSP": true,
+      "PoliceMSP": true,
+      "ProsecutionMSP": true
+    }
+  },
+  "model": "qwen3-14b-4bit-untuned",
+  "adapterActive": false,
+  "chaincodeStagingSha256": "3ce5c404d51066ed180cc1e9846c72dcd242415c7d84607a018c8c3591098a91",
+  "initialTreeDirty": true,
+  "olderMobileWork": "preserved uncommitted",
+  "notRun": [
+    "four-VM backend image build and deployment",
+    "full R1-R14 acceptance on fresh v3 fixtures",
+    "physical-phone/tunnel connectivity",
+    "research load experiments and accuracy reruns",
+    "model training or activation",
+    "end-to-end performance comparison"
+  ],
+  "repositoryCheck": {
+    "passed": false,
+    "reason": "pre-existing retained 69.8 MiB September raw transactions.jsonl exceeds publication size cap"
+  },
+  "cleanIndexVerification": {
+    "kind": "full exported staged-index source, existing installed dependencies reused",
+    "chaincode": 341,
+    "backend": 313,
+    "policies": 27,
+    "frontend": 77,
+    "dataset": 104,
+    "total": 862,
+    "failed": 0,
+    "scriptPassed": 25,
+    "uncommittedMobileIncluded": false
+  }
+}

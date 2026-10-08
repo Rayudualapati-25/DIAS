@@ -1,0 +1,6 @@
+PASS          R1  Request log: who requested which record
+PASS          R2  Signed recommendation commitment and off-chain LLM explanation
+PASS          S3  Synthetic request closed with FORCE_DENY
+PASS          R14  The ledger commits values and hashes, without explanation, justification or note text
+
+4/4 scenarios pass, 13/13 checks; written to experiments/runs/20261008_step15/live-smoke-fixed

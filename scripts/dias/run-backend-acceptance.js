@@ -22,7 +22,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const { createClient, sleep } = require('./acceptance-client');
+const { check, createClient, scenario, sleep, stagesOf } = require('./acceptance-client');
 const flow = require('./acceptance-scenarios');
 const safeguards = require('./acceptance-safeguards');
 
@@ -52,7 +52,10 @@ async function waitForHealth(url, timeoutMs) {
 /** A second backend on the same ledger whose model endpoint cannot be reached. */
 async function startOfflineModelBackend(outDir) {
   const logFile = fs.openSync(path.join(outDir, 'offline-model-backend.log'), 'a');
-  const child = spawn(process.execPath, [path.join(REPO, 'backend', 'src', 'server.js')], {
+  // This isolated test process serves only requests submitted to it. It must
+  // not start the normal expiry/recovery workers against the shared ledger.
+  const child = spawn(process.execPath, ['-e',
+    `require(${JSON.stringify(path.join(REPO, 'backend', 'src', 'server.js'))}).app.listen(process.env.PORT, '127.0.0.1')`], {
     env: {
       ...process.env,
       PORT: String(OFFLINE_PORT),
@@ -64,7 +67,14 @@ async function startOfflineModelBackend(outDir) {
     stdio: ['ignore', logFile, logFile],
   });
   const url = `http://localhost:${OFFLINE_PORT}/api`;
-  await waitForHealth(url, 60000);
+  try {
+    await waitForHealth(url, 60000);
+  } catch (error) {
+    child.kill('SIGTERM');
+    throw error;
+  } finally {
+    fs.closeSync(logFile);
+  }
   return { url, stop: () => child.kill('SIGTERM') };
 }
 
@@ -151,6 +161,32 @@ async function requireDemoData(client) {
   }
 }
 
+/** Bounded current-host check: deny one synthetic request; create no reusable grant. */
+async function runSmoke(client, record) {
+  const spec = { username: 'insp.rathore', body: {
+    recordId: 'REC-FIR-001', action: 'annotate', purpose: 'investigation',
+    justification: 'Step 15 synthetic smoke check; close with FORCE_DENY after verifying the signed recommendation.',
+  } };
+  const first = await flow.requestLog(client, spec);
+  record(first.result);
+  if (!first.requestId) throw new Error('smoke request was not created');
+  const { review, result } = await flow.backendRecommendation(client, first.requestId);
+  record(result);
+  const closed = await flow.closeOne(client, { requestId: first.requestId, label: 'step 15 smoke' });
+  const trail = await client.trail(first.requestId);
+  record(scenario('S3', 'Synthetic request closed with FORCE_DENY', [
+    check('decision committed', closed.status === 201, closed.status),
+    check('outcome is DENIED', closed.outcome === 'DENIED', closed.outcome),
+    check('no reusable authorization created', closed.authorization === null, String(closed.authorization)),
+    check('agreement matches the committed recommendation', closed.llmAgreement ===
+      (closed.llm === 'DENY' ? 'AGREED' : closed.llm === 'ALLOW' ? 'NOT_AGREED' : 'NO_RECOMMENDATION'), closed.llmAgreement),
+    check('decision lifecycle includes the derived agreement', trail.status === 200 &&
+      stagesOf(trail.data).includes('AGREEMENT_DERIVED'), stagesOf(trail.data || {}).join(',')),
+  ], { requestId: first.requestId, llm: flow.llmValue(review), llmAgreement: closed.llmAgreement }));
+  record(await safeguards.noLlmOnLedger(client, [first.requestId]));
+  return review;
+}
+
 async function main() {
   const outDir = newRunDir(argValue('--out'));
   const log = runnerLog(outDir);
@@ -166,18 +202,23 @@ async function main() {
   };
   const startedAtUtc = new Date().toISOString();
 
-  const { deny, override, denySpec } = await runFlow(client, record);
-  record(await safeguards.revocationAndExpiry(client, denySpec, override.authorization));
-  record(await safeguards.selfDecision(client));
-  record(await safeguards.changedFacts(client));
-  const offline = await startOfflineModelBackend(outDir);
-  try {
-    record(await safeguards.noRecommendation(recordingClient(createClient(offline.url), requestIds)));
-  } finally {
-    offline.stop();
+  let smokeReview = null;
+  if (process.argv.includes('--smoke')) {
+    smokeReview = await runSmoke(client, record);
+  } else {
+    const { deny, override, denySpec } = await runFlow(client, record);
+    record(await safeguards.revocationAndExpiry(client, denySpec, override.authorization));
+    record(await safeguards.selfDecision(client));
+    record(await safeguards.changedFacts(client));
+    const offline = await startOfflineModelBackend(outDir);
+    try {
+      record(await safeguards.noRecommendation(recordingClient(createClient(offline.url), requestIds)));
+    } finally {
+      offline.stop();
+    }
+    record(await safeguards.accessLog(client, deny && deny.requestId, 'NOT_AGREED'));
+    record(await safeguards.noLlmOnLedger(client, requestIds));
   }
-  record(await safeguards.accessLog(client, deny && deny.requestId, 'NOT_AGREED'));
-  record(await safeguards.noLlmOnLedger(client, requestIds));
 
   const count = (status) => scenarios.filter((item) => item.status === status).length;
   const report = {
@@ -185,6 +226,8 @@ async function main() {
     startedAtUtc,
     finishedAtUtc: new Date().toISOString(),
     apiUrl: API_URL,
+    mode: process.argv.includes('--smoke') ? 'bounded-current-host-smoke' : 'full-acceptance',
+    modelProvenance: smokeReview && smokeReview.recommendation && smokeReview.recommendation.provenance,
     summary: { pass: count('PASS'), fail: count('FAIL'), notExercised: count('NOT EXERCISED'), total: scenarios.length },
     checks: {
       passed: scenarios.flatMap((item) => item.checks).filter((item) => item.ok).length,
@@ -199,7 +242,9 @@ async function main() {
   process.exitCode = report.summary.fail === 0 && report.summary.notExercised === 0 ? 0 : 1;
 }
 
-main().catch((error) => {
+if (require.main === module) main().catch((error) => {
   console.error(`[acceptance] ${error.stack || error.message}`);
   process.exit(1);
 });
+
+module.exports = { newRunDir, runSmoke };

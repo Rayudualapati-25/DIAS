@@ -247,6 +247,7 @@ def app_services():
             "volumes": [
                 f"{TB}/organizations:/app/network/organizations:ro",
                 "backend-data:/data",
+                f"{TB}/keys:/run/dias-keys:ro",
             ],
             "extra_hosts": [f"host.lima.internal:{HOST_GATEWAY}"],
             "ports": ["13001:3001"],

@@ -1,0 +1,8 @@
+PASS          R1  Request log: who requested which record
+FAIL          R2  Signed recommendation commitment and off-chain LLM explanation
+      x ledger trail contains no explanation payload: offChainVerification.justification
+PASS          S3  Synthetic request closed with FORCE_DENY
+FAIL          R14  The ledger commits values and hashes, without explanation, justification or note text
+      x REQ-699ad5753d578717: ledger trail holds no explanation payload: ACCESS_REQUEST_SUBMITTED,DYNAMIC_AUTHORIZATION_CHECKED,RECOMMENDATION_COMMITTED,AUDITOR_DECISION_RECORDED,AGREEMENT_DERIVED,ACCESS_OUTCOME_RECORDED
+
+2/4 scenarios pass, 11/13 checks; written to experiments/runs/20261008_step15/live-smoke

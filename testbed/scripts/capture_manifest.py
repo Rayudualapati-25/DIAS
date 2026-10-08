@@ -4,23 +4,26 @@ code snapshots and git state. Written next to the results so every number can
 be traced to the software that produced it.
 
 Usage: python3 capture_manifest.py --out <manifest.json>
+       --chaincode-definition <querycommitted.json> --model-evidence <smoke.json>
 """
 
 import argparse
 import hashlib
 import json
 import os
+from pathlib import Path
 import platform
+import re
 import subprocess
 import sys
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-TB = os.path.expanduser("~/dias-testbed")
+TB = os.path.expanduser(os.environ.get("TB", "~/dias-testbed"))
 ADAPTER = os.path.join(REPO, "LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/adapters.safetensors")
 
 
 def run(*cmd, cwd=None):
-    result = subprocess.run(list(cmd), capture_output=True, text=True, cwd=cwd)
+    result = subprocess.run(list(cmd), capture_output=True, text=True, cwd=cwd, check=True)
     return result.stdout.strip()
 
 
@@ -57,7 +60,29 @@ def vm(machine):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", required=True)
+    parser.add_argument("--chaincode-definition", required=True,
+                        help="fresh querycommitted JSON from the target testbed channel")
+    parser.add_argument("--model-evidence", required=True,
+                        help="passing testbed smoke JSON that verifies the served adapter")
     args = parser.parse_args()
+    if os.path.exists(args.out):
+        raise ValueError("output already exists; retain the earlier manifest")
+    with open(args.chaincode_definition) as handle:
+        definition = json.load(handle)
+    if not definition.get("version") or not definition.get("sequence"):
+        raise ValueError("chaincode definition must include its observed version and sequence")
+    with open(args.model_evidence) as handle:
+        model_report = json.load(handle)
+    model = model_report.get("modelProvenance")
+    if not model or not model.get("modelId"):
+        raise ValueError("model evidence must contain actual recommendation provenance")
+    summary = model_report.get("summary", {})
+    if summary.get("fail", summary.get("failed", 1)) != 0:
+        raise ValueError("model evidence must be a passing smoke run")
+    expected_adapter = model_report.get("expectedAdapterHash") or ""
+    if not re.fullmatch(r"[a-f0-9]{64}", expected_adapter) or expected_adapter != model.get("adapterHash"):
+        raise ValueError("testbed smoke must verify the adapter actually served")
+
     manifest = {
         "captured_utc": run("date", "-u", "+%Y-%m-%dT%H:%M:%SZ"),
         "host": {
@@ -81,31 +106,28 @@ def main():
             "endorsement_policy": "MAJORITY Endorsement (3 of 5)",
             "configtx_sha256": sha256_file(os.path.join(REPO, "testbed/config/configtx.yaml")),
             "chaincode": {
-                "name": "diasrecords", "version": "2.3", "sequence": 1,
-                "package_sha256": open(os.path.join(TB, "channel-artifacts/diasrecords_2.3.sha256")).read().split()[0],
-                "source_tree_sha256": open(os.path.join(TB, "chaincode-staging/SOURCE_SHA256")).read().split()[-1],
-                "on_chain": "request facts and hashes; auditor decision with the LLM recommendation value "
-                            "(ALLOW/DENY/UNAVAILABLE) and the agreement the contract derives from both",
+                "name": "diasrecords", "version": definition["version"], "sequence": definition["sequence"],
+                "definition_sha256": sha256_file(args.chaincode_definition),
+                "package_sha256": Path(TB, f"channel-artifacts/diasrecords_{definition['version']}.sha256").read_text().split()[0],
+                "staged_source_tree_sha256": Path(TB, "chaincode-staging/SOURCE_SHA256").read_text().split()[-1],
+                "on_chain": "verified context and claims digests; signed recommendation value and status; "
+                            "auditor decision and note digest; agreement derived by the contract",
                 "off_chain": "justification text, the LLM's reason text, reason code, clause references, provenance",
             },
         },
         "backend": {
             "image": "dias-backend:testbed",
-            "image_source_sha256_now": open(os.path.join(TB, "build/BACKEND_SOURCE_SHA256")).read().strip(),
+            "image_source_sha256_now": Path(TB, "build/BACKEND_SOURCE_SHA256").read_text().strip(),
             "trace": "DIAS_TRACE_FILE on (timing of every ledger call, queue and model call)",
         },
         "model": {
-            "server": "mlx_lm.server 0.31.3 on the Mac GPU, 127.0.0.1:8081, HF_HUB_OFFLINE=1",
-            "base_model": "mlx-community/Qwen3-14B-4bit",
-            "base_revision": run("cat", os.path.expanduser("~/.cache/huggingface/hub/models--mlx-community--Qwen3-14B-4bit/refs/main")),
-            "adapter": "qwen3-14b-dias-lora-v7",
-            "adapter_sha256": sha256_file(ADAPTER),
-            "decoding": {"temperature": 0, "top_p": 1, "max_tokens": 512, "thinking": "disabled"},
-            "prompt_cache": "server default (10 entries); every request in a run has distinct facts",
-            "workers": "1 (the backend answers recommendations one at a time)",
+            "observed_recommendation_provenance": model,
+            "evidence_sha256": sha256_file(args.model_evidence),
+            "v7_adapter_file_sha256": sha256_file(ADAPTER) if os.path.exists(ADAPTER) else None,
+            "limitation": "Provenance is reported by the backend; the smoke checks its adapterHash against the supplied served-file digest.",
         },
         "plans": {
-            "burst_and_steady_sha256": json.load(open(os.path.join(REPO, "testbed/load/generated/plan-meta.json")))["planSha256"],
+            "burst_and_steady_sha256": json.loads(Path(REPO, "testbed/load/generated/plan-meta.json").read_text())["planSha256"],
             "fault_plan_sha256": sha256_file(os.path.join(REPO, "testbed/load/generated/fault-plan.json")),
         },
         "git": {

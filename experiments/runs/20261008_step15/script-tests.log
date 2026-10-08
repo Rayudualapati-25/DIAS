@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: privacy checks separate backend verification from committed ledger fields
+ok 1 - privacy checks separate backend verification from committed ledger fields
+  ---
+  duration_ms: 0.704417
+  type: 'test'
+  ...
+# Subtest: v3 hashes and committed recommendation values are allowed; plaintext explanation is rejected
+ok 2 - v3 hashes and committed recommendation values are allowed; plaintext explanation is rejected
+  ---
+  duration_ms: 0.131167
+  type: 'test'
+  ...
+# Subtest: acceptance expects the v3 commitment lifecycle and verifies the off-chain object
+ok 3 - acceptance expects the v3 commitment lifecycle and verifies the off-chain object
+  ---
+  duration_ms: 0.213208
+  type: 'test'
+  ...
+# Subtest: all requesting departments route to the independent Audit district head
+ok 4 - all requesting departments route to the independent Audit district head
+  ---
+  duration_ms: 0.433375
+  type: 'test'
+  ...
+# Subtest: watcher polls status in groups of at most 50 without opening reviews or files
+ok 5 - watcher polls status in groups of at most 50 without opening reviews or files
+  ---
+  duration_ms: 4.810625
+  type: 'test'
+  ...
+# Subtest: watcher exposes API failures instead of pretending readiness
+ok 6 - watcher exposes API failures instead of pretending readiness
+  ---
+  duration_ms: 3.074542
+  type: 'test'
+  ...
+# Subtest: a recommendation still being signed times out
+ok 7 - a recommendation still being signed times out
+  ---
+  duration_ms: 10.884416
+  type: 'test'
+  ...
+# Subtest: a status response arriving after the deadline cannot report readiness
+ok 8 - a status response arriving after the deadline cannot report readiness
+  ---
+  duration_ms: 31.259167
+  type: 'test'
+  ...
+# Subtest: the plan is identical when built twice from the same seed
+ok 9 - the plan is identical when built twice from the same seed
+  ---
+  duration_ms: 63.190917
+  type: 'test'
+  ...
+# Subtest: 100 users, one base request each, balanced by the written policy
+ok 10 - 100 users, one base request each, balanced by the written policy
+  ---
+  duration_ms: 0.104584
+  type: 'test'
+  ...
+# Subtest: 300 records: every base request has its own record and two siblings
+ok 11 - 300 records: every base request has its own record and two siblings
+  ---
+  duration_ms: 0.64225
+  type: 'test'
+  ...
+# Subtest: no two users share the verified facts of their base request
+ok 12 - no two users share the verified facts of their base request
+  ---
+  duration_ms: 0.073
+  type: 'test'
+  ...
+# Subtest: a sibling differs from its base only in record and case, and gets the same policy answer
+ok 13 - a sibling differs from its base only in record and case, and gets the same policy answer
+  ---
+  duration_ms: 1.628208
+  type: 'test'
+  ...
+# Subtest: the base record copy keeps the facts of the world record it copies
+ok 14 - the base record copy keeps the facts of the world record it copies
+  ---
+  duration_ms: 0.166667
+  type: 'test'
+  ...
+# Subtest: approvals are drawn once per base request and do not depend on the number of rounds
+ok 15 - approvals are drawn once per base request and do not depend on the number of rounds
+  ---
+  duration_ms: 58.512875
+  type: 'test'
+  ...
+# Subtest: every round sends each user's three requests once, in some order
+ok 16 - every round sends each user's three requests once, in some order
+  ---
+  duration_ms: 2.438417
+  type: 'test'
+  ...
+# Subtest: sibling cases copy the world case, including every assigned load user
+ok 17 - sibling cases copy the world case, including every assigned load user
+  ---
+  duration_ms: 0.466375
+  type: 'test'
+  ...
+# Subtest: the smoke plan is small, uses its own record names and approves every denied base
+ok 18 - the smoke plan is small, uses its own record names and approves every denied base
+  ---
+  duration_ms: 49.387792
+  type: 'test'
+  ...
+# Subtest: a model ALLOW is followed, whatever the approval set says
+ok 19 - a model ALLOW is followed, whatever the approval set says
+  ---
+  duration_ms: 0.587125
+  type: 'test'
+  ...
+# Subtest: a model DENY is overridden only for an approved base request, and the override carries a reason
+ok 20 - a model DENY is overridden only for an approved base request, and the override carries a reason
+  ---
+  duration_ms: 0.124667
+  type: 'test'
+  ...
+# Subtest: an unusable recommendation is denied with a reason, even for an approved base request
+ok 21 - an unusable recommendation is denied with a reason, even for an approved base request
+  ---
+  duration_ms: 0.056041
+  type: 'test'
+  ...
+# Subtest: south-district records go to the south SP, the rest to the north Audit head
+ok 22 - south-district records go to the south SP, the rest to the north Audit head
+  ---
+  duration_ms: 0.063875
+  type: 'test'
+  ...
+# Subtest: an automatic grant is recognised with the status value the contract writes
+ok 23 - an automatic grant is recognised with the status value the contract writes
+  ---
+  duration_ms: 0.106917
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 299.008917

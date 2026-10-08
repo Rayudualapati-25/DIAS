@@ -17,7 +17,7 @@
  * its own first request. Times contain no human review time.
  *
  * Usage: node testbed/reuse/run.js --plan testbed/reuse/generated/reuse-100-users-plan.json \
- *          --url http://dias-backend:3001/api --review-dir /data/dias-reviews --out /results/<run>
+ *          --url http://dias-backend:3001/api --out /results/<run>
  */
 
 const fs = require('fs');
@@ -25,13 +25,10 @@ const os = require('os');
 const path = require('path');
 const crypto = require('crypto');
 const {
-  AUDITORS, createClient, createWatcher, now, referenceFor, round, sleep,
+  AUDITORS, auditorFor: districtAuditor, createClient, createWatcher, now, referenceFor, round, sleep,
 } = require('../load/workflow');
 
 const APP = path.resolve(__dirname, '..', '..');
-const DEPARTMENT_HEAD = Object.freeze({
-  police: 'sp.north', forensics: 'cfo.north', prosecution: 'dp.north', court: 'dj.north',
-});
 const OVERRIDE_REASON = 'Approved on review: the request is in the pre-registered approval set of the reuse experiment.';
 const UNUSABLE_REASON = 'No valid LLM recommendation was available; denied pending manual review.';
 const PROGRESS_EVERY = 50;
@@ -46,9 +43,9 @@ function args(argv) {
   return out;
 }
 
-/** The district head of the requester's department; south-district files go to the south SP (as in E5-E7). */
+/** Independent Audit district head for the record's district, as in E5–E7. */
 function auditorFor(stream, user) {
-  return stream.record.jurisdiction === 'district-south' ? 'sp.south' : DEPARTMENT_HEAD[user.org];
+  return districtAuditor(stream, user);
 }
 
 /** The scripted auditor: override a model DENY only for an approved base request. */
@@ -122,12 +119,8 @@ async function runRequest({ client, watcher, stream, base, user, roundIndex, tim
 
     row.path = 'reviewed';
     row.stage = 'recommendation';
-    const { entry, observedAt } = await watcher.wait(row.requestId, timeoutMs);
+    const { observedAt } = await watcher.wait(row.requestId, timeoutMs, auditor);
     row.recommendationReadyMs = round(observedAt - t1);
-    const reference = referenceFor(entry.verifiedRequest);
-    row.expected = reference.recommendation;
-    row.expectedReasonCode = reference.reasonCode;
-
     row.stage = 'review';
     const reviewed = await client.review(row.requestId, auditor);
     const t3 = now();
@@ -137,8 +130,16 @@ async function runRequest({ client, watcher, stream, base, user, roundIndex, tim
       row.error = `review ${reviewed.status}: ${reviewed.error}`;
       return row;
     }
+    const reference = referenceFor(reviewed.data.request.verifiedRequest);
+    row.expected = reference.recommendation;
+    row.expectedReasonCode = reference.reasonCode;
+    row.recommendationState = reviewed.data.recommendationState;
+    row.integrityStatus = reviewed.data.integrity && reviewed.data.integrity.status;
+    if (reviewed.data.commitment && row.integrityStatus !== 'verified') {
+      throw new Error(`recommendation integrity: ${row.integrityStatus}`);
+    }
     const recommendation = reviewed.data.recommendation || {};
-    const valid = recommendation.generationStatus === 'OK' && ['ALLOW', 'DENY'].includes(recommendation.recommendation);
+    const valid = row.recommendationState === 'committed' && row.integrityStatus === 'verified' && recommendation.generationStatus === 'OK' && ['ALLOW', 'DENY'].includes(recommendation.recommendation);
     Object.assign(row, {
       generationStatus: recommendation.generationStatus || null,
       recommendation: recommendation.recommendation || null,
@@ -150,7 +151,7 @@ async function runRequest({ client, watcher, stream, base, user, roundIndex, tim
     });
 
     row.stage = 'decision';
-    const body = auditorDecision(recommendation, base.approveIfModelDenies);
+    const body = auditorDecision(valid ? recommendation : null, base.approveIfModelDenies);
     const decided = await client.decide(row.requestId, auditor, body);
     const t4 = now();
     row.decision = body.decision;
@@ -191,8 +192,8 @@ async function inChunks(items, size, fn) {
 
 async function main() {
   const opts = args(process.argv.slice(2));
+  if (opts['review-dir']) throw new Error('--review-dir is retired; reviews are accessed through the backend API');
   const url = opts.url || 'http://dias-backend:3001/api';
-  const reviewDir = opts['review-dir'] || '/data/dias-reviews';
   const outDir = opts.out;
   if (!outDir || !opts.plan) throw new Error('--plan and --out are required');
   const planFile = path.resolve(APP, opts.plan);
@@ -207,11 +208,13 @@ async function main() {
   const usernames = plan.bases.map((base) => base.username);
 
   fs.mkdirSync(outDir, { recursive: true });
-  if (fs.existsSync(path.join(outDir, 'run.json'))) throw new Error(`${outDir} already holds a completed run`);
+  if (['run.json', 'requests.jsonl'].some(name => fs.existsSync(path.join(outDir, name)))) {
+    throw new Error(`${outDir} already holds run evidence; select a fresh output directory`);
+  }
   const rowsFile = path.join(outDir, 'requests.jsonl');
   const record = (row) => fs.appendFileSync(rowsFile, `${JSON.stringify(row)}\n`);
   const client = createClient(url);
-  const watcher = createWatcher(reviewDir);
+  const watcher = createWatcher(client);
   const startedAt = now();
 
   await inChunks([...usernames, ...AUDITORS], 10, (username) => client.login(username));

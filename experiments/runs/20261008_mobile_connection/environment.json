@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-08T11:50:53.663Z",
+  "gitHead": "bcc611d65681716a8b4538298e85225ac77cde62",
+  "initialChanges": " M README.md\n M backend/src/server.js\n?? backend/src/mobile/\n?? backend/src/routes/mobile.js\n?? backend/test/mobileCases.unit.test.js\n?? docs/mobile-connectivity-research.md\n?? experiments/plans/20261003_mobile_foundation.md\n?? experiments/plans/20261006_dias_host_startup.md\n?? experiments/run-mobile-foundation.js\n?? experiments/runs/20261003_mobile_foundation/\n?? experiments/runs/20261006_dias_host_startup/\n?? mobile/\n?? reports/iteration/iter_20261002_v3_methodology_alignment.md\n?? reports/iteration/iter_20261003_mobile_foundation.md\n?? reports/iteration/iter_20261006_dias_host_startup.md\n?? results/tables/20261003_mobile_foundation_transport.csv\n?? results/tables/20261006_dias_host_startup_transport.csv\n?? scripts/mobile-connect.sh\n?? scripts/mobile-host.js\n",
+  "node": "v22.20.0",
+  "androidSerial": "emulator-5554",
+  "avd": "Medium_Phone_API_36.1",
+  "apiBase": "http://10.0.2.2:3001",
+  "reverseBase": "http://127.0.0.1:3001",
+  "websiteBase": "http://127.0.0.1:3001",
+  "network": "diaschannel/diasrecords",
+  "scope": "Existing basic Android sign-in, case summaries, manual batches and SQLite; not full mobile workflow or background synchronization.",
+  "followingStep": "15 only after emulator/portal connection checks pass",
+  "preserve": [
+    "network/identities/model",
+    "earlier source and test artifacts",
+    "unrelated working-tree edits"
+  ]
+}

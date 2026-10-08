@@ -26,9 +26,11 @@ certificates, CAs, ledger and backend.
   endpoints every 5 s. The Mac is sampled by `monitor/mac_sampler.py`.
 - Fabric 2.5.16, CA 1.5.22, CouchDB 3.4.2; three Raft orderers; block settings
   identical to the single-host network (2 s batch timeout, 10 messages).
-- Contract `diasrecords` 2.3: the working-copy contract that commits the LLM
-  recommendation value (ALLOW/DENY/UNAVAILABLE) with the auditor decision and
-  derives the agreement on-chain; justification and reason text stay off-chain.
+- Current source label: `diasrecords` 3.0 (npm package 3.0.0). The contract
+  commits the signed recommendation before review, then derives agreement when
+  the auditor decides. Justification, recommendation and note digests bind the
+  encrypted off-chain objects. Earlier research results used older contracts.
+  The Mac portal still runs 2.5, sequence 3; step 15 does not redeploy it.
 
 ## Build (in order)
 
@@ -52,12 +54,17 @@ docker --context lima-dias-m1 run --rm --network diasnet -v ~/dias-testbed:/test
 # start everything on M1-M3 (docker compose -f ~/dias-testbed/compose/mN.json up -d), then:
 docker --context lima-dias-m1 run --rm --network diasnet -v ~/dias-testbed:/testbed \
   hyperledger/fabric-tools:2.5.16 bash /testbed/scripts/channel.sh
+testbed/scripts/prepare-chaincode.sh
+# A fresh channel uses sequence 1. An upgrade requires the next sequence from
+# querycommitted and a new version label; never overwrite an earlier package.
 docker --context lima-dias-m4 run --rm --network diasnet -v ~/dias-testbed:/testbed \
   hyperledger/fabric-tools:2.5.16 bash /testbed/scripts/deploy-cc.sh
 # 4. users (20 base + 100 load users), backend image, ledger seed
 node testbed/load/plan.js            # users + pre-registered request plans
 docker --context lima-dias-m4 run --rm --network diasnet -v ~/dias-testbed:/testbed \
   hyperledger/fabric-ca:1.5.22 bash /testbed/scripts/register-users.sh
+# Configure ~/dias-testbed/backend.env and the existing operator-managed keys
+# as described below before seeding or starting the backend.
 testbed/scripts/build-backend.sh
 docker --context lima-dias-m4 compose -f ~/dias-testbed/compose/m4.json up -d prometheus cadvisor-m4 node-exporter-m4
 docker --context lima-dias-m4 compose -f ~/dias-testbed/compose/m4.json run --rm --no-deps \
@@ -67,9 +74,65 @@ HF_HUB_OFFLINE=1 .venv-qwen-policy/bin/mlx_lm.server --model mlx-community/Qwen3
   --adapter-path LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7 \
   --host 127.0.0.1 --port 8081 --max-tokens 512 --chat-template-args '{"enable_thinking":false}'
 docker --context lima-dias-m4 compose -f ~/dias-testbed/compose/m4.json up -d dias-backend
-docker --context lima-dias-m4 run --rm --network diasnet -v dias-backend-data:/data:ro \
-  dias-backend:testbed node testbed/load/smoke.js
+V7_SHA="$(shasum -a 256 LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7/adapters.safetensors | cut -d' ' -f1)"
+SMOKE="smoke-$(date -u +%Y%m%dT%H%M%SZ)"
+docker --context lima-dias-m4 run --rm --network diasnet -v ~/dias-testbed/results:/results \
+  dias-backend:testbed node testbed/load/smoke.js \
+  --expected-adapter-hash "$V7_SHA" --out "/results/${SMOKE}/smoke.json"
 ```
+
+## Step 15 setup and verification
+
+The Android connection gate passed before these scripts were updated. Script
+tests, source staging, read-only ledger inspection and one bounded Mac API
+workflow passed; four-VM build, deployment and research reruns remain pending.
+See [iteration 073](../reports/iteration/iter_073_step15_integration.md).
+
+The backend needs an existing Ed25519 signing key at
+`~/dias-testbed/keys/recommender.pem`, mounted read-only at
+`/run/dias-keys/recommender.pem`. On a **fresh** testbed, generate it with
+`node scripts/dias/recommender-key.js --out ~/dias-testbed/keys/recommender.pem`
+and create the review encryption settings with
+`node scripts/dias/review-store-key.js --append ~/dias-testbed/backend.env`.
+On an existing testbed retain those keys, earlier decryption keys and review
+data. Never replace keys to fix a connection failure.
+
+Configure the private `backend.env` with `CHANNEL=diaschannel`,
+`CHAINCODE=diasrecords`, a private `JWT_SECRET`, `DIAS_MODEL_URL` pointing to the
+Mac endpoint reachable **from M4**, `DIAS_REVIEW_STORE_DIR=/data/dias-reviews`,
+`DIAS_RECOMMENDER_SIGNING_KEY_FILE=/run/dias-keys/recommender.pem`, the review
+key settings, and `DIAS_TRACE_FILE=/data/trace/backend-trace.jsonl`. For V7 also
+set `DIAS_MODEL_ID`, `DIAS_ADAPTER_ID` and `DIAS_ADAPTER_HASH` to the actual
+served model and adapter digest. Defaults describe the untuned model. A Mac
+loopback health check alone does not establish VM reachability: the smoke run
+must return verified recommendations with the expected adapter digest.
+
+The ledger seed now registers the policy with `sp.north`, activates it with
+the different Audit identity `cfo.north`, and registers only the signer's public
+key. Load generators use authenticated, batched status polling, wait through
+signing and commitment, and open encrypted reviews through the backend once.
+They no longer mount the review database or accept `--review-dir`. Replay is a
+separate privileged process with the existing encryption settings and keys;
+it refuses comparison across different model, policy or prompt provenance.
+
+E3 is an explicit ledger-only baseline. It submits current request/note digests,
+does not call an LLM or produce a recommendation commitment, and closes requests
+with `NO_RECOMMENDATION`. E5–E7 include the recommendation commitment. Compare
+their stages with this distinction recorded, rather than treating the write
+sets as identical.
+
+For evidence collection, supply fresh `querycommitted --output json` from the
+testbed channel and the passing four-workflow smoke JSON. Set `RUNDIR` to a new
+run directory and `CHAINCODE_DEFINITION` and `MODEL_EVIDENCE` to those files
+before `finalize.sh`. Also supply `BASELINE_RUN` and `PROPOSED_RUN` from fresh
+prompt-v2 evaluations; the finalizer requires them to avoid silently using the
+September prompt-v1 predictions. The manifest records the observed version/sequence and
+model provenance; it no longer invents them from a fixed label. Archived
+September results must remain unchanged. A full R1–R14 acceptance run and the
+step 16 checks are required before step 17 research experiments. The finalizer
+retains structured summaries and figures. Historical report/manuscript
+generators remain available for archived reproduction and are not called by
+the v3 finalizer; the manuscript is separate step 18 work.
 
 ## Experiments
 

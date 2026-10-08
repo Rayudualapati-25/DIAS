@@ -11,7 +11,7 @@
  *
  * For every level the rounds are:
  *   W1 CreateAccessRequest    (write; the 100 load users as requesters), 60 s
- *   W2 SubmitAuditorDecision  (write; the five district heads decide every
+ *   W2 SubmitAuditorDecision  (write; the Audit district heads decide every
  *                              request W1 created, so nothing is left pending)
  *   R1 GetRequest             (read; evaluate only, no ordering), 30 s
  *   R2 QueryAccessDecisions   (read; the public decision log, newest 50), 30 s
@@ -31,10 +31,14 @@ const { performance } = require('perf_hooks');
 const APP = path.resolve(__dirname, '..', '..');
 const grpc = require(path.join(APP, 'backend/node_modules/@grpc/grpc-js'));
 const { connect, signers } = require(path.join(APP, 'backend/node_modules/@hyperledger/fabric-gateway'));
-const { ORG_CONFIG, CHANNEL, CHAINCODE } = require(path.join(APP, 'backend/src/config'));
+const { ORG_CONFIG, CHANNEL, CHAINCODE, NETWORK_DIR } = require(path.join(APP, 'backend/src/config'));
 const world = require('../seed/world');
+const { auditorFor } = require('./workflow');
+const { DOMAINS, hashText } = require('../../chaincode/crimerecords/lib/dias/commitments');
+const JUSTIFICATION = 'Synthetic ledger-only capacity request; no model is called.';
+const CLOSURE_NOTE = 'Synthetic ledger-only request closed without a recommendation.';
 
-const ORGS_DIR = path.join(APP, 'network', 'organizations', 'peerOrganizations');
+const ORGS_DIR = path.join(NETWORK_DIR, 'organizations', 'peerOrganizations');
 const now = () => performance.timeOrigin + performance.now();
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const round = (value) => Math.round(value * 1000) / 1000;
@@ -154,10 +158,14 @@ async function main() {
   const writeSeconds = Number(opts['write-seconds'] || 60);
   const readSeconds = Number(opts['read-seconds'] || 30);
   const pauseMs = Number(opts.pause || 20000);
+  if (fs.existsSync(path.join(outDir, 'transactions.jsonl')) || fs.existsSync(path.join(outDir, 'summary.json'))) {
+    throw new Error('output already contains a run; choose a fresh --out directory');
+  }
   fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'config.json'), JSON.stringify({ channel: CHANNEL, chaincode: CHAINCODE, levels, writeSeconds, readSeconds, pauseMs, justification: JUSTIFICATION, closureNote: CLOSURE_NOTE, modelCalled: false }, null, 2) + '\n');
   const rowsFile = path.join(outDir, 'transactions.jsonl');
   const users = JSON.parse(fs.readFileSync(path.join(__dirname, 'generated', 'users.json'), 'utf8'));
-  const auditors = ['sp.north', 'sp.south', 'cfo.north', 'dp.north', 'dj.north'];
+  const auditors = ['sp.north', 'sp.south', 'dj.north'];
   // Users with a revoked certificate credential are left out: their requests are
   // policy denials, not ledger load.
   const requesterContracts = users.filter((user) => user.certCredentialStatus === 'active')
@@ -187,9 +195,13 @@ async function main() {
       return { user, contract, combo };
     }, async ({ user, contract, combo }) => {
       const row = await timedSubmit(contract, 'CreateAccessRequest', [
-        combo.recordId, JSON.stringify({ action: combo.action, purpose: combo.purpose, emergencyFlag: false }),
+        combo.recordId, JSON.stringify({ action: combo.action, purpose: combo.purpose, emergencyDeclared: false, justificationHash: hashText(DOMAINS.JUSTIFICATION, JUSTIFICATION) }),
       ]);
-      if (row.ok && row.result && row.result.requestId) created.push({ requestId: row.result.requestId, user });
+      if (row.ok && row.result && row.result.status === 'awaiting-auditor') {
+        created.push({ requestId: row.result.requestId, user, recordId: combo.recordId });
+      } else if (row.ok) {
+        throw new Error('ledger-only experiment requires records without an existing reusable authorization');
+      }
       return { ...row, username: user.username };
     });
     log('W1', w1.rows, level);
@@ -198,9 +210,10 @@ async function main() {
 
     // W2: decide every request W1 created.
     const queue = [...created];
-    const w2 = await fixedLoad(level, 0, () => (queue.length ? queue.shift() : null), async ({ requestId }, index) => {
-      const row = await timedSubmit(auditorContracts[index % auditorContracts.length], 'SubmitAuditorDecision', [
-        requestId, 'FORCE_DENY', 'DENY', '',
+    const w2 = await fixedLoad(level, 0, () => (queue.length ? queue.shift() : null), async ({ requestId, recordId, user }) => {
+      const auditor = auditorFor({ recordId }, user);
+      const row = await timedSubmit(auditorContracts[auditors.indexOf(auditor)], 'SubmitAuditorDecision', [
+        requestId, 'FORCE_DENY', hashText(DOMAINS.NOTE, CLOSURE_NOTE), '',
       ]);
       return { ...row, requestId };
     });

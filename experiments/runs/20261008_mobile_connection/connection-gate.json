@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "exactPortalParity": true,
+  "items": [
+    {
+      "caseId": "CASE-2026-001",
+      "owningAgency": "police",
+      "jurisdiction": "district-north",
+      "status": "under-investigation"
+    },
+    {
+      "caseId": "CASE-2026-002",
+      "owningAgency": "police",
+      "jurisdiction": "district-north",
+      "status": "under-investigation"
+    }
+  ],
+  "scope": "3bd4564821b4943a3fcb5e4f2474f3328bca12b227c5ab55b11519b443dcb9cc",
+  "complete": true,
+  "fetchedAt": 1791460704678,
+  "emulator": "emulator-5554",
+  "unitTests": 3,
+  "deviceTests": 10,
+  "failures": 0,
+  "skips": 0,
+  "connectionMethods": [
+    "10.0.2.2:3001",
+    "adb reverse 127.0.0.1:3001"
+  ],
+  "scopeLimit": "manual refresh of read-only case summaries; full mobile DIAS not implemented"
+}

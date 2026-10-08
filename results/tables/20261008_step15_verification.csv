@@ -1,0 +1,9 @@
+check,baseline,updated,evidence
+legacy_workflow_compatibility,0_of_4_pass,7_of_7_pass,workflow.test.js_and_retained_logs
+legacy_acceptance_compatibility,1_of_2_pass,3_of_3_pass,acceptance.test.js_and_retained_logs
+all_script_checks,not_comparable,25_pass_0_fail,script-tests-complete.log
+manifest_guards,not_run,6_pass_0_fail,manifest-tests-verified.log
+package_regression,not_repeated,868_pass_0_fail,regression-tests.log
+current_host_smoke,11_of_13_checks,17_of_17_checks,live-smoke_and_live-smoke-final
+chaincode_staging_repeat,first_digest,repeated_same_digest,prepare-chaincode-repeat.log
+four_VM_runs,not_run,not_run,separate_steps_16_and_17

@@ -11,7 +11,7 @@
  * list before reviewing, and the requester reads the outcome afterwards. After
  * the last arrival the run waits for every open workflow to finish.
  *
- * Usage: node testbed/load/run-steady.js --url ... --review-dir ... --out /results/<run>
+ * Usage: node testbed/load/run-steady.js --url ... --out /results/<run>
  */
 
 const fs = require('fs');
@@ -31,8 +31,8 @@ function args(argv) {
 
 async function main() {
   const opts = args(process.argv.slice(2));
+  if (opts['review-dir']) throw new Error('--review-dir is retired; reviews are accessed through the backend API');
   const url = opts.url || 'http://dias-backend:3001/api';
-  const reviewDir = opts['review-dir'] || '/data/dias-reviews';
   const outDir = opts.out;
   if (!outDir) throw new Error('--out is required');
   const settleMs = Number(opts.settle || 60000);
@@ -45,10 +45,12 @@ async function main() {
   const users = new Map(JSON.parse(fs.readFileSync(path.join(planDir, 'users.json'), 'utf8'))
     .map((user) => [user.username, user]));
   fs.mkdirSync(outDir, { recursive: true });
-  if (fs.existsSync(path.join(outDir, 'run.json'))) throw new Error(`${outDir} already holds a completed run`);
+  if (['run.json', 'requests.jsonl'].some(name => fs.existsSync(path.join(outDir, name)))) {
+    throw new Error(`${outDir} already holds run evidence; select a fresh output directory`);
+  }
   const rowsFile = path.join(outDir, 'requests.jsonl');
   const client = createClient(url);
-  const watcher = createWatcher(reviewDir);
+  const watcher = createWatcher(client);
 
   for (const username of [...users.keys(), ...AUDITORS]) await client.login(username);
   process.stdout.write(`signed in ${users.size + AUDITORS.length} identities; settling ${settleMs / 1000} s\n`);
