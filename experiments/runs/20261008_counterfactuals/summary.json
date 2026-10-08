@@ -1,0 +1,156 @@
+{
+  "completedAt": "2026-10-08T10:19:20.920Z",
+  "step": 14,
+  "status": "implemented-and-running",
+  "sourceBaseCommit": "902d39381678d73ba75ef53817600dd3613358e3",
+  "tests": {
+    "backendBaseline": 319,
+    "backend": 341,
+    "frontend": 82,
+    "frontendSyntax": "passed",
+    "policies": 27,
+    "chaincode": 341,
+    "dataset": 104,
+    "live": {
+      "passed": 11,
+      "failed": 0,
+      "total": 11
+    }
+  },
+  "offline": {
+    "contexts": 4096,
+    "rows": [
+      {
+        "variant": "baseline_unverified_single",
+        "totalCases": 4096,
+        "deniedCases": 3979,
+        "coveredDeniedCases": 348,
+        "emittedSets": 32333,
+        "verifiedAllowSets": 975,
+        "minimalSets": 975,
+        "changes": 32333,
+        "authorityLabelledChanges": 32333,
+        "fidelity": 0.030154950051031453,
+        "coverage": 0.08745916059311384,
+        "minimality": 0.030154950051031453,
+        "authorityCoverage": 1
+      },
+      {
+        "variant": "verified_two_facts",
+        "totalCases": 4096,
+        "deniedCases": 3979,
+        "coveredDeniedCases": 820,
+        "emittedSets": 2935,
+        "verifiedAllowSets": 2935,
+        "minimalSets": 2935,
+        "changes": 4895,
+        "authorityLabelledChanges": 4895,
+        "fidelity": 1,
+        "coverage": 0.2060819301331993,
+        "minimality": 1,
+        "authorityCoverage": 1
+      },
+      {
+        "variant": "ablation_single_fact",
+        "totalCases": 4096,
+        "deniedCases": 3979,
+        "coveredDeniedCases": 348,
+        "emittedSets": 975,
+        "verifiedAllowSets": 975,
+        "minimalSets": 975,
+        "changes": 975,
+        "authorityLabelledChanges": 975,
+        "fidelity": 1,
+        "coverage": 0.08745916059311384,
+        "minimality": 1,
+        "authorityCoverage": 1
+      },
+      {
+        "variant": "ablation_no_verification",
+        "totalCases": 4096,
+        "deniedCases": 3979,
+        "coveredDeniedCases": 820,
+        "emittedSets": 134187,
+        "verifiedAllowSets": 6308,
+        "minimalSets": 2935,
+        "changes": 236041,
+        "authorityLabelledChanges": 236041,
+        "fidelity": 0.0470090247192351,
+        "coverage": 0.2060819301331993,
+        "minimality": 0.021872461564831167,
+        "authorityCoverage": 1
+      },
+      {
+        "variant": "ablation_no_authority",
+        "totalCases": 4096,
+        "deniedCases": 3979,
+        "coveredDeniedCases": 820,
+        "emittedSets": 2935,
+        "verifiedAllowSets": 2935,
+        "minimalSets": 2935,
+        "changes": 4895,
+        "authorityLabelledChanges": 0,
+        "fidelity": 1,
+        "coverage": 0.2060819301331993,
+        "minimality": 1,
+        "authorityCoverage": 0
+      },
+      {
+        "variant": "ablation_disabled",
+        "totalCases": 4096,
+        "deniedCases": 3979,
+        "coveredDeniedCases": 0,
+        "emittedSets": 0,
+        "verifiedAllowSets": 0,
+        "minimalSets": 0,
+        "changes": 0,
+        "authorityLabelledChanges": 0,
+        "fidelity": null,
+        "coverage": 0,
+        "minimality": null,
+        "authorityCoverage": null
+      }
+    ],
+    "limitations": [
+      "Synthetic exhaustive grid, not legal feasibility or explanation quality.",
+      "Fidelity is against the same reference oracle used to filter outputs; it tests consistency, not independent policy correctness.",
+      "Coverage is bounded by the permitted facts and two-change search.",
+      "No LLM, Fabric writes or testbed measurements in this experiment."
+    ]
+  },
+  "browser": {
+    "exercised": "auditor decision-log detail",
+    "screenshot": "auditor-policy-panel.png",
+    "snapshot": "auditor-policy-panel.txt",
+    "notExercisedLive": [
+      "requester history panel",
+      "waiting auditor dialog"
+    ]
+  },
+  "runtime": {
+    "backendPid": 31564,
+    "backendPort": 3001,
+    "modelPid": 6696,
+    "modelPort": 8081,
+    "backendRestarted": true,
+    "modelRestarted": false,
+    "chaincodeChanged": false,
+    "chaincodeRedeployed": false,
+    "network": "diaschannel/diasrecords",
+    "deployedVersion": "v2.5",
+    "deployedSequence": 3,
+    "newBusinessRequests": 0,
+    "newDecisions": 0,
+    "newAuthorizations": 0,
+    "readSideEffects": "Sensitive reads append normal Fabric access-log events."
+  },
+  "limitations": [
+    "Synthetic grid and the same oracle for filtering and verification establish consistency only.",
+    "Hypothetical authority labels do not establish legal feasibility or auditor approval.",
+    "Hints are based on committed request-time facts and remain unsigned off-chain read results.",
+    "Original LLM text is preserved; its accuracy was not measured or corrected.",
+    "The complete worktree includes older uncommitted mobile files; no clean-clone claim.",
+    "No four-VM, model, mobile-sync or paper experiment was run."
+  ],
+  "nextStep": "15: update legacy acceptance, testbed and ledger-inspection scripts before experiment reruns"
+}

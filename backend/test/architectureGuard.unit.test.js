@@ -5,8 +5,8 @@
  *
  * DIAS's central constraint is that the model is advisory and nothing corrects
  * it at runtime. That is an architectural property, not a behaviour any single
- * unit test can demonstrate: it holds only while no live code path can reach a
- * deterministic policy evaluator.
+ * unit test can demonstrate. Step 14 permits the oracle only inside the
+ * explanation module; the recommender, signer and worker still cannot reach it.
  *
  * This suite walks the real `require` graph from the live entry points and fails
  * if a forbidden module is reachable, so the property is checked by construction
@@ -29,14 +29,13 @@ const ENTRY_POINTS = Object.freeze([
 ]);
 
 /**
- * Modules that must never be reachable from a live DIAS path.
+ * Retired modules that must never be reachable from a live DIAS path.
  *
  * The reference oracle is a legitimate part of the repository — it labels the
- * training data and validates the dataset offline — which is exactly why its
- * absence from the runtime has to be enforced rather than assumed.
+ * training data and validates the dataset offline. Its step 14 explanation-only
+ * exception is checked separately, rather than allowing general runtime use.
  */
 const FORBIDDEN = Object.freeze([
-  { file: 'policies/reference-oracle/referencePolicyOracle.js', why: 'the offline reference oracle must never judge a live recommendation' },
   { file: 'chaincode/crimerecords/lib/policy/policyEngine.js', why: 'the SEAL deterministic policy engine must not run in the live path' },
   { file: 'chaincode/crimerecords/lib/policy/controlledDecision.js', why: 'SEAL controlled-decision logic must not run in the live path' },
   { file: 'chaincode/crimerecords/lib/policy/llmDecisionProtocol.js', why: 'the SEAL decision protocol enforced engine/model agreement' },
@@ -52,7 +51,7 @@ const FORBIDDEN = Object.freeze([
  * `Module._resolveFilename` is the same resolver `require` uses, so an alias or
  * a computed-looking path that node would follow is followed here too.
  */
-function requireGraph(entryRelative) {
+function requireGraph(entryRelative, { stopAt = [] } = {}) {
   const entry = path.join(REPO_ROOT, entryRelative);
   const seen = new Set();
   const queue = [entry];
@@ -60,6 +59,7 @@ function requireGraph(entryRelative) {
     const file = queue.shift();
     if (seen.has(file) || !file.startsWith(REPO_ROOT) || file.includes('node_modules')) continue;
     seen.add(file);
+    if (stopAt.includes(path.relative(REPO_ROOT, file))) continue;
     let source;
     try {
       source = fs.readFileSync(file, 'utf8');
@@ -84,6 +84,19 @@ describe('DIAS backend architecture guard', () => {
   it('resolves a non-trivial graph for every entry point', () => {
     for (const { entry, files } of graphs) {
       expect(files.size, `${entry} resolved almost nothing`).to.be.greaterThan(3);
+    }
+  });
+
+  it('allows the oracle only through the counterfactual explanation module', () => {
+    const explainer = 'backend/src/dias/counterfactuals.js';
+    const oracle = path.join(REPO_ROOT, 'policies/reference-oracle/referencePolicyOracle.js');
+    expect(requireGraph(explainer).has(oracle)).to.equal(true);
+    for (const entry of ENTRY_POINTS) {
+      expect(requireGraph(entry, { stopAt: [explainer] }).has(oracle), entry).to.equal(false);
+    }
+    for (const entry of ['backend/src/dias/recommender.js', 'backend/src/dias/recommendationWorker.js',
+      'backend/src/dias/signedRecommendation.js']) {
+      expect(requireGraph(entry).has(oracle), entry).to.equal(false);
     }
   });
 

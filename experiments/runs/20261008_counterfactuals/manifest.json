@@ -1,0 +1,350 @@
+{
+  "createdAt": "2026-10-08T10:20:34.156Z",
+  "gitHeadBeforeStep14Commit": "902d39381678d73ba75ef53817600dd3613358e3",
+  "sources": [
+    {
+      "path": ".env.example",
+      "bytes": 3190,
+      "sha256": "df6a6ce339c10fe16d53efbd1ca7f44faa49a18180b754877512cb898a33b6f1"
+    },
+    {
+      "path": "backend/src/config.js",
+      "bytes": 12168,
+      "sha256": "ccde4c0a2a49560249ae3a3989651455db248fb8700f5d2dc560a52d199ee2db"
+    },
+    {
+      "path": "backend/src/routes/access.js",
+      "bytes": 27525,
+      "sha256": "e826e282ac0242a9976d49cb860118c0792948523c3c135bfce568cd18771d05"
+    },
+    {
+      "path": "backend/src/dias/counterfactuals.js",
+      "bytes": 7846,
+      "sha256": "954086f68ed8a6d74fa865e52c74d8f110ca3be7031b3afcec116e4d54544163"
+    },
+    {
+      "path": "backend/test/architectureGuard.unit.test.js",
+      "bytes": 7738,
+      "sha256": "6bcb143db1037110174b8a75e99cadeb36caf6ef7385752c57e175784a56bbf6"
+    },
+    {
+      "path": "backend/test/security.unit.test.js",
+      "bytes": 5445,
+      "sha256": "b1f4cc0c2749264e75c042205f1d1d03d3c962a8e292b75168f8feefb9701afd"
+    },
+    {
+      "path": "backend/test/counterfactuals.unit.test.js",
+      "bytes": 10287,
+      "sha256": "d3786dfdba91f8a7489bcef921e6d20962e7fd4a1b269483317c073345755411"
+    },
+    {
+      "path": "backend/test/counterfactualDetail.unit.test.js",
+      "bytes": 5336,
+      "sha256": "27f433eca4bd22e868c80cc4c114e01e137d839a1ff3590d54de0938f6006bc7"
+    },
+    {
+      "path": "frontend/js/shared/counterfactuals.js",
+      "bytes": 1847,
+      "sha256": "87bffc23124e55a6bea4a794fc17e0829d2e0e7420fe4039c76cba908b581d8e"
+    },
+    {
+      "path": "frontend/js/shared/counterfactual-panel.js",
+      "bytes": 614,
+      "sha256": "53a617e5ce93c2f00a569655358503254fef97ed15c9981a9b2b74924253a8bd"
+    },
+    {
+      "path": "frontend/js/modules/request-access.js",
+      "bytes": 22786,
+      "sha256": "62899fe5743b18167c69117bf7f9426de1c006a469c4c368ff7bc26e013a269c"
+    },
+    {
+      "path": "frontend/js/modules/decision-log.js",
+      "bytes": 9036,
+      "sha256": "90b68f6dd25a0394c56eadf9217f83151424a151c556ed785e7127d1aaf7fcd2"
+    },
+    {
+      "path": "frontend/js/modules/auditor-review.js",
+      "bytes": 25723,
+      "sha256": "090be00b58f8d447a44135c5260351b9e16aefd75999f8e61d8debe5b0c80d2e"
+    },
+    {
+      "path": "frontend/test/counterfactuals.test.mjs",
+      "bytes": 2652,
+      "sha256": "4686158ca6aecd435d6ae3f356bb10a5209205cf1929ed076efcd7c70bc5baf6"
+    },
+    {
+      "path": "policies/package.json",
+      "bytes": 515,
+      "sha256": "402a2add78ba76f64719813add3b3c3519b13c3d6d9550ff3319ab1d064f1190"
+    },
+    {
+      "path": "policies/reference-oracle/referencePolicyOracle.js",
+      "bytes": 6912,
+      "sha256": "24edf254bda393449c043cb854af8d9e41eae546d0056005967c3d312ee777bf"
+    },
+    {
+      "path": "docs/design/dias-v3-ledger-schema.md",
+      "bytes": 32459,
+      "sha256": "174dd932ae672f1c5775d2e7e4b8319e6ffffb112ead5efa455cc4f5fa94b69d"
+    },
+    {
+      "path": "docs/design/dias-v3-requirements-traceability.md",
+      "bytes": 22665,
+      "sha256": "bc34617f5db5ca1691a8db99c51eeda7c624d1f8408219418c5c4cd649181902"
+    },
+    {
+      "path": "experiments/plans/20261008_counterfactuals.md",
+      "bytes": 3402,
+      "sha256": "3182dc0867ff537830dc10db35e9a712cea41ecce731eaa62a4124ee83737e3a"
+    },
+    {
+      "path": "experiments/evaluate-counterfactuals.js",
+      "bytes": 6398,
+      "sha256": "17cab94e39a34715d32f8c313ea830828a96e130b9f7002d93217598f62f6b20"
+    },
+    {
+      "path": "experiments/check-counterfactuals-live.js",
+      "bytes": 5297,
+      "sha256": "898d1956cb4a3a5cba788ac4c916eaae1cc8790bfee50b28d46e04efd97debad"
+    },
+    {
+      "path": "reports/iteration/iter_070_counterfactuals.md",
+      "bytes": 8956,
+      "sha256": "abbee503a9c4336ae2c07bb0eefee9eafc61b0a3b51ca23914d27462121d63d7"
+    },
+    {
+      "path": "results/tables/20261008_counterfactuals.csv",
+      "bytes": 726,
+      "sha256": "1ead60135305c864cbfefb9329422d516117b4d8ed151d881ef1caa5952f4c4d"
+    },
+    {
+      "path": "policies/dias-governance-policy-v1.json",
+      "bytes": 25075,
+      "sha256": "1568f45a422c3ffdbbe75286b89c2cbb0d57c04b1e7dfbe8178c4787d0f62dca"
+    },
+    {
+      "path": "policies/lib/bundle.js",
+      "bytes": 4053,
+      "sha256": "1ec974bbee670cc86b89e4ca930b951279bf8022b0b44ee8df22546b0a62550d"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/verifiedRequest.js",
+      "bytes": 4910,
+      "sha256": "f767a6a7ffb7cc758a1c982e874e0fd5a6a5ed9c31360bbc41e65ddbe52c7200"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/policyRegistry.js",
+      "bytes": 3273,
+      "sha256": "dd9f79f11e15e027870a4fb688c34a630049e3935dfd5c63639f092fc23b4412"
+    },
+    {
+      "path": "backend/src/dias/recommendationDetail.js",
+      "bytes": 7037,
+      "sha256": "759f67846d22e4f8778625e58281b62eb45d6017e08047bdc82754c96dcaf425"
+    },
+    {
+      "path": "backend/package.json",
+      "bytes": 849,
+      "sha256": "9b84e41f6757c7ecfce3d1d0e4ff3167844becf1366976c738e921e25848550e"
+    },
+    {
+      "path": "backend/package-lock.json",
+      "bytes": 80929,
+      "sha256": "cb5553b77e6d34c68588e0ebf5033482defb49e95cd7199b04543c3111d5e71b"
+    },
+    {
+      "path": "chaincode/crimerecords/package.json",
+      "bytes": 918,
+      "sha256": "f41b0026412eeb607d1eaa260b8da21b74dda4dd8e49c793259df36cd1adf07b"
+    },
+    {
+      "path": "chaincode/crimerecords/package-lock.json",
+      "bytes": 128392,
+      "sha256": "3a056bb2dfb3c7c284bab6aba78c3439deb6b6182f2e25aed884138c326d9176"
+    },
+    {
+      "path": "frontend/package.json",
+      "bytes": 342,
+      "sha256": "ab5b7bbab81a47cdd22956d9a184cfadb685a2b5c60d7c35e9bb2d7110de4715"
+    },
+    {
+      "path": "experiments/dias-finetuning/v2/package.json",
+      "bytes": 582,
+      "sha256": "4f9355d1774813232485986fb11baaa2598baf5c2ec48181b8a5628ca7eca4e3"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "experiments/runs/20261008_counterfactuals/.gitignore",
+      "bytes": 100,
+      "sha256": "15412c3cf8eacfde248537a41a7874ae76f3cb027b56f20d241cabb89bd051ff"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/architecture-before.log",
+      "bytes": 2245,
+      "sha256": "89ce1989fcc244fd55f10e9f1c8aaf0155173c700acc65d1432e5ad8c5bbcea5"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/auditor-policy-panel.png",
+      "bytes": 85713,
+      "sha256": "51e232019e08f0b0778d0e97f86fa4ee137b3e356bc7ce024b4e800abaf211ca"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/auditor-policy-panel.txt",
+      "bytes": 12098,
+      "sha256": "7f8795d038632cec8af74fb60ac0ceab2d08cd07498f9d591a79c14a511e3e3c"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/backend-baseline.log",
+      "bytes": 25960,
+      "sha256": "036424b462763eae264828c4a311aa10dd697c587516ab13d621a142b474b56c"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/backend-startup.log",
+      "bytes": 341,
+      "sha256": "f5c6dfad1cd0d7bfa464a66bf312eddbf4960062d544e9ebf1968695393deb70"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/backend-tests-02.log",
+      "bytes": 27849,
+      "sha256": "a4a108c2b37524d6610cf89914003ea744ddbec34960271a585b9a787616e4d7"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/backend-tests-03.log",
+      "bytes": 27856,
+      "sha256": "fe5c78944e5e3e8c49d4234efad733f4de82b077c0ef047319e665e82634f5e8"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/backend-tests.log",
+      "bytes": 28080,
+      "sha256": "3e734fa430dd359ab57ca193af0a540a767c929904624b031b65dd06e006b036"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/chaincode-tests.log",
+      "bytes": 31042,
+      "sha256": "8c0eb440aafebc82db4110508c05b78ba161837994b60da7819c8a52aed0cbb8"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/dataset-tests.log",
+      "bytes": 20265,
+      "sha256": "4977f5a656fb3d581a6d224d24af3d4a0c0c53b80998809d140de0555fe2271e"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/detail-before.log",
+      "bytes": 3420,
+      "sha256": "e99597552dec08c1c4db4ca8d7184d7be79f2b156c5a439a4e541de39169a518"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/environment.json",
+      "bytes": 1131,
+      "sha256": "9f772eb0ce82c490872aaada2d6f6f085878de26b1ae3f3babd0785dc2810e5a"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/frontend-before.log",
+      "bytes": 1491,
+      "sha256": "018a8aa5619748dfd1830e686ec7974662b8c457499ecb518f5b8359430ec229"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/frontend-syntax-02.log",
+      "bytes": 134,
+      "sha256": "37cce4841abb63c02dedf0682f2f6cc704e552fba0256f26eed0a6851c47d1a9"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/frontend-syntax.log",
+      "bytes": 134,
+      "sha256": "37cce4841abb63c02dedf0682f2f6cc704e552fba0256f26eed0a6851c47d1a9"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/frontend-tests-02.log",
+      "bytes": 16850,
+      "sha256": "f139dfa1250cb7a04c80305a247fbd86479b8bc6ed73eb4384dc953de9a5109a"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/frontend-tests.log",
+      "bytes": 16843,
+      "sha256": "c9d9c19cf44afbdc0dd957e44c3b8a6cc7398654179da31e4d691810e9d7cc2e"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/generator-before.log",
+      "bytes": 2370,
+      "sha256": "c625c50adaf0f8890b8dd20937034bfd04511d769df96a484dc08a4e45e588f7"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/generator-detail-first.log",
+      "bytes": 1593,
+      "sha256": "9ab37d287a9b09287dd8de7e277b0b11da2987af9372d77929b21319e1b5cd3d"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/live/config.json",
+      "bytes": 279,
+      "sha256": "1c9264915c30d1f366c5b12f0a1a9f560e2be9aa24e1366b61c5dcd65bc1c5d5"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/live/live.json",
+      "bytes": 10421,
+      "sha256": "2c940a06eff12c014cb84f3cc87f919880104921f6528b5b6ef6f59cbebe3ebf"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/live-before.json",
+      "bytes": 1110,
+      "sha256": "55fc94392eab1b0c62222ac63412fd62859410f5618c98a39d6d2bce2fc73726"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/live.log",
+      "bytes": 36,
+      "sha256": "336f2f54febdbcd590febb521ff70c75971119d5f7b9c6efd4e2440bc6991119"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/offline/cases.json",
+      "bytes": 6395306,
+      "sha256": "0443801a02c085f5bd667cc1581a49ea2e94ef5c9b07fc0720aee4ec789360d8"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/offline/comparison.csv",
+      "bytes": 726,
+      "sha256": "1ead60135305c864cbfefb9329422d516117b4d8ed151d881ef1caa5952f4c4d"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/offline/config.json",
+      "bytes": 1095,
+      "sha256": "50749cf9164a3a3cab53f6cd512fd7aed94ed0a0a226e45deab4e5f3a9841be8"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/offline/metrics.json",
+      "bytes": 2910,
+      "sha256": "0052e46c9a60aec7945dc3f76c07c272f09a3dba6ea55ea27c55ef91536105fd"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/offline.log",
+      "bytes": 2498,
+      "sha256": "63bf3e627a494720d3256634101290a0e4e6b10c603166ed754da3ec1ba8267a"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/policies-tests.log",
+      "bytes": 5615,
+      "sha256": "3e10eb19f2f50033047a7df126b99b7b98025db1879f2def295ecd6d7aac59b1"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactuals/summary.json",
+      "bytes": 4946,
+      "sha256": "388a23585ecbea55fa8177bf08f3d258c2ee3f67261ade013e0cde93e51c062d"
+    }
+  ],
+  "excludes": [
+    {
+      "path": "experiments/runs/20261008_counterfactuals/backend-active.log",
+      "reason": "Running process log retained locally; stable backend-startup.log snapshot included."
+    },
+    {
+      "path": ".env and external identities",
+      "reason": "Secrets deliberately omitted."
+    }
+  ],
+  "checks": {
+    "changedJavaScriptSyntax": "passed",
+    "privateKeyOrBearerTokenPatterns": "none found",
+    "caveat": "Pattern check is not an exhaustive secret detector.",
+    "stagedSourceWhitespace": "passed",
+    "rawLogWhitespace": "Tool-formatted coverage tables and blank lines retained verbatim; excluded from source whitespace check."
+  }
+}

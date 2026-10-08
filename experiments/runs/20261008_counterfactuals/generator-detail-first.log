@@ -1,0 +1,28 @@
+
+
+  counterfactual explanations
+    ✔ has nothing to change when the written policy already allows the request
+    ✔ names the one change that would let the written policy allow the request, and who can make it
+    ✔ labels each kind of change with the authority that could make it
+    ✔ offers the smallest sufficient step for a graded fact, in either direction
+    ✔ pairs two changes only when neither is enough alone
+    ✔ says so when no permitted change would help
+    ✔ proposes nothing when more than two facts would have to change
+    ✔ keeps only change sets that the reference policy confirms, for every refused case
+    ✔ is minimal: no kept change set stays sufficient with one of its changes removed
+    ✔ never names anything as a decision, a recommendation or a grant
+    ✔ does not change the facts it was given
+    ✔ returns null for facts the written policy cannot evaluate, instead of guessing
+
+  counterfactual API detail
+    ✔ uses the caller-authorized ledger facts and leaves the LLM text unchanged
+    ✔ loads no policy for waiting, allowed or automatically settled requester views
+    ✔ does not expose hints to another organization or to an auditor requesting their own record
+    ✔ lets an auditor explain somebody else's waiting request, without any submit
+    ✔ can be removed entirely with the feature toggle
+    ✔ suppresses a changed context or mismatching policy rather than giving an unbound explanation
+    ✔ treats missing facts and missing policy as unavailable, without failing the LLM detail
+
+
+  19 passing (20ms)
+

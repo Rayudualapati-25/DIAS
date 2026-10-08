@@ -1,0 +1,67 @@
+{
+  "seed": 0,
+  "randomness": "none",
+  "bundleHash": "796013dd7d8a043891485cbf7bf9d4c54288f3fa7d746fd7dd2fdc693bc9b1c0",
+  "maxChanges": 2,
+  "roles": [
+    [
+      "inspector",
+      "police",
+      "PoliceMSP",
+      "fir"
+    ],
+    [
+      "constable",
+      "police",
+      "PoliceMSP",
+      "fir"
+    ],
+    [
+      "lab-analyst",
+      "forensics",
+      "ForensicsMSP",
+      "forensic-report"
+    ],
+    [
+      "judge",
+      "court",
+      "CourtMSP",
+      "court-order"
+    ]
+  ],
+  "assigned": [
+    true,
+    false
+  ],
+  "credential": [
+    "active",
+    "revoked"
+  ],
+  "sameDistrict": [
+    true,
+    false
+  ],
+  "clearance": [
+    "low",
+    "high"
+  ],
+  "sensitivity": [
+    "low",
+    "high"
+  ],
+  "flags": [
+    false,
+    true
+  ],
+  "actions": [
+    "view",
+    "export"
+  ],
+  "purposes": [
+    "investigation",
+    "undefined-purpose"
+  ],
+  "baseline": "all unverified one-fact suggestions",
+  "verificationAblation": "unfiltered one/two-fact candidate universe; not a runtime mode",
+  "authorityAblation": "remove authority labels from the verified outputs"
+}

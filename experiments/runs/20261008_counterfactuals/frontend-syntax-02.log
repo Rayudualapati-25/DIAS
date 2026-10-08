@@ -1,0 +1,4 @@
+
+> crime-records-frontend@0.1.0 check
+> for f in $(find js -name '*.js'); do node --input-type=module --check < "$f" || exit 1; done
+

@@ -266,6 +266,9 @@ The backend remains part of the trusted base, because it holds every demonstrati
   - `LEGAL` (unsealing, juvenile and victim protection).
 - **Limits:** counterfactuals are explanation support. They are never compared with the LLM recommendation, never decide anything, and never grant access.
 - **Visibility:** they reveal the written policy's outcome for the current facts, which is a second signal next to the LLM's advice. This relaxes the 2026-09-11 decision to keep the oracle offline, as approved in plan step 14, and `DIAS_COUNTERFACTUALS=off` disables it.
+- **Implemented 2026-10-08:** `GET /access/request/:id/recommendation` adds `counterfactuals`. Facts come from the caller-authorized ledger trail. The v3 context schema, `h_C`, policy version and policy digest must match; otherwise hints are marked unavailable. Requester claims and the stored LLM prose are not inputs. The requester sees hints only after FORCE DENY; a requester who is also an auditor follows that same rule. Other permitted auditors may read them before review.
+- **Search and wording:** enumerate changes to the nine permitted facts, retain inclusion-minimal sufficient sets of one or two distinct facts, and use the lowest sufficient clearance/reclassification level. Identity, role, district, case and record type are never changed. Legal changes are hypothetical conditions, not proof that protection may lawfully be removed. A policy ALLOW produces no change set and does not explain an auditor denial. The API, requester, audit detail and auditor review panels keep these hints separate from the model's original text.
+- **Evidence:** `reports/iteration/iter_070_counterfactuals.md`, `experiments/runs/20261008_counterfactuals/`. Offline consistency is against the same synthetic-policy oracle; it is not independent legal or explanation-quality validation.
 
 ## 14. Older records and versions
 

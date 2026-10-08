@@ -53,7 +53,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | done (step 10; κ in the audit trail without the review store) |
 | M23 | No self-review | OK | 3 | done (step 3; `diasAuditorAuthority.test.js`) |
 | M24 | Auditor authority: AuditMSP district head, active credential, district | PART | 3 | done (step 3; `diasAuditorAuthority.test.js`, `chaincodeErrors.unit.test.js`) |
-| M25 | Counterfactual explanation (C3) | MISS | 14 | planned (step 14) |
+| M25 | Counterfactual explanation (C3) | MISS | 14 | done (step 14; bound API, generator and visibility tests; 2,935/2,935 emitted sets satisfy the oracle on a 4,096-case synthetic grid; limited coverage reported in iteration 070) |
 | M26 | Two pre-review commits and one atomic final commit (Algorithm 1) | PART | 10, 11 | done (steps 10, 11; three transactions in `diasAuditTrail.test.js`; note staged before the decision) |
 | M27 | Pending requests end (expiry, cancellation, late decisions) | MISS | 7 | done (step 7; `diasRequestLifecycle.test.js`, `expirySweeper.unit.test.js`); policy-change expiry in step 8 |
 | I01 | Table V contracts and transactions | OK | 15 | planned (table update) |
@@ -63,7 +63,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | I05 | Prompt marks facts as authoritative and J as untrusted | OK | 5 | done (prompt v2; v1 frozen and checked against every tracked prompt) |
 | I06 | Response schema check; failure is a status, not a DENY | OK | — | done (baseline) |
 | I07 | Review store tamper-evident and protected | PART | 9, 13 | done: justification, recommendation and note tamper-evident (steps 9–11) and encrypted at rest (step 13) |
-| I08 | No written-policy engine in the contract | OK | 14 | planned (guard kept) |
+| I08 | No written-policy engine in the contract | OK | 14 | done (step 14; contract unchanged; only the backend explanation module may reach the oracle; recommender, signer and worker remain isolated) |
 | A01 | Final PDF download re-checks the grant | MISS | 4 | done (step 4; `diasRelease.test.js`, `documentRelease.unit.test.js`) |
 | A02 | Record history, evidence and decision log restricted | MISS | 13 | done (step 13; `diasPrivacy.test.js`); redeployed on the development host on 2026-10-08 and checked live (`experiments/runs/20261008_step13_redeploy/`) |
 | A03 | Explanation and off-chain object access defined and enforced | PART | 13 | done (step 13; requester rule changed by the author on 2026-10-08; `diasRecommendationDetail.unit.test.js`, `offChainVerification.unit.test.js`) |
@@ -231,11 +231,12 @@ Each entry: current behavior → required change; files; tests; evidence; accept
 
 ### M25 — Counterfactuals
 - **Paper:** C3 (§II).
-- **Current:** none in the DIAS path.
+- **Current:** implemented in step 14, with requester/auditor visibility and context/policy binding.
 - **Change:** policy-verified counterfactual module and API (design §13).
 - **Tests:** generator unit tests (every kept counterfactual flips the oracle; minimality; authority labels; no output field named as a decision).
 - **Evidence:** offline fidelity experiment.
 - **Acceptance:** 100% of kept counterfactuals flip the oracle outcome when applied; coverage and limits are reported.
+- **Observed:** 2,935 of 2,935 kept sets satisfy the written policy and are inclusion-minimal. 820 of 3,979 denied grid requests have a permitted one/two-fact set (20.61%). This measures consistency with the same oracle, not independent accuracy. See iteration 070 and the retained comparison table.
 
 ### M27 — Pending-request lifecycle
 - **Paper:** §IV-E says the request "remains unresolved until a valid decision is submitted"; the plan adds expiry.

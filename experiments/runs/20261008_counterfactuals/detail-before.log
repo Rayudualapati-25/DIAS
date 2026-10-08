@@ -1,0 +1,66 @@
+
+
+  counterfactual API detail
+    1) uses the caller-authorized ledger facts and leaves the LLM text unchanged
+    2) loads no policy for waiting, allowed or automatically settled requester views
+    3) does not expose hints to another organization or to an auditor requesting their own record
+    4) lets an auditor explain somebody else's waiting request, without any submit
+    5) can be removed entirely with the feature toggle
+    6) suppresses a changed context or mismatching policy rather than giving an unbound explanation
+    7) treats missing facts and missing policy as unavailable, without failing the LLM detail
+
+
+  0 passing (5ms)
+  7 failing
+
+  1) counterfactual API detail
+       uses the caller-authorized ledger facts and leaves the LLM text unchanged:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:42:26)
+      at process.processImmediate (node:internal/timers:485:21)
+
+  2) counterfactual API detail
+       loads no policy for waiting, allowed or automatically settled requester views:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:56:28)
+      at process.processImmediate (node:internal/timers:485:21)
+
+  3) counterfactual API detail
+       does not expose hints to another organization or to an auditor requesting their own record:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:62:27)
+      at process.processImmediate (node:internal/timers:485:21)
+
+  4) counterfactual API detail
+       lets an auditor explain somebody else's waiting request, without any submit:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:74:26)
+      at process.processImmediate (node:internal/timers:485:21)
+
+  5) counterfactual API detail
+       can be removed entirely with the feature toggle:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:80:26)
+      at process.processImmediate (node:internal/timers:485:21)
+
+  6) counterfactual API detail
+       suppresses a changed context or mismatching policy rather than giving an unbound explanation:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:88:28)
+      at process.processImmediate (node:internal/timers:485:21)
+
+  7) counterfactual API detail
+       treats missing facts and missing policy as unavailable, without failing the LLM detail:
+     TypeError: recommendationExplanation is not a function
+      at ask (backend/test/counterfactualDetail.unit.test.js:30:24)
+      at Context.<anonymous> (backend/test/counterfactualDetail.unit.test.js:95:27)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+

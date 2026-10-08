@@ -1,0 +1,176 @@
+
+> dias-policies@1.0.0 test
+> node --test test/bundle.test.js test/referencePolicyOracle.test.js test/policyPackage.test.js
+
+TAP version 13
+# Subtest: committed bundle equals its derivation from the retained policy tables
+ok 1 - committed bundle equals its derivation from the retained policy tables
+  ---
+  duration_ms: 1.987625
+  type: 'test'
+  ...
+# Subtest: bundle validates and every clause reference has the documented format
+ok 2 - bundle validates and every clause reference has the documented format
+  ---
+  duration_ms: 1.162959
+  type: 'test'
+  ...
+# Subtest: bundle vocabularies and tables match the chaincode copies exactly
+ok 3 - bundle vocabularies and tables match the chaincode copies exactly
+  ---
+  duration_ms: 0.802
+  type: 'test'
+  ...
+# Subtest: the only DENY/ALLOW reason codes are the binary recommendation codes
+ok 4 - the only DENY/ALLOW reason codes are the binary recommendation codes
+  ---
+  duration_ms: 0.482709
+  type: 'test'
+  ...
+# Subtest: the bundle hash is canonical and changes when a clause changes
+ok 5 - the bundle hash is canonical and changes when a clause changes
+  ---
+  duration_ms: 0.839333
+  type: 'test'
+  ...
+# Subtest: validation reports unordered DENY clauses and unknown precedence references
+ok 6 - validation reports unordered DENY clauses and unknown precedence references
+  ---
+  duration_ms: 1.505125
+  type: 'test'
+  ...
+# Subtest: loading a missing bundle fails with a clear error
+ok 7 - loading a missing bundle fails with a clear error
+  ---
+  duration_ms: 0.221458
+  type: 'test'
+  ...
+# Subtest: the bundle hash is stable across serializations
+ok 8 - the bundle hash is stable across serializations
+  ---
+  duration_ms: 0.9505
+  type: 'test'
+  ...
+# Subtest: every reason code maps to exactly one recommendation class
+ok 9 - every reason code maps to exactly one recommendation class
+  ---
+  duration_ms: 0.198084
+  type: 'test'
+  ...
+# Subtest: every clause reason code is declared, and every declared code is used
+ok 10 - every clause reason code is declared, and every declared code is used
+  ---
+  duration_ms: 0.325625
+  type: 'test'
+  ...
+# Subtest: every policy reference the bundle names resolves to a clause
+ok 11 - every policy reference the bundle names resolves to a clause
+  ---
+  duration_ms: 0.107333
+  type: 'test'
+  ...
+# Subtest: precedence covers every DENY clause exactly once, in a fixed order
+ok 12 - precedence covers every DENY clause exactly once, in a fixed order
+  ---
+  duration_ms: 0.110458
+  type: 'test'
+  ...
+# Subtest: the oracle implements a predicate for every DENY clause and nothing more
+ok 13 - the oracle implements a predicate for every DENY clause and nothing more
+  ---
+  duration_ms: 0.113792
+  type: 'test'
+  ...
+# Subtest: the oracle reports the first applicable clause and lists them all
+ok 14 - the oracle reports the first applicable clause and lists them all
+  ---
+  duration_ms: 0.277291
+  type: 'test'
+  ...
+# Subtest: every oracle verdict satisfies the response schema the backend enforces
+ok 15 - every oracle verdict satisfies the response schema the backend enforces
+  ---
+  duration_ms: 0.601625
+  type: 'test'
+  ...
+# Subtest: every review flag the policy defines is documented
+ok 16 - every review flag the policy defines is documented
+  ---
+  duration_ms: 0.32575
+  type: 'test'
+  ...
+# Subtest: the generated specification matches the bundle it documents
+ok 17 - the generated specification matches the bundle it documents
+  ---
+  duration_ms: 0.458584
+  type: 'test'
+  ...
+# Subtest: the open-questions document exists and is current for this bundle
+ok 18 - the open-questions document exists and is current for this bundle
+  ---
+  duration_ms: 0.349958
+  type: 'test'
+  ...
+# Subtest: the canonicalizer is byte-identical to the chaincode implementation
+ok 19 - the canonicalizer is byte-identical to the chaincode implementation
+  ---
+  duration_ms: 0.693333
+  type: 'test'
+  ...
+# Subtest: every precedence clause has an oracle predicate
+ok 20 - every precedence clause has an oracle predicate
+  ---
+  duration_ms: 1.187709
+  type: 'test'
+  ...
+# Subtest: oracle reproduces the retained engine on an exhaustive grid (sealed: ESCALATE -> DENY)
+ok 21 - oracle reproduces the retained engine on an exhaustive grid (sealed: ESCALATE -> DENY)
+  ---
+  duration_ms: 5742.535125
+  type: 'test'
+  ...
+# Subtest: ALLOW lists the permission and default clauses
+ok 22 - ALLOW lists the permission and default clauses
+  ---
+  duration_ms: 0.514375
+  type: 'test'
+  ...
+# Subtest: DENY lists every applicable clause in precedence order, first decisive
+ok 23 - DENY lists every applicable clause in precedence order, first decisive
+  ---
+  duration_ms: 0.092875
+  type: 'test'
+  ...
+# Subtest: sealed records outside the court are DENY with a court-review flag
+ok 24 - sealed records outside the court are DENY with a court-review flag
+  ---
+  duration_ms: 0.084625
+  type: 'test'
+  ...
+# Subtest: unknown roles and organizations never pass the RBAC organization clause
+ok 25 - unknown roles and organizations never pass the RBAC organization clause
+  ---
+  duration_ms: 0.055958
+  type: 'test'
+  ...
+# Subtest: unknown sensitivity is treated as high and unknown clearance satisfies nothing
+ok 26 - unknown sensitivity is treated as high and unknown clearance satisfies nothing
+  ---
+  duration_ms: 0.09975
+  type: 'test'
+  ...
+# Subtest: missing facts fail loudly instead of defaulting
+ok 27 - missing facts fail loudly instead of defaulting
+  ---
+  duration_ms: 0.180291
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5790.616708
