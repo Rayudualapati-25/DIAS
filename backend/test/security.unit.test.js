@@ -91,15 +91,6 @@ describe('security configuration', () => {
     expect(result.stdout).to.equal(path.join(BACKEND_DIR, 'data', 'agency-vault'));
   });
 
-  it('enables policy hints by default and disables them with the explicit off setting', () => {
-    const expression = "process.stdout.write(String(require('./src/config').DIAS_COUNTERFACTUALS))";
-    expect(loadConfig({ DIAS_COUNTERFACTUALS: '' }, expression).stdout).to.equal('true');
-    expect(loadConfig({ DIAS_COUNTERFACTUALS: 'off' }, expression).stdout).to.equal('false');
-    const invalid = loadConfig({ DIAS_COUNTERFACTUALS: 'maybe' });
-    expect(invalid.status).to.not.equal(0);
-    expect(invalid.stderr).to.contain('DIAS_COUNTERFACTUALS');
-  });
-
   it('allows same-origin or originless requests and rejects other origins', () => {
     expect(isAllowedOrigin(undefined)).to.equal(true);
     expect(isAllowedOrigin(CORS_ORIGIN)).to.equal(true);

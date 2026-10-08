@@ -1,0 +1,49 @@
+{
+  "status": 200,
+  "success": true,
+  "data": {
+    "requestId": "REQ-09b823865a80b449",
+    "viewer": "requester",
+    "decision": {
+      "decision": "FORCE_DENY",
+      "llmRecommendation": "ALLOW",
+      "llmAgreement": "NOT_AGREED",
+      "auditor": {
+        "username": "sp.north",
+        "role": "sp"
+      },
+      "decidedAtUtc": "2026-10-08T09:01:12.456Z"
+    },
+    "outcome": {
+      "outcome": "DENIED",
+      "basis": "AUDITOR_DECISION"
+    },
+    "explanationVisible": true,
+    "withheld": null,
+    "recommendationState": "ready",
+    "available": true,
+    "recommendation": "ALLOW",
+    "reasonCode": "POLICY_SATISFIED",
+    "policyRefs": [
+      "GP-RBAC:C2@v1",
+      "GP-DEFAULT:C1@v1"
+    ],
+    "missingEvidence": [],
+    "reviewFlags": [],
+    "unavailable": null,
+    "reason": "The verified requester has an active credential, is assigned to the requested case, and their role 'inspector' is authorized to perform the 'view' action on the 'fir' record type. No DENY clauses apply.",
+    "reasonVisible": true,
+    "counterfactuals": {
+      "available": true,
+      "schemaVersion": "dias-counterfactuals-v1",
+      "writtenPolicy": {
+        "result": "ALLOW",
+        "blockingClauses": []
+      },
+      "changeSets": [],
+      "unresolvedClauses": [],
+      "maxChanges": 2
+    }
+  },
+  "error": null
+}

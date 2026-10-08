@@ -1,0 +1,96 @@
+{
+  "completedAt": "2026-10-08T11:34:37.564Z",
+  "status": "counterfactual component removed; LLM-only explanation active",
+  "tests": {
+    "backend": 319,
+    "frontend": 77,
+    "frontendSyntax": "passed",
+    "live": {
+      "passed": 11,
+      "failed": 0,
+      "total": 11
+    }
+  },
+  "comparison": [
+    {
+      "variant": "counterfactual_layer_present",
+      "generatorInRuntime": true,
+      "oracleReachable": true,
+      "additionalAuditorDetailFetches": 1,
+      "apiCounterfactualField": true,
+      "llmAccountComparedWithBaseline": "baseline",
+      "evidence": "architecture-before.log;live-before.json;baseline commit dd099b7"
+    },
+    {
+      "variant": "llm_only_component_removed",
+      "generatorInRuntime": false,
+      "oracleReachable": false,
+      "additionalAuditorDetailFetches": 0,
+      "apiCounterfactualField": false,
+      "llmAccountComparedWithBaseline": "exact match",
+      "evidence": "static-checks.json;backend-tests.log;live/live.json"
+    }
+  ],
+  "restoredSource": [
+    {
+      "file": ".env.example",
+      "matches": true
+    },
+    {
+      "file": "backend/src/config.js",
+      "matches": true
+    },
+    {
+      "file": "backend/src/routes/access.js",
+      "matches": true
+    },
+    {
+      "file": "backend/test/architectureGuard.unit.test.js",
+      "matches": true
+    },
+    {
+      "file": "backend/test/security.unit.test.js",
+      "matches": true
+    },
+    {
+      "file": "frontend/js/modules/auditor-review.js",
+      "matches": true
+    },
+    {
+      "file": "frontend/js/modules/decision-log.js",
+      "matches": true
+    },
+    {
+      "file": "frontend/js/modules/request-access.js",
+      "matches": true
+    },
+    {
+      "file": "policies/package.json",
+      "matches": true
+    },
+    {
+      "file": "policies/reference-oracle/referencePolicyOracle.js",
+      "matches": true
+    }
+  ],
+  "preserved": [
+    "original LLM account and decision",
+    "model process on port 8081",
+    "Fabric ledger and identities",
+    "prior experiment evidence",
+    "unrelated mobile changes"
+  ],
+  "noNewBusinessTransactions": true,
+  "readSideEffects": "Normal sensitive-read access-log events.",
+  "latency": "not measured; extra computation and extra review fetch removed by source inspection",
+  "browser": {
+    "screenshot": "llm-only-panel.png",
+    "snapshot": "llm-only-panel.txt",
+    "exercised": "auditor decision-log detail"
+  },
+  "featureTestsRetired": {
+    "backend": 22,
+    "frontend": 5
+  },
+  "nextStep": "15: integration scripts"
+}

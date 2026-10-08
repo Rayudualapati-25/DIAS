@@ -33,7 +33,6 @@ import {
 } from '../shared/dias.js';
 import { auditorRequestFromSearch } from '../shared/auditor-handoff.js';
 import { createRecommendationWatch, preparingRequestIds } from '../shared/recommendation-watch.js';
-import { counterfactualPanel } from '../shared/counterfactual-panel.js';
 
 const show = (input) => (input === undefined || input === null || input === '' ? '—' : String(input));
 
@@ -313,10 +312,7 @@ export default {
     const showReview = async (requestId, { keepDraft = false, automatic = false } = {}) => {
       reviewSequence += 1;
       const mine = reviewSequence;
-      const [review, explanation] = await Promise.all([
-        attempt(() => api.access.auditorReview(requestId)),
-        api.access.requestRecommendation(requestId).catch(() => null),
-      ]);
+      const review = await attempt(() => api.access.auditorReview(requestId));
       if (!review || mine !== reviewSequence) return;
       const showingThis = dialog.open && openedReview !== null && openedReview.requestId === requestId;
       if (automatic && !showingThis) return;
@@ -440,7 +436,6 @@ export default {
         recommendationCard(item, {
           onRefresh: () => showReview(requestId, { keepDraft: true }),
         }),
-        counterfactualPanel(explanation),
         reviewNotice,
         integrityCallout(review),
         subheading('Verified requester facts'),

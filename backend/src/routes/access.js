@@ -36,9 +36,6 @@ const {
   recommendationOf,
 } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
 const { AUDIT_ORG, explanationFor } = require('../dias/recommendationDetail');
-const { counterfactualsForTrail, mayExplain } = require('../dias/counterfactuals');
-const { loadBundle } = require('../../../policies/lib/bundle');
-const { DIAS_COUNTERFACTUALS, DIAS_POLICY_BUNDLE_PATH } = require('../config');
 const {
   createsAuthorization, llmAgreementFor, requiresAuditorReason,
 } = require('../dias/agreement');
@@ -283,29 +280,13 @@ router.get('/decision-log', asyncRoute(async (req, res) => {
  * contract refuses it to anyone who is neither a reviewer nor the requester.
  * Nothing about how the recommendation was produced is returned.
  */
-async function recommendationExplanation({
-  user, requestId, store, ledger = fabric, enabled = DIAS_COUNTERFACTUALS,
-  bundleLoader = () => loadBundle(DIAS_POLICY_BUNDLE_PATH).bundle,
-}) {
-  const trail = await ledger.evaluate(user.org, user.fabricUser, 'AuditContract', 'GetRequestAuditTrail', requestId);
-  const result = explanationFor({ user, trail, entry: store.readSafely(requestId), auditorRoles: AUDITOR_ROLES });
-  if (result.status !== 200) return result;
-  let counterfactuals = null;
-  if (enabled && mayExplain(result.data)) {
-    try {
-      counterfactuals = counterfactualsForTrail({ detail: result.data, request: trail.request, bundle: bundleLoader() });
-    } catch (_error) {
-      counterfactuals = { available: false, reason: 'policy-unavailable' };
-    }
-  }
-  return { ...result, data: { ...result.data, counterfactuals } };
-}
-
 router.get('/request/:requestId/recommendation', asyncRoute(async (req, res) => {
   const { requestId } = req.params;
   if (!SAFE_ID.test(requestId || '')) return fail(res, 'requestId has invalid format');
-  const outcome = await recommendationExplanation({
-    user: req.user, requestId, store: getDiasRuntime().store,
+  const trail = await fabric.evaluate(
+    req.user.org, req.user.fabricUser, 'AuditContract', 'GetRequestAuditTrail', requestId);
+  const outcome = explanationFor({
+    user: req.user, trail, entry: getDiasRuntime().store.readSafely(requestId), auditorRoles: AUDITOR_ROLES,
   });
   if (outcome.error) return fail(res, outcome.error, outcome.status);
   return ok(res, outcome.data);
@@ -620,7 +601,6 @@ module.exports.answerCommittedRequest = answerCommittedRequest;
 module.exports.parseStatusIds = parseStatusIds;
 module.exports.preparationStatus = preparationStatus;
 module.exports.recommendationStatus = recommendationStatus;
-module.exports.recommendationExplanation = recommendationExplanation;
 module.exports.reviewView = reviewView;
 module.exports.submitAccessRequest = submitAccessRequest;
 module.exports.isEndorsementConvergenceError = isEndorsementConvergenceError;

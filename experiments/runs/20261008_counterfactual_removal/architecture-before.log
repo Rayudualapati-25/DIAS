@@ -1,0 +1,39 @@
+
+
+  DIAS backend architecture guard
+    ✔ resolves a non-trivial graph for every entry point
+    1) does not reach policies/reference-oracle/referencePolicyOracle.js — the offline reference oracle must never judge a live recommendation
+    ✔ does not reach chaincode/crimerecords/lib/policy/policyEngine.js — the SEAL deterministic policy engine must not run in the live path
+    ✔ does not reach chaincode/crimerecords/lib/policy/controlledDecision.js — SEAL controlled-decision logic must not run in the live path
+    ✔ does not reach chaincode/crimerecords/lib/policy/llmDecisionProtocol.js — the SEAL decision protocol enforced engine/model agreement
+    ✔ does not reach chaincode/crimerecords/lib/policy/dynamicPolicy.js — SEAL property-fingerprint dynamic policy is replaced by exact-record authorization
+    ✔ does not reach backend/src/llm/policyDecision.js — the SEAL runtime guard overrode the model recommendation
+    ✔ does not reach backend/src/llm/groundedPolicyPrompt.js — DIAS has exactly one prompt implementation
+    ✔ does not reach backend/src/llm/explain.js — SEAL explanation rewording reads decision fields DIAS never writes
+    ✔ does not reach backend/src/llm/ollama.js — the SEAL wording model is not part of the DIAS runtime
+    ✔ reaches the DIAS recommender from the access routes, inside the backend
+    ✔ has no AI-organisation listener and no separate recommendation service; the signer has no Fabric identity
+    ✔ has no SEAL listener left to run
+    ✔ keeps ESCALATE out of the live recommendation vocabulary
+
+
+  13 passing (4ms)
+  1 failing
+
+  1) DIAS backend architecture guard
+       does not reach policies/reference-oracle/referencePolicyOracle.js — the offline reference oracle must never judge a live recommendation:
+
+      AssertionError: reachable from: backend/src/server.js, backend/src/routes/access.js: expected [ 'backend/src/server.js', …(1) ] to deeply equal []
+      + expected - actual
+
+      -[
+      -  "backend/src/server.js"
+      -  "backend/src/routes/access.js"
+      -]
+      +[]
+      
+      at Context.<anonymous> (test/architectureGuard.unit.test.js:94:76)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+

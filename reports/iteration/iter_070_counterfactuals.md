@@ -1,5 +1,7 @@
 # Iteration 070 — verified counterfactual explanations
 
+**Historical report — component withdrawn on 2026-10-08 at the author's request.** The implementation and commands below describe commit `dd099b7`, not the active system. Use that commit in a separate checkout for reproduction. Original logs and metrics remain unchanged; iteration 071 records removal and preservation of the LLM explanation.
+
 - **Date:** 2026-10-08.
 - **Plan step:** 14; requirements M25 and I08.
 - **Outcome:** implemented and running on the local host. The original LLM

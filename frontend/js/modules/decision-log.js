@@ -19,7 +19,6 @@ import {
 } from '../core/components.js';
 import { dateTime, shortHash } from '../core/format.js';
 import { agreementLabel, decisionLogRow, recommendationLabel } from '../shared/dias.js';
-import { counterfactualPanel } from '../shared/counterfactual-panel.js';
 
 const show = (value) => (value === undefined || value === null || value === '' ? '—' : String(value));
 const showList = (values) => (values && values.length > 0 ? values.join(', ') : '—');
@@ -70,7 +69,7 @@ function detailPanel(entry, detail) {
   const heading = subheading(`Why ${entry.requestId} was decided as it was`);
   if (detail.recommendationState === 'pending') {
     return el('div', {}, heading,
-      hint('The LLM recommendation for this request is still being prepared.'), counterfactualPanel(detail));
+      hint('The LLM recommendation for this request is still being prepared.'));
   }
   if (!detail.available) {
     return el('div', {}, heading,
@@ -79,7 +78,7 @@ function detailPanel(entry, detail) {
         detailTable([
           ['Generation status', mono(show(detail.unavailable && detail.unavailable.generationStatus))],
           ['Reported cause', mono(show(detail.unavailable && detail.unavailable.errorCode))],
-        ])), counterfactualPanel(detail));
+        ])));
   }
   return el('div', {}, heading,
     detailTable([
@@ -93,7 +92,7 @@ function detailPanel(entry, detail) {
         ? show(detail.reason)
         : hint('Restricted. The model\'s written reason can quote case detail, so it is '
           + 'shown only to the officer who made this request and to auditors.')],
-    ]), counterfactualPanel(detail));
+    ]));
 }
 
 /** The log as a caller outside the reviewer set receives it: no names, files or transactions. */

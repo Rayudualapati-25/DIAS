@@ -1,0 +1,50 @@
+{
+  "recordedAt": "2026-10-08T11:31:46.147Z",
+  "sameAsPreFeature": [
+    {
+      "file": ".env.example",
+      "matches": true
+    },
+    {
+      "file": "backend/src/config.js",
+      "matches": true
+    },
+    {
+      "file": "backend/src/routes/access.js",
+      "matches": true
+    },
+    {
+      "file": "backend/test/architectureGuard.unit.test.js",
+      "matches": true
+    },
+    {
+      "file": "backend/test/security.unit.test.js",
+      "matches": true
+    },
+    {
+      "file": "frontend/js/modules/auditor-review.js",
+      "matches": true
+    },
+    {
+      "file": "frontend/js/modules/decision-log.js",
+      "matches": true
+    },
+    {
+      "file": "frontend/js/modules/request-access.js",
+      "matches": true
+    },
+    {
+      "file": "policies/package.json",
+      "matches": true
+    },
+    {
+      "file": "policies/reference-oracle/referencePolicyOracle.js",
+      "matches": true
+    }
+  ],
+  "generatorExists": false,
+  "reviewHadAdditionalRecommendationRequest": true,
+  "reviewHasAdditionalRecommendationRequest": false,
+  "runtimeCounterfactualReferences": "",
+  "oracleRuntimeGuard": "passes in backend-tests.log; failure before removal retained in architecture-before.log"
+}

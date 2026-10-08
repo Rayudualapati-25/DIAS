@@ -4,6 +4,7 @@
 - **Approval:** on 2026-10-01 the author approved running all steps end to end without stopping for approval. The design defaults in Step 2 are the approved choices. Every choice must be written down so the author can review it afterwards.
 - **Evidence it starts from:** `reports/paper_code_alignment_audit.md` (line numbers there refer to the code at tag `eval-baseline-2026-10-01`; check them before use).
 - **Baseline:** `experiments/runs/20261001_eval_baseline/` (Step 1, done).
+- **Amendment, 2026-10-08:** the author withdrew counterfactual explanations. Step 14 is removed from the active system; explanations use the existing LLM account only. The reference oracle stays offline. Prior counterfactual evidence is historical and retained.
 
 ## Ground rules
 
@@ -42,7 +43,7 @@
 | 11 | Enforce the auditor note in the contract | Note hash required for disagreement or a missing recommendation |
 | 12 | Reduce trust in the backend. **Amended 2026-10-08:** the backend asks the LLM itself (see Amendments) | Signed recommendation provenance; request-to-recommendation test |
 | 13 | Strengthen privacy controls | Restricted histories, evidence, explanations and decision log |
-| 14 | Add counterfactual explanations | Only changes verified to alter the policy outcome |
+| 14 | Withdrawn: retain only the LLM explanation | Oracle absent from runtime; counterfactual computation, panels and extra review request removed |
 | 15 | Update backend, frontend and testbed | All components use the new schemas and transactions |
 | 16 | Complete verification | Full test list below |
 | 17 | Rerun affected experiments | Offline experiments now; the rest prepared for the Mac |
@@ -85,7 +86,7 @@ Starting points from the audit:
 
 - Restrict `GetRecordHistory`, `ListEvidence`, the public decision log and access to the full explanation.
 - Encrypt the off-chain review store.
-- Counterfactuals come from the reference policy oracle. Keep only changes that, when applied, actually flip the oracle's outcome.
+- The author withdrew counterfactuals on 2026-10-08. Keep the original LLM explanation and its visibility controls; the reference policy oracle must not be reachable at runtime.
 - Update the backend API, the auditor and requester screens, the testbed scripts (add the missing `testbed/scripts/prepare-chaincode.sh`), the chaincode version in the `Makefile`, and the README.
 
 ### Step 16 — required tests

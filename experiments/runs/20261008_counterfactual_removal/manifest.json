@@ -1,0 +1,305 @@
+{
+  "completedAt": "2026-10-08T11:35:48.282Z",
+  "baselineCommit": "dd099b77275a8a69c2427973177d72b0c6704d72",
+  "source": [
+    {
+      "path": ".env.example",
+      "bytes": 2998,
+      "sha256": "88c83d10fa391c9baf4ec88875445fa77ac9d7faa770a69ba4e836b198c8b96f"
+    },
+    {
+      "path": "backend/src/config.js",
+      "bytes": 11913,
+      "sha256": "acbd9b50b93e4b71388e89355bb7aa8bbb67f9537b73693dea47b090c862904e"
+    },
+    {
+      "path": "backend/src/routes/access.js",
+      "bytes": 26536,
+      "sha256": "6d8fc0bc67a58a7efd67c50122107ce5a79b73a48a5b820e8f178473ae630fbd"
+    },
+    {
+      "path": "backend/test/architectureGuard.unit.test.js",
+      "bytes": 7047,
+      "sha256": "81200fa0105b9e6cbac3ae2aee97d89822413fc70da0f32cc4106bcc689a3869"
+    },
+    {
+      "path": "backend/test/security.unit.test.js",
+      "bytes": 4883,
+      "sha256": "0e961490c7a3884793c3abd93656d4ef14bdc701deb0abb3360689634f1c86a1"
+    },
+    {
+      "path": "frontend/js/modules/auditor-review.js",
+      "bytes": 25490,
+      "sha256": "7e7ae6747c62d7d70034e1bc48fb0d410581b558b9435da76e787805b53fdd33"
+    },
+    {
+      "path": "frontend/js/modules/decision-log.js",
+      "bytes": 8876,
+      "sha256": "b72a26e327eaa85b8df5b5e7b54e144fc1155b3a61ef060f551db839864df21b"
+    },
+    {
+      "path": "frontend/js/modules/request-access.js",
+      "bytes": 22645,
+      "sha256": "08b3e873d58a88cfcd034c1473263c10d738b61fa1871a366ee62749257babef"
+    },
+    {
+      "path": "policies/package.json",
+      "bytes": 503,
+      "sha256": "06f559855df0d5cc37decd35264972485e73788fcf20693bcdaa4741adfdd9ce"
+    },
+    {
+      "path": "policies/reference-oracle/referencePolicyOracle.js",
+      "bytes": 6824,
+      "sha256": "ac7db29a0c9442d5a9bbd662f690835f46991d8c0a9a806e925737f1830d83a8"
+    },
+    {
+      "path": "docs/design/dias-v3-ledger-schema.md",
+      "bytes": 31214,
+      "sha256": "049d06d8dcefffc2b198f5fa15c6069ae410fabca632db60275af054715fe51e"
+    },
+    {
+      "path": "docs/design/dias-v3-requirements-traceability.md",
+      "bytes": 22551,
+      "sha256": "23a951573c4bbd36f611f84ba234497e51b410d43d034f7de85ade8b839b5d32"
+    },
+    {
+      "path": "experiments/plans/20261001_integrity_v3_plan.md",
+      "bytes": 12188,
+      "sha256": "d383805a97affda53af59d3f330d09496f39a501783f94f022a9ffc1e4a58bcd"
+    },
+    {
+      "path": "experiments/plans/20261008_counterfactuals.md",
+      "bytes": 3765,
+      "sha256": "cee615be5b53fc1f29a7cf27bf867703b3b90c6703c61edaab9147ed077afb84"
+    },
+    {
+      "path": "experiments/plans/20261008_counterfactual_removal.md",
+      "bytes": 1796,
+      "sha256": "cf384f34984bb3d5aab7fc9f350f884382253548f7d6d753183c951022c3029d"
+    },
+    {
+      "path": "reports/iteration/iter_070_counterfactuals.md",
+      "bytes": 9302,
+      "sha256": "65f0e05bcab1fc532f550ee60484ad5520c0f8fe2ce2cef9668733b2f60ded25"
+    },
+    {
+      "path": "reports/iteration/iter_071_counterfactual_removal.md",
+      "bytes": 5491,
+      "sha256": "35ba9cab1dea67a25b178ba2fce9492d9bdc1cc0e737ca3c3b52e1a3d98e3d89"
+    },
+    {
+      "path": "experiments/check-llm-detail-only-live.js",
+      "bytes": 5508,
+      "sha256": "0ad1edefab109838d0c489f024aff5b2da48440f7fa0ffb965c91cc785998d9c"
+    },
+    {
+      "path": "results/tables/20261008_counterfactual_removal.csv",
+      "bytes": 368,
+      "sha256": "0d0b5a61824824d5d6ab38b40f373498887dc79be49e56f278e93fbc6a4506ea"
+    }
+  ],
+  "removed": [
+    {
+      "path": "backend/src/dias/counterfactuals.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/backend/src/dias/counterfactuals.js",
+        "bytes": 7846,
+        "sha256": "954086f68ed8a6d74fa865e52c74d8f110ca3be7031b3afcec116e4d54544163"
+      }
+    },
+    {
+      "path": "backend/test/counterfactualDetail.unit.test.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/backend/test/counterfactualDetail.unit.test.js",
+        "bytes": 5336,
+        "sha256": "27f433eca4bd22e868c80cc4c114e01e137d839a1ff3590d54de0938f6006bc7"
+      }
+    },
+    {
+      "path": "backend/test/counterfactuals.unit.test.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/backend/test/counterfactuals.unit.test.js",
+        "bytes": 10287,
+        "sha256": "d3786dfdba91f8a7489bcef921e6d20962e7fd4a1b269483317c073345755411"
+      }
+    },
+    {
+      "path": "frontend/js/shared/counterfactual-panel.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/frontend/js/shared/counterfactual-panel.js",
+        "bytes": 614,
+        "sha256": "53a617e5ce93c2f00a569655358503254fef97ed15c9981a9b2b74924253a8bd"
+      }
+    },
+    {
+      "path": "frontend/js/shared/counterfactuals.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/frontend/js/shared/counterfactuals.js",
+        "bytes": 1847,
+        "sha256": "87bffc23124e55a6bea4a794fc17e0829d2e0e7420fe4039c76cba908b581d8e"
+      }
+    },
+    {
+      "path": "frontend/test/counterfactuals.test.mjs",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/frontend/test/counterfactuals.test.mjs",
+        "bytes": 2652,
+        "sha256": "4686158ca6aecd435d6ae3f356bb10a5209205cf1929ed076efcd7c70bc5baf6"
+      }
+    },
+    {
+      "path": "experiments/check-counterfactuals-live.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/experiments/check-counterfactuals-live.js",
+        "bytes": 5297,
+        "sha256": "898d1956cb4a3a5cba788ac4c916eaae1cc8790bfee50b28d46e04efd97debad"
+      }
+    },
+    {
+      "path": "experiments/evaluate-counterfactuals.js",
+      "removedFromActiveTree": true,
+      "retainedSnapshot": {
+        "path": "experiments/runs/20261008_counterfactual_removal/removed-source/experiments/evaluate-counterfactuals.js",
+        "bytes": 6398,
+        "sha256": "17cab94e39a34715d32f8c313ea830828a96e130b9f7002d93217598f62f6b20"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/.gitignore",
+      "bytes": 91,
+      "sha256": "047a11da341366f46f92aaedf71f9fe170b8d52b01fe8e6fdc466c1867901d60"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/architecture-before.log",
+      "bytes": 2237,
+      "sha256": "75e98ed93223b0ac2e7323e2ad19336a441bad04de1ef7c72c636d0595f08d35"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/backend-startup.log",
+      "bytes": 341,
+      "sha256": "f5c6dfad1cd0d7bfa464a66bf312eddbf4960062d544e9ebf1968695393deb70"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/backend-tests.log",
+      "bytes": 26061,
+      "sha256": "be8d4be692cbb050c85b18061697d0f73622baa4478970e684ebab12e7b64b63"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/config.json",
+      "bytes": 1569,
+      "sha256": "5ee19631097e6656126f3c12aaaf15294b532d13e76e1457df033158aea0f1b3"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/frontend-syntax.log",
+      "bytes": 134,
+      "sha256": "37cce4841abb63c02dedf0682f2f6cc704e552fba0256f26eed0a6851c47d1a9"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/frontend-tests.log",
+      "bytes": 15616,
+      "sha256": "58cef735917f8fa6a2c945bd1210e9e857f473eabc1b0cd0157b31b053be6cec"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/live/config.json",
+      "bytes": 286,
+      "sha256": "8c4661d22c238f30fba737f4b9ee19bc51f6c3c3b2723e32767c6200b93d7ec8"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/live/live.json",
+      "bytes": 8811,
+      "sha256": "3beb9d0f07e8fe8915d428220b5a6881eabc2d143b755f3f604430da50e26924"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/live-before.json",
+      "bytes": 1338,
+      "sha256": "0acf9b81b7ab7121b69b159b141c816579d12ba6d4b8f434f4cbc75c4d53468b"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/live.log",
+      "bytes": 36,
+      "sha256": "336f2f54febdbcd590febb521ff70c75971119d5f7b9c6efd4e2440bc6991119"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/llm-only-panel.png",
+      "bytes": 75601,
+      "sha256": "b3d3a63c2a79572c8347e29aec09e417e4c0459cde62329c227e6cff1b418563"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/llm-only-panel.txt",
+      "bytes": 11767,
+      "sha256": "3f3a47bfc925b345e8948369a50caf00f2d97ca07d535e175febe25bcaa51e2b"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/README.md",
+      "bytes": 372,
+      "sha256": "7c6ed977e8657b3b7b0ac0ce33127d0041c7fbc63206840f2e7b6fb28e930bfe"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/backend/src/dias/counterfactuals.js",
+      "bytes": 7846,
+      "sha256": "954086f68ed8a6d74fa865e52c74d8f110ca3be7031b3afcec116e4d54544163"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/backend/test/counterfactualDetail.unit.test.js",
+      "bytes": 5336,
+      "sha256": "27f433eca4bd22e868c80cc4c114e01e137d839a1ff3590d54de0938f6006bc7"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/backend/test/counterfactuals.unit.test.js",
+      "bytes": 10287,
+      "sha256": "d3786dfdba91f8a7489bcef921e6d20962e7fd4a1b269483317c073345755411"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/experiments/check-counterfactuals-live.js",
+      "bytes": 5297,
+      "sha256": "898d1956cb4a3a5cba788ac4c916eaae1cc8790bfee50b28d46e04efd97debad"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/experiments/evaluate-counterfactuals.js",
+      "bytes": 6398,
+      "sha256": "17cab94e39a34715d32f8c313ea830828a96e130b9f7002d93217598f62f6b20"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/frontend/js/shared/counterfactual-panel.js",
+      "bytes": 614,
+      "sha256": "53a617e5ce93c2f00a569655358503254fef97ed15c9981a9b2b74924253a8bd"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/frontend/js/shared/counterfactuals.js",
+      "bytes": 1847,
+      "sha256": "87bffc23124e55a6bea4a794fc17e0829d2e0e7420fe4039c76cba908b581d8e"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/removed-source/frontend/test/counterfactuals.test.mjs",
+      "bytes": 2652,
+      "sha256": "4686158ca6aecd435d6ae3f356bb10a5209205cf1929ed076efcd7c70bc5baf6"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/static-checks.json",
+      "bytes": 1212,
+      "sha256": "868ad0a79ce9b07770c041cf366833926c88802ad5bc3a72b14162af2140c60d"
+    },
+    {
+      "path": "experiments/runs/20261008_counterfactual_removal/summary.json",
+      "bytes": 2523,
+      "sha256": "3c07ac43acddec4375ebd1e9da5ecb54225379b42904abbfd84096099fad9922"
+    }
+  ],
+  "checks": {
+    "sourceSyntax": "passed",
+    "privateKeyOrBearerTokenPatterns": "none found; pattern check is not exhaustive"
+  },
+  "excludes": [
+    ".env and external identities",
+    "Mutable backend-active.log; stable startup snapshot retained"
+  ]
+}

@@ -23,8 +23,8 @@
 | Record history, evidence list, custody | No caller checks | Restricted to the owning station, the record's district, and reviewers |
 | Off-chain review store | Plain JSON files | Authenticated encryption (AES-256-GCM), key outside Git |
 | Access log | One ledger write after every authenticated API call | Defined logging policy: sensitive reads, and failures of state-changing calls |
-| Explanations | Structured part public; free text for requester and auditors | Structured part and counterfactuals for the requester and auditors; full object for auditors |
-| Counterfactuals | None | Generated off-chain and kept only when the reference policy oracle confirms the outcome changes |
+| Explanations | Structured part public; free text for requester and auditors | Existing LLM structured part and written reason according to the visibility rules; full object for auditors |
+| Counterfactuals | None | Withdrawn by the author on 2026-10-08; existing LLM account only |
 
 ## 2. Roles and trust
 
@@ -49,7 +49,6 @@ The backend remains part of the trusted base, because it holds every demonstrati
 | Recommendation object M | Off-chain (encrypted) | Recommendation, status, normalized model output or error, provenance; `h_M` on the ledger |
 | Commitment κ | Ledger | See §6 |
 | Auditor note N | Off-chain (encrypted) | Auditor's text; `h_N` on the ledger |
-| Counterfactuals | Off-chain | Recomputable from C and the policy; not committed |
 | Decision, outcome, authorization | Ledger | See §7–§9 |
 | Protected record content | Owning agency vault | Content hash on the ledger |
 
@@ -204,7 +203,7 @@ The backend remains part of the trusted base, because it holds every demonstrati
 | Evidence list and custody | — | yes | same-district Police, Forensics, Prosecution, Court |
 | J (justification) | yes | AuditMSP district heads | no |
 | M recommendation value | once an auditor has decided⁴ | AuditMSP district heads | no |
-| M structured part³, written reason, and counterfactuals | only when the auditor denied the request⁴ | AuditMSP district heads | no |
+| M structured part³ and written reason | only when the auditor denied the request⁴ | AuditMSP district heads | no |
 | M provenance | no | AuditMSP district heads | no |
 | N (auditor note) | no | AuditMSP district heads | no |
 
@@ -257,18 +256,12 @@ The backend remains part of the trusted base, because it holds every demonstrati
 - **Readers:** the reviewer set (`QueryAccessEvents`).
 - **Effect on measurements:** logging adds ledger writes outside the measured request latency. Throughput and resource figures from v2 runs are therefore not comparable with v3 runs.
 
-## 13. Counterfactual explanations
+## 13. Explanation source
 
-- **Engine:** the backend applies the reference policy oracle to the verified context with up to two changed facts. It keeps only the minimal change sets that the oracle confirms change the outcome.
-- **Each change is labelled:**
-  - `REQUESTER` (action, purpose);
-  - `ADMINISTRATIVE` (credential reinstatement, case assignment, clearance, sensitivity reclassification);
-  - `LEGAL` (unsealing, juvenile and victim protection).
-- **Limits:** counterfactuals are explanation support. They are never compared with the LLM recommendation, never decide anything, and never grant access.
-- **Visibility:** they reveal the written policy's outcome for the current facts, which is a second signal next to the LLM's advice. This relaxes the 2026-09-11 decision to keep the oracle offline, as approved in plan step 14, and `DIAS_COUNTERFACTUALS=off` disables it.
-- **Implemented 2026-10-08:** `GET /access/request/:id/recommendation` adds `counterfactuals`. Facts come from the caller-authorized ledger trail. The v3 context schema, `h_C`, policy version and policy digest must match; otherwise hints are marked unavailable. Requester claims and the stored LLM prose are not inputs. The requester sees hints only after FORCE DENY; a requester who is also an auditor follows that same rule. Other permitted auditors may read them before review.
-- **Search and wording:** enumerate changes to the nine permitted facts, retain inclusion-minimal sufficient sets of one or two distinct facts, and use the lowest sufficient clearance/reclassification level. Identity, role, district, case and record type are never changed. Legal changes are hypothetical conditions, not proof that protection may lawfully be removed. A policy ALLOW produces no change set and does not explain an auditor denial. The API, requester, audit detail and auditor review panels keep these hints separate from the model's original text.
-- **Evidence:** `reports/iteration/iter_070_counterfactuals.md`, `experiments/runs/20261008_counterfactuals/`. Offline consistency is against the same synthetic-policy oracle; it is not independent legal or explanation-quality validation.
+- **Author decision, 2026-10-08:** use the existing LLM explanation only. The separate counterfactual layer is withdrawn.
+- **Runtime:** the recommendation detail returns the existing LLM account under section 10's visibility controls. There is no hypothetical fact search, reference-oracle call, counterfactual field or policy hint panel. Auditor review loads its existing review response without a second explanation-detail request.
+- **Architecture:** the reference policy oracle remains an offline labelling/evaluation tool and must not be reachable from live backend entry points. Existing ledger checks, committed recommendation integrity and auditor authority remain in place.
+- **Historical evidence:** iteration 070 and `experiments/runs/20261008_counterfactuals/` preserve the removed implementation's consistency checks. They establish neither an independent support claim nor an end-to-end latency result. Removal checks are recorded in iteration 071 and `experiments/runs/20261008_counterfactual_removal/`.
 
 ## 14. Older records and versions
 

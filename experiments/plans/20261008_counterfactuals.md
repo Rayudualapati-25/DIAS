@@ -1,5 +1,7 @@
 # Step 14 — verified counterfactual explanations
 
+**Historical plan — withdrawn on 2026-10-08 at the author's request.** The runtime now uses only the existing LLM explanation. The implementation described below belongs to commit `dd099b7`; reproduce its experiments in a separate checkout of that commit. Logs and metrics are retained unchanged. See `20261008_counterfactual_removal.md` for the current plan.
+
 ## Scope
 
 Continue the unfinished generator tests on `feat/dias-v3-integrity`. Preserve

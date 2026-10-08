@@ -1,14 +1,13 @@
 'use strict';
 
 /**
- * REFERENCE ORACLE — dataset/evaluation labels and policy hypotheticals.
+ * OFFLINE REFERENCE ORACLE — NOT PART OF THE DIAS RUNTIME.
  *
  * Applies the canonical governance policy bundle deterministically to one
  * synthetic request so that datasets, test fixtures, and offline evaluation have
- * a reproducible reference recommendation. Design section 13 additionally
- * permits the counterfactual explanation module to check hypothetical changes.
- * Qwen recommends, the auditor decides; this oracle never corrects the model or
- * grants access. The architecture guard limits that runtime exception.
+ * a reproducible reference recommendation. The live DIAS workflow never calls
+ * this module: Qwen recommends, the auditor decides, and no runtime code compares
+ * the two with this oracle (enforced by the architecture guard tests).
  */
 
 const { clauseRef, findClause } = require('../lib/bundle');

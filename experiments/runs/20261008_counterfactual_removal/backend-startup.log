@@ -1,0 +1,4 @@
+CHANNEL=diaschannel CHAINCODE=diasrecords DIAS_MODEL_URL=http://127.0.0.1:8081/v1 \
+		node backend/src/server.js
+DIAS backend listening on http://localhost:3001 (LLM recommendations resumed: 0; reviews encrypted: 0, re-sealed: 0, unreadable: 0)
+[dias] staged auditor notes settled: {"committed":0,"dropped":0,"stillStaged":0,"unreadable":0}

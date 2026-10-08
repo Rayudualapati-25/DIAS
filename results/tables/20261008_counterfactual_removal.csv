@@ -1,0 +1,3 @@
+variant,generatorInRuntime,oracleReachable,additionalAuditorDetailFetches,apiCounterfactualField,llmAccountComparedWithBaseline,evidence
+counterfactual_layer_present,true,true,1,true,baseline,architecture-before.log;live-before.json;baseline commit dd099b7
+llm_only_component_removed,false,false,0,false,exact match,static-checks.json;backend-tests.log;live/live.json

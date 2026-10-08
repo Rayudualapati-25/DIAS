@@ -13,7 +13,6 @@
 
 import { api } from '../core/api.js';
 import { el } from '../core/dom.js';
-import { counterfactualPanel } from '../shared/counterfactual-panel.js';
 import {
   card, grid, row, field, input, select, textarea, form, table, detailTable, button,
   badge, mono, hint, slot, replace, attempt, callout, asyncRegion, subheading,
@@ -94,8 +93,7 @@ function decisionExplanation(detail) {
         ? callout('warn', 'The LLM explanation is not available',
           hint('The ledger records the recommendation above, but this backend no longer holds its explanation.'))
         : callout('warn', 'There was no LLM recommendation for this request',
-          hint('The auditor decided without one.')),
-      counterfactualPanel(detail));
+          hint('The auditor decided without one.')));
   }
   return el('div', { class: 'decision-detail' }, detailTable(view.rows),
     callout('info', 'The LLM explanation (advisory only)',
@@ -106,8 +104,7 @@ function decisionExplanation(detail) {
         ['What the LLM said was missing', listed(explained.missingEvidence, 'nothing')],
         ['Review flags', listed(explained.reviewFlags, 'none')],
       ]),
-      hint('The auditor made the decision. This explanation comes from the LLM, which decided nothing.')),
-    counterfactualPanel(detail));
+      hint('The auditor made the decision. This explanation comes from the LLM, which decided nothing.')));
 }
 
 export default {

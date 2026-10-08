@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-08T11:27:50.315Z",
+  "objective": "Remove runtime counterfactual explanations; retain existing LLM explanations and historical evidence.",
+  "baselineCommit": "dd099b77275a8a69c2427973177d72b0c6704d72",
+  "branch": "feat/dias-v3-integrity",
+  "initialChanges": " M README.md\n M backend/src/server.js\n?? backend/src/mobile/\n?? backend/src/routes/mobile.js\n?? backend/test/mobileCases.unit.test.js\n?? docs/mobile-connectivity-research.md\n?? experiments/plans/20261003_mobile_foundation.md\n?? experiments/plans/20261006_dias_host_startup.md\n?? experiments/run-mobile-foundation.js\n?? experiments/runs/20261003_mobile_foundation/\n?? experiments/runs/20261006_dias_host_startup/\n?? mobile/\n?? reports/iteration/iter_20261002_v3_methodology_alignment.md\n?? reports/iteration/iter_20261003_mobile_foundation.md\n?? reports/iteration/iter_20261006_dias_host_startup.md\n?? results/tables/20261003_mobile_foundation_transport.csv\n?? results/tables/20261006_dias_host_startup_transport.csv\n?? scripts/mobile-connect.sh\n?? scripts/mobile-host.js\n",
+  "baselineEvidence": "experiments/runs/20261008_counterfactuals/",
+  "proposedChange": "Whole-component removal, restoring the oracle runtime ban and single auditor-review request.",
+  "modelChange": false,
+  "latencyBenchmark": "not planned; no latency reduction will be claimed without a controlled measurement",
+  "preserve": [
+    "Fabric state",
+    "model service",
+    "LLM reason text and decision",
+    "previous experiment artifacts",
+    "older uncommitted mobile work"
+  ]
+}

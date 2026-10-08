@@ -87,10 +87,6 @@ const DIAS_REVIEW_STORE_DIR = resolveFromRepo(
   process.env.DIAS_REVIEW_STORE_DIR,
   path.join(REPO_ROOT, 'backend', 'data', 'dias-reviews')
 );
-const DIAS_COUNTERFACTUALS = process.env.DIAS_COUNTERFACTUALS || 'on';
-if (!['on', 'off'].includes(DIAS_COUNTERFACTUALS)) {
-  throw new Error('[config] DIAS_COUNTERFACTUALS must be "on" or "off"');
-}
 
 // The Fabric CLI binaries ship with the workspace rather than the system.
 // fabric-ca-client is used to register and enrol new department users, exactly
@@ -243,7 +239,6 @@ module.exports = Object.freeze({
   DIAS_ADAPTER_PATH,
   DIAS_POLICY_BUNDLE_PATH,
   DIAS_REVIEW_STORE_DIR,
-  DIAS_COUNTERFACTUALS: DIAS_COUNTERFACTUALS === 'on',
 
   // Identity of the model the backend serves, kept with each off-chain
   // recommendation. The defaults describe the untuned base model; set the

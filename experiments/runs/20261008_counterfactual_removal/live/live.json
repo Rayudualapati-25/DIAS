@@ -1,0 +1,278 @@
+{
+  "completedAt": "2026-10-08T11:31:55.429Z",
+  "base": "http://127.0.0.1:3001/api",
+  "checks": [
+    {
+      "name": "backend reachable",
+      "ok": true
+    },
+    {
+      "name": "denied requester retains the LLM explanation",
+      "ok": true
+    },
+    {
+      "name": "counterfactual response field removed",
+      "ok": true
+    },
+    {
+      "name": "original LLM account and committed decision unchanged",
+      "ok": true
+    },
+    {
+      "name": "allowed requester retains existing explanation withholding",
+      "ok": true
+    },
+    {
+      "name": "auditor retains the same LLM account without policy hints",
+      "ok": true
+    },
+    {
+      "name": "other-organization reviewer is refused",
+      "ok": true
+    },
+    {
+      "name": "anonymous caller is refused",
+      "ok": true
+    },
+    {
+      "name": "invalid request identifier is refused",
+      "ok": true
+    },
+    {
+      "name": "own denied request retains requester visibility for judge.rana",
+      "ok": true
+    },
+    {
+      "name": "own denied request retains requester visibility for dj.north",
+      "ok": true
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11
+  },
+  "data": {
+    "denied": {
+      "status": 200,
+      "success": true,
+      "data": {
+        "requestId": "REQ-09b823865a80b449",
+        "viewer": "requester",
+        "decision": {
+          "decision": "FORCE_DENY",
+          "llmRecommendation": "ALLOW",
+          "llmAgreement": "NOT_AGREED",
+          "auditor": {
+            "username": "sp.north",
+            "role": "sp"
+          },
+          "decidedAtUtc": "2026-10-08T09:01:12.456Z"
+        },
+        "outcome": {
+          "outcome": "DENIED",
+          "basis": "AUDITOR_DECISION"
+        },
+        "explanationVisible": true,
+        "withheld": null,
+        "recommendationState": "ready",
+        "available": true,
+        "recommendation": "ALLOW",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyRefs": [
+          "GP-RBAC:C2@v1",
+          "GP-DEFAULT:C1@v1"
+        ],
+        "missingEvidence": [],
+        "reviewFlags": [],
+        "unavailable": null,
+        "reason": "The verified requester has an active credential, is assigned to the requested case, and their role 'inspector' is authorized to perform the 'view' action on the 'fir' record type. No DENY clauses apply.",
+        "reasonVisible": true
+      },
+      "error": null
+    },
+    "allowed": {
+      "status": 200,
+      "success": true,
+      "data": {
+        "requestId": "REQ-24601cfdab132c5f",
+        "viewer": "requester",
+        "decision": {
+          "decision": "FORCE_ALLOW",
+          "llmRecommendation": "ALLOW",
+          "llmAgreement": "AGREED",
+          "auditor": {
+            "username": "sp.north",
+            "role": "sp"
+          },
+          "decidedAtUtc": "2026-10-06T09:44:07.898Z"
+        },
+        "outcome": {
+          "outcome": "GRANTED",
+          "basis": "AUDITOR_DECISION"
+        },
+        "explanationVisible": false,
+        "withheld": "allowed",
+        "recommendationState": "withheld",
+        "available": false,
+        "recommendation": "ALLOW",
+        "reasonCode": null,
+        "policyRefs": [],
+        "missingEvidence": [],
+        "reviewFlags": [],
+        "unavailable": null,
+        "reason": null,
+        "reasonVisible": false
+      },
+      "error": null
+    },
+    "audit": {
+      "status": 200,
+      "success": true,
+      "data": {
+        "requestId": "REQ-09b823865a80b449",
+        "viewer": "auditor",
+        "decision": {
+          "decision": "FORCE_DENY",
+          "llmRecommendation": "ALLOW",
+          "llmAgreement": "NOT_AGREED",
+          "auditor": {
+            "username": "sp.north",
+            "role": "sp"
+          },
+          "decidedAtUtc": "2026-10-08T09:01:12.456Z"
+        },
+        "outcome": {
+          "outcome": "DENIED",
+          "basis": "AUDITOR_DECISION"
+        },
+        "explanationVisible": true,
+        "withheld": null,
+        "recommendationState": "ready",
+        "available": true,
+        "recommendation": "ALLOW",
+        "reasonCode": "POLICY_SATISFIED",
+        "policyRefs": [
+          "GP-RBAC:C2@v1",
+          "GP-DEFAULT:C1@v1"
+        ],
+        "missingEvidence": [],
+        "reviewFlags": [],
+        "unavailable": null,
+        "reason": "The verified requester has an active credential, is assigned to the requested case, and their role 'inspector' is authorized to perform the 'view' action on the 'fir' record type. No DENY clauses apply.",
+        "reasonVisible": true
+      },
+      "error": null
+    },
+    "forbidden": {
+      "status": 403,
+      "success": false,
+      "data": null,
+      "error": "only the officer who made the request and an audit-organisation district head may read the LLM detail of a request"
+    },
+    "anonymous": {
+      "status": 401,
+      "success": false,
+      "data": null,
+      "error": "missing bearer token"
+    },
+    "invalid": {
+      "status": 400,
+      "success": false,
+      "data": null,
+      "error": "requestId has invalid format"
+    },
+    "own": {
+      "judge.rana": {
+        "status": 200,
+        "success": true,
+        "data": {
+          "requestId": "REQ-c1192ac4d762165f",
+          "viewer": "requester",
+          "decision": {
+            "decision": "FORCE_DENY",
+            "llmRecommendation": "ALLOW",
+            "llmAgreement": "NOT_AGREED",
+            "auditor": {
+              "username": "sp.north",
+              "role": "sp"
+            },
+            "decidedAtUtc": "2026-10-08T09:01:51.656Z"
+          },
+          "outcome": {
+            "outcome": "DENIED",
+            "basis": "AUDITOR_DECISION"
+          },
+          "explanationVisible": true,
+          "withheld": null,
+          "recommendationState": "ready",
+          "available": true,
+          "recommendation": "ALLOW",
+          "reasonCode": "POLICY_SATISFIED",
+          "policyRefs": [
+            "GP-RBAC:C2@v1",
+            "GP-DEFAULT:C1@v1"
+          ],
+          "missingEvidence": [],
+          "reviewFlags": [],
+          "unavailable": null,
+          "reason": "The requester's credentialStatus is active, the purpose is judicial-proceeding (allowed), the requester's role (judge) belongs to the court organization, the role has permission to view fir records, the record is not sealed, not juvenile-protected, not victim-protected, the requester's jurisdiction matches the record's jurisdiction, the requester is not assigned to the case but is in the assignmentExempt list, and the requester's clearance (high) meets the record's sensitivity (medium).",
+          "reasonVisible": true
+        },
+        "error": null
+      },
+      "dj.north": {
+        "status": 200,
+        "success": true,
+        "data": {
+          "requestId": "REQ-3c70c05a42742da0",
+          "viewer": "requester",
+          "decision": {
+            "decision": "FORCE_DENY",
+            "llmRecommendation": "ALLOW",
+            "llmAgreement": "NOT_AGREED",
+            "auditor": {
+              "username": "sp.north",
+              "role": "sp"
+            },
+            "decidedAtUtc": "2026-10-08T09:02:08.072Z"
+          },
+          "outcome": {
+            "outcome": "DENIED",
+            "basis": "AUDITOR_DECISION"
+          },
+          "explanationVisible": true,
+          "withheld": null,
+          "recommendationState": "ready",
+          "available": true,
+          "recommendation": "ALLOW",
+          "reasonCode": "POLICY_SATISFIED",
+          "policyRefs": [
+            "GP-CRED:C1@v1",
+            "GP-PURPOSE:C1@v1",
+            "GP-RBAC:C1@v1",
+            "GP-RBAC:C2@v1",
+            "GP-SEAL:C1@v1",
+            "GP-JUV:C1@v1",
+            "GP-VICTIM:C1@v1",
+            "GP-JURIS:C1@v1",
+            "GP-ASSIGN:C1@v1",
+            "GP-CLEAR:C1@v1",
+            "GP-DEFAULT:C1@v1"
+          ],
+          "missingEvidence": [],
+          "reviewFlags": [],
+          "unavailable": null,
+          "reason": "The requester's credentialStatus is active, the purpose is audit-review (allowed), the requester's role (district-judge) belongs to the court organization, the role has permission to view fir records, the record is not sealed, not juvenile-protected, not victim-protected, the requester's jurisdiction matches the record's jurisdiction, the requester is not assigned to the case but is in roleLists.assignmentExempt, and the requester's clearance (high) meets the record's sensitivity (medium).",
+          "reasonVisible": true
+        },
+        "error": null
+      }
+    }
+  },
+  "limitations": [
+    "Existing synthetic requests only; no new business request, decision or grant.",
+    "Sensitive reads append normal Fabric access-log events.",
+    "No LLM accuracy or end-to-end latency measurement."
+  ]
+}
