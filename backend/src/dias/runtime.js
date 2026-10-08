@@ -18,6 +18,7 @@ const { loadBundle } = require('../../../policies/lib/bundle');
 const { createPolicyContextProvider } = require('./policyContextProvider');
 const { createRecommender } = require('./recommender');
 const { createReviewStore } = require('./reviewStore');
+const { loadReviewCipher } = require('./reviewCipher');
 const { createRecommendationWorker } = require('./recommendationWorker');
 const { createRecommendationSigner } = require('./recommendationSigner');
 const { policyIdentity } = require('./policyRegistration');
@@ -86,7 +87,8 @@ function createDiasRuntime({
     policy,
     model: modelSettings(settings),
   });
-  const store = createReviewStore(settings.DIAS_REVIEW_STORE_DIR);
+  // The running backend never writes a review in the clear (design §10).
+  const store = createReviewStore(settings.DIAS_REVIEW_STORE_DIR, { cipher: loadReviewCipher(settings) });
   const worker = createRecommendationWorker({
     store,
     signedRecommender,

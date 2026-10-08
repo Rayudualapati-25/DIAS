@@ -35,7 +35,7 @@ const { checkRecommendationIntegrity } = require('../dias/recommendationIntegrit
 const {
   recommendationOf,
 } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
-const { AUDIT_ORG, mayReadReasonText, recommendationDetail } = require('../dias/recommendationDetail');
+const { AUDIT_ORG, explanationFor } = require('../dias/recommendationDetail');
 const {
   createsAuthorization, llmAgreementFor, requiresAuditorReason,
 } = require('../dias/agreement');
@@ -270,25 +270,26 @@ router.get('/decision-log', asyncRoute(async (req, res) => {
 }));
 
 /**
- * The "why" behind one decision, opened from the decision log.
+ * The LLM's account of one request, for the caller (design §10).
  *
- * Any signed-in identity reads the model's structured account — the reason code,
- * the policy clauses it cited, what it said was missing, the review flags, and
- * why there was no recommendation when there was none. The free-text reason is
- * case narrative, so it is returned only to the officer who made the request and
- * to an audit-organisation district head; everyone else gets `reasonVisible:
- * false` and no text. Nothing about how the recommendation was produced is
- * returned: no timings, no token counts, no model or policy provenance.
+ * An audit-organisation district head reads it at any time. The officer who made
+ * the request reads it according to the auditor's decision: nothing before one;
+ * the decision and the account when denied; the decision and the recommendation
+ * value when allowed. Nobody else reads it. The ledger's request trail, read as
+ * the caller, says who the caller is to this request and what was decided; the
+ * contract refuses it to anyone who is neither a reviewer nor the requester.
+ * Nothing about how the recommendation was produced is returned.
  */
 router.get('/request/:requestId/recommendation', asyncRoute(async (req, res) => {
   const { requestId } = req.params;
   if (!SAFE_ID.test(requestId || '')) return fail(res, 'requestId has invalid format');
-  const { store } = getDiasRuntime();
-  const entry = store.read(requestId);
-  return ok(res, recommendationDetail(entry, {
-    requestId,
-    reasonVisible: mayReadReasonText(req.user, entry, AUDITOR_ROLES),
-  }));
+  const trail = await fabric.evaluate(
+    req.user.org, req.user.fabricUser, 'AuditContract', 'GetRequestAuditTrail', requestId);
+  const outcome = explanationFor({
+    user: req.user, trail, entry: getDiasRuntime().store.readSafely(requestId), auditorRoles: AUDITOR_ROLES,
+  });
+  if (outcome.error) return fail(res, outcome.error, outcome.status);
+  return ok(res, outcome.data);
 }));
 
 router.get('/record/:recordId', asyncRoute(async (req, res) => {
@@ -312,7 +313,7 @@ router.get('/auditor/pending', requireRole(...AUDITOR_ROLES), asyncRoute(async (
     req.user.org, req.user.fabricUser, CONTRACT, 'QueryPendingAuditorRequests');
   const { store } = getDiasRuntime();
   return ok(res, pending.map(({ request, commitment }) => (
-    reviewView(request, commitment, store.read(request.requestId)))));
+    reviewView(request, commitment, store.readSafely(request.requestId)))));
 }));
 
 /**
@@ -363,7 +364,7 @@ router.get('/auditor/:requestId', requireRole(...AUDITOR_ROLES), asyncRoute(asyn
   const { request, commitment } = await fabric.evaluate(
     req.user.org, req.user.fabricUser, CONTRACT, 'GetAuditorReview', req.params.requestId);
   const { store } = getDiasRuntime();
-  return ok(res, reviewView(request, commitment, store.read(request.requestId)));
+  return ok(res, reviewView(request, commitment, store.readSafely(request.requestId)));
 }));
 
 /**
@@ -459,7 +460,9 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   if (!parsed.success) return { status: 400, error: parsed.error.issues[0].message };
   const { decision, validUntilUtc } = parsed.data;
   const reason = normalizeNote(parsed.data.reason);
-  const entry = store.read(requestId);
+  // An entry that cannot be opened counts as absent: with a commitment on the
+  // ledger the decision is then refused below as "object not available".
+  const entry = store.readSafely(requestId);
   if (isRecommendationPreparing(entry)) {
     return {
       status: 409,

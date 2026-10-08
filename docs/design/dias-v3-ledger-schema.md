@@ -198,18 +198,26 @@ The backend remains part of the trusted base, because it holds every demonstrati
 | Object | Own requester | Reviewer¹ | Other members |
 |---|---|---|---|
 | Request record (`GetRequest`) | yes | AuditMSP district heads | no |
-| κ, decision, outcome (audit trail) | yes | yes | no |
+| κ, decision, outcome (audit trail) | yes; what κ says only once an auditor has decided⁴ | yes | no |
 | Decision log (`QueryAccessDecisions`) | redacted² | full | redacted² |
 | Record history | — | yes | owning station only |
 | Evidence list and custody | — | yes | same-district Police, Forensics, Prosecution, Court |
 | J (justification) | yes | AuditMSP district heads | no |
-| M structured part³ and counterfactuals | yes | AuditMSP district heads | no |
-| M full (free text, provenance) | no | AuditMSP district heads | no |
+| M recommendation value | once an auditor has decided⁴ | AuditMSP district heads | no |
+| M structured part³, written reason, and counterfactuals | only when the auditor denied the request⁴ | AuditMSP district heads | no |
+| M provenance | no | AuditMSP district heads | no |
 | N (auditor note) | no | AuditMSP district heads | no |
 
 1. The reviewer set is AuditContract's: AuditMSP, CourtMSP or ProsecutionMSP identities with a district-head or seal-authority role.
 2. Redacted entries keep the outcome, basis, decision, recommendation value, agreement, generation status, action, purpose, the requester's organization and the time. They drop identities, record and case identifiers, authorization identifiers and transaction identifiers.
-3. The structured part is the recommendation value, reason code, policy references, missing evidence and review flags.
+3. The structured part is the reason code, policy references, missing evidence and review flags.
+4. Author's rule, 2026-10-08: the officer who made a request reads the LLM's account according to the auditor's decision.
+   - **Before a decision:** nothing from the LLM, including the recommendation value in κ. The contract returns a withheld commitment, and the backend returns an empty account.
+   - **Denied:** the auditor's decision, the recommendation value, the structured part and the written reason.
+   - **Allowed:** the auditor's decision and the recommendation value. The grant itself releases the case-file information; the explanation is not shown.
+   - **No auditor decision** (a reused authorization, an expiry, a cancellation): nothing from the LLM.
+   - The auditor's note is never shown to the requester.
+5. A court or prosecution reviewer receives the check of each off-chain object against its ledger digest, without the text.
 
 **Limits of these controls:**
 - These are interface-level controls. Every channel member's peer stores every block, so an organization that reads its own peer's ledger directly sees every request record. Confidentiality against member organizations would need private data collections for those fields.
@@ -218,7 +226,8 @@ The backend remains part of the trusted base, because it holds every demonstrati
 **Review store encryption:**
 - AES-256-GCM with a random 96-bit IV per write.
 - The additional authenticated data is the request identifier and schema version, so a file moved to another request fails to decrypt.
-- Key: `DIAS_REVIEW_STORE_KEY` (base64, 32 bytes) with `DIAS_REVIEW_STORE_KEY_ID`. Older keys go in `DIAS_REVIEW_STORE_PREVIOUS_KEYS` for rotation.
+- Key: `DIAS_REVIEW_STORE_KEY` (base64, 32 bytes) with `DIAS_REVIEW_STORE_KEY_ID`. Older keys go in `DIAS_REVIEW_STORE_PREVIOUS_KEYS` (`id:key` pairs) for rotation. `scripts/dias/review-store-key.js` creates a key. The backend does not start without one.
+- Entries written before encryption are still read, and are encrypted when the backend starts.
 - **Losing the key loses the off-chain objects.** The ledger still holds their hashes, the recommendation value and the status.
 
 ## 11. Off-chain write protocol
@@ -306,3 +315,14 @@ The backend remains part of the trusted base, because it holds every demonstrati
   - consequence for the trust model (§2, §6.1): the signature no longer protects against a compromised backend. A recommendation still cannot be changed after κ is committed, and the contract still derives the agreement;
   - the auditor screen checks by itself whether a recommendation it waits for is ready (§12). The check is a routine read and writes nothing to the ledger;
   - the "Access log" screen lists, for every settled request, who requested what, what the LLM recommended, and what the auditor decided together with that recommendation. It reads the existing decision records; what is written to the ledger is unchanged.
+- 2026-10-08 (step 13) — privacy controls built as §10 describes, with one change by the author and three details:
+  - **changed by the author:** the officer who made a request reads the LLM's account according to the auditor's decision (§10, note 4). The frozen table gave the requester the structured part at any time and never the written reason;
+  - the contract withholds κ's content from the requester until an auditor decision exists, in `GetRecommendationCommitment` and in the request audit trail (commitment, summary and lifecycle event);
+  - the off-chain text in a reviewer's trail is for AuditMSP district heads only; court and prosecution reviewers receive the verification statuses (§10, note 5);
+  - the redacted decision-log entry carries `redacted: true`, and full entries now carry `generationStatus`.
+- 2026-10-08 (step 13, after the security review) — the requester rule comes first:
+  - whoever made a request is its requester before any reviewer or auditor right applies. The request trail reports `isRequester`, withholds κ's content until an auditor decision exists, and never carries the note digest `h_N` for the requester;
+  - a district head is refused `GetAuditorReview` for their own request, and `QueryPendingAuditorRequests` leaves it out;
+  - `GetEvidenceDetail` follows the evidence rule of §10 (reviewers and same-district members);
+  - a station or district member needs an active certificate credential for record history and evidence;
+  - the review store accepts only encrypted entries once it has a key, re-seals entries of an earlier key at start-up, and requires the full 16-byte authentication tag.

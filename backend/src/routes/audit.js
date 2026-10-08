@@ -5,6 +5,7 @@ const fabric = require('../fabric/gateway');
 const vault = require('../storage/vault');
 const { getDiasRuntime } = require('../dias/runtime');
 const { reviewerTrail } = require('../dias/offChainVerification');
+const { isAuditor } = require('../dias/recommendationDetail');
 const { ok, asyncRoute } = require('../util/respond');
 const { requireAuth, requireRole } = require('../middleware/auth');
 
@@ -77,17 +78,19 @@ router.get('/access-log/verify', requireRole(...REVIEWER_ROLES), asyncRoute(asyn
  * outcome, each with the Fabric transaction that committed it.
  *
  * The chaincode authorises the trail itself, so no role guard is applied here
- * beyond authentication. A reviewer also receives the off-chain review — the
- * justification, the recommendation and the auditor's note — clearly separated,
- * with each object checked against the digest the ledger committed for it.
+ * beyond authentication. A reviewer also receives the check of each off-chain
+ * object against the digest the ledger committed for it. Only an
+ * audit-organisation district head receives the off-chain review itself — the
+ * justification, the recommendation and the auditor's note — clearly separated
+ * (design §10).
  */
 router.get('/request-trail/:requestId', asyncRoute(async (req, res) => {
   const trail = await fabric.evaluate(
     req.user.org, req.user.fabricUser, 'AuditContract', 'GetRequestAuditTrail',
     req.params.requestId);
   if (trail.viewer !== 'reviewer') return ok(res, trail);
-  const entry = getDiasRuntime().store.read(trail.requestId);
-  return ok(res, reviewerTrail({ trail, entry }));
+  const entry = getDiasRuntime().store.readSafely(trail.requestId);
+  return ok(res, reviewerTrail({ trail, entry, auditor: isAuditor(req.user, DISTRICT_HEAD_ROLES) }));
 }));
 
 module.exports = router;

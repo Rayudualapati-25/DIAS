@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-08",
+  "purpose": "Redeploy diasrecords with the step 13 visibility rules and verify the system on the running host",
+  "definition": {
+    "before": {
+      "version": "2.2",
+      "sequence": 1
+    },
+    "after": {
+      "version": "2.4",
+      "sequence": 2,
+      "approvals": {
+        "AuditMSP": true,
+        "CourtMSP": true,
+        "ForensicsMSP": true,
+        "PoliceMSP": true,
+        "ProsecutionMSP": true
+      }
+    },
+    "packageId": "diasrecords_2.4:482d72d917d4f467b567138cd3134d996005a2d2790db435ce334154e202ff7c",
+    "channelHeight": {
+      "before": 140,
+      "afterDeploy": 146
+    },
+    "oldContractContainersRunningAfter": 0,
+    "afterSecurityFixes": {
+      "version": "2.5",
+      "sequence": 3,
+      "approvals": {
+        "AuditMSP": true,
+        "CourtMSP": true,
+        "ForensicsMSP": true,
+        "PoliceMSP": true,
+        "ProsecutionMSP": true
+      },
+      "packageId": "diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210"
+    }
+  },
+  "automatedSuites": {
+    "chaincode": 335,
+    "backend": 312,
+    "frontend": 76,
+    "policies": 27,
+    "dataset": 104,
+    "failing": 0
+  },
+  "liveChecks": {
+    "step13": {
+      "file": "live-check-01/step13-live.json",
+      "passed": 42,
+      "failed": 0,
+      "total": 42,
+      "status": "passed",
+      "evidence": {
+        "deniedRequestId": "REQ-4a97d0bb8d965008",
+        "deniedRequestRecommendation": "ALLOW",
+        "deniedAgreement": "NOT_AGREED",
+        "recommendationFor_insp.singh": "DENY",
+        "reuse": {
+          "username": "insp.singh",
+          "firstRequestId": "REQ-5e67613c0554a85a",
+          "authorizationId": "AUTH-505ba2efddcbcfb2"
+        }
+      },
+      "notExercised": []
+    },
+    "hostWorkflow": {
+      "file": "host-smoke-01/host-smoke.json",
+      "passed": 15,
+      "failed": 0,
+      "total": 15,
+      "status": "passed",
+      "requestId": "REQ-c86e69fe1680a3d6"
+    }
+  },
+  "screensChecked": [
+    "access log as sp.north (six rows, every case)",
+    "request access as insp.sharma (denied request, real explanation)",
+    "decision log as insp.sharma (reduced)"
+  ],
+  "limits": [
+    "One machine; nothing was run on the four-VM testbed.",
+    "The model is the untuned base model served on this host; no accuracy claim.",
+    "The live checks wrote demo requests, decisions and one dynamic authorization, which was revoked again."
+  ],
+  "securityReview": {
+    "verdict": "Warning: 1 high, 2 medium, 6 low; none critical",
+    "fixedBeforeSecondDeploy": [
+      "high: the requester rule now comes before reviewer and auditor rights (contract and backend); a district head never reviews their own request",
+      "medium: the private evidence detail is scoped to the district",
+      "medium: one unreadable stored review no longer breaks the auditor queue; entries of an earlier key are re-sealed at start-up; unreadable entries are counted",
+      "low: fixed authentication-tag length; plaintext entries refused by an encrypted store after start-up; writes flushed before rename; the requester never sees the note digest; a missing explanation is no longer reported as \"no recommendation\""
+    ],
+    "leftAsDocumentedLimits": [
+      "digests are unsalted",
+      "the lifecycle chaincode event carries the generation status",
+      "reviewer and member reads trust the certificate, not the ledger profile",
+      "older reviews in backend/data/dias-reviews/ (not the running store) are still in the clear",
+      "DIAS_TRACE_FILE logs recommendation values in the clear when enabled"
+    ]
+  },
+  "automatedSuitesFinal": {
+    "chaincode": 341,
+    "backend": 319,
+    "frontend": 77,
+    "policies": 27,
+    "dataset": 104,
+    "failing": 0
+  },
+  "liveChecksFinal": {
+    "step13": {
+      "file": "live-check-02/step13-live.json",
+      "passed": 59,
+      "failed": 0,
+      "total": 59,
+      "status": "passed",
+      "evidence": {
+        "deniedRequestId": "REQ-09b823865a80b449",
+        "deniedRequestRecommendation": "ALLOW",
+        "deniedAgreement": "NOT_AGREED",
+        "recommendationFor_insp.singh": "DENY",
+        "reuse": {
+          "username": "insp.singh",
+          "firstRequestId": "REQ-5b27fe370e0de35d",
+          "authorizationId": "AUTH-0f9afc98078d1e46"
+        },
+        "ownRequestOf_judge.rana": "REQ-c1192ac4d762165f",
+        "ownRequestOf_dj.north": "REQ-3c70c05a42742da0"
+      },
+      "notExercised": []
+    },
+    "hostWorkflow": {
+      "file": "host-smoke-02/host-smoke.json",
+      "passed": 15,
+      "failed": 0,
+      "total": 15,
+      "status": "passed",
+      "requestId": "REQ-a22428e3b07b50af"
+    }
+  }
+}

@@ -24,7 +24,7 @@ import {
 import { dateTime, shortHash } from '../core/format.js';
 import { loadRecentRequests, rememberRequest } from '../shared/recent-requests.js';
 import {
-  accessDecisionView, isSettled, justificationCommitmentView, progressLabel,
+  accessDecisionView, isSettled, justificationCommitmentView, progressLabel, requesterDecisionView,
 } from '../shared/dias.js';
 import {
   prepareAuditorHandoff, completeAuditorHandoff, closeAuditorHandoff, openAuditorReview,
@@ -73,6 +73,38 @@ function decisionSummary(decision) {
       ['Recorded', dateTime(view.recordedAtUtc)],
     ]),
     hint(OUTCOME_CONSEQUENCE[view.granted ? 'granted' : 'denied']));
+}
+
+const listed = (values, none) => (values.length > 0 ? values.join(', ') : none);
+
+/**
+ * The auditor's decision and, when the request was denied, the LLM's explanation
+ * (design §10). The backend has already applied the rule for this officer; an
+ * allowed request names the recommendation without its explanation.
+ */
+function decisionExplanation(detail) {
+  const view = requesterDecisionView(detail);
+  if (!view.decided) return null;
+  const explained = view.explanation;
+  if (explained === null) return el('div', { class: 'decision-detail' }, detailTable(view.rows));
+  if (!explained.available) {
+    return el('div', { class: 'decision-detail' }, detailTable(view.rows),
+      explained.cause === 'explanation-missing'
+        ? callout('warn', 'The LLM explanation is not available',
+          hint('The ledger records the recommendation above, but this backend no longer holds its explanation.'))
+        : callout('warn', 'There was no LLM recommendation for this request',
+          hint('The auditor decided without one.')));
+  }
+  return el('div', { class: 'decision-detail' }, detailTable(view.rows),
+    callout('info', 'The LLM explanation (advisory only)',
+      el('p', { class: 'justification' }, explained.reason || '—'),
+      detailTable([
+        ['Reason code', mono(explained.reasonCode || '—')],
+        ['Policy clauses cited', listed(explained.policyRefs, '—')],
+        ['What the LLM said was missing', listed(explained.missingEvidence, 'nothing')],
+        ['Review flags', listed(explained.reviewFlags, 'none')],
+      ]),
+      hint('The auditor made the decision. This explanation comes from the LLM, which decided nothing.')));
 }
 
 export default {
@@ -190,12 +222,18 @@ export default {
       activeRequestId = decision.requestId || decision.decisionId;
       renderRecent(rememberRequest(user.username, decision));
       const view = accessDecisionView(decision);
+      // What this officer may read of the auditor's decision and the LLM's account.
+      const detail = view.automatic || !view.requestId ? null
+        : await attempt(() => api.access.requestRecommendation(view.requestId));
+      const explanation = decisionExplanation(detail);
 
       if (!view.granted) {
         replace(outcome, card('Access denied',
           'The case file stays closed. An AuditMSP auditor made this decision, and the ledger '
           + 'holds it together with whether it agreed with the LLM.',
-          decisionSummary(decision)));
+          decisionSummary(decision),
+          explanation && subheading('The auditor decision and the LLM explanation'),
+          explanation));
         return;
       }
 
@@ -221,7 +259,9 @@ export default {
             ? 'An exact active dynamic authorization matched this request, so neither the LLM '
               + 'nor an auditor was consulted.'
             : 'An AuditMSP auditor granted this request. The decision is on the Fabric ledger.',
-          decisionSummary(decision)),
+          decisionSummary(decision),
+          explanation && subheading('The auditor decision'),
+          explanation),
         record && card('Case-file metadata',
           'Released because this exact identity holds a granted view decision on the ledger.',
           metadataView(record),

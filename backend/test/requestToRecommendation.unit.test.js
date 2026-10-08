@@ -84,6 +84,8 @@ describe('from a request to the auditor recommendation, inside the backend', () 
       CHANNEL: 'diaschannel',
       DIAS_MODEL_URL: modelUrl,
       DIAS_REVIEW_STORE_DIR: path.join(dir, name),
+      DIAS_REVIEW_STORE_KEY: crypto.randomBytes(32).toString('base64'),
+      DIAS_REVIEW_STORE_KEY_ID: 'test-key',
       DIAS_RECOMMENDER_SIGNING_KEY_FILE: keyFile,
     },
     ledger,
@@ -126,6 +128,10 @@ describe('from a request to the auditor recommendation, inside the backend', () 
     expect(entry).to.include({ recommendationState: 'committed', commitmentId: 'KAPPA-REQ-21' });
     expect(entry.recommendation).to.include({ generationStatus: 'OK', recommendation: 'ALLOW' });
     expect(verifies(runtime.signedRecommender, 'REQ-21', entry.commitment)).to.equal(true);
+    // Step 13: what the backend keeps off-chain is encrypted at rest.
+    const stored = fs.readFileSync(path.join(dir, 'reviews', 'REQ-21.json'), 'utf8');
+    expect(stored).to.not.include(JUSTIFICATION);
+    expect(JSON.parse(stored)).to.include({ schemaVersion: 'dias-offchain-review-encrypted-v1', keyId: 'test-key' });
   });
 
   it('never asks the LLM when a reusable authorization granted the request', async () => {

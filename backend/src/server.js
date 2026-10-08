@@ -73,6 +73,14 @@ app.use((req, res) => res.status(404).send('not found'));
 function startServer(port = PORT) {
   // Recommendations a previous process left unfinished are answered again, so an
   // auditor is never left waiting for one that will not arrive.
+  // Every stored review is brought under the current key first (design §10), so
+  // that what the worker resumes is readable: older reviews in the clear are
+  // encrypted, and reviews of an earlier key are re-sealed.
+  const sealed = getDiasRuntime().store.sealWithCurrentKey();
+  if (sealed.unreadable > 0) {
+    // eslint-disable-next-line no-console
+    console.error(`[dias] ${sealed.unreadable} stored review(s) cannot be opened with the configured keys`);
+  }
   const resumed = getDiasRuntime().worker.resumePending();
   // Auditor notes a previous process staged before an unconfirmed decision are
   // settled against the ledger (design §11). It runs in the background: a ledger
@@ -97,7 +105,8 @@ function startServer(port = PORT) {
   return app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`DIAS backend listening on http://localhost:${port}`
-      + ` (LLM recommendations resumed: ${resumed})`);
+      + ` (LLM recommendations resumed: ${resumed}; reviews encrypted: ${sealed.encrypted},`
+      + ` re-sealed: ${sealed.resealed}, unreadable: ${sealed.unreadable})`);
   });
 }
 

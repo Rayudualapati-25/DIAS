@@ -24,6 +24,12 @@ const statusTone = (status) => (status === 'granted' ? 'allow' : status === 'den
 
 /** The off-chain review, which never came from the ledger. */
 function offChainReviewBlock(review, request) {
+  // Not sent at all: this reviewer is not a district head of the audit organisation.
+  if (review === undefined) {
+    return hint('The justification, the LLM recommendation and the auditor\'s note are shown only '
+      + 'to district heads of the audit organisation. The checks below still say whether each '
+      + 'one matches its digest on the ledger.');
+  }
   if (!review) {
     return hint(request.processingPath === 'dynamic-authorization'
       ? 'No off-chain review exists for this request: an active dynamic authorization '

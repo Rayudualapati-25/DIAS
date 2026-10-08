@@ -1,0 +1,48 @@
+[0;34mVendoring production dependencies[0m
+[0;34mPackaging diasrecords 2.5[0m
+[0;34mPackage ID: diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210[0m
+[0;34minstall: peer0.police[0m
+[34m2026-10-08 14:30:13.607 IST 0001 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Installed remotely: response:<status:200 payload:"\nPdiasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210\022\017diasrecords_2.5" > 
+[34m2026-10-08 14:30:13.608 IST 0002 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Chaincode code package identifier: diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210
+[0;34minstall: peer0.forensics[0m
+[34m2026-10-08 14:30:17.276 IST 0001 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Installed remotely: response:<status:200 payload:"\nPdiasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210\022\017diasrecords_2.5" > 
+[34m2026-10-08 14:30:17.276 IST 0002 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Chaincode code package identifier: diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210
+[0;34minstall: peer0.prosecution[0m
+[34m2026-10-08 14:30:20.923 IST 0001 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Installed remotely: response:<status:200 payload:"\nPdiasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210\022\017diasrecords_2.5" > 
+[34m2026-10-08 14:30:20.923 IST 0002 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Chaincode code package identifier: diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210
+[0;34minstall: peer0.court[0m
+[34m2026-10-08 14:30:24.688 IST 0001 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Installed remotely: response:<status:200 payload:"\nPdiasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210\022\017diasrecords_2.5" > 
+[34m2026-10-08 14:30:24.689 IST 0002 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Chaincode code package identifier: diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210
+[0;34minstall: peer0.audit[0m
+[34m2026-10-08 14:30:28.321 IST 0001 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Installed remotely: response:<status:200 payload:"\nPdiasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210\022\017diasrecords_2.5" > 
+[34m2026-10-08 14:30:28.321 IST 0002 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Chaincode code package identifier: diasrecords_2.5:ed210c638515aa8d0349ef5daef94b0836a27cfa2e2b6ae6c3b235cb3ad65210
+[0;34mSequence: 3 (committed on channel: 2)[0m
+[0;34mapprove: police[0m
+[34m2026-10-08 14:30:30.486 IST 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [0ff8a64efac58fd3ff545a56bbc2542742e6d964fb3be6160788a89461f417be] committed with status (VALID) at localhost:7051
+[0;34mapprove: forensics[0m
+[34m2026-10-08 14:30:32.628 IST 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [693f2aa1859b4e3679666b2553e6847a0612be7dc5c197e974b86e1f775b6c40] committed with status (VALID) at localhost:8051
+[0;34mapprove: prosecution[0m
+[34m2026-10-08 14:30:34.763 IST 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [7332cef7afb22a04a0d00048e138251a066b001ff7816eae4f85c0d12e425f15] committed with status (VALID) at localhost:9051
+[0;34mapprove: court[0m
+[34m2026-10-08 14:30:36.898 IST 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [b9e5bac13f369e41aaf8c33e01fe5ce7d78bedbd3491e6f8231048b4973e38d1] committed with status (VALID) at localhost:10051
+[0;34mapprove: audit[0m
+[34m2026-10-08 14:30:39.020 IST 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [738df527fa295cc00f8da3f967869735104e87f8dd592edd186965029232704a] committed with status (VALID) at localhost:11051
+[0;34mChecking commit readiness[0m
+{
+	"approvals": {
+		"AuditMSP": true,
+		"CourtMSP": true,
+		"ForensicsMSP": true,
+		"PoliceMSP": true,
+		"ProsecutionMSP": true
+	}
+}
+[0;34mCommitting chaincode definition[0m
+[34m2026-10-08 14:30:41.341 IST 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [53967bd6403d1d7b89cb035facde505575ece6803691abbaf510dfd7ece2484f] committed with status (VALID) at localhost:10051
+[34m2026-10-08 14:30:41.342 IST 0002 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [53967bd6403d1d7b89cb035facde505575ece6803691abbaf510dfd7ece2484f] committed with status (VALID) at localhost:7051
+[34m2026-10-08 14:30:41.345 IST 0003 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [53967bd6403d1d7b89cb035facde505575ece6803691abbaf510dfd7ece2484f] committed with status (VALID) at localhost:11051
+[34m2026-10-08 14:30:41.347 IST 0004 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [53967bd6403d1d7b89cb035facde505575ece6803691abbaf510dfd7ece2484f] committed with status (VALID) at localhost:8051
+[34m2026-10-08 14:30:41.348 IST 0005 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [53967bd6403d1d7b89cb035facde505575ece6803691abbaf510dfd7ece2484f] committed with status (VALID) at localhost:9051
+[0;34mCommitted definition:[0m
+Committed chaincode definition for chaincode 'diasrecords' on channel 'diaschannel':
+Version: 2.5, Sequence: 3, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [AuditMSP: true, CourtMSP: true, ForensicsMSP: true, PoliceMSP: true, ProsecutionMSP: true]

@@ -98,15 +98,42 @@ describe('off-chain objects checked against their ledger digests', () => {
     });
   });
 
-  it('adds the off-chain review and its verification to a reviewer trail only', () => {
+  it('adds the off-chain review and its verification for an audit-organisation district head', () => {
     const { trail, entry } = decidedCase();
-    const view = reviewerTrail({ trail, entry });
+    const view = reviewerTrail({ trail, entry, auditor: true });
     expect(view.offChainReview).to.include({ justification: 'Reviewing the FIR.' });
     expect(view.offChainReview.auditorNote).to.include({ reason: NOTE });
     expect(statuses(view.offChainVerification)).to.deep.equal({
       justification: 'verified', recommendation: 'verified', note: 'verified',
     });
-    const requesterView = reviewerTrail({ trail: { ...trail, viewer: 'requester' }, entry });
-    expect(requesterView).to.not.have.any.keys('offChainReview', 'offChainVerification');
+  });
+
+  // Design §10: the justification, the full recommendation and the note are for
+  // AuditMSP district heads. A court or prosecution reviewer still learns whether
+  // each object matches its ledger digest, without reading it.
+  it('gives another reviewer the verification without the off-chain text', () => {
+    const { trail, entry } = decidedCase();
+    const view = reviewerTrail({ trail, entry, auditor: false });
+    expect(view).to.not.have.property('offChainReview');
+    expect(statuses(view.offChainVerification)).to.deep.equal({
+      justification: 'verified', recommendation: 'verified', note: 'verified',
+    });
+    expect(JSON.stringify(view.offChainVerification)).to.not.include(NOTE);
+  });
+
+  it('adds nothing for an auditor or reviewer who made the request themselves', () => {
+    const { trail, entry } = decidedCase();
+    for (const auditor of [true, false]) {
+      const own = reviewerTrail({ trail: { ...trail, isRequester: true }, entry, auditor });
+      expect(own).to.not.have.any.keys('offChainReview', 'offChainVerification');
+    }
+  });
+
+  it('adds nothing for the requester, whoever asks', () => {
+    const { trail, entry } = decidedCase();
+    for (const auditor of [true, false]) {
+      const requesterView = reviewerTrail({ trail: { ...trail, viewer: 'requester' }, entry, auditor });
+      expect(requesterView).to.not.have.any.keys('offChainReview', 'offChainVerification');
+    }
   });
 });

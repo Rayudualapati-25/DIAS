@@ -17,6 +17,7 @@ const {
 } = require('./policy/policyV1');
 const { AUTHORIZATION_KEY } = require('./dias/authorization');
 const { isBoundTo, readActivePolicy } = require('./dias/policyRegistry');
+const { isOwningStation, isReviewer, isSameDistrictEvidenceMember } = require('./dias/visibility');
 
 const RECORD_KEY = 'record';
 const ACCESS_KEY = 'accessDecision';
@@ -315,7 +316,18 @@ class RecordContract extends Contract {
     return JSON.stringify(event);
   }
 
+  /** Evidence is read by a reviewer or by a same-district member of the evidence organisations (design §10). */
+  async _requireEvidenceReader(ctx, recordId, action) {
+    const caller = getCaller(ctx);
+    const record = await this._getRecord(ctx, recordId);
+    if (!isReviewer(caller) && !isSameDistrictEvidenceMember(caller, record)) {
+      throw new Error(`unauthorized: ${action} requires a reviewer or a same-district member of `
+        + 'the police, forensics, prosecution or court');
+    }
+  }
+
   async QueryEvidenceCustody(ctx, recordId, evidenceId) {
+    await this._requireEvidenceReader(ctx, recordId, 'QueryEvidenceCustody');
     const iterator = await ctx.stub.getStateByPartialCompositeKey(
       CUSTODY_KEY, [recordId, evidenceId]
     );
@@ -580,7 +592,13 @@ class RecordContract extends Contract {
     });
   }
 
+  /** A record's history is read by a reviewer or by its owning station (design §10). */
   async GetRecordHistory(ctx, recordId) {
+    const caller = getCaller(ctx);
+    const record = await this._getRecord(ctx, recordId);
+    if (!isReviewer(caller) && !isOwningStation(caller, record)) {
+      throw new Error('unauthorized: GetRecordHistory requires a reviewer or the owning station');
+    }
     const iterator = await ctx.stub.getHistoryForKey(this._recordKey(ctx, recordId));
     const history = [];
     let res = await iterator.next();
@@ -606,6 +624,7 @@ class RecordContract extends Contract {
   async GetEvidenceDetail(ctx, recordId, evidenceId) {
     const caller = getCaller(ctx);
     requireMsp(caller, EVIDENCE_PDC_MSPS, 'GetEvidenceDetail');
+    await this._requireEvidenceReader(ctx, recordId, 'GetEvidenceDetail');
 
     const key = ctx.stub.createCompositeKey(EVIDENCE_KEY, [recordId, evidenceId]);
     const data = await ctx.stub.getPrivateData(EVIDENCE_PDC, key);
@@ -661,6 +680,7 @@ class RecordContract extends Contract {
   }
 
   async ListEvidence(ctx, recordId) {
+    await this._requireEvidenceReader(ctx, recordId, 'ListEvidence');
     const iterator = await ctx.stub.getStateByPartialCompositeKey(
       EVIDENCE_KEY, [recordId]
     );

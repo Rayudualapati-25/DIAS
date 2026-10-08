@@ -10,11 +10,15 @@
  * checked against it.
  *
  * Every write replaces the whole entry through a temporary file and a rename, so
- * a reader never sees a half-written entry.
+ * a reader never sees a half-written entry. With a cipher, every entry is written
+ * encrypted and only encrypted entries are read (design §10). `sealWithCurrentKey`,
+ * run at start-up, encrypts entries an earlier version left in the clear and
+ * re-seals those of an earlier key.
  */
 
 const fs = require('fs');
 const path = require('path');
+const { isEncryptedReview } = require('./reviewCipher');
 
 const REVIEW_SCHEMA_VERSION = 'dias-offchain-review-v1';
 const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
@@ -37,7 +41,7 @@ const RECOMMENDATION_STATE = Object.freeze({
 const PREPARING_STATES = Object.freeze([RECOMMENDATION_STATE.PENDING, RECOMMENDATION_STATE.SIGNED]);
 const isRecommendationPreparing = (entry) => Boolean(entry) && PREPARING_STATES.includes(entry.recommendationState);
 
-function createReviewStore(dir, { now = () => new Date(), log = console } = {}) {
+function createReviewStore(dir, { now = () => new Date(), log = console, cipher = null } = {}) {
   if (!dir) throw new Error('review store requires a directory');
 
   function fileFor(requestId) {
@@ -45,7 +49,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
     return path.join(dir, `${requestId}.json`);
   }
 
-  function read(requestId) {
+  /** What the file holds: an encrypted envelope, an entry in the clear, or null. */
+  function readStored(requestId) {
     try {
       return JSON.parse(fs.readFileSync(fileFor(requestId), 'utf8'));
     } catch (error) {
@@ -54,11 +59,47 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
     }
   }
 
+  function read(requestId) {
+    const stored = readStored(requestId);
+    if (stored === null) return null;
+    if (!isEncryptedReview(stored)) {
+      // An encrypted store does not take a file in the clear at face value.
+      if (cipher) throw new Error(`the review of '${requestId}' is not encrypted; restart the backend to encrypt it`);
+      return stored;
+    }
+    if (!cipher) throw new Error(`the review of '${requestId}' is encrypted and this store has no key`);
+    return cipher.open(requestId, stored);
+  }
+
+  /**
+   * Read for a view that must not fail because of one entry: an entry that cannot
+   * be opened (a retired key, a damaged file) is reported and treated as absent.
+   * A decision on such a request is then refused as "recommendation object not
+   * available", never taken on something nobody could read.
+   */
+  function readSafely(requestId) {
+    fileFor(requestId);
+    try {
+      return read(requestId);
+    } catch (error) {
+      log.error(`[dias] off-chain review of ${requestId} could not be read: ${error.message}`);
+      return null;
+    }
+  }
+
   function write(entry) {
     const file = fileFor(entry.requestId);
     fs.mkdirSync(dir, { recursive: true, mode: 0o700 });
     const temporary = `${file}.${process.pid}.${Date.now()}.tmp`;
-    fs.writeFileSync(temporary, `${JSON.stringify(entry, null, 2)}\n`, { mode: 0o600 });
+    const stored = cipher ? cipher.seal(entry.requestId, entry) : entry;
+    // Flushed before the rename, so a crash leaves either the old entry or the new one.
+    const descriptor = fs.openSync(temporary, 'w', 0o600);
+    try {
+      fs.writeFileSync(descriptor, `${JSON.stringify(stored, null, 2)}\n`);
+      fs.fsyncSync(descriptor);
+    } finally {
+      fs.closeSync(descriptor);
+    }
     fs.renameSync(temporary, file);
     return entry;
   }
@@ -164,8 +205,43 @@ function createReviewStore(dir, { now = () => new Date(), log = console } = {}) 
       .filter(Boolean);
   }
 
+  /** What one stored file needs at start-up: 'encrypted', 'resealed', 'unreadable' or null. */
+  function sealOne(requestId) {
+    const stored = readStored(requestId);
+    if (stored === null) return null;
+    if (!isEncryptedReview(stored)) {
+      if (stored.requestId !== requestId) throw new Error('its request identifier does not match its file name');
+      write(stored);
+      return 'encrypted';
+    }
+    const entry = cipher.open(requestId, stored);
+    if (stored.keyId === cipher.keyId) return null;
+    write(entry);
+    return 'resealed';
+  }
+
+  /**
+   * Bring every stored entry under the current key, at start-up: encrypt what an
+   * earlier version left in the clear, and re-seal what an earlier key sealed, so
+   * that key can be retired. An entry that cannot be opened is counted, reported
+   * and left exactly as it is.
+   */
+  function sealWithCurrentKey() {
+    const counts = { encrypted: 0, resealed: 0, unreadable: 0 };
+    if (!cipher || !fs.existsSync(dir)) return counts;
+    return fs.readdirSync(dir).filter((name) => name.endsWith('.json')).reduce((total, name) => {
+      try {
+        const done = sealOne(name.slice(0, -'.json'.length));
+        return done ? { ...total, [done]: total[done] + 1 } : total;
+      } catch (error) {
+        log.error(`[dias] off-chain review ${name} was left as it is: ${error.message}`);
+        return { ...total, unreadable: total.unreadable + 1 };
+      }
+    }, counts);
+  }
+
   return Object.freeze({
-    create, read, update, list, stageNote, commitNote, dropStagedNote, dir,
+    create, read, readSafely, update, list, stageNote, commitNote, dropStagedNote, sealWithCurrentKey, dir,
   });
 }
 

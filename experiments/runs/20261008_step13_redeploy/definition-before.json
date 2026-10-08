@@ -1,0 +1,78 @@
+{
+	"sequence": 1,
+	"version": "2.2",
+	"endorsement_plugin": "escc",
+	"validation_plugin": "vscc",
+	"validation_parameter": "EiAvQ2hhbm5lbC9BcHBsaWNhdGlvbi9FbmRvcnNlbWVudA==",
+	"collections": {
+		"config": [
+			{
+				"Payload": {
+					"StaticCollectionConfig": {
+						"name": "evidenceDetails",
+						"member_orgs_policy": {
+							"Payload": {
+								"SignaturePolicy": {
+									"rule": {
+										"Type": {
+											"NOutOf": {
+												"n": 1,
+												"rules": [
+													{
+														"Type": {
+															"SignedBy": 0
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 1
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 2
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 3
+														}
+													}
+												]
+											}
+										}
+									},
+									"identities": [
+										{
+											"principal": "CglQb2xpY2VNU1A="
+										},
+										{
+											"principal": "CgxGb3JlbnNpY3NNU1A="
+										},
+										{
+											"principal": "Cg5Qcm9zZWN1dGlvbk1TUA=="
+										},
+										{
+											"principal": "CghDb3VydE1TUA=="
+										}
+									]
+								}
+							}
+						},
+						"required_peer_count": 1,
+						"maximum_peer_count": 3,
+						"member_only_read": true,
+						"member_only_write": true
+					}
+				}
+			}
+		]
+	},
+	"approvals": {
+		"AuditMSP": true,
+		"CourtMSP": true,
+		"ForensicsMSP": true,
+		"PoliceMSP": true,
+		"ProsecutionMSP": true
+	}
+}

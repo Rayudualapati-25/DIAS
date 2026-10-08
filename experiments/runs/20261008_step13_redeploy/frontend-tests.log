@@ -1,0 +1,474 @@
+
+> crime-records-frontend@0.1.0 test
+> node --test
+
+TAP version 13
+# Subtest: shows the record and committed request identifiers for a DIAS request
+ok 1 - shows the record and committed request identifiers for a DIAS request
+  ---
+  duration_ms: 0.952584
+  type: 'test'
+  ...
+# Subtest: shows public lookup filters and handles an empty target
+ok 2 - shows public lookup filters and handles an empty target
+  ---
+  duration_ms: 0.182375
+  type: 'test'
+  ...
+# Subtest: states who requested what, what the LLM recommended, and the decision with that recommendation
+ok 3 - states who requested what, what the LLM recommended, and the decision with that recommendation
+  ---
+  duration_ms: 0.464292
+  type: 'test'
+  ...
+# Subtest: says when the auditor decided against the LLM, or without a recommendation
+ok 4 - says when the auditor decided against the LLM, or without a recommendation
+  ---
+  duration_ms: 0.182
+  type: 'test'
+  ...
+# Subtest: says when neither the LLM nor an auditor was involved
+ok 5 - says when neither the LLM nor an auditor was involved
+  ---
+  duration_ms: 0.105375
+  type: 'test'
+  ...
+# Subtest: never throws on an incomplete entry
+ok 6 - never throws on an incomplete entry
+  ---
+  duration_ms: 0.053291
+  type: 'test'
+  ...
+# Subtest: orders the log by time without changing the list it was given
+ok 7 - orders the log by time without changing the list it was given
+  ---
+  duration_ms: 5.429417
+  type: 'test'
+  ...
+# Subtest: filters by requester or record text, by LLM recommendation and by auditor decision
+ok 8 - filters by requester or record text, by LLM recommendation and by auditor decision
+  ---
+  duration_ms: 0.160417
+  type: 'test'
+  ...
+# Subtest: counts only the filters that are actually set
+ok 9 - counts only the filters that are actually set
+  ---
+  duration_ms: 0.216333
+  type: 'test'
+  ...
+# Subtest: formats a log time as a compact local timestamp
+ok 10 - formats a log time as a compact local timestamp
+  ---
+  duration_ms: 1.1925
+  type: 'test'
+  ...
+# Subtest: the auditor console and officer administration are for AuditMSP district heads only
+ok 11 - the auditor console and officer administration are for AuditMSP district heads only
+  ---
+  duration_ms: 0.861541
+  type: 'test'
+  ...
+# Subtest: audit screens follow AuditContract reviewer organisations and roles
+ok 12 - audit screens follow AuditContract reviewer organisations and roles
+  ---
+  duration_ms: 0.218333
+  type: 'test'
+  ...
+# Subtest: filing, PDF uploads and case creation are police station duties
+ok 13 - filing, PDF uploads and case creation are police station duties
+  ---
+  duration_ms: 0.109791
+  type: 'test'
+  ...
+# Subtest: only the court seals, only forensics attaches evidence, and custody stays with its holders
+ok 14 - only the court seals, only forensics attaches evidence, and custody stays with its holders
+  ---
+  duration_ms: 0.12825
+  type: 'test'
+  ...
+# Subtest: case workflow is offered to the roles GovernanceContract accepts
+ok 15 - case workflow is offered to the roles GovernanceContract accepts
+  ---
+  duration_ms: 0.066625
+  type: 'test'
+  ...
+# Subtest: requesting access and the decision log are open to every signed-in identity
+ok 16 - requesting access and the decision log are open to every signed-in identity
+  ---
+  duration_ms: 0.100417
+  type: 'test'
+  ...
+# Subtest: a district head can register an officer into any department
+ok 17 - a district head can register an officer into any department
+  ---
+  duration_ms: 0.086917
+  type: 'test'
+  ...
+# Subtest: every endpoint the client calls is mounted by a router
+ok 18 - every endpoint the client calls is mounted by a router
+  ---
+  duration_ms: 2.401125
+  type: 'test'
+  ...
+# Subtest: the client exposes the DIAS access endpoints the workflow needs
+ok 19 - the client exposes the DIAS access endpoints the workflow needs
+  ---
+  duration_ms: 0.240291
+  type: 'test'
+  ...
+# Subtest: no SEAL-era access endpoint survives in the client
+ok 20 - no SEAL-era access endpoint survives in the client
+  ---
+  duration_ms: 0.147625
+  type: 'test'
+  ...
+# Subtest: builds and reads a safe direct auditor-review link
+ok 21 - builds and reads a safe direct auditor-review link
+  ---
+  duration_ms: 0.598791
+  type: 'test'
+  ...
+# Subtest: clears the cloned requester session before showing the waiting page
+ok 22 - clears the cloned requester session before showing the waiting page
+  ---
+  duration_ms: 0.14875
+  type: 'test'
+  ...
+# Subtest: routes a prepared popup to the exact request and can close it
+ok 23 - routes a prepared popup to the exact request and can close it
+  ---
+  duration_ms: 0.387709
+  type: 'test'
+  ...
+# Subtest: reports a blocked or closed popup without throwing
+ok 24 - reports a blocked or closed popup without throwing
+  ---
+  duration_ms: 0.533625
+  type: 'test'
+  ...
+# Subtest: SHA-256 matches the standard test vectors
+ok 25 - SHA-256 matches the standard test vectors
+  ---
+  duration_ms: 1.09225
+  type: 'test'
+  ...
+# Subtest: reproduces every shared text and JSON vector, including the shell references
+ok 26 - reproduces every shared text and JSON vector, including the shell references
+  ---
+  duration_ms: 1.078833
+  type: 'test'
+  ...
+# Subtest: agrees with the contract implementation on generated text and objects
+ok 27 - agrees with the contract implementation on generated text and objects
+  ---
+  duration_ms: 2.3125
+  type: 'test'
+  ...
+# Subtest: detects changed content and rejects malformed digests and bad input
+ok 28 - detects changed content and rejects malformed digests and bad input
+  ---
+  duration_ms: 0.202208
+  type: 'test'
+  ...
+# Subtest: separates a committed outcome from a pending request
+ok 29 - separates a committed outcome from a pending request
+  ---
+  duration_ms: 0.586458
+  type: 'test'
+  ...
+# Subtest: a DENY recommendation is never a denial
+ok 30 - a DENY recommendation is never a denial
+  ---
+  duration_ms: 0.1425
+  type: 'test'
+  ...
+# Subtest: names an automatic grant only when a dynamic authorization produced it
+ok 31 - names an automatic grant only when a dynamic authorization produced it
+  ---
+  duration_ms: 0.0615
+  type: 'test'
+  ...
+# Subtest: reports a generation failure as an absence, not a recommendation
+ok 32 - reports a generation failure as an absence, not a recommendation
+  ---
+  duration_ms: 0.072166
+  type: 'test'
+  ...
+# Subtest: says a recommendation is being prepared while the backend asks the LLM
+ok 33 - says a recommendation is being prepared while the backend asks the LLM
+  ---
+  duration_ms: 0.100042
+  type: 'test'
+  ...
+# Subtest: derives the LLM agreement the ledger will record
+ok 34 - derives the LLM agreement the ledger will record
+  ---
+  duration_ms: 0.075417
+  type: 'test'
+  ...
+# Subtest: creates a dynamic authorization for exactly one combination
+ok 35 - creates a dynamic authorization for exactly one combination
+  ---
+  duration_ms: 0.110667
+  type: 'test'
+  ...
+# Subtest: requires an override reason whenever the auditor differs or nothing was recommended
+ok 36 - requires an override reason whenever the auditor differs or nothing was recommended
+  ---
+  duration_ms: 0.054291
+  type: 'test'
+  ...
+# Subtest: tells the auditor what their choice will create before they make it
+ok 37 - tells the auditor what their choice will create before they make it
+  ---
+  duration_ms: 0.287042
+  type: 'test'
+  ...
+# Subtest: builds an auditor summary from the verified request, not from the justification
+ok 38 - builds an auditor summary from the verified request, not from the justification
+  ---
+  duration_ms: 0.370042
+  type: 'test'
+  ...
+# Subtest: accepts only the auditable deny-to-force-allow authorization origin
+ok 39 - accepts only the auditable deny-to-force-allow authorization origin
+  ---
+  duration_ms: 0.107167
+  type: 'test'
+  ...
+# Subtest: flattens an authorization into an exact scope the auditor can read
+ok 40 - flattens an authorization into an exact scope the auditor can read
+  ---
+  duration_ms: 0.081541
+  type: 'test'
+  ...
+# Subtest: describes a committed access decision by who decided it, never by the model
+ok 41 - describes a committed access decision by who decided it, never by the model
+  ---
+  duration_ms: 0.0865
+  type: 'test'
+  ...
+# Subtest: says who may decide a request, before the auditor presses anything
+ok 42 - says who may decide a request, before the auditor presses anything
+  ---
+  duration_ms: 0.1615
+  type: 'test'
+  ...
+# Subtest: treats expired and cancelled requests as closed without any decision
+ok 43 - treats expired and cancelled requests as closed without any decision
+  ---
+  duration_ms: 0.094291
+  type: 'test'
+  ...
+# Subtest: checks the committed justification digest against the text the requester sent
+ok 44 - checks the committed justification digest against the text the requester sent
+  ---
+  duration_ms: 1.025292
+  type: 'test'
+  ...
+# Subtest: verifies the displayed recommendation against its ledger commitment in the browser
+ok 45 - verifies the displayed recommendation against its ledger commitment in the browser
+  ---
+  duration_ms: 0.850959
+  type: 'test'
+  ...
+# Subtest: blocks a decision on a mismatch, a missing object, or a commitment not yet on the ledger
+ok 46 - blocks a decision on a mismatch, a missing object, or a commitment not yet on the ledger
+  ---
+  duration_ms: 1.207958
+  type: 'test'
+  ...
+# Subtest: derives the consequences of a decision from the committed recommendation
+ok 47 - derives the consequences of a decision from the committed recommendation
+  ---
+  duration_ms: 0.1995
+  type: 'test'
+  ...
+# Subtest: tells an unconfirmed decision apart from a refused or an already-made one
+ok 48 - tells an unconfirmed decision apart from a refused or an already-made one
+  ---
+  duration_ms: 0.119583
+  type: 'test'
+  ...
+# Subtest: lists each off-chain object with its check against the ledger digest
+ok 49 - lists each off-chain object with its check against the ledger digest
+  ---
+  duration_ms: 0.172125
+  type: 'test'
+  ...
+# Subtest: shows a denied requester the auditor decision and the LLM explanation
+ok 50 - shows a denied requester the auditor decision and the LLM explanation
+  ---
+  duration_ms: 0.13
+  type: 'test'
+  ...
+# Subtest: tells a denied requester when there was no LLM recommendation to explain
+ok 51 - tells a denied requester when there was no LLM recommendation to explain
+  ---
+  duration_ms: 0.044083
+  type: 'test'
+  ...
+# Subtest: shows an allowed requester the decision and the recommendation, without an explanation
+ok 52 - shows an allowed requester the decision and the recommendation, without an explanation
+  ---
+  duration_ms: 0.042333
+  type: 'test'
+  ...
+# Subtest: shows a requester nothing from the LLM before a decision or without one
+ok 53 - shows a requester nothing from the LLM before a decision or without one
+  ---
+  duration_ms: 0.041792
+  type: 'test'
+  ...
+# Subtest: lays out a reduced decision-log entry without the identifiers it does not carry
+ok 54 - lays out a reduced decision-log entry without the identifiers it does not carry
+  ---
+  duration_ms: 0.108208
+  type: 'test'
+  ...
+# Subtest: every form pattern compiles the way browsers compile it
+ok 55 - every form pattern compiles the way browsers compile it
+  ---
+  duration_ms: 2.936583
+  type: 'test'
+  ...
+# Subtest: starts empty for an identity with no requests
+ok 56 - starts empty for an identity with no requests
+  ---
+  duration_ms: 1.274708
+  type: 'test'
+  ...
+# Subtest: remembers a request and reads it back, most recent first
+ok 57 - remembers a request and reads it back, most recent first
+  ---
+  duration_ms: 0.244834
+  type: 'test'
+  ...
+# Subtest: updates the status of an existing decision instead of duplicating it
+ok 58 - updates the status of an existing decision instead of duplicating it
+  ---
+  duration_ms: 0.109583
+  type: 'test'
+  ...
+# Subtest: keeps identities separate
+ok 59 - keeps identities separate
+  ---
+  duration_ms: 0.154375
+  type: 'test'
+  ...
+# Subtest: stores only identifiers and status, never explanation text
+ok 60 - stores only identifiers and status, never explanation text
+  ---
+  duration_ms: 0.347375
+  type: 'test'
+  ...
+# Subtest: tracks a pending request before an auditor creates a decision id
+ok 61 - tracks a pending request before an auditor creates a decision id
+  ---
+  duration_ms: 0.148875
+  type: 'test'
+  ...
+# Subtest: caps the list at ten entries and does not mutate the stored copy
+ok 62 - caps the list at ten entries and does not mutate the stored copy
+  ---
+  duration_ms: 0.1915
+  type: 'test'
+  ...
+# Subtest: survives an unavailable or corrupt storage
+ok 63 - survives an unavailable or corrupt storage
+  ---
+  duration_ms: 0.093625
+  type: 'test'
+  ...
+# Subtest: finds the requests whose recommendation is still being prepared or committed
+ok 64 - finds the requests whose recommendation is still being prepared or committed
+  ---
+  duration_ms: 0.769791
+  type: 'test'
+  ...
+# Subtest: reports a recommendation the moment it is ready and keeps waiting for the rest
+ok 65 - reports a recommendation the moment it is ready and keeps waiting for the rest
+  ---
+  duration_ms: 0.434791
+  type: 'test'
+  ...
+# Subtest: stops by itself once nothing is left to wait for, without a notice
+ok 66 - stops by itself once nothing is left to wait for, without a notice
+  ---
+  duration_ms: 0.125958
+  type: 'test'
+  ...
+# Subtest: never waits again for a request it already reported, so a stuck view cannot loop
+ok 67 - never waits again for a request it already reported, so a stuck view cannot loop
+  ---
+  duration_ms: 0.074875
+  type: 'test'
+  ...
+# Subtest: asks in calls of at most WATCH_MAX_IDS requests, which is the limit the backend accepts
+ok 68 - asks in calls of at most WATCH_MAX_IDS requests, which is the limit the backend accepts
+  ---
+  duration_ms: 0.39025
+  type: 'test'
+  ...
+# Subtest: stops at once when the backend refuses, and says so
+ok 69 - stops at once when the backend refuses, and says so
+  ---
+  duration_ms: 0.112917
+  type: 'test'
+  ...
+# Subtest: tries again after a network failure and reports once the backend answers
+ok 70 - tries again after a network failure and reports once the backend answers
+  ---
+  duration_ms: 0.754334
+  type: 'test'
+  ...
+# Subtest: gives up after repeated network failures, and says so
+ok 71 - gives up after repeated network failures, and says so
+  ---
+  duration_ms: 0.207125
+  type: 'test'
+  ...
+# Subtest: stops without asking once the screen is gone, without a notice
+ok 72 - stops without asking once the screen is gone, without a notice
+  ---
+  duration_ms: 0.273959
+  type: 'test'
+  ...
+# Subtest: reports nothing when the screen was left while a check was in flight
+ok 73 - reports nothing when the screen was left while a check was in flight
+  ---
+  duration_ms: 0.37575
+  type: 'test'
+  ...
+# Subtest: gives up after the time limit, and says so
+ok 74 - gives up after the time limit, and says so
+  ---
+  duration_ms: 0.1275
+  type: 'test'
+  ...
+# Subtest: a new watch replaces a check in flight without doubling the checks
+ok 75 - a new watch replaces a check in flight without doubling the checks
+  ---
+  duration_ms: 0.097875
+  type: 'test'
+  ...
+# Subtest: stop ends the watch at once
+ok 76 - stop ends the watch at once
+  ---
+  duration_ms: 0.049667
+  type: 'test'
+  ...
+1..76
+# tests 76
+# suites 0
+# pass 76
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.455833
+
+> crime-records-frontend@0.1.0 check
+> for f in $(find js -name '*.js'); do node --input-type=module --check < "$f" || exit 1; done
+

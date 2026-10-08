@@ -1,0 +1,43 @@
+PASS backend health
+PASS before the decision, the officer's request trail withholds the recommendation
+PASS before the decision, the officer reads nothing from the LLM
+PASS the auditor reads the full LLM account before deciding
+PASS the auditor denies the request
+PASS after the denial, the officer reads the auditor decision
+PASS after the denial, the officer reads the LLM recommendation and its explanation
+PASS the officer never receives the auditor note or how the recommendation was produced
+PASS after the decision, the officer's request trail shows the recommendation
+PASS const.verma is refused the LLM account of another officer's request
+PASS pp.mehta is refused the LLM account of another officer's request
+PASS judge.rana is refused the LLM account of another officer's request
+PASS a court reviewer gets the verification of the off-chain objects, without their text
+PASS an audit district head gets the justification and the auditor note
+PASS FORCE ALLOW over an LLM DENY creates a reusable authorization
+PASS after an allow, the officer reads the decision and the recommendation, not the explanation
+PASS the repeat request is granted at once by the authorization
+PASS no LLM recommendation was made for the reused request
+PASS a reused authorization shows the officer nothing from the LLM
+PASS the test authorization is revoked again
+PASS after the revocation the same request goes to the auditor again
+PASS a cancelled request shows insp.singh nothing from the LLM
+PASS insp.sharma reads the reduced decision log, without names, files or transactions
+PASS the reduced log still shows what was decided and against which recommendation
+PASS analyst.rao reads the reduced decision log, without names, files or transactions
+PASS pp.mehta reads the reduced decision log, without names, files or transactions
+PASS sp.north reads the full decision log
+PASS judge.rana reads the full decision log
+PASS sp.south reads the full decision log
+PASS record history is readable by insp.sharma (owning station)
+PASS record history is readable by judge.rana (reviewer)
+PASS record history is readable by sp.north (reviewer)
+PASS record history is refused for insp.singh (another station)
+PASS record history is refused for analyst.rao (another organization)
+PASS record history is refused for pp.mehta (reviewer organization without the role)
+PASS the evidence list is readable by analyst.rao (same-district forensics)
+PASS the evidence list is readable by pp.mehta (same-district prosecution)
+PASS the evidence list is readable by insp.sharma (same-district police)
+PASS the evidence list is readable by sp.south (reviewer of another district)
+PASS the evidence list is refused for insp.singh (another district)
+PASS the API passes the evidence refusal on as 403
+PASS every review on disk is encrypted
+42/42 checks passed; not exercised: 0

@@ -16,8 +16,15 @@ const { expect } = require('chai');
 const { createDiasRuntime } = require('../src/dias/runtime');
 const config = require('../src/config');
 
+/** A review store key for these tests only. */
+const REVIEW_KEY = Object.freeze({
+  DIAS_REVIEW_STORE_KEY: crypto.randomBytes(32).toString('base64'), DIAS_REVIEW_STORE_KEY_ID: 'test-key',
+});
+
 function settings(dir, overrides = {}) {
-  return { ...config, DIAS_REVIEW_STORE_DIR: path.join(dir, 'reviews'), ...overrides };
+  return {
+    ...config, ...REVIEW_KEY, DIAS_REVIEW_STORE_DIR: path.join(dir, 'reviews'), ...overrides,
+  };
 }
 
 function signingKeyFile(dir) {
@@ -61,6 +68,14 @@ describe('DIAS runtime (v3)', () => {
     expect(runtime).to.not.have.property('service');
     expect(runtime).to.not.have.property('recommendationMode');
     expect(Object.keys(config).filter((name) => /^DIAS_RECOMMENDER_(URL|TOKEN)$/.test(name))).to.deep.equal([]);
+  });
+
+  // Step 13: the running backend never keeps a review in the clear.
+  it('refuses to start without the review store key, naming how to create one', () => {
+    expect(() => createDiasRuntime({
+      settings: settings(dir, { DIAS_REVIEW_STORE_KEY: '', DIAS_RECOMMENDER_SIGNING_KEY_FILE: signingKeyFile(dir) }),
+      ledger: idleLedger,
+    })).to.throw(/DIAS_REVIEW_STORE_KEY is required.*scripts\/dias\/review-store-key\.js/);
   });
 
   it('refuses to start without a signing key, naming how to create one', () => {

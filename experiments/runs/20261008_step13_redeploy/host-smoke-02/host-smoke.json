@@ -1,0 +1,143 @@
+{
+  "startedAt": "2026-10-08T09:02:17.652Z",
+  "base": "http://127.0.0.1:3001/api",
+  "existingRequestId": null,
+  "fixture": {
+    "recordId": "REC-FIR-001",
+    "requester": "insp.sharma",
+    "auditor": "sp.north"
+  },
+  "checks": [
+    {
+      "name": "backend health",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "data": "ok",
+        "error": null
+      }
+    },
+    {
+      "name": "requester and auditor Fabric sign-in",
+      "ok": true,
+      "detail": "Both real API logins succeeded."
+    },
+    {
+      "name": "request accepted for review",
+      "ok": true,
+      "detail": 202
+    },
+    {
+      "name": "committed requester and record binding",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "justification is stored as a digest on the request",
+      "ok": true,
+      "detail": {
+        "justificationHash": "12af08b528660fe246e302979aadd68294946888924aba0fa8a686a89544b3cb"
+      }
+    },
+    {
+      "name": "real model generated a valid recommendation",
+      "ok": true,
+      "detail": "ALLOW"
+    },
+    {
+      "name": "pre-review signed commitment is on Fabric",
+      "ok": true,
+      "detail": "KAPPA-0d75a5562c9ddf5b"
+    },
+    {
+      "name": "off-chain recommendation matches its commitment",
+      "ok": true,
+      "detail": {
+        "status": "verified",
+        "problems": [],
+        "recommendationHash": "3bed973bd81848921f4f9abbe50ef48c5090dfb48e41de5408a0894c5c434b5d"
+      }
+    },
+    {
+      "name": "auditor decision committed",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "error": null
+      }
+    },
+    {
+      "name": "ledger derives agreement with the model",
+      "ok": true,
+      "detail": "AGREED"
+    },
+    {
+      "name": "committed access outcome matches the decision",
+      "ok": true,
+      "detail": "GRANTED"
+    },
+    {
+      "name": "audit trail readable",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "audit lifecycle contains the current v3 stages in order",
+      "ok": true,
+      "detail": [
+        "ACCESS_REQUEST_SUBMITTED",
+        "DYNAMIC_AUTHORIZATION_CHECKED",
+        "RECOMMENDATION_COMMITTED",
+        "AUDITOR_DECISION_RECORDED",
+        "AGREEMENT_DERIVED",
+        "ACCESS_OUTCOME_RECORDED"
+      ]
+    },
+    {
+      "name": "requester can read freshly authorized metadata",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "agency vault payload matches the ledger commitment",
+      "ok": true,
+      "detail": {
+        "match": true,
+        "storedHash": "d1e9fe0963ddffd071ecb071a73bd930737419bedbd48573466714303b9ae44c",
+        "computedHash": "d1e9fe0963ddffd071ecb071a73bd930737419bedbd48573466714303b9ae44c",
+        "storage": "agency-controlled-off-chain-vault",
+        "verifiedAt": "2026-10-08T09:02:25.955Z"
+      }
+    }
+  ],
+  "evidence": {
+    "requestId": "REQ-a22428e3b07b50af",
+    "recommendation": "ALLOW",
+    "commitmentId": "KAPPA-0d75a5562c9ddf5b",
+    "commitmentTxId": "0d75a5562c9ddf5bf87fd0acfba77d3f397160be7911b8f9c4c97bf8917508f2",
+    "decisionSource": "POST auditor decision, then ledger readback",
+    "auditorDecisionId": "AUDIT-d2e1966f04e847d8",
+    "outcomeId": "OUTCOME-d2e1966f04e847d8",
+    "outcome": "GRANTED",
+    "lifecycle": [
+      "ACCESS_REQUEST_SUBMITTED",
+      "DYNAMIC_AUTHORIZATION_CHECKED",
+      "RECOMMENDATION_COMMITTED",
+      "AUDITOR_DECISION_RECORDED",
+      "AGREEMENT_DERIVED",
+      "ACCESS_OUTCOME_RECORDED"
+    ]
+  },
+  "limitations": [
+    "One seeded-record path; no full acceptance-suite claim.",
+    "No physical phone, emulator sync, public tunnel, or automatic mobile synchronization.",
+    "No PDF upload/download, expiry, revocation, or multi-device conflict test in this check."
+  ],
+  "status": "passed",
+  "completedAt": "2026-10-08T09:02:25.956Z",
+  "summary": {
+    "passed": 15,
+    "failed": 0,
+    "total": 15
+  }
+}

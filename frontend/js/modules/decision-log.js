@@ -1,22 +1,24 @@
 /**
  * The decision log, read from the ledger by anyone signed in.
  *
- * Every settled request appears here: who asked for which case file, what was
- * decided, who decided it, the LLM recommendation that decision was taken
- * against — or that none was available — and whether the two agreed. It is
- * deliberately open to every organization on the channel — a decision that only
- * its maker can see is not an accountable decision. The justification, the LLM's
- * reasoning and the auditor's reason are not here: they are off-chain, and only a
- * reviewer sees them, through the audit trail.
+ * Every settled request appears here: what was decided, the LLM recommendation
+ * that decision was taken against — or that none was available — and whether the
+ * two agreed. That much is open to every organization on the channel: a decision
+ * that only its maker can see is not an accountable decision. Who asked, for
+ * which case file, who decided and in which transaction are shown to reviewers
+ * only; everyone else receives the reduced entries (design §10). The LLM's own
+ * account opens from here for district heads of the audit organisation; the
+ * officer who made a request reads theirs on the request screen.
  */
 
 import { api } from '../core/api.js';
+import { ALLOW, canAccess } from '../core/access.js';
 import {
   card, grid, table, button, badge, mono, hint, asyncRegion, el,
   subheading, detailTable, callout, slot, replace, attempt,
 } from '../core/components.js';
 import { dateTime, shortHash } from '../core/format.js';
-import { agreementLabel, recommendationLabel } from '../shared/dias.js';
+import { agreementLabel, decisionLogRow, recommendationLabel } from '../shared/dias.js';
 
 const show = (value) => (value === undefined || value === null || value === '' ? '—' : String(value));
 const showList = (values) => (values && values.length > 0 ? values.join(', ') : '—');
@@ -30,8 +32,16 @@ function decidedBy(entry) {
     el('small', { class: 'block' }, show(entry.auditor && entry.auditor.role)));
 }
 
+/**
+ * Why an entry names no LLM recommendation. A reused authorization never asks the
+ * LLM. A request that expired or was cancelled may have had a recommendation, but
+ * the ledger's list carries it only with a decision.
+ */
+const noRecommendationText = (entry) => (entry.basis === 'DYNAMIC_AUTHORIZATION'
+  ? 'LLM not consulted' : 'Not recorded: no decision was made');
+
 function recommendationCell(entry) {
-  if (!entry.llmRecommendation) return hint('LLM not consulted');
+  if (!entry.llmRecommendation) return hint(noRecommendationText(entry));
   if (entry.llmRecommendation === 'UNAVAILABLE') {
     return el('div', {}, badge('unavailable', 'neutral'),
       el('small', { class: 'block' }, recommendationLabel(entry.llmRecommendation)));
@@ -41,7 +51,7 @@ function recommendationCell(entry) {
 }
 
 function agreementCell(entry) {
-  if (!entry.llmAgreement) return hint('LLM not consulted');
+  if (!entry.llmAgreement) return hint(noRecommendationText(entry));
   return el('div', {}, mono(entry.llmAgreement),
     el('small', { class: 'block' }, agreementLabel(entry.llmAgreement)));
 }
@@ -85,6 +95,25 @@ function detailPanel(entry, detail) {
     ]));
 }
 
+/** The log as a caller outside the reviewer set receives it: no names, files or transactions. */
+function reducedTable(entries) {
+  return table(
+    ['When', 'Requester organization', 'Action · purpose', 'Outcome', 'Decided by',
+      'LLM recommendation', 'Agreement with the LLM'],
+    entries.map((entry) => {
+      const row = decisionLogRow(entry);
+      return [
+        dateTime(row.when),
+        show(row.organization),
+        show(row.operation),
+        badge(show(row.outcome), row.outcome === 'GRANTED' ? 'allow' : 'deny'),
+        show(row.decidedBy),
+        recommendationCell(entry),
+        agreementCell(entry),
+      ];
+    }));
+}
+
 export default {
   id: 'decision-log',
   title: 'Decision log',
@@ -93,13 +122,24 @@ export default {
   allow: undefined,
   summary: 'Every decision on the ledger: who asked for what, and what was decided.',
 
-  mount() {
+  mount({ user }) {
+    // The LLM's account is for district heads of the audit organisation.
+    const mayOpenDetail = canAccess(user, ALLOW.AUDITOR);
     const region = asyncRegion({
       load: () => api.access.decisionLog(100),
       loadingMessage: 'Reading the decision log from Fabric…',
       render: ({ entries }) => {
         if (entries.length === 0) {
           return hint('No request has been decided yet on this channel.');
+        }
+        const total = hint(`${entries.length} decision${entries.length === 1 ? '' : 's'} on the ledger, newest first.`);
+        if (entries.some((entry) => entry.redacted === true)) {
+          return el('div', {}, total,
+            callout('info', 'You see the reduced log',
+              hint('It shows what was decided and against which LLM recommendation, without names, '
+                + 'case files or transactions. Reviewers see the full log. Your own requests, with '
+                + 'their decisions, are on the "Request access" screen.')),
+            reducedTable(entries));
         }
         const panel = slot({ class: 'region' });
         const openDetail = async (entry) => {
@@ -110,7 +150,7 @@ export default {
             : callout('bad', 'Could not read the LLM detail for this decision'));
         };
         return el('div', {},
-          hint(`${entries.length} decision${entries.length === 1 ? '' : 's'} on the ledger, newest first.`),
+          total,
           table(
             ['When', 'Requester', 'Case file', 'Action · purpose', 'Outcome', 'Decided by',
               'LLM recommendation', 'Agreement with the LLM', 'Transaction', 'Detail'],
@@ -126,7 +166,7 @@ export default {
               recommendationCell(entry),
               agreementCell(entry),
               mono(shortHash(entry.decisionTxId || entry.outcomeTxId, 16)),
-              entry.llmRecommendation
+              entry.llmRecommendation && mayOpenDetail
                 ? button('Why', { kind: 'ghost', onclick: () => openDetail(entry) })
                 : hint('—'),
             ])),
@@ -135,11 +175,11 @@ export default {
     });
 
     return grid(card('Decisions recorded on the blockchain',
-      'Committed by the chaincode: the request (who asked for which case file, with the action '
-      + 'and purpose) and the decision (the auditor, their FORCE ALLOW or FORCE DENY, the LLM '
-      + 'recommendation they decided against, and whether the two agreed). A recommendation the '
+      'Committed by the chaincode: the request and the decision (FORCE ALLOW or FORCE DENY, the LLM '
+      + 'recommendation it was taken against, and whether the two agreed). A recommendation the '
       + 'backend could not produce is recorded as unavailable. Every organization on the channel '
-      + 'reads the same list.',
+      + 'can read what was decided; who asked, for which case file and who decided are shown to '
+      + 'reviewers only.',
       el('div', { class: 'actions' },
         button('Refresh', { kind: 'ghost', onclick: () => region.reload() })),
       region));

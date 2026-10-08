@@ -1,0 +1,15 @@
+PASS backend health
+PASS requester and auditor Fabric sign-in
+PASS request accepted for review
+PASS committed requester and record binding
+PASS justification is stored as a digest on the request
+PASS real model generated a valid recommendation
+PASS pre-review signed commitment is on Fabric
+PASS off-chain recommendation matches its commitment
+PASS auditor decision committed
+PASS ledger derives agreement with the model
+PASS committed access outcome matches the decision
+PASS audit trail readable
+PASS audit lifecycle contains the current v3 stages in order
+PASS requester can read freshly authorized metadata
+PASS agency vault payload matches the ledger commitment

@@ -62,12 +62,12 @@ Each requirement traces: paper requirement → current behavior → required cha
 | I04 | Access-log entries defined and measured | PART | 6 | done (step 6; `accessLogger.unit.test.js`; replay −47.6% / −68.1% writes) |
 | I05 | Prompt marks facts as authoritative and J as untrusted | OK | 5 | done (prompt v2; v1 frozen and checked against every tracked prompt) |
 | I06 | Response schema check; failure is a status, not a DENY | OK | — | done (baseline) |
-| I07 | Review store tamper-evident and protected | PART | 9, 13 | justification, recommendation and note tamper-evident (steps 9–11); encryption in 13 |
+| I07 | Review store tamper-evident and protected | PART | 9, 13 | done: justification, recommendation and note tamper-evident (steps 9–11) and encrypted at rest (step 13) |
 | I08 | No written-policy engine in the contract | OK | 14 | planned (guard kept) |
 | A01 | Final PDF download re-checks the grant | MISS | 4 | done (step 4; `diasRelease.test.js`, `documentRelease.unit.test.js`) |
-| A02 | Record history, evidence and decision log restricted | MISS | 13 | planned (step 13) |
-| A03 | Explanation and off-chain object access defined and enforced | PART | 13 | planned (step 13) |
-| A04 | Off-chain review data encrypted | MISS | 13 | planned (step 13) |
+| A02 | Record history, evidence and decision log restricted | MISS | 13 | done (step 13; `diasPrivacy.test.js`); redeployed on the development host on 2026-10-08 and checked live (`experiments/runs/20261008_step13_redeploy/`) |
+| A03 | Explanation and off-chain object access defined and enforced | PART | 13 | done (step 13; requester rule changed by the author on 2026-10-08; `diasRecommendationDetail.unit.test.js`, `offChainVerification.unit.test.js`) |
+| A04 | Off-chain review data encrypted | MISS | 13 | done (step 13; `reviewStoreEncryption.unit.test.js`) |
 | A05 | Signed recommendation provenance; no AI organization | MISS | 10, 12 | signing, signer registry, revocation and replay rejection done (step 10); the separate process was dropped by the author on 2026-10-08, so the backend holds the key |
 | A06 | Maximum authorization validity (null expiry never ends) | OUT | — | open researcher decision |
 | A07 | Identity and record id inside C (§IV-C) | TEXT | — | text fix |

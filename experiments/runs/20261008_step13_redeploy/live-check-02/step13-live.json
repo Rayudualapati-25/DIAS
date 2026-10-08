@@ -1,0 +1,481 @@
+{
+  "startedAt": "2026-10-08T09:01:06.110Z",
+  "base": "http://127.0.0.1:3001/api",
+  "record": "REC-FIR-001",
+  "checks": [
+    {
+      "name": "backend health",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "a new request goes to the auditor",
+      "ok": true,
+      "detail": 202
+    },
+    {
+      "name": "before the decision, the officer's request trail withholds the recommendation",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "commitment": {
+          "requestId": "REQ-09b823865a80b449",
+          "commitmentId": "KAPPA-b958f6a168f6dc37",
+          "withheldUntilDecision": true
+        }
+      }
+    },
+    {
+      "name": "before the decision, the officer reads nothing from the LLM",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "withheld": "awaiting-decision"
+      }
+    },
+    {
+      "name": "the auditor reads the full LLM account before deciding",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "recommendation": "ALLOW"
+      }
+    },
+    {
+      "name": "the auditor denies the request",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "error": null
+      }
+    },
+    {
+      "name": "after the denial, the officer reads the auditor decision",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "decision": {
+          "decision": "FORCE_DENY",
+          "llmRecommendation": "ALLOW",
+          "llmAgreement": "NOT_AGREED",
+          "auditor": {
+            "username": "sp.north",
+            "role": "sp"
+          },
+          "decidedAtUtc": "2026-10-08T09:01:12.456Z"
+        },
+        "outcome": {
+          "outcome": "DENIED",
+          "basis": "AUDITOR_DECISION"
+        }
+      }
+    },
+    {
+      "name": "after the denial, the officer reads the LLM recommendation and its explanation",
+      "ok": true,
+      "detail": {
+        "recommendation": "ALLOW",
+        "reasonCode": "POLICY_SATISFIED",
+        "hasReason": true
+      }
+    },
+    {
+      "name": "the officer never receives the auditor note or how the recommendation was produced",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "after the decision, the officer's request trail shows the recommendation",
+      "ok": true,
+      "detail": "ALLOW"
+    },
+    {
+      "name": "const.verma is refused the LLM account of another officer's request",
+      "ok": true,
+      "detail": 403
+    },
+    {
+      "name": "pp.mehta is refused the LLM account of another officer's request",
+      "ok": true,
+      "detail": 403
+    },
+    {
+      "name": "judge.rana is refused the LLM account of another officer's request",
+      "ok": true,
+      "detail": 403
+    },
+    {
+      "name": "a court reviewer gets the verification of the off-chain objects, without their text",
+      "ok": true,
+      "detail": {
+        "justification": {
+          "status": "verified",
+          "committed": "8f47fa04ee33e6cc5ce746903844a3ff5951a34ea5e9b8f32f3ef930c9ac963d",
+          "computed": "8f47fa04ee33e6cc5ce746903844a3ff5951a34ea5e9b8f32f3ef930c9ac963d"
+        },
+        "recommendation": {
+          "status": "verified",
+          "committed": "5a2c268ed5bdd49d9bbcd023d64eb2934be4203d482fbad948e24baaf7f8d49e",
+          "computed": "5a2c268ed5bdd49d9bbcd023d64eb2934be4203d482fbad948e24baaf7f8d49e",
+          "problems": []
+        },
+        "note": {
+          "status": "verified",
+          "committed": "e30c114ecf0efa63da5f0eef8f899169df607fe0e635dd3aca94cfd54f515335",
+          "computed": "e30c114ecf0efa63da5f0eef8f899169df607fe0e635dd3aca94cfd54f515335"
+        }
+      }
+    },
+    {
+      "name": "an audit district head gets the justification and the auditor note",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "FORCE ALLOW over an LLM DENY creates a reusable authorization",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "error": null
+      }
+    },
+    {
+      "name": "after an allow, the officer reads the decision and the recommendation, not the explanation",
+      "ok": true,
+      "detail": {
+        "withheld": "allowed"
+      }
+    },
+    {
+      "name": "the repeat request is granted at once by the authorization",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "processingPath": "dynamic-authorization"
+      }
+    },
+    {
+      "name": "no LLM recommendation was made for the reused request",
+      "ok": true,
+      "detail": "not-generated"
+    },
+    {
+      "name": "a reused authorization shows the officer nothing from the LLM",
+      "ok": true,
+      "detail": {
+        "outcome": "GRANTED",
+        "basis": "DYNAMIC_AUTHORIZATION"
+      }
+    },
+    {
+      "name": "the test authorization is revoked again",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "error": null
+      }
+    },
+    {
+      "name": "after the revocation the same request goes to the auditor again",
+      "ok": true,
+      "detail": 202
+    },
+    {
+      "name": "a cancelled request shows insp.singh nothing from the LLM",
+      "ok": true,
+      "detail": {
+        "cancel": 200,
+        "withheld": "no-auditor-decision",
+        "outcome": {
+          "outcome": "CANCELLED",
+          "basis": "REQUESTER_CANCELLED"
+        }
+      }
+    },
+    {
+      "name": "a court reviewer: the trail of their own request withholds the recommendation",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "viewer": "reviewer"
+      }
+    },
+    {
+      "name": "a court reviewer: the reviewer trail of their own request carries no off-chain text",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "a court reviewer: reads nothing from the LLM about their own request before the decision",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "viewer": "requester",
+        "withheld": "awaiting-decision"
+      }
+    },
+    {
+      "name": "a court reviewer: another district head decides their request",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "error": null
+      }
+    },
+    {
+      "name": "a court reviewer: after the denial they read the decision and the explanation as the requester",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "viewer": "requester"
+      }
+    },
+    {
+      "name": "a court reviewer: their trail then shows the recommendation, and never the digest of the auditor note",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "an audit district head: the trail of their own request withholds the recommendation",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "viewer": "reviewer"
+      }
+    },
+    {
+      "name": "an audit district head: the reviewer trail of their own request carries no off-chain text",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "an audit district head: reads nothing from the LLM about their own request before the decision",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "viewer": "requester",
+        "withheld": "awaiting-decision"
+      }
+    },
+    {
+      "name": "an audit district head is refused the auditor view of their own request",
+      "ok": true,
+      "detail": {
+        "status": 403,
+        "error": "unauthorized: a district head cannot review their own request; another district head decides it"
+      }
+    },
+    {
+      "name": "their own request is missing from their auditor queue and present in another district head's",
+      "ok": true,
+      "detail": {
+        "own": 200,
+        "other": 200
+      }
+    },
+    {
+      "name": "an audit district head: another district head decides their request",
+      "ok": true,
+      "detail": {
+        "status": 201,
+        "error": null
+      }
+    },
+    {
+      "name": "an audit district head: after the denial they read the decision and the explanation as the requester",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "viewer": "requester"
+      }
+    },
+    {
+      "name": "an audit district head: their trail then shows the recommendation, and never the digest of the auditor note",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "insp.sharma reads the reduced decision log, without names, files or transactions",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "entries": 12
+      }
+    },
+    {
+      "name": "the reduced log still shows what was decided and against which recommendation",
+      "ok": true,
+      "detail": [
+        {
+          "redacted": true,
+          "outcome": "DENIED",
+          "basis": "AUDITOR_DECISION",
+          "decision": "FORCE_DENY",
+          "llmRecommendation": "ALLOW",
+          "llmAgreement": "NOT_AGREED",
+          "generationStatus": "OK",
+          "action": "view",
+          "purpose": "audit-review",
+          "requester": {
+            "organization": "audit"
+          },
+          "decidedAtUtc": "2026-10-08T09:02:08.072Z"
+        },
+        {
+          "redacted": true,
+          "outcome": "DENIED",
+          "basis": "AUDITOR_DECISION",
+          "decision": "FORCE_DENY",
+          "llmRecommendation": "ALLOW",
+          "llmAgreement": "NOT_AGREED",
+          "generationStatus": "OK",
+          "action": "view",
+          "purpose": "judicial-proceeding",
+          "requester": {
+            "organization": "court"
+          },
+          "decidedAtUtc": "2026-10-08T09:01:51.656Z"
+        }
+      ]
+    },
+    {
+      "name": "analyst.rao reads the reduced decision log, without names, files or transactions",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "entries": 12
+      }
+    },
+    {
+      "name": "pp.mehta reads the reduced decision log, without names, files or transactions",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "entries": 12
+      }
+    },
+    {
+      "name": "sp.north reads the full decision log",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "entries": 12
+      }
+    },
+    {
+      "name": "judge.rana reads the full decision log",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "entries": 12
+      }
+    },
+    {
+      "name": "sp.south reads the full decision log",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "entries": 12
+      }
+    },
+    {
+      "name": "record history is readable by insp.sharma (owning station)",
+      "ok": true,
+      "detail": "1 entries"
+    },
+    {
+      "name": "record history is readable by judge.rana (reviewer)",
+      "ok": true,
+      "detail": "1 entries"
+    },
+    {
+      "name": "record history is readable by sp.north (reviewer)",
+      "ok": true,
+      "detail": "1 entries"
+    },
+    {
+      "name": "record history is refused for insp.singh (another station)",
+      "ok": true,
+      "detail": "chaincode response 500, unauthorized: GetRecordHistory requires a reviewer or the owning station"
+    },
+    {
+      "name": "record history is refused for analyst.rao (another organization)",
+      "ok": true,
+      "detail": "chaincode response 500, unauthorized: GetRecordHistory requires a reviewer or the owning station"
+    },
+    {
+      "name": "record history is refused for pp.mehta (reviewer organization without the role)",
+      "ok": true,
+      "detail": "chaincode response 500, unauthorized: GetRecordHistory requires a reviewer or the owning station"
+    },
+    {
+      "name": "the evidence list is readable by analyst.rao (same-district forensics)",
+      "ok": true,
+      "detail": "0 items"
+    },
+    {
+      "name": "the evidence list is readable by pp.mehta (same-district prosecution)",
+      "ok": true,
+      "detail": "0 items"
+    },
+    {
+      "name": "the evidence list is readable by insp.sharma (same-district police)",
+      "ok": true,
+      "detail": "0 items"
+    },
+    {
+      "name": "the evidence list is readable by sp.south (reviewer of another district)",
+      "ok": true,
+      "detail": "0 items"
+    },
+    {
+      "name": "the evidence list is refused for insp.singh (another district)",
+      "ok": true,
+      "detail": "chaincode response 500, unauthorized: ListEvidence requires a reviewer or a same-district member of the police, forensics, prosecution or court"
+    },
+    {
+      "name": "the private evidence detail is refused for insp.singh (another district)",
+      "ok": true,
+      "detail": "chaincode response 500, unauthorized: GetEvidenceDetail requires a reviewer or a same-district member of the police, forensics, prosecution or court"
+    },
+    {
+      "name": "the private evidence detail passes the district check for analyst.rao (same district)",
+      "ok": true,
+      "detail": "chaincode response 500, no private detail for evidence 'EV-NONE' on record 'REC-FIR-001'"
+    },
+    {
+      "name": "the API passes the evidence refusal on as 403",
+      "ok": true,
+      "detail": 403
+    },
+    {
+      "name": "every review on disk is encrypted",
+      "ok": true,
+      "detail": {
+        "files": 10,
+        "clear": []
+      }
+    }
+  ],
+  "evidence": {
+    "deniedRequestId": "REQ-09b823865a80b449",
+    "deniedRequestRecommendation": "ALLOW",
+    "deniedAgreement": "NOT_AGREED",
+    "recommendationFor_insp.singh": "DENY",
+    "reuse": {
+      "username": "insp.singh",
+      "firstRequestId": "REQ-5b27fe370e0de35d",
+      "authorizationId": "AUTH-0f9afc98078d1e46"
+    },
+    "ownRequestOf_judge.rana": "REQ-c1192ac4d762165f",
+    "ownRequestOf_dj.north": "REQ-3c70c05a42742da0"
+  },
+  "notExercised": [],
+  "completedAt": "2026-10-08T09:02:09.437Z",
+  "summary": {
+    "passed": 59,
+    "failed": 0,
+    "total": 59
+  },
+  "status": "passed"
+}

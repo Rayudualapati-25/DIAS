@@ -1,0 +1,60 @@
+PASS backend health
+PASS a new request goes to the auditor
+PASS before the decision, the officer's request trail withholds the recommendation
+PASS before the decision, the officer reads nothing from the LLM
+PASS the auditor reads the full LLM account before deciding
+PASS the auditor denies the request
+PASS after the denial, the officer reads the auditor decision
+PASS after the denial, the officer reads the LLM recommendation and its explanation
+PASS the officer never receives the auditor note or how the recommendation was produced
+PASS after the decision, the officer's request trail shows the recommendation
+PASS const.verma is refused the LLM account of another officer's request
+PASS pp.mehta is refused the LLM account of another officer's request
+PASS judge.rana is refused the LLM account of another officer's request
+PASS a court reviewer gets the verification of the off-chain objects, without their text
+PASS an audit district head gets the justification and the auditor note
+PASS FORCE ALLOW over an LLM DENY creates a reusable authorization
+PASS after an allow, the officer reads the decision and the recommendation, not the explanation
+PASS the repeat request is granted at once by the authorization
+PASS no LLM recommendation was made for the reused request
+PASS a reused authorization shows the officer nothing from the LLM
+PASS the test authorization is revoked again
+PASS after the revocation the same request goes to the auditor again
+PASS a cancelled request shows insp.singh nothing from the LLM
+PASS a court reviewer: the trail of their own request withholds the recommendation
+PASS a court reviewer: the reviewer trail of their own request carries no off-chain text
+PASS a court reviewer: reads nothing from the LLM about their own request before the decision
+PASS a court reviewer: another district head decides their request
+PASS a court reviewer: after the denial they read the decision and the explanation as the requester
+PASS a court reviewer: their trail then shows the recommendation, and never the digest of the auditor note
+PASS an audit district head: the trail of their own request withholds the recommendation
+PASS an audit district head: the reviewer trail of their own request carries no off-chain text
+PASS an audit district head: reads nothing from the LLM about their own request before the decision
+PASS an audit district head is refused the auditor view of their own request
+PASS their own request is missing from their auditor queue and present in another district head's
+PASS an audit district head: another district head decides their request
+PASS an audit district head: after the denial they read the decision and the explanation as the requester
+PASS an audit district head: their trail then shows the recommendation, and never the digest of the auditor note
+PASS insp.sharma reads the reduced decision log, without names, files or transactions
+PASS the reduced log still shows what was decided and against which recommendation
+PASS analyst.rao reads the reduced decision log, without names, files or transactions
+PASS pp.mehta reads the reduced decision log, without names, files or transactions
+PASS sp.north reads the full decision log
+PASS judge.rana reads the full decision log
+PASS sp.south reads the full decision log
+PASS record history is readable by insp.sharma (owning station)
+PASS record history is readable by judge.rana (reviewer)
+PASS record history is readable by sp.north (reviewer)
+PASS record history is refused for insp.singh (another station)
+PASS record history is refused for analyst.rao (another organization)
+PASS record history is refused for pp.mehta (reviewer organization without the role)
+PASS the evidence list is readable by analyst.rao (same-district forensics)
+PASS the evidence list is readable by pp.mehta (same-district prosecution)
+PASS the evidence list is readable by insp.sharma (same-district police)
+PASS the evidence list is readable by sp.south (reviewer of another district)
+PASS the evidence list is refused for insp.singh (another district)
+PASS the private evidence detail is refused for insp.singh (another district)
+PASS the private evidence detail passes the district check for analyst.rao (same district)
+PASS the API passes the evidence refusal on as 403
+PASS every review on disk is encrypted
+59/59 checks passed; not exercised: 0

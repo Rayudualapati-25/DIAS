@@ -43,7 +43,11 @@ if (!['llm-only', 'legacy-baseline'].includes(ACCESS_POLICY_MODE)) {
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const BUNDLED_LLM_ADAPTER_HASH = '5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe';
-const NETWORK_DIR = path.join(REPO_ROOT, 'network');
+// A mobile development API can reuse the currently running Mac network's
+// enrolled identities without copying its keys into another checkout.
+const NETWORK_DIR = process.env.FABRIC_NETWORK_DIR
+  ? path.resolve(REPO_ROOT, process.env.FABRIC_NETWORK_DIR)
+  : path.join(REPO_ROOT, 'network');
 const VAULT_DIR = process.env.AGENCY_VAULT_DIR
   ? (path.isAbsolute(process.env.AGENCY_VAULT_DIR)
     ? path.normalize(process.env.AGENCY_VAULT_DIR)
@@ -247,6 +251,13 @@ module.exports = Object.freeze({
   DIAS_MODEL_QUANTIZATION: process.env.DIAS_MODEL_QUANTIZATION || '4bit',
   DIAS_ADAPTER_ID: process.env.DIAS_ADAPTER_ID || null,
   DIAS_ADAPTER_HASH: process.env.DIAS_ADAPTER_HASH || null,
+
+  // Encryption of the off-chain review store at rest (design §10): the current
+  // key (base64, 32 bytes), its identifier, and `id:key` pairs of earlier keys.
+  // Create a key with scripts/dias/review-store-key.js.
+  DIAS_REVIEW_STORE_KEY: process.env.DIAS_REVIEW_STORE_KEY || '',
+  DIAS_REVIEW_STORE_KEY_ID: process.env.DIAS_REVIEW_STORE_KEY_ID || '',
+  DIAS_REVIEW_STORE_PREVIOUS_KEYS: process.env.DIAS_REVIEW_STORE_PREVIOUS_KEYS || '',
 
   // How often the backend records the expiry of requests past their review
   // deadline (design §8). 0 disables the sweeper.

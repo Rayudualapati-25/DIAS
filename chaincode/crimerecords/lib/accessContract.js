@@ -32,6 +32,7 @@ const { putJson } = require('./util/state');
 const { requireActiveDistrictHead } = require('./dias/auditorAuthority');
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } = require('./policy/policyV1');
 const KEYS = require('./dias/keys');
+const { isReviewer, redactDecisionLogEntry, withheldCommitment } = require('./dias/visibility');
 const {
   EVENT, actorFrom, appendAuthorizationEvents, appendRequestEvents, emitLifecycle,
   readAuthorizationEvents,
@@ -1049,7 +1050,10 @@ class AccessContract extends Contract {
     return JSON.stringify(request);
   }
 
-  /** κ for one request, or null; readable by its requester and district heads. */
+  /**
+   * κ for one request, or null; readable by its requester and district heads. A
+   * requester sees what κ says only once an auditor has decided (design §10).
+   */
   async GetRecommendationCommitment(ctx, requestId) {
     const caller = getCaller(ctx);
     const request = await this._getRequest(ctx, requestId);
@@ -1058,7 +1062,10 @@ class AccessContract extends Contract {
     if (!ownsRequest && !isAuditor) {
       throw new Error('unauthorized: access request belongs to a different identity');
     }
-    return JSON.stringify(await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId)));
+    const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId));
+    const decided = Boolean(await this._read(ctx, this._key(ctx, KEYS.AUDITOR_DECISION, requestId)));
+    // The requester rule comes first, also for a requester who is a district head.
+    return JSON.stringify(commitment && ownsRequest && !decided ? withheldCommitment(commitment) : commitment);
   }
 
   /** The committed request and its recommendation commitment κ (null before one exists). */
@@ -1069,21 +1076,29 @@ class AccessContract extends Contract {
    * (design §11).
    */
   async GetAuditorReview(ctx, requestId) {
-    this._requireAuditor(ctx, 'GetAuditorReview');
+    const caller = this._requireAuditor(ctx, 'GetAuditorReview');
     const request = await this._getRequest(ctx, requestId);
+    // A district head who made the request is its requester, not its auditor: the
+    // review carries the recommendation and the note digest (design §10).
+    if (request.requester.identityHash === sha256(caller.id)) {
+      throw new Error('unauthorized: a district head cannot review their own request; '
+        + 'another district head decides it');
+    }
     const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId));
     const decision = await this._read(ctx, this._key(ctx, KEYS.AUDITOR_DECISION, requestId));
     return JSON.stringify({ request, commitment, decision });
   }
 
+  /** Every request that waits for a decision, except the caller's own. */
   async QueryPendingAuditorRequests(ctx) {
-    this._requireAuditor(ctx, 'QueryPendingAuditorRequests');
+    const caller = this._requireAuditor(ctx, 'QueryPendingAuditorRequests');
+    const callerHash = sha256(caller.id);
     const iterator = await ctx.stub.getStateByPartialCompositeKey(KEYS.REQUEST, []);
     const reviews = [];
     let result = await iterator.next();
     while (!result.done) {
       const request = JSON.parse(result.value.value.toString());
-      if (request.status === REQUEST_STATUS.AWAITING_AUDITOR) {
+      if (request.status === REQUEST_STATUS.AWAITING_AUDITOR && request.requester.identityHash !== callerHash) {
         const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, request.requestId));
         reviews.push({ request, commitment });
       }
@@ -1144,13 +1159,14 @@ class AccessContract extends Contract {
   }
 
   /**
-   * The public decision log: for every settled request, who asked for which
-   * record, what was decided — by an auditor, or automatically by a dynamic
-   * authorization — and the LLM recommendation that decision was taken against,
-   * which is UNAVAILABLE when the backend had none to show. Readable by every
-   * identity on the channel, because "who decided what, and for whom" is exactly
-   * what the shared ledger exists to make checkable. It carries no identity hash,
-   * no justification, and none of the LLM's reasoning or model provenance.
+   * The decision log: for every settled request, who asked for which record, what
+   * was decided — by an auditor, or automatically by a dynamic authorization —
+   * and the LLM recommendation that decision was taken against, which is
+   * UNAVAILABLE when the backend had none to show. A reviewer reads it in full.
+   * Every other identity on the channel reads it redacted (design §10): what was
+   * decided and against which recommendation stays checkable by all, without who
+   * asked, for which record, or who decided. It carries no identity hash, no
+   * justification, and none of the LLM's reasoning or model provenance.
    *
    * The scan reads every outcome and returns the newest `limit`, which is
    * adequate for a research prototype, not for a production log.
@@ -1195,6 +1211,7 @@ class AccessContract extends Contract {
         decision: decision ? decision.decision : null,
         llmRecommendation: decision ? decision.llmRecommendation : null,
         llmAgreement: decision ? decision.llmAgreement : null,
+        generationStatus: decision ? decision.generationStatus ?? null : null,
         authorizationId: outcome.authorizationId,
         createdAuthorizationId: outcome.createdAuthorizationId,
         decidedAtUtc: outcome.recordedAtUtc,
@@ -1202,7 +1219,7 @@ class AccessContract extends Contract {
         decisionTxId: decision ? decision.txId : null,
       });
     }
-    return JSON.stringify(entries);
+    return JSON.stringify(isReviewer(caller) ? entries : entries.map(redactDecisionLogEntry));
   }
 
   async GetDecision(ctx, recordId, decisionId) {

@@ -14,32 +14,23 @@ const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
 const { SAFE_ID, hashObject, sha256 } = require('./util/validate');
 const { putJson } = require('./util/state');
-const { SEAL_AUTHORITY_ROLES, DISTRICT_HEAD_ROLES } = require('./policy/policyV1');
 const KEYS = require('./dias/keys');
 const { readAuthorizationEvents, readRequestEvents } = require('./dias/lifecycle');
 const { AUTHORIZATION_KEY } = require('./dias/authorization');
 const { COMMITMENT_KEY } = require('./dias/recommendationCommitment');
+const {
+  REVIEWER_MSPS, REVIEWER_ROLES, decisionForRequester, isReviewer, withheldCommitment,
+  withholdCommitmentEvent, withoutNoteDigestEvent,
+} = require('./dias/visibility');
 
 const ACCESS_EVENT_KEY = 'accessEvent';
 
-// Reviewer orgs: auditors, the court, and prosecution can reconstruct trails.
-const REVIEWER_MSPS = [MSP.AUDIT, MSP.COURT, MSP.PROSECUTION];
-/**
- * Membership of a reviewer organisation is not by itself oversight authority.
- * Reading a trail requires a district head, or the court authority that can open
- * a sealed record.
- */
-const REVIEWER_ROLES = Object.freeze([...SEAL_AUTHORITY_ROLES, ...DISTRICT_HEAD_ROLES]);
-
 function requireReviewer(ctx, action) {
   const caller = getCaller(ctx);
-  requireMsp(caller, REVIEWER_MSPS, action);
+  requireMsp(caller, [...REVIEWER_MSPS], action);
   requireRole(caller, [...REVIEWER_ROLES], action);
   return caller;
 }
-
-const isReviewer = (caller) => REVIEWER_MSPS.includes(caller.mspId)
-  && REVIEWER_ROLES.includes(caller.role);
 
 async function readJson(ctx, key) {
   const data = await ctx.stub.getState(key);
@@ -107,7 +98,9 @@ function summarize(request, auditorDecision, outcome, commitment) {
       txId: auditorDecision.txId,
     } : { status: request.auditorReviewStatus },
     createdAuthorizationId: request.createdAuthorizationId,
-    recommendation: commitment ? {
+    recommendation: commitment && commitment.withheldUntilDecision ? {
+      commitmentId: commitment.commitmentId, withheldUntilDecision: true,
+    } : commitment ? {
       commitmentId: commitment.commitmentId,
       recommendation: commitment.recommendation,
       generationStatus: commitment.generationStatus,
@@ -252,10 +245,19 @@ class AuditContract extends Contract {
     if (!reviewer && !requester) {
       throw new Error('unauthorized: the request audit trail requires a reviewer or the requester');
     }
-    const lifecycle = await readRequestEvents(ctx, requestId);
-    const auditorDecision = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.AUDITOR_DECISION, [requestId]));
+    const decided = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.AUDITOR_DECISION, [requestId]));
     const outcome = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.OUTCOME, [requestId]));
-    const recommendationCommitment = await readJson(ctx, ctx.stub.createCompositeKey(COMMITMENT_KEY, [requestId]));
+    const committed = await readJson(ctx, ctx.stub.createCompositeKey(COMMITMENT_KEY, [requestId]));
+    const events = await readRequestEvents(ctx, requestId);
+    // The requester rule comes before reviewer rights (design §10): whoever made
+    // the request learns the recommendation with the auditor's decision, never
+    // ahead of it, and never reads the digest of the auditor's note — also when
+    // they hold a reviewer or auditor role themselves.
+    const withhold = requester && !decided && Boolean(committed);
+    const recommendationCommitment = withhold ? withheldCommitment(committed) : committed;
+    const auditorDecision = requester ? decisionForRequester(decided) : decided;
+    const lifecycle = !requester ? events
+      : events.map(withoutNoteDigestEvent).map(withhold ? withholdCommitmentEvent : (event) => event);
 
     const related = [
       ['checked-by-this-request', request.dynamicAuthorizationCheck.authorizationId],
@@ -275,6 +277,7 @@ class AuditContract extends Contract {
     return JSON.stringify({
       requestId,
       viewer: reviewer ? 'reviewer' : 'requester',
+      isRequester: requester,
       summary: summarize(request, auditorDecision, outcome, recommendationCommitment),
       request,
       lifecycle,

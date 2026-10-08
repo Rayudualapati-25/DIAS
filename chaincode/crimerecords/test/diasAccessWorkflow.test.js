@@ -161,14 +161,16 @@ describe('DIAS access workflow', () => {
     });
   });
 
-  describe('public decision log', () => {
-    it('lets any signed-in member read who asked for what and what was decided', async () => {
+  // Step 13 (design §10): the full log is for reviewers. What every other member
+  // reads is the redacted log, tested in diasPrivacy.test.js.
+  describe('decision log, as a reviewer reads it', () => {
+    it('lets a reviewer read who asked for what and what was decided', async () => {
       const granted = (await world.submit(INSPECTOR)).result;
       await world.decide(granted.requestId, 'FORCE_ALLOW', 'DENY');
       const denied = (await world.submit(CONSTABLE, { recordId: 'FIR-2' })).result;
       await world.decide(denied.requestId, 'FORCE_DENY', 'DENY');
 
-      const { result: entries } = await world.run(CONSTABLE, world.nextTx('QUERY'),
+      const { result: entries } = await world.run(CALLERS.auditor, world.nextTx('QUERY'),
         (ctx) => world.contracts.access.QueryAccessDecisions(ctx, '50'));
 
       expect(entries).to.have.length(2);
@@ -193,7 +195,7 @@ describe('DIAS access workflow', () => {
       const { authorization } = await world.createAuthorization();
       const repeat = (await world.submit(INSPECTOR)).result;
       expect(repeat.status).to.equal('granted');
-      const { result: entries } = await world.run(CONSTABLE, world.nextTx('QUERY'),
+      const { result: entries } = await world.run(CALLERS.auditor, world.nextTx('QUERY'),
         (ctx) => world.contracts.access.QueryAccessDecisions(ctx, '50'));
       const automatic = entries.find((entry) => entry.requestId === repeat.requestId);
       expect(automatic).to.include({
@@ -211,7 +213,7 @@ describe('DIAS access workflow', () => {
         const request = (await world.submit(INSPECTOR, { recordId })).result;
         await world.decide(request.requestId, 'FORCE_DENY', 'DENY', { timestamp: times[recordId] });
       }
-      const { result: entries } = await world.run(INSPECTOR, world.nextTx('QUERY'),
+      const { result: entries } = await world.run(CALLERS.auditor, world.nextTx('QUERY'),
         (ctx) => world.contracts.access.QueryAccessDecisions(ctx, '1'));
       expect(entries).to.have.length(1);
       expect(entries[0].recordId).to.equal('FIR-2');

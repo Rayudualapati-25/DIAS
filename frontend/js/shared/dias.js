@@ -229,6 +229,75 @@ export function agreementLabel(value) {
   return 'not yet decided';
 }
 
+const LLM_VALUE_TEXT = Object.freeze({ ALLOW: 'ALLOW', DENY: 'DENY' });
+
+/**
+ * What the officer who made a request is shown about its decision (design §10).
+ * The auditor's decision is shown once there is one. The LLM's explanation is
+ * shown only when the request was denied; when it was allowed the recommendation
+ * is named without its explanation; before a decision, or when no auditor
+ * decided, nothing from the LLM is shown. `detail` is the backend's answer for
+ * this caller, which has already applied the rule.
+ */
+export function requesterDecisionView(detail) {
+  const decision = detail?.decision || null;
+  if (!decision) return { decided: false, rows: [], explanation: null };
+  const rows = [
+    ['Auditor decision',
+      `${String(decision.decision).replace('_', ' ')} by ${decision.auditor?.username || 'an auditor'}`],
+    ['LLM recommendation', LLM_VALUE_TEXT[decision.llmRecommendation] || 'No recommendation was available'],
+    ['Decision against the LLM', agreementLabel(decision.llmAgreement)],
+  ];
+  if (!detail.explanationVisible) return { decided: true, rows, explanation: null };
+  if (!detail.available) {
+    // The ledger knows whether the LLM recommended something; when it did, only
+    // the explanation is missing from this backend's store.
+    const cause = LLM_VALUE_TEXT[decision.llmRecommendation] ? 'explanation-missing' : 'no-recommendation';
+    return { decided: true, rows, explanation: { available: false, cause } };
+  }
+  return {
+    decided: true,
+    rows,
+    explanation: {
+      available: true,
+      reason: detail.reason || null,
+      reasonCode: detail.reasonCode || null,
+      policyRefs: detail.policyRefs || [],
+      missingEvidence: detail.missingEvidence || [],
+      reviewFlags: detail.reviewFlags || [],
+    },
+  };
+}
+
+/**
+ * One row of the decision log. A reviewer receives full entries; every other
+ * identity receives reduced ones (`redacted`), which carry no names, case files,
+ * authorizations or transactions (design §10).
+ */
+export function decisionLogRow(entry) {
+  const redacted = entry?.redacted === true;
+  const automatic = entry?.basis === 'DYNAMIC_AUTHORIZATION';
+  const decidedBy = automatic
+    ? (entry.authorizationId ? `dynamic authorization ${entry.authorizationId}` : 'a dynamic authorization')
+    : (entry?.auditor?.username || (entry?.decision ? 'an auditor' : null));
+  return {
+    redacted,
+    when: entry?.decidedAtUtc ?? null,
+    requester: entry?.requester?.username ?? null,
+    organization: entry?.requester?.organization ?? null,
+    recordId: entry?.recordId ?? null,
+    caseId: entry?.caseId ?? null,
+    operation: [entry?.action, entry?.purpose].filter(Boolean).join(' · ') || null,
+    outcome: entry?.outcome ?? null,
+    decidedBy,
+    decision: entry?.decision ?? null,
+    llmRecommendation: entry?.llmRecommendation ?? null,
+    llmAgreement: entry?.llmAgreement ?? null,
+    requestId: entry?.requestId ?? null,
+    transaction: entry?.decisionTxId || entry?.outcomeTxId || null,
+  };
+}
+
 /**
  * Whether this auditor decision will create a reusable dynamic authorization.
  * Exactly one combination does: the model recommended DENY and the auditor

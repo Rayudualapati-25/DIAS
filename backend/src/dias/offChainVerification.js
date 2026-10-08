@@ -63,14 +63,19 @@ function verifyOffChainObjects({ trail, entry }) {
 }
 
 /**
- * The request trail a reviewer receives: the ledger's trail, the off-chain review
- * clearly marked as such, and the verification of each off-chain object. Any
- * other viewer receives the ledger's trail unchanged.
+ * The request trail a reviewer receives: the ledger's trail and the verification
+ * of each off-chain object. The off-chain text itself — the justification, the
+ * recommendation and the auditor's note, clearly marked as off-chain — is added
+ * only for an audit-organisation district head (`auditor`, design §10). Any
+ * other viewer receives the ledger's trail unchanged, and so does a reviewer who
+ * made the request themselves: for their own request they are the requester.
  */
-function reviewerTrail({ trail, entry }) {
-  if (trail.viewer !== 'reviewer') return trail;
+function reviewerTrail({ trail, entry, auditor = false }) {
+  if (trail.viewer !== 'reviewer' || trail.isRequester === true) return trail;
+  const verified = { ...trail, offChainVerification: verifyOffChainObjects({ trail, entry }) };
+  if (!auditor) return verified;
   return {
-    ...trail,
+    ...verified,
     offChainReview: entry ? {
       storage: 'backend off-chain review store (not on the ledger)',
       justification: entry.justification,
@@ -78,7 +83,6 @@ function reviewerTrail({ trail, entry }) {
       recommendation: entry.recommendation,
       auditorNote: entry.auditorNote,
     } : null,
-    offChainVerification: verifyOffChainObjects({ trail, entry }),
   };
 }
 

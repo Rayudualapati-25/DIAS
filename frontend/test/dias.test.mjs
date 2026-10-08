@@ -367,3 +367,96 @@ test('lists each off-chain object with its check against the ledger digest', () 
   assert.deepEqual(offChainVerificationRows(null), []);
   assert.match(offChainVerificationRows({ note: { status: 'not-committed' } })[0].label, /no digest/);
 });
+
+// ---------------------------------------------------------------------------
+// Step 13: what the officer who made a request is shown about its decision, and
+// the decision log for a caller who only receives the reduced entries.
+// ---------------------------------------------------------------------------
+
+const { requesterDecisionView, decisionLogRow } = await import('../js/shared/dias.js');
+
+const decisionBlock = (overrides = {}) => ({
+  decision: 'FORCE_DENY', llmRecommendation: 'DENY', llmAgreement: 'AGREED',
+  auditor: { username: 'sp.north', role: 'sp' }, decidedAtUtc: '2026-10-08T09:00:00.000Z', ...overrides,
+});
+
+test('shows a denied requester the auditor decision and the LLM explanation', () => {
+  const view = requesterDecisionView({
+    decision: decisionBlock(), explanationVisible: true, available: true,
+    reason: 'The officer is not assigned to the case.', reasonCode: 'NOT_ASSIGNED',
+    policyRefs: ['GP-ASSIGN:C1@v1'], missingEvidence: ['case assignment'], reviewFlags: [],
+  });
+  assert.equal(view.decided, true);
+  assert.deepEqual(view.rows, [
+    ['Auditor decision', 'FORCE DENY by sp.north'],
+    ['LLM recommendation', 'DENY'],
+    ['Decision against the LLM', 'agreed with the LLM'],
+  ]);
+  assert.deepEqual(view.explanation, {
+    available: true, reason: 'The officer is not assigned to the case.', reasonCode: 'NOT_ASSIGNED',
+    policyRefs: ['GP-ASSIGN:C1@v1'], missingEvidence: ['case assignment'], reviewFlags: [],
+  });
+});
+
+test('tells a denied requester when there was no LLM recommendation to explain', () => {
+  const view = requesterDecisionView({
+    decision: decisionBlock({ llmRecommendation: 'UNAVAILABLE', llmAgreement: 'NO_RECOMMENDATION' }),
+    explanationVisible: true, available: false, unavailable: { generationStatus: 'UNAVAILABLE', errorCode: 'timeout' },
+  });
+  assert.deepEqual(view.rows[1], ['LLM recommendation', 'No recommendation was available']);
+  assert.deepEqual(view.explanation, { available: false, cause: 'no-recommendation' });
+});
+
+test('tells a denied requester when the explanation of a real recommendation is no longer stored', () => {
+  const view = requesterDecisionView({
+    decision: decisionBlock(), explanationVisible: true, available: false,
+    unavailable: { generationStatus: 'NOT_GENERATED', errorCode: 'no_review_stored' },
+  });
+  // The ledger says the LLM recommended DENY; only its explanation is missing.
+  assert.deepEqual(view.rows[1], ['LLM recommendation', 'DENY']);
+  assert.deepEqual(view.explanation, { available: false, cause: 'explanation-missing' });
+});
+
+test('shows an allowed requester the decision and the recommendation, without an explanation', () => {
+  const view = requesterDecisionView({
+    decision: decisionBlock({ decision: 'FORCE_ALLOW', llmRecommendation: 'DENY', llmAgreement: 'NOT_AGREED' }),
+    explanationVisible: false, withheld: 'allowed', recommendation: 'DENY', reason: null,
+  });
+  assert.deepEqual(view.rows, [
+    ['Auditor decision', 'FORCE ALLOW by sp.north'],
+    ['LLM recommendation', 'DENY'],
+    ['Decision against the LLM', 'did not agree with the LLM'],
+  ]);
+  assert.equal(view.explanation, null);
+});
+
+test('shows a requester nothing from the LLM before a decision or without one', () => {
+  for (const detail of [null, undefined, { decision: null, withheld: 'awaiting-decision' }, { decision: null, withheld: 'no-auditor-decision' }]) {
+    assert.deepEqual(requesterDecisionView(detail), { decided: false, rows: [], explanation: null });
+  }
+});
+
+test('lays out a reduced decision-log entry without the identifiers it does not carry', () => {
+  const reduced = decisionLogRow({
+    redacted: true, outcome: 'DENIED', basis: 'AUDITOR_DECISION', decision: 'FORCE_DENY',
+    llmRecommendation: 'DENY', llmAgreement: 'AGREED', generationStatus: 'OK', action: 'view',
+    purpose: 'investigation', requester: { organization: 'police' }, decidedAtUtc: '2026-10-08T09:00:00.000Z',
+  });
+  assert.deepEqual(reduced, {
+    redacted: true, when: '2026-10-08T09:00:00.000Z', requester: null, organization: 'police', recordId: null,
+    caseId: null, operation: 'view · investigation', outcome: 'DENIED', decidedBy: 'an auditor',
+    decision: 'FORCE_DENY', llmRecommendation: 'DENY', llmAgreement: 'AGREED', requestId: null, transaction: null,
+  });
+  const full = decisionLogRow({
+    requestId: 'REQ-1', recordId: 'REC-1', caseId: 'CASE-1', action: 'view', purpose: 'investigation',
+    requester: { username: 'insp.sharma', organization: 'police', role: 'inspector' }, outcome: 'GRANTED',
+    basis: 'DYNAMIC_AUTHORIZATION', auditor: null, decision: null, llmRecommendation: null, llmAgreement: null,
+    authorizationId: 'AUTH-1', decidedAtUtc: '2026-10-08T10:00:00.000Z', outcomeTxId: 'tx-9', decisionTxId: null,
+  });
+  assert.equal(full.redacted, false);
+  assert.equal(full.requester, 'insp.sharma');
+  assert.equal(full.decidedBy, 'dynamic authorization AUTH-1');
+  assert.equal(full.transaction, 'tx-9');
+  assert.equal(decisionLogRow({ redacted: true, basis: 'DYNAMIC_AUTHORIZATION', requester: {} }).decidedBy,
+    'a dynamic authorization');
+});
