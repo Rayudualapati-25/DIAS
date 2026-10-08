@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * The recommendation service's key on the ledger (design §6.1): generate an
+ * The backend's recommendation signing key on the ledger (design §6.1): generate an
  * Ed25519 key, and register its public key through an AuditMSP district head.
  * Registration is safe to repeat; a revoked key is never registered again — a
  * rotation generates a new key.

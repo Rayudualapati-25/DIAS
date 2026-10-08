@@ -195,7 +195,7 @@ seed-records:
 seed-policy:
 	CHANNEL=$(DIAS_CHANNEL) CHAINCODE=$(DIAS_CC_NAME) node scripts/dias/register-policy.js
 
-# Step 4 (v3): the recommendation service's signing key. Generated once (never
+# Step 4 (v3): the backend's recommendation signing key. Generated once (never
 # committed) and its public key registered, so its commitments verify on-chain.
 seed-recommender:
 	@test -f backend/data/dias-recommender-signing-key.pem || node scripts/dias/recommender-key.js

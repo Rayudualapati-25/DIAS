@@ -190,6 +190,9 @@ export const api = {
     // The public decision log: every settled request and what was decided for it.
     decisionLog: (limit = 50) => request('GET', `/access/decision-log${query({ limit })}`),
     auditorPending: () => request('GET', '/access/auditor/pending'),
+    // Whether these requests' LLM recommendations are ready yet. Reads no case data.
+    auditorPendingStatus: (requestIds) =>
+      request('GET', `/access/auditor/pending/status${query({ ids: requestIds.join(',') })}`),
     auditorReview: (requestId) => request('GET', `/access/auditor/${requestId}`),
     // FORCE_ALLOW / FORCE_DENY. `reason` is mandatory whenever the auditor does not
     // agree with the LLM recommendation or none exists; the backend enforces it and

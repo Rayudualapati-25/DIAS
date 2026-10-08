@@ -229,6 +229,51 @@ describe('DIAS access routes', () => {
     });
   });
 
+  describe('recommendation status for the auditor screen', () => {
+    it('says which requests still wait for their recommendation, from the off-chain store alone', () => {
+      storedReview('REQ-30');
+      storedReview('REQ-31', { recommendationState: 'signed' });
+      storedReview('REQ-32', { recommendationState: 'committed' });
+      storedReview('REQ-33', { recommendationState: 'failed' });
+      expect(accessRouter.preparationStatus(['REQ-30', 'REQ-31', 'REQ-32', 'REQ-33', 'REQ-404'], store))
+        .to.deep.equal([
+          { requestId: 'REQ-30', preparing: true },
+          { requestId: 'REQ-31', preparing: true },
+          { requestId: 'REQ-32', preparing: false },
+          { requestId: 'REQ-33', preparing: false },
+          { requestId: 'REQ-404', preparing: false },
+        ]);
+    });
+
+    it('answers an audit-organisation district head, and nobody else', () => {
+      storedReview('REQ-40');
+      const head = { ...auditor, role: accessRouter.AUDITOR_ROLES[0] };
+      const ask = (user, ids = 'REQ-40') => accessRouter.recommendationStatus({ user, query: { ids }, store });
+      expect(ask(head)).to.deep.equal({ status: 200, data: [{ requestId: 'REQ-40', preparing: true }] });
+      // District-head role names exist in every organisation; only the audit one reviews.
+      expect(ask({ ...head, org: 'police' }))
+        .to.deep.equal({ status: 403, error: 'only an audit-organisation district head may ask this' });
+      expect(ask({ ...head, role: 'inspector' }).status).to.equal(403);
+      expect(ask(undefined).status).to.equal(403);
+      expect(ask(head, '../escape')).to.deep.equal({
+        status: 400, error: 'ids must be 1 to 50 request ids separated by commas',
+      });
+      expect(accessRouter.recommendationStatus({ user: head, query: undefined, store }).status).to.equal(400);
+    });
+
+    it('accepts 1 to 50 distinct safe request ids and refuses anything else', () => {
+      expect(accessRouter.parseStatusIds('REQ-1,REQ-2,REQ-1')).to.deep.equal(['REQ-1', 'REQ-2']);
+      expect(accessRouter.parseStatusIds(Array.from({ length: 50 }, (_, i) => `REQ-${i}`).join(',')))
+        .to.have.length(50);
+      for (const refused of [
+        undefined, '', ',', 'REQ-1,', '../escape', 'REQ 1', ['REQ-1', 'REQ-2'],
+        Array.from({ length: 51 }, (_, i) => `REQ-${i}`).join(','),
+      ]) {
+        expect(accessRouter.parseStatusIds(refused), JSON.stringify(refused)).to.equal(null);
+      }
+    });
+  });
+
   describe('auditor review view', () => {
     it('joins the request, its commitment and the off-chain material, with the integrity verdict', () => {
       const pair = commitmentPair('REQ-4', 'DENY');

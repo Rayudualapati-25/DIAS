@@ -2,10 +2,11 @@
  * DIAS auditor console.
  *
  * Every request that no active dynamic authorization settled arrives here. The
- * recommendation service produces an advisory recommendation and its signed
+ * backend asks the LLM at once for an advisory recommendation and its signed
  * commitment κ is written to the ledger before review; this screen shows the
  * recommendation — or that it is still being prepared, or that none could be
- * produced — and recomputes its digest against κ in the browser. The AuditMSP
+ * produced — and recomputes its digest against κ in the browser. While one is
+ * being prepared the screen checks by itself and shows it when ready. The AuditMSP
  * reviewer sees all verified facts, the untrusted justification as submitted,
  * and the model's answer clearly marked as advisory, and is the only actor who
  * can decide. The ledger records the decision and its agreement with κ; the
@@ -28,8 +29,10 @@ import {
   reviewSummary, authorizationView, agreementLabel, decisionAvailability, llmAgreement,
   willCreateAuthorization, requiresOverrideReason, authorizationOutcomeNote,
   recommendationIntegrity, committedRecommendation, justificationCommitmentView, decisionFailureView,
+  isRecommendationPreparing,
 } from '../shared/dias.js';
 import { auditorRequestFromSearch } from '../shared/auditor-handoff.js';
+import { createRecommendationWatch, preparingRequestIds } from '../shared/recommendation-watch.js';
 
 const show = (input) => (input === undefined || input === null || input === '' ? '—' : String(input));
 
@@ -138,8 +141,9 @@ function recommendationCard(item, { onRefresh }) {
       el('div', { class: 'llm-verdict warn' },
         el('div', { class: 'llm-verdict-label' }, 'Model recommendation'),
         el('div', { class: 'llm-verdict-value' }, 'Being prepared'),
-        hint('The backend is asking the LLM about this request. Refresh in a moment; '
-          + 'you can decide once the recommendation, or its failure, is ready.')),
+        hint('The backend is asking the LLM about this request. This screen checks every few '
+          + 'seconds and shows the recommendation as soon as it is ready; you can decide once '
+          + 'it, or its failure, is ready.')),
       el('div', { class: 'actions' },
         button('Refresh recommendation', { kind: 'ghost', small: true, onclick: onRefresh })));
   }
@@ -170,6 +174,18 @@ function recommendationCard(item, { onRefresh }) {
     ]));
 }
 
+/** What the auditor has typed so far and where the caret is, to carry it over a refresh. */
+function draftOf(reason) {
+  return {
+    text: reason.value,
+    focused: document.activeElement === reason,
+    start: reason.selectionStart,
+    end: reason.selectionEnd,
+  };
+}
+
+const WATCH_STOPPED_NOTICE = 'Automatic checking has stopped. Press Refresh to check again.';
+
 export default {
   id: 'auditor-review',
   title: 'Auditor review',
@@ -184,8 +200,47 @@ export default {
     dialog.append(dialogBody);
     const authorizationDetail = slot();
     let queueRegion;
+    let layout;
+    // What the screen is waiting for: the queue's unfinished recommendations, and
+    // the open review's when it is one of them.
+    let waitingInQueue = [];
+    let openedReview = null;
+    // Counts every opening and refresh of a review, so that an answer which arrives
+    // after a newer one, or after the dialog was closed, is dropped.
+    let reviewSequence = 0;
+    // Shown in the queue card and in an open review when automatic checking gave up.
+    const queueNotice = slot();
+    const reviewNotice = slot();
+    const setWatchNotice = (text) => [queueNotice, reviewNotice]
+      .forEach((node) => replace(node, text ? hint(text) : null));
 
     const closeDialog = () => { if (dialog.open) dialog.close(); };
+
+    const watch = createRecommendationWatch({
+      check: (requestIds) => api.access.auditorPendingStatus(requestIds),
+      isActive: () => Boolean(layout && layout.isConnected),
+      onReady: (readyIds) => {
+        if (readyIds.some((requestId) => waitingInQueue.includes(requestId))) {
+          queueRegion.reload({ quiet: true });
+        }
+        if (dialog.open && openedReview && readyIds.includes(openedReview.requestId)) {
+          showReview(openedReview.requestId, { automatic: true });
+        }
+      },
+      onStopped: () => setWatchNotice(WATCH_STOPPED_NOTICE),
+    });
+    const syncWatch = () => {
+      setWatchNotice(null);
+      watch.watch([
+        ...waitingInQueue,
+        ...(dialog.open && openedReview && openedReview.preparing ? [openedReview.requestId] : []),
+      ]);
+    };
+    dialog.addEventListener('close', () => {
+      openedReview = null;
+      reviewSequence += 1;
+      syncWatch();
+    });
 
     const authorizationsRegion = asyncRegion({
       load: () => api.access.dynamicAuthorizations('all'),
@@ -248,9 +303,21 @@ export default {
       },
     });
 
-    const showReview = async (requestId) => {
+    /**
+     * Open or refresh the review of one request. `keepDraft` carries over what the
+     * auditor typed when the dialog already shows this request. `automatic` marks a
+     * refresh the screen started itself: it never reopens a dialog the auditor
+     * closed and never replaces a review the auditor has since switched to.
+     */
+    const showReview = async (requestId, { keepDraft = false, automatic = false } = {}) => {
+      reviewSequence += 1;
+      const mine = reviewSequence;
       const review = await attempt(() => api.access.auditorReview(requestId));
-      if (!review) return;
+      if (!review || mine !== reviewSequence) return;
+      const showingThis = dialog.open && openedReview !== null && openedReview.requestId === requestId;
+      if (automatic && !showingThis) return;
+      // Read after the answer arrived, so nothing typed while waiting is lost.
+      const draft = (keepDraft || automatic) && showingThis ? draftOf(openedReview.reason) : null;
       const item = reviewSummary(review);
       const availability = decisionAvailability(review, user.username);
       // Consequences follow the recommendation committed on the ledger (κ).
@@ -261,6 +328,7 @@ export default {
         placeholder: 'Reason for your decision',
         'aria-label': 'Auditor reason',
       });
+      if (draft) reason.value = draft.text;
       const consequence = slot({ class: 'auditor-consequence' });
       const problem = slot({ class: 'auditor-problem', role: 'alert' });
 
@@ -295,7 +363,7 @@ export default {
             availability.reason === 'own-request'
               ? hint('Sign in to this window as another district head of the record\'s district '
                 + '— for example dj.north, cfo.north or dp.north — and open the request again.')
-              : hint('Press "Refresh recommendation" above once it is ready.')));
+              : hint('It appears here by itself when it is ready; the button above checks now.')));
           return;
         }
         if (requiresOverrideReason(committed, decision)
@@ -319,6 +387,7 @@ export default {
           return;
         }
         toast(decision === 'FORCE_ALLOW' ? 'Request force-allowed' : 'Request force-denied', 'success');
+        openedReview = null;
         const outcome = result.accessOutcome || {};
         replace(dialogBody,
           el('div', { class: 'auditor-dialog-head' },
@@ -357,8 +426,17 @@ export default {
           availability.reason === 'own-request'
             ? hint('Sign in to this window as another district head of the record\'s district '
               + '— dj.north, cfo.north or dp.north — and open the request again.')
+            : null,
+          // The recommendation card has its own button while nothing is shown yet.
+          availability.reason === 'recommendation-pending' && !item.recommendation.pending
+            ? el('div', { class: 'actions' }, button('Check again', {
+              kind: 'ghost', small: true, onclick: () => showReview(requestId, { keepDraft: true }),
+            }))
             : null),
-        recommendationCard(item, { onRefresh: () => showReview(requestId) }),
+        recommendationCard(item, {
+          onRefresh: () => showReview(requestId, { keepDraft: true }),
+        }),
+        reviewNotice,
         integrityCallout(review),
         subheading('Verified requester facts'),
         verifiedFactsTable(item),
@@ -381,11 +459,19 @@ export default {
         el('div', { class: 'actions auditor-actions' }, ...decisionButtons(finalize, availability)));
 
       if (!dialog.open) dialog.showModal();
+      if (draft && draft.focused) {
+        reason.focus();
+        reason.setSelectionRange(draft.start, draft.end);
+      }
+      openedReview = { requestId, reason, preparing: isRecommendationPreparing(review) };
+      syncWatch();
     };
 
     queueRegion = asyncRegion({
       load: () => api.access.auditorPending(),
       render: (pending) => {
+        waitingInQueue = preparingRequestIds(pending);
+        syncWatch();
         if (pending.length === 0) return hint('No requests are waiting for an auditor.');
         return el('div', {},
           hint(count(pending.length, 'request'), ' waiting for a final decision.'),
@@ -406,13 +492,15 @@ export default {
       },
     });
 
-    const layout = grid(
+    layout = grid(
       card('Pending auditor decisions',
         'Each request shows the LLM recommendation the backend prepared, or that it is '
-        + 'still being prepared or could not be. Only an AuditMSP district authority can '
+        + 'still being prepared or could not be. A recommendation that is being prepared '
+        + 'appears here by itself when it is ready. Only an AuditMSP district authority can '
         + 'make the final decision.',
         el('div', { class: 'actions' },
           button('Refresh', { kind: 'ghost', onclick: () => queueRegion.reload() })),
+        queueNotice,
         queueRegion),
       card('Dynamic authorizations',
         'Latest committed Fabric state. An active exact-scope authorization grants '

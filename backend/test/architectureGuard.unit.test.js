@@ -99,28 +99,31 @@ describe('DIAS backend architecture guard', () => {
     const access = graphs.find(({ entry }) => entry === 'backend/src/routes/access.js').files;
     for (const required of ['backend/src/dias/recommender.js', 'backend/src/dias/recommendationPrompt.js',
       'backend/src/dias/recommendationWorker.js', 'backend/src/dias/reviewStore.js',
-      'backend/src/dias/agreement.js']) {
+      'backend/src/dias/agreement.js', 'backend/src/dias/signedRecommendation.js']) {
       expect(access.has(path.join(REPO_ROOT, required)), `${required} is not reachable`).to.equal(true);
     }
   });
 
   /**
-   * v3 replaces the v2 rule "no recommendation signer at all": the recommendation
-   * service now signs its output so the ledger can verify it (design §6.1). What
-   * must still hold is that it is not an AI organisation: the retired listener and
-   * attestation modules stay gone, and the service has no Fabric identity, so no
-   * path from it reaches the Fabric gateway or the offline oracle.
+   * v3 replaces the v2 rule "no recommendation signer at all": the backend now
+   * signs each recommendation so the ledger can verify it (design §6.1). What must
+   * still hold is that there is no AI organisation and no separate recommendation
+   * service: the retired listener, attestation and service modules stay gone, and
+   * the signing module has no Fabric identity, so no path from it reaches the
+   * Fabric gateway or the offline oracle.
    */
-  it('has no AI-organisation listener, and the recommendation signer has no Fabric identity', () => {
+  it('has no AI-organisation listener and no separate recommendation service; the signer has no Fabric identity', () => {
     for (const retired of ['backend/src/ai/start.js', 'backend/src/dias/recommendationService.js',
-      'backend/src/dias/attestation.js', 'backend/src/routes/explain.js']) {
+      'backend/src/dias/attestation.js', 'backend/src/routes/explain.js',
+      'backend/src/recommender-service', 'backend/src/dias/remoteRecommendationService.js']) {
       expect(fs.existsSync(path.join(REPO_ROOT, retired)), `${retired} still exists`).to.equal(false);
     }
-    const service = requireGraph('backend/src/recommender-service/service.js');
+    const signing = requireGraph('backend/src/dias/signedRecommendation.js');
+    expect(signing.size, 'backend/src/dias/signedRecommendation.js resolved almost nothing').to.be.greaterThan(3);
     for (const forbidden of ['backend/src/fabric/gateway.js', 'policies/reference-oracle/referencePolicyOracle.js']) {
-      expect(service.has(path.join(REPO_ROOT, forbidden)), `the service reaches ${forbidden}`).to.equal(false);
+      expect(signing.has(path.join(REPO_ROOT, forbidden)), `the signing module reaches ${forbidden}`).to.equal(false);
     }
-    expect(service.has(path.join(REPO_ROOT, 'backend/src/dias/recommender.js'))).to.equal(false);
+    expect(signing.has(path.join(REPO_ROOT, 'backend/src/dias/recommender.js'))).to.equal(false);
   });
 
   it('has no SEAL listener left to run', () => {

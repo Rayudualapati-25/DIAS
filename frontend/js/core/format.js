@@ -11,6 +11,16 @@ export function dateTime(iso) {
   return Number.isNaN(date.getTime()) ? String(iso) : date.toLocaleString();
 }
 
+/** 'YYYY-MM-DD HH:MM:SS' in local time, for log lists; an em dash for a missing value. */
+export function timestamp(iso) {
+  if (!iso) return '—';
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return String(iso);
+  const two = (value) => String(value).padStart(2, '0');
+  return `${date.getFullYear()}-${two(date.getMonth() + 1)}-${two(date.getDate())} `
+    + `${two(date.getHours())}:${two(date.getMinutes())}:${two(date.getSeconds())}`;
+}
+
 /** Shorten a hash or transaction id for display. */
 export function shortHash(value, keep = 16) {
   if (!value) return '—';

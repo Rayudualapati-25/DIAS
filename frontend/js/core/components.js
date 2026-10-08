@@ -164,6 +164,71 @@ export function form({ fields = [], submitLabel = 'Submit', onSubmit, extraActio
 }
 
 // ---------------------------------------------------------------------------
+// Tabs and icon buttons
+// ---------------------------------------------------------------------------
+
+/**
+ * A row of tabs over one panel.
+ *   tabs([{ id, label, render }])
+ * A tab's `render()` runs the first time it is opened and its node is kept, so
+ * a tab that is never opened loads nothing and switching back does not reload.
+ */
+export function tabs(items) {
+  const panel = slot({ class: 'tab-panel', role: 'tabpanel' });
+  const rendered = new Map();
+  const buttons = items.map((item) => el('button', {
+    class: 'tab', type: 'button', role: 'tab', 'aria-selected': 'false', onclick: () => open(item),
+  }, item.label));
+
+  function open(item) {
+    buttons.forEach((node, index) => {
+      const active = items[index] === item;
+      node.classList.toggle('active', active);
+      node.setAttribute('aria-selected', String(active));
+    });
+    if (!rendered.has(item.id)) rendered.set(item.id, item.render());
+    replace(panel, rendered.get(item.id));
+  }
+
+  open(items[0]);
+  return el('div', { class: 'tabs' },
+    el('div', { class: 'tab-list', role: 'tablist' }, buttons), panel);
+}
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const ICON_PATHS = Object.freeze({
+  refresh: 'M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5',
+  filter: 'M4 5h16l-6 7.5V19l-4-2v-4.5L4 5z',
+});
+
+function icon(name) {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('class', 'icon');
+  svg.setAttribute('aria-hidden', 'true');
+  const path = document.createElementNS(SVG_NS, 'path');
+  path.setAttribute('d', ICON_PATHS[name]);
+  svg.append(path);
+  return svg;
+}
+
+/**
+ * A square button showing only an icon ('refresh' or 'filter'). `label` says
+ * what it does, as its tooltip and for screen readers. `pip` is a small number
+ * on its corner; `pressed` marks a toggle that is on.
+ */
+export function iconButton(name, { label, onclick, pip = 0, pressed } = {}) {
+  return el('button', {
+    class: 'icon-btn',
+    type: 'button',
+    title: label,
+    'aria-label': label,
+    ...(pressed === undefined ? {} : { 'aria-pressed': String(pressed) }),
+    onclick,
+  }, icon(name), pip > 0 ? el('span', { class: 'pip' }, String(pip)) : null);
+}
+
+// ---------------------------------------------------------------------------
 // Tables
 // ---------------------------------------------------------------------------
 
@@ -211,14 +276,15 @@ export async function attempt(action, successMessage) {
  *     render: (data) => table(...),
  *   });
  *   region.reload();      // call again whenever you want fresh data
+ *   region.reload({ quiet: true });   // the same, without blanking what is shown
  *
  * Returns the node, with `.reload()` attached.
  */
 export function asyncRegion({ load, render, loadingMessage = 'Loading…', immediate = true }) {
   const node = slot({ class: 'region' });
 
-  const reload = async () => {
-    replace(node, hint(loadingMessage));
+  const reload = async ({ quiet = false } = {}) => {
+    if (!quiet) replace(node, hint(loadingMessage));
     try {
       const data = await load();
       replace(node);

@@ -8,9 +8,10 @@
  *      chaincode commits who asked for which record and checks the latest active
  *      dynamic authorization in the same transaction — an exact match grants at
  *      once, with the auditor recorded as skipped;
- *   2. otherwise the recommendation service produces an advisory ALLOW/DENY
- *      recommendation; the object M stays off-chain and its signed commitment κ
- *      (value, specific status, h_M, bindings) is committed before review;
+ *   2. otherwise the backend asks the LLM at once, in its own process, for an
+ *      advisory ALLOW/DENY recommendation; the object M stays off-chain and its
+ *      signed commitment κ (value, specific status, h_M, bindings) is committed
+ *      before review;
  *   3. an auditor issues FORCE_ALLOW or FORCE_DENY, which is the final word. The
  *      backend refuses a decision while M does not match κ, and sends only the
  *      decision, the note digest h_N and any expiry; the chaincode derives the
@@ -29,12 +30,12 @@ const {
 } = require('../util/respond');
 const { requireAuth, requireRole } = require('../middleware/auth');
 const { getDiasRuntime } = require('../dias/runtime');
-const { RECOMMENDATION_STATE } = require('../dias/reviewStore');
+const { isRecommendationPreparing } = require('../dias/reviewStore');
 const { checkRecommendationIntegrity } = require('../dias/recommendationIntegrity');
 const {
   recommendationOf,
 } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
-const { mayReadReasonText, recommendationDetail } = require('../dias/recommendationDetail');
+const { AUDIT_ORG, mayReadReasonText, recommendationDetail } = require('../dias/recommendationDetail');
 const {
   createsAuthorization, llmAgreementFor, requiresAuditorReason,
 } = require('../dias/agreement');
@@ -61,6 +62,8 @@ const CONTRACT = 'AccessContract';
 const AUDITOR_ROLES = [...DISTRICT_HEAD_ROLES];
 
 const ENDORSEMENT_CONVERGENCE_RETRIES = Number(process.env.ENDORSEMENT_CONVERGENCE_RETRIES || 5);
+/** The most requests one auditor-screen status check may ask about. */
+const MAX_STATUS_IDS = 50;
 
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
@@ -134,6 +137,40 @@ function openReview({ request, justification, store, worker, log = console }) {
 }
 
 /**
+ * What the backend does with a request the ledger has just committed. A request
+ * that an active dynamic authorization granted is finished: no LLM and no
+ * auditor. Every other request has its review opened and its LLM recommendation
+ * asked for at once, inside this backend; nothing else has to trigger it.
+ * `runtime` is read only on that second path.
+ */
+function answerCommittedRequest({ request, justification, runtime = getDiasRuntime, log = console }) {
+  if (request.processingPath === 'dynamic-authorization') {
+    return {
+      status: 201,
+      data: {
+        ...request,
+        processingState: 'decided',
+        automatic: true,
+        message: 'An active dynamic authorization matched this exact request. '
+          + 'Access was granted automatically, without auditor review.',
+      },
+    };
+  }
+  const { store, worker } = runtime();
+  const review = openReview({ request, justification, store, worker, log });
+  return {
+    status: 202,
+    data: {
+      ...request,
+      processingState: 'awaiting-auditor',
+      automatic: false,
+      recommendationState: review.recommendationState,
+      message: review.message,
+    },
+  };
+}
+
+/**
  * `action` and `purpose` are canonical request facts: the chaincode validates
  * them against the policy vocabulary and commits them in the verified context.
  * `emergencyDeclared` is the requester's own statement and is committed as a
@@ -192,25 +229,8 @@ router.post('/request', asyncRoute(async (req, res) => {
     processingPath: request.processingPath,
   };
 
-  if (request.processingPath === 'dynamic-authorization') {
-    return ok(res, {
-      ...request,
-      processingState: 'decided',
-      automatic: true,
-      message: 'An active dynamic authorization matched this exact request. '
-        + 'Access was granted automatically, without auditor review.',
-    }, 201);
-  }
-
-  const { store, worker } = getDiasRuntime();
-  const review = openReview({ request, justification, store, worker });
-  return ok(res, {
-    ...request,
-    processingState: 'awaiting-auditor',
-    automatic: false,
-    recommendationState: review.recommendationState,
-    message: review.message,
-  }, 202);
+  const answer = answerCommittedRequest({ request, justification });
+  return ok(res, answer.data, answer.status);
 }));
 
 /** One access request, so a requester can see that it was raised and answered. */
@@ -293,6 +313,50 @@ router.get('/auditor/pending', requireRole(...AUDITOR_ROLES), asyncRoute(async (
   const { store } = getDiasRuntime();
   return ok(res, pending.map(({ request, commitment }) => (
     reviewView(request, commitment, store.read(request.requestId)))));
+}));
+
+/**
+ * The request ids an auditor screen asks about, or null unless the query is 1 to
+ * MAX_STATUS_IDS safe identifiers separated by commas.
+ */
+function parseStatusIds(value) {
+  if (typeof value !== 'string') return null;
+  const ids = [...new Set(value.split(','))];
+  if (ids.length > MAX_STATUS_IDS || !ids.every((id) => SAFE_ID.test(id))) return null;
+  return ids;
+}
+
+/** For each request: is its LLM recommendation still being prepared or committed? */
+function preparationStatus(ids, store) {
+  return ids.map((requestId) => ({
+    requestId, preparing: isRecommendationPreparing(store.read(requestId)),
+  }));
+}
+
+/**
+ * Whether the recommendations an auditor screen is waiting for are ready yet. The
+ * screen asks this every few seconds while it shows "Being prepared", and loads
+ * the queue again once one is ready. It reads only the off-chain review store and
+ * returns no case data: no ledger call, and, as a routine read, no access-log
+ * transaction when it succeeds (design §12).
+ *
+ * No chaincode call stands behind this route, so it checks the organisation
+ * itself: district-head roles exist in every organisation, and only the audit
+ * organisation reviews requests.
+ */
+function recommendationStatus({ user, query, store }) {
+  if (!user || user.org !== AUDIT_ORG || !AUDITOR_ROLES.includes(user.role)) {
+    return { status: 403, error: 'only an audit-organisation district head may ask this' };
+  }
+  const ids = parseStatusIds(query && query.ids);
+  if (!ids) return { status: 400, error: `ids must be 1 to ${MAX_STATUS_IDS} request ids separated by commas` };
+  return { status: 200, data: preparationStatus(ids, store) };
+}
+
+router.get('/auditor/pending/status', requireRole(...AUDITOR_ROLES), asyncRoute(async (req, res) => {
+  const outcome = recommendationStatus({ user: req.user, query: req.query, store: getDiasRuntime().store });
+  if (outcome.error) return fail(res, outcome.error, outcome.status);
+  return ok(res, outcome.data);
 }));
 
 router.get('/auditor/:requestId', requireRole(...AUDITOR_ROLES), asyncRoute(async (req, res) => {
@@ -396,7 +460,7 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   const { decision, validUntilUtc } = parsed.data;
   const reason = normalizeNote(parsed.data.reason);
   const entry = store.read(requestId);
-  if (entry && [RECOMMENDATION_STATE.PENDING, RECOMMENDATION_STATE.SIGNED].includes(entry.recommendationState)) {
+  if (isRecommendationPreparing(entry)) {
     return {
       status: 409,
       error: 'the LLM recommendation for this request is still being prepared or committed; try again shortly',
@@ -530,6 +594,10 @@ module.exports.requestSchema = requestSchema;
 module.exports.parseAccessRequest = parseAccessRequest;
 module.exports.decide = decide;
 module.exports.openReview = openReview;
+module.exports.answerCommittedRequest = answerCommittedRequest;
+module.exports.parseStatusIds = parseStatusIds;
+module.exports.preparationStatus = preparationStatus;
+module.exports.recommendationStatus = recommendationStatus;
 module.exports.reviewView = reviewView;
 module.exports.submitAccessRequest = submitAccessRequest;
 module.exports.isEndorsementConvergenceError = isEndorsementConvergenceError;

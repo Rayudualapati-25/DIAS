@@ -1,12 +1,13 @@
 'use strict';
 
 /**
- * The recommendation service's signing key (design §6.1).
+ * The backend's recommendation signing key (design §6.1).
  *
- * Ed25519, loaded from the service's own environment. The public key and its
+ * Ed25519, loaded from a file on the backend host. The public key and its
  * identifier (SHA-256 of the DER public key) are what a district head registers
- * on the ledger; the private key never leaves the service. When the service runs
- * as its own process (step 12) the backend never holds this key.
+ * on the ledger; the private key never leaves the backend. The backend holds
+ * this key, so a signature names the key that produced a commitment and does not
+ * protect against the backend itself.
  */
 
 const crypto = require('crypto');

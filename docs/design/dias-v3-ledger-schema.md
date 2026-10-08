@@ -1,7 +1,7 @@
 # DIAS v3 — design and ledger schema
 
 - **Status:** frozen for implementation on 2026-10-01 (plan step 2). Changes after this date are listed in the change log at the end.
-- **Scope:** the access-request workflow of `diasrecords` 3.0, the backend that drives it, the recommendation service, and the browser screens that display its results.
+- **Scope:** the access-request workflow of `diasrecords` 3.0, the backend that drives it and asks the LLM, and the browser screens that display its results.
 - **Approval:** the author approved the plan's design defaults and asked for the steps to run without stopping for approval (`experiments/plans/20261001_integrity_v3_plan.md`). Every choice that goes beyond those defaults is marked **[D-nn]** with its reason, so it can be reviewed later.
 - **Target design:** the Methodology section of the paper (§IV, Algorithm 1, Table II). Where the code and the paper disagree, this document says which one changes, and why.
 
@@ -32,13 +32,12 @@
 |---|---|---|
 | Requester | Nothing beyond their signed request | Justification content, emergency claim |
 | LLM | Nothing | Any decision; its output is advisory and checked only for format |
-| Recommendation service | Running the configured model on the inputs it received, and signing what it produced | Correctness of the recommendation |
-| Backend | Holding user keys, the review store key and the Fabric connection (prototype limitation) | Choosing the recommendation, the agreement value, or the active policy |
+| Backend | Holding user keys, the recommendation signing key, the review store key and the Fabric connection; running the configured model on the committed inputs, and signing and committing what it produced (prototype limitation) | Correctness of the recommendation; changing a recommendation after it is committed; choosing the agreement value or the active policy |
 | Auditor (AuditMSP district head) | The binding decision for requests in their district | — |
 | Fabric MSPs, CAs, endorsement policy | Identity and agreement on contract execution | Correctness of the LLM |
 | Record owner | Storing protected content and checking its hash before delivery | — |
 
-The backend remains part of the trusted base, because it holds every demonstration private key: a compromised backend can still sign transactions as any user, including an auditor. v3 removes the backend's ability to *substitute* a recommendation, *choose* the agreement, or *choose* the policy unnoticed. It does not remove its ability to impersonate users. Removing that needs user-held keys, which is outside this revision.
+The backend remains part of the trusted base, because it holds every demonstration private key: a compromised backend can still sign transactions as any user, including an auditor. Since 2026-10-08 the backend also asks the LLM itself and holds the recommendation signing key (author's decision: there is no separate recommendation service). A compromised backend could therefore commit a recommendation the model did not produce. What v3 still removes is the backend's ability to *change* a recommendation after κ is committed, to *choose* the agreement, or to *choose* the policy unnoticed. It does not remove its ability to impersonate users. Removing the remaining trust needs user-held keys and a signing key held outside the backend, which are outside this revision.
 
 ## 3. On-chain and off-chain data
 
@@ -119,9 +118,9 @@ The backend remains part of the trusted base, because it holds every demonstrati
 - **Replay protection:** the request, context, claims, justification, policy and channel are all inside the signature. A signed object therefore cannot be replayed onto another request, policy or network.
 - **Signer registry:** `diasRecommendationSigner/<keyId>`. `keyId` is the SHA-256 of the DER public key, computed by the contract from the registered PEM.
   - `RegisterRecommendationSigner(publicKeyPem, label)` and `RevokeRecommendationSigner(keyId, reason)`: AuditMSP district head with an active profile.
-  - **Rotation:** register the new key, switch the service, then revoke the old key. Commitments signed earlier stay valid evidence of what was committed at the time.
-- **Key custody:** the private key lives only in the recommendation service's environment (`DIAS_RECOMMENDER_SIGNING_KEY`). It is never in Git and never in the backend's environment when the service runs as a separate process.
-  - Embedded mode (service inside the backend process) exists for tests and local development only, and is refused when `NODE_ENV=production`.
+  - **Rotation:** register the new key, switch the backend to it, then revoke the old key. Commitments signed earlier stay valid evidence of what was committed at the time.
+- **Key custody:** the backend holds the private key, in a PEM file outside Git (`DIAS_RECOMMENDER_SIGNING_KEY_FILE`). There is no separate recommendation service (author's decision, 2026-10-08): the backend asks the LLM itself as soon as a request is committed without a reusable authorization, and signs what the model returned.
+  - Consequence: the signature names the key that produced a commitment and binds it to the request, policy and channel. It does not protect against the backend itself.
 - **What a valid signature proves:** the holder of a registered key produced this exact M (by hash), status and binding. **It does not prove:**
   - that the recommendation is correct;
   - that an LLM generated the text;
@@ -243,7 +242,8 @@ The backend remains part of the trusted base, because it holds every demonstrati
 - **Classes** (`DIAS_ACCESS_LOG_MODE=security`, the v3 default):
   - sensitive reads, always logged: protected metadata, document release, evidence, record history, explanations, auditor queue and review, decision log, audit trails, authorization records, record search;
   - state-changing calls with their own transaction: logged only when refused or failed, because the successful transaction is already the record;
-  - routine reads (`auth.whoami`, own document list): not logged.
+  - routine reads (`auth.whoami`, own document list, the auditor screen's status check): not logged.
+- **Auditor screen status check:** `GET /access/auditor/pending/status?ids=…` tells an open auditor screen whether the recommendations it waits for are ready. It reads only the off-chain review store and returns request ids with a yes or no, never case data. It answers only a district head of the audit organisation, and takes at most 50 request ids per call. The screen asks every 3 seconds, for at most 10 minutes, and only while it shows a recommendation as being prepared; a refused check ends the asking. The queue itself stays a sensitive, always-logged read; it is loaded again only when a recommendation became ready.
 - **Comparison mode:** `DIAS_ACCESS_LOG_MODE=all` reproduces v2 (one write per authenticated call).
 - **Readers:** the reviewer set (`QueryAccessEvents`).
 - **Effect on measurements:** logging adds ledger writes outside the measured request latency. Throughput and resource figures from v2 runs are therefore not comparable with v3 runs.
@@ -300,3 +300,9 @@ The backend remains part of the trusted base, because it holds every demonstrati
   - when a request has no review entry, a note-only entry is created so the note is still durable before its decision;
   - a decision whose outcome is unknown returns HTTP 503 and keeps its note staged; a decision on a request already decided returns 409 and settles the staged note;
   - start-up reconciliation reads with the backend's own identity (`AUTH_ORG`/`AUTH_USER`, an AuditMSP district head by default), the same identity as the expiry sweeper.
+- 2026-10-08 (step 12, changed by the author) — the recommendation runs inside the backend; the separate recommendation service process is dropped:
+  - the backend asks the LLM as soon as a request is committed without a reusable authorization, signs the result with the recommendation key it holds, and commits κ. A request granted by a reusable authorization never reaches the LLM;
+  - `backend/src/recommender-service/` is removed and its code is `backend/src/dias/signedRecommendation.js`. The contract, the signer registry and κ are unchanged, so nothing is redeployed;
+  - consequence for the trust model (§2, §6.1): the signature no longer protects against a compromised backend. A recommendation still cannot be changed after κ is committed, and the contract still derives the agreement;
+  - the auditor screen checks by itself whether a recommendation it waits for is ready (§12). The check is a routine read and writes nothing to the ledger;
+  - the "Access log" screen lists, for every settled request, who requested what, what the LLM recommended, and what the auditor decided together with that recommendation. It reads the existing decision records; what is written to the ledger is unchanged.

@@ -212,6 +212,20 @@ describe('access-log policy (plan step 6)', () => {
     expect(shouldLog({ mode, action: 'auth.whoami', status: 500 })).to.equal(true);
   });
 
+  // The auditor screen asks this every few seconds while a recommendation is being
+  // prepared. It reads no case data, so a successful call must not become a ledger
+  // transaction; a refused one still does.
+  it('treats the auditor screen\'s status check as a routine read that writes nothing when it succeeds', () => {
+    const entry = classify(snapshot('GET', '/access/auditor/pending/status', { query: { ids: 'REQ-1,REQ-2' } }));
+    expect(entry).to.deep.equal({ action: 'dias.auditor.queue.status', target: null });
+    expect(logClassOf('dias.auditor.queue.status')).to.equal(LOG_CLASS.ROUTINE);
+    expect(shouldLog({ mode: 'security', action: 'dias.auditor.queue.status', status: 200 })).to.equal(false);
+    expect(shouldLog({ mode: 'security', action: 'dias.auditor.queue.status', status: 403 })).to.equal(true);
+    // The queue itself stays a sensitive, always-logged read.
+    expect(classify(snapshot('GET', '/access/auditor/pending')).action).to.equal('dias.auditor.queue.read');
+    expect(logClassOf('dias.auditor.queue.read')).to.equal(LOG_CLASS.SENSITIVE);
+  });
+
   it('in all mode logs every call, as v2 did', () => {
     for (const action of ['access.request', 'auth.whoami', 'document.release', 'api.unknown']) {
       expect(shouldLog({ mode: 'all', action, status: 200 }), action).to.equal(true);
@@ -240,7 +254,7 @@ describe('access-log policy coverage', () => {
     ['POST', '/access/request/REQ-1/cancel'],
     ['GET', '/access/decision-log'], ['GET', '/access/request/REQ-1/recommendation'],
     ['GET', '/access/record/R-1'], ['GET', '/access/decision/R-1/D-1'],
-    ['GET', '/access/auditor/pending'], ['GET', '/access/auditor/REQ-1'],
+    ['GET', '/access/auditor/pending'], ['GET', '/access/auditor/pending/status'], ['GET', '/access/auditor/REQ-1'],
     ['POST', '/access/auditor/REQ-1/decision'], ['GET', '/access/dynamic-authorizations'],
     ['GET', '/access/dynamic-authorizations/AUTH-1'], ['GET', '/access/dynamic-authorizations/AUTH-1/history'],
     ['POST', '/access/dynamic-authorizations/AUTH-1/revoke'],

@@ -4,7 +4,7 @@
  * Recommendations, committed before review (design §6, §11).
  *
  * Once a request is committed and waits for the auditor, the worker asks the
- * recommendation service for an advisory recommendation. The service returns
+ * backend's signed recommender for an advisory recommendation. That returns
  * the recommendation object M and a signed commitment κ. The worker stores both
  * (state `signed`) BEFORE submitting κ, so a crash or a lost response never loses
  * what was signed: a `signed` entry is resubmitted unchanged, which the contract
@@ -13,11 +13,11 @@
  *
  * States: pending → signed → committed, or commit-rejected when the ledger
  * refuses κ for a reason a retry cannot fix (expired, stale policy, mismatch),
- * or failed when the service itself could not answer. Requests are answered one
+ * or failed when the recommender itself could not answer. Requests are answered one
  * at a time so the model server is never flooded.
  */
 
-const { RECOMMENDATION_STATE } = require('./reviewStore');
+const { RECOMMENDATION_STATE, isRecommendationPreparing } = require('./reviewStore');
 const { sameCommitment } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
 const trace = require('../util/trace');
 
@@ -50,7 +50,7 @@ function chaincodeMessage(error) {
   return String((error && error.message) || error);
 }
 
-function serviceInput(requestId, entry) {
+function recommenderInput(requestId, entry) {
   return {
     requestId,
     verifiedRequest: entry.verifiedRequest,
@@ -64,16 +64,16 @@ function serviceInput(requestId, entry) {
   };
 }
 
-function createRecommendationWorker({ store, service, ledger, relay, log = console }) {
-  if (!store || !service || !ledger || !relay) {
-    throw new Error('recommendation worker requires a store, a recommendation service, a ledger and a relay identity');
+function createRecommendationWorker({ store, signedRecommender, ledger, relay, log = console }) {
+  if (!store || !signedRecommender || !ledger || !relay) {
+    throw new Error('recommendation worker requires a store, a signed recommender, a ledger and a relay identity');
   }
   let queue = Promise.resolve();
   const queued = new Set();
 
   async function produce(requestId, entry) {
     trace.emit('recommendation.started', { requestId });
-    const produced = await service.recommend(serviceInput(requestId, entry));
+    const produced = await signedRecommender.recommend(recommenderInput(requestId, entry));
     const record = recommendationRecord(produced.result);
     const latencyMs = record.provenance.latencyMs || null;
     trace.emit('recommendation.ready', {
@@ -137,7 +137,7 @@ function createRecommendationWorker({ store, service, ledger, relay, log = conso
     if (entry.recommendationState === RECOMMENDATION_STATE.SIGNED) await commit(requestId, entry);
   }
 
-  /** The service could not answer at all: the auditor decides without a recommendation. */
+  /** The recommender could not answer at all: the auditor decides without a recommendation. */
   function recordFailure(requestId, error) {
     log.error(`[dias] ${requestId} recommendation failed: ${error.message}`);
     try {
@@ -170,9 +170,7 @@ function createRecommendationWorker({ store, service, ledger, relay, log = conso
 
   /** Answer every entry a previous process left pending, and resubmit every signed one. */
   function resumePending() {
-    const unfinished = store.list().filter((entry) => [
-      RECOMMENDATION_STATE.PENDING, RECOMMENDATION_STATE.SIGNED,
-    ].includes(entry.recommendationState));
+    const unfinished = store.list().filter(isRecommendationPreparing);
     for (const entry of unfinished) enqueue(entry.requestId);
     return unfinished.length;
   }

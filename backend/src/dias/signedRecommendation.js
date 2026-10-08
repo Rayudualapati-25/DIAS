@@ -1,19 +1,23 @@
 'use strict';
 
 /**
- * The recommendation service (design §2, §6.1).
+ * The signed recommender: the part of the backend that asks the model and signs
+ * what it got (design §2, §6.1). It runs inside the backend process; there is no
+ * separate recommendation service (author's decision, 2026-10-08).
  *
  * It receives a committed request's verified context, claims and justification
  * together with the digests and policy the ledger recorded for them. Before
  * judging anything it recomputes those digests and checks that the policy it
  * holds is the request's policy. Then it runs the recommender, builds the
- * recommendation object M, and signs the commitment κ with its own key.
+ * recommendation object M, and signs the commitment κ with the backend's
+ * recommendation key.
  *
  * When the inputs do not match their digests, or the policy differs, it does not
  * judge: it signs a specific failure status instead, so the ledger records that
  * no recommendation could be produced and why. A signature therefore attests
- * "this service produced this exact M for this request under this policy"; it
- * does not attest that the recommendation is correct.
+ * "the holder of this key produced this exact M for this request under this
+ * policy"; it does not attest that the recommendation is correct. Because the key
+ * is held by the backend, it does not protect against the backend itself.
  *
  * This module has no Fabric identity and never talks to the ledger.
  */
@@ -24,7 +28,7 @@ const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/
 const { provenancePayload } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');
 const {
   buildRecommendationObject, modelVersionOf, recommendationHashOf,
-} = require('../dias/recommendationObject');
+} = require('./recommendationObject');
 
 /** Which input does not match its committed digest, or null when all match. */
 function digestMismatch(input) {
@@ -44,9 +48,9 @@ function digestMismatch(input) {
   return null;
 }
 
-function createRecommendationService({ recommender, signer, channel, policy, model }) {
+function createSignedRecommender({ recommender, signer, channel, policy, model }) {
   if (!recommender || !signer || !channel || !policy || !model) {
-    throw new Error('recommendation service requires a recommender, a signer, a channel, a policy and a model');
+    throw new Error('signed recommender requires a recommender, a signer, a channel, a policy and a model');
   }
 
   async function judge(input) {
@@ -65,7 +69,7 @@ function createRecommendationService({ recommender, signer, channel, policy, mod
     }
     if (input.policyVersion !== policy.policyVersion || input.policyHash !== policy.policyHash) {
       return failure('POLICY_CONTEXT_UNAVAILABLE', 'policy_version_mismatch',
-        `the request is bound to ${input.policyVersion}; this service holds ${policy.policyVersion}`);
+        `the request is bound to ${input.policyVersion}; the backend holds ${policy.policyVersion}`);
     }
     return recommender.recommend({
       requestId: input.requestId,
@@ -108,4 +112,4 @@ function createRecommendationService({ recommender, signer, channel, policy, mod
   return Object.freeze({ recommend, keyId: signer.keyId, publicKeyPem: signer.publicKeyPem });
 }
 
-module.exports = { createRecommendationService };
+module.exports = { createSignedRecommender };

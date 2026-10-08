@@ -173,6 +173,10 @@ function describe(snapshot) {
   if (path === '/access/auditor/pending') {
     return { action: 'dias.auditor.queue.read', target: null };
   }
+  // The auditor screen's automatic "is it ready yet" check: no case data is read.
+  if (path === '/access/auditor/pending/status') {
+    return { action: 'dias.auditor.queue.status', target: null };
+  }
   const auditorDecisionMatch = path.match(/^\/access\/auditor\/([^/]+)\/decision$/);
   if (auditorDecisionMatch) {
     return {
@@ -316,6 +320,7 @@ const ACTION_CLASS = Object.freeze({
   'dias.decision-log.read': SENSITIVE,
   'dias.recommendation.read': SENSITIVE,
   'dias.auditor.queue.read': SENSITIVE,
+  'dias.auditor.queue.status': ROUTINE,
   'dias.auditor.review.read': SENSITIVE,
   'dias.auditor.decision': LEDGER_WRITE,
   'dias.authorization.list': SENSITIVE,

@@ -49,7 +49,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | M18 | Lifecycle events for recommendation commitment and agreement derivation | PART | 10 | done (step 10; `diasAccessWorkflow.test.js`, `diasAuditTrail.test.js`) |
 | M19 | Off-chain objects verifiable against on-chain hashes | MISS | 9–11 | done (steps 9–11; `offChainVerification.unit.test.js`: verified, mismatch, missing, not-committed); tamper experiment in step 17 |
 | M20 | Release re-checks outcome, credential, authorization and `v_P` | PART | 4, 8 | done (steps 4 and 8; `diasRelease.test.js`, `diasPolicyBinding.test.js`) |
-| M21 | Trust model states the backend's role | TEXT/PART | 12 | planned (step 12 + text) |
+| M21 | Trust model states the backend's role | TEXT/PART | 12 | design text done (design §2, 2026-10-08): the backend asks the LLM and holds the signing key; the paper text still has to change |
 | M22 | Ledger keeps value, status and fingerprint if off-chain data is lost | MISS | 10 | done (step 10; κ in the audit trail without the review store) |
 | M23 | No self-review | OK | 3 | done (step 3; `diasAuditorAuthority.test.js`) |
 | M24 | Auditor authority: AuditMSP district head, active credential, district | PART | 3 | done (step 3; `diasAuditorAuthority.test.js`, `chaincodeErrors.unit.test.js`) |
@@ -68,7 +68,7 @@ Each requirement traces: paper requirement → current behavior → required cha
 | A02 | Record history, evidence and decision log restricted | MISS | 13 | planned (step 13) |
 | A03 | Explanation and off-chain object access defined and enforced | PART | 13 | planned (step 13) |
 | A04 | Off-chain review data encrypted | MISS | 13 | planned (step 13) |
-| A05 | Signed recommendation provenance; no AI organization | MISS | 10, 12 | signing, signer registry, revocation and replay rejection done (step 10); separate process in step 12 |
+| A05 | Signed recommendation provenance; no AI organization | MISS | 10, 12 | signing, signer registry, revocation and replay rejection done (step 10); the separate process was dropped by the author on 2026-10-08, so the backend holds the key |
 | A06 | Maximum authorization validity (null expiry never ends) | OUT | — | open researcher decision |
 | A07 | Identity and record id inside C (§IV-C) | TEXT | — | text fix |
 | A08 | Result numbers (23.75%, 60.27%, E7 failures, Fig. 13 memory, loss range) | TEXT | — | text fix |
@@ -217,7 +217,7 @@ Each entry: current behavior → required change; files; tests; evidence; accept
 ### M21 — Trust model
 - **Paper:** §IV-A omits the backend.
 - **Change:**
-  - step 12 removes recommendation substitution;
+  - step 12 was changed by the author on 2026-10-08: the backend asks the LLM and signs, so substitution before commitment is not removed; a change after commitment is still detected (κ, `h_M`);
   - the design (§2) states the remaining backend trust;
   - the text fix goes in the reconciliation report.
 - **Acceptance:** the design lists every trusted component and what it is trusted for.

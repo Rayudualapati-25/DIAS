@@ -40,7 +40,7 @@
 | 9 | Hash the off-chain objects (h_J, h_M, h_N) | Canonical serialization and tamper tests |
 | 10 | Commit the recommendation before review (κ) | Missing, duplicate and wrong commitments rejected |
 | 11 | Enforce the auditor note in the contract | Note hash required for disagreement or a missing recommendation |
-| 12 | Reduce trust in the backend | Signed recommendation provenance |
+| 12 | Reduce trust in the backend. **Amended 2026-10-08:** the backend asks the LLM itself (see Amendments) | Signed recommendation provenance; request-to-recommendation test |
 | 13 | Strengthen privacy controls | Restricted histories, evidence, explanations and decision log |
 | 14 | Add counterfactual explanations | Only changes verified to alter the policy outcome |
 | 15 | Update backend, frontend and testbed | All components use the new schemas and transactions |
@@ -140,3 +140,14 @@ Multi-VM tests and live UI checks: NOT RUN — needs the author's Mac.
 - Push the branch.
 - Open a pull request into `main` with these sections: What changed, Why, Effect on the paper, and Not run — needs the author's Mac.
 - Do not merge it.
+
+## Amendments
+
+### 2026-10-08 — step 12 changed by the author
+
+- **Decision:** there is no separate recommendation service. When a request is not settled by a reusable authorization, the backend invokes the LLM immediately, and the result goes to the auditor's decision screen.
+- **What it replaces:**
+  - the Step 2 default "Recommendation service: separately authenticated, and its output digitally signed". The output is still digitally signed, by a key the backend holds;
+  - the Steps 8–12 line "The backend cannot replace a recommendation without detection". This no longer holds before commitment. After κ is committed, a change is still detected.
+- **Effect on the paper:** the trust model must say that the backend runs the model and holds the signing key. The manuscript is not changed by this step.
+- **Record:** `reports/iteration/iter_068_in_backend_llm.md` and the design change log entry of 2026-10-08.

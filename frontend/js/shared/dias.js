@@ -7,7 +7,7 @@
  * view model is what stops a screen from showing "DENY" as though access had
  * been refused when no auditor has looked at it yet.
  *
- * The model runs behind the recommendation service. The complete recommendation
+ * The backend asks the model itself. The complete recommendation
  * object stays off-chain; before review its digest h_M, value, generation status
  * and request bindings are committed on the ledger (κ). Agreement is computed by
  * the contract against κ, never against what the backend reports (paper Eq. 3),
@@ -161,6 +161,14 @@ export function accessDecisionView(decision) {
   };
 }
 
+/** The backend's states for "not ready yet": being produced, or its commitment not confirmed. */
+const PREPARING_STATES = Object.freeze(['pending', 'signed']);
+
+/** Whether this review's recommendation is still being prepared or committed. */
+export function isRecommendationPreparing(review) {
+  return PREPARING_STATES.includes(review?.recommendationState);
+}
+
 /**
  * The model's advisory answer, or an explicit statement that none exists.
  * `state` is the backend's preparation state: 'pending' while the LLM is still
@@ -280,7 +288,7 @@ export function decisionAvailability(review, viewerUsername) {
         + 'must decide it — the chaincode refuses a decision by the requester.',
     };
   }
-  if (['pending', 'signed'].includes(review.recommendationState)) {
+  if (isRecommendationPreparing(review)) {
     return {
       allowed: false,
       reason: 'recommendation-pending',

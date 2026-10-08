@@ -5,8 +5,10 @@
  *
  * The backend itself calls the LLM, so everything the recommendation needs is
  * assembled here from configuration and from the governance policy bundle on
- * disk: the policy context, the model identity and endpoint, the off-chain review
- * store, and the worker that answers requests one at a time.
+ * disk: the policy context, the model identity and endpoint, the signing key, the
+ * off-chain review store, and the worker that answers requests one at a time.
+ * There is no separate recommendation service to start, address or authenticate
+ * to (author's decision, 2026-10-08).
  */
 
 const fs = require('fs');
@@ -19,7 +21,7 @@ const { createReviewStore } = require('./reviewStore');
 const { createRecommendationWorker } = require('./recommendationWorker');
 const { createRecommendationSigner } = require('./recommendationSigner');
 const { policyIdentity } = require('./policyRegistration');
-const { createRecommendationService } = require('../recommender-service/service');
+const { createSignedRecommender } = require('./signedRecommendation');
 
 function loadSigner(keyFile) {
   if (!keyFile || !fs.existsSync(keyFile)) {
@@ -74,9 +76,10 @@ function createDiasRuntime({
     },
   });
   const policy = policyIdentity(settings.DIAS_POLICY_BUNDLE_PATH);
-  // Embedded mode: the service runs inside this process with its own key. Step 12
-  // moves it into a separate process, so the backend no longer holds the key.
-  const service = createRecommendationService({
+  // The backend holds the recommendation signing key and signs what the model
+  // returned. The signature names the key that produced a commitment; it does not
+  // protect against the backend itself (design §2).
+  const signedRecommender = createSignedRecommender({
     recommender,
     signer: signer || loadSigner(settings.DIAS_RECOMMENDER_SIGNING_KEY_FILE),
     channel: settings.CHANNEL,
@@ -86,12 +89,12 @@ function createDiasRuntime({
   const store = createReviewStore(settings.DIAS_REVIEW_STORE_DIR);
   const worker = createRecommendationWorker({
     store,
-    service,
+    signedRecommender,
     ledger,
     relay: { org: settings.DIAS_RELAY_ORG, fabricUser: settings.DIAS_RELAY_USER },
     log,
   });
-  return Object.freeze({ policyBundle, policy, recommender, service, store, worker });
+  return Object.freeze({ policyBundle, policy, recommender, signedRecommender, store, worker });
 }
 
 let shared = null;

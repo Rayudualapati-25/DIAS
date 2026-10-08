@@ -1,6 +1,6 @@
 'use strict';
 
-/** Registering the recommendation service's public key on the ledger (design §6.1); safe to rerun. */
+/** Registering the backend's recommendation signing key on the ledger (design §6.1); safe to rerun. */
 
 const crypto = require('crypto');
 const { expect } = require('chai');

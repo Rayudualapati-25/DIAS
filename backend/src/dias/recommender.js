@@ -237,7 +237,7 @@ function createRecommender({
   }
 
   /**
-   * A failure this service determined before or instead of an inference call:
+   * A failure the backend determined before or instead of an inference call:
    * a committed-hash mismatch, or a policy bundle that is not the active one.
    * The hashes come from the ledger rather than from anything recomputed here,
    * because the point of these statuses is that what we hold cannot be trusted.

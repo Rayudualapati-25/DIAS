@@ -10,7 +10,7 @@ const os = require('os');
 const path = require('path');
 const { expect } = require('chai');
 
-const { createReviewStore } = require('../src/dias/reviewStore');
+const { createReviewStore, isRecommendationPreparing } = require('../src/dias/reviewStore');
 const { createRecommendationWorker, recommendationRecord } = require('../src/dias/recommendationWorker');
 const {
   LLM_AGREEMENT, createsAuthorization, llmAgreementFor, requiresAuditorReason,
@@ -116,6 +116,14 @@ describe('DIAS backend recommendation path', () => {
       expect(store.list().map((entry) => entry.requestId)).to.deep.equal(['REQ-2']);
     });
 
+    it('counts a recommendation as being prepared until its commitment is confirmed or it has failed', () => {
+      const state = (recommendationState) => ({ recommendationState });
+      expect(['pending', 'signed'].map((value) => isRecommendationPreparing(state(value)))).to.deep.equal([true, true]);
+      expect(['committed', 'commit-rejected', 'failed', 'ready', null]
+        .map((value) => isRecommendationPreparing(state(value)))).to.deep.equal([false, false, false, false, false]);
+      expect(isRecommendationPreparing(null)).to.equal(false);
+    });
+
     it('rejects unsafe request identifiers and reports missing entries', () => {
       expect(() => store.read('../escape')).to.throw(/invalid format/);
       expect(store.read('REQ-404')).to.equal(null);
@@ -133,7 +141,7 @@ describe('DIAS backend recommendation path', () => {
     });
   });
 
-  describe('recommendation worker (v3: service, commitment, ledger)', () => {
+  describe('recommendation worker (v3: signed recommender, commitment, ledger)', () => {
     const RELAY = Object.freeze({ org: 'audit', fabricUser: 'sp.north' });
 
     function signedCommitment(requestId, overrides = {}) {
@@ -145,7 +153,7 @@ describe('DIAS backend recommendation path', () => {
       };
     }
 
-    function fakeService(result = okResult(validOutput({ recommendation: 'DENY', reason_code: 'NOT_ASSIGNED' }))) {
+    function fakeSignedRecommender(result = okResult(validOutput({ recommendation: 'DENY', reason_code: 'NOT_ASSIGNED' }))) {
       const calls = [];
       return {
         calls,
@@ -181,15 +189,15 @@ describe('DIAS backend recommendation path', () => {
       };
     }
 
-    const worker = (service, ledger) => createRecommendationWorker({
-      store, service, ledger, relay: RELAY, log: silent,
+    const worker = (signedRecommender, ledger) => createRecommendationWorker({
+      store, signedRecommender, ledger, relay: RELAY, log: silent,
     });
 
-    it('asks the service, stores M and the signed commitment, then commits it before review', async () => {
+    it('asks the signed recommender, stores M and the signed commitment, then commits it before review', async () => {
       store.create({ request: committed('REQ-3'), justification: 'why' });
-      const service = fakeService();
+      const signedRecommender = fakeSignedRecommender();
       const ledger = fakeLedger();
-      await worker(service, ledger).enqueue('REQ-3');
+      await worker(signedRecommender, ledger).enqueue('REQ-3');
       const entry = store.read('REQ-3');
       expect(entry).to.include({ recommendationState: 'committed', commitmentId: 'KAPPA-REQ-3' });
       expect(entry.commitment.recommendation).to.equal('DENY');
@@ -198,11 +206,11 @@ describe('DIAS backend recommendation path', () => {
       expect(ledger.calls[0]).to.deep.equal(['audit', 'sp.north', 'AccessContract', 'CommitRecommendation', 'REQ-3']);
     });
 
-    it('gives the service the committed inputs and the digests the ledger holds for them', async () => {
+    it('gives the signed recommender the committed inputs and the digests the ledger holds for them', async () => {
       store.create({ request: committed('REQ-7', { justificationText: 'Reviewing the FIR.', policyVersion: 'dias-governance-policy-v1', policyHash: '4'.repeat(64) }), justification: 'Reviewing the FIR.' });
-      const service = fakeService();
-      await worker(service, fakeLedger()).enqueue('REQ-7');
-      const [input] = service.calls;
+      const signedRecommender = fakeSignedRecommender();
+      await worker(signedRecommender, fakeLedger()).enqueue('REQ-7');
+      const [input] = signedRecommender.calls;
       expect(input).to.include({
         requestId: 'REQ-7', justification: 'Reviewing the FIR.',
         justificationHash: hashText('justification', 'Reviewing the FIR.'),
@@ -216,7 +224,7 @@ describe('DIAS backend recommendation path', () => {
     it('keeps a specific failure status in the auditor view and still commits it', async () => {
       store.create({ request: committed('REQ-4'), justification: 'why' });
       const ledger = fakeLedger();
-      await worker(fakeService(failureResult('server_unreachable')), ledger).enqueue('REQ-4');
+      await worker(fakeSignedRecommender(failureResult('server_unreachable')), ledger).enqueue('REQ-4');
       const entry = store.read('REQ-4');
       expect(entry.recommendationState).to.equal('committed');
       expect(entry.recommendation).to.include({
@@ -230,7 +238,7 @@ describe('DIAS backend recommendation path', () => {
       const expired = Object.assign(new Error('endorse failed'), {
         details: [{ message: 'DIAS_REQUEST_EXPIRED: the review deadline has passed' }],
       });
-      await worker(fakeService(), fakeLedger({ submitError: expired })).enqueue('REQ-9');
+      await worker(fakeSignedRecommender(), fakeLedger({ submitError: expired })).enqueue('REQ-9');
       expect(store.read('REQ-9')).to.include({
         recommendationState: 'commit-rejected', commitError: 'DIAS_REQUEST_EXPIRED: the review deadline has passed',
       });
@@ -238,18 +246,18 @@ describe('DIAS backend recommendation path', () => {
 
     it('keeps a signed commitment after an uncertain failure and later resubmits it unchanged', async () => {
       store.create({ request: committed('REQ-10'), justification: 'why' });
-      const service = fakeService();
+      const signedRecommender = fakeSignedRecommender();
       const timeout = new Error('commit status deadline exceeded');
-      await worker(service, fakeLedger({ submitError: timeout, onLedger: null })).enqueue('REQ-10');
+      await worker(signedRecommender, fakeLedger({ submitError: timeout, onLedger: null })).enqueue('REQ-10');
       const signed = store.read('REQ-10');
       expect(signed.recommendationState).to.equal('signed');
-      const retried = worker(service, fakeLedger());
+      const retried = worker(signedRecommender, fakeLedger());
       expect(retried.resumePending()).to.equal(1);
       await retried.idle();
       const entry = store.read('REQ-10');
       expect(entry.recommendationState).to.equal('committed');
       expect(entry.commitment).to.deep.equal(signed.commitment);
-      expect(service.calls).to.have.length(1);
+      expect(signedRecommender.calls).to.have.length(1);
     });
 
     it('recognizes a commitment that reached the ledger although the response was lost', async () => {
@@ -259,11 +267,11 @@ describe('DIAS backend recommendation path', () => {
         submitError: timeout,
         onLedger: () => ({ commitmentId: 'KAPPA-REQ-11', txId: 'tx-11', ...store.read('REQ-11').commitment }),
       });
-      await worker(fakeService(), ledger).enqueue('REQ-11');
+      await worker(fakeSignedRecommender(), ledger).enqueue('REQ-11');
       expect(store.read('REQ-11')).to.include({ recommendationState: 'committed', commitmentId: 'KAPPA-REQ-11' });
     });
 
-    it('records a service failure as failed, so the auditor is not left waiting', async () => {
+    it('records a recommender failure as failed, so the auditor is not left waiting', async () => {
       store.create({ request: committed('REQ-5'), justification: 'why' });
       const broken = { recommend: async () => { throw new Error('signing key unavailable'); } };
       await worker(broken, fakeLedger()).enqueue('REQ-5');
@@ -279,7 +287,7 @@ describe('DIAS backend recommendation path', () => {
       let running = 0;
       let maxRunning = 0;
       const order = [];
-      const service = fakeService();
+      const signedRecommender = fakeSignedRecommender();
       const slow = {
         recommend: async (input) => {
           running += 1;
@@ -287,7 +295,7 @@ describe('DIAS backend recommendation path', () => {
           order.push(input.requestId);
           await new Promise((resolve) => setTimeout(resolve, 5));
           running -= 1;
-          return service.recommend(input);
+          return signedRecommender.recommend(input);
         },
       };
       const queue = worker(slow, fakeLedger());

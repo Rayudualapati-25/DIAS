@@ -252,7 +252,7 @@ module.exports = Object.freeze({
   // deadline (design §8). 0 disables the sweeper.
   DIAS_EXPIRY_SWEEP_SECONDS: Number(process.env.DIAS_EXPIRY_SWEEP_SECONDS || 300),
 
-  // The recommendation service's Ed25519 signing key (design §6.1). Its public
+  // The backend's Ed25519 recommendation signing key (design §6.1). Its public
   // key must be registered on the ledger (scripts/dias/register-recommender-key.js).
   DIAS_RECOMMENDER_SIGNING_KEY_FILE: resolveFromRepo(
     process.env.DIAS_RECOMMENDER_SIGNING_KEY_FILE,
