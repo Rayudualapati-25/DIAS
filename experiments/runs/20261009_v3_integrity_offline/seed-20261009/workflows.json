@@ -1,0 +1,583 @@
+[
+  {
+    "version": "v2",
+    "workflow": "W1",
+    "label": "reviewed: LLM DENY, auditor FORCE_ALLOW (creates an authorization)",
+    "repetitions": 200,
+    "transactions": 2,
+    "totalWriteSetBytes": {
+      "min": 14572,
+      "max": 14572
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.445,
+      "p50": 0.618,
+      "p95": 1.388,
+      "p99": 2.031,
+      "max": 3.502,
+      "mean": 0.725
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest",
+        "executionMs": {
+          "n": 200,
+          "min": 0.148,
+          "p50": 0.213,
+          "p95": 0.328,
+          "p99": 0.451,
+          "max": 1.547,
+          "mean": 0.233
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 3852,
+          "max": 3852
+        },
+        "writeSetBytesByType": {
+          "diasRequestEvent": 1656,
+          "diasAccessRequest": 2196
+        },
+        "eventBytes": 297
+      },
+      {
+        "name": "SubmitAuditorDecision",
+        "executionMs": {
+          "n": 200,
+          "min": 0.295,
+          "p50": 0.417,
+          "p95": 0.804,
+          "p99": 1.784,
+          "max": 2.103,
+          "mean": 0.492
+        },
+        "keysWritten": 10,
+        "writeSetBytes": {
+          "min": 10720,
+          "max": 10720
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2287,
+          "diasAuthorizationEvent": 1124,
+          "diasAuthorization": 1833,
+          "diasAuthorizationScope": 355,
+          "diasAuditorDecision": 842,
+          "diasAccessOutcome": 881,
+          "accessDecision": 657,
+          "diasRequestEvent": 2741
+        },
+        "eventBytes": 401
+      }
+    ]
+  },
+  {
+    "version": "v3",
+    "workflow": "W1",
+    "label": "reviewed: LLM DENY, auditor FORCE_ALLOW (creates an authorization)",
+    "repetitions": 200,
+    "transactions": 3,
+    "totalWriteSetBytes": {
+      "min": 22742,
+      "max": 22742
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.906,
+      "p50": 1.22,
+      "p95": 2.298,
+      "p99": 3.257,
+      "max": 4.52,
+      "mean": 1.375
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest",
+        "executionMs": {
+          "n": 200,
+          "min": 0.193,
+          "p50": 0.271,
+          "p95": 0.455,
+          "p99": 1.478,
+          "max": 1.789,
+          "mean": 0.304
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 4631,
+          "max": 4631
+        },
+        "writeSetBytesByType": {
+          "diasRequestEvent": 1911,
+          "diasAccessRequest": 2720
+        },
+        "eventBytes": 297
+      },
+      {
+        "name": "CommitRecommendation",
+        "executionMs": {
+          "n": 200,
+          "min": 0.306,
+          "p50": 0.409,
+          "p95": 0.704,
+          "p99": 1.373,
+          "max": 2.603,
+          "mean": 0.471
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 4793,
+          "max": 4793
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2774,
+          "diasRecommendationCommitment": 1237,
+          "diasRequestEvent": 782
+        },
+        "eventBytes": 256
+      },
+      {
+        "name": "SubmitAuditorDecision",
+        "executionMs": {
+          "n": 200,
+          "min": 0.362,
+          "p50": 0.512,
+          "p95": 1.459,
+          "p99": 2.001,
+          "max": 2.096,
+          "mean": 0.599
+        },
+        "keysWritten": 11,
+        "writeSetBytes": {
+          "min": 13318,
+          "max": 13318
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2889,
+          "diasAuthorizationEvent": 1390,
+          "diasAuthorization": 2048,
+          "diasAuthorizationScope": 355,
+          "diasAuditorDecision": 1210,
+          "diasAccessOutcome": 1005,
+          "accessDecision": 781,
+          "diasRequestEvent": 3640
+        },
+        "eventBytes": 421
+      }
+    ]
+  },
+  {
+    "version": "v2",
+    "workflow": "W2",
+    "label": "reviewed: LLM DENY, auditor FORCE_DENY (agreed, no authorization)",
+    "repetitions": 200,
+    "transactions": 2,
+    "totalWriteSetBytes": {
+      "min": 10061,
+      "max": 10061
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.317,
+      "p50": 0.52,
+      "p95": 0.708,
+      "p99": 2.554,
+      "max": 2.826,
+      "mean": 0.548
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest",
+        "executionMs": {
+          "n": 200,
+          "min": 0.14,
+          "p50": 0.224,
+          "p95": 0.316,
+          "p99": 0.355,
+          "max": 2.468,
+          "mean": 0.246
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 3852,
+          "max": 3852
+        },
+        "writeSetBytesByType": {
+          "diasRequestEvent": 1656,
+          "diasAccessRequest": 2196
+        },
+        "eventBytes": 297
+      },
+      {
+        "name": "SubmitAuditorDecision",
+        "executionMs": {
+          "n": 200,
+          "min": 0.176,
+          "p50": 0.286,
+          "p95": 0.438,
+          "p99": 0.542,
+          "max": 2.411,
+          "mean": 0.302
+        },
+        "keysWritten": 6,
+        "writeSetBytes": {
+          "min": 6209,
+          "max": 6209
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2262,
+          "diasAuditorDecision": 819,
+          "diasAccessOutcome": 861,
+          "accessDecision": 655,
+          "diasRequestEvent": 1612
+        },
+        "eventBytes": 345
+      }
+    ]
+  },
+  {
+    "version": "v3",
+    "workflow": "W2",
+    "label": "reviewed: LLM DENY, auditor FORCE_DENY (agreed, no authorization)",
+    "repetitions": 200,
+    "transactions": 3,
+    "totalWriteSetBytes": {
+      "min": 17359,
+      "max": 17359
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.79,
+      "p50": 1.162,
+      "p95": 1.447,
+      "p99": 3.435,
+      "max": 4.302,
+      "mean": 1.192
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest",
+        "executionMs": {
+          "n": 200,
+          "min": 0.196,
+          "p50": 0.289,
+          "p95": 0.402,
+          "p99": 0.518,
+          "max": 2.487,
+          "mean": 0.312
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 4631,
+          "max": 4631
+        },
+        "writeSetBytesByType": {
+          "diasRequestEvent": 1911,
+          "diasAccessRequest": 2720
+        },
+        "eventBytes": 297
+      },
+      {
+        "name": "CommitRecommendation",
+        "executionMs": {
+          "n": 200,
+          "min": 0.31,
+          "p50": 0.465,
+          "p95": 0.582,
+          "p99": 0.614,
+          "max": 2.753,
+          "mean": 0.466
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 4793,
+          "max": 4793
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2774,
+          "diasRecommendationCommitment": 1237,
+          "diasRequestEvent": 782
+        },
+        "eventBytes": 256
+      },
+      {
+        "name": "SubmitAuditorDecision",
+        "executionMs": {
+          "n": 200,
+          "min": 0.249,
+          "p50": 0.382,
+          "p95": 0.512,
+          "p99": 0.844,
+          "max": 3.442,
+          "mean": 0.414
+        },
+        "keysWritten": 7,
+        "writeSetBytes": {
+          "min": 7935,
+          "max": 7935
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2864,
+          "diasAuditorDecision": 1125,
+          "diasAccessOutcome": 985,
+          "accessDecision": 779,
+          "diasRequestEvent": 2182
+        },
+        "eventBytes": 365
+      }
+    ]
+  },
+  {
+    "version": "v2",
+    "workflow": "W3",
+    "label": "reviewed: LLM ALLOW, auditor FORCE_ALLOW (agreed, no authorization)",
+    "repetitions": 200,
+    "transactions": 2,
+    "totalWriteSetBytes": {
+      "min": 10075,
+      "max": 10075
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.322,
+      "p50": 0.402,
+      "p95": 0.629,
+      "p99": 0.909,
+      "max": 2.427,
+      "mean": 0.449
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest",
+        "executionMs": {
+          "n": 200,
+          "min": 0.142,
+          "p50": 0.173,
+          "p95": 0.285,
+          "p99": 0.414,
+          "max": 1.796,
+          "mean": 0.199
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 3852,
+          "max": 3852
+        },
+        "writeSetBytesByType": {
+          "diasRequestEvent": 1656,
+          "diasAccessRequest": 2196
+        },
+        "eventBytes": 297
+      },
+      {
+        "name": "SubmitAuditorDecision",
+        "executionMs": {
+          "n": 200,
+          "min": 0.178,
+          "p50": 0.222,
+          "p95": 0.364,
+          "p99": 0.474,
+          "max": 2.22,
+          "mean": 0.25
+        },
+        "keysWritten": 6,
+        "writeSetBytes": {
+          "min": 6223,
+          "max": 6223
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2265,
+          "diasAuditorDecision": 821,
+          "diasAccessOutcome": 863,
+          "accessDecision": 658,
+          "diasRequestEvent": 1616
+        },
+        "eventBytes": 347
+      }
+    ]
+  },
+  {
+    "version": "v3",
+    "workflow": "W3",
+    "label": "reviewed: LLM ALLOW, auditor FORCE_ALLOW (agreed, no authorization)",
+    "repetitions": 200,
+    "transactions": 3,
+    "totalWriteSetBytes": {
+      "min": 17376,
+      "max": 17376
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.76,
+      "p50": 0.957,
+      "p95": 1.454,
+      "p99": 2.905,
+      "max": 4.339,
+      "mean": 1.057
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest",
+        "executionMs": {
+          "n": 200,
+          "min": 0.193,
+          "p50": 0.245,
+          "p95": 0.415,
+          "p99": 1.268,
+          "max": 3.535,
+          "mean": 0.292
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 4631,
+          "max": 4631
+        },
+        "writeSetBytesByType": {
+          "diasRequestEvent": 1911,
+          "diasAccessRequest": 2720
+        },
+        "eventBytes": 297
+      },
+      {
+        "name": "CommitRecommendation",
+        "executionMs": {
+          "n": 200,
+          "min": 0.296,
+          "p50": 0.39,
+          "p95": 0.574,
+          "p99": 0.804,
+          "max": 2.22,
+          "mean": 0.425
+        },
+        "keysWritten": 3,
+        "writeSetBytes": {
+          "min": 4795,
+          "max": 4795
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2774,
+          "diasRecommendationCommitment": 1238,
+          "diasRequestEvent": 783
+        },
+        "eventBytes": 256
+      },
+      {
+        "name": "SubmitAuditorDecision",
+        "executionMs": {
+          "n": 200,
+          "min": 0.241,
+          "p50": 0.311,
+          "p95": 0.459,
+          "p99": 0.639,
+          "max": 2.252,
+          "mean": 0.34
+        },
+        "keysWritten": 7,
+        "writeSetBytes": {
+          "min": 7950,
+          "max": 7950
+        },
+        "writeSetBytesByType": {
+          "diasAccessRequest": 2867,
+          "diasAuditorDecision": 1127,
+          "diasAccessOutcome": 987,
+          "accessDecision": 782,
+          "diasRequestEvent": 2187
+        },
+        "eventBytes": 367
+      }
+    ]
+  },
+  {
+    "version": "v2",
+    "workflow": "W4",
+    "label": "reuse of the authorization created by W1 (no auditor, no LLM)",
+    "repetitions": 200,
+    "transactions": 1,
+    "totalWriteSetBytes": {
+      "min": 6870,
+      "max": 6870
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.182,
+      "p50": 0.225,
+      "p95": 0.392,
+      "p99": 0.488,
+      "max": 1.495,
+      "mean": 0.264
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest (reuse)",
+        "executionMs": {
+          "n": 200,
+          "min": 0.182,
+          "p50": 0.225,
+          "p95": 0.392,
+          "p99": 0.488,
+          "max": 1.495,
+          "mean": 0.264
+        },
+        "keysWritten": 7,
+        "writeSetBytes": {
+          "min": 6870,
+          "max": 6870
+        },
+        "writeSetBytesByType": {
+          "diasAccessOutcome": 899,
+          "accessDecision": 668,
+          "diasRequestEvent": 3083,
+          "diasAccessRequest": 2220
+        },
+        "eventBytes": 395
+      }
+    ]
+  },
+  {
+    "version": "v3",
+    "workflow": "W4",
+    "label": "reuse of the authorization created by W1 (no auditor, no LLM)",
+    "repetitions": 200,
+    "transactions": 1,
+    "totalWriteSetBytes": {
+      "min": 7875,
+      "max": 7875
+    },
+    "totalExecutionMs": {
+      "n": 200,
+      "min": 0.227,
+      "p50": 0.292,
+      "p95": 0.444,
+      "p99": 0.472,
+      "max": 0.518,
+      "mean": 0.313
+    },
+    "perTransaction": [
+      {
+        "name": "CreateAccessRequest (reuse)",
+        "executionMs": {
+          "n": 200,
+          "min": 0.227,
+          "p50": 0.292,
+          "p95": 0.444,
+          "p99": 0.472,
+          "max": 0.518,
+          "mean": 0.313
+        },
+        "keysWritten": 7,
+        "writeSetBytes": {
+          "min": 7875,
+          "max": 7875
+        },
+        "writeSetBytesByType": {
+          "diasAccessOutcome": 1023,
+          "accessDecision": 792,
+          "diasRequestEvent": 3338,
+          "diasAccessRequest": 2722
+        },
+        "eventBytes": 395
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "node": "v22.22.0",
+  "platform": "linux 6.18.44-fc-v80",
+  "arch": "x64",
+  "cpuModel": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "logicalCpus": 4,
+  "totalMemoryBytes": 16876494848,
+  "v3SourceCommit": "b27f4560e760e9ca144ee8e93ff9cba0b7e1da4e",
+  "v3WorktreeClean": false,
+  "v2BaselineCommit": "2336bb4724a088490614ce86d496ef9b03c31265",
+  "args": {
+    "seed": 20261011,
+    "iterations": 5000,
+    "warmup": 500,
+    "workflows": 200,
+    "cases": 200,
+    "out": "experiments/runs/20261009_v3_integrity_offline/seed-20261011"
+  },
+  "harnessSha256": "9a96728cf2a5cb86b6bdeb0572c3f68054d5631a3b0dc36a62ee92637137c272"
+}

@@ -1,0 +1,8 @@
+item_after_policy_change,v3_total,v3_refused,v3_reason_or_result,v2_baseline_still_accepted,seeds,kind
+reuse of an authorization issued under the old policy,12,12,POLICY_CHANGED,12,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor decision on a pending request with κ,6,6,DIAS_STALE_POLICY,n/a (v2 has no policy input),20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+κ commit on a pending request,6,6,DIAS_STALE_POLICY,n/a (no κ in v2),20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+document release of a reviewed grant,3,3,DIAS_STALE_POLICY,not measured,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+document release of a reused grant,3,3,DIAS_STALE_POLICY,not measured,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+expiry of a pending request after the change (should succeed),12,0,accepted,n/a,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+reissue under the new policy (should succeed; old one superseded),5,0,old status superseded; generation 2,n/a,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result

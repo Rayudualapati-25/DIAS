@@ -1,0 +1,66 @@
+version,workflow,transaction,state_object_type,key_plus_value_bytes
+v2,W1,CreateAccessRequest,diasRequestEvent,1656
+v2,W1,CreateAccessRequest,diasAccessRequest,2196
+v2,W1,SubmitAuditorDecision,diasAccessRequest,2287
+v2,W1,SubmitAuditorDecision,diasAuthorizationEvent,1124
+v2,W1,SubmitAuditorDecision,diasAuthorization,1833
+v2,W1,SubmitAuditorDecision,diasAuthorizationScope,355
+v2,W1,SubmitAuditorDecision,diasAuditorDecision,842
+v2,W1,SubmitAuditorDecision,diasAccessOutcome,881
+v2,W1,SubmitAuditorDecision,accessDecision,657
+v2,W1,SubmitAuditorDecision,diasRequestEvent,2741
+v3,W1,CreateAccessRequest,diasRequestEvent,1911
+v3,W1,CreateAccessRequest,diasAccessRequest,2720
+v3,W1,CommitRecommendation,diasAccessRequest,2774
+v3,W1,CommitRecommendation,diasRecommendationCommitment,1237
+v3,W1,CommitRecommendation,diasRequestEvent,782
+v3,W1,SubmitAuditorDecision,diasAccessRequest,2889
+v3,W1,SubmitAuditorDecision,diasAuthorizationEvent,1390
+v3,W1,SubmitAuditorDecision,diasAuthorization,2048
+v3,W1,SubmitAuditorDecision,diasAuthorizationScope,355
+v3,W1,SubmitAuditorDecision,diasAuditorDecision,1210
+v3,W1,SubmitAuditorDecision,diasAccessOutcome,1005
+v3,W1,SubmitAuditorDecision,accessDecision,781
+v3,W1,SubmitAuditorDecision,diasRequestEvent,3640
+v2,W2,CreateAccessRequest,diasRequestEvent,1656
+v2,W2,CreateAccessRequest,diasAccessRequest,2196
+v2,W2,SubmitAuditorDecision,diasAccessRequest,2262
+v2,W2,SubmitAuditorDecision,diasAuditorDecision,819
+v2,W2,SubmitAuditorDecision,diasAccessOutcome,861
+v2,W2,SubmitAuditorDecision,accessDecision,655
+v2,W2,SubmitAuditorDecision,diasRequestEvent,1612
+v3,W2,CreateAccessRequest,diasRequestEvent,1911
+v3,W2,CreateAccessRequest,diasAccessRequest,2720
+v3,W2,CommitRecommendation,diasAccessRequest,2774
+v3,W2,CommitRecommendation,diasRecommendationCommitment,1237
+v3,W2,CommitRecommendation,diasRequestEvent,782
+v3,W2,SubmitAuditorDecision,diasAccessRequest,2864
+v3,W2,SubmitAuditorDecision,diasAuditorDecision,1125
+v3,W2,SubmitAuditorDecision,diasAccessOutcome,985
+v3,W2,SubmitAuditorDecision,accessDecision,779
+v3,W2,SubmitAuditorDecision,diasRequestEvent,2182
+v2,W3,CreateAccessRequest,diasRequestEvent,1656
+v2,W3,CreateAccessRequest,diasAccessRequest,2196
+v2,W3,SubmitAuditorDecision,diasAccessRequest,2265
+v2,W3,SubmitAuditorDecision,diasAuditorDecision,821
+v2,W3,SubmitAuditorDecision,diasAccessOutcome,863
+v2,W3,SubmitAuditorDecision,accessDecision,658
+v2,W3,SubmitAuditorDecision,diasRequestEvent,1616
+v3,W3,CreateAccessRequest,diasRequestEvent,1911
+v3,W3,CreateAccessRequest,diasAccessRequest,2720
+v3,W3,CommitRecommendation,diasAccessRequest,2774
+v3,W3,CommitRecommendation,diasRecommendationCommitment,1238
+v3,W3,CommitRecommendation,diasRequestEvent,783
+v3,W3,SubmitAuditorDecision,diasAccessRequest,2867
+v3,W3,SubmitAuditorDecision,diasAuditorDecision,1127
+v3,W3,SubmitAuditorDecision,diasAccessOutcome,987
+v3,W3,SubmitAuditorDecision,accessDecision,782
+v3,W3,SubmitAuditorDecision,diasRequestEvent,2187
+v2,W4,CreateAccessRequest (reuse),diasAccessOutcome,899
+v2,W4,CreateAccessRequest (reuse),accessDecision,668
+v2,W4,CreateAccessRequest (reuse),diasRequestEvent,3083
+v2,W4,CreateAccessRequest (reuse),diasAccessRequest,2220
+v3,W4,CreateAccessRequest (reuse),diasAccessOutcome,1023
+v3,W4,CreateAccessRequest (reuse),accessDecision,792
+v3,W4,CreateAccessRequest (reuse),diasRequestEvent,3338
+v3,W4,CreateAccessRequest (reuse),diasAccessRequest,2722

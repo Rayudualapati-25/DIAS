@@ -1,0 +1,13 @@
+operation,input_bytes,iterations_per_seed,p50_us_median_of_seeds,p50_us_min_seed,p50_us_max_seed,p95_us_median_of_seeds,p99_us_median_of_seeds,seeds,kind
+h_J: hashText(justification),220,5000,2.273,2.244,4.48,6.908,20.669,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+h_N: hashText(note),570,5000,2.121,1.532,2.818,4.148,8.146,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+canonicalJson(verified context),527,5000,7.161,7.096,14.035,13.522,31.685,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+h_C: verifiedRequestHash(context),527,5000,13.569,13.479,26.407,24.671,51.052,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+h_M: recommendationHashOf(M),1385,5000,14.526,14.338,15.637,26.623,60.481,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+generic hashCanonical(M),1385,5000,14.932,14.485,23.909,29.546,74.737,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+naive SHA-256(JSON.stringify(M)) [ablation],1385,5000,4.553,4.538,6.92,7.985,23.414,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+Ed25519 sign κ provenance,740,5000,51.652,47.043,64.681,82.241,131.434,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+Ed25519 verify κ provenance,740,5000,146.82,141.042,150.029,213.109,308.161,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+check M against κ (backend),,5000,15.388,15.004,16.453,28.355,59.364,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+AES-256-GCM seal review entry,2817,5000,17.728,17.688,17.78,49.758,100.315,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+AES-256-GCM open review entry,2817,5000,14.144,14.13,14.36,37.129,72.395,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result

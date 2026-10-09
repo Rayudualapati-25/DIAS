@@ -1,0 +1,11 @@
+measure,p50_median_of_seeds,p50_min_seed,p50_max_seed,p95_median_of_seeds,repetitions_per_seed,seeds,kind
+openReviewMs,0.957,0.941,1.158,1.934,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+generateSignCommitMs,5.147,4.751,6.227,8.051,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+commitRecommendationContractMs,0.502,0.476,0.551,0.705,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+stageNoteMs,1.045,0.943,1.24,1.733,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+commitNoteMs,1.111,1.063,1.349,1.716,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+createRequestContractMs,0.262,0.258,0.294,0.401,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+decisionContractMs,0.565,0.53,0.625,0.838,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+onChainWriteSetBytes,22788,22788,22788,22788,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+offChainEncryptedBytes,9143,9119,9147,9255,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result
+offChainPlaintextBytes,7986,7968,7988,8071,200,20261009 20261010 20261011,backend runtime + stand-in model on localhost + mock Fabric stub; not a live Fabric or model result

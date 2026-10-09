@@ -1,0 +1,80 @@
+{
+  "scopes": 36,
+  "setupFailures": [],
+  "controlDownloadsBeforeChange": {
+    "reviewed": true,
+    "reused": true
+  },
+  "v3": {
+    "reuseOfOldAuthorization": {
+      "total": 12,
+      "refused": 12,
+      "accepted": 0,
+      "missReasons": [
+        "POLICY_CHANGED"
+      ]
+    },
+    "decisionOnPendingRequestWithKappa": {
+      "total": 6,
+      "refused": 6,
+      "accepted": 0,
+      "errors": [
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0022ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0041ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0058ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0081ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0100ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0117ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b"
+      ]
+    },
+    "kappaCommitOnPendingRequest": {
+      "total": 6,
+      "refused": 6,
+      "accepted": 0,
+      "errors": [
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0010ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0033ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0050ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0069ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0092ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b",
+        "DIAS_STALE_POLICY: access request 'REQ-SUBMIT0109ffffff' was made under policy 'dias-governance-policy-v1', but 'dias-governance-policy-v2' is active; it must b"
+      ]
+    },
+    "expiryOfPendingRequest": {
+      "total": 12,
+      "refused": 0,
+      "accepted": 12
+    },
+    "releaseOfReviewedGrant": {
+      "total": 3,
+      "refused": 3,
+      "accepted": 0,
+      "errors": [
+        "DIAS_STALE_POLICY: this grant was issued under policy 'dias-governance-policy-v1', which is no longer active; request access again"
+      ]
+    },
+    "releaseOfReusedGrant": {
+      "total": 3,
+      "refused": 3,
+      "accepted": 0,
+      "errors": [
+        "DIAS_STALE_POLICY: this grant was issued under policy 'dias-governance-policy-v1', which is no longer active; request access again"
+      ]
+    },
+    "reissueUnderNewPolicy": {
+      "total": 5,
+      "ok": 5,
+      "oldStatuses": [
+        "superseded"
+      ],
+      "newGenerations": [
+        2
+      ]
+    }
+  },
+  "v2Baseline": {
+    "note": "v2 binds no policy version; a policy change cannot reach the ledger",
+    "reuseContinues": 12,
+    "total": 12
+  }
+}

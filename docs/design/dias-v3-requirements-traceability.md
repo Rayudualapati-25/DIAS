@@ -75,9 +75,9 @@ Each requirement traces: paper requirement → current behavior → required cha
 | A09 | Scripted auditor disclosed for every experiment | TEXT/EXP | — | text fix; human study OUT |
 | A10 | Reproducibility: prepare-chaincode script, pinned Python, figure scripts, V6 preflight | PART | 15, 19 | deterministic preparation, source staging and observed manifest inputs done (iteration 073); pinned Python and final reproduction remain step 19 |
 | A11 | Public-release hygiene: home paths, third-party PDFs, licences, legacy code | MISS | 19 | planned |
-| A12 | Model input change re-evaluated | EXP | 17 | planned (prepared, not run) |
-| A13 | v3 performance re-measured (reuse, load, faults, resources, ledger growth) | EXP | 17 | planned (prepared, not run) |
-| A14 | Integrity cost and tamper detection measured | EXP | 17 | planned (offline) |
+| A12 | Model input change re-evaluated | EXP | 17 | prepared, not run (checklist X1–X3, `experiments/plans/20261009_step17_mac_run_checklist.md`); model choice is an open author decision |
+| A13 | v3 performance re-measured (reuse, load, faults, resources, ledger growth) | EXP | 17 | prepared, not run (checklist X4–X11) |
+| A14 | Integrity cost and tamper detection measured | EXP | 17 | done offline (iteration 075; mock stub and microbenchmarks only; `results/tables/20261009_v3_integrity_*.csv`) |
 
 ## Step 16 — required-test matrix (offline, 2026-10-09)
 
@@ -322,3 +322,4 @@ Each entry: current behavior → required change; files; tests; evidence; accept
   - policy-update invalidation;
   - label invariance.
 - **Labelling:** microbenchmarks and simulated workflows (mock Fabric stub), never presented as live Fabric results.
+- **Done (step 17, offline, 2026-10-09):** latency, tamper detection with a check-by-check ablation, policy-update invalidation against the v2 baseline, and storage per workflow (v2 against v3, on-chain and off-chain). Label invariance was done in step 5. Evidence: `experiments/runs/20261009_v3_integrity_offline/`, iteration 075.

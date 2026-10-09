@@ -1,0 +1,45 @@
+object,mutation,content_changed,trials,detected,detection_rate,digest_only_rate,field_binding_only_rate,naive_noncanonical_hash_flag_rate,seeds,kind
+justification (h_J),replace one character,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),insert one character,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),delete one character,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),append trailing space,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),change letter case,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),Unicode look-alike (Latin a -> Cyrillic a),true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),Unicode normalization NFC -> NFD (same visible text),true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),emptied,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+justification (h_J),object deleted,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),replace one character,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),insert one character,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),delete one character,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),append trailing space,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),change letter case,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),Unicode look-alike (Latin a -> Cyrillic a),true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),Unicode normalization NFC -> NFD (same visible text),true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),emptied,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+auditor note (h_N),object deleted,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),flip recommendation value,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),flip value in value and output together,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),one character of the explanation,true,600,600,1,1,0,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),reason code,true,600,600,1,1,0,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),add a policy reference,true,600,600,1,1,0,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),generation status,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),request id,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),provenance.contextHash,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),provenance.claimsHash,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),provenance.justificationHash,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),provenance.policyVersion,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),provenance.policyHash,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),provenance.modelVersion,true,600,600,1,1,1,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),add an unknown field,true,600,600,1,1,0,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),remove the output,true,600,600,1,1,0,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),reorder keys at every depth (same content),false,600,0,0,0,0,1,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+recommendation object (h_M),object deleted,true,600,600,1,0,0,0,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field contextHash,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field claimsHash,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field justificationHash,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field policyVersion,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field policyHash,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field recommendation,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field generationStatus,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field modelVersion,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+commitment κ (signature),signed field recommendationHash,true,600,600,1,,,,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result

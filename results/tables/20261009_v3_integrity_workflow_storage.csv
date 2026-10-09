@@ -1,0 +1,9 @@
+version,workflow,description,transactions,write_set_bytes_min,write_set_bytes_max,v3_minus_v2_bytes,v3_minus_v2_percent,contract_exec_ms_p50_median_of_seeds,contract_exec_ms_p50_min_seed,contract_exec_ms_p50_max_seed,repetitions_per_seed,seeds,kind
+v2,W1,"reviewed: LLM DENY, auditor FORCE_ALLOW (creates an authorization)",2,14572,14572,,,0.548,0.531,0.618,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v3,W1,"reviewed: LLM DENY, auditor FORCE_ALLOW (creates an authorization)",3,22742,22742,8170,56.1,1.091,1.057,1.22,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v2,W2,"reviewed: LLM DENY, auditor FORCE_DENY (agreed, no authorization)",2,10061,10061,,,0.393,0.381,0.52,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v3,W2,"reviewed: LLM DENY, auditor FORCE_DENY (agreed, no authorization)",3,17359,17359,7298,72.5,0.91,0.875,1.162,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v2,W3,"reviewed: LLM ALLOW, auditor FORCE_ALLOW (agreed, no authorization)",2,10075,10075,,,0.377,0.372,0.402,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v3,W3,"reviewed: LLM ALLOW, auditor FORCE_ALLOW (agreed, no authorization)",3,17376,17376,7301,72.5,0.867,0.854,0.957,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v2,W4,"reuse of the authorization created by W1 (no auditor, no LLM)",1,6870,6870,,,0.225,0.216,0.226,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result
+v3,W4,"reuse of the authorization created by W1 (no auditor, no LLM)",1,7875,7875,1005,14.6,0.286,0.277,0.292,200,20261009 20261010 20261011,offline microbenchmark / mock Fabric stub; not a live Fabric result

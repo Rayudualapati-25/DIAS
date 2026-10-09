@@ -1,0 +1,13 @@
+{
+  "experiment": "v3 integrity, offline",
+  "kind": "microbenchmarks and simulated workflows on the in-process mock Fabric stub; not live Fabric results",
+  "seed": 20261010,
+  "iterations": 5000,
+  "warmup": 500,
+  "workflowRepetitions": 200,
+  "tamperCases": 200,
+  "v2Baseline": {
+    "commit": "2336bb4724a088490614ce86d496ef9b03c31265",
+    "extractedWith": "git archive (read-only copy in a temporary directory)"
+  }
+}
