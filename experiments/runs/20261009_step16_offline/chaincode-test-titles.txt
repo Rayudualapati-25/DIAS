@@ -1,0 +1,342 @@
+architectureGuard.test.js :: architecture guard: the DIAS runtime has no policy engine the deployed contracts never load the retained rule engine or disagreement guard
+architectureGuard.test.js :: architecture guard: the DIAS runtime has no policy engine the chaincode package excludes every retained policy-engine module
+architectureGuard.test.js :: architecture guard: the DIAS runtime has no policy engine runtime modules stay inside the package and never reach the offline oracle or guard
+architectureGuard.test.js :: architecture guard: the DIAS runtime has no policy engine loads the DIAS modules for verified requests, authorization, and lifecycle
+architectureGuard.test.js :: architecture guard: the DIAS runtime has no policy engine loads only the recommendation commitment, never a model, parser, prompt or registration
+authority.test.js :: rank ladder orders each department from low to high
+authority.test.js :: rank ladder gives every role in every department a rank
+authority.test.js :: rank ladder never compares ranks across departments
+authority.test.js :: authority resolution makes the highest-ranked officer at a station its head
+authority.test.js :: authority resolution makes the highest-ranked officer in a district its head
+authority.test.js :: authority resolution keeps departments separate
+authority.test.js :: authority resolution routes a request to the station head when that head has the clearance
+authority.test.js :: authority resolution routes past a station head who lacks the clearance, up to the district head
+authority.test.js :: authority resolution skips the station tier for a requester with no station
+authority.test.js :: authority resolution never routes a request to the requester themselves
+authority.test.js :: authority resolution returns nothing when no authority in reach holds the clearance
+canonicalState.test.js :: canonical ledger state the serializer is independent of insertion order produces identical bytes for the same content inserted in any order
+canonicalState.test.js :: canonical ledger state the serializer is independent of insertion order survives the spread that caused the divergence
+canonicalState.test.js :: canonical ledger state the serializer is independent of insertion order canonicalises nested objects and preserves array order
+canonicalState.test.js :: canonical ledger state the serializer is independent of insertion order still distinguishes different content
+canonicalState.test.js :: canonical ledger state the serializer is independent of insertion order refuses anything that is not a JSON object
+canonicalState.test.js :: canonical ledger state the serializer is independent of insertion order writes the canonical bytes through putJson
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer accessContract.js writes JSON state only through putJson
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer accessContract.js never serialises STATE with JSON.stringify
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer accessContract.js builds no event payload from spread state
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer auditContract.js writes JSON state only through putJson
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer auditContract.js never serialises STATE with JSON.stringify
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer auditContract.js builds no event payload from spread state
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer governanceContract.js writes JSON state only through putJson
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer governanceContract.js never serialises STATE with JSON.stringify
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer governanceContract.js builds no event payload from spread state
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer recordContract.js writes JSON state only through putJson
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer recordContract.js never serialises STATE with JSON.stringify
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer recordContract.js builds no event payload from spread state
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer userContract.js writes JSON state only through putJson
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer userContract.js never serialises STATE with JSON.stringify
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer userContract.js builds no event payload from spread state
+canonicalState.test.js :: canonical ledger state no contract may bypass the serializer every contract imports the shared writer
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) declares its format and the six domains of the design
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes {"b":2,"a":1}
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes {"outer":{"z":1,"a":[3,1,2]},"top":true}
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes {"é":1,"z":2,"A":3,"€":4}
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes {"ﬁ":1,"😀":2} (keys sort by UTF-16 code units (0xD83D < 0xFB01), not by code point)
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes {"string":"€$\u000f\nA'B\"\\\\\"/","literals":[null,true,false]} (RFC 8785 section 3.2.2.2 string example)
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes [0,-1,9007199254740991,-9007199254740991]
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes {}
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON serializes []
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON is independent of insertion order at every depth
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON rejects non-integer number
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON rejects unsafe integer
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON rejects nested non-integer number
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON rejects values JSON cannot represent exactly
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) canonical JSON rejects strings with an unpaired surrogate anywhere, including keys
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests hashes note text "hello" to the shell reference
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests hashes justification text "hello" to the shell reference
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests hashes note text "" to the shell reference
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests hashes justification text "café €" to the shell reference
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests hashes canonical context JSON to the shell reference
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests gives the same text different digests in different domains
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests hashes text exactly: no trimming and no Unicode normalization
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests detects any change to structured content
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) domain-separated digests refuses an unknown domain and non-string text
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) digest format accepts exactly 64 lowercase hexadecimal characters
+commitments.test.js :: commitment hashing (dias-commitment-hash-v1) digest format names the field when a digest is malformed
+diasAccessSecurity.test.js :: DIAS access workflow safeguards request submission commits the structured action and purpose and keeps identity out of the verified context
+diasAccessSecurity.test.js :: DIAS access workflow safeguards request submission commits the justification only as its digest (h_J)
+diasAccessSecurity.test.js :: DIAS access workflow safeguards request submission refuses a request without a well-formed justification digest
+diasAccessSecurity.test.js :: DIAS access workflow safeguards request submission refuses the retired v2 emergencyFlag input instead of reading it as a fact
+diasAccessSecurity.test.js :: DIAS access workflow safeguards request submission rejects invalid request fields
+diasAccessSecurity.test.js :: DIAS access workflow safeguards request submission binds the request to the certificate-matched UserProfile
+diasAccessSecurity.test.js :: DIAS access workflow safeguards auditor decision stage allows only AuditMSP district heads and takes the recommendation from the commitment
+diasAccessSecurity.test.js :: DIAS access workflow safeguards auditor decision stage prevents a requester from deciding their own request
+diasAccessSecurity.test.js :: DIAS access workflow safeguards auditor decision stage rejects a decision when governed facts changed after the request
+diasAccessSecurity.test.js :: DIAS access workflow safeguards auditor decision stage bounds revocation reasons and identifiers
+diasAccessSecurity.test.js :: DIAS access workflow safeguards read access limits a request to its requester and district heads
+diasAccessSecurity.test.js :: DIAS access workflow safeguards read access shows district heads the pending queue with the committed request and its commitment
+diasAccessSecurity.test.js :: DIAS access workflow safeguards read access lets district heads query authorizations and their history
+diasAccessSecurity.test.js :: DIAS access workflow safeguards read access limits access decisions to their subject and district heads
+diasAccessWorkflow.test.js :: DIAS access workflow request log records who asked for which record and waits for the auditor
+diasAccessWorkflow.test.js :: DIAS access workflow request log commits digests and the recommendation value, but never free text
+diasAccessWorkflow.test.js :: DIAS access workflow decision log: auditor FORCE_ALLOW that agreed with an LLM ALLOW grants access, records AGREED, and creates no dynamic authorization
+diasAccessWorkflow.test.js :: DIAS access workflow decision log: auditor FORCE_DENY that agreed with an LLM DENY denies access without creating a dynamic authorization
+diasAccessWorkflow.test.js :: DIAS access workflow decision log: auditor FORCE_ALLOW that did not agree with an LLM DENY grants access and creates an exact-record dynamic authorization
+diasAccessWorkflow.test.js :: DIAS access workflow decision log: auditor FORCE_DENY that did not agree with an LLM ALLOW denies access, records NOT_AGREED, and creates no dynamic authorization
+diasAccessWorkflow.test.js :: DIAS access workflow decision log: no LLM recommendation lets the auditor decide and never creates a dynamic authorization
+diasAccessWorkflow.test.js :: DIAS access workflow decision log, as a reviewer reads it lets a reviewer read who asked for what and what was decided
+diasAccessWorkflow.test.js :: DIAS access workflow decision log, as a reviewer reads it shows an automatic grant as decided by its dynamic authorization
+diasAccessWorkflow.test.js :: DIAS access workflow decision log, as a reviewer reads it returns the newest entries first and refuses an out-of-range limit
+diasAccessWorkflow.test.js :: DIAS access workflow reuse of an active dynamic authorization grants a repeat request with the auditor recorded as skipped
+diasAccessWorkflow.test.js :: DIAS access workflow no broad reuse does not reuse the authorization for another record, action, purpose, or user
+diasAccessWorkflow.test.js :: DIAS access workflow no broad reuse does not reuse the authorization after a governed fact changes
+diasAccessWorkflow.test.js :: DIAS access workflow explicit revocation requires a district head and a reason, records the change, and stops reuse
+diasAccessWorkflow.test.js :: DIAS access workflow explicit revocation creates a new generation when a revoked scope is approved again
+diasAccessWorkflow.test.js :: DIAS access workflow expiry stops reuse after validUntilUtc and records the expiry transition
+diasAccessWorkflow.test.js :: DIAS access workflow expiry rejects an expiry when no dynamic authorization is created
+diasAccessWorkflow.test.js :: DIAS access workflow FORCE_DENY never revokes other authorizations
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) credential status rejects a decision by an auditor whose ledger profile is suspended
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) credential status rejects a decision by an auditor whose ledger profile is revoked
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) credential status rejects a decision signed with a certificate whose credential is not active
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) credential status rejects a district head with no ledger profile
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) credential status rejects a certificate that does not match the auditor profile
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) district and clearance rejects a district head of another district
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) district and clearance rejects a district head without clearance for the record
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) district and clearance accepts an active district head of the record district with clearance
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) district and clearance still refuses a decision on the auditor own request
+diasAuditorAuthority.test.js :: DIAS auditor authority (plan step 3) revocation requires the same active, in-district authority
+diasAuditTrail.test.js :: AuditContract GetRequestAuditTrail reconstructs a reviewed request that created a dynamic authorization
+diasAuditTrail.test.js :: AuditContract GetRequestAuditTrail reconstructs a reused authorization with the auditor skipped, and a later revocation
+diasAuditTrail.test.js :: AuditContract GetRequestAuditTrail reconstructs every commitment of a reviewed request from the trail alone
+diasAuditTrail.test.js :: AuditContract GetRequestAuditTrail lets the requester read their own trail and refuses other identities
+diasAuditTrail.test.js :: AuditContract record-level trail and verification lists the DIAS requests and release grants for a record
+diasAuditTrail.test.js :: AuditContract record-level trail and verification confirms a matching payload hash and flags a tampered one
+diasAuditTrail.test.js :: AuditContract direct-ledger access events derives the actor from the signing identity and stores the event
+diasAuditTrail.test.js :: AuditContract direct-ledger access events allows reviewers to query and rejects ordinary departments
+diasAuditTrail.test.js :: AuditContract direct-ledger access events rejects malformed event fields and limits
+diasAuthorization.test.js :: DIAS dynamic authorization scope is exact: user, record, case, action, and purpose each change the scope
+diasAuthorization.test.js :: DIAS dynamic authorization creation records the originating request, auditor decision, LLM agreement, scope, and conditions
+diasAuthorization.test.js :: DIAS dynamic authorization creation is refused unless the auditor FORCE_ALLOW did not agree with an LLM DENY
+diasAuthorization.test.js :: DIAS dynamic authorization creation validates identifiers, auditor identity, and expiry
+diasAuthorization.test.js :: DIAS dynamic authorization creation increments the generation when it replaces an earlier authorization
+diasAuthorization.test.js :: DIAS dynamic authorization matching matches only an active, unexpired authorization with unchanged conditions
+diasAuthorization.test.js :: DIAS dynamic authorization matching does not match when no authorization or a different scope is stored
+diasAuthorization.test.js :: DIAS dynamic authorization matching reports revoked, superseded, expired, and changed-condition misses
+diasAuthorization.test.js :: DIAS dynamic authorization state transitions revokes without mutating the previous state
+diasAuthorization.test.js :: DIAS dynamic authorization state transitions expires and supersedes with an incremented state version
+diasAuthorization.test.js :: DIAS dynamic authorization policy binding (v3) stores the policy it is issued under and refuses to be issued without one
+diasAuthorization.test.js :: DIAS dynamic authorization policy binding (v3) reports POLICY_CHANGED, not a match, under another active policy
+diasAuthorization.test.js :: DIAS dynamic authorization policy binding (v3) never matches an authorization of an older schema
+diasLifecycle.test.js :: DIAS lifecycle events writes ordered, transaction-bound events under the request ID
+diasLifecycle.test.js :: DIAS lifecycle events keeps request event streams isolated even when IDs share a prefix
+diasLifecycle.test.js :: DIAS lifecycle events stores authorization events in their own key space
+diasLifecycle.test.js :: DIAS lifecycle events emits one chaincode event naming every committed stage
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) returns the committed decision with its note digest in the auditor review, for read-back
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) rejects a malformed note digest before reading anything
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) a note digest is required rejects FORCE_ALLOW over a committed DENY (NOT_AGREED) without one, writing nothing
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) a note digest is required rejects FORCE_DENY over a committed ALLOW (NOT_AGREED) without one, writing nothing
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) a note digest is required rejects a committed failure status (NO_RECOMMENDATION) without one, writing nothing
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) a note digest is required rejects no commitment at all (NO_RECOMMENDATION) without one, writing nothing
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) a note digest is required accepts the same decision once the digest is supplied, and records it
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) an agreeing decision needs no note, and records that none was given
+diasNoteCommitment.test.js :: DIAS auditor note commitment (plan step 11) an agreeing decision may carry a note digest, which is recorded
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) policy registry activates the seeded policy and reports it as active
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) policy registry needs a different district head to activate than the one who registered
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) policy registry never re-activates a retired version and refuses duplicates and malformed input
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) policy registry accepts registration and activation only from active AuditMSP district heads
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) policy registry refuses every request while no policy is active
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) binding binds a request, its decision, outcome and authorization to the active policy
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) binding rejects a decision once another policy is active, then lets the request be expired
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) binding stops reusing an authorization after a policy change, without changing its status
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) binding reissues the authorization under the new policy as a new generation
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) release after a policy change refuses to release a reviewed grant issued under a retired policy
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) release after a policy change refuses to release a reused grant issued under a retired policy
+diasPolicyBinding.test.js :: DIAS policy governance and binding (plan step 8) records without a policy binding never reuses an authorization or releases a grant that carries no policy
+diasPolicyBinding.test.js :: policy digest of the repository policy matches the binding the test world activates, so tests use the real policy identity
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) record history is readable by a reviewer and by the owning station
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) record history is refused for another station, another organization, and a reviewer organization without the role
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) record history is refused for an owning-station member whose credential is not active
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) record history refuses a record that does not exist instead of returning an empty history
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) evidence list and custody chain is readable by a reviewer and by same-district police, forensics, prosecution and court
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) evidence list and custody chain is refused outside the record's district
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) evidence list and custody chain is refused for a same-district member whose credential is not active
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) evidence list and custody chain scopes the private evidence detail to the district as well
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) evidence list and custody chain lets a seal-authority reviewer of another district read, because reviewers are not district-bound
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) decision log is full for reviewers
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) decision log is redacted for everyone else, the requester included
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision is withheld from the requester until an auditor has decided
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision is always visible to the auditors and reviewers
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision is shown to the requester once the auditor has allowed the request
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision never shows the requester the digest of the auditor note
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision is shown to the requester once the auditor has decided, in every part of the trail
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision is withheld from a court reviewer for their own request until another auditor has decided
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision is withheld from an audit district head for their own request until another auditor has decided
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision keeps an audit district head out of the auditor view of their own request
+diasPrivacy.test.js :: DIAS privacy controls (plan step 13) the recommendation, for the requester, follows the auditor decision stays withheld from the requester when the request ends without a decision
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) signer registry registers an Ed25519 key under the digest of its public key
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) signer registry refuses duplicates, other key types, malformed keys and non-auditors
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) signer registry stops accepting commitments signed by a revoked key, and revocation needs a reason
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) acceptance commits a signed recommendation before review, bound to the request
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) acceptance treats an identical resubmission as a safe retry that writes nothing
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) acceptance rejects a different commitment for the same request without writing
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) acceptance keeps every specific generation failure status
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) rejection rejects commitments whose bindings do not match the request
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) rejection rejects inconsistent or malformed content
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) rejection rejects a commitment changed after signing, or signed by an unregistered key
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) rejection rejects a valid commitment replayed onto another request
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) rejection rejects a commitment after the deadline, a policy change, or a decision
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) ALLOW + FORCE_ALLOW -> AGREED
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) ALLOW + FORCE_DENY -> NOT_AGREED
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) DENY + FORCE_ALLOW -> NOT_AGREED, authorization created
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) DENY + FORCE_DENY -> AGREED
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) a committed UNAVAILABLE -> NO_RECOMMENDATION with the specific status
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) a committed INVALID_OUTPUT -> NO_RECOMMENDATION with the specific status
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) a committed POLICY_CONTEXT_UNAVAILABLE -> NO_RECOMMENDATION with the specific status
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) a committed CONTEXT_OVERFLOW -> NO_RECOMMENDATION with the specific status
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) no commitment at all -> NO_RECOMMENDATION recorded as NOT_COMMITTED
+diasRecommendationCommitment.test.js :: DIAS pre-review recommendation commitment (plan steps 10 and 12) agreement derived from the commitment (paper Eq. 3) takes no recommendation from the caller: the third argument is the note digest
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) releases a reviewed grant to its requester
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download after the requester profile is suspended
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download after the requester profile is revoked
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download when the requester certificate is no longer active
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download to any other identity
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download of a reused grant after its authorization is revoked
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download of a reused grant after its authorization expires
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download of a reused grant whose authorization scope no longer matches
+diasRelease.test.js :: DIAS release at the final document download (plan step 4) refuses the download when the access decision behind it is not a granted view
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) never releases anything for an expired or cancelled request
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) review deadline gives a pending request the default 72-hour deadline and an automatic grant none
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) review deadline takes the deadline from the on-chain parameter set by an active district head
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) review deadline refuses parameters from anyone else and out-of-range or unknown values
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) expiry rejects a decision after the deadline without writing anything
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) expiry records the expiry through its own transaction once the deadline has passed
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) expiry refuses a late decision on an expired request
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) expiry lets the requester ask again after an expiry
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) cancellation lets only the requester cancel a pending request
+diasRequestLifecycle.test.js :: DIAS pending-request lifecycle (plan step 7) cancellation cannot cancel a request that is already decided
+diasSchema.test.js :: DIAS verified request builds the documented shape with booleans and nulls normalized
+diasSchema.test.js :: DIAS verified request rejects missing groups, extra fields, and wrong types
+diasSchema.test.js :: DIAS verified request hashes independently of key order
+diasSchema.test.js :: DIAS verified request hashes the ordered context in the context domain
+diasSchema.test.js :: DIAS verified request never carries a requester claim, even when one is passed in
+diasSchema.test.js :: DIAS requester claims records the self-declared emergency as a claim with its own digest
+diasSchema.test.js :: DIAS requester claims defaults to no emergency and rejects anything but a boolean or extra fields
+diasSchema.test.js :: DIAS verified request v1 (historical, prompt v1 and the published dataset) keeps the v1 shape with both flags inside the request group, unchanged
+diasSchema.test.js :: DIAS recommendation schema accepts a valid response and normalizes key order
+diasSchema.test.js :: DIAS recommendation schema allows only binary recommendations with matching reason codes
+diasSchema.test.js :: DIAS recommendation schema validates lists against the registered policy vocabulary
+diasSchema.test.js :: DIAS recommendation schema separates generation failures from recommendations
+governanceContract.test.js :: GovernanceContract creates and queries a department
+governanceContract.test.js :: GovernanceContract blocks anyone outside the district authority
+governanceContract.test.js :: GovernanceContract creates, reads and lists a governed case
+governanceContract.test.js :: GovernanceContract validates case ownership and protected classifications
+governanceContract.test.js :: GovernanceContract lets a supervisor assign users without duplicates
+governanceContract.test.js :: GovernanceContract rejects unauthorized case creation and assignment
+governanceContract.test.js :: GovernanceContract records prosecution/court workflow metadata with valid transitions
+governanceContract.test.js :: GovernanceContract rejects invalid court workflow transitions
+governanceContract.test.js :: GovernanceContract who may create a department accepts a district head of the authority organisation
+governanceContract.test.js :: GovernanceContract who may create a department refuses a working officer of that department
+governanceContract.test.js :: GovernanceContract who may create a department refuses a station head, who is not a district authority
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 1 - the model read the request the way it was committed keeps the model result when action, purpose, decision and reason all agree
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 2 - the model read a different operation than the one invoked escalates when the canonical action is view and the model says export
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 2 - the model read a different operation than the one invoked evaluates policy on the canonical action, not the one the model reported
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 2 - the model read a different operation than the one invoked escalates when the model reports a different purpose than the one committed
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 3 - trusted context implies DENY, the model proposes ALLOW escalates rather than granting
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 4 - trusted context implies ALLOW, the model proposes DENY escalates rather than denying
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 5 - the decision matches but the reason code conflicts escalates an ALLOW carried by a denial reason code
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 5 - the decision matches but the reason code conflicts escalates a reason code the policy did not reach, even at the same decision
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 6 - purpose is established independently of the model takes the purpose the requester committed, never the model classification
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 6 - purpose is established independently of the model never shows the canonical operation or purpose to the model
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 6 - purpose is established independently of the model rejects a purpose outside the policy vocabulary before inference
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 7 - the explanation describes the escalation, not the proposal explains a policy disagreement without reusing the proposed ALLOW reason
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 7 - the explanation describes the escalation, not the proposal explains an input disagreement in its own terms
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 7 - the explanation describes the escalation, not the proposal records the committed request, not the model reading, in parsedRequest
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 8 - disagreement never substitutes the deterministic outcome escalates instead of adopting the policy outcome: model ALLOW against a policy DENY
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 8 - disagreement never substitutes the deterministic outcome escalates instead of adopting the policy outcome: model DENY against a policy ALLOW
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 8 - disagreement never substitutes the deterministic outcome escalates instead of adopting the policy outcome: model DENY against a policy DENY for a different reason
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 8 - disagreement never substitutes the deterministic outcome escalates instead of adopting the policy outcome: model misread the operation
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 8 - disagreement never substitutes the deterministic outcome exhaustively: no advisory over the whole reason vocabulary ever yields a
+canonicalInputs.test.js :: canonical request facts drive the deterministic safety check TEST 8 - disagreement never substitutes the deterministic outcome never lets the model emit a system reason code itself
+dynamicPolicy.test.js :: DIAS dynamic access policy canonical request fingerprint is stable across record and case identifiers when properties and assignment match
+dynamicPolicy.test.js :: DIAS dynamic access policy canonical request fingerprint changes when any governed match field changes
+dynamicPolicy.test.js :: DIAS dynamic access policy rule provenance creates a versioned active rule only for DENY to FORCE_ALLOW
+policyEngine.test.js :: policyEngine (crime-policy-v2) allows a fully compliant request with decisive attributes
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies when the credential is not active (rule 1)
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies a missing or unknown purpose (rule 2)
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies when RBAC gives the role no such permission (rule 3)
+policyEngine.test.js :: policyEngine (crime-policy-v2) does not let an AuditMSP title inherit an operational PoliceMSP role
+policyEngine.test.js :: policyEngine (crime-policy-v2) escalates a sealed record to the court for everyone outside it (rule 4)
+policyEngine.test.js :: policyEngine (crime-policy-v2) lets the court open its own sealed record without escalation (rule 4)
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies juvenile records outside the narrow legal exception (rule 5)
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies victim-protected raw content to forensics (rule 5b)
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies any request that crosses a district, for every role (rule 6)
+policyEngine.test.js :: policyEngine (crime-policy-v2) has no emergency override of any kind
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies unassigned officers with a counterfactual (rule 7)
+policyEngine.test.js :: policyEngine (crime-policy-v2) exempts cross-case roles from assignment but never from jurisdiction
+policyEngine.test.js :: policyEngine (crime-policy-v2) denies insufficient clearance rather than escalating (rule 8)
+policyEngine.test.js :: policyEngine (crime-policy-v2) treats a missing clearance attribute as no clearance (rule 8)
+policyEngine.test.js :: policyEngine (crime-policy-v2) never blocks on the witness flag alone
+policyEngine.test.js :: policyEngine (crime-policy-v2) is deterministic: same input, same output
+structuredExplanation.test.js :: structured explanation materialization defines explanation details for every active reason code
+structuredExplanation.test.js :: structured explanation materialization TEST 1 - materializes the correct ALLOW explanation
+structuredExplanation.test.js :: structured explanation materialization TEST 2 - materializes the correct DENY explanation
+structuredExplanation.test.js :: structured explanation materialization TEST 3 - materializes the correct normal ESCALATE explanation
+structuredExplanation.test.js :: structured explanation materialization TEST 4 - explains MODEL_POLICY_DISAGREEMENT from proposed ALLOW
+structuredExplanation.test.js :: structured explanation materialization TEST 5 - explains MODEL_POLICY_DISAGREEMENT from proposed DENY
+structuredExplanation.test.js :: structured explanation materialization materializes MODEL_INPUT_DISAGREEMENT from the effective input-conflict reason
+structuredExplanation.test.js :: structured explanation materialization TEST 6 - rejects a model decision that conflicts with its reason
+structuredExplanation.test.js :: structured explanation materialization TEST 7 - detects tampered explanation text after the attacker recomputes outputHash
+structuredExplanation.test.js :: structured explanation materialization TEST 8 - detects tampered decisiveAttributes after the attacker recomputes outputHash
+structuredExplanation.test.js :: structured explanation materialization TEST 9 - detects a tampered counterfactual after the attacker recomputes outputHash
+structuredExplanation.test.js :: structured explanation materialization TEST 10 - rejects an unknown reason code
+structuredExplanation.test.js :: structured explanation materialization exhaustively matches each model reason explanation to the policy evidence
+structuredExplanation.test.js :: structured explanation materialization gives every system-generated escalation a policy-condition counterfactual
+recordContract.test.js :: RecordContract CreateCaseRecord creates a record for an authorized police role
+recordContract.test.js :: RecordContract CreateCaseRecord rejects non-police MSPs
+recordContract.test.js :: RecordContract CreateCaseRecord allows a constable to file (CCTNS station data entry)
+recordContract.test.js :: RecordContract CreateCaseRecord still rejects police roles outside the filing set
+recordContract.test.js :: RecordContract CreateCaseRecord rejects a caller with no role attribute
+recordContract.test.js :: RecordContract CreateCaseRecord rejects unknown fields (allow-list, not denylist)
+recordContract.test.js :: RecordContract CreateCaseRecord rejects a malformed content hash and a bad enum
+recordContract.test.js :: RecordContract CreateCaseRecord rejects non-boolean flags (type checking, not presence checking)
+recordContract.test.js :: RecordContract CreateCaseRecord rejects duplicates
+recordContract.test.js :: RecordContract AttachEvidenceHash attaches evidence for a forensics analyst
+recordContract.test.js :: RecordContract AttachEvidenceHash writes transient detail to the private collection only
+recordContract.test.js :: RecordContract AttachEvidenceHash rejects police callers and bad hashes
+recordContract.test.js :: RecordContract AttachEvidenceHash rejects duplicate evidence ids and missing records
+recordContract.test.js :: RecordContract AttachEvidenceHash reads private detail back for a collection member
+recordContract.test.js :: RecordContract AttachEvidenceHash blocks non-collection orgs from reading private detail
+recordContract.test.js :: RecordContract AttachEvidenceHash errors when no private detail was supplied
+recordContract.test.js :: RecordContract AttachEvidenceHash lists attached evidence
+recordContract.test.js :: RecordContract AttachEvidenceHash records custody transfers and enforces the current custodian
+recordContract.test.js :: RecordContract AttachEvidenceHash rejects invalid custody destinations and unknown evidence
+recordContract.test.js :: RecordContract SealRecord / UnsealRecord lets a judge seal and unseal without mutating history
+recordContract.test.js :: RecordContract SealRecord / UnsealRecord rejects double-sealing and non-court callers
+recordContract.test.js :: RecordContract QueryRecords (case-file search) finds every record belonging to a case
+recordContract.test.js :: RecordContract QueryRecords (case-file search) combines filters
+recordContract.test.js :: RecordContract QueryRecords (case-file search) finds one case file by its identifier for any role, public index fields only
+recordContract.test.js :: RecordContract QueryRecords (case-file search) rejects a malformed record identifier filter
+recordContract.test.js :: RecordContract QueryRecords (case-file search) returns an empty list when nothing matches
+recordContract.test.js :: RecordContract QueryRecords (case-file search) refuses an unfiltered search and unknown filter fields
+recordContract.test.js :: RecordContract QueryRecords (case-file search) requires an identity with a role
+recordContract.test.js :: RecordContract GetRecord errors for a missing record (real-shim empty Buffer semantics)
+recordContract.test.js :: RecordContract GetRecord limits ungated metadata to the owning station or AuditMSP
+recordContract.test.js :: RecordContract ALLOW-gated metadata and full-document requests releases metadata only for the exact granted view decision
+recordContract.test.js :: RecordContract ALLOW-gated metadata and full-document requests runs the complete request, owner upload, and requester read workflow
+recordContract.test.js :: RecordContract ALLOW-gated metadata and full-document requests rejects document upload by the wrong organization or station
+recordContract.test.js :: RecordContract ALLOW-gated metadata and full-document requests validates PDF commitments and keeps releases identity-bound
+recordContract.test.js :: RecordContract AuthorizeRecordRead returns only the governed off-chain reference after an identity-bound grant
+recordContract.test.js :: RecordContract AuthorizeRecordRead rejects a caller without an identity-bound grant
+recordContract.test.js :: RecordContract release re-checks the grant basis refuses release after the requester credential is suspended
+recordContract.test.js :: RecordContract release re-checks the grant basis releases a dynamic-authorization grant only while that authorization is active and unexpired
+recordContract.test.js :: RecordContract release re-checks the grant basis never releases raw content on a grant for a different action
+userContract.test.js :: UserContract creates an identity-backed authorization profile without secrets
+userContract.test.js :: UserContract requires the department administrator and matching department mapping
+userContract.test.js :: UserContract rejects duplicates, malformed JSON and unknown fields
+userContract.test.js :: UserContract reads, lists and reports existence
+userContract.test.js :: UserContract authenticates only the matching certificate, MSP, role and profile attributes
+userContract.test.js :: UserContract keeps status changes and history on the ledger
+userContract.test.js :: UserContract rejects invalid status and non-admin status changes
+userContract.test.js :: UserContract genesis bootstrap lets an AuditMSP administrator admit the very first user
+userContract.test.js :: UserContract genesis bootstrap closes the bootstrap as soon as one user exists
+userContract.test.js :: UserContract genesis bootstrap never opens the bootstrap to an organisation other than the authority
+userContract.test.js :: UserContract genesis bootstrap once a district head exists, they admit users to any department

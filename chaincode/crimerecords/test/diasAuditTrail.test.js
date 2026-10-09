@@ -6,7 +6,13 @@ const { expect } = chai;
 
 const AuditContract = require('../lib/auditContract');
 const { CALLERS, RECORD_META, buildMockContext, cloneInto } = require('./testHelpers');
-const { createDiasWorld } = require('./diasTestWorld');
+const {
+  DEFAULT_JUSTIFICATION, POLICY_V1, createDiasWorld, recommendationObjectFor,
+} = require('./diasTestWorld');
+const { hashCanonical, hashText } = require('../lib/dias/commitments');
+const {
+  provenancePayload, signerKeyIdOf, verifyProvenance,
+} = require('../lib/dias/recommendationCommitment');
 
 const audit = new AuditContract();
 const stagesOf = (events) => events.map((event) => event.eventType);
@@ -74,6 +80,52 @@ describe('AuditContract', () => {
       expect(result.transactions).to.have.length(1);
       expect(result.auditorDecision).to.equal(null);
       expect(result.dynamicAuthorizations[0].relation).to.equal('checked-by-this-request');
+      expect(result.dynamicAuthorizations[0].authorization.status).to.equal('revoked');
+      expect(stagesOf(result.dynamicAuthorizations[0].events))
+        .to.deep.equal(['DYNAMIC_AUTHORIZATION_CREATED', 'DYNAMIC_AUTHORIZATION_REVOKED']);
+    });
+
+    // Plan step 16, "complete audit trail reconstructed": from the trail alone, an
+    // auditor can recompute h_J, h_M and h_N from the off-chain objects, check the
+    // κ signature, and see one policy binding and one transaction per stage.
+    it('reconstructs every commitment of a reviewed request from the trail alone', async () => {
+      const { request, authorization } = await world.createAuthorization();
+      await world.revoke(authorization.authorizationId, 'Tasking ended.');
+      const result = await trail(CALLERS.auditor, request.requestId);
+      const kappa = result.recommendationCommitment;
+
+      expect(result.request.justificationHash).to.equal(hashText('justification', DEFAULT_JUSTIFICATION));
+      expect(kappa.justificationHash).to.equal(result.request.justificationHash);
+      expect(kappa.contextHash).to.equal(result.request.verifiedRequestHash);
+      expect(kappa.recommendationHash).to.equal(hashCanonical(
+        'recommendation', recommendationObjectFor(request.requestId, 'DENY', 'OK')));
+      expect(kappa.signerKeyId).to.equal(signerKeyIdOf(world.signer.publicKeyPem));
+      expect(verifyProvenance({
+        publicKeyPem: world.signer.publicKeyPem,
+        payload: provenancePayload({ channel: 'diaschannel', ...kappa }),
+        signature: kappa.signature,
+      })).to.equal(true);
+      expect(verifyProvenance({
+        publicKeyPem: world.signer.publicKeyPem,
+        payload: provenancePayload({ channel: 'diaschannel', ...kappa, recommendation: 'ALLOW' }),
+        signature: kappa.signature,
+      })).to.equal(false);
+      expect(result.auditorDecision).to.include({
+        noteHash: hashText('note', `Auditor note for ${request.requestId}`),
+        recommendationCommitmentId: kappa.commitmentId,
+        recommendationHash: kappa.recommendationHash,
+        verifiedRequestHash: result.request.verifiedRequestHash,
+      });
+
+      const bound = [result.request, kappa, result.auditorDecision, result.accessOutcome,
+        result.dynamicAuthorizations[0].authorization];
+      for (const item of bound) {
+        expect(item).to.include({ policyVersion: POLICY_V1.policyVersion, policyHash: POLICY_V1.policyHash });
+      }
+      expect(result.transactions.map((transaction) => transaction.txId)).to.deep.equal([
+        result.request.txId, kappa.txId, result.auditorDecision.txId,
+      ]);
+      expect(result.accessOutcome.txId).to.equal(result.auditorDecision.txId);
       expect(result.dynamicAuthorizations[0].authorization.status).to.equal('revoked');
       expect(stagesOf(result.dynamicAuthorizations[0].events))
         .to.deep.equal(['DYNAMIC_AUTHORIZATION_CREATED', 'DYNAMIC_AUTHORIZATION_REVOKED']);

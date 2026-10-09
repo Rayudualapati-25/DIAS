@@ -79,6 +79,24 @@ Each requirement traces: paper requirement → current behavior → required cha
 | A13 | v3 performance re-measured (reuse, load, faults, resources, ledger growth) | EXP | 17 | planned (prepared, not run) |
 | A14 | Integrity cost and tamper detection measured | EXP | 17 | planned (offline) |
 
+## Step 16 — required-test matrix (offline, 2026-10-09)
+
+Each required test of plan step 16, with the tests that prove it on the mock Fabric stub. Full list: `results/tables/20261009_step16_required_tests.csv`; report: iteration 074. The live run of the same checks is NOT RUN — needs the author's Mac.
+
+| ID | Required test | Proven by | Related rows | Offline status |
+|---|---|---|---|---|
+| R16-01 | Inactive auditor rejected | `diasAuditorAuthority.test.js` | M24 | covered |
+| R16-02 | Inactive requester rejected at release | `diasRelease.test.js`, `recordContract.test.js` | M20, A01 | covered |
+| R16-03 | Revoked and expired authorization rejected at download | `diasRelease.test.js` | M20, A01 | covered |
+| R16-04 | Old-policy authorization rejected | `diasPolicyBinding.test.js` | M06, M17 | covered |
+| R16-05 | Changed justification, recommendation or note detected | `offChainVerification.unit.test.js`, `recommendationIntegrity.unit.test.js`, `commitments.test.js` | M19, M10 | covered |
+| R16-06 | Missing, duplicate or wrong commitment rejected | `diasRecommendationCommitment.test.js`, `diasNoteCommitment.test.js` | M08 | covered; a missing κ gives NO_RECOMMENDATION and needs a note (design §7) |
+| R16-07 | Missing note rejected | `diasNoteCommitment.test.js`, `auditorNote.unit.test.js` | M11 | covered |
+| R16-08 | Unauthorized explanation access rejected | `diasPrivacy.test.js`, `diasRecommendationDetail.unit.test.js` | A02, A03 | covered |
+| R16-09 | Pending request expires correctly | `diasRequestLifecycle.test.js`, `expirySweeper.unit.test.js` | M27 | covered |
+| R16-10 | Recommendation signature verified | `diasRecommendationCommitment.test.js`, `signedRecommendation.unit.test.js` | A05 | covered |
+| R16-11 | Complete audit trail reconstructed | `diasAuditTrail.test.js` ("reconstructs every commitment of a reviewed request from the trail alone", added 2026-10-09) | M18, M19, M26 | gap closed |
+
 ## Details
 
 Each entry: current behavior → required change; files; tests; evidence; acceptance criterion.
