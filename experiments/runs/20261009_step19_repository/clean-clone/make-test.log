@@ -1,0 +1,2241 @@
+cd chaincode/crimerecords && npm test
+
+> crimerecords@3.0.0 test
+> nyc mocha --recursive 'test/**/*.test.js'
+
+
+
+  architecture guard: the DIAS runtime has no policy engine
+    ✔ the deployed contracts never load the retained rule engine or disagreement guard
+    ✔ the chaincode package excludes every retained policy-engine module
+    ✔ runtime modules stay inside the package and never reach the offline oracle or guard
+    ✔ loads the DIAS modules for verified requests, authorization, and lifecycle
+    ✔ loads only the recommendation commitment, never a model, parser, prompt or registration
+
+  rank ladder
+    ✔ orders each department from low to high
+    ✔ gives every role in every department a rank
+    ✔ never compares ranks across departments
+
+  authority resolution
+    ✔ makes the highest-ranked officer at a station its head
+    ✔ makes the highest-ranked officer in a district its head
+    ✔ keeps departments separate
+    ✔ routes a request to the station head when that head has the clearance
+    ✔ routes past a station head who lacks the clearance, up to the district head
+    ✔ skips the station tier for a requester with no station
+    ✔ never routes a request to the requester themselves
+    ✔ returns nothing when no authority in reach holds the clearance
+
+  canonical ledger state
+    the serializer is independent of insertion order
+      ✔ produces identical bytes for the same content inserted in any order
+      ✔ survives the spread that caused the divergence
+      ✔ canonicalises nested objects and preserves array order
+      ✔ still distinguishes different content
+      ✔ refuses anything that is not a JSON object
+      ✔ writes the canonical bytes through putJson
+    no contract may bypass the serializer
+      ✔ accessContract.js writes JSON state only through putJson
+      ✔ accessContract.js never serialises STATE with JSON.stringify
+      ✔ accessContract.js builds no event payload from spread state
+      ✔ auditContract.js writes JSON state only through putJson
+      ✔ auditContract.js never serialises STATE with JSON.stringify
+      ✔ auditContract.js builds no event payload from spread state
+      ✔ governanceContract.js writes JSON state only through putJson
+      ✔ governanceContract.js never serialises STATE with JSON.stringify
+      ✔ governanceContract.js builds no event payload from spread state
+      ✔ recordContract.js writes JSON state only through putJson
+      ✔ recordContract.js never serialises STATE with JSON.stringify
+      ✔ recordContract.js builds no event payload from spread state
+      ✔ userContract.js writes JSON state only through putJson
+      ✔ userContract.js never serialises STATE with JSON.stringify
+      ✔ userContract.js builds no event payload from spread state
+      ✔ every contract imports the shared writer
+
+  commitment hashing (dias-commitment-hash-v1)
+    ✔ declares its format and the six domains of the design
+    canonical JSON
+      ✔ serializes {"b":2,"a":1}
+      ✔ serializes {"outer":{"z":1,"a":[3,1,2]},"top":true}
+      ✔ serializes {"é":1,"z":2,"A":3,"€":4}
+      ✔ serializes {"ﬁ":1,"😀":2} (keys sort by UTF-16 code units (0xD83D < 0xFB01), not by code point)
+      ✔ serializes {"string":"€$\u000f\nA'B\"\\\\\"/","literals":[null,true,false]} (RFC 8785 section 3.2.2.2 string example)
+      ✔ serializes [0,-1,9007199254740991,-9007199254740991]
+      ✔ serializes {}
+      ✔ serializes []
+      ✔ is independent of insertion order at every depth
+      ✔ rejects non-integer number
+      ✔ rejects unsafe integer
+      ✔ rejects nested non-integer number
+      ✔ rejects values JSON cannot represent exactly
+      ✔ rejects strings with an unpaired surrogate anywhere, including keys
+    domain-separated digests
+      ✔ hashes note text "hello" to the shell reference
+      ✔ hashes justification text "hello" to the shell reference
+      ✔ hashes note text "" to the shell reference
+      ✔ hashes justification text "café €" to the shell reference
+      ✔ hashes canonical context JSON to the shell reference
+      ✔ gives the same text different digests in different domains
+      ✔ hashes text exactly: no trimming and no Unicode normalization
+      ✔ detects any change to structured content
+      ✔ refuses an unknown domain and non-string text
+    digest format
+      ✔ accepts exactly 64 lowercase hexadecimal characters
+      ✔ names the field when a digest is malformed
+
+  DIAS access workflow safeguards
+    request submission
+      ✔ commits the structured action and purpose and keeps identity out of the verified context
+      ✔ commits the justification only as its digest (h_J)
+      ✔ refuses a request without a well-formed justification digest
+      ✔ refuses the retired v2 emergencyFlag input instead of reading it as a fact
+      ✔ rejects invalid request fields
+      ✔ binds the request to the certificate-matched UserProfile
+    auditor decision stage
+      ✔ allows only AuditMSP district heads and takes the recommendation from the commitment
+      ✔ prevents a requester from deciding their own request
+      ✔ rejects a decision when governed facts changed after the request
+      ✔ bounds revocation reasons and identifiers
+    read access
+      ✔ limits a request to its requester and district heads
+      ✔ shows district heads the pending queue with the committed request and its commitment
+      ✔ lets district heads query authorizations and their history
+      ✔ limits access decisions to their subject and district heads
+
+  DIAS access workflow
+    request log
+      ✔ records who asked for which record and waits for the auditor
+      ✔ commits digests and the recommendation value, but never free text
+    decision log: auditor FORCE_ALLOW that agreed with an LLM ALLOW
+      ✔ grants access, records AGREED, and creates no dynamic authorization
+    decision log: auditor FORCE_DENY that agreed with an LLM DENY
+      ✔ denies access without creating a dynamic authorization
+    decision log: auditor FORCE_ALLOW that did not agree with an LLM DENY
+      ✔ grants access and creates an exact-record dynamic authorization
+    decision log: auditor FORCE_DENY that did not agree with an LLM ALLOW
+      ✔ denies access, records NOT_AGREED, and creates no dynamic authorization
+    decision log: no LLM recommendation
+      ✔ lets the auditor decide and never creates a dynamic authorization
+    decision log, as a reviewer reads it
+      ✔ lets a reviewer read who asked for what and what was decided
+      ✔ shows an automatic grant as decided by its dynamic authorization
+      ✔ returns the newest entries first and refuses an out-of-range limit
+    reuse of an active dynamic authorization
+      ✔ grants a repeat request with the auditor recorded as skipped
+    no broad reuse
+      ✔ does not reuse the authorization for another record, action, purpose, or user
+      ✔ does not reuse the authorization after a governed fact changes
+    explicit revocation
+      ✔ requires a district head and a reason, records the change, and stops reuse
+      ✔ creates a new generation when a revoked scope is approved again
+    expiry
+      ✔ stops reuse after validUntilUtc and records the expiry transition
+      ✔ rejects an expiry when no dynamic authorization is created
+    FORCE_DENY
+      ✔ never revokes other authorizations
+
+  DIAS auditor authority (plan step 3)
+    credential status
+      ✔ rejects a decision by an auditor whose ledger profile is suspended
+      ✔ rejects a decision by an auditor whose ledger profile is revoked
+      ✔ rejects a decision signed with a certificate whose credential is not active
+      ✔ rejects a district head with no ledger profile
+      ✔ rejects a certificate that does not match the auditor profile
+    district and clearance
+      ✔ rejects a district head of another district
+      ✔ rejects a district head without clearance for the record
+      ✔ accepts an active district head of the record district with clearance
+      ✔ still refuses a decision on the auditor own request
+    revocation
+      ✔ requires the same active, in-district authority
+
+  AuditContract
+    GetRequestAuditTrail
+      ✔ reconstructs a reviewed request that created a dynamic authorization
+      ✔ reconstructs a reused authorization with the auditor skipped, and a later revocation
+      ✔ reconstructs every commitment of a reviewed request from the trail alone
+      ✔ lets the requester read their own trail and refuses other identities
+    record-level trail and verification
+      ✔ lists the DIAS requests and release grants for a record
+      ✔ confirms a matching payload hash and flags a tampered one
+    direct-ledger access events
+      ✔ derives the actor from the signing identity and stores the event
+      ✔ allows reviewers to query and rejects ordinary departments
+      ✔ rejects malformed event fields and limits
+
+  DIAS dynamic authorization scope
+    ✔ is exact: user, record, case, action, and purpose each change the scope
+
+  DIAS dynamic authorization creation
+    ✔ records the originating request, auditor decision, LLM agreement, scope, and conditions
+    ✔ is refused unless the auditor FORCE_ALLOW did not agree with an LLM DENY
+    ✔ validates identifiers, auditor identity, and expiry
+    ✔ increments the generation when it replaces an earlier authorization
+
+  DIAS dynamic authorization matching
+    ✔ matches only an active, unexpired authorization with unchanged conditions
+    ✔ does not match when no authorization or a different scope is stored
+    ✔ reports revoked, superseded, expired, and changed-condition misses
+
+  DIAS dynamic authorization state transitions
+    ✔ revokes without mutating the previous state
+    ✔ expires and supersedes with an incremented state version
+
+  DIAS dynamic authorization policy binding (v3)
+    ✔ stores the policy it is issued under and refuses to be issued without one
+    ✔ reports POLICY_CHANGED, not a match, under another active policy
+    ✔ never matches an authorization of an older schema
+
+  DIAS lifecycle events
+    ✔ writes ordered, transaction-bound events under the request ID
+    ✔ keeps request event streams isolated even when IDs share a prefix
+    ✔ stores authorization events in their own key space
+    ✔ emits one chaincode event naming every committed stage
+
+  DIAS auditor note commitment (plan step 11)
+    ✔ returns the committed decision with its note digest in the auditor review, for read-back
+    ✔ rejects a malformed note digest before reading anything
+    a note digest is required
+      ✔ rejects FORCE_ALLOW over a committed DENY (NOT_AGREED) without one, writing nothing
+      ✔ rejects FORCE_DENY over a committed ALLOW (NOT_AGREED) without one, writing nothing
+      ✔ rejects a committed failure status (NO_RECOMMENDATION) without one, writing nothing
+      ✔ rejects no commitment at all (NO_RECOMMENDATION) without one, writing nothing
+      ✔ accepts the same decision once the digest is supplied, and records it
+    an agreeing decision
+      ✔ needs no note, and records that none was given
+      ✔ may carry a note digest, which is recorded
+
+  DIAS policy governance and binding (plan step 8)
+    policy registry
+      ✔ activates the seeded policy and reports it as active
+      ✔ needs a different district head to activate than the one who registered
+      ✔ never re-activates a retired version and refuses duplicates and malformed input
+      ✔ accepts registration and activation only from active AuditMSP district heads
+      ✔ refuses every request while no policy is active
+    binding
+      ✔ binds a request, its decision, outcome and authorization to the active policy
+      ✔ rejects a decision once another policy is active, then lets the request be expired
+      ✔ stops reusing an authorization after a policy change, without changing its status
+      ✔ reissues the authorization under the new policy as a new generation
+    release after a policy change
+      ✔ refuses to release a reviewed grant issued under a retired policy
+      ✔ refuses to release a reused grant issued under a retired policy
+    records without a policy binding
+      ✔ never reuses an authorization or releases a grant that carries no policy
+
+  policy digest of the repository policy
+    ✔ matches the binding the test world activates, so tests use the real policy identity
+
+  DIAS privacy controls (plan step 13)
+    record history
+      ✔ is readable by a reviewer and by the owning station
+      ✔ is refused for another station, another organization, and a reviewer organization without the role
+      ✔ is refused for an owning-station member whose credential is not active
+      ✔ refuses a record that does not exist instead of returning an empty history
+    evidence list and custody chain
+      ✔ is readable by a reviewer and by same-district police, forensics, prosecution and court
+      ✔ is refused outside the record's district
+      ✔ is refused for a same-district member whose credential is not active
+      ✔ scopes the private evidence detail to the district as well
+      ✔ lets a seal-authority reviewer of another district read, because reviewers are not district-bound
+    decision log
+      ✔ is full for reviewers
+      ✔ is redacted for everyone else, the requester included
+    the recommendation, for the requester, follows the auditor decision
+      ✔ is withheld from the requester until an auditor has decided
+      ✔ is always visible to the auditors and reviewers
+      ✔ is shown to the requester once the auditor has allowed the request
+      ✔ never shows the requester the digest of the auditor note
+      ✔ is shown to the requester once the auditor has decided, in every part of the trail
+      ✔ is withheld from a court reviewer for their own request until another auditor has decided
+      ✔ is withheld from an audit district head for their own request until another auditor has decided
+      ✔ keeps an audit district head out of the auditor view of their own request
+      ✔ stays withheld from the requester when the request ends without a decision
+
+  DIAS pre-review recommendation commitment (plan steps 10 and 12)
+    signer registry
+      ✔ registers an Ed25519 key under the digest of its public key
+      ✔ refuses duplicates, other key types, malformed keys and non-auditors
+      ✔ stops accepting commitments signed by a revoked key, and revocation needs a reason
+    acceptance
+      ✔ commits a signed recommendation before review, bound to the request
+      ✔ treats an identical resubmission as a safe retry that writes nothing
+      ✔ rejects a different commitment for the same request without writing
+      ✔ keeps every specific generation failure status
+    rejection
+      ✔ rejects commitments whose bindings do not match the request
+      ✔ rejects inconsistent or malformed content
+      ✔ rejects a commitment changed after signing, or signed by an unregistered key
+      ✔ rejects a valid commitment replayed onto another request
+      ✔ rejects a commitment after the deadline, a policy change, or a decision
+    agreement derived from the commitment (paper Eq. 3)
+      ✔ ALLOW + FORCE_ALLOW -> AGREED
+      ✔ ALLOW + FORCE_DENY -> NOT_AGREED
+      ✔ DENY + FORCE_ALLOW -> NOT_AGREED, authorization created
+      ✔ DENY + FORCE_DENY -> AGREED
+      ✔ a committed UNAVAILABLE -> NO_RECOMMENDATION with the specific status
+      ✔ a committed INVALID_OUTPUT -> NO_RECOMMENDATION with the specific status
+      ✔ a committed POLICY_CONTEXT_UNAVAILABLE -> NO_RECOMMENDATION with the specific status
+      ✔ a committed CONTEXT_OVERFLOW -> NO_RECOMMENDATION with the specific status
+      ✔ no commitment at all -> NO_RECOMMENDATION recorded as NOT_COMMITTED
+      ✔ takes no recommendation from the caller: the third argument is the note digest
+
+  DIAS release at the final document download (plan step 4)
+    ✔ releases a reviewed grant to its requester
+    ✔ refuses the download after the requester profile is suspended
+    ✔ refuses the download after the requester profile is revoked
+    ✔ refuses the download when the requester certificate is no longer active
+    ✔ refuses the download to any other identity
+    ✔ refuses the download of a reused grant after its authorization is revoked
+    ✔ refuses the download of a reused grant after its authorization expires
+    ✔ refuses the download of a reused grant whose authorization scope no longer matches
+    ✔ refuses the download when the access decision behind it is not a granted view
+
+  DIAS pending-request lifecycle (plan step 7)
+    ✔ never releases anything for an expired or cancelled request
+    review deadline
+      ✔ gives a pending request the default 72-hour deadline and an automatic grant none
+      ✔ takes the deadline from the on-chain parameter set by an active district head
+      ✔ refuses parameters from anyone else and out-of-range or unknown values
+    expiry
+      ✔ rejects a decision after the deadline without writing anything
+      ✔ records the expiry through its own transaction once the deadline has passed
+      ✔ refuses a late decision on an expired request
+      ✔ lets the requester ask again after an expiry
+    cancellation
+      ✔ lets only the requester cancel a pending request
+      ✔ cannot cancel a request that is already decided
+
+  DIAS verified request
+    ✔ builds the documented shape with booleans and nulls normalized
+    ✔ rejects missing groups, extra fields, and wrong types
+    ✔ hashes independently of key order
+    ✔ hashes the ordered context in the context domain
+    ✔ never carries a requester claim, even when one is passed in
+
+  DIAS requester claims
+    ✔ records the self-declared emergency as a claim with its own digest
+    ✔ defaults to no emergency and rejects anything but a boolean or extra fields
+
+  DIAS verified request v1 (historical, prompt v1 and the published dataset)
+    ✔ keeps the v1 shape with both flags inside the request group, unchanged
+
+  DIAS recommendation schema
+    ✔ accepts a valid response and normalizes key order
+    ✔ allows only binary recommendations with matching reason codes
+    ✔ validates lists against the registered policy vocabulary
+    ✔ separates generation failures from recommendations
+
+  GovernanceContract
+    ✔ creates and queries a department
+    ✔ blocks anyone outside the district authority
+    ✔ creates, reads and lists a governed case
+    ✔ validates case ownership and protected classifications
+    ✔ lets a supervisor assign users without duplicates
+    ✔ rejects unauthorized case creation and assignment
+    ✔ records prosecution/court workflow metadata with valid transitions
+    ✔ rejects invalid court workflow transitions
+    who may create a department
+      ✔ accepts a district head of the authority organisation
+      ✔ refuses a working officer of that department
+      ✔ refuses a station head, who is not a district authority
+
+  canonical request facts drive the deterministic safety check
+    TEST 1 - the model read the request the way it was committed
+      ✔ keeps the model result when action, purpose, decision and reason all agree
+    TEST 2 - the model read a different operation than the one invoked
+      ✔ escalates when the canonical action is view and the model says export
+      ✔ evaluates policy on the canonical action, not the one the model reported
+      ✔ escalates when the model reports a different purpose than the one committed
+    TEST 3 - trusted context implies DENY, the model proposes ALLOW
+      ✔ escalates rather than granting
+    TEST 4 - trusted context implies ALLOW, the model proposes DENY
+      ✔ escalates rather than denying
+    TEST 5 - the decision matches but the reason code conflicts
+      ✔ escalates an ALLOW carried by a denial reason code
+      ✔ escalates a reason code the policy did not reach, even at the same decision
+    TEST 6 - purpose is established independently of the model
+      ✔ takes the purpose the requester committed, never the model classification
+      ✔ never shows the canonical operation or purpose to the model
+      ✔ rejects a purpose outside the policy vocabulary before inference
+    TEST 7 - the explanation describes the escalation, not the proposal
+      ✔ explains a policy disagreement without reusing the proposed ALLOW reason
+      ✔ explains an input disagreement in its own terms
+      ✔ records the committed request, not the model reading, in parsedRequest
+    TEST 8 - disagreement never substitutes the deterministic outcome
+      ✔ escalates instead of adopting the policy outcome: model ALLOW against a policy DENY
+      ✔ escalates instead of adopting the policy outcome: model DENY against a policy ALLOW
+      ✔ escalates instead of adopting the policy outcome: model DENY against a policy DENY for a different reason
+      ✔ escalates instead of adopting the policy outcome: model misread the operation
+      ✔ exhaustively: no advisory over the whole reason vocabulary ever yields a
+      ✔ never lets the model emit a system reason code itself
+
+  DIAS dynamic access policy
+    canonical request fingerprint
+      ✔ is stable across record and case identifiers when properties and assignment match
+      ✔ changes when any governed match field changes
+    rule provenance
+      ✔ creates a versioned active rule only for DENY to FORCE_ALLOW
+
+  policyEngine (crime-policy-v2)
+    ✔ allows a fully compliant request with decisive attributes
+    ✔ denies when the credential is not active (rule 1)
+    ✔ denies a missing or unknown purpose (rule 2)
+    ✔ denies when RBAC gives the role no such permission (rule 3)
+    ✔ does not let an AuditMSP title inherit an operational PoliceMSP role
+    ✔ escalates a sealed record to the court for everyone outside it (rule 4)
+    ✔ lets the court open its own sealed record without escalation (rule 4)
+    ✔ denies juvenile records outside the narrow legal exception (rule 5)
+    ✔ denies victim-protected raw content to forensics (rule 5b)
+    ✔ denies any request that crosses a district, for every role (rule 6)
+    ✔ has no emergency override of any kind
+    ✔ denies unassigned officers with a counterfactual (rule 7)
+    ✔ exempts cross-case roles from assignment but never from jurisdiction
+    ✔ denies insufficient clearance rather than escalating (rule 8)
+    ✔ treats a missing clearance attribute as no clearance (rule 8)
+    ✔ never blocks on the witness flag alone
+    ✔ is deterministic: same input, same output
+
+  structured explanation materialization
+    ✔ defines explanation details for every active reason code
+    ✔ TEST 1 - materializes the correct ALLOW explanation
+    ✔ TEST 2 - materializes the correct DENY explanation
+    ✔ TEST 3 - materializes the correct normal ESCALATE explanation
+    ✔ TEST 4 - explains MODEL_POLICY_DISAGREEMENT from proposed ALLOW
+    ✔ TEST 5 - explains MODEL_POLICY_DISAGREEMENT from proposed DENY
+    ✔ materializes MODEL_INPUT_DISAGREEMENT from the effective input-conflict reason
+    ✔ TEST 6 - rejects a model decision that conflicts with its reason
+    ✔ TEST 7 - detects tampered explanation text after the attacker recomputes outputHash
+    ✔ TEST 8 - detects tampered decisiveAttributes after the attacker recomputes outputHash
+    ✔ TEST 9 - detects a tampered counterfactual after the attacker recomputes outputHash
+    ✔ TEST 10 - rejects an unknown reason code
+    ✔ exhaustively matches each model reason explanation to the policy evidence
+    ✔ gives every system-generated escalation a policy-condition counterfactual
+
+  RecordContract
+    CreateCaseRecord
+      ✔ creates a record for an authorized police role
+      ✔ rejects non-police MSPs
+      ✔ allows a constable to file (CCTNS station data entry)
+      ✔ still rejects police roles outside the filing set
+      ✔ rejects a caller with no role attribute
+      ✔ rejects unknown fields (allow-list, not denylist)
+      ✔ rejects a malformed content hash and a bad enum
+      ✔ rejects non-boolean flags (type checking, not presence checking)
+      ✔ rejects duplicates
+    AttachEvidenceHash
+      ✔ attaches evidence for a forensics analyst
+      ✔ writes transient detail to the private collection only
+      ✔ rejects police callers and bad hashes
+      ✔ rejects duplicate evidence ids and missing records
+      ✔ reads private detail back for a collection member
+      ✔ blocks non-collection orgs from reading private detail
+      ✔ errors when no private detail was supplied
+      ✔ lists attached evidence
+      ✔ records custody transfers and enforces the current custodian
+      ✔ rejects invalid custody destinations and unknown evidence
+    SealRecord / UnsealRecord
+      ✔ lets a judge seal and unseal without mutating history
+      ✔ rejects double-sealing and non-court callers
+    QueryRecords (case-file search)
+      ✔ finds every record belonging to a case
+      ✔ combines filters
+      ✔ finds one case file by its identifier for any role, public index fields only
+      ✔ rejects a malformed record identifier filter
+      ✔ returns an empty list when nothing matches
+      ✔ refuses an unfiltered search and unknown filter fields
+      ✔ requires an identity with a role
+    GetRecord
+      ✔ errors for a missing record (real-shim empty Buffer semantics)
+      ✔ limits ungated metadata to the owning station or AuditMSP
+    ALLOW-gated metadata and full-document requests
+      ✔ releases metadata only for the exact granted view decision
+      ✔ runs the complete request, owner upload, and requester read workflow
+      ✔ rejects document upload by the wrong organization or station
+      ✔ validates PDF commitments and keeps releases identity-bound
+    AuthorizeRecordRead
+      ✔ returns only the governed off-chain reference after an identity-bound grant
+      ✔ rejects a caller without an identity-bound grant
+    release re-checks the grant basis
+      ✔ refuses release after the requester credential is suspended
+      ✔ releases a dynamic-authorization grant only while that authorization is active and unexpired
+      ✔ never releases raw content on a grant for a different action
+
+  UserContract
+    ✔ creates an identity-backed authorization profile without secrets
+    ✔ requires the department administrator and matching department mapping
+    ✔ rejects duplicates, malformed JSON and unknown fields
+    ✔ reads, lists and reports existence
+    ✔ authenticates only the matching certificate, MSP, role and profile attributes
+    ✔ keeps status changes and history on the ledger
+    ✔ rejects invalid status and non-admin status changes
+    genesis bootstrap
+      ✔ lets an AuditMSP administrator admit the very first user
+      ✔ closes the bootstrap as soon as one user exists
+      ✔ never opens the bootstrap to an organisation other than the authority
+      ✔ once a district head exists, they admit users to any department
+
+
+  342 passing (572ms)
+
+------------------------------|---------|----------|---------|---------|----------------------------
+File                          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
+------------------------------|---------|----------|---------|---------|----------------------------
+All files                     |   93.12 |    86.47 |   93.44 |   94.61 |                            
+ lib                          |   95.61 |    86.26 |   98.51 |   97.45 |                            
+  accessContract.js           |   95.52 |    84.64 |     100 |   97.73 | ...34-235,243,250,308,1063 
+  auditContract.js            |   96.42 |    85.33 |     100 |   97.08 | 53-56                      
+  governanceContract.js       |   93.65 |    81.57 |   95.83 |   97.74 | 81,134,234,253             
+  recordContract.js           |   97.05 |    91.48 |     100 |   97.64 | ...192,203,208,243,465,507 
+  userContract.js             |   94.18 |    84.37 |    92.3 |   95.23 | 89,113,129,180             
+ lib/dias                     |      96 |    93.52 |   95.45 |   95.97 |                            
+  auditorAuthority.js         |   94.28 |     90.9 |     100 |   94.28 | 39,66                      
+  authorization.js            |     100 |    96.87 |     100 |     100 | 123,190                    
+  commitments.js              |     100 |      100 |     100 |     100 |                            
+  keys.js                     |     100 |      100 |     100 |     100 |                            
+  lifecycle.js                |     100 |    66.66 |     100 |     100 | 41-43                      
+  parameters.js               |   95.65 |    93.75 |     100 |      95 | 21                         
+  policyRegistry.js           |     100 |      100 |     100 |     100 |                            
+  recommendationCommitment.js |   93.84 |       95 |     100 |   93.33 | 51,59,77,143               
+  recommendationSchema.js     |    97.5 |    97.36 |     100 |   97.29 | 79                         
+  requesterClaims.js          |     100 |       90 |     100 |     100 | 17                         
+  verifiedRequest.js          |   96.96 |    96.77 |     100 |   96.55 | 79                         
+  verifiedRequestV1.js        |   75.75 |    77.41 |      60 |   75.86 | 84,88,104,108,115-121      
+  visibility.js               |   96.42 |    88.88 |    90.9 |     100 | 30                         
+ lib/policy                   |   77.93 |    76.67 |   72.34 |   80.69 |                            
+  authority.js                |   90.38 |     87.5 |    90.9 |     100 | 75,87,97,100,115           
+  controlledDecision.js       |   74.35 |       92 |   41.17 |   73.68 | 19-63,87                   
+  dynamicPolicy.js            |   82.85 |    81.63 |     100 |   83.87 | 33,97,108,114,117          
+  llmDecisionProtocol.js      |    59.4 |    55.43 |   77.77 |   62.76 | ...127,132,136,139,149-190 
+  policyEngine.js             |     100 |    95.74 |     100 |     100 | 38,128                     
+  policyV1.js                 |     100 |      100 |     100 |     100 |                            
+  reasonDecisions.js          |     100 |      100 |     100 |     100 |                            
+ lib/util                     |   95.65 |     89.7 |     100 |   95.45 |                            
+  identity.js                 |     100 |    84.21 |     100 |     100 | 54-56                      
+  state.js                    |     100 |      100 |     100 |     100 |                            
+  validate.js                 |   93.47 |     90.9 |     100 |   93.02 | 42,63,75                   
+------------------------------|---------|----------|---------|---------|----------------------------
+cd backend && npm test
+
+> crime-records-backend@1.0.0 test
+> mocha --require test/setup.unit.js 'test/**/*.unit.test.js' --timeout 30000
+
+
+
+  DIAS access routes
+    decisions on an overdue request
+      ✔ records the expiry and passes the refusal on when the deadline has passed
+    decisions under a retired policy
+      ✔ closes the request and passes the refusal on
+    request submission
+      ✔ commits the request with no justification and no transient data
+      ✔ sends the emergency as a requester claim, never as a verified fact
+      ✔ refuses the retired emergencyFlag field with a pointer to its replacement
+      ✔ retries only the pre-submit peer-convergence mismatch
+      ✔ does not retry unrelated Fabric failures
+      ✔ queues the LLM recommendation once the off-chain review is saved
+      ✔ still answers for a committed request when its off-chain review cannot be saved
+      ✔ requires a justification between 3 and 2000 characters
+    recommendation status for the auditor screen
+      ✔ says which requests still wait for their recommendation, from the off-chain store alone
+      ✔ answers an audit-organisation district head, and nobody else
+      ✔ accepts 1 to 50 distinct safe request ids and refuses anything else
+    auditor review view
+      ✔ joins the request, its commitment and the off-chain material, with the integrity verdict
+    auditor decision (v3: agreement from the ledger commitment)
+      ✔ records AGREED for FORCE_ALLOW over a committed ALLOW, with no note
+      ✔ requires a note for FORCE_ALLOW over a committed DENY and sends only its digest
+      ✔ records NOT_AGREED for FORCE_DENY over a committed ALLOW and refuses an expiry there
+      ✔ records NO_RECOMMENDATION for a committed failure, or when nothing was committed
+      ✔ waits while the recommendation is being prepared or committed, and never submits
+      ✔ refuses to decide when the stored recommendation no longer matches its commitment
+      ✔ refuses to decide when the committed recommendation object is missing
+      ✔ ignores any recommendation or agreement value the browser tries to send
+      ✔ rejects an unknown decision before anything reaches the ledger
+
+  accessLogger.describe
+    ✔ records a DIAS request action and correlates its Fabric request ID
+    ✔ classifies a direct record lookup as a search for that identifier
+    ✔ records auditor decisions without the auditor reason
+    ✔ gives retired SEAL-era routes only a generic action and never their request body
+    ✔ names current DIAS request and authorization routes
+    ✔ names a case read and current request audit routes
+    ✔ records a gated metadata read as its own action with the decision that unlocked it
+    ✔ records reading one decision against its record and decision
+    ✔ does not mistake the document-request routes for a record called "document-requests"
+    ✔ records a full-document request against its record and decision
+    ✔ names the case list instead of a generic api path
+    ✔ keeps existing classifications unchanged
+
+  access-log policy (plan step 6)
+    ✔ names every current API route with its own action
+    ✔ copies only identifiers into the new targets, never free text
+    ✔ gives every named action a class, and an unknown action the sensitive class
+    ✔ in security mode logs sensitive reads always and other calls only when refused or failed
+    ✔ treats the auditor screen's status check as a routine read that writes nothing when it succeeds
+    ✔ in all mode logs every call, as v2 did
+    ✔ defaults to security and refuses an unknown mode
+
+  access-log policy coverage
+    ✔ classifies the action of every mounted route explicitly
+
+  DIAS backend architecture guard
+    ✔ resolves a non-trivial graph for every entry point
+    ✔ does not reach policies/reference-oracle/referencePolicyOracle.js — the offline reference oracle must never judge a live recommendation
+    ✔ does not reach chaincode/crimerecords/lib/policy/policyEngine.js — the SEAL deterministic policy engine must not run in the live path
+    ✔ does not reach chaincode/crimerecords/lib/policy/controlledDecision.js — SEAL controlled-decision logic must not run in the live path
+    ✔ does not reach chaincode/crimerecords/lib/policy/llmDecisionProtocol.js — the SEAL decision protocol enforced engine/model agreement
+    ✔ does not reach chaincode/crimerecords/lib/policy/dynamicPolicy.js — SEAL property-fingerprint dynamic policy is replaced by exact-record authorization
+    ✔ does not reach backend/src/llm/policyDecision.js — the SEAL runtime guard overrode the model recommendation
+    ✔ does not reach backend/src/llm/groundedPolicyPrompt.js — DIAS has exactly one prompt implementation
+    ✔ does not reach backend/src/llm/explain.js — SEAL explanation rewording reads decision fields DIAS never writes
+    ✔ does not reach backend/src/llm/ollama.js — the SEAL wording model is not part of the DIAS runtime
+    ✔ reaches the DIAS recommender from the access routes, inside the backend
+    ✔ has no AI-organisation listener and no separate recommendation service; the signer has no Fabric identity
+    ✔ has no SEAL listener left to run
+    ✔ keeps ESCALATE out of the live recommendation vocabulary
+
+  auditor note made durable before its decision (plan step 11)
+    the review store
+      ✔ keeps a staged note on disk, readable by a new process
+      ✔ stages a note even when the request has no review entry
+      ✔ commits one note and clears every other staged note; drops one note by digest
+    the decision route
+      ✔ writes the note to disk before the decision is sent, then marks it committed
+      ✔ drops the note when the ledger refuses the decision, and passes the refusal on
+      ✔ recognizes a decision that committed although the response was lost
+[dias] REQ-13 decision not confirmed: commit status request timed out
+      ✔ keeps the note staged and says the decision is unconfirmed when the ledger shows nothing yet
+      ✔ never submits a second decision for a request already decided, and settles its note
+      ✔ stages and commits an optional note on an agreeing decision, and none when there is no text
+      ✔ accepts notes up to 2,000 characters and refuses longer or blank required notes
+      ✔ stores a required note durably even when the request has no review entry
+    settling notes left staged by a stopped process
+      ✔ commits, drops or keeps each staged note according to the ledger
+      ✔ leaves a note staged when the ledger cannot be read, and counts it
+
+  chaincode error status mapping
+    ✔ maps "DIAS_AUDITOR_INACTIVE" to 403
+    ✔ maps "DIAS_AUDITOR_OUT_OF_DISTRICT" to 403
+    ✔ maps "DIAS_AUDITOR_CLEARANCE" to 403
+    ✔ maps "unauthorized" to 403
+    ✔ maps "DIAS_REQUEST_EXPIRED" to 409
+    ✔ maps "DIAS_STALE_POLICY" to 409
+    ✔ maps "DIAS_COMMITMENT_CONFLICT" to 409
+    ✔ maps "DIAS_NO_ACTIVE_POLICY" to 409
+    ✔ maps "DIAS_LEGACY_RECORD" to 409
+    ✔ maps "DIAS_SIGNATURE_INVALID" to 422
+    ✔ maps "DIAS_NOTE_REQUIRED" to 422
+    ✔ maps "access request" to 422
+    ✔ answers through asyncRoute with the mapped status and the contract sentence
+
+  backend/chaincode contract compatibility
+    ✔ finds the gateway calls it is supposed to check
+    ✔ names only contracts that exist in the chaincode
+    ✔ calls only methods the deployed contracts expose (49ms)
+    ✔ still calls the DIAS workflow methods the redesign introduced
+    ✔ no longer calls the AI-organisation recommendation or model-registration methods
+    ✔ no longer calls any SEAL-era access method
+
+  DIAS backend recommendation path
+    LLM agreement
+      ✔ is AGREED when the auditor follows the LLM and NOT_AGREED otherwise
+      ✔ is NO_RECOMMENDATION without a valid recommendation
+      ✔ requires a reason unless agreed, and creates an authorization only for FORCE_ALLOW over a DENY
+    review store
+      ✔ keeps the justification and a pending recommendation for a committed request
+      ✔ replaces entries without mutating what an earlier read returned
+      ✔ counts a recommendation as being prepared until its commitment is confirmed or it has failed
+      ✔ rejects unsafe request identifiers and reports missing entries
+      ✔ skips an unreadable entry when listing, so one damaged file cannot stop the backend
+    recommendation worker (v3: signed recommender, commitment, ledger)
+      ✔ asks the signed recommender, stores M and the signed commitment, then commits it before review
+      ✔ gives the signed recommender the committed inputs and the digests the ledger holds for them
+      ✔ keeps a specific failure status in the auditor view and still commits it
+      ✔ marks a commitment the ledger refuses for a lasting reason as commit-rejected
+      ✔ keeps a signed commitment after an uncertain failure and later resubmits it unchanged
+      ✔ recognizes a commitment that reached the ledger although the response was lost
+      ✔ records a recommender failure as failed, so the auditor is not left waiting
+      ✔ answers requests one at a time, each once, and resumes pending and signed entries
+      ✔ stores a failed generation as a status with no recommendation
+
+  DIAS recommendation response contract
+    ✔ accepts a valid ALLOW and a valid DENY response
+    ✔ records the limited formatting tolerances it applied
+    ✔ rejects ESCALATE and any third recommendation value
+    ✔ rejects extra keys, missing keys, and non-JSON text
+    ✔ rejects a reason code that belongs to the other recommendation
+    ✔ rejects unknown or duplicate policy references and unknown review flags
+    ✔ bounds free-text fields
+
+  DIAS policy context provider
+    ✔ supplies the complete bundle and narrows RBAC to the requester role
+    ✔ marks an undefined role instead of inventing permissions
+    ✔ hashes the context deterministically and per role
+    ✔ reports POLICY_CONTEXT_UNAVAILABLE when the bundle cannot be loaded
+    ✔ exposes the registered bundle vocabulary needed for schema validation
+
+  DIAS recommendation prompt v2 (current)
+    ✔ is versioned and states the advisory authority boundary
+    ✔ supplies the authoritative structured action and purpose
+    ✔ never includes identity fields that are not policy facts
+    ✔ keeps prompt-injection text inside the untrusted justification block
+    ✔ neutralizes attempts to close the justification block early
+    ✔ includes every clause reference and the requester role permissions
+    ✔ is deterministic for identical inputs
+
+  DIAS recommendation prompt v1 (historical)
+    ✔ is versioned and states the advisory authority boundary
+    ✔ supplies the authoritative structured action and purpose
+    ✔ never includes identity fields that are not policy facts
+    ✔ keeps prompt-injection text inside the untrusted justification block
+    ✔ neutralizes attempts to close the justification block early
+    ✔ includes every clause reference and the requester role permissions
+    ✔ is deterministic for identical inputs
+
+  DIAS recommendation prompt v2: facts and claims are separate
+    ✔ shows the verified context without any requester claim
+    ✔ shows the claims in their own block, marked as unverified
+    ✔ rejects a v1-shaped request and malformed claims
+    ✔ rejects a malformed verified request
+
+  LLM explanation of a request
+    for the officer who made the request
+      ✔ shows nothing from the LLM before an auditor has decided
+      ✔ shows the decision and the LLM explanation when the auditor denied the request
+      ✔ shows the explanation as the LLM gave it when the auditor denied against an LLM ALLOW
+      ✔ says there was no LLM recommendation when the auditor denied without one
+      ✔ shows the decision and the recommendation value, without the explanation, when allowed
+      ✔ shows nothing from the LLM when no auditor decided: a reused authorization, an expiry, a cancellation
+      ✔ never returns the auditor note, timings, token counts or model and policy provenance
+    for everyone else
+      ✔ gives an audit-organisation district head the full account at every stage
+      ✔ refuses a reviewer of another organisation, whose role name may be the same
+      ✔ treats an audit district head as the requester of their own request
+      ✔ gives a court reviewer the explanation of their own denied request, as any requester
+      ✔ refuses a missing user or a trail the ledger did not return
+    the model's account itself
+      ✔ has a structured part, and withholds the free text unless it is to be shown
+      ✔ adds the free text for a caller who may read it
+      ✔ never returns timings, token counts or model and policy provenance
+      ✔ says why there was no recommendation, and offers nothing to read
+      ✔ reports a recommendation still being prepared
+      ✔ reports a request whose review was never stored
+
+  DIAS recommender
+    ✔ returns a schema-valid recommendation with application-generated provenance
+    ✔ keeps the model recommendation even when the offline reference oracle disagrees
+    ✔ reports UNAVAILABLE without a recommendation when the server cannot be reached
+    ✔ reports UNAVAILABLE on a timeout and on a non-context HTTP error
+    ✔ reports INVALID_OUTPUT for malformed or out-of-contract model text
+    ✔ reports POLICY_CONTEXT_UNAVAILABLE when the policy bundle cannot be assembled
+    ✔ reports CONTEXT_OVERFLOW before calling the model when the prompt exceeds its budget
+    ✔ evaluates with the historical v1 prompt and provenance when asked to
+    ✔ refuses an unknown prompt version and a v2 call without valid claims
+
+  DIAS runtime (v3)
+    ✔ loads the signing key and exposes its key identity and the policy binding
+    ✔ has no separate-service mode: production builds the same in-backend recommender
+    ✔ refuses to start without the review store key, naming how to create one
+    ✔ refuses to start without a signing key, naming how to create one
+
+  full-document release
+    ✔ reads the vault only after the ledger re-checks the grant, and delivers matching bytes
+    ✔ never reads the vault when the ledger refuses the release
+    ✔ answers 409 and delivers nothing when the vault bytes do not match the committed hash
+    ✔ refuses a malformed request identifier before reaching the ledger
+
+  DIAS expiry sweeper
+    ✔ expires only the pending requests whose deadline has passed
+    ✔ keeps sweeping after one request is refused and reports why
+    ✔ does not start a timer when the interval is zero
+
+  Fabric commit conflicts
+    ✔ recognises only MVCC and phantom-read commit failures as conflicts
+    ✔ proposes the transaction again after a conflict and returns the committed result
+    ✔ gives up after the retry budget and rethrows the conflict
+    ✔ never retries a chaincode refusal or any other failure
+    ✔ answers a conflict that survives the retries with 409 and a plain explanation
+
+  cross-surface invariants
+    endorsement capacity vs private data collection membership
+      ✔ reads the organization count from the channel profile
+      ✔ 'evidenceDetails' has enough members to satisfy MAJORITY endorsement
+      ✔ the evidence endorser set is drawn only from evidenceDetails members
+      ✔ no collection names an organization outside the DIAS channel
+      ✔ recordContract mirrors the evidenceDetails distribution policy
+    explanation schema headroom
+      ✔ the decisiveAttributes cap is identical on both sides of the wire
+      ✔ no reason can emit more decisive attributes than the validators accept
+    model budget
+      ✔ the backend recommender reads the one configurable model budget
+    reason vocabulary
+      ✔ every reason code has explanation details
+      ✔ the model may not emit a system-generated reason
+      ✔ the request schema derives its vocabulary from the policy tables
+    authorization gates agree between API and chaincode
+      ✔ record-filing roles are identical
+      ✔ audit-trail roles are derived from the same policy tables on both sides
+
+  template renderer (baseline and fallback)
+    ✔ states the outcome, the reason and the decisive attributes
+    ✔ includes the counterfactual when there is one
+    ✔ is deterministic
+    ✔ handles an unknown reason code without crashing
+
+  prompt construction
+    ✔ includes the decision, reason and decisive attributes
+    ✔ never sends case contents or personal identifiers to the model
+
+  grounding validation
+    ✔ accepts a faithful explanation
+    ✔ rejects text that contradicts the recorded decision
+    ✔ rejects invented identifiers
+    ✔ rejects an invented record type that was not supplied to the wording model
+    ✔ allows the record and case ids that really belong to this decision
+    ✔ rejects assistant filler and AI self-reference
+    ✔ rejects text that is too short to explain anything
+    ✔ rejects calling an escalated decision final (it is pending review)
+    ✔ accepts an escalated explanation that says review is pending
+    ✔ rejects blaming a factor that did not decide the request
+    ✔ accepts an RBAC denial that blames the right thing
+    ✔ warns but still accepts text that drops the counterfactual
+
+  off-chain objects checked against their ledger digests
+    ✔ verifies the justification, the recommendation object and the note
+    ✔ reports each object changed after its digest was committed
+    ✔ reports objects whose digest is committed but whose copy is gone
+    ✔ finds a committed note that is still only staged
+    ✔ says when no digest was committed at all
+    ✔ adds the off-chain review and its verification for an audit-organisation district head
+    ✔ gives another reviewer the verification without the off-chain text
+    ✔ adds nothing for an auditor or reviewer who made the request themselves
+    ✔ adds nothing for the requester, whoever asks
+
+  policy model attestation
+    ✔ creates a verifiable Ed25519 signature over the complete decision binding
+    ✔ fails verification after any trusted context value changes
+    ✔ cryptographically binds the effective decision
+    ✔ cryptographically binds the reasonCode
+    ✔ cryptographically binds the explanation text
+    ✔ cryptographically binds the decisiveAttributes
+    ✔ cryptographically binds the counterfactual
+    ✔ rejects a non-Ed25519 signing key (80ms)
+
+  fine-tuned policy decision client
+    ✔ keeps authenticated attributes separate from the untrusted query
+    ✔ accepts a structurally consistent model decision
+    ✔ rejects a model decision that contradicts its reason code
+    ✔ rejects system-generated reason codes when they come directly from the model
+    ✔ sends a policy-disagreeing model result to AuditMSP instead of trusting it
+    ✔ accepts a deterministic policy-disagreement escalation artifact
+    ✔ keeps a Qwen result unchanged when it matches the policy safety check
+    ✔ escalates when the model reads a different operation than the one committed
+    ✔ escalates when the model reads a different purpose than the one committed
+    ✔ never puts the canonical operation or purpose in the model prompt
+    ✔ rejects a decision whose recorded request is not the one committed
+    ✔ rejects a decision whose recorded purpose is not the one committed
+    ✔ still rejects a materialized artifact whose decision was tampered with
+    ✔ rejects a materialized artifact whose explanation text was tampered with
+    ✔ rejects a materialized artifact whose decisive attributes were tampered with
+    ✔ rejects a materialized artifact whose counterfactual was tampered with
+    ✔ rejects extra compact-output fields instead of accepting free-form explanations
+    ✔ rejects model attempts to change ledger resource attributes
+    ✔ requires strict JSON without markdown or hidden reasoning
+    ✔ returns a validated decision with audit hashes from the MLX service
+    ✔ rejects an adapter whose local bytes do not match the registered digest
+    ✔ does not invoke inference when adapter verification fails
+
+  policy registration for seeding
+    ✔ identifies the repository policy by version and v3 digest
+    ✔ registers with one district head and activates with another
+    ✔ does nothing when the same policy is already active
+    ✔ refuses a registered version whose digest differs, and the same person twice
+
+  recommendation integrity before review
+    ✔ verifies an object that matches its commitment
+    ✔ reports a changed explanation through the digest alone
+    ✔ reports a changed value, status or binding even if the digest field were forged to match
+    ✔ distinguishes a missing commitment from a missing object
+
+  recommendation object M
+    ✔ holds the recommendation, its status, the bindings and the model, but no timing
+    ✔ records a failed generation as a status and an error, with no recommendation
+    ✔ is deterministic: the same output gives the same digest whatever the timing
+    ✔ replaces unpaired surrogates from model or server text so the object can always be hashed
+    ✔ names the model as base@revision plus the adapter digest
+
+  case-file lookup
+    ✔ finds a case file through the public index for an officer outside the owning station
+    ✔ answers 404 when the index holds no such case file
+    ✔ refuses a malformed identifier before reaching the ledger
+    ✔ returns only the public index fields even if more come back
+
+  officer administration guard
+    ✔ lets a district head of the authority organisation admit officers to any department
+    ✔ refuses everyone else before a certificate is issued
+
+  from a request to the auditor recommendation, inside the backend
+    ✔ asks the LLM at once when no reusable authorization matched, then signs and commits its answer (72ms)
+    ✔ never asks the LLM when a reusable authorization granted the request
+    ✔ commits "no recommendation" for the auditor when the model server is not running
+
+  off-chain review store encryption
+    ✔ writes nothing readable and reads back exactly what was stored
+    ✔ uses a fresh IV for every write, so the same entry never encrypts the same way twice
+    ✔ does not open with another key
+    ✔ does not open after its ciphertext, IV or tag was changed
+    ✔ does not open a file that was moved to another request
+    ✔ opens entries written under an earlier key, and writes with the current one
+    ✔ encrypts an entry written before encryption at start-up, and refuses it in the clear after that
+    ✔ re-seals entries of an earlier key at start-up, so that key can be retired
+    ✔ counts what it cannot open at start-up and leaves it untouched
+    ✔ reads safely for a list: an entry that cannot be opened is reported and treated as absent
+    ✔ does not open with a shortened authentication tag
+    ✔ refuses to read an encrypted entry without a key, and skips it when listing
+    the key from configuration
+      ✔ builds a cipher from a 32-byte base64 key, its identifier and earlier keys
+      ✔ stops start-up without a key, naming how to create one, and never echoes key material
+
+  security configuration
+    ✔ fails fast when production has no JWT secret (59ms)
+    ✔ retains a loudly warned fallback for local development only (59ms)
+    ✔ defaults CORS to the local API origin and accepts an explicit origin (104ms)
+    ✔ rejects a wildcard CORS configuration (43ms)
+    ✔ allows only mutually exclusive LLM and legacy policy modes (143ms)
+    ✔ resolves a relative agency vault path from the repository root (56ms)
+    ✔ allows same-origin or originless requests and rejects other origins
+    ✔ emits CORS headers only for the configured browser origin
+
+  Fabric CA enrolment secrets
+    ✔ generates distinct URL-safe 256-bit secrets
+
+  recommendation signer
+    ✔ signs provenance with an Ed25519 key whose identifier is the public-key digest
+    ✔ refuses a key that is not Ed25519
+
+  signed recommender
+    ✔ signs a commitment bound to the request, its digests and h_M
+    ✔ does not judge inputs whose digests do not match, and signs that as UNAVAILABLE
+    ✔ does not judge a changed verified context or changed claims, naming which one
+    ✔ does not judge under another policy, and signs that as POLICY_CONTEXT_UNAVAILABLE
+    ✔ keeps the specific failure status the recommender reports
+    ✔ produces the identical commitment again for the same model output (safe retry)
+
+  recommendation signer registration
+    ✔ generates an Ed25519 private key in PEM form
+    ✔ registers the public key once and reports an already active key
+    ✔ refuses to reuse a key that was revoked
+
+  testbed instrumentation
+    peer addresses
+      ✔ keeps every localhost peer address when FABRIC_PEER_ENDPOINTS is unset
+      ✔ accepts host:port overrides for known organizations only
+    trace
+      ✔ writes nothing while it is off
+      ✔ appends one JSON line per event with rounded durations
+    staged submit
+      ✔ endorses, submits and waits for the commit, then returns the result
+      ✔ throws the library CommitError on an unsuccessful commit status
+
+  off-chain PDF vault
+    ✔ stores PDF bytes, reads them back, and returns a stable SHA-256 commitment (53ms)
+    ✔ rejects empty, non-PDF, oversized, and duplicate uploads (70ms)
+
+
+  313 passing (1s)
+
+cd policies && npm test
+
+> dias-policies@1.0.0 test
+> node --test test/bundle.test.js test/referencePolicyOracle.test.js test/policyPackage.test.js
+
+TAP version 13
+# Subtest: committed bundle equals its derivation from the retained policy tables
+ok 1 - committed bundle equals its derivation from the retained policy tables
+  ---
+  duration_ms: 3.40866
+  type: 'test'
+  ...
+# Subtest: bundle validates and every clause reference has the documented format
+ok 2 - bundle validates and every clause reference has the documented format
+  ---
+  duration_ms: 2.921387
+  type: 'test'
+  ...
+# Subtest: bundle vocabularies and tables match the chaincode copies exactly
+ok 3 - bundle vocabularies and tables match the chaincode copies exactly
+  ---
+  duration_ms: 1.683779
+  type: 'test'
+  ...
+# Subtest: the only DENY/ALLOW reason codes are the binary recommendation codes
+ok 4 - the only DENY/ALLOW reason codes are the binary recommendation codes
+  ---
+  duration_ms: 1.082357
+  type: 'test'
+  ...
+# Subtest: the bundle hash is canonical and changes when a clause changes
+ok 5 - the bundle hash is canonical and changes when a clause changes
+  ---
+  duration_ms: 5.278913
+  type: 'test'
+  ...
+# Subtest: validation reports unordered DENY clauses and unknown precedence references
+ok 6 - validation reports unordered DENY clauses and unknown precedence references
+  ---
+  duration_ms: 1.637247
+  type: 'test'
+  ...
+# Subtest: loading a missing bundle fails with a clear error
+ok 7 - loading a missing bundle fails with a clear error
+  ---
+  duration_ms: 0.498089
+  type: 'test'
+  ...
+# Subtest: the bundle hash is stable across serializations
+ok 8 - the bundle hash is stable across serializations
+  ---
+  duration_ms: 3.841366
+  type: 'test'
+  ...
+# Subtest: every reason code maps to exactly one recommendation class
+ok 9 - every reason code maps to exactly one recommendation class
+  ---
+  duration_ms: 0.511954
+  type: 'test'
+  ...
+# Subtest: every clause reason code is declared, and every declared code is used
+ok 10 - every clause reason code is declared, and every declared code is used
+  ---
+  duration_ms: 1.922966
+  type: 'test'
+  ...
+# Subtest: every policy reference the bundle names resolves to a clause
+ok 11 - every policy reference the bundle names resolves to a clause
+  ---
+  duration_ms: 0.394156
+  type: 'test'
+  ...
+# Subtest: precedence covers every DENY clause exactly once, in a fixed order
+ok 12 - precedence covers every DENY clause exactly once, in a fixed order
+  ---
+  duration_ms: 0.436186
+  type: 'test'
+  ...
+# Subtest: the oracle implements a predicate for every DENY clause and nothing more
+ok 13 - the oracle implements a predicate for every DENY clause and nothing more
+  ---
+  duration_ms: 0.28704
+  type: 'test'
+  ...
+# Subtest: the oracle reports the first applicable clause and lists them all
+ok 14 - the oracle reports the first applicable clause and lists them all
+  ---
+  duration_ms: 0.887545
+  type: 'test'
+  ...
+# Subtest: every oracle verdict satisfies the response schema the backend enforces
+ok 15 - every oracle verdict satisfies the response schema the backend enforces
+  ---
+  duration_ms: 1.559523
+  type: 'test'
+  ...
+# Subtest: every review flag the policy defines is documented
+ok 16 - every review flag the policy defines is documented
+  ---
+  duration_ms: 0.547334
+  type: 'test'
+  ...
+# Subtest: the generated specification matches the bundle it documents
+ok 17 - the generated specification matches the bundle it documents
+  ---
+  duration_ms: 0.81803
+  type: 'test'
+  ...
+# Subtest: the open-questions document exists and is current for this bundle
+ok 18 - the open-questions document exists and is current for this bundle
+  ---
+  duration_ms: 0.873209
+  type: 'test'
+  ...
+# Subtest: the canonicalizer is byte-identical to the chaincode implementation
+ok 19 - the canonicalizer is byte-identical to the chaincode implementation
+  ---
+  duration_ms: 1.879206
+  type: 'test'
+  ...
+# Subtest: every precedence clause has an oracle predicate
+ok 20 - every precedence clause has an oracle predicate
+  ---
+  duration_ms: 1.040886
+  type: 'test'
+  ...
+# Subtest: oracle reproduces the retained engine on an exhaustive grid (sealed: ESCALATE -> DENY)
+ok 21 - oracle reproduces the retained engine on an exhaustive grid (sealed: ESCALATE -> DENY)
+  ---
+  duration_ms: 13241.282389
+  type: 'test'
+  ...
+# Subtest: ALLOW lists the permission and default clauses
+ok 22 - ALLOW lists the permission and default clauses
+  ---
+  duration_ms: 1.762145
+  type: 'test'
+  ...
+# Subtest: DENY lists every applicable clause in precedence order, first decisive
+ok 23 - DENY lists every applicable clause in precedence order, first decisive
+  ---
+  duration_ms: 0.24136
+  type: 'test'
+  ...
+# Subtest: sealed records outside the court are DENY with a court-review flag
+ok 24 - sealed records outside the court are DENY with a court-review flag
+  ---
+  duration_ms: 0.352921
+  type: 'test'
+  ...
+# Subtest: unknown roles and organizations never pass the RBAC organization clause
+ok 25 - unknown roles and organizations never pass the RBAC organization clause
+  ---
+  duration_ms: 0.190192
+  type: 'test'
+  ...
+# Subtest: unknown sensitivity is treated as high and unknown clearance satisfies nothing
+ok 26 - unknown sensitivity is treated as high and unknown clearance satisfies nothing
+  ---
+  duration_ms: 0.21554
+  type: 'test'
+  ...
+# Subtest: missing facts fail loudly instead of defaulting
+ok 27 - missing facts fail loudly instead of defaulting
+  ---
+  duration_ms: 0.566827
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13365.89725
+cd frontend && npm test
+
+> crime-records-frontend@0.1.0 test
+> node --test
+
+TAP version 13
+# Subtest: shows the record and committed request identifiers for a DIAS request
+ok 1 - shows the record and committed request identifiers for a DIAS request
+  ---
+  duration_ms: 1.457176
+  type: 'test'
+  ...
+# Subtest: shows public lookup filters and handles an empty target
+ok 2 - shows public lookup filters and handles an empty target
+  ---
+  duration_ms: 0.281316
+  type: 'test'
+  ...
+# Subtest: states who requested what, what the LLM recommended, and the decision with that recommendation
+ok 3 - states who requested what, what the LLM recommended, and the decision with that recommendation
+  ---
+  duration_ms: 4.063262
+  type: 'test'
+  ...
+# Subtest: says when the auditor decided against the LLM, or without a recommendation
+ok 4 - says when the auditor decided against the LLM, or without a recommendation
+  ---
+  duration_ms: 0.355163
+  type: 'test'
+  ...
+# Subtest: says when neither the LLM nor an auditor was involved
+ok 5 - says when neither the LLM nor an auditor was involved
+  ---
+  duration_ms: 0.241449
+  type: 'test'
+  ...
+# Subtest: never throws on an incomplete entry
+ok 6 - never throws on an incomplete entry
+  ---
+  duration_ms: 0.167956
+  type: 'test'
+  ...
+# Subtest: orders the log by time without changing the list it was given
+ok 7 - orders the log by time without changing the list it was given
+  ---
+  duration_ms: 8.86001
+  type: 'test'
+  ...
+# Subtest: filters by requester or record text, by LLM recommendation and by auditor decision
+ok 8 - filters by requester or record text, by LLM recommendation and by auditor decision
+  ---
+  duration_ms: 0.434031
+  type: 'test'
+  ...
+# Subtest: counts only the filters that are actually set
+ok 9 - counts only the filters that are actually set
+  ---
+  duration_ms: 0.299744
+  type: 'test'
+  ...
+# Subtest: formats a log time as a compact local timestamp
+ok 10 - formats a log time as a compact local timestamp
+  ---
+  duration_ms: 1.507548
+  type: 'test'
+  ...
+# Subtest: the auditor console and officer administration are for AuditMSP district heads only
+ok 11 - the auditor console and officer administration are for AuditMSP district heads only
+  ---
+  duration_ms: 2.607425
+  type: 'test'
+  ...
+# Subtest: audit screens follow AuditContract reviewer organisations and roles
+ok 12 - audit screens follow AuditContract reviewer organisations and roles
+  ---
+  duration_ms: 0.537621
+  type: 'test'
+  ...
+# Subtest: filing, PDF uploads and case creation are police station duties
+ok 13 - filing, PDF uploads and case creation are police station duties
+  ---
+  duration_ms: 2.365235
+  type: 'test'
+  ...
+# Subtest: only the court seals, only forensics attaches evidence, and custody stays with its holders
+ok 14 - only the court seals, only forensics attaches evidence, and custody stays with its holders
+  ---
+  duration_ms: 0.45021
+  type: 'test'
+  ...
+# Subtest: case workflow is offered to the roles GovernanceContract accepts
+ok 15 - case workflow is offered to the roles GovernanceContract accepts
+  ---
+  duration_ms: 0.18371
+  type: 'test'
+  ...
+# Subtest: requesting access and the decision log are open to every signed-in identity
+ok 16 - requesting access and the decision log are open to every signed-in identity
+  ---
+  duration_ms: 0.207351
+  type: 'test'
+  ...
+# Subtest: a district head can register an officer into any department
+ok 17 - a district head can register an officer into any department
+  ---
+  duration_ms: 0.234032
+  type: 'test'
+  ...
+# Subtest: every endpoint the client calls is mounted by a router
+ok 18 - every endpoint the client calls is mounted by a router
+  ---
+  duration_ms: 4.804956
+  type: 'test'
+  ...
+# Subtest: the client exposes the DIAS access endpoints the workflow needs
+ok 19 - the client exposes the DIAS access endpoints the workflow needs
+  ---
+  duration_ms: 0.689695
+  type: 'test'
+  ...
+# Subtest: no SEAL-era access endpoint survives in the client
+ok 20 - no SEAL-era access endpoint survives in the client
+  ---
+  duration_ms: 0.368475
+  type: 'test'
+  ...
+# Subtest: builds and reads a safe direct auditor-review link
+ok 21 - builds and reads a safe direct auditor-review link
+  ---
+  duration_ms: 1.448607
+  type: 'test'
+  ...
+# Subtest: clears the cloned requester session before showing the waiting page
+ok 22 - clears the cloned requester session before showing the waiting page
+  ---
+  duration_ms: 0.329889
+  type: 'test'
+  ...
+# Subtest: routes a prepared popup to the exact request and can close it
+ok 23 - routes a prepared popup to the exact request and can close it
+  ---
+  duration_ms: 1.5552
+  type: 'test'
+  ...
+# Subtest: reports a blocked or closed popup without throwing
+ok 24 - reports a blocked or closed popup without throwing
+  ---
+  duration_ms: 0.146757
+  type: 'test'
+  ...
+# Subtest: SHA-256 matches the standard test vectors
+ok 25 - SHA-256 matches the standard test vectors
+  ---
+  duration_ms: 2.603671
+  type: 'test'
+  ...
+# Subtest: reproduces every shared text and JSON vector, including the shell references
+ok 26 - reproduces every shared text and JSON vector, including the shell references
+  ---
+  duration_ms: 2.511524
+  type: 'test'
+  ...
+# Subtest: agrees with the contract implementation on generated text and objects
+ok 27 - agrees with the contract implementation on generated text and objects
+  ---
+  duration_ms: 4.737602
+  type: 'test'
+  ...
+# Subtest: detects changed content and rejects malformed digests and bad input
+ok 28 - detects changed content and rejects malformed digests and bad input
+  ---
+  duration_ms: 0.49998
+  type: 'test'
+  ...
+# Subtest: separates a committed outcome from a pending request
+ok 29 - separates a committed outcome from a pending request
+  ---
+  duration_ms: 1.2926
+  type: 'test'
+  ...
+# Subtest: a DENY recommendation is never a denial
+ok 30 - a DENY recommendation is never a denial
+  ---
+  duration_ms: 0.326947
+  type: 'test'
+  ...
+# Subtest: names an automatic grant only when a dynamic authorization produced it
+ok 31 - names an automatic grant only when a dynamic authorization produced it
+  ---
+  duration_ms: 0.125863
+  type: 'test'
+  ...
+# Subtest: reports a generation failure as an absence, not a recommendation
+ok 32 - reports a generation failure as an absence, not a recommendation
+  ---
+  duration_ms: 0.208072
+  type: 'test'
+  ...
+# Subtest: says a recommendation is being prepared while the backend asks the LLM
+ok 33 - says a recommendation is being prepared while the backend asks the LLM
+  ---
+  duration_ms: 0.193588
+  type: 'test'
+  ...
+# Subtest: derives the LLM agreement the ledger will record
+ok 34 - derives the LLM agreement the ledger will record
+  ---
+  duration_ms: 0.219121
+  type: 'test'
+  ...
+# Subtest: creates a dynamic authorization for exactly one combination
+ok 35 - creates a dynamic authorization for exactly one combination
+  ---
+  duration_ms: 0.213237
+  type: 'test'
+  ...
+# Subtest: requires an override reason whenever the auditor differs or nothing was recommended
+ok 36 - requires an override reason whenever the auditor differs or nothing was recommended
+  ---
+  duration_ms: 0.126037
+  type: 'test'
+  ...
+# Subtest: tells the auditor what their choice will create before they make it
+ok 37 - tells the auditor what their choice will create before they make it
+  ---
+  duration_ms: 0.503338
+  type: 'test'
+  ...
+# Subtest: builds an auditor summary from the verified request, not from the justification
+ok 38 - builds an auditor summary from the verified request, not from the justification
+  ---
+  duration_ms: 0.552399
+  type: 'test'
+  ...
+# Subtest: accepts only the auditable deny-to-force-allow authorization origin
+ok 39 - accepts only the auditable deny-to-force-allow authorization origin
+  ---
+  duration_ms: 0.345139
+  type: 'test'
+  ...
+# Subtest: flattens an authorization into an exact scope the auditor can read
+ok 40 - flattens an authorization into an exact scope the auditor can read
+  ---
+  duration_ms: 0.403109
+  type: 'test'
+  ...
+# Subtest: describes a committed access decision by who decided it, never by the model
+ok 41 - describes a committed access decision by who decided it, never by the model
+  ---
+  duration_ms: 0.3344
+  type: 'test'
+  ...
+# Subtest: says who may decide a request, before the auditor presses anything
+ok 42 - says who may decide a request, before the auditor presses anything
+  ---
+  duration_ms: 0.354092
+  type: 'test'
+  ...
+# Subtest: treats expired and cancelled requests as closed without any decision
+ok 43 - treats expired and cancelled requests as closed without any decision
+  ---
+  duration_ms: 0.553492
+  type: 'test'
+  ...
+# Subtest: checks the committed justification digest against the text the requester sent
+ok 44 - checks the committed justification digest against the text the requester sent
+  ---
+  duration_ms: 3.850724
+  type: 'test'
+  ...
+# Subtest: verifies the displayed recommendation against its ledger commitment in the browser
+ok 45 - verifies the displayed recommendation against its ledger commitment in the browser
+  ---
+  duration_ms: 1.548917
+  type: 'test'
+  ...
+# Subtest: blocks a decision on a mismatch, a missing object, or a commitment not yet on the ledger
+ok 46 - blocks a decision on a mismatch, a missing object, or a commitment not yet on the ledger
+  ---
+  duration_ms: 2.836189
+  type: 'test'
+  ...
+# Subtest: derives the consequences of a decision from the committed recommendation
+ok 47 - derives the consequences of a decision from the committed recommendation
+  ---
+  duration_ms: 0.380381
+  type: 'test'
+  ...
+# Subtest: tells an unconfirmed decision apart from a refused or an already-made one
+ok 48 - tells an unconfirmed decision apart from a refused or an already-made one
+  ---
+  duration_ms: 0.256778
+  type: 'test'
+  ...
+# Subtest: lists each off-chain object with its check against the ledger digest
+ok 49 - lists each off-chain object with its check against the ledger digest
+  ---
+  duration_ms: 0.319097
+  type: 'test'
+  ...
+# Subtest: shows a denied requester the auditor decision and the LLM explanation
+ok 50 - shows a denied requester the auditor decision and the LLM explanation
+  ---
+  duration_ms: 0.278399
+  type: 'test'
+  ...
+# Subtest: tells a denied requester when there was no LLM recommendation to explain
+ok 51 - tells a denied requester when there was no LLM recommendation to explain
+  ---
+  duration_ms: 0.153523
+  type: 'test'
+  ...
+# Subtest: tells a denied requester when the explanation of a real recommendation is no longer stored
+ok 52 - tells a denied requester when the explanation of a real recommendation is no longer stored
+  ---
+  duration_ms: 0.086573
+  type: 'test'
+  ...
+# Subtest: shows an allowed requester the decision and the recommendation, without an explanation
+ok 53 - shows an allowed requester the decision and the recommendation, without an explanation
+  ---
+  duration_ms: 0.083975
+  type: 'test'
+  ...
+# Subtest: shows a requester nothing from the LLM before a decision or without one
+ok 54 - shows a requester nothing from the LLM before a decision or without one
+  ---
+  duration_ms: 0.158137
+  type: 'test'
+  ...
+# Subtest: lays out a reduced decision-log entry without the identifiers it does not carry
+ok 55 - lays out a reduced decision-log entry without the identifiers it does not carry
+  ---
+  duration_ms: 0.610936
+  type: 'test'
+  ...
+# Subtest: every form pattern compiles the way browsers compile it
+ok 56 - every form pattern compiles the way browsers compile it
+  ---
+  duration_ms: 5.294518
+  type: 'test'
+  ...
+# Subtest: starts empty for an identity with no requests
+ok 57 - starts empty for an identity with no requests
+  ---
+  duration_ms: 2.36849
+  type: 'test'
+  ...
+# Subtest: remembers a request and reads it back, most recent first
+ok 58 - remembers a request and reads it back, most recent first
+  ---
+  duration_ms: 1.549235
+  type: 'test'
+  ...
+# Subtest: updates the status of an existing decision instead of duplicating it
+ok 59 - updates the status of an existing decision instead of duplicating it
+  ---
+  duration_ms: 0.296563
+  type: 'test'
+  ...
+# Subtest: keeps identities separate
+ok 60 - keeps identities separate
+  ---
+  duration_ms: 0.274611
+  type: 'test'
+  ...
+# Subtest: stores only identifiers and status, never explanation text
+ok 61 - stores only identifiers and status, never explanation text
+  ---
+  duration_ms: 0.571009
+  type: 'test'
+  ...
+# Subtest: tracks a pending request before an auditor creates a decision id
+ok 62 - tracks a pending request before an auditor creates a decision id
+  ---
+  duration_ms: 0.399125
+  type: 'test'
+  ...
+# Subtest: caps the list at ten entries and does not mutate the stored copy
+ok 63 - caps the list at ten entries and does not mutate the stored copy
+  ---
+  duration_ms: 0.445279
+  type: 'test'
+  ...
+# Subtest: survives an unavailable or corrupt storage
+ok 64 - survives an unavailable or corrupt storage
+  ---
+  duration_ms: 0.23381
+  type: 'test'
+  ...
+# Subtest: finds the requests whose recommendation is still being prepared or committed
+ok 65 - finds the requests whose recommendation is still being prepared or committed
+  ---
+  duration_ms: 2.209338
+  type: 'test'
+  ...
+# Subtest: reports a recommendation the moment it is ready and keeps waiting for the rest
+ok 66 - reports a recommendation the moment it is ready and keeps waiting for the rest
+  ---
+  duration_ms: 1.213565
+  type: 'test'
+  ...
+# Subtest: stops by itself once nothing is left to wait for, without a notice
+ok 67 - stops by itself once nothing is left to wait for, without a notice
+  ---
+  duration_ms: 0.367214
+  type: 'test'
+  ...
+# Subtest: never waits again for a request it already reported, so a stuck view cannot loop
+ok 68 - never waits again for a request it already reported, so a stuck view cannot loop
+  ---
+  duration_ms: 0.207035
+  type: 'test'
+  ...
+# Subtest: asks in calls of at most WATCH_MAX_IDS requests, which is the limit the backend accepts
+ok 69 - asks in calls of at most WATCH_MAX_IDS requests, which is the limit the backend accepts
+  ---
+  duration_ms: 0.778205
+  type: 'test'
+  ...
+# Subtest: stops at once when the backend refuses, and says so
+ok 70 - stops at once when the backend refuses, and says so
+  ---
+  duration_ms: 0.342175
+  type: 'test'
+  ...
+# Subtest: tries again after a network failure and reports once the backend answers
+ok 71 - tries again after a network failure and reports once the backend answers
+  ---
+  duration_ms: 0.452619
+  type: 'test'
+  ...
+# Subtest: gives up after repeated network failures, and says so
+ok 72 - gives up after repeated network failures, and says so
+  ---
+  duration_ms: 1.398568
+  type: 'test'
+  ...
+# Subtest: stops without asking once the screen is gone, without a notice
+ok 73 - stops without asking once the screen is gone, without a notice
+  ---
+  duration_ms: 0.495707
+  type: 'test'
+  ...
+# Subtest: reports nothing when the screen was left while a check was in flight
+ok 74 - reports nothing when the screen was left while a check was in flight
+  ---
+  duration_ms: 0.524619
+  type: 'test'
+  ...
+# Subtest: gives up after the time limit, and says so
+ok 75 - gives up after the time limit, and says so
+  ---
+  duration_ms: 0.388754
+  type: 'test'
+  ...
+# Subtest: a new watch replaces a check in flight without doubling the checks
+ok 76 - a new watch replaces a check in flight without doubling the checks
+  ---
+  duration_ms: 0.222169
+  type: 'test'
+  ...
+# Subtest: stop ends the watch at once
+ok 77 - stop ends the watch at once
+  ---
+  duration_ms: 0.103589
+  type: 'test'
+  ...
+1..77
+# tests 77
+# suites 0
+# pass 77
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 390.339547
+cd experiments/dias-finetuning/v2 && npm test
+
+> dias-dataset-v2@2.0.0 test
+> node --test test/checks.test.js test/generate.test.js test/metrics.test.js test/ablations.test.js test/subsets.test.js test/v6Adapter.test.js test/scopeAblation.test.js test/promptV1Frozen.test.js test/v3Inputs.test.js
+
+TAP version 13
+# Subtest: the control is exactly the frozen v1 prompt the dataset was built with
+ok 1 - the control is exactly the frozen v1 prompt the dataset was built with
+  ---
+  duration_ms: 12.514951
+  type: 'test'
+  ...
+# Subtest: every ablation leaves the system prompt untouched
+ok 2 - every ablation leaves the system prompt untouched
+  ---
+  duration_ms: 6.67576
+  type: 'test'
+  ...
+# Subtest: each ablation changes only its own section
+ok 3 - each ablation changes only its own section
+  ---
+  duration_ms: 6.377651
+  type: 'test'
+  ...
+# Subtest: the redacted information is genuinely gone
+ok 4 - the redacted information is genuinely gone
+  ---
+  duration_ms: 0.973368
+  type: 'test'
+  ...
+# Subtest: redaction keeps the JSON parseable and the keys present
+ok 5 - redaction keeps the JSON parseable and the keys present
+  ---
+  duration_ms: 2.00072
+  type: 'test'
+  ...
+# Subtest: no-action-purpose keeps the fields it is not ablating
+ok 6 - no-action-purpose keeps the fields it is not ablating
+  ---
+  duration_ms: 0.531887
+  type: 'test'
+  ...
+# Subtest: no ablated prompt contains the answer
+ok 7 - no ablated prompt contains the answer
+  ---
+  duration_ms: 6.387005
+  type: 'test'
+  ...
+# Subtest: every ablation declares what it expects, so a result can be judged
+ok 8 - every ablation declares what it expects, so a result can be judged
+  ---
+  duration_ms: 0.288543
+  type: 'test'
+  ...
+# Subtest: schema check rejects a third recommendation class
+ok 9 - schema check rejects a third recommendation class
+  ---
+  duration_ms: 3.379842
+  type: 'test'
+  ...
+# Subtest: schema check rejects a reason code that contradicts the recommendation
+ok 10 - schema check rejects a reason code that contradicts the recommendation
+  ---
+  duration_ms: 1.076587
+  type: 'test'
+  ...
+# Subtest: label reproduction detects a flipped label
+ok 11 - label reproduction detects a flipped label
+  ---
+  duration_ms: 16.52644
+  type: 'test'
+  ...
+# Subtest: label reproduction detects a review flag added without justification for it
+ok 12 - label reproduction detects a review flag added without justification for it
+  ---
+  duration_ms: 5.669684
+  type: 'test'
+  ...
+# Subtest: balance check detects a skewed set
+ok 13 - balance check detects a skewed set
+  ---
+  duration_ms: 58.550336
+  type: 'test'
+  ...
+# Subtest: duplicate check detects a prompt repeated inside one set
+ok 14 - duplicate check detects a prompt repeated inside one set
+  ---
+  duration_ms: 1.119833
+  type: 'test'
+  ...
+# Subtest: duplicate check detects a training prompt reappearing in test
+ok 15 - duplicate check detects a training prompt reappearing in test
+  ---
+  duration_ms: 1.177302
+  type: 'test'
+  ...
+# Subtest: duplicate check tolerates the same example in two views of the test split
+ok 16 - duplicate check tolerates the same example in two views of the test split
+  ---
+  duration_ms: 0.405739
+  type: 'test'
+  ...
+# Subtest: feature leakage detects the same facts phrased differently across splits
+ok 17 - feature leakage detects the same facts phrased differently across splits
+  ---
+  duration_ms: 4.101333
+  type: 'test'
+  ...
+# Subtest: family leakage detects a near-miss pair split across train and test
+ok 18 - family leakage detects a near-miss pair split across train and test
+  ---
+  duration_ms: 5.115416
+  type: 'test'
+  ...
+# Subtest: template leakage detects held-out phrasing used in training
+ok 19 - template leakage detects held-out phrasing used in training
+  ---
+  duration_ms: 97.12052
+  type: 'test'
+  ...
+# Subtest: template leakage detects an OOD set contaminated with trained phrasing
+ok 20 - template leakage detects an OOD set contaminated with trained phrasing
+  ---
+  duration_ms: 109.575034
+  type: 'test'
+  ...
+# Subtest: identifier check detects v1-style usernames containing the role and split
+ok 21 - identifier check detects v1-style usernames containing the role and split
+  ---
+  duration_ms: 2.006483
+  type: 'test'
+  ...
+# Subtest: identifier check detects a record id that spells out the reason code
+ok 22 - identifier check detects a record id that spells out the reason code
+  ---
+  duration_ms: 0.836502
+  type: 'test'
+  ...
+# Subtest: predictiveness check detects v1-style per-reason identifier ranges
+ok 23 - predictiveness check detects v1-style per-reason identifier ranges
+  ---
+  duration_ms: 105.606989
+  type: 'test'
+  ...
+# Subtest: predictiveness check does not flag ordinary sampling noise
+ok 24 - predictiveness check does not flag ordinary sampling noise
+  ---
+  duration_ms: 7.327752
+  type: 'test'
+  ...
+# Subtest: coverage check detects a missing reason code
+ok 25 - coverage check detects a missing reason code
+  ---
+  duration_ms: 326.878051
+  type: 'test'
+  ...
+# Subtest: vocabulary coverage detects a clearance level that never appears
+ok 26 - vocabulary coverage detects a clearance level that never appears
+  ---
+  duration_ms: 268.15843
+  type: 'test'
+  ...
+# Subtest: precedence check detects references listed out of order
+ok 27 - precedence check detects references listed out of order
+  ---
+  duration_ms: 259.793835
+  type: 'test'
+  ...
+# Subtest: precedence check detects a dataset with no multi-clause example at all
+ok 28 - precedence check detects a dataset with no multi-clause example at all
+  ---
+  duration_ms: 155.691338
+  type: 'test'
+  ...
+# Subtest: explanation grounding detects a reason citing a clause the label omits
+ok 29 - explanation grounding detects a reason citing a clause the label omits
+  ---
+  duration_ms: 1.026591
+  type: 'test'
+  ...
+# Subtest: independence check detects a field that never varies
+ok 30 - independence check detects a field that never varies
+  ---
+  duration_ms: 4.941992
+  type: 'test'
+  ...
+# Subtest: independence check detects a distractor that predicts the label
+ok 31 - independence check detects a distractor that predicts the label
+  ---
+  duration_ms: 5.948177
+  type: 'test'
+  ...
+# Subtest: scenario presence detects training with no adversarial text
+ok 32 - scenario presence detects training with no adversarial text
+  ---
+  duration_ms: 54.520418
+  type: 'test'
+  ...
+# Subtest: the same seed produces byte-identical examples
+ok 33 - the same seed produces byte-identical examples
+  ---
+  duration_ms: 1141.550453
+  type: 'test'
+  ...
+# Subtest: a different seed produces a different dataset
+ok 34 - a different seed produces a different dataset
+  ---
+  duration_ms: 645.493646
+  type: 'test'
+  ...
+# Subtest: independent rng streams do not disturb each other
+ok 35 - independent rng streams do not disturb each other
+  ---
+  duration_ms: 0.376185
+  type: 'test'
+  ...
+# Subtest: identifiers carry no ordering a reader could exploit
+ok 36 - identifiers carry no ordering a reader could exploit
+  ---
+  duration_ms: 4.3872
+  type: 'test'
+  ...
+# Subtest: clean-allow scenarios really are ALLOW under the oracle
+ok 37 - clean-allow scenarios really are ALLOW under the oracle
+  ---
+  duration_ms: 13.735221
+  type: 'test'
+  ...
+# Subtest: each single-violation constructor produces its own clause and no other reason
+ok 38 - each single-violation constructor produces its own clause and no other reason
+  ---
+  duration_ms: 11.32152
+  type: 'test'
+  ...
+# Subtest: near-miss pairs differ in label but share almost everything else
+ok 39 - near-miss pairs differ in label but share almost everything else
+  ---
+  duration_ms: 5.120813
+  type: 'test'
+  ...
+# Subtest: multi-violation scenarios really apply every clause they name
+ok 40 - multi-violation scenarios really apply every clause they name
+  ---
+  duration_ms: 6.175783
+  type: 'test'
+  ...
+# Subtest: cross-jurisdiction uses two real districts, never a derived string
+ok 41 - cross-jurisdiction uses two real districts, never a derived string
+  ---
+  duration_ms: 2.617786
+  type: 'test'
+  ...
+# Subtest: review flags come from the justification family declaration
+ok 42 - review flags come from the justification family declaration
+  ---
+  duration_ms: 2.057562
+  type: 'test'
+  ...
+# Subtest: a sealed record adds the court-review flag on top of the text flags
+ok 43 - a sealed record adds the court-review flag on top of the text flags
+  ---
+  duration_ms: 0.381205
+  type: 'test'
+  ...
+# Subtest: every justification family declares flags and renders every template
+ok 44 - every justification family declares flags and renders every template
+  ---
+  duration_ms: 0.395309
+  type: 'test'
+  ...
+# Subtest: held-out template families are disjoint from trainable ones
+ok 45 - held-out template families are disjoint from trainable ones
+  ---
+  duration_ms: 0.108007
+  type: 'test'
+  ...
+# Subtest: split assignment is stable when families are added
+ok 46 - split assignment is stable when families are added
+  ---
+  duration_ms: 0.309014
+  type: 'test'
+  ...
+# Subtest: split assignment respects the declared weights in aggregate
+ok 47 - split assignment respects the declared weights in aggregate
+  ---
+  duration_ms: 8.26048
+  type: 'test'
+  ...
+# Subtest: no example ever carries an ESCALATE label or an evidence requirement
+ok 48 - no example ever carries an ESCALATE label or an evidence requirement
+  ---
+  duration_ms: 266.355313
+  type: 'test'
+  ...
+# Subtest: INVALID_PURPOSE never appears, because the runtime cannot produce it
+ok 49 - INVALID_PURPOSE never appears, because the runtime cannot produce it
+  ---
+  duration_ms: 618.422945
+  type: 'test'
+  ...
+# Subtest: a perfect run scores 1 everywhere and reports no unsafe errors
+ok 50 - a perfect run scores 1 everywhere and reports no unsafe errors
+  ---
+  duration_ms: 1.559925
+  type: 'test'
+  ...
+# Subtest: an always-DENY model scores 0.5 balanced accuracy, not the class prior
+ok 51 - an always-DENY model scores 0.5 balanced accuracy, not the class prior
+  ---
+  duration_ms: 0.540266
+  type: 'test'
+  ...
+# Subtest: an unparseable answer is an absent decision, never a safe DENY
+ok 52 - an unparseable answer is an absent decision, never a safe DENY
+  ---
+  duration_ms: 1.665063
+  type: 'test'
+  ...
+# Subtest: false ALLOW and false DENY are counted separately and not averaged
+ok 53 - false ALLOW and false DENY are counted separately and not averaged
+  ---
+  duration_ms: 0.317409
+  type: 'test'
+  ...
+# Subtest: the confusion matrix matches a hand count
+ok 54 - the confusion matrix matches a hand count
+  ---
+  duration_ms: 1.343811
+  type: 'test'
+  ...
+# Subtest: per-class precision, recall and F1 follow their definitions
+ok 55 - per-class precision, recall and F1 follow their definitions
+  ---
+  duration_ms: 0.277341
+  type: 'test'
+  ...
+# Subtest: joint accuracy is stricter than decision accuracy alone
+ok 56 - joint accuracy is stricter than decision accuracy alone
+  ---
+  duration_ms: 0.327499
+  type: 'test'
+  ...
+# Subtest: a fully correct response satisfies every joint metric
+ok 57 - a fully correct response satisfies every joint metric
+  ---
+  duration_ms: 0.180994
+  type: 'test'
+  ...
+# Subtest: review-flag accuracy ignores ordering, because the flag set is unordered
+ok 58 - review-flag accuracy ignores ordering, because the flag set is unordered
+  ---
+  duration_ms: 0.402061
+  type: 'test'
+  ...
+# Subtest: confidence intervals are reported and widen on small samples
+ok 59 - confidence intervals are reported and widen on small samples
+  ---
+  duration_ms: 0.453216
+  type: 'test'
+  ...
+# Subtest: latency percentiles are ordered and drawn from the observed values
+ok 60 - latency percentiles are ordered and drawn from the observed values
+  ---
+  duration_ms: 0.618379
+  type: 'test'
+  ...
+# Subtest: error categories separate unsafe errors from wrong explanations
+ok 61 - error categories separate unsafe errors from wrong explanations
+  ---
+  duration_ms: 0.293171
+  type: 'test'
+  ...
+# Subtest: grouping computes each group independently
+ok 62 - grouping computes each group independently
+  ---
+  duration_ms: 7.762732
+  type: 'test'
+  ...
+# Subtest: an empty run reports nulls rather than dividing by zero
+ok 63 - an empty run reports nulls rather than dividing by zero
+  ---
+  duration_ms: 0.143902
+  type: 'test'
+  ...
+# Subtest: the dataset manifest names the v1 prompt
+ok 64 - the dataset manifest names the v1 prompt
+  ---
+  duration_ms: 1.427486
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in test-adversarial.cases.jsonl
+ok 65 - prompt v1 reproduces every recorded prompt in test-adversarial.cases.jsonl
+  ---
+  duration_ms: 71.39379
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in test-decision-balanced.cases.jsonl
+ok 66 - prompt v1 reproduces every recorded prompt in test-decision-balanced.cases.jsonl
+  ---
+  duration_ms: 78.114813
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in test-multi-rule.cases.jsonl
+ok 67 - prompt v1 reproduces every recorded prompt in test-multi-rule.cases.jsonl
+  ---
+  duration_ms: 48.732107
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in test-ood-paraphrase.cases.jsonl
+ok 68 - prompt v1 reproduces every recorded prompt in test-ood-paraphrase.cases.jsonl
+  ---
+  duration_ms: 59.276984
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in test-reason-balanced.cases.jsonl
+ok 69 - prompt v1 reproduces every recorded prompt in test-reason-balanced.cases.jsonl
+  ---
+  duration_ms: 95.961747
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in train.cases.jsonl
+ok 70 - prompt v1 reproduces every recorded prompt in train.cases.jsonl
+  ---
+  duration_ms: 821.023042
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in validation-balanced.cases.jsonl
+ok 71 - prompt v1 reproduces every recorded prompt in validation-balanced.cases.jsonl
+  ---
+  duration_ms: 75.989712
+  type: 'test'
+  ...
+# Subtest: prompt v1 reproduces every recorded prompt in workflow-evaluation.cases.jsonl
+ok 72 - prompt v1 reproduces every recorded prompt in workflow-evaluation.cases.jsonl
+  ---
+  duration_ms: 6.726208
+  type: 'test'
+  ...
+# Subtest: exact-record scope distinguishes two records with identical properties
+ok 73 - exact-record scope distinguishes two records with identical properties
+  ---
+  duration_ms: 2.099367
+  type: 'test'
+  ...
+# Subtest: the property fingerprint does NOT — which is the defect being measured
+ok 74 - the property fingerprint does NOT — which is the defect being measured
+  ---
+  duration_ms: 0.437886
+  type: 'test'
+  ...
+# Subtest: both scopes still distinguish a different action or purpose
+ok 75 - both scopes still distinguish a different action or purpose
+  ---
+  duration_ms: 0.245395
+  type: 'test'
+  ...
+# Subtest: an exact-record approval never reaches a second record
+ok 76 - an exact-record approval never reaches a second record
+  ---
+  duration_ms: 0.504841
+  type: 'test'
+  ...
+# Subtest: a property-fingerprint approval does reach a second record
+ok 77 - a property-fingerprint approval does reach a second record
+  ---
+  duration_ms: 0.391538
+  type: 'test'
+  ...
+# Subtest: only a model DENY the auditor overrides creates an authorization
+ok 78 - only a model DENY the auditor overrides creates an authorization
+  ---
+  duration_ms: 0.286865
+  type: 'test'
+  ...
+# Subtest: every request is accounted for: skipped or reviewed, never both, never neither
+ok 79 - every request is accounted for: skipped or reviewed, never both, never neither
+  ---
+  duration_ms: 3.086317
+  type: 'test'
+  ...
+# Subtest: with no siblings the two designs are identical, and the report must say so
+ok 80 - with no siblings the two designs are identical, and the report must say so
+  ---
+  duration_ms: 2.209219
+  type: 'test'
+  ...
+# Subtest: both arms replay the identical stream, so the difference is the scope alone
+ok 81 - both arms replay the identical stream, so the difference is the scope alone
+  ---
+  duration_ms: 2.5537
+  type: 'test'
+  ...
+# Subtest: the stream is deterministic from its seed
+ok 82 - the stream is deterministic from its seed
+  ---
+  duration_ms: 8.798573
+  type: 'test'
+  ...
+# Subtest: each subset has the size it claims
+ok 83 - each subset has the size it claims
+  ---
+  duration_ms: 0.98354
+  type: 'test'
+  ...
+# Subtest: subsets are nested, so a learning curve measures added data
+ok 84 - subsets are nested, so a learning curve measures added data
+  ---
+  duration_ms: 4.011205
+  type: 'test'
+  ...
+# Subtest: every subset is drawn only from the training pool
+ok 85 - every subset is drawn only from the training pool
+  ---
+  duration_ms: 3.313877
+  type: 'test'
+  ...
+# Subtest: no subset contains a duplicate
+ok 86 - no subset contains a duplicate
+  ---
+  duration_ms: 0.938157
+  type: 'test'
+  ...
+# Subtest: every subset stays balanced
+ok 87 - every subset stays balanced
+  ---
+  duration_ms: 2.111798
+  type: 'test'
+  ...
+# Subtest: every subset still covers every reason code and scenario in the pool
+ok 88 - every subset still covers every reason code and scenario in the pool
+  ---
+  duration_ms: 17.249833
+  type: 'test'
+  ...
+# Subtest: every subset keeps adversarial text, which is a minority and easy to lose
+ok 89 - every subset keeps adversarial text, which is a minority and easy to lose
+  ---
+  duration_ms: 0.721803
+  type: 'test'
+  ...
+# Subtest: the training lines match their audit records, line for line
+ok 90 - the training lines match their audit records, line for line
+  ---
+  duration_ms: 226.15679
+  type: 'test'
+  ...
+# Subtest: the manifest records a hash for every subset file
+ok 91 - the manifest records a hash for every subset file
+  ---
+  duration_ms: 103.159221
+  type: 'test'
+  ...
+# Subtest: every v1 case converts to a valid v3 context and claims
+ok 92 - every v1 case converts to a valid v3 context and claims
+  ---
+  duration_ms: 16.882469
+  type: 'test'
+  ...
+# Subtest: the run descriptor names the prompt and the input adapter
+ok 93 - the run descriptor names the prompt and the input adapter
+  ---
+  duration_ms: 3.28183
+  type: 'test'
+  ...
+# Subtest: escalate becomes an absent recommendation, never a DENY
+ok 94 - escalate becomes an absent recommendation, never a DENY
+  ---
+  duration_ms: 1.777576
+  type: 'test'
+  ...
+# Subtest: allow and deny map to the binary classes
+ok 95 - allow and deny map to the binary classes
+  ---
+  duration_ms: 0.434297
+  type: 'test'
+  ...
+# Subtest: reason codes carry across, and an unknown one is an invalid answer
+ok 96 - reason codes carry across, and an unknown one is an invalid answer
+  ---
+  duration_ms: 0.29414
+  type: 'test'
+  ...
+# Subtest: fields V6 does not produce are left empty rather than fabricated
+ok 97 - fields V6 does not produce are left empty rather than fabricated
+  ---
+  duration_ms: 1.816687
+  type: 'test'
+  ...
+# Subtest: unparseable and non-JSON answers are INVALID_OUTPUT
+ok 98 - unparseable and non-JSON answers are INVALID_OUTPUT
+  ---
+  duration_ms: 0.299955
+  type: 'test'
+  ...
+# Subtest: a thinking block and a code fence are tolerated, as they are for V7
+ok 99 - a thinking block and a code fence are tolerated, as they are for V7
+  ---
+  duration_ms: 0.437221
+  type: 'test'
+  ...
+# Subtest: the action and purpose are withheld from the V6 prompt, as SEAL intended
+ok 100 - the action and purpose are withheld from the V6 prompt, as SEAL intended
+  ---
+  duration_ms: 0.755498
+  type: 'test'
+  ...
+# Subtest: every policy-relevant fact survives the re-projection
+ok 101 - every policy-relevant fact survives the re-projection
+  ---
+  duration_ms: 0.614151
+  type: 'test'
+  ...
+# Subtest: the V6 prompt never contains the answer
+ok 102 - the V6 prompt never contains the answer
+  ---
+  duration_ms: 0.684856
+  type: 'test'
+  ...
+# Subtest: every adaptation is documented, so the comparison can be judged
+ok 103 - every adaptation is documented, so the comparison can be judged
+  ---
+  duration_ms: 0.584815
+  type: 'test'
+  ...
+# Subtest: the code map covers exactly the reason codes the v2 policy defines
+ok 104 - the code map covers exactly the reason codes the v2 policy defines
+  ---
+  duration_ms: 10.049664
+  type: 'test'
+  ...
+1..104
+# tests 104
+# suites 0
+# pass 104
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2890.130575

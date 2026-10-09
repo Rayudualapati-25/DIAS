@@ -14,7 +14,10 @@ import json
 import os
 import sys
 
-TB = os.environ.get("TB", "/Users/venkatrayudu/dias-testbed")
+# Host paths are written as ${HOME}/dias-testbed by default: Docker Compose
+# interpolates HOME on the Mac that runs `docker --context ... compose`, and Lima
+# mounts the Mac home at the same path inside every VM. Set TB to write a fixed path.
+TB = os.environ.get("TB", "${HOME}/dias-testbed")
 # The Mac as seen from a VM on Lima's user-v2 network (host.lima.internal).
 HOST_GATEWAY = os.environ.get("HOST_GATEWAY", "192.168.104.2")
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "compose")

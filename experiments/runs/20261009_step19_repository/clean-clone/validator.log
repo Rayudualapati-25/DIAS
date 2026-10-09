@@ -1,0 +1,27 @@
+PASS  pairing:train                      5254 training lines match their audit records
+PASS  pairing:validation-balanced        400 training lines match their audit records
+PASS  pairing:test-decision-balanced     600 training lines match their audit records
+PASS  pairing:test-reason-balanced       540 training lines match their audit records
+PASS  pairing:test-adversarial           389 training lines match their audit records
+PASS  pairing:test-ood-paraphrase        400 training lines match their audit records
+PASS  pairing:test-multi-rule            370 training lines match their audit records
+PASS  pairing:workflow-evaluation        60 training lines match their audit records
+PASS  schema                             8013 labels satisfy the response contract
+PASS  label-reproduction                 8013 labels reproduced from the oracle and the family declaration
+PASS  balance                            4 sets balanced within ±0.02
+PASS  duplicate-prompts                  7478 distinct prompts; 535 reuses across views of the same split
+PASS  feature-leakage                    4675 distinct feature sets, none crossing a split
+PASS  family-leakage                     4260 families, each in exactly one split
+PASS  template-leakage                   5 held-out template families, none in training; test-ood-paraphrase uses only them
+PASS  identifier-substring               no identifier contains a label, reason code, split, role or organization
+PASS  identifier-predictiveness:recordId 4 buckets of >=50; none beyond z=5.7 from 0.450
+PASS  identifier-predictiveness:caseId   16 buckets of >=50; none beyond z=6.4 from 0.450
+PASS  identifier-predictiveness:username 9 buckets of >=50; none beyond z=6.1 from 0.450
+PASS  coverage                           10 clause references and 9 reason codes present
+PASS  vocabulary-coverage                roles=22 clearances=3 actions=3 purposes=6 recordTypes=7 sensitivity=3 organizations=4
+PASS  precedence                         1621 multi-clause DENY examples across 149 clause combinations
+PASS  explanation-grounding              8013 explanations cite only listed clauses and name the decisive one
+PASS  irrelevant-field-independence      overall ALLOW 0.450; {"emergencyFlag":{"trueShare":0.4662,"falseShare":0.444,"trueCount":2040,"falseCount":5973},"approvalTokenPresent":{"trueShare":0.4438,"falseShare":0.4516,"trueCount":2037,"falseCount":5976},"witnessFlag":{"trueShare":0.4501,"falseShare":0.4494,"trueCount":2417,"falseCount":5596}}
+PASS  scenario-presence                  training covers clean-allow, multi-violation, near-miss, adversarial-on-allow, single-violation, adversarial-on-deny with plain, injection, contradictory, verbose text
+
+25/25 checks passed

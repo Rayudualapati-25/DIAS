@@ -73,8 +73,8 @@ Each requirement traces: paper requirement → current behavior → required cha
 | A07 | Identity and record id inside C (§IV-C) | TEXT | — | text fix |
 | A08 | Result numbers (23.75%, 60.27%, E7 failures, Fig. 13 memory, loss range) | TEXT | — | text fix |
 | A09 | Scripted auditor disclosed for every experiment | TEXT/EXP | — | text fix; human study OUT |
-| A10 | Reproducibility: prepare-chaincode script, pinned Python, figure scripts, V6 preflight | PART | 15, 19 | deterministic preparation, source staging and observed manifest inputs done (iteration 073); pinned Python and final reproduction remain step 19 |
-| A11 | Public-release hygiene: home paths, third-party PDFs, licences, legacy code | MISS | 19 | planned |
+| A10 | Reproducibility: prepare-chaincode script, pinned Python, figure scripts, V6 preflight | PART | 15, 19 | done offline (iterations 073, 076): `REPRODUCE.md`, pinned Python, archived-analysis rebuild and clean-clone tests; E3/E5/E6 resource figures and the E7 election time cannot be rebuilt from tracked data (Prometheus database and container logs not in the repository) |
+| A11 | Public-release hygiene: home paths, third-party PDFs, licences, legacy code | MISS | 19 | done (iteration 076): scripts and configs free of home paths and checked; 50 third-party PDFs removed; licence notes; 4 legacy items archived. Open: OrgAccess MIT notice, base-model licence, 3 saved third-party HTML pages, 69.8 MiB raw log |
 | A12 | Model input change re-evaluated | EXP | 17 | prepared, not run (checklist X1–X3, `experiments/plans/20261009_step17_mac_run_checklist.md`); model choice is an open author decision |
 | A13 | v3 performance re-measured (reuse, load, faults, resources, ledger growth) | EXP | 17 | prepared, not run (checklist X4–X11) |
 | A14 | Integrity cost and tamper detection measured | EXP | 17 | done offline (iteration 075; mock stub and microbenchmarks only; `results/tables/20261009_v3_integrity_*.csv`) |

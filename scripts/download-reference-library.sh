@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
-repo_dir="/Users/venkatrayudu/Workspace/XAI workspace/DIAS"
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Folder with the user-provided PDFs that have no public download (copy_local_pdf).
+user_library="${REFERENCE_USER_LIBRARY:-${HOME}/Desktop/Sengupta sir papers}"
 bib_file="$repo_dir/papers/final_paper/dias-refs.bib"
 library_dir="$repo_dir/papers/reference_library"
 active_dir="$library_dir/01_cited_in_current_manuscript"
@@ -263,33 +265,35 @@ copy_local_pdf() {
   local title="$2"
   local source="$3"
   local destination="$benchmark_dir/${key}.pdf"
+  # The manifest names the file inside the user library, never the local path.
+  local recorded="user-library/$(basename "$source")"
 
   if [[ -f "$source" ]] && head -c 5 "$source" | grep -q '%PDF-'; then
     cp -p "$source" "$destination"
     digest=$(shasum -a 256 "$destination" | awk '{print $1}')
-    append_manifest "methodology_and_benchmark" "$key" "$title" "" "$source" \
+    append_manifest "methodology_and_benchmark" "$key" "$title" "" "$recorded" \
       "copied_from_user_library" "${destination#$repo_dir/}" "$digest" "User-provided source preserved as a separate copy."
   else
-    append_manifest "methodology_and_benchmark" "$key" "$title" "" "$source" \
+    append_manifest "methodology_and_benchmark" "$key" "$title" "" "$recorded" \
       "not_downloaded" "" "" "Expected user-provided PDF was not found or was not a valid PDF."
   fi
 }
 
 copy_local_pdf "AVChain" \
   "AVChain: Trusted Sharing of Autonomous Vehicle Crash Incident Data using Interoperating HyperLedger Fabric Networks and IPFS" \
-  "/Users/venkatrayudu/Desktop/Sengupta sir papers/3709158.pdf"
+  "$user_library/3709158.pdf"
 copy_local_pdf "ReAcct" \
   "ReAcct: Redaction Control for Interoperable Blockchains" \
-  "/Users/venkatrayudu/Desktop/Sengupta sir papers/ReAcct_Redaction_Control_for_Interoperable_Blockchains.pdf"
+  "$user_library/ReAcct_Redaction_Control_for_Interoperable_Blockchains.pdf"
 copy_local_pdf "InterSnap" \
   "Auditable Ledger Snapshot for Non-Repudiable Cross-Blockchain Communication" \
-  "/Users/venkatrayudu/Desktop/Sengupta sir papers/2511.16560v1.pdf"
+  "$user_library/2511.16560v1.pdf"
 copy_local_pdf "SecureBlockchainFL" \
   "Blockchain Based Secure Federated Learning With Local Differential Privacy and Incentivization" \
-  "/Users/venkatrayudu/Desktop/Sengupta sir papers/Blockchain_Based_Secure_Federated_Learning_With_Local_Differential_Privacy_and_Incentivization.pdf"
+  "$user_library/Blockchain_Based_Secure_Federated_Learning_With_Local_Differential_Privacy_and_Incentivization.pdf"
 copy_local_pdf "P2PBotnetCloseness" \
   "A Closeness Centrality Based P2P Botnet Detection Approach Using Deep Learning" \
-  "/Users/venkatrayudu/Desktop/Sengupta sir papers/A_Closeness_Centrality_Based_P2P_Botnet_Detection_Approach_Using_Deep_Learning.pdf"
+  "$user_library/A_Closeness_Centrality_Based_P2P_Botnet_Detection_Approach_Using_Deep_Learning.pdf"
 
 download_extra() {
   local key="$1"

@@ -1,0 +1,23 @@
+# Python dependencies of testbed/analysis (figures, tables, tests) and
+# testbed/monitor/mac_sampler.py. Exact versions, resolved on 2026-10-09 with
+# Python 3.13 from matplotlib 3.10.7 (the version the author's Mac recorded in
+# results/plots/caliper/figure_manifest.json), pytest and psutil.
+#   python3 -m venv .venv-analysis
+#   .venv-analysis/bin/pip install -r testbed/analysis/requirements.txt
+#   .venv-analysis/bin/python -m pytest -q testbed/analysis testbed/scripts/test_capture_manifest.py
+contourpy==1.4.0
+cycler==0.12.1
+fonttools==4.66.1
+iniconfig==2.3.1
+kiwisolver==1.5.1
+matplotlib==3.10.7
+numpy==2.5.3
+packaging==26.3
+pillow==12.3.0
+pluggy==1.6.0
+psutil==7.2.2
+Pygments==2.21.0
+pyparsing==3.3.3
+pytest==9.1.1
+python-dateutil==2.9.0.post0
+six==1.17.0

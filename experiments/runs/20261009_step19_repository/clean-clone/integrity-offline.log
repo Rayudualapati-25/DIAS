@@ -1,0 +1,26 @@
+[2026-10-09T10:23:55.308Z] start: node v22.22.0, Intel(R) Xeon(R) Processor @ 2.10GHz, v3 8f6a393a62a5c13e8c38d3ce6e2dc23f5a36166c, clean=true
+[2026-10-09T10:23:55.431Z] latency h_J: hashText(justification): p50 2.326 us, p95 6.196 us
+[2026-10-09T10:23:55.449Z] latency h_N: hashText(note): p50 1.591 us, p95 4.555 us
+[2026-10-09T10:23:55.524Z] latency canonicalJson(verified context): p50 8.039 us, p95 17.164 us
+[2026-10-09T10:23:55.635Z] latency h_C: verifiedRequestHash(context): p50 14.243 us, p95 33.473 us
+[2026-10-09T10:23:55.768Z] latency h_M: recommendationHashOf(M): p50 17.25 us, p95 38.496 us
+[2026-10-09T10:23:55.878Z] latency generic hashCanonical(M): p50 14.788 us, p95 30.248 us
+[2026-10-09T10:23:55.912Z] latency naive SHA-256(JSON.stringify(M)) [ablation]: p50 4.579 us, p95 8.022 us
+[2026-10-09T10:23:56.260Z] latency Ed25519 sign κ provenance: p50 51.69 us, p95 96.375 us
+[2026-10-09T10:23:57.134Z] latency Ed25519 verify κ provenance: p50 144.568 us, p95 203.36 us
+[2026-10-09T10:23:57.265Z] latency check M against κ (backend): p50 15.722 us, p95 39.141 us
+[2026-10-09T10:23:57.407Z] latency AES-256-GCM seal review entry: p50 18.509 us, p95 52.523 us
+[2026-10-09T10:23:57.533Z] latency AES-256-GCM open review entry: p50 14.805 us, p95 36.67 us
+[2026-10-09T10:23:58.201Z] workflow v2 W1: 2 tx, write set 14572-14572 B, exec p50 0.564 ms
+[2026-10-09T10:23:58.202Z] workflow v3 W1: 3 tx, write set 22742-22742 B, exec p50 1.151 ms
+[2026-10-09T10:23:58.712Z] workflow v2 W2: 2 tx, write set 10061-10061 B, exec p50 0.4 ms
+[2026-10-09T10:23:58.713Z] workflow v3 W2: 3 tx, write set 17359-17359 B, exec p50 0.924 ms
+[2026-10-09T10:23:59.206Z] workflow v2 W3: 2 tx, write set 10075-10075 B, exec p50 0.38 ms
+[2026-10-09T10:23:59.207Z] workflow v3 W3: 3 tx, write set 17376-17376 B, exec p50 0.87 ms
+[2026-10-09T10:23:59.926Z] workflow v2 W4: 1 tx, write set 6870-6870 B, exec p50 0.225 ms
+[2026-10-09T10:23:59.926Z] workflow v3 W4: 1 tx, write set 7875-7875 B, exec p50 0.277 ms
+[config] JWT_SECRET not set — using a dev-only default. Do not deploy like this.
+[2026-10-09T10:24:02.710Z] end-to-end v3 (backend runtime, stand-in model): generate+sign+commit p50 5.095 ms; off-chain 9115 B encrypted vs 7966 B plaintext
+[2026-10-09T10:24:03.833Z] tamper: 44 mutation classes x 200 cases; clean-copy false alarms 0; contract rejected 60/60 forged κ
+[2026-10-09T10:24:03.918Z] policy: v3 reuse after change 0/12; v2 reuse continues 12/12
+[2026-10-09T10:24:03.918Z] done

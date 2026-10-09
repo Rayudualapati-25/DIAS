@@ -40,6 +40,28 @@ SECRET_CONTENT = (
 )
 
 
+# An absolute home-directory path ties a script or a configuration to one
+# person's machine. Recorded evidence keeps the paths it was produced with:
+# run records, raw logs, training outputs, derived result files and dated
+# reports are never edited (docs/release/home-paths.md lists them).
+HOME_PATH = re.compile(rb"/(?:Users|home)/[A-Za-z][A-Za-z0-9._-]*/")
+HOME_PATH_EVIDENCE = (
+    "experiments/runs/",
+    "LLMxAI/experiments/runs/",
+    "LLMxAI/experiments/llm_policy_engine/adapters/",
+    "results/",
+    "reports/",
+    "paper-tests/results/",
+    "archive/",
+    "SNAPSHOT.md",
+    "experiments/llm_policy_engine/README.md",
+)
+
+
+def home_path_allowed(path: str) -> bool:
+    return path.startswith(HOME_PATH_EVIDENCE)
+
+
 def publication_files() -> list[str]:
     command = [
         "git",
@@ -102,6 +124,8 @@ def main() -> int:
         for label, pattern in SECRET_CONTENT:
             if pattern.search(data):
                 violations.append(f"possible {label}: {relative}")
+        if not home_path_allowed(relative) and HOME_PATH.search(data):
+            violations.append(f"home-directory path outside recorded evidence: {relative}")
 
     if violations:
         print("Repository publication check failed:", file=sys.stderr)

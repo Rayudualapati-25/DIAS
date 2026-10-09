@@ -21,7 +21,9 @@ mkdir -p "${2:?usage: train-v7.sh <config.yaml> <run-dir>}"
 RUN_DIR="$(cd "$2" && pwd)"
 PYTHON="${REPO}/.venv-qwen-policy/bin/python"
 
-V6_ADAPTER="/Users/venkatrayudu/Workspace/XAI workspace/crime-records-network/LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best/adapters.safetensors"
+# The V6 adapter lives in the earlier crime-records-network checkout; set
+# V6_ADAPTER when it is elsewhere. Its digest is still checked below.
+V6_ADAPTER="${V6_ADAPTER:-${HOME}/Workspace/XAI workspace/crime-records-network/LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best/adapters.safetensors}"
 V6_SHA="5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe"
 
 LOG="${RUN_DIR}/training.log"

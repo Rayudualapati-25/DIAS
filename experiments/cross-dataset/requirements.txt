@@ -1,0 +1,5 @@
+# experiments/cross-dataset uses only the Python standard library (checked on
+# 2026-10-09: argparse, collections, concurrent, hashlib, importlib, json, math,
+# os, random, sys, time, urllib). Tested with Python 3.13. No packages to install.
+# run_eval.py also needs the model server (MLX, on the author's Mac).
+#   python3 experiments/cross-dataset/score.py   (rewrites the run's comparison.json in place)

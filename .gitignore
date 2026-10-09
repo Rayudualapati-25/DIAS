@@ -141,3 +141,10 @@ experiments/dias-finetuning/data-v2-binary/staged/*/test.jsonl
 /papers/reference_library/03_methodology_and_benchmark_papers/ReAcct.pdf
 /papers/reference_library/03_methodology_and_benchmark_papers/SecureBlockchainFL.pdf
 /papers/reference_library/03_methodology_and_benchmark_papers/P2PBotnetCloseness.pdf
+
+# Third-party papers are not redistributed from this repository (step 19).
+# Their sources and SHA-256 digests are in docs/release/removed-third-party-pdfs.csv;
+# scripts/download-reference-library.sh fetches the open-access ones again.
+/papers/reference_library/**/*.pdf
+/reports/research/20260905_related_work/*_sources/*.pdf
+/LLMxAI/2511.20284v2.pdf

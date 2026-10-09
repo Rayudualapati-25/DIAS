@@ -99,6 +99,10 @@ RULES = [
     rule(r"^outputs/", "spreadsheet export of experiment graphs (2026-09-17)", "generated-output", T + "generated/", "medium",
          "Chart workbook exported for Google Sheets; not a source of evidence."),
 
+    # ---- archived by plan step 19 (2026-10-09) after a dependency check -------------
+    rule(r"^archive/", "legacy material moved after a dependency check", "historical-evidence", "keep", "high",
+         "Old and new paths in archive/README.md."),
+
     # ---- predecessor (SEAL-era) material -------------------------------------------
     rule(r"^paper experiment results/", "SEAL-era five-organization latency/ledger-growth study", "historical-evidence",
          T + "obsolete/seal-era/", "medium", "Evidence for the predecessor paper; not used by the DIAS manuscript."),

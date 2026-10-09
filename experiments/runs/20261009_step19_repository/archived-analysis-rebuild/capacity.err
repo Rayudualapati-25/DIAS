@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<repo>/testbed/analysis/capacity_figure.py", line 63, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "<repo>/testbed/analysis/capacity_figure.py", line 26, in main
+    e3 = json.load(open(os.path.join(a, "e3", "e3-summary.json")))
+                   ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<out>/e3/e3-summary.json'

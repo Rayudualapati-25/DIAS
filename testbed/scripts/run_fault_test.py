@@ -26,6 +26,8 @@ import urllib.parse
 import urllib.request
 
 PROM = "http://127.0.0.1:19090/api/v1/query?query="
+# The testbed directory on the Mac; Lima mounts it at the same path in every VM.
+TB = os.environ.get("TB", os.path.join(os.path.expanduser("~"), "dias-testbed"))
 MACHINE_OF = {"orderer1": "m1", "orderer2": "m2", "orderer3": "m3"}
 FABRIC_CONTAINERS = [
     ("m1", "orderer1.example.com"), ("m2", "orderer2.example.com"), ("m3", "orderer3.example.com"),
@@ -81,7 +83,7 @@ def chain_info():
             "-e", f"CORE_PEER_MSPCONFIGPATH={tb}/{org}.example.com/users/Admin@{org}.example.com/msp",
             "-e", f"CORE_PEER_ADDRESS=peer0.{org}.example.com:{port}", "-e", "FABRIC_CFG_PATH=/testbed/config",
         ]
-        code, out = docker("m4", "run", "--rm", "--network", "diasnet", "-v", "/Users/venkatrayudu/dias-testbed:/testbed",
+        code, out = docker("m4", "run", "--rm", "--network", "diasnet", "-v", f"{TB}:/testbed",
                            *env, "hyperledger/fabric-tools:2.5.16", "peer", "channel", "getinfo", "-c", "diaschannel")
         match = re.search(r"Blockchain info: (\{.*?\})", out)
         try:
@@ -192,7 +194,7 @@ def main():
         print(f"no Raft leader found (got {leader!r}); the test was not started", file=sys.stderr)
         return 1
     code, cid = docker("m4", "run", "-d", "--name", "loadgen-e7", "--network", "diasnet",
-                       "-v", "/Users/venkatrayudu/dias-testbed/results:/results",
+                       "-v", f"{TB}/results:/results",
                        "dias-backend:testbed", "node", "testbed/load/run-steady.js",
                        "--url", "http://dias-backend:3001/api",
                        "--out", f"/results/{args.run_name}", "--plan", "fault-plan.json",

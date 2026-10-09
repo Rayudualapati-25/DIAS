@@ -40,7 +40,7 @@ Requirements: Apple Silicon, Python 3.13, Node.js 20 or newer, and enough memory
 to serve Qwen3-14B in four-bit MLX format.
 
 ```bash
-cd "/Users/venkatrayudu/Workspace/LLMxAI"
+cd LLMxAI   # from the repository root
 python3 -m venv .venv
 .venv/bin/python -m pip install -r experiments/llm_policy_engine/requirements.txt
 npm run model
@@ -49,7 +49,7 @@ npm run model
 In a second terminal:
 
 ```bash
-cd "/Users/venkatrayudu/Workspace/LLMxAI"
+cd LLMxAI   # from the repository root
 npm start
 ```
 
@@ -148,7 +148,7 @@ or production safety by themselves.
 - `experiments/runs/` — retained logs, configs, metrics, and live smoke output.
 - `results/` — retained tables and plots.
 - `reports/iteration/` — evidence-based progress and limitations.
-- `2511.20284v2.pdf` — the pre-existing attached PDF, preserved unchanged.
+- `2511.20284v2.pdf` — a third-party paper (arXiv 2511.20284v2); no longer tracked since 2026-10-09, see `docs/release/removed-third-party-pdfs.csv`.
 
 ## Important limitations
 

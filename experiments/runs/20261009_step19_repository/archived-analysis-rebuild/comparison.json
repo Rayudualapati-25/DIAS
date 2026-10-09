@@ -1,0 +1,83 @@
+{
+  "identical": [
+    "accuracy.log",
+    "growth.log",
+    "growth/ledger-growth.json"
+  ],
+  "same_after_line_endings": [
+    "accuracy/accuracy-sets.csv"
+  ],
+  "numerically_equal": [],
+  "equal_except_added_fields": [
+    "accuracy/accuracy.json (added: /source_runs)",
+    "e4/e4-summary.json (added: /reference_file)"
+  ],
+  "different": [
+    "capacity.log",
+    "e3.log",
+    "e4.log",
+    "e5.log",
+    "e6.log",
+    "e7.log",
+    "e7/e7-summary.json"
+  ],
+  "missing": [
+    "accuracy/accuracy.log",
+    "capacity/capacity.json",
+    "e3/e3-functions.csv",
+    "e3/e3-summary.json",
+    "e5/e5-component-rows.csv",
+    "e5/e5-components.csv",
+    "e5/e5-errors.json",
+    "e5/e5-fabric-metrics.json",
+    "e5/e5-levels.csv",
+    "e5/e5-resources.csv",
+    "e5/e5-summary.json",
+    "e5/replay-errors.json",
+    "e6/e6-containers.csv",
+    "e6/e6-machines-series.csv",
+    "e6/e6-summary.json"
+  ],
+  "figures_present": [
+    "accuracy/e1_outcomes_counts.pdf",
+    "accuracy/e1_outcomes_counts.png",
+    "accuracy/e1_quality_counts.pdf",
+    "accuracy/e1_quality_counts.png",
+    "accuracy/e2_adversarial_counts.pdf",
+    "accuracy/e2_adversarial_counts.png",
+    "e4/e4_llm_time_per_recommendation.pdf",
+    "e4/e4_llm_time_per_recommendation.png",
+    "e7/e7_fault_timeline.pdf",
+    "e7/e7_fault_timeline.png",
+    "growth/ledger_growth_reads.pdf",
+    "growth/ledger_growth_reads.png",
+    "testbed/testbed_layout.pdf",
+    "testbed/testbed_layout.png"
+  ],
+  "figures_missing": [
+    "capacity/capacity_by_component.pdf",
+    "capacity/capacity_by_component.png",
+    "e3/e3_latency.pdf",
+    "e3/e3_latency.png",
+    "e3/e3_throughput.pdf",
+    "e3/e3_throughput.png",
+    "e3/e3_write_stages.pdf",
+    "e3/e3_write_stages.png",
+    "e5/e5_components_by_users.pdf",
+    "e5/e5_components_by_users.png",
+    "e5/e5_latency_by_users.pdf",
+    "e5/e5_latency_by_users.png",
+    "e5/e5_resources_by_users.pdf",
+    "e5/e5_resources_by_users.png",
+    "e5/e5_throughput_by_users.pdf",
+    "e5/e5_throughput_by_users.png",
+    "e6/e6_containers.pdf",
+    "e6/e6_containers.png",
+    "e6/e6_latency_over_time.pdf",
+    "e6/e6_latency_over_time.png",
+    "e6/e6_machines_cpu_memory.pdf",
+    "e6/e6_machines_cpu_memory.png",
+    "e6/e6_operations.pdf",
+    "e6/e6_operations.png"
+  ]
+}

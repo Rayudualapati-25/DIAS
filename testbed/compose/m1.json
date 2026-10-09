@@ -87,8 +87,8 @@
       "working_dir": "/root",
       "command": "orderer",
       "volumes": [
-        "/Users/venkatrayudu/dias-testbed/organizations/ordererOrganizations/example.com/orderers/orderer1.example.com/msp:/var/hyperledger/orderer/msp:ro",
-        "/Users/venkatrayudu/dias-testbed/organizations/ordererOrganizations/example.com/orderers/orderer1.example.com/tls:/var/hyperledger/orderer/tls:ro",
+        "${HOME}/dias-testbed/organizations/ordererOrganizations/example.com/orderers/orderer1.example.com/msp:/var/hyperledger/orderer/msp:ro",
+        "${HOME}/dias-testbed/organizations/ordererOrganizations/example.com/orderers/orderer1.example.com/tls:/var/hyperledger/orderer/tls:ro",
         "orderer1:/var/hyperledger/production/orderer"
       ],
       "networks": [
@@ -161,9 +161,9 @@
       "working_dir": "/root",
       "command": "peer node start",
       "volumes": [
-        "/Users/venkatrayudu/dias-testbed/organizations/peerOrganizations/police.example.com/peers/peer0.police.example.com:/etc/hyperledger/fabric:ro",
+        "${HOME}/dias-testbed/organizations/peerOrganizations/police.example.com/peers/peer0.police.example.com:/etc/hyperledger/fabric:ro",
         "peer0-police:/var/hyperledger/production",
-        "/Users/venkatrayudu/dias-testbed/config:/etc/hyperledger/peercfg:ro",
+        "${HOME}/dias-testbed/config:/etc/hyperledger/peercfg:ro",
         "/var/run/docker.sock:/host/var/run/docker.sock"
       ],
       "networks": [

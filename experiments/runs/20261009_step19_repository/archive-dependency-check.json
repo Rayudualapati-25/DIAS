@@ -1,0 +1,223 @@
+{
+  "paper experiment results/": {
+    "files": 29,
+    "dependencies": [
+      {
+        "file": "scripts/audit/inventory_rules.py",
+        "kind": "dependency",
+        "matched": [
+          "paper experiment results"
+        ]
+      },
+      {
+        "file": "scripts/check-repository.py",
+        "kind": "dependency",
+        "matched": [
+          "paper experiment results"
+        ]
+      }
+    ],
+    "mentions": [
+      {
+        "file": "reports/paper_code_alignment_audit.md",
+        "kind": "mention",
+        "matched": [
+          "paper experiment results"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory.csv",
+        "kind": "mention",
+        "matched": [
+          "paper experiment results"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory_summary.json",
+        "kind": "mention",
+        "matched": [
+          "paper experiment results"
+        ]
+      },
+      {
+        "file": "results/plots/README.md",
+        "kind": "mention",
+        "matched": [
+          "paper experiment results"
+        ]
+      }
+    ]
+  },
+  "outputs/20260917_google_sheets_experiments/": {
+    "files": 4,
+    "dependencies": [],
+    "mentions": [
+      {
+        "file": "reports/paper_code_alignment_audit.md",
+        "kind": "mention",
+        "matched": [
+          "outputs/20260917_google_sheets_experiments"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory.csv",
+        "kind": "mention",
+        "matched": [
+          "outputs/20260917_google_sheets_experiments"
+        ]
+      }
+    ]
+  },
+  "_figpreview.svg": {
+    "files": 1,
+    "dependencies": [],
+    "mentions": [
+      {
+        "file": "reports/paper_code_alignment_audit.md",
+        "kind": "mention",
+        "matched": [
+          "_figpreview.svg"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory.csv",
+        "kind": "mention",
+        "matched": [
+          "_figpreview.svg"
+        ]
+      }
+    ]
+  },
+  "test-refs.bib": {
+    "files": 1,
+    "dependencies": [],
+    "mentions": [
+      {
+        "file": "reports/paper_code_alignment_audit.md",
+        "kind": "mention",
+        "matched": [
+          "test-refs.bib"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory.csv",
+        "kind": "mention",
+        "matched": [
+          "test-refs.bib"
+        ]
+      }
+    ]
+  },
+  "solidity-frontend/": {
+    "files": 8,
+    "dependencies": [
+      {
+        "file": "README.md",
+        "kind": "dependency",
+        "matched": [
+          "solidity-frontend"
+        ]
+      },
+      {
+        "file": "docs/github-repository.md",
+        "kind": "dependency",
+        "matched": [
+          "solidity-frontend"
+        ]
+      },
+      {
+        "file": "scripts/audit/inventory_rules.py",
+        "kind": "dependency",
+        "matched": [
+          "solidity-frontend"
+        ]
+      }
+    ],
+    "mentions": [
+      {
+        "file": "experiments/runs/20260818_solidity_frontend.json",
+        "kind": "mention",
+        "matched": [
+          "solidity-frontend"
+        ]
+      },
+      {
+        "file": "reports/iteration/iter_007_solidity_frontend.md",
+        "kind": "mention",
+        "matched": [
+          "solidity-frontend"
+        ]
+      },
+      {
+        "file": "reports/paper_code_alignment_audit.md",
+        "kind": "mention",
+        "matched": [
+          "solidity-frontend"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory.csv",
+        "kind": "mention",
+        "matched": [
+          "solidity-frontend"
+        ]
+      },
+      {
+        "file": "results/tables/20260818_solidity_frontend_validation.csv",
+        "kind": "mention",
+        "matched": [
+          "solidity-frontend"
+        ]
+      }
+    ]
+  },
+  "paper-tests/": {
+    "files": 104,
+    "dependencies": [
+      {
+        "file": ".gitignore",
+        "kind": "dependency",
+        "matched": [
+          "paper-tests"
+        ]
+      },
+      {
+        "file": "scripts/audit/inventory_rules.py",
+        "kind": "dependency",
+        "matched": [
+          "paper-tests"
+        ]
+      },
+      {
+        "file": "scripts/check-repository.py",
+        "kind": "dependency",
+        "matched": [
+          "paper-tests"
+        ]
+      }
+    ],
+    "mentions": [
+      {
+        "file": "reports/paper_code_alignment_audit.md",
+        "kind": "mention",
+        "matched": [
+          "paper-tests"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory.csv",
+        "kind": "mention",
+        "matched": [
+          "paper-tests"
+        ]
+      },
+      {
+        "file": "reports/repository_audit/repository_inventory_summary.json",
+        "kind": "mention",
+        "matched": [
+          "paper-tests"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "testedCommit": "8f6a393a62a5c13e8c38d3ce6e2dc23f5a36166c",
+  "clonedFrom": "local repository at the tested commit (git clone, full history)",
+  "node": "v22.22.0",
+  "python": "3.13.16",
+  "results": {
+    "makeInstall": "exit 0",
+    "makeTest": {"chaincode": 342, "backend": 313, "policies": 27, "frontend": 77, "dataset": 104, "failures": 0},
+    "datasetValidator": "25/25 checks passed",
+    "pythonAnalysisTests": "20 passed (fresh venv from testbed/analysis/requirements.txt)",
+    "integrityOfflineSeed20261009": {
+      "exit": 0,
+      "tamper.json": "byte-identical to experiments/runs/20261009_v3_integrity_offline/seed-20261009",
+      "policy-invalidation.json": "byte-identical",
+      "workflow write-set bytes": "identical",
+      "end-to-end on-chain bytes": "identical",
+      "end-to-end off-chain plaintext bytes": "p50 7966 vs recorded 7968: the entry holds timestamps and latency values whose length varies",
+      "harnessSha256": "9a96728cf2a5cb86b6bdeb0572c3f68054d5631a3b0dc36a62ee92637137c272"
+    }
+  }
+}

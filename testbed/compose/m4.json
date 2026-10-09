@@ -23,7 +23,7 @@
         "--storage.tsdb.retention.time=60d"
       ],
       "volumes": [
-        "/Users/venkatrayudu/dias-testbed/monitor/prometheus.yml:/etc/prometheus/prometheus.yml:ro",
+        "${HOME}/dias-testbed/monitor/prometheus.yml:/etc/prometheus/prometheus.yml:ro",
         "prometheus-data:/prometheus"
       ],
       "ports": [
@@ -39,15 +39,15 @@
       "container_name": "dias-backend",
       "hostname": "dias-backend",
       "env_file": [
-        "/Users/venkatrayudu/dias-testbed/backend.env"
+        "${HOME}/dias-testbed/backend.env"
       ],
       "environment": [
         "FABRIC_PEER_ENDPOINTS={\"police\":\"peer0.police.example.com:7051\",\"forensics\":\"peer0.forensics.example.com:8051\",\"prosecution\":\"peer0.prosecution.example.com:9051\",\"court\":\"peer0.court.example.com:10051\",\"audit\":\"peer0.audit.example.com:11051\"}"
       ],
       "volumes": [
-        "/Users/venkatrayudu/dias-testbed/organizations:/app/network/organizations:ro",
+        "${HOME}/dias-testbed/organizations:/app/network/organizations:ro",
         "backend-data:/data",
-        "/Users/venkatrayudu/dias-testbed/keys:/run/dias-keys:ro"
+        "${HOME}/dias-testbed/keys:/run/dias-keys:ro"
       ],
       "extra_hosts": [
         "host.lima.internal:192.168.104.2"
