@@ -45,7 +45,7 @@ Evidence: `experiments/runs/20261009_step19_repository/`. No release tag.
 | Check | Result |
 |---|---|
 | `make test` in the working tree | chaincode 342, backend 313, policies 27, frontend 77, dataset 104; 0 failures |
-| Clean clone of commit `8f6a393` (this step's content without its evidence files) | `make install` ok; same counts; validator 25/25; Python tests 20 passed in a fresh venv |
+| Clean clone of the step's tree before its evidence was added (local commit `8f6a393`, later amended into `b7e9f19`; the two differ only in the 8 evidence and report files) | `make install` ok; same counts; validator 25/25; Python tests 20 passed in a fresh venv |
 | Offline integrity run from the clean clone | tamper and policy results byte-identical to iteration 075; write-set bytes identical |
 | `make repo-check` | fails only on the retained 69.8 MiB raw log (unchanged, by decision) |
 | Home-path inventory | 259 files, 0 outside recorded evidence |

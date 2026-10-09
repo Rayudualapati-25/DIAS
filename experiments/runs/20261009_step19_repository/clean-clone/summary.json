@@ -1,11 +1,19 @@
 {
   "testedCommit": "8f6a393a62a5c13e8c38d3ce6e2dc23f5a36166c",
+  "testedCommitNote": "local commit, amended into b7e9f19 to add this evidence; git diff 8f6a393 b7e9f19 lists only the 8 evidence and report files, so the tested source equals b7e9f19's source",
   "clonedFrom": "local repository at the tested commit (git clone, full history)",
   "node": "v22.22.0",
   "python": "3.13.16",
   "results": {
     "makeInstall": "exit 0",
-    "makeTest": {"chaincode": 342, "backend": 313, "policies": 27, "frontend": 77, "dataset": 104, "failures": 0},
+    "makeTest": {
+      "chaincode": 342,
+      "backend": 313,
+      "policies": 27,
+      "frontend": 77,
+      "dataset": 104,
+      "failures": 0
+    },
     "datasetValidator": "25/25 checks passed",
     "pythonAnalysisTests": "20 passed (fresh venv from testbed/analysis/requirements.txt)",
     "integrityOfflineSeed20261009": {
