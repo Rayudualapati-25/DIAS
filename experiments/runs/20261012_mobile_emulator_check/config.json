@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-12",
+  "portalCommit": "98a105ea241677b98d1b812a55073ec216a33660",
+  "device": "emulator-5554",
+  "apiBase": "http://10.0.2.2:3001",
+  "reverseBase": "http://127.0.0.1:3001",
+  "username": "insp.sharma",
+  "application": "org.dias.mobile.dev",
+  "host": "normal Mac portal; no alternate backend",
+  "baseline": "20261008_mobile_connection final 10 device and 3 unit checks; same native workflow scope",
+  "sourceChanges": "none; existing mobile foundation remains uncommitted",
+  "toolchain": {
+    "gradle": "9.3.1",
+    "agp": "9.1.1",
+    "compileSdk": 36,
+    "jdk": "/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+  },
+  "networkReset": false,
+  "scope": "native read-only summary client; full request/review screens absent"
+}

@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-10-12T06:54:06.399Z",
+  "device": "emulator-5554",
+  "appPackage": "org.dias.mobile.dev",
+  "hostBase": "http://10.0.2.2:3001",
+  "database": "dias-summaries.db",
+  "localCount": 2,
+  "portalCount": 2,
+  "mobileEndpointCount": 2,
+  "allFourFieldsEqual": true,
+  "cacheComplete": true,
+  "cacheFetchedAt": "2026-10-12T06:42:29.169Z",
+  "cases": [
+    {
+      "caseId": "CASE-2026-001",
+      "owningAgency": "police",
+      "jurisdiction": "district-north",
+      "status": "under-investigation"
+    },
+    {
+      "caseId": "CASE-2026-002",
+      "owningAgency": "police",
+      "jurisdiction": "district-north",
+      "status": "under-investigation"
+    }
+  ],
+  "scopeStoredAsHash": true
+}

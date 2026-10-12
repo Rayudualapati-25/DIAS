@@ -1,0 +1,16 @@
+capability,baseline_20261008,current_20261012,evidence,limitation
+Android Studio emulator launch,pass,pass,android-studio-cases.png,AVD only
+Normal Mac host connection via 10.0.2.2,pass,pass,device-results/HostConnectionTest and android-verification.log,local debug network
+Normal Mac host connection via adb reverse,pass,pass,device-results/HostConnectionTest and reverse-before.txt,existing local mapping
+Demo sign-in as enrolled officer,pass,pass,android-studio-cases.png,prototype identity selection
+Case summary manual refresh,pass,pass; 2 cases,android-studio-cases.png and running-app-parity.json,live fixture has only 2 cases
+SQLite portal parity for four summary fields,pass,pass; 2 of 2,device-results/HostConnectionTest and running-app-parity.json,summary metadata only
+Bounded batches and offline cache fixture,pass,pass; 7 device checks,device-results/FoundationTest,45-case deterministic fixture
+Search starts access request,absent,absent,ApiClient.kt and MainActivity.kt,no native request UI or API call
+Mobile LLM recommendation view,absent,absent,ApiClient.kt and MainActivity.kt,model not invoked by native app
+Mobile auditor review and binding decision,absent,absent,ApiClient.kt and MainActivity.kt,no native auditor UI
+Requester final decision view,absent,absent,ApiClient.kt and MainActivity.kt,no native history or decision UI
+Mobile reusable authorization flow,absent,absent,ApiClient.kt and MainActivity.kt,portal path only
+Mobile ledger access-log view,absent,absent,ApiClient.kt and MainActivity.kt,portal path only
+Protected case or evidence content,absent,absent,ApiClient.kt and MainActivity.kt,summary metadata only
+Background automatic sync,absent,absent,MainActivity.kt,refresh is manual
