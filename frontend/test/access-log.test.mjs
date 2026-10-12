@@ -52,6 +52,8 @@ test('states who requested what, what the LLM recommended, and the decision with
     what: { name: 'REC-FIR-001', detail: 'view · investigation' },
     llm: { value: 'ALLOW', label: 'ALLOW', detail: null },
     decision: { value: 'FORCE_ALLOW', label: 'FORCE ALLOW', detail: 'agreed with the LLM\'s ALLOW · by sp.north' },
+    approval: { label: 'GRANTED', detail: null },
+    authorization: { label: '—', detail: null },
   });
 });
 
@@ -100,6 +102,27 @@ test('never throws on an incomplete entry', () => {
   assert.deepEqual(row.who, { name: '—', detail: null });
   assert.deepEqual(row.what, { name: '—', detail: null });
   assert.equal(row.decision.value, 'NONE');
+});
+
+test('shows pending advice separately from binding approval and authorization checks', () => {
+  const pending = accessRequestRow(ledgerEntry({ outcome: null, basis: null, decision: null,
+    status: 'awaiting-auditor', decidedAtUtc: null, submittedAtUtc: '2026-10-12T10:00:00Z',
+    dynamicAuthorizationCheck: { outcome: 'MISS', authorizationId: null } }));
+  assert.equal(pending.time, '2026-10-12T10:00:00Z');
+  assert.equal(pending.llm.label, 'ALLOW');
+  assert.equal(pending.decision.label, 'Waiting for auditor');
+  assert.equal(pending.approval.label, 'Waiting');
+  assert.equal(pending.authorization.label, 'MISS');
+  const preparing = accessRequestRow(ledgerEntry({ outcome: null, decision: null,
+    status: 'awaiting-auditor', llmRecommendation: null }));
+  assert.equal(preparing.llm.label, 'Being prepared');
+  const withheld = accessRequestRow(ledgerEntry({ outcome: null, decision: null,
+    status: 'awaiting-auditor', llmRecommendation: null, recommendationWithheld: true }));
+  assert.equal(withheld.llm.label, 'Withheld until decision');
+  const reused = accessRequestRow(ledgerEntry({ basis: 'DYNAMIC_AUTHORIZATION',
+    dynamicAuthorizationCheck: { outcome: 'MATCH', authorizationId: 'AUTH-9' } }));
+  assert.deepEqual(reused.authorization, { label: 'MATCH', detail: 'AUTH-9' });
+  assert.equal(reused.approval.label, 'GRANTED');
 });
 
 test('orders the log by time without changing the list it was given', () => {

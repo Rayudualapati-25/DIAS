@@ -1,7 +1,7 @@
 /**
  * The requester's screen, from finding a case file to opening it.
  *
- *   find a case or case file -> choose the operation, purpose and reason
+ *   enter the identifier, operation, purpose and reason -> Search
  *   -> the ledger records the request and checks the exact dynamic authorization
  *   -> a match grants at once; otherwise an auditor decides, advised by the LLM
  *   -> a granted view opens the metadata and the complete-PDF hand-over
@@ -22,7 +22,8 @@ import {
   ACTIONS, PURPOSES, OUTCOME_CONSEQUENCE, defaultPurpose, purposeLabel, requestActionLabel,
 } from '../shared/vocab.js';
 import { dateTime, shortHash } from '../core/format.js';
-import { loadRecentRequests, rememberRequest } from '../shared/recent-requests.js';
+import { rememberRequest } from '../shared/recent-requests.js';
+import { searchForAccess } from '../shared/search-access.js';
 import {
   accessDecisionView, isSettled, justificationCommitmentView, progressLabel, requesterDecisionView,
 } from '../shared/dias.js';
@@ -138,16 +139,6 @@ export default {
     actionInput.value = 'view';
     purposeInput.value = defaultPurpose(user.role);
 
-    let justificationEdited = false;
-    const suggestedJustification = () => (selected
-      ? `I need to ${actionInput.value} case file ${selected.recordId} for ${purposeInput.value}.` : '');
-    const setSuggestedJustification = () => {
-      if (!justificationEdited) justificationInput.value = suggestedJustification();
-    };
-    justificationInput.addEventListener('input', () => { justificationEdited = true; });
-    actionInput.addEventListener('change', setSuggestedJustification);
-    purposeInput.addEventListener('change', setSuggestedJustification);
-
     const openPdf = async (requestId) => {
       const viewer = window.open('', '_blank');
       if (viewer) viewer.opener = null;
@@ -185,12 +176,11 @@ export default {
     });
 
     const renderRecent = (entries) => {
-      replace(recent, table(['Case file', 'Decision', 'Status', 'When', ''],
+      replace(recent, table(['Case file', 'Status', 'Requested', ''],
         entries.map((entry) => [
           mono(entry.recordId),
-          badge(entry.decision || 'waiting', entry.decision || 'pending'),
           badge(entry.status, statusKind(entry.status)),
-          dateTime(entry.createdAtUtc),
+          dateTime(entry.submittedAtUtc || entry.createdAtUtc),
           button('Open', {
             small: true, kind: 'ghost',
             onclick: () => {
@@ -199,7 +189,12 @@ export default {
             },
           }),
         ]),
-        { emptyMessage: 'No requests in this browser session yet.' }));
+        { emptyMessage: 'No access requests recorded for this identity yet.' }));
+    };
+
+    const refreshRequests = async () => {
+      const history = await attempt(() => api.access.myRequests(100));
+      if (history) renderRecent(history.entries || []);
     };
 
     // --- what happened to the request -------------------------------------
@@ -221,6 +216,7 @@ export default {
       auditorHandoffWasOpened = false;
       activeRequestId = decision.requestId || decision.decisionId;
       renderRecent(rememberRequest(user.username, decision));
+      refreshRequests();
       const view = accessDecisionView(decision);
       // What this officer may read of the auditor's decision and the LLM's account.
       const detail = view.automatic || !view.requestId ? null
@@ -272,6 +268,7 @@ export default {
     const showPending = (request) => {
       activeRequestId = request.requestId;
       renderRecent(rememberRequest(user.username, request));
+      refreshRequests();
       const routedNow = completeAuditorHandoff(auditorHandoff, request.requestId);
       if (routedNow) {
         auditorHandoff = null;
@@ -310,6 +307,16 @@ export default {
     };
 
     const showProgress = async (result) => {
+      if (['cancelled', 'expired'].includes(result.status)) {
+        closeAuditorHandoff(auditorHandoff);
+        auditorHandoff = null;
+        activeRequestId = result.requestId;
+        refreshRequests();
+        replace(outcome, card(result.status === 'cancelled' ? 'Request cancelled' : 'Request expired',
+          'This request is closed. No access was granted; submit a new search to request access again.',
+          detailTable([['Request', mono(result.requestId)], ['Status', progressLabel(result)]])));
+        return;
+      }
       if (result.decisionId && ['granted', 'denied'].includes(result.status)) {
         await showDecision(result);
         return;
@@ -367,86 +374,48 @@ export default {
           hint('Report this request: the text the auditor and the model receive may not be the '
             + 'text you wrote.')));
       }
-    };
-
-    const requestForm = form({
-      submitLabel: 'Submit access request',
-      fields: [
-        row(
-          field('Operation', actionInput, 'What you want to do with the case file.'),
-          field('Purpose', purposeInput, 'The declared purpose. Both are committed with the request.'),
-        ),
-        field('Why do you need it?', justificationInput,
-          'This text is untrusted: the auditor reads it and the LLM is told not to treat its '
-          + 'claims as facts. Your role, clearance and case assignments come from Fabric.'),
-      ],
-      onSubmit: submitRequest,
-    });
-    const requestCard = card('Request access to the selected case file',
-      'Your organization, role, clearance and case assignment come from your Fabric identity.',
-      slot({ class: 'selected-record' }), requestForm);
-    requestCard.classList.add('request-card');
-    const selectedLine = requestCard.querySelector('.selected-record');
-    requestCard.hidden = true;
-
-    const selectRecord = (record) => {
-      selected = record;
-      justificationEdited = false;
-      setSuggestedJustification();
-      replace(selectedLine, callout('info', `Selected ${record.recordId}`,
-        hint('Case ', mono(record.caseId || '—'), ' · owning station ', record.owningStation || '—',
-          '. Nothing protected has been read yet.')));
-      requestCard.hidden = false;
-      requestCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    };
-
-    // --- finding ----------------------------------------------------------
-    const filesTable = (items) => table(['Case file', 'Owning station', ''], items.map((item) => [
-      mono(item.recordId),
-      item.owningStation,
-      button('Select', { small: true, onclick: () => selectRecord(item) }),
-    ]));
-
-    const lookUp = async (id) => {
-      replace(outcome);
-      requestCard.hidden = true;
-      selected = null;
-      let filesInCase = null;
-      try {
-        await api.cases.get(id);
-        filesInCase = await api.records.search({ caseId: id });
-      } catch {
-        filesInCase = null;
-      }
-      if (filesInCase && filesInCase.length > 0) {
-        replace(found, card(`Case ${id}`,
-          'DIAS evaluates one case file at a time. Choose the file you need.', filesTable(filesInCase)));
-        return;
-      }
-      if (filesInCase) {
-        replace(found, callout('warn', `Case ${id} has no case files yet`,
-          hint('The case exists, but nothing has been filed in it. Use "File a record" to add one.')));
-        return;
-      }
-      const record = await attempt(() => api.records.lookup(id));
-      if (!record) {
-        replace(found, callout('bad', `No case or case file called "${id}"`,
-          hint('Check the identifier. Nothing was requested.')));
-        return;
-      }
-      replace(found, card(`Case file ${record.recordId}`,
-        `Found in the public index · owned by ${record.owningStation}.`, filesTable([record])));
-      selectRecord(record);
+      return result;
     };
 
     const findForm = form({
-      submitLabel: 'Find',
-      fields: [field('Case or case-file number', input('recordId', {
-        placeholder: 'CASE-2026-001 or REC-FIR-001', required: true, minlength: '1',
+      submitLabel: 'Search',
+      fields: [
+        field('Search for', select('kind', [
+          { value: 'record', label: 'Case file or record' },
+          { value: 'case', label: 'Case number' },
+          { value: 'evidence', label: 'Evidence item' },
+        ])),
+        field('Identifier', input('identifier', {
+        placeholder: 'REC-FIR-001, CASE-2026-001 or an evidence ID', required: true, minlength: '1',
         maxlength: '128', pattern: '[A-Za-z0-9._\\-]+', autocomplete: 'off',
-      }), 'Looking a number up is public and is logged as a search. A request is created only '
-        + 'when you submit the form below.')],
-      onSubmit: ({ recordId }) => lookUp(recordId.trim()),
+        })),
+        row(field('Operation', actionInput), field('Purpose', purposeInput)),
+        field('Why do you need it?', justificationInput,
+          'The LLM and auditor read your reason alongside your verified role and case assignments.'),
+      ],
+      onSubmit: async (values) => {
+        replace(found);
+        replace(outcome);
+        selected = null;
+        const result = await searchForAccess({ api, input: values,
+          submit: async (record, intent) => { selected = record; return submitRequest(intent); } });
+        if (result.targets.length > 1) {
+          let choosing = false;
+          replace(found, card('Choose the case file to request',
+            'Your search matches several files. Select one to start its access evaluation.',
+            table(['Case file', 'Owning station', ''], result.targets.map((record) => [
+              mono(record.recordId), record.owningStation,
+              button('Request access', { small: true, onclick: async (event) => {
+                if (choosing) return;
+                const control = event.currentTarget;
+                choosing = true;
+                control.disabled = true;
+                try { selected = record; await submitRequest(result.intent); }
+                finally { control.disabled = false; choosing = false; }
+              } }),
+            ]))));
+        }
+      },
     });
 
     const identityCard = card('Signed in as',
@@ -458,10 +427,11 @@ export default {
         ['Organization', ORG_LABEL[user.org] || user.org],
       ]));
 
-    renderRecent(loadRecentRequests(user.username));
-    const recentCard = card('My requests in this session',
-      'Open one to read its current status from the ledger — for example, whether the auditor '
-      + 'has decided.', recent);
+    refreshRequests();
+    const recentCard = card('My access requests',
+      'Your newest 100 requests are read from the blockchain, including earlier sessions.',
+      el('div', { class: 'actions' }, button('Refresh', { kind: 'ghost', small: true, onclick: refreshRequests })),
+      recent);
     const documentsCard = card('My complete-file requests',
       'When the owning station uploads a requested PDF, the View PDF button appears here.',
       el('div', { class: 'actions' },
@@ -470,16 +440,16 @@ export default {
 
     return el('div', { class: 'search-workspace' },
       el('div', { class: 'decision-flow', 'aria-label': 'Decision flow' },
-        el('span', {}, '1 · Find the case file'),
-        el('span', {}, '2 · Operation, purpose, reason'),
+        el('span', {}, '1 · Identifier, operation, purpose, reason'),
+        el('span', {}, '2 · Search and request'),
         el('span', {}, '3 · Dynamic authorization check'),
         el('span', {}, '4 · LLM advice on a miss'),
         el('span', {}, '5 · Auditor final decision')),
-      grid(identityCard, card('Find a case or case file',
-        'Case numbers are known to every organization; looking one up reads only the public index.',
+      grid(identityCard, card('Search and request access',
+        'Search checks reusable authorization first. On a miss, the LLM advises the auditor, '
+        + 'who makes the final decision. Evidence access uses its parent case-file scope.',
         findForm)),
       found,
-      requestCard,
       outcome,
       el('section', { class: 'request-history' },
         subheading('History'),

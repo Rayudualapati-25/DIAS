@@ -8,6 +8,17 @@ const { describe: classify, withResponseTarget } = require('../src/middleware/ac
 const snapshot = (method, path, extra = {}) => ({ method, path, query: {}, body: {}, ...extra });
 
 describe('accessLogger.describe', () => {
+  it('never copies unexpected query fields or invalid body objects into blockchain targets', () => {
+    const query = classify(snapshot('GET', '/records', {
+      query: { caseId: 'CASE-1', token: 'private token', justification: 'private narrative',
+        owningStation: { password: 'private password' } },
+    }));
+    expect(query.target).to.deep.equal({ filters: { caseId: 'CASE-1' } });
+    const body = classify(snapshot('POST', '/access/request', {
+      body: { recordId: { reason: 'private text' }, action: 'view', purpose: 'investigation' },
+    }));
+    expect(JSON.stringify(body)).to.not.match(/private|reason/);
+  });
   it('records a DIAS request action and correlates its Fabric request ID', () => {
     const entry = classify(snapshot('POST', '/access/request', {
       body: {
@@ -31,6 +42,18 @@ describe('accessLogger.describe', () => {
   it('classifies a direct record lookup as a search for that identifier', () => {
     expect(classify(snapshot('GET', '/records/lookup/REC-FIR-001'))).to.deep.equal({
       action: 'record.search', target: { filters: { recordId: 'REC-FIR-001' } },
+    });
+  });
+
+  it('classifies evidence discovery and ledger history explicitly', () => {
+    expect(classify(snapshot('GET', '/records/evidence-index/EV-1'))).to.deep.equal({
+      action: 'record.search', target: { filters: { evidenceId: 'EV-1' } },
+    });
+    expect(classify(snapshot('GET', '/access/workflow-log'))).to.deep.equal({
+      action: 'dias.workflow-log.read', target: null,
+    });
+    expect(classify(snapshot('GET', '/access/requests/mine'))).to.deep.equal({
+      action: 'access.request.list', target: null,
     });
   });
 
@@ -253,6 +276,7 @@ describe('access-log policy coverage', () => {
     ['POST', '/access/request'], ['GET', '/access/request/REQ-1'], ['GET', '/access/request/REQ-1/trail'],
     ['POST', '/access/request/REQ-1/cancel'],
     ['GET', '/access/decision-log'], ['GET', '/access/request/REQ-1/recommendation'],
+    ['GET', '/access/workflow-log'], ['GET', '/access/requests/mine'],
     ['GET', '/access/record/R-1'], ['GET', '/access/decision/R-1/D-1'],
     ['GET', '/access/auditor/pending'], ['GET', '/access/auditor/pending/status'], ['GET', '/access/auditor/REQ-1'],
     ['POST', '/access/auditor/REQ-1/decision'], ['GET', '/access/dynamic-authorizations'],
@@ -261,6 +285,7 @@ describe('access-log policy coverage', () => {
     ['GET', '/users'], ['GET', '/users/u'], ['GET', '/users/u/history'], ['POST', '/users'],
     ['POST', '/users/u/status'], ['GET', '/departments'], ['POST', '/departments'],
     ['GET', '/records'], ['POST', '/records'], ['GET', '/records/lookup/R-1'],
+    ['GET', '/records/evidence-index/E-1'],
     ['GET', '/records/document-requests/mine'], ['POST', '/records/document-requests/D-1/upload'],
     ['GET', '/records/document-requests/D-1/content'], ['POST', '/records/R-1/document-requests'],
     ['GET', '/records/R-1/metadata/D-1'], ['GET', '/records/R-1'], ['GET', '/records/R-1/payload'],

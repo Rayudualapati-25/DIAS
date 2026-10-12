@@ -1,0 +1,105 @@
+{
+  "startedAt": "2026-10-12T06:17:17.688Z",
+  "base": "http://localhost:3001/api",
+  "checks": [
+    {
+      "name": "request history is restored from Fabric and restricted to its signing identity",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "a non-reviewer cannot read all workflow requests",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "invalid history limit is refused",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "case discovery returns identifiers without protected content",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Search automatically records a request awaiting review",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pending request and authorization check appear in the blockchain workflow log",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "backend automatically commits its signed LLM recommendation for the auditor",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "auditor binding decision is a committed denial",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "requester sees the auditor decision after it is committed",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "request, authorization check, recommendation, decision and outcome have Fabric lifecycle records",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "reuse fixture receives a valid DENY recommendation",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "auditor overriding DENY creates reusable authorization",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "the next Search grants automatically by exact authorization",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "reuse creates no off-chain review and invokes no model worker",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "reuse records MATCH, skipped auditor and GRANTED without a recommendation commitment",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "evidence discovery reveals only identifier and parent file ownership",
+      "ok": false,
+      "detail": null
+    },
+    {
+      "name": "temporary test authorization is revoked",
+      "ok": true,
+      "detail": {
+        "authorizationId": "AUTH-3432dd181196d76a"
+      }
+    }
+  ],
+  "evidence": {
+    "deniedRequestId": "REQ-f5e48bfe59a58d09",
+    "reusedRequestId": "REQ-63afa8e4336049df",
+    "authorizationId": "AUTH-3432dd181196d76a"
+  },
+  "error": "Case file or evidence not found.",
+  "summary": {
+    "passed": 16,
+    "failed": 1,
+    "error": "Case file or evidence not found."
+  },
+  "finishedAt": "2026-10-12T06:17:41.366Z"
+}

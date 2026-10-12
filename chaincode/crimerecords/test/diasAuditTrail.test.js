@@ -135,6 +135,21 @@ describe('AuditContract', () => {
       await expect(audit.QueryAccessEvents(state, '50')).to.be.rejectedWith(/requires membership in/);
     });
 
+    it('deduplicates a retried application event by signing identity and rejects changed data', async () => {
+      const log = (caller, action = 'record.search') => call(caller, (ctx) =>
+        world.contracts.audit.RecordAccessEventOnce(ctx, 'EVENT-1', action, '{"recordId":"FIR-1"}', 'ok', '200'));
+      const first = await log(CALLERS.inspector);
+      const retry = await log(CALLERS.inspector);
+      expect(retry.txId).to.equal(first.txId);
+      await expect(log(CALLERS.inspector, 'record.read')).to.be.rejectedWith(/conflict/);
+      await log(CALLERS.constable);
+      const events = await call(CALLERS.auditor, (ctx) => world.contracts.audit.QueryAccessEvents(ctx, '50'));
+      expect(events).to.have.length(2);
+      await expect(call(CALLERS.inspector, (ctx) =>
+        world.contracts.audit.RecordAccessEventOnce(ctx, '../bad', 'record.search', '{}', 'ok', '200')))
+        .to.be.rejectedWith(/eventId/);
+    });
+
     it('rejects malformed event fields and limits', async () => {
       const ctx = buildMockContext(CALLERS.inspector);
       await expect(audit.RecordAccessEvent(ctx, 'bad action!', '{}', 'ok', '200')).to.be.rejectedWith(/action/);

@@ -136,6 +136,16 @@ class AuditContract extends Contract {
    * from the signing certificate; callers cannot name a different actor.
    */
   async RecordAccessEvent(ctx, action, targetJson, outcome, statusCode) {
+    return this._recordAccessEvent(ctx, action, targetJson, outcome, statusCode, null);
+  }
+
+  /** Stable receipt makes a timeout/restart retry safe without duplicate events. */
+  async RecordAccessEventOnce(ctx, eventId, action, targetJson, outcome, statusCode) {
+    if (!SAFE_ID.test(eventId || '')) throw new Error('eventId has invalid format');
+    return this._recordAccessEvent(ctx, action, targetJson, outcome, statusCode, eventId);
+  }
+
+  async _recordAccessEvent(ctx, action, targetJson, outcome, statusCode, eventId) {
     const caller = getCaller(ctx);
     if (!SAFE_ID.test(action || '')) throw new Error('action must be a simple identifier');
     if (!['ok', 'failed', 'refused', 'rejected', 'error'].includes(outcome)) {
@@ -154,10 +164,18 @@ class AuditContract extends Contract {
     if (Buffer.byteLength(targetJson, 'utf8') > 2048) {
       throw new Error('target exceeds 2048 byte limit');
     }
+    const identityHash = hashObject({ id: caller.id });
+    const receiptKey = eventId ? ctx.stub.createCompositeKey('accessEventReceipt', [identityHash, eventId]) : null;
+    const fingerprint = hashObject({ action, target, outcome, status });
+    const receipt = receiptKey ? await readJson(ctx, receiptKey) : null;
+    if (receipt) {
+      if (receipt.fingerprint !== fingerprint) throw new Error('access event retry conflict');
+      return JSON.stringify(await readJson(ctx, receipt.eventKey));
+    }
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
     const event = {
       docType: 'applicationAccessEvent',
-      actorIdentityHash: hashObject({ id: caller.id }),
+      actorIdentityHash: identityHash,
       actorUsername: caller.enrollmentId,
       actorMsp: caller.mspId,
       actorRole: caller.role,
@@ -168,7 +186,9 @@ class AuditContract extends Contract {
       timestamp,
       txId: ctx.stub.getTxID(),
     };
-    await putJson(ctx, ctx.stub.createCompositeKey(ACCESS_EVENT_KEY, [timestamp, event.txId]), event);
+    const eventKey = ctx.stub.createCompositeKey(ACCESS_EVENT_KEY, [timestamp, event.txId]);
+    await putJson(ctx, eventKey, event);
+    if (receiptKey) await putJson(ctx, receiptKey, { fingerprint, eventKey });
     ctx.stub.setEvent('ApplicationAccessRecorded', Buffer.from(JSON.stringify({
       action, outcome, txId: event.txId,
     })));

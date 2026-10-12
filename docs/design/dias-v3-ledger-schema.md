@@ -236,6 +236,7 @@ The backend remains part of the trusted base, because it holds every demonstrati
   2. store M and the signed κ (state `signed`);
   3. submit κ (state `committed`).
   - **After a crash:** a `signed` entry is resubmitted unchanged, which is idempotent. An uncertain response is resolved by reading κ back from the ledger.
+  - **While running:** a 15-second recovery tick requeues pending/signed entries. Signed entries reuse their stored M and κ without calling the LLM again. Queue membership prevents overlapping generation for a request.
   - **Determinism:** M contains no timestamps or latencies, which are kept outside M. A regeneration with the same deterministic model output therefore has the same `h_M`.
 - **Note:**
   1. validate (1–2,000 characters, not only whitespace);
@@ -254,7 +255,11 @@ The backend remains part of the trusted base, because it holds every demonstrati
 - **Auditor screen status check:** `GET /access/auditor/pending/status?ids=…` tells an open auditor screen whether the recommendations it waits for are ready. It reads only the off-chain review store and returns request ids with a yes or no, never case data. It answers only a district head of the audit organisation, and takes at most 50 request ids per call. The screen asks every 3 seconds, for at most 10 minutes, and only while it shows a recommendation as being prepared; a refused check ends the asking. The queue itself stays a sensitive, always-logged read; it is loaded again only when a recommendation became ready.
 - **Comparison mode:** `DIAS_ACCESS_LOG_MODE=all` reproduces v2 (one write per authenticated call).
 - **Readers:** the reviewer set (`QueryAccessEvents`).
-- **Effect on measurements:** logging adds ledger writes outside the measured request latency. Throughput and resource figures from v2 runs are therefore not comparable with v3 runs.
+- **Durability (2026-10-12):** sensitive application events are flushed to an encrypted local outbox before a buffered response ends. A staging failure returns 503 instead of releasing that response. The backend submits afterwards and retries every 15 seconds and on restart. `RecordAccessEventOnce` keys its receipt by signing identity and event id, so an ambiguous commit/retry does not duplicate an event; changed retry data is refused. Files are removed only after confirmation. Damaged or undecryptable files remain for operator recovery. The outbox is temporary delivery state, not a second authoritative access log.
+- **Targets:** only bounded, allow-listed identifiers and discovery filters are copied, including on refused requests. Unknown query fields, arbitrary objects, tokens and free text are omitted. Anonymous calls without a signing identity cannot honestly be attributed on Fabric.
+- **Workflow view:** `QueryAccessWorkflowLog` reconstructs pending and settled requests from request, commitment, auditor-decision and outcome records. It includes the authorization check, transaction identifiers and any created authorization. Reviewers can read it; advice for their own pending request remains withheld. `QueryMyAccessRequests` returns only the signing identity's newest requests, allowing history to survive logout/browser loss. Both validate a 1–500 result limit; scans of world state remain a prototype scaling limitation.
+- **Search (author clarification, 2026-10-12):** the requester enters a record/case/evidence identifier, operation, purpose and reason. Search automatically submits a single matching file scope. Multiple matches require selecting a file; no undisclosed batch requests are created. `QueryEvidenceIndex` exposes only identifiers and parent file ownership. Evidence access requests use their parent record scope; existing evidence collection/member read rules still apply separately.
+- **Effect on measurements:** logging now adds local encrypted staging I/O to the response path and Fabric writes afterwards. No latency measurement was made for this change. Throughput/resource figures from older logging implementations need fresh baseline/proposed runs before comparison.
 
 ## 13. Explanation source
 

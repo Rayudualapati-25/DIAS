@@ -1,0 +1,10 @@
+PASS request history is restored from Fabric and restricted to its signing identity
+PASS a non-reviewer cannot read all workflow requests
+PASS invalid history limit is refused
+PASS case discovery returns identifiers without protected content
+PASS Search automatically records a request awaiting review
+PASS pending request and authorization check appear in the blockchain workflow log
+PASS backend automatically commits its signed LLM recommendation for the auditor
+PASS auditor binding decision is a committed denial
+PASS requester sees the auditor decision after it is committed
+Cannot read properties of undefined (reading 'map')

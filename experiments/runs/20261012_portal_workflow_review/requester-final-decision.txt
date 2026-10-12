@@ -1,0 +1,309 @@
+Browser tab: 2, Title: "DIAS | Access Service Portal", URL: "http://localhost:3001/#/request-access".
+0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/request-access
+	1 container app
+		2 container
+			3 text DIAS Access service portal Crime Records Access Network Insp. A. Sharma Police · inspector
+			4 button Sign out
+		5 container Portal sections
+			6 text WORKSPACE
+			7 text Explore services
+			8 text Choose a task or review an existing request.
+			9 heading ACCESS, Value: 4
+				10 text ACCESS
+			11 link Description: Request access, Value: localhost:3001/#/request-access
+			12 link Description: Decision log, Value: localhost:3001/#/decision-log
+			13 heading RECORDS, Value: 4
+				14 text RECORDS
+			15 link Description: Cases, Value: localhost:3001/#/cases
+			16 link Description: File a record, Value: localhost:3001/#/file-record
+			17 link Description: PDF requests, Value: localhost:3001/#/document-requests
+			18 link Description: Evidence, Value: localhost:3001/#/evidence
+			19 heading PEOPLE, Value: 4
+				20 text PEOPLE
+			21 link Description: Departments, Value: localhost:3001/#/departments
+			22 link Description: Officer directory, Value: localhost:3001/#/user-directory
+		23 container module-content
+			24 container
+				25 text WORKSPACE ACCESS
+			26 heading Request access, Value: 1
+				27 text Request access
+			28 text Find a case file and request access; a dynamic authorization or an auditor decides.
+			29 container Decision flow
+				30 text 1 · Identifier, operation, purpose, reason 2 · Search and request 3 · Dynamic authorization check 4 · LLM advice on a miss 5 · Auditor final decision
+			31 container
+				32 heading Signed in as, Value: 2
+					33 text Signed in as
+				34 text These attributes come from the enrolled Fabric identity and cannot be changed here.
+				35 table
+					36 row
+						37 cell
+							38 text FIELD
+						39 cell
+							40 text VALUE
+					41 row
+						42 cell
+							43 text Officer
+						44 cell
+							45 text Insp. A. Sharma
+							46 text @insp.sharma
+					47 row
+						48 cell
+							49 text Role
+						50 cell
+							51 text INSPECTOR
+					52 row
+						53 cell
+							54 text Organization
+						55 cell
+							56 text Police
+			57 container
+				58 heading Search and request access, Value: 2
+					59 text Search and request access
+				60 text Search checks reusable authorization first. On a miss, the LLM advises the auditor, who makes the final decision. Evidence access uses its parent case-file scope.
+				61 container
+					62 text Search for
+					63 pop up button (collapsed, settable) Search for, Value: Case file or record, Secondary Actions: Expand
+						64 menu
+							65 (selected) Case file or record
+							66 Case number
+							67 Evidence item
+				68 container
+					69 text Identifier
+					70 text field (settable) Identifier, Value: REC-FIR-001
+				71 container
+					72 text Operation
+					73 pop up button (collapsed, settable) Description: Operation, Value: View, Secondary Actions: Expand
+						74 menu
+							75 (selected) View
+							76 Export
+							77 Annotate
+				78 container
+					79 text Purpose
+					80 pop up button (collapsed, settable) Description: Purpose, Value: Investigation, Secondary Actions: Expand
+						81 menu
+							82 (selected) Investigation
+							83 Forensic analysis
+							84 Prosecution
+							85 Judicial proceeding
+							86 Audit review
+							87 Defence preparation
+				88 container
+					89 text Why do you need it?
+					90 text entry area (settable) Description: Why you need it, Value: Engineering verification on the synthetic demo FIR; requesting view for the assigned investigation.
+					91 text The LLM and auditor read your reason alongside your verified role and case assignments.
+				92 button Search
+			105 container
+				106 heading Access granted, Value: 2
+					107 text Access granted
+				108 text An AuditMSP auditor granted this request. The decision is on the Fabric ledger.
+				109 table
+					110 row
+						111 cell
+							112 text FIELD
+						113 cell
+							114 text VALUE
+					115 row
+						116 cell
+							117 text Outcome
+						118 cell
+							119 text GRANTED
+					120 row
+						121 cell
+							122 text Decided by
+						123 cell
+							124 text AuditMSP auditor
+					125 row
+						126 cell
+							127 text Action · purpose
+						128 cell
+							129 text view · investigation
+					130 row
+						131 cell
+							132 text Access outcome
+						133 cell
+							134 text OUTCOME-85285832a4c9e119
+					135 row
+						136 cell
+							137 text Request
+						138 cell
+							139 text REQ-e3c8b66127918eec
+					140 row
+						141 cell
+							142 text Auditor decision
+						143 cell
+							144 text AUDIT-85285832a4c9e119
+					145 row
+						146 cell
+							147 text Recorded
+						148 cell
+							149 text 10/12/2026, 11:41:17 AM
+				150 text Access is granted on the ledger. A granted view opens the case-file metadata, and the complete PDF can then be requested from the owning station.
+				151 heading The auditor decision, Value: 3
+					152 text The auditor decision
+				153 table
+					154 row
+						155 cell
+							156 text FIELD
+						157 cell
+							158 text VALUE
+					159 row
+						160 cell
+							161 text Auditor decision
+						162 cell
+							163 text FORCE ALLOW by sp.north
+					164 row
+						165 cell
+							166 text LLM recommendation
+						167 cell
+							168 text ALLOW
+					169 row
+						170 cell
+							171 text Decision against the LLM
+						172 cell
+							173 text agreed with the LLM
+				174 heading Case-file metadata, Value: 2
+					175 text Case-file metadata
+				176 text Released because this exact identity holds a granted view decision on the ledger.
+				177 table
+					178 row
+						179 cell
+							180 text FIELD
+						181 cell
+							182 text VALUE
+					183 row
+						184 cell
+							185 text Case file
+						186 cell
+							187 text REC-FIR-001
+					188 row
+						189 cell
+							190 text Case
+						191 cell
+							192 text CASE-2026-001
+					193 row
+						194 cell
+							195 text Type
+						196 cell
+							197 text fir
+					198 row
+						199 cell
+							200 text Sensitivity
+						201 cell
+							202 text MEDIUM
+					203 row
+						204 cell
+							205 text Status
+						206 cell
+							207 text ACTIVE
+					208 row
+						209 cell
+							210 text Sealed
+						211 cell
+							212 text NO
+					213 row
+						214 cell
+							215 text Special flags
+						216 cell
+							217 text none
+					218 row
+						219 cell
+							220 text Jurisdiction
+						221 cell
+							222 text district-north
+					223 row
+						224 cell
+							225 text Owning station
+						226 cell
+							227 text PS-Central
+					228 row
+						229 cell
+							230 text Owning organization
+						231 cell
+							232 text police
+					233 row
+						234 cell
+							235 text Filed
+						236 cell
+							237 text 10/6/2026, 3:09:03 PM
+					238 row
+						239 cell
+							240 text Content commitment
+						241 cell
+							242 text d1e9fe0963ddffd0…
+				243 button Request the complete file
+			93 container
+				94 heading History, Value: 3
+					95 text History
+				96 heading My access requests, Value: 2
+					97 text My access requests
+				98 text Your newest 100 requests are read from the blockchain, including earlier sessions.
+				99 button Refresh
+				244 table
+					245 row
+						246 cell
+							247 text CASE FILE
+						248 cell
+							249 text STATUS
+						250 cell
+							251 text REQUESTED
+					252 row
+						253 cell
+							254 text REC-FIR-001
+						255 cell
+							256 text GRANTED
+						257 cell
+							258 text 10/12/2026, 11:38:32 AM
+						259 cell
+							260 button Open
+					261 row
+						262 cell
+							263 text REC-FIR-001
+						264 cell
+							265 text GRANTED
+						266 cell
+							267 text 10/8/2026, 2:32:17 PM
+						268 cell
+							269 button Open
+					270 row
+						271 cell
+							272 text REC-FIR-001
+						273 cell
+							274 text DENIED
+						275 cell
+							276 text 10/8/2026, 2:31:06 PM
+						277 cell
+							278 button Open
+					279 row
+						280 cell
+							281 text REC-FIR-001
+						282 cell
+							283 text GRANTED
+						284 cell
+							285 text 10/8/2026, 2:19:42 PM
+						286 cell
+							287 button Open
+					288 row
+						289 cell
+							290 text REC-FIR-001
+						291 cell
+							292 text DENIED
+						293 cell
+							294 text 10/8/2026, 8:46:37 AM
+						295 cell
+							296 button Open
+					297 row
+						298 cell
+							299 text REC-FIR-001
+						300 cell
+							301 text GRANTED
+						302 cell
+							303 text 10/6/2026, 3:09:27 PM
+						304 cell
+							305 button Open
+				100 heading My complete-file requests, Value: 2
+					101 text My complete-file requests
+				102 text When the owning station uploads a requested PDF, the View PDF button appears here.
+				103 button Refresh
+				104 text You have not requested a complete PDF yet.
+
+The focused UI element is 0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/request-access

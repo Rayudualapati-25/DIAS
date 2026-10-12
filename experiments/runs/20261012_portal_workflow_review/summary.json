@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-12",
+  "baselineCommit": "60a92b0ba53fb019fcff65bbbcbdf4ed8dd832b4",
+  "baselinePackageTests": {
+    "passed": 868,
+    "failed": 0,
+    "counts": {
+      "chaincode": 341,
+      "backend": 319,
+      "policies": 27,
+      "frontend": 77,
+      "dataset": 104
+    }
+  },
+  "updatedWorktreeTests": {
+    "passed": 890,
+    "failed": 0,
+    "counts": {
+      "chaincode": 350,
+      "backend": 326,
+      "policies": 27,
+      "frontend": 83,
+      "dataset": 104
+    },
+    "note": "includes six pre-existing uncommitted mobile checks"
+  },
+  "updatedStagedSourceTests": {
+    "passed": 884,
+    "failed": 0,
+    "counts": {
+      "chaincode": 350,
+      "backend": 320,
+      "policies": 27,
+      "frontend": 83,
+      "dataset": 104
+    },
+    "note": "exported staged index; existing installed dependencies reused"
+  },
+  "scriptTests": {
+    "passed": 25,
+    "failed": 0
+  },
+  "liveChecks": {
+    "passed": 21,
+    "failed": 0,
+    "error": null
+  },
+  "liveEvidence": {
+    "deniedRequestId": "REQ-86c8a2f10be3d86c",
+    "reusedRequestId": "REQ-bb4585362bcdf8bc",
+    "authorizationId": "AUTH-4382058e054ac0b7",
+    "evidenceId": "EV-PORTAL-1791785991571",
+    "evidenceRequestId": "REQ-72e2d3eb82802b54"
+  },
+  "baselineRegressionFailures": [
+    "Search helper absent",
+    "ledger history/workflow APIs absent",
+    "pending log presentation incomplete",
+    "durable event staging absent",
+    "scheduled recommendation recovery absent"
+  ],
+  "verificationHarnessFailures": [
+    {
+      "run": "live",
+      "passed": 8,
+      "error": "wrong decision field in verification script"
+    },
+    {
+      "run": "live-02",
+      "passed": 9,
+      "error": "wrong lifecycle field in verification script"
+    },
+    {
+      "run": "live-03",
+      "passed": 16,
+      "failed": 1,
+      "error": "verification adapter expected entries; evidence endpoint returns an array"
+    }
+  ],
+  "limits": [
+    "native Android request and auditor screens not implemented",
+    "four-VM acceptance/evaluation/load/fault/ablation runs not performed",
+    "no model accuracy or end-to-end latency claim",
+    "custodial prototype sign-in remains"
+  ],
+  "status": "portal workflow implemented and bounded Mac-host verification passed"
+}

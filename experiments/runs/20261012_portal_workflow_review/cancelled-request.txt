@@ -1,0 +1,181 @@
+Browser tab: 4, Title: "DIAS | Access Service Portal", URL: "http://localhost:3001/#/request-access".
+0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/request-access
+	1 container app
+		2 container
+			3 text DIAS Access service portal Crime Records Access Network Const. R. Verma Police · constable
+			4 button Sign out
+		5 container Portal sections
+			6 text WORKSPACE
+			7 text Explore services
+			8 text Choose a task or review an existing request.
+			9 heading ACCESS, Value: 4
+				10 text ACCESS
+			11 link Description: Request access, Value: localhost:3001/#/request-access
+			12 link Description: Decision log, Value: localhost:3001/#/decision-log
+			13 heading RECORDS, Value: 4
+				14 text RECORDS
+			15 link Description: Cases, Value: localhost:3001/#/cases
+			16 link Description: File a record, Value: localhost:3001/#/file-record
+			17 link Description: PDF requests, Value: localhost:3001/#/document-requests
+			18 link Description: Evidence, Value: localhost:3001/#/evidence
+			19 heading PEOPLE, Value: 4
+				20 text PEOPLE
+			21 link Description: Departments, Value: localhost:3001/#/departments
+			22 link Description: Officer directory, Value: localhost:3001/#/user-directory
+		23 container module-content
+			24 container
+				25 text WORKSPACE ACCESS
+			26 heading Request access, Value: 1
+				27 text Request access
+			28 text Find a case file and request access; a dynamic authorization or an auditor decides.
+			29 container Decision flow
+				30 text 1 · Identifier, operation, purpose, reason 2 · Search and request 3 · Dynamic authorization check 4 · LLM advice on a miss 5 · Auditor final decision
+			31 container
+				32 heading Signed in as, Value: 2
+					33 text Signed in as
+				34 text These attributes come from the enrolled Fabric identity and cannot be changed here.
+				35 table
+					36 row
+						37 cell
+							38 text FIELD
+						39 cell
+							40 text VALUE
+					41 row
+						42 cell
+							43 text Officer
+						44 cell
+							45 text Const. R. Verma
+							46 text @const.verma
+					47 row
+						48 cell
+							49 text Role
+						50 cell
+							51 text CONSTABLE
+					52 row
+						53 cell
+							54 text Organization
+						55 cell
+							56 text Police
+			57 container
+				58 heading Search and request access, Value: 2
+					59 text Search and request access
+				60 text Search checks reusable authorization first. On a miss, the LLM advises the auditor, who makes the final decision. Evidence access uses its parent case-file scope.
+				61 container
+					62 text Search for
+					63 pop up button (collapsed, settable) Search for, Value: Case file or record, Secondary Actions: Expand
+						64 menu
+							65 (selected) Case file or record
+							66 Case number
+							67 Evidence item
+				68 container
+					69 text Identifier
+					70 text field (settable) Identifier
+				71 container
+					72 text Operation
+					73 pop up button (collapsed, settable) Description: Operation, Value: View, Secondary Actions: Expand
+						74 menu
+							75 (selected) View
+							76 Export
+							77 Annotate
+				78 container
+					79 text Purpose
+					80 pop up button (collapsed, settable) Description: Purpose, Value: Investigation, Secondary Actions: Expand
+						81 menu
+							82 (selected) Investigation
+							83 Forensic analysis
+							84 Prosecution
+							85 Judicial proceeding
+							86 Audit review
+							87 Defence preparation
+				88 container
+					89 text Why do you need it?
+					90 text entry area (settable) Why you need it
+					91 text The LLM and auditor read your reason alongside your verified role and case assignments.
+				92 button Search
+			158 container
+				159 heading Request cancelled, Value: 2
+					160 text Request cancelled
+				161 text This request is closed. No access was granted; submit a new search to request access again.
+				162 table
+					163 row
+						164 cell
+							165 text FIELD
+						166 cell
+							167 text VALUE
+					168 row
+						169 cell
+							170 text Request
+						171 cell
+							172 text REQ-72e2d3eb82802b54
+					173 row
+						174 cell
+							175 text Status
+						176 cell
+							177 text cancelled by the requester
+			93 container
+				94 heading History, Value: 3
+					95 text History
+				96 heading My access requests, Value: 2
+					97 text My access requests
+				98 text Your newest 100 requests are read from the blockchain, including earlier sessions.
+				99 button Refresh
+				178 table
+					179 row
+						180 cell
+							181 text CASE FILE
+						182 cell
+							183 text STATUS
+						184 cell
+							185 text REQUESTED
+					186 row
+						187 cell
+							188 text REC-FIR-001
+						189 cell
+							190 text CANCELLED
+						191 cell
+							192 text 10/12/2026, 11:49:53 AM
+						193 cell
+							194 button Open
+					195 row
+						196 cell
+							197 text REC-FIR-001
+						198 cell
+							199 text DENIED
+						200 cell
+							201 text 10/12/2026, 11:49:32 AM
+						202 cell
+							203 button Open
+					204 row
+						205 cell
+							206 text REC-FIR-001
+						207 cell
+							208 text DENIED
+						209 cell
+							210 text 10/12/2026, 11:47:17 AM
+						211 cell
+							212 button Open
+					213 row
+						214 cell
+							215 text REC-FIR-001
+						216 cell
+							217 text DENIED
+						218 cell
+							219 text 10/12/2026, 11:45:21 AM
+						220 cell
+							221 button Open
+					222 row
+						223 cell
+							224 text REC-FIR-001
+						225 cell
+							226 text DENIED
+						227 cell
+							228 text 10/12/2026, 11:43:34 AM
+						229 cell
+							230 button Open
+				153 heading My complete-file requests, Value: 2
+					154 text My complete-file requests
+				155 text When the owning station uploads a requested PDF, the View PDF button appears here.
+				156 button Refresh
+				157 text You have not requested a complete PDF yet.
+
+The focused UI element is 0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/request-access

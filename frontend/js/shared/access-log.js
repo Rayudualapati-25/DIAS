@@ -47,6 +47,11 @@ function llmCell(entry) {
   if (entry.basis === 'DYNAMIC_AUTHORIZATION') {
     return { value: 'NOT_ASKED', label: 'Not asked', detail: 'a reusable authorization matched' };
   }
+  if (entry.status === 'awaiting-auditor') {
+    return entry.recommendationWithheld
+      ? { value: 'NONE', label: 'Withheld until decision', detail: 'this is your own request' }
+      : { value: 'NONE', label: 'Being prepared', detail: 'awaiting a committed recommendation' };
+  }
   return { value: 'NOT_RECORDED', label: 'Not recorded', detail: 'the request ended without a decision' };
 }
 
@@ -82,6 +87,9 @@ function decisionCell(entry) {
   if (entry.outcome === 'EXPIRED') {
     return { value: 'NONE', label: 'No decision', detail: 'the request expired' };
   }
+  if (entry.status === 'awaiting-auditor') {
+    return { value: 'NONE', label: 'Waiting for auditor', detail: 'no final decision committed' };
+  }
   return { value: 'NONE', label: 'No decision', detail: null };
 }
 
@@ -94,7 +102,7 @@ export function accessRequestRow(entry) {
   const requester = entry?.requester || {};
   return {
     requestId: entry?.requestId ?? null,
-    time: entry?.decidedAtUtc ?? null,
+    time: entry?.decidedAtUtc ?? entry?.submittedAtUtc ?? null,
     who: {
       name: present(requester.username) ? requester.username : '—',
       detail: joined(requester.role, requester.organization),
@@ -105,6 +113,10 @@ export function accessRequestRow(entry) {
     },
     llm: llmCell(entry || {}),
     decision: decisionCell(entry || {}),
+    approval: { label: entry?.outcome || (entry?.status === 'awaiting-auditor' ? 'Waiting' : '—'),
+      detail: entry?.createdAuthorizationId ? `created authorization ${entry.createdAuthorizationId}` : null },
+    authorization: { label: entry?.dynamicAuthorizationCheck?.outcome || '—',
+      detail: entry?.dynamicAuthorizationCheck?.authorizationId || null },
   };
 }
 

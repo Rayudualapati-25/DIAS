@@ -1,0 +1,58 @@
+
+
+  portal request history and blockchain workflow log
+    1) restores only the signing requester’s requests, including requests awaiting a decision
+    2) restores a committed decision after a new browser session without exposing the auditor note
+    3) shows a pending request and its committed LLM recommendation to a reviewer
+    4) records automatic approval, the authorization check and bypass without pretending the LLM ran
+    5) refuses the full workflow log to a requester without reviewer authority
+    6) validates limits instead of accepting an unbounded or malformed scan result
+
+
+  0 passing (18ms)
+  6 failing
+
+  1) portal request history and blockchain workflow log
+       restores only the signing requester’s requests, including requests awaiting a decision:
+     TypeError: world.contracts.access[method] is not a function
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/chaincode/crimerecords/test/diasWorkflowLog.test.js:12:44
+      at Object.run (chaincode/crimerecords/test/diasTestWorld.js:104:23)
+      at read (chaincode/crimerecords/test/diasWorkflowLog.test.js:11:57)
+      at Context.<anonymous> (chaincode/crimerecords/test/diasWorkflowLog.test.js:18:27)
+
+  2) portal request history and blockchain workflow log
+       restores a committed decision after a new browser session without exposing the auditor note:
+     TypeError: world.contracts.access[method] is not a function
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/chaincode/crimerecords/test/diasWorkflowLog.test.js:12:44
+      at Object.run (chaincode/crimerecords/test/diasTestWorld.js:104:23)
+      at read (chaincode/crimerecords/test/diasWorkflowLog.test.js:11:57)
+      at Context.<anonymous> (chaincode/crimerecords/test/diasWorkflowLog.test.js:27:27)
+
+  3) portal request history and blockchain workflow log
+       shows a pending request and its committed LLM recommendation to a reviewer:
+     TypeError: world.contracts.access[method] is not a function
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/chaincode/crimerecords/test/diasWorkflowLog.test.js:12:44
+      at Object.run (chaincode/crimerecords/test/diasTestWorld.js:104:23)
+      at read (chaincode/crimerecords/test/diasWorkflowLog.test.js:11:57)
+      at Context.<anonymous> (chaincode/crimerecords/test/diasWorkflowLog.test.js:36:27)
+
+  4) portal request history and blockchain workflow log
+       records automatic approval, the authorization check and bypass without pretending the LLM ran:
+     TypeError: world.contracts.access[method] is not a function
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/chaincode/crimerecords/test/diasWorkflowLog.test.js:12:44
+      at Object.run (chaincode/crimerecords/test/diasTestWorld.js:104:23)
+      at read (chaincode/crimerecords/test/diasWorkflowLog.test.js:11:57)
+      at Context.<anonymous> (chaincode/crimerecords/test/diasWorkflowLog.test.js:48:27)
+
+  5) portal request history and blockchain workflow log
+       refuses the full workflow log to a requester without reviewer authority:
+     AssertionError: expected promise to be rejected with an error matching /unauthorized/ but got 'world.contracts.access[method] is not…'
+  
+
+  6) portal request history and blockchain workflow log
+       validates limits instead of accepting an unbounded or malformed scan result:
+     AssertionError: expected promise to be rejected with an error matching /limit/ but got 'world.contracts.access[method] is not…'
+  
+
+
+

@@ -18,6 +18,7 @@ const accessRoutes = require('./routes/access');
 const auditRoutes = require('./routes/audit');
 const { accessLogger } = require('./middleware/accessLogger');
 const { getDiasRuntime } = require('./dias/runtime');
+const { getAccessEventOutbox } = require('./dias/accessEventOutbox');
 const trace = require('./util/trace');
 
 const app = express();
@@ -51,7 +52,7 @@ app.use('/api', (req, res, next) => {
 });
 
 // Records authenticated API calls as Fabric transactions. Mounted before the
-// routes so it sees every request; it submits after the response is sent.
+// routes so it sees every request; it stages before ending and submits afterwards.
 app.use('/api', accessLogger);
 
 app.get('/api/health', (req, res) => res.json({ success: true, data: 'ok', error: null }));
@@ -82,6 +83,9 @@ function startServer(port = PORT) {
     console.error(`[dias] ${sealed.unreadable} stored review(s) cannot be opened with the configured keys`);
   }
   const resumed = getDiasRuntime().worker.resumePending();
+  getDiasRuntime().worker.startRecovery();
+  const accessOutbox = getAccessEventOutbox();
+  accessOutbox.start();
   // Auditor notes a previous process staged before an unconfirmed decision are
   // settled against the ledger (design §11). It runs in the background: a ledger
   // that is not reachable yet leaves the notes staged and is logged.
@@ -97,17 +101,24 @@ function startServer(port = PORT) {
     console.error(`[dias] staged auditor notes could not be settled: ${error.message}`);
   });
   // Requests past their review deadline are closed on the ledger (design §8).
-  createExpirySweeper({
+  const expirySweeper = createExpirySweeper({
     ledger: fabric,
     identity: { org: AUTH_ORG, fabricUser: AUTH_USER },
     intervalMs: DIAS_EXPIRY_SWEEP_SECONDS * 1000,
-  }).start();
-  return app.listen(port, () => {
+  });
+  expirySweeper.start();
+  const server = app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`DIAS backend listening on http://localhost:${port}`
       + ` (LLM recommendations resumed: ${resumed}; reviews encrypted: ${sealed.encrypted},`
       + ` re-sealed: ${sealed.resealed}, unreadable: ${sealed.unreadable})`);
   });
+  server.on('close', () => {
+    getDiasRuntime().worker.stopRecovery();
+    accessOutbox.stop();
+    expirySweeper.stop();
+  });
+  return server;
 }
 
 if (require.main === module) startServer();

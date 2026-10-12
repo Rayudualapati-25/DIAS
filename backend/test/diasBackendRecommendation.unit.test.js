@@ -271,6 +271,32 @@ describe('DIAS backend recommendation path', () => {
       expect(store.read('REQ-11')).to.include({ recommendationState: 'committed', commitmentId: 'KAPPA-REQ-11' });
     });
 
+    it('automatically retries a signed commitment on the next recovery tick without asking the model again', async () => {
+      store.create({ request: committed('REQ-retry'), justification: 'why' });
+      const signedRecommender = fakeSignedRecommender();
+      let submits = 0;
+      let tick;
+      let cleared = false;
+      const queue = createRecommendationWorker({ store, signedRecommender, relay: RELAY, log: silent,
+        ledger: { submit: async () => {
+          submits += 1;
+          if (submits === 1) throw new Error('temporary unavailable');
+          return { commitmentId: 'KAPPA-retry', txId: 'tx-retry' };
+        }, evaluate: async () => null },
+        schedule: (callback) => { tick = callback; return { unref() {} }; },
+        cancel: () => { cleared = true; },
+      });
+      await queue.enqueue('REQ-retry');
+      expect(store.read('REQ-retry').recommendationState).to.equal('signed');
+      queue.startRecovery(15_000);
+      tick();
+      await queue.idle();
+      expect(store.read('REQ-retry').recommendationState).to.equal('committed');
+      expect(signedRecommender.calls).to.have.length(1);
+      queue.stopRecovery();
+      expect(cleared).to.equal(true);
+    });
+
     it('records a recommender failure as failed, so the auditor is not left waiting', async () => {
       store.create({ request: committed('REQ-5'), justification: 'why' });
       const broken = { recommend: async () => { throw new Error('signing key unavailable'); } };

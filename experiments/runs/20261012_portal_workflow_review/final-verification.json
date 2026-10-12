@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-12T06:37:37.627Z",
+  "sourceWhitespaceCheck": "pass; raw evidence logs excluded",
+  "rawEvidenceWhitespace": "git diff check flags formatter trailing spaces in preserved test logs; logs kept unchanged",
+  "frontendSyntax": "pass",
+  "allChangedJavaScriptSyntax": "pass",
+  "stagedSecretPatternScan": {
+    "files": 105,
+    "hits": []
+  },
+  "stagedSourceTests": 884,
+  "stagedScriptTests": 25,
+  "liveChecks": 21,
+  "unrelatedMobileEdits": "excluded from staged source; two server mount/import lines retained unstaged"
+}

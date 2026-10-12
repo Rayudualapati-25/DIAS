@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-10-12T06:15:21.273Z",
+  "base": "http://localhost:3001/api",
+  "checks": [
+    {
+      "name": "request history is restored from Fabric and restricted to its signing identity",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "a non-reviewer cannot read all workflow requests",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "invalid history limit is refused",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "case discovery returns identifiers without protected content",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "Search automatically records a request awaiting review",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "pending request and authorization check appear in the blockchain workflow log",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "backend automatically commits its signed LLM recommendation for the auditor",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "auditor binding decision is a committed denial",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "requester sees the auditor decision after it is committed",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "evidence": {
+    "deniedRequestId": "REQ-bb45adea5287c938"
+  },
+  "error": "Cannot read properties of undefined (reading 'map')",
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "error": "Cannot read properties of undefined (reading 'map')"
+  },
+  "finishedAt": "2026-10-12T06:15:29.599Z"
+}

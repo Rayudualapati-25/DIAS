@@ -1,0 +1,21 @@
+PASS request history is restored from Fabric and restricted to its signing identity
+PASS a non-reviewer cannot read all workflow requests
+PASS invalid history limit is refused
+PASS case discovery returns identifiers without protected content
+PASS Search automatically records a request awaiting review
+PASS pending request and authorization check appear in the blockchain workflow log
+PASS backend automatically commits its signed LLM recommendation for the auditor
+PASS auditor binding decision is a committed denial
+PASS requester sees the auditor decision after it is committed
+PASS request, authorization check, recommendation, decision and outcome have Fabric lifecycle records
+PASS reuse fixture receives a valid DENY recommendation
+PASS auditor overriding DENY creates reusable authorization
+PASS the next Search grants automatically by exact authorization
+PASS reuse creates no off-chain review and invokes no model worker
+PASS reuse records MATCH, skipped auditor and GRANTED without a recommendation commitment
+PASS evidence discovery reveals only identifier and parent file ownership
+PASS Search for evidence automatically requests its parent file scope
+PASS cancellation closes without granting access
+PASS workflow log distinguishes advice, final decision, approval and automatic authorization
+PASS evidence Search is committed in the application blockchain access log
+PASS temporary test authorization is revoked

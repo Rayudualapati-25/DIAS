@@ -1,0 +1,33 @@
+
+
+  accessLogger.describe
+    ✔ never copies unexpected query fields or invalid body objects into blockchain targets
+    ✔ records a DIAS request action and correlates its Fabric request ID
+    ✔ classifies a direct record lookup as a search for that identifier
+    ✔ classifies evidence discovery and ledger history explicitly
+    ✔ records auditor decisions without the auditor reason
+    ✔ gives retired SEAL-era routes only a generic action and never their request body
+    ✔ names current DIAS request and authorization routes
+    ✔ names a case read and current request audit routes
+    ✔ records a gated metadata read as its own action with the decision that unlocked it
+    ✔ records reading one decision against its record and decision
+    ✔ does not mistake the document-request routes for a record called "document-requests"
+    ✔ records a full-document request against its record and decision
+    ✔ names the case list instead of a generic api path
+    ✔ keeps existing classifications unchanged
+
+  access-log policy (plan step 6)
+    ✔ names every current API route with its own action
+    ✔ copies only identifiers into the new targets, never free text
+    ✔ gives every named action a class, and an unknown action the sensitive class
+    ✔ in security mode logs sensitive reads always and other calls only when refused or failed
+    ✔ treats the auditor screen's status check as a routine read that writes nothing when it succeeds
+    ✔ in all mode logs every call, as v2 did
+    ✔ defaults to security and refuses an unknown mode
+
+  access-log policy coverage
+    ✔ classifies the action of every mounted route explicitly
+
+
+  22 passing (9ms)
+

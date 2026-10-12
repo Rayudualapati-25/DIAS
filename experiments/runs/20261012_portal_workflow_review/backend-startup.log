@@ -1,0 +1,12 @@
+CHANNEL=diaschannel CHAINCODE=diasrecords DIAS_MODEL_URL=http://127.0.0.1:8081/v1 \
+		node backend/src/server.js
+DIAS backend listening on http://localhost:3001 (LLM recommendations resumed: 0; reviews encrypted: 0, re-sealed: 0, unreadable: 0)
+[dias] staged auditor notes settled: {"committed":0,"dropped":0,"stillStaged":0,"unreadable":0}
+[dias] REQ-e3c8b66127918eec -> committed OK ALLOW
+[dias] REQ-78888dd15f3a99a9 -> committed OK DENY
+[dias] REQ-bb45adea5287c938 -> committed OK DENY
+[dias] REQ-f5e48bfe59a58d09 -> committed OK DENY
+[dias] REQ-0618d6bda3f50041 -> committed OK DENY
+[dias] REQ-86c8a2f10be3d86c -> committed OK DENY
+[dias] REQ-f272e4c1a883ffc3 -> committed OK DENY
+[dias] REQ-72e2d3eb82802b54 commitment refused: access request 'REQ-72e2d3eb82802b54' is not awaiting-auditor (status: cancelled)

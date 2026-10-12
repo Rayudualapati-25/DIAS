@@ -1,0 +1,46 @@
+{
+  "status": 200,
+  "row": {
+    "requestId": "REQ-e3c8b66127918eec",
+    "recordId": "REC-FIR-001",
+    "caseId": "CASE-2026-001",
+    "action": "view",
+    "purpose": "investigation",
+    "status": "awaiting-auditor",
+    "requester": {
+      "username": "insp.sharma",
+      "organization": "police",
+      "role": "inspector"
+    },
+    "submittedAtUtc": "2026-10-12T06:08:32.603Z",
+    "requestTxId": "e3c8b66127918eec1cd7cc056b7a750ea475e565e973e26fc7e4f19054a0f341",
+    "processingPath": "auditor-review",
+    "dynamicAuthorizationCheck": {
+      "authorizationId": null,
+      "checkedAtUtc": "2026-10-12T06:08:32.603Z",
+      "conditionsHash": "86036cf1521418602a80f29ea483062427946e99196f804f1a1d04e9c98205b3",
+      "generation": null,
+      "matched": false,
+      "outcome": "NO_AUTHORIZATION",
+      "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+      "policyVersion": "dias-governance-policy-v1",
+      "scopeHash": "63cf34ca0d861714f5116c834eb5302c8281569943dd6d3bb46fc0f4b0a2dea0",
+      "stateVersion": null,
+      "status": null
+    },
+    "outcome": null,
+    "basis": null,
+    "auditor": null,
+    "decision": null,
+    "llmAgreement": null,
+    "llmRecommendation": "ALLOW",
+    "generationStatus": "OK",
+    "recommendationWithheld": false,
+    "recommendationTxId": "11860c26a98899180029dd000dab6a76b2dcd8f73b94bb148cef1deb48bb629b",
+    "authorizationId": null,
+    "createdAuthorizationId": null,
+    "decidedAtUtc": null,
+    "outcomeTxId": null,
+    "decisionTxId": null
+  }
+}

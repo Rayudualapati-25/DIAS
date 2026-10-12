@@ -1,0 +1,62 @@
+
+
+  DIAS backend recommendation path
+    LLM agreement
+      ✔ is AGREED when the auditor follows the LLM and NOT_AGREED otherwise
+      ✔ is NO_RECOMMENDATION without a valid recommendation
+      ✔ requires a reason unless agreed, and creates an authorization only for FORCE_ALLOW over a DENY
+    review store
+      ✔ keeps the justification and a pending recommendation for a committed request
+      ✔ replaces entries without mutating what an earlier read returned
+      ✔ counts a recommendation as being prepared until its commitment is confirmed or it has failed
+      ✔ rejects unsafe request identifiers and reports missing entries
+      ✔ skips an unreadable entry when listing, so one damaged file cannot stop the backend
+    recommendation worker (v3: signed recommender, commitment, ledger)
+      ✔ asks the signed recommender, stores M and the signed commitment, then commits it before review
+      ✔ gives the signed recommender the committed inputs and the digests the ledger holds for them
+      ✔ keeps a specific failure status in the auditor view and still commits it
+      ✔ marks a commitment the ledger refuses for a lasting reason as commit-rejected
+      ✔ keeps a signed commitment after an uncertain failure and later resubmits it unchanged
+      ✔ recognizes a commitment that reached the ledger although the response was lost
+      1) automatically retries a signed commitment on the next recovery tick without asking the model again
+      ✔ records a recommender failure as failed, so the auditor is not left waiting
+      ✔ answers requests one at a time, each once, and resumes pending and signed entries (49ms)
+      ✔ stores a failed generation as a status with no recommendation
+
+  AuditContract
+    GetRequestAuditTrail
+      ✔ reconstructs a reviewed request that created a dynamic authorization
+      ✔ reconstructs a reused authorization with the auditor skipped, and a later revocation
+      ✔ lets the requester read their own trail and refuses other identities
+    record-level trail and verification
+      ✔ lists the DIAS requests and release grants for a record
+      ✔ confirms a matching payload hash and flags a tampered one
+    direct-ledger access events
+      ✔ derives the actor from the signing identity and stores the event
+      ✔ allows reviewers to query and rejects ordinary departments
+      2) deduplicates a retried application event by signing identity and rejects changed data
+      ✔ rejects malformed event fields and limits
+
+
+  25 passing (218ms)
+  2 failing
+
+  1) DIAS backend recommendation path
+       recommendation worker (v3: signed recommender, commitment, ledger)
+         automatically retries a signed commitment on the next recovery tick without asking the model again:
+     TypeError: queue.startRecovery is not a function
+      at Context.<anonymous> (backend/test/diasBackendRecommendation.unit.test.js:291:13)
+
+  2) AuditContract
+       direct-ledger access events
+         deduplicates a retried application event by signing identity and rejects changed data:
+     TypeError: world.contracts.audit.RecordAccessEventOnce is not a function
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/chaincode/crimerecords/test/diasAuditTrail.test.js:140:31
+      at Object.run (chaincode/crimerecords/test/diasTestWorld.js:104:23)
+      at call (chaincode/crimerecords/test/diasAuditTrail.test.js:16:42)
+      at log (chaincode/crimerecords/test/diasAuditTrail.test.js:139:57)
+      at Context.<anonymous> (chaincode/crimerecords/test/diasAuditTrail.test.js:141:27)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+

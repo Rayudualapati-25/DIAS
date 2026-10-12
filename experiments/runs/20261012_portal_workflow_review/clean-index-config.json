@@ -1,0 +1,9 @@
+{
+  "snapshot": "/var/folders/hr/fg3wnnyx4xqfgml4q1jxqb2m0000gn/T/dias-portal-workflow-index-SayVQ6",
+  "dependencies": "reused installed dependencies; no .env, mobile edits or credentials copied",
+  "source": "staged Git index",
+  "suites": [
+    "make test",
+    "node --test scripts/dias/acceptance.test.js testbed/load/workflow.test.js testbed/reuse/plan.test.js testbed/reuse/run.test.js"
+  ]
+}

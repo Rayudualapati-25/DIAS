@@ -1,0 +1,230 @@
+
+== 1. Observed channel membership and endorsement policy
+{
+  "members": [
+    "AuditMSP",
+    "CourtMSP",
+    "ForensicsMSP",
+    "PoliceMSP",
+    "ProsecutionMSP"
+  ],
+  "endorsement": {
+    "mod_policy": "Admins",
+    "policy": {
+      "type": 3,
+      "value": {
+        "rule": "MAJORITY",
+        "sub_policy": "Endorsement"
+      }
+    },
+    "version": "0"
+  }
+}
+
+== 2. Peer heights observed sequentially (writes may advance them during inspection)
+{"height":362,"currentBlockHash":"pTHJ/xhZH8+QoV3gsAGGS+nqJrSm7pJyD0K9w1Mr0WI=","previousBlockHash":"D3xBZDe8IDkR9gAH9Y9cvgFv4hQS9OXderEkRt08SV0=","organization":"police"}
+{"height":362,"currentBlockHash":"pTHJ/xhZH8+QoV3gsAGGS+nqJrSm7pJyD0K9w1Mr0WI=","previousBlockHash":"D3xBZDe8IDkR9gAH9Y9cvgFv4hQS9OXderEkRt08SV0=","organization":"forensics"}
+{"height":362,"currentBlockHash":"pTHJ/xhZH8+QoV3gsAGGS+nqJrSm7pJyD0K9w1Mr0WI=","previousBlockHash":"D3xBZDe8IDkR9gAH9Y9cvgFv4hQS9OXderEkRt08SV0=","organization":"prosecution"}
+{"height":362,"currentBlockHash":"pTHJ/xhZH8+QoV3gsAGGS+nqJrSm7pJyD0K9w1Mr0WI=","previousBlockHash":"D3xBZDe8IDkR9gAH9Y9cvgFv4hQS9OXderEkRt08SV0=","organization":"court"}
+{"height":362,"currentBlockHash":"pTHJ/xhZH8+QoV3gsAGGS+nqJrSm7pJyD0K9w1Mr0WI=","previousBlockHash":"D3xBZDe8IDkR9gAH9Y9cvgFv4hQS9OXderEkRt08SV0=","organization":"audit"}
+
+== 3. Committed chaincode definition and a decoded current block
+{
+	"sequence": 4,
+	"version": "3.0",
+	"endorsement_plugin": "escc",
+	"validation_plugin": "vscc",
+	"validation_parameter": "EiAvQ2hhbm5lbC9BcHBsaWNhdGlvbi9FbmRvcnNlbWVudA==",
+	"collections": {
+		"config": [
+			{
+				"Payload": {
+					"StaticCollectionConfig": {
+						"name": "evidenceDetails",
+						"member_orgs_policy": {
+							"Payload": {
+								"SignaturePolicy": {
+									"rule": {
+										"Type": {
+											"NOutOf": {
+												"n": 1,
+												"rules": [
+													{
+														"Type": {
+															"SignedBy": 0
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 1
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 2
+														}
+													},
+													{
+														"Type": {
+															"SignedBy": 3
+														}
+													}
+												]
+											}
+										}
+									},
+									"identities": [
+										{
+											"principal": "CglQb2xpY2VNU1A="
+										},
+										{
+											"principal": "CgxGb3JlbnNpY3NNU1A="
+										},
+										{
+											"principal": "Cg5Qcm9zZWN1dGlvbk1TUA=="
+										},
+										{
+											"principal": "CghDb3VydE1TUA=="
+										}
+									]
+								}
+							}
+						},
+						"required_peer_count": 1,
+						"maximum_peer_count": 3,
+						"member_only_read": true,
+						"member_only_write": true
+					}
+				}
+			}
+		]
+	},
+	"approvals": {
+		"AuditMSP": true,
+		"CourtMSP": true,
+		"ForensicsMSP": true,
+		"PoliceMSP": true,
+		"ProsecutionMSP": true
+	}
+}
+{"block":"361","transactions":1}
+observed endorsers: AuditMSP, ForensicsMSP, ProsecutionMSP
+
+== 4. Current DIAS case summaries and decision commitments
+[
+  {
+    "caseId": "CASE-2026-001",
+    "owningAgency": "police",
+    "jurisdiction": "district-north",
+    "status": "under-investigation"
+  },
+  {
+    "caseId": "CASE-2026-002",
+    "owningAgency": "police",
+    "jurisdiction": "district-north",
+    "status": "under-investigation"
+  }
+]
+[
+  {
+    "requestId": "REQ-72e2d3eb82802b54",
+    "decision": null,
+    "outcome": "CANCELLED",
+    "llmRecommendation": null,
+    "llmAgreement": null,
+    "decisionTxId": null
+  },
+  {
+    "requestId": "REQ-bb4585362bcdf8bc",
+    "decision": null,
+    "outcome": "GRANTED",
+    "llmRecommendation": null,
+    "llmAgreement": null,
+    "decisionTxId": null
+  },
+  {
+    "requestId": "REQ-f272e4c1a883ffc3",
+    "decision": "FORCE_ALLOW",
+    "outcome": "GRANTED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "NOT_AGREED",
+    "decisionTxId": "4382058e054ac0b70b9074d8e75e59d2f9c23cb1ee36ba4bcf10d3f7479f35b9"
+  },
+  {
+    "requestId": "REQ-86c8a2f10be3d86c",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "83c0f140e707a9206500e947c97bf7d0bcb56424fbbc6238c1cf7da3ec6ad329"
+  },
+  {
+    "requestId": "REQ-63afa8e4336049df",
+    "decision": null,
+    "outcome": "GRANTED",
+    "llmRecommendation": null,
+    "llmAgreement": null,
+    "decisionTxId": null
+  },
+  {
+    "requestId": "REQ-0618d6bda3f50041",
+    "decision": "FORCE_ALLOW",
+    "outcome": "GRANTED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "NOT_AGREED",
+    "decisionTxId": "3432dd181196d76adc240a20e4d7af2cc6eb9dcbc51ef6e9bf7fcf23453b682f"
+  },
+  {
+    "requestId": "REQ-f5e48bfe59a58d09",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "65e250710d7b5478182cbe9dae8081b5d3c45aa8181cf84eb9cafacb448ffebb"
+  },
+  {
+    "requestId": "REQ-bb45adea5287c938",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "b56391a148532b406c355736e1481d6defd199bf6814f03ab32975fc2a29bf49"
+  },
+  {
+    "requestId": "REQ-78888dd15f3a99a9",
+    "decision": "FORCE_DENY",
+    "outcome": "DENIED",
+    "llmRecommendation": "DENY",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "0931e3d91cada1509343122c97e5e8807916a24aa0d2c9a9405ac707065f5636"
+  },
+  {
+    "requestId": "REQ-e3c8b66127918eec",
+    "decision": "FORCE_ALLOW",
+    "outcome": "GRANTED",
+    "llmRecommendation": "ALLOW",
+    "llmAgreement": "AGREED",
+    "decisionTxId": "85285832a4c9e119c1f8c87de5ebdc95aa848cf6be9d63e3fc28e0fa0f831495"
+  }
+]
+
+== 5. Running peer and state-database containers
+dev-peer0.audit.example.com-diasrecords_3.0-5fbef89a8a17e237554278c977112e47fedd39e86ad1486233845171d5c61be5	
+dev-peer0.police.example.com-diasrecords_3.0-5fbef89a8a17e237554278c977112e47fedd39e86ad1486233845171d5c61be5	
+dev-peer0.forensics.example.com-diasrecords_3.0-5fbef89a8a17e237554278c977112e47fedd39e86ad1486233845171d5c61be5	
+dev-peer0.prosecution.example.com-diasrecords_3.0-5fbef89a8a17e237554278c977112e47fedd39e86ad1486233845171d5c61be5	
+dev-peer0.court.example.com-diasrecords_3.0-5fbef89a8a17e237554278c977112e47fedd39e86ad1486233845171d5c61be5	
+peer0.audit.example.com	0.0.0.0:9448->9448/tcp, [::]:9448->9448/tcp, 7051/tcp, 0.0.0.0:11051->11051/tcp, [::]:11051->11051/tcp
+peer0.ai.example.com	0.0.0.0:9449->9449/tcp, [::]:9449->9449/tcp, 7051/tcp, 0.0.0.0:12051->12051/tcp, [::]:12051->12051/tcp
+peer0.prosecution.example.com	0.0.0.0:9051->9051/tcp, [::]:9051->9051/tcp, 7051/tcp, 0.0.0.0:9446->9446/tcp, [::]:9446->9446/tcp
+peer0.forensics.example.com	0.0.0.0:8051->8051/tcp, [::]:8051->8051/tcp, 7051/tcp, 0.0.0.0:9445->9445/tcp, [::]:9445->9445/tcp
+peer0.police.example.com	0.0.0.0:7051->7051/tcp, [::]:7051->7051/tcp, 0.0.0.0:9444->9444/tcp, [::]:9444->9444/tcp
+peer0.court.example.com	0.0.0.0:9447->9447/tcp, [::]:9447->9447/tcp, 7051/tcp, 0.0.0.0:10051->10051/tcp, [::]:10051->10051/tcp
+couchdb-audit	4369/tcp, 9100/tcp, 0.0.0.0:9984->5984/tcp, [::]:9984->5984/tcp
+couchdb-police	4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp, [::]:5984->5984/tcp
+couchdb-prosecution	4369/tcp, 9100/tcp, 0.0.0.0:7984->5984/tcp, [::]:7984->5984/tcp
+couchdb-ai	4369/tcp, 9100/tcp, 0.0.0.0:10984->5984/tcp, [::]:10984->5984/tcp
+couchdb-forensics	4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp, [::]:6984->5984/tcp
+couchdb-court	4369/tcp, 9100/tcp, 0.0.0.0:8984->5984/tcp, [::]:8984->5984/tcp
+
+Read-only evidence saved to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20261012_portal_workflow_review/ledger-after

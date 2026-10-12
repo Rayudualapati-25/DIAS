@@ -1,0 +1,550 @@
+Browser tab: 3, Title: "DIAS | Access Service Portal", URL: "http://localhost:3001/#/access-log".
+0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/access-log
+	1 container app
+		2 container
+			3 text DIAS Access service portal Crime Records Access Network SP (district-north) Oversight & Internal Affairs · sp
+			4 button Sign out
+		5 container Portal sections
+			6 text WORKSPACE
+			7 text Explore services
+			8 text Choose a task or review an existing request.
+			9 heading ACCESS, Value: 4
+				10 text ACCESS
+			11 link Description: Request access, Value: localhost:3001/#/request-access
+			12 link Description: Decision log, Value: localhost:3001/#/decision-log
+			13 heading RECORDS, Value: 4
+				14 text RECORDS
+			15 link Description: Cases, Value: localhost:3001/#/cases
+			16 link Description: Evidence, Value: localhost:3001/#/evidence
+			17 heading REVIEW, Value: 4
+				18 text REVIEW
+			19 link Description: Auditor review, Value: localhost:3001/#/auditor-review
+			20 heading AUDIT, Value: 4
+				21 text AUDIT
+			22 link Description: Audit trail, Value: localhost:3001/#/audit-trail
+			23 link Description: Payload integrity, Value: localhost:3001/#/payload-integrity
+			24 link Description: Access log, Value: localhost:3001/#/access-log
+			25 heading PEOPLE, Value: 4
+				26 text PEOPLE
+			27 link Description: Departments, Value: localhost:3001/#/departments
+			28 link Description: Register an officer, Value: localhost:3001/#/register-user
+			29 link Description: Officer directory, Value: localhost:3001/#/user-directory
+		30 container module-content
+			31 container
+				32 text WORKSPACE AUDIT
+			33 heading Access log, Value: 1
+				34 text Access log
+			35 text Who requested what, what the LLM recommended, and what the auditor decided.
+			36 container
+				37 tab group
+					38 tab (selected, settable, boolean) Access requests, Value: 1
+					39 tab (selectable, settable, boolean) Searches and reads, Value: 0
+				40 heading Access requests 26, Value: 3
+					41 text Access requests 26
+				42 text Last refreshed 11:59:24 AM.
+				43 button Refresh
+				44 checkbox Description: Show filters, Value: 0
+				45 table
+					46 row
+						47 cell
+							48 button Time, Help: Newest first. Press for oldest first.
+						49 cell
+							50 text Who requested
+						51 cell
+							52 text What was requested
+						53 cell
+							54 text LLM recommended
+						55 cell
+							56 text Auditor decided
+						57 cell
+							58 text Access outcome
+						59 cell
+							60 text Authorization check
+					61 row
+						62 cell
+							63 text 2026-10-12 11:49:55
+						64 cell
+							65 text const.verma
+							66 text constable · police
+						67 cell
+							68 text REC-FIR-001
+							69 text view · investigation
+						70 cell
+							71 text Not recorded
+							72 text the request ended without a decision
+						73 cell
+							74 text No decision
+							75 text cancelled by the requester
+						76 cell
+							77 text CANCELLED
+						78 cell
+							79 text NO_AUTHORIZATION
+					80 row
+						81 cell
+							82 text 2026-10-12 11:49:49
+						83 cell
+							84 text insp.singh
+							85 text inspector · police
+						86 cell
+							87 text REC-FIR-001
+							88 text view · investigation
+						89 cell
+							90 text Not asked
+							91 text a reusable authorization matched
+						92 cell
+							93 text Not needed
+							94 text granted by reusable authorization AUTH-4382058e054ac0b7
+						95 cell
+							96 text GRANTED
+						97 cell
+							98 text MATCH
+							99 text AUTH-4382058e054ac0b7
+					100 row
+						101 cell
+							102 text 2026-10-12 11:49:47
+						103 cell
+							104 text insp.singh
+							105 text inspector · police
+						106 cell
+							107 text REC-FIR-001
+							108 text view · investigation
+						109 cell
+							110 text DENY
+						111 cell
+							112 text FORCE ALLOW
+							113 text against the LLM's DENY · by sp.north
+						114 cell
+							115 text GRANTED
+							116 text created authorization AUTH-4382058e054ac0b7
+						117 cell
+							118 text REVOKED
+							119 text AUTH-3432dd181196d76a
+					120 row
+						121 cell
+							122 text 2026-10-12 11:49:39
+						123 cell
+							124 text const.verma
+							125 text constable · police
+						126 cell
+							127 text REC-FIR-001
+							128 text export · investigation
+						129 cell
+							130 text DENY
+						131 cell
+							132 text FORCE DENY
+							133 text agreed with the LLM's DENY · by sp.north
+						134 cell
+							135 text DENIED
+						136 cell
+							137 text NO_AUTHORIZATION
+					138 row
+						139 cell
+							140 text 2026-10-12 11:47:35
+						141 cell
+							142 text insp.singh
+							143 text inspector · police
+						144 cell
+							145 text REC-FIR-001
+							146 text view · investigation
+						147 cell
+							148 text Not asked
+							149 text a reusable authorization matched
+						150 cell
+							151 text Not needed
+							152 text granted by reusable authorization AUTH-3432dd181196d76a
+						153 cell
+							154 text GRANTED
+						155 cell
+							156 text MATCH
+							157 text AUTH-3432dd181196d76a
+					158 row
+						159 cell
+							160 text 2026-10-12 11:47:33
+						161 cell
+							162 text insp.singh
+							163 text inspector · police
+						164 cell
+							165 text REC-FIR-001
+							166 text view · investigation
+						167 cell
+							168 text DENY
+						169 cell
+							170 text FORCE ALLOW
+							171 text against the LLM's DENY · by sp.north
+						172 cell
+							173 text GRANTED
+							174 text created authorization AUTH-3432dd181196d76a
+						175 cell
+							176 text REVOKED
+							177 text AUTH-0f9afc98078d1e46
+					178 row
+						179 cell
+							180 text 2026-10-12 11:47:24
+						181 cell
+							182 text const.verma
+							183 text constable · police
+						184 cell
+							185 text REC-FIR-001
+							186 text export · investigation
+						187 cell
+							188 text DENY
+						189 cell
+							190 text FORCE DENY
+							191 text agreed with the LLM's DENY · by sp.north
+						192 cell
+							193 text DENIED
+						194 cell
+							195 text NO_AUTHORIZATION
+					196 row
+						197 cell
+							198 text 2026-10-12 11:45:28
+						199 cell
+							200 text const.verma
+							201 text constable · police
+						202 cell
+							203 text REC-FIR-001
+							204 text export · investigation
+						205 cell
+							206 text DENY
+						207 cell
+							208 text FORCE DENY
+							209 text agreed with the LLM's DENY · by sp.north
+						210 cell
+							211 text DENIED
+						212 cell
+							213 text NO_AUTHORIZATION
+					214 row
+						215 cell
+							216 text 2026-10-12 11:43:45
+						217 cell
+							218 text const.verma
+							219 text constable · police
+						220 cell
+							221 text REC-FIR-001
+							222 text export · investigation
+						223 cell
+							224 text DENY
+						225 cell
+							226 text FORCE DENY
+							227 text agreed with the LLM's DENY · by sp.north
+						228 cell
+							229 text DENIED
+						230 cell
+							231 text NO_AUTHORIZATION
+					232 row
+						233 cell
+							234 text 2026-10-12 11:41:17
+						235 cell
+							236 text insp.sharma
+							237 text inspector · police
+						238 cell
+							239 text REC-FIR-001
+							240 text view · investigation
+						241 cell
+							242 text ALLOW
+						243 cell
+							244 text FORCE ALLOW
+							245 text agreed with the LLM's ALLOW · by sp.north
+						246 cell
+							247 text GRANTED
+						248 cell
+							249 text NO_AUTHORIZATION
+					250 row
+						251 cell
+							252 text 2026-10-08 17:51:50
+						253 cell
+							254 text insp.rathore
+							255 text inspector · police
+						256 cell
+							257 text REC-FIR-001
+							258 text annotate · investigation
+						259 cell
+							260 text DENY
+						261 cell
+							262 text FORCE DENY
+							263 text agreed with the LLM's DENY · by sp.north
+						264 cell
+							265 text DENIED
+						266 cell
+							267 text NO_AUTHORIZATION
+					268 row
+						269 cell
+							270 text 2026-10-08 17:47:30
+						271 cell
+							272 text insp.rathore
+							273 text inspector · police
+						274 cell
+							275 text REC-FIR-001
+							276 text annotate · investigation
+						277 cell
+							278 text DENY
+						279 cell
+							280 text FORCE DENY
+							281 text agreed with the LLM's DENY · by sp.north
+						282 cell
+							283 text DENIED
+						284 cell
+							285 text NO_AUTHORIZATION
+					286 row
+						287 cell
+							288 text 2026-10-08 17:39:58
+						289 cell
+							290 text insp.rathore
+							291 text inspector · police
+						292 cell
+							293 text REC-FIR-001
+							294 text annotate · investigation
+						295 cell
+							296 text DENY
+						297 cell
+							298 text FORCE DENY
+							299 text agreed with the LLM's DENY · by sp.north
+						300 cell
+							301 text DENIED
+						302 cell
+							303 text NO_AUTHORIZATION
+					304 row
+						305 cell
+							306 text 2026-10-08 14:32:24
+						307 cell
+							308 text insp.sharma
+							309 text inspector · police
+						310 cell
+							311 text REC-FIR-001
+							312 text view · investigation
+						313 cell
+							314 text ALLOW
+						315 cell
+							316 text FORCE ALLOW
+							317 text agreed with the LLM's ALLOW · by sp.north
+						318 cell
+							319 text GRANTED
+						320 cell
+							321 text NO_AUTHORIZATION
+					322 row
+						323 cell
+							324 text 2026-10-08 14:32:08
+						325 cell
+							326 text dj.north
+							327 text district-judge · audit
+						328 cell
+							329 text REC-FIR-001
+							330 text view · audit-review
+						331 cell
+							332 text ALLOW
+						333 cell
+							334 text FORCE DENY
+							335 text against the LLM's ALLOW · by sp.north
+						336 cell
+							337 text DENIED
+						338 cell
+							339 text NO_AUTHORIZATION
+					340 row
+						341 cell
+							342 text 2026-10-08 14:31:51
+						343 cell
+							344 text judge.rana
+							345 text judge · court
+						346 cell
+							347 text REC-FIR-001
+							348 text view · judicial-proceeding
+						349 cell
+							350 text ALLOW
+						351 cell
+							352 text FORCE DENY
+							353 text against the LLM's ALLOW · by sp.north
+						354 cell
+							355 text DENIED
+						356 cell
+							357 text NO_AUTHORIZATION
+					358 row
+						359 cell
+							360 text 2026-10-08 14:31:37
+						361 cell
+							362 text insp.singh
+							363 text inspector · police
+						364 cell
+							365 text REC-FIR-001
+							366 text view · investigation
+						367 cell
+							368 text DENY
+						369 cell
+							370 text No decision
+							371 text cancelled by the requester
+						372 cell
+							373 text CANCELLED
+						374 cell
+							375 text REVOKED
+							376 text AUTH-0f9afc98078d1e46
+					377 row
+						378 cell
+							379 text 2026-10-08 14:31:22
+						380 cell
+							381 text insp.singh
+							382 text inspector · police
+						383 cell
+							384 text REC-FIR-001
+							385 text view · investigation
+						386 cell
+							387 text Not asked
+							388 text a reusable authorization matched
+						389 cell
+							390 text Not needed
+							391 text granted by reusable authorization AUTH-0f9afc98078d1e46
+						392 cell
+							393 text GRANTED
+						394 cell
+							395 text MATCH
+							396 text AUTH-0f9afc98078d1e46
+					397 row
+						398 cell
+							399 text 2026-10-08 14:31:21
+						400 cell
+							401 text insp.singh
+							402 text inspector · police
+						403 cell
+							404 text REC-FIR-001
+							405 text view · investigation
+						406 cell
+							407 text DENY
+						408 cell
+							409 text FORCE ALLOW
+							410 text against the LLM's DENY · by sp.north
+						411 cell
+							412 text GRANTED
+							413 text created authorization AUTH-0f9afc98078d1e46
+						414 cell
+							415 text REVOKED
+							416 text AUTH-505ba2efddcbcfb2
+					417 row
+						418 cell
+							419 text 2026-10-08 14:31:12
+						420 cell
+							421 text insp.sharma
+							422 text inspector · police
+						423 cell
+							424 text REC-FIR-001
+							425 text view · investigation
+						426 cell
+							427 text ALLOW
+						428 cell
+							429 text FORCE DENY
+							430 text against the LLM's ALLOW · by sp.north
+						431 cell
+							432 text DENIED
+						433 cell
+							434 text NO_AUTHORIZATION
+					435 row
+						436 cell
+							437 text 2026-10-08 14:19:49
+						438 cell
+							439 text insp.sharma
+							440 text inspector · police
+						441 cell
+							442 text REC-FIR-001
+							443 text view · investigation
+						444 cell
+							445 text ALLOW
+						446 cell
+							447 text FORCE ALLOW
+							448 text agreed with the LLM's ALLOW · by sp.north
+						449 cell
+							450 text GRANTED
+						451 cell
+							452 text NO_AUTHORIZATION
+					453 row
+						454 cell
+							455 text 2026-10-08 14:19:33
+						456 cell
+							457 text insp.singh
+							458 text inspector · police
+						459 cell
+							460 text REC-FIR-001
+							461 text view · investigation
+						462 cell
+							463 text DENY
+						464 cell
+							465 text No decision
+							466 text cancelled by the requester
+						467 cell
+							468 text CANCELLED
+						469 cell
+							470 text REVOKED
+							471 text AUTH-505ba2efddcbcfb2
+					472 row
+						473 cell
+							474 text 2026-10-08 14:19:19
+						475 cell
+							476 text insp.singh
+							477 text inspector · police
+						478 cell
+							479 text REC-FIR-001
+							480 text view · investigation
+						481 cell
+							482 text Not asked
+							483 text a reusable authorization matched
+						484 cell
+							485 text Not needed
+							486 text granted by reusable authorization AUTH-505ba2efddcbcfb2
+						487 cell
+							488 text GRANTED
+						489 cell
+							490 text MATCH
+							491 text AUTH-505ba2efddcbcfb2
+					492 row
+						493 cell
+							494 text 2026-10-08 14:19:18
+						495 cell
+							496 text insp.singh
+							497 text inspector · police
+						498 cell
+							499 text REC-FIR-001
+							500 text view · investigation
+						501 cell
+							502 text DENY
+						503 cell
+							504 text FORCE ALLOW
+							505 text against the LLM's DENY · by sp.north
+						506 cell
+							507 text GRANTED
+							508 text created authorization AUTH-505ba2efddcbcfb2
+						509 cell
+							510 text NO_AUTHORIZATION
+					511 row
+						512 cell
+							513 text 2026-10-08 14:19:04
+						514 cell
+							515 text insp.sharma
+							516 text inspector · police
+						517 cell
+							518 text REC-FIR-001
+							519 text view · investigation
+						520 cell
+							521 text ALLOW
+						522 cell
+							523 text FORCE DENY
+							524 text against the LLM's ALLOW · by sp.north
+						525 cell
+							526 text DENIED
+						527 cell
+							528 text NO_AUTHORIZATION
+					529 row
+						530 cell
+							531 text 2026-10-06 15:14:07
+						532 cell
+							533 text insp.sharma
+							534 text inspector · police
+						535 cell
+							536 text REC-FIR-001
+							537 text view · investigation
+						538 cell
+							539 text ALLOW
+						540 cell
+							541 text FORCE ALLOW
+							542 text agreed with the LLM's ALLOW · by sp.north
+						543 cell
+							544 text GRANTED
+						545 cell
+							546 text NO_AUTHORIZATION
+
+The focused UI element is 0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/access-log

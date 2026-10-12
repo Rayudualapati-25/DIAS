@@ -3,15 +3,15 @@
 /**
  * Records authenticated API calls directly on the Fabric ledger.
  *
- * Runs AFTER the response has been sent, so logging never slows a request down
- * and never turns a logging bug into a failed request.
+ * Stages a small encrypted event before a buffered response ends; Fabric submits
+ * happen afterwards and are retried. A staging failure refuses the response.
  *
  * Only who/what/when is recorded — never the case narrative, the payload
  * contents or a token. Search filters ARE recorded, because "who
  * went looking for this case" is exactly the signal an auditor needs.
  */
 
-const fabric = require('../fabric/gateway');
+const { getAccessEventOutbox } = require('../dias/accessEventOutbox');
 
 const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
 
@@ -26,7 +26,7 @@ const identifier = (value) => (typeof value === 'string' && SAFE_ID.test(value) 
  * Express rewrites req.url while nested routers dispatch, so by the time the
  * response has finished the path no longer identifies the route.
  */
-function describe(snapshot) {
+function describeRaw(snapshot) {
   const path = snapshot.path;
   const method = snapshot.method;
   const req = { query: snapshot.query || {}, body: snapshot.body || {} };
@@ -53,6 +53,10 @@ function describe(snapshot) {
       action: 'record.search',
       target: { filters: { recordId: recordLookupMatch[1] } },
     };
+  }
+  const evidenceIndexMatch = path.match(/^\/records\/evidence-index\/([^/]+)$/);
+  if (evidenceIndexMatch) {
+    return { action: 'record.search', target: { filters: { evidenceId: evidenceIndexMatch[1] } } };
   }
   // The full-document (PDF) workflow shares the /records prefix but names a
   // request rather than a record, so it is classified before the record routes.
@@ -153,6 +157,8 @@ function describe(snapshot) {
     };
   }
   if (path === '/access/decision-log') return { action: 'dias.decision-log.read', target: null };
+  if (path === '/access/workflow-log') return { action: 'dias.workflow-log.read', target: null };
+  if (path === '/access/requests/mine') return { action: 'access.request.list', target: null };
   // Who opened the model's reasoning behind a decision is itself worth logging.
   const recommendationMatch = path.match(/^\/access\/request\/([^/]+)\/recommendation$/);
   if (recommendationMatch) {
@@ -237,6 +243,40 @@ function describe(snapshot) {
   return { action: `api${path.replace(/\//g, '.')}`, target: null };
 }
 
+const FILTER_FIELDS = Object.freeze([
+  'recordId', 'caseId', 'recordType', 'sensitivityLevel', 'owningStation', 'jurisdiction', 'evidenceId',
+]);
+const TARGET_FIELDS = Object.freeze([
+  'username', 'recordId', 'requestId', 'decisionId', 'authorizationId', 'caseId', 'evidenceId',
+  'action', 'purpose', 'decision', 'userId', 'nextStatus', 'status', 'departmentId',
+  'processingPath', 'llmRecommendation', 'llmAgreement',
+]);
+
+/** Refused calls have not passed route validation; copy only bounded identifiers. */
+function safeTarget(target) {
+  if (!target || typeof target !== 'object') return null;
+  const safe = {};
+  for (const name of TARGET_FIELDS) {
+    const value = identifier(target[name]);
+    if (value !== null) safe[name] = value;
+  }
+  if (target.filters && typeof target.filters === 'object') {
+    safe.filters = {};
+    for (const name of FILTER_FIELDS) {
+      const value = identifier(target.filters[name]);
+      if (value !== null) safe.filters[name] = value;
+    }
+  }
+  return safe;
+}
+
+function describe(snapshot) {
+  const described = describeRaw(snapshot);
+  if (!described) return null;
+  return { action: SAFE_ID.test(described.action) ? described.action : 'api.unknown',
+    target: safeTarget(described.target) };
+}
+
 /** Add only server-verified response fields to a DIAS request log target. */
 function withResponseTarget(described, responseTarget) {
   if (!responseTarget) return described.target;
@@ -255,7 +295,7 @@ function withResponseTarget(described, responseTarget) {
       extra.llmAgreement = responseTarget.llmAgreement;
     }
   }
-  return Object.keys(extra).length === 0 ? described.target : { ...described.target, ...extra };
+  return safeTarget({ ...described.target, ...extra });
 }
 
 /**
@@ -318,6 +358,8 @@ const ACTION_CLASS = Object.freeze({
   'access.request.cancel': LEDGER_WRITE,
   'access.request.trail': SENSITIVE,
   'dias.decision-log.read': SENSITIVE,
+  'dias.workflow-log.read': SENSITIVE,
+  'access.request.list': ROUTINE,
   'dias.recommendation.read': SENSITIVE,
   'dias.auditor.queue.read': SENSITIVE,
   'dias.auditor.queue.status': ROUTINE,
@@ -361,7 +403,8 @@ function outcomeFor(status, action) {
   return 'ok';
 }
 
-function accessLogger(req, res, next) {
+function createAccessLogger({ outbox = null, log = console } = {}) {
+  return function accessLogger(req, res, next) {
   // Snapshot now: req.url is mutated by nested routers before 'finish' fires.
   // req.originalUrl is the one field Express never rewrites.
   const snapshot = {
@@ -371,34 +414,49 @@ function accessLogger(req, res, next) {
     body: req.body && typeof req.body === 'object' ? { ...req.body } : {},
   };
 
-  res.on('finish', async () => {
+  let staged = false;
+  let queue;
+  const originalEnd = res.end;
+  res.end = function endWithAccessEvent(...args) {
     try {
       const described = describe(snapshot);
-      if (!described) return;
-
       const user = req.user || {};
       // Fabric needs a signing identity. Failed/anonymous logins are reported
       // by the web server but cannot honestly be attributed on-chain.
-      if (!user.org || !user.fabricUser) return;
-      const action = described.action === 'auth.login' && res.statusCode !== 200
-        ? 'auth.login_failed'
-        : described.action;
-      if (!shouldLog({ mode: ACCESS_LOG_MODE, action, status: res.statusCode })) return;
-
-      await fabric.submit(
-        user.org, user.fabricUser, 'AuditContract', 'RecordAccessEvent',
-        action, JSON.stringify(withResponseTarget(described, res.locals.accessEventTarget)),
-        outcomeFor(res.statusCode, described.action), String(res.statusCode)
-      );
+      if (!staged && described && user.org && user.fabricUser) {
+        const action = described.action === 'auth.login' && res.statusCode !== 200
+          ? 'auth.login_failed' : described.action;
+        if (shouldLog({ mode: ACCESS_LOG_MODE, action, status: res.statusCode })) {
+          queue = outbox || getAccessEventOutbox();
+          queue.stage({ org: user.org, fabricUser: user.fabricUser, action,
+            target: withResponseTarget(described, res.locals.accessEventTarget),
+            outcome: outcomeFor(res.statusCode, described.action), status: res.statusCode });
+          staged = true;
+        }
+      }
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('[accessLogger] failed to record entry:', err.message);
+      log.error('[accessLogger] failed to stage entry:', err.message);
+      if (res.headersSent) { res.destroy(); return res; }
+      res.statusCode = 503;
+      res.removeHeader('Content-Length');
+      res.removeHeader('ETag');
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      return originalEnd.call(res, JSON.stringify({ success: false, data: null,
+        error: 'The access log could not be saved. Try again later.' }));
     }
+    return originalEnd.apply(res, args);
+  };
+  res.on('finish', () => {
+    if (staged) queue.flush().catch((error) => log.error('[accessLogger] retry pending:', error.message));
   });
   next();
+  };
 }
 
+const accessLogger = createAccessLogger();
+
 module.exports = {
+  createAccessLogger,
   ACCESS_LOG_MODE,
   ACTION_CLASS,
   LOG_CLASS,

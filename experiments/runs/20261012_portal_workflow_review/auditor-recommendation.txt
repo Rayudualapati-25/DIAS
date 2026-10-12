@@ -1,0 +1,194 @@
+Browser tab: 3, Title: "DIAS | Access Service Portal", URL: "http://localhost:3001/#/auditor-review".
+0 AXWebArea DIAS | Access Service Portal, URL: localhost:3001/#/auditor-review
+	1 container Auditor decision
+		2 heading Review REC-FIR-001, Value: 2
+			3 text Review REC-FIR-001
+		4 container
+			5 text Request  REQ-e3c8b66127918eec  ·  10/12/2026, 11:38:32 AM
+		6 button Close
+		7 text MODEL RECOMMENDATION (ADVISORY ONLY)
+		8 text ALLOW
+		9 container
+			10 text Reason code  POLICY_SATISFIED  · this recommendation cannot grant or deny access.
+		11 table
+			12 row
+				13 cell
+					14 text FIELD
+				15 cell
+					16 text VALUE
+			17 row
+				18 cell
+					19 text Explanation
+				20 cell
+					21 text The requester has an active credential, is assigned to the requested case, and their role 'inspector' is authorized to perform the 'view' action on the 'fir' record type. No applicable DENY clauses are triggered.
+			22 row
+				23 cell
+					24 text Stored
+				25 cell
+					26 text off-chain; its digest h_M was committed on the ledger before review
+			27 row
+				28 cell
+					29 text Policy references
+				30 cell
+					31 container
+						32 text GP-RBAC:C2@V1 GP-DEFAULT:C1@V1
+			33 row
+				34 cell
+					35 text Missing evidence
+				36 cell
+					37 text none
+			38 row
+				39 cell
+					40 text Review flags
+				41 cell
+					42 text none
+		43 text Checked against the ledger
+		44 container
+			45 text This is the recommendation committed before review: commitment  KAPPA-11860c26a9889918  · h_M  62ce8da8017b7348…  · signed by key  3f65dd432f09… .
+		46 heading Verified requester facts, Value: 3
+			47 text Verified requester facts
+		48 table
+			49 row
+				50 cell
+					51 text FIELD
+				52 cell
+					53 text VALUE
+			54 row
+				55 cell
+					56 text Username (stable id)
+				57 cell
+					58 text insp.sharma
+					59 text PoliceMSP::insp.sharma
+			60 row
+				61 cell
+					62 text Organization / MSP
+				63 cell
+					64 text police · PoliceMSP
+			65 row
+				66 cell
+					67 text Role / rank
+				68 cell
+					69 text inspector · 3
+			70 row
+				71 cell
+					72 text Station / jurisdiction
+				73 cell
+					74 text PS-Central · district-north
+			75 row
+				76 cell
+					77 text Clearance
+				78 cell
+					79 text high
+			80 row
+				81 cell
+					82 text Credential status
+				83 cell
+					84 text ACTIVE
+			85 row
+				86 cell
+					87 text Assigned to requested case
+				88 cell
+					89 text YES
+		90 heading Requested record, Value: 3
+			91 text Requested record
+		92 table
+			93 row
+				94 cell
+					95 text FIELD
+				96 cell
+					97 text VALUE
+			98 row
+				99 cell
+					100 text Record / case
+				101 cell
+					102 text REC-FIR-001 · CASE-2026-001
+			103 row
+				104 cell
+					105 text Record type / sensitivity
+				106 cell
+					107 text fir · medium
+			108 row
+				109 cell
+					110 text Record jurisdiction
+				111 cell
+					112 text district-north
+			113 row
+				114 cell
+					115 text Owner
+				116 cell
+					117 text police · PS-Central
+			118 row
+				119 cell
+					120 text Sealed
+				121 cell
+					122 text NO
+			123 row
+				124 cell
+					125 text Juvenile
+				126 cell
+					127 text NO
+			128 row
+				129 cell
+					130 text Witness
+				131 cell
+					132 text NO
+			133 row
+				134 cell
+					135 text Victim protection
+				136 cell
+					137 text NO
+		138 heading Requested action and purpose, Value: 3
+			139 text Requested action and purpose
+		140 table
+			141 row
+				142 cell
+					143 text FIELD
+				144 cell
+					145 text VALUE
+			146 row
+				147 cell
+					148 text Action
+				149 cell
+					150 text view
+			151 row
+				152 cell
+					153 text Purpose
+				154 cell
+					155 text investigation
+			156 row
+				157 cell
+					158 text Emergency declared (requester claim, not verified)
+				159 cell
+					160 text NO
+			161 row
+				162 cell
+					163 text Submitted
+				164 cell
+					165 text 10/12/2026, 11:38:32 AM
+		166 heading User justification (untrusted), Value: 3
+			167 text User justification (untrusted)
+		168 text Written by the requester
+		169 text Engineering verification on the synthetic demo FIR; requesting view for the assigned investigation.
+		170 container
+			171 text Off-chain text; its fingerprint on the ledger,  1e6dd6c22231c068… , matches what is shown.
+		172 text Claims here are not verified facts.
+		173 container
+			174 text Auditor reason
+			175 text entry area (settable) Auditor reason
+		176 text FORCE ALLOW — no dynamic authorization
+		177 text No dynamic authorization is created. Only a model DENY overridden to FORCE ALLOW produces one.
+		178 container
+			179 text The ledger will record:  agreed with the LLM .
+		180 text A reason is optional here.
+		181 text FORCE DENY — no dynamic authorization
+		182 text No dynamic authorization is created. Only a model DENY overridden to FORCE ALLOW produces one.
+		183 container
+			184 text The ledger will record:  did not agree with the LLM .
+		185 text A reason is REQUIRED for this combination.
+		186 text Your decision is final
+		187 text The model recommendation above is advisory. Only this decision, or an already-active dynamic authorization, determines access.
+		188 container
+			189 button Force Allow
+			190 button Force Deny
+
+The focused UI element is 6 button Close

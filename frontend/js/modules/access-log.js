@@ -1,10 +1,10 @@
 /**
  * The access log.
  *
- * "Access requests" is the log itself. For every settled request on the ledger
+ * "Access requests" is the log itself. For every request on the ledger
  * it shows who requested which case file, what the LLM recommended, and what the
  * auditor decided — stated together with the recommendation it was taken
- * against. It is read from the ledger's decision records; nothing is written for
+ * against, the access outcome and authorization check. It is reconstructed from ledger records;
  * it, and none of the LLM's text is shown.
  *
  * "Searches and reads" keeps the application access events: who searched, who
@@ -25,7 +25,7 @@ import {
   filterAccessRows, sortAccessRows,
 } from '../shared/access-log.js';
 
-/** How many settled requests and access events one load reads from the ledger. */
+/** How many requests and access events one load reads from the ledger. */
 const ACCESS_REQUEST_LIMIT = 100;
 const ACCESS_EVENT_LIMIT = 60;
 
@@ -56,7 +56,7 @@ function refreshedNote({ shown, total, refreshedAt }) {
   return [
     `Last refreshed ${refreshedAt.toLocaleTimeString()}.`,
     shown < total ? `Showing ${shown} of ${total}.` : null,
-    total >= ACCESS_REQUEST_LIMIT ? `Only the newest ${ACCESS_REQUEST_LIMIT} settled requests are loaded.` : null,
+    total >= ACCESS_REQUEST_LIMIT ? `Only the newest ${ACCESS_REQUEST_LIMIT} requests are loaded.` : null,
   ].filter(Boolean).join(' ');
 }
 
@@ -87,18 +87,21 @@ function requestsTable({ rows, anyLoaded, order, onToggleOrder }) {
     onclick: onToggleOrder,
   }, 'Time', el('span', { class: 'arrow', 'aria-hidden': 'true' }, oldestFirst ? '▲' : '▼'));
   const node = table(
-    [sortButton, 'Who requested', 'What was requested', 'LLM recommended', 'Auditor decided'],
+    [sortButton, 'Who requested', 'What was requested', 'LLM recommended', 'Auditor decided',
+      'Access outcome', 'Authorization check'],
     rows.map((row) => [
       timestamp(row.time),
       cell(row.who.name, row.who.detail),
       cell(row.what.name, row.what.detail),
       cell(row.llm.label, row.llm.detail, { status: true }),
       cell(row.decision.label, row.decision.detail, { status: true }),
+      cell(row.approval.label, row.approval.detail, { status: true }),
+      cell(row.authorization.label, row.authorization.detail),
     ]),
     {
       emptyMessage: anyLoaded
         ? 'No entry matches the filters.'
-        : 'No request has been settled yet on this channel.',
+        : 'No access request has been recorded on this channel.',
     });
   node.classList.add('log');
   return node;
@@ -166,7 +169,7 @@ function requestsPanel() {
   async function load() {
     replace(list, hint('Reading the access log from Fabric…'));
     try {
-      const data = await api.access.decisionLog(ACCESS_REQUEST_LIMIT);
+      const data = await api.access.workflowLog(ACCESS_REQUEST_LIMIT);
       update({ rows: (data.entries || []).map(accessRequestRow), refreshedAt: new Date() });
     } catch (error) {
       replace(list, callout('bad', 'Could not load this', hint(error.message)));

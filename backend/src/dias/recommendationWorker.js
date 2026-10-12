@@ -64,12 +64,14 @@ function recommenderInput(requestId, entry) {
   };
 }
 
-function createRecommendationWorker({ store, signedRecommender, ledger, relay, log = console }) {
+function createRecommendationWorker({ store, signedRecommender, ledger, relay, log = console,
+  schedule = setInterval, cancel = clearInterval }) {
   if (!store || !signedRecommender || !ledger || !relay) {
     throw new Error('recommendation worker requires a store, a signed recommender, a ledger and a relay identity');
   }
   let queue = Promise.resolve();
   const queued = new Set();
+  let recoveryTimer = null;
 
   async function produce(requestId, entry) {
     trace.emit('recommendation.started', { requestId });
@@ -175,7 +177,22 @@ function createRecommendationWorker({ store, signedRecommender, ledger, relay, l
     return unfinished.length;
   }
 
-  return Object.freeze({ enqueue, resumePending, idle: () => queue });
+  function startRecovery(intervalMs = 15_000) {
+    if (recoveryTimer) return;
+    if (!Number.isFinite(intervalMs) || intervalMs < 1000) throw new Error('invalid recovery interval');
+    recoveryTimer = schedule(() => {
+      try { resumePending(); }
+      catch (error) { log.error(`[dias] recommendation recovery failed: ${error.message}`); }
+    }, intervalMs);
+    recoveryTimer.unref?.();
+  }
+
+  function stopRecovery() {
+    if (recoveryTimer) cancel(recoveryTimer);
+    recoveryTimer = null;
+  }
+
+  return Object.freeze({ enqueue, resumePending, startRecovery, stopRecovery, idle: () => queue });
 }
 
 module.exports = { createRecommendationWorker, recommendationRecord };

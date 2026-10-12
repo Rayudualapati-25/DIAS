@@ -146,6 +146,7 @@ export const api = {
   records: {
     create: (payload) => request('POST', '/records', payload),
     search: (filters) => request('GET', `/records${query(filters)}`),
+    evidenceIndex: (evidenceId) => request('GET', `/records/evidence-index/${evidenceId}`),
     lookup: (recordId) => request('GET', `/records/lookup/${recordId}`),
     get: (recordId) => request('GET', `/records/${recordId}`),
     metadata: (recordId, decisionId) =>
@@ -189,6 +190,8 @@ export const api = {
       request('GET', `/access/decision/${recordId}/${decisionId}`),
     // The public decision log: every settled request and what was decided for it.
     decisionLog: (limit = 50) => request('GET', `/access/decision-log${query({ limit })}`),
+    workflowLog: (limit = 100) => request('GET', `/access/workflow-log${query({ limit })}`),
+    myRequests: (limit = 100) => request('GET', `/access/requests/mine${query({ limit })}`),
     auditorPending: () => request('GET', '/access/auditor/pending'),
     // Whether these requests' LLM recommendations are ready yet. Reads no case data.
     auditorPendingStatus: (requestIds) =>

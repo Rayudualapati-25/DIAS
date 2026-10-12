@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-12",
+  "baselineCommit": "60a92b0ba53fb019fcff65bbbcbdf4ed8dd832b4",
+  "node": "v22.20.0",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "portal": "http://localhost:3001",
+  "channel": "diaschannel",
+  "chaincode": "diasrecords",
+  "dockerContext": "colima-seal-live",
+  "definitionBefore": {
+    "version": "2.5",
+    "sequence": 3
+  },
+  "definitionAfter": {
+    "version": "3.0",
+    "sequence": 4
+  },
+  "packageId": "diasrecords_3.0:5fbef89a8a17e237554278c977112e47fedd39e86ad1486233845171d5c61be5",
+  "modelProcess": "6696 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python .venv-qwen-policy/bin/mlx_lm.server --model mlx-community/Qwen3-14B-4bit --host 127.0.0.1 --port 8081 --max-tokens 512 --chat-template-args {\"enable_thinking\":false}",
+  "modelTraining": "unchanged untuned Qwen3-14B; no adapter activated",
+  "accessLogMode": "security",
+  "recoveryIntervalMs": 15000,
+  "liveFixtures": "existing demo identities and REC-FIR-001; unique evidence IDs; synthetic authorization revoked in cleanup",
+  "seed": "deterministic offline fixtures; live IDs/timestamps generated, so no repeatability of exact IDs",
+  "networkReset": false,
+  "limits": "single Mac development network; no four-VM experiment or latency/accuracy measurement"
+}

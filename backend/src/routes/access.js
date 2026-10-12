@@ -60,6 +60,7 @@ const CONTRACT = 'AccessContract';
  * chaincode error.
  */
 const AUDITOR_ROLES = [...DISTRICT_HEAD_ROLES];
+const { REVIEWER_ROLES } = require('../../../chaincode/crimerecords/lib/dias/visibility');
 
 const ENDORSEMENT_CONVERGENCE_RETRIES = Number(process.env.ENDORSEMENT_CONVERGENCE_RETRIES || 5);
 /** The most requests one auditor-screen status check may ask about. */
@@ -238,6 +239,22 @@ router.get('/request/:requestId', asyncRoute(async (req, res) => {
   const request = await fabric.evaluate(
     req.user.org, req.user.fabricUser, CONTRACT, 'GetRequest', req.params.requestId);
   return ok(res, request);
+}));
+
+router.get('/requests/mine', asyncRoute(async (req, res) => {
+  const limit = z.coerce.number().int().min(1).max(500).safeParse(req.query.limit || 100);
+  if (!limit.success) return fail(res, 'limit must be an integer from 1 to 500');
+  const entries = await fabric.evaluate(req.user.org, req.user.fabricUser, CONTRACT,
+    'QueryMyAccessRequests', String(limit.data));
+  return ok(res, { entries, storage: 'fabric-ledger' });
+}));
+
+router.get('/workflow-log', requireRole(...REVIEWER_ROLES), asyncRoute(async (req, res) => {
+  const limit = z.coerce.number().int().min(1).max(500).safeParse(req.query.limit || 100);
+  if (!limit.success) return fail(res, 'limit must be an integer from 1 to 500');
+  const entries = await fabric.evaluate(req.user.org, req.user.fabricUser, CONTRACT,
+    'QueryAccessWorkflowLog', String(limit.data));
+  return ok(res, { entries, storage: 'fabric-ledger' });
 }));
 
 /** The requester withdraws a request that is still waiting for review. */

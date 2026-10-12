@@ -1,0 +1,170 @@
+TAP version 13
+# Subtest: shows the record and committed request identifiers for a DIAS request
+ok 1 - shows the record and committed request identifiers for a DIAS request
+  ---
+  duration_ms: 0.802166
+  type: 'test'
+  ...
+# Subtest: shows public lookup filters and handles an empty target
+ok 2 - shows public lookup filters and handles an empty target
+  ---
+  duration_ms: 0.117458
+  type: 'test'
+  ...
+# Subtest: states who requested what, what the LLM recommended, and the decision with that recommendation
+not ok 3 - states who requested what, what the LLM recommended, and the decision with that recommendation
+  ---
+  duration_ms: 1.345708
+  type: 'test'
+  location: '/Users/venkatrayudu/Workspace/XAI workspace/DIAS/frontend/test/access-log.test.mjs:47:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+    -   approval: {
+    -     detail: null,
+    -     label: 'GRANTED'
+    -   },
+    -   authorization: {
+    -     detail: null,
+    -     label: '—'
+    -   },
+        decision: {
+          detail: "agreed with the LLM's ALLOW · by sp.north",
+          label: 'FORCE ALLOW',
+          value: 'FORCE_ALLOW'
+        },
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    requestId: 'REQ-1'
+    time: '2026-10-06T10:00:00.000Z'
+    who:
+      name: 'insp.sharma'
+      detail: 'inspector · police'
+    what:
+      name: 'REC-FIR-001'
+      detail: 'view · investigation'
+    llm:
+      value: 'ALLOW'
+      label: 'ALLOW'
+      detail: ~
+    decision:
+      value: 'FORCE_ALLOW'
+      label: 'FORCE ALLOW'
+      detail: "agreed with the LLM's ALLOW · by sp.north"
+    approval:
+      label: 'GRANTED'
+      detail: ~
+    authorization:
+      label: '—'
+      detail: ~
+  actual:
+    requestId: 'REQ-1'
+    time: '2026-10-06T10:00:00.000Z'
+    who:
+      name: 'insp.sharma'
+      detail: 'inspector · police'
+    what:
+      name: 'REC-FIR-001'
+      detail: 'view · investigation'
+    llm:
+      value: 'ALLOW'
+      label: 'ALLOW'
+      detail: ~
+    decision:
+      value: 'FORCE_ALLOW'
+      label: 'FORCE ALLOW'
+      detail: "agreed with the LLM's ALLOW · by sp.north"
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/venkatrayudu/Workspace/XAI%20workspace/DIAS/frontend/test/access-log.test.mjs:48:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: says when the auditor decided against the LLM, or without a recommendation
+ok 4 - says when the auditor decided against the LLM, or without a recommendation
+  ---
+  duration_ms: 0.123208
+  type: 'test'
+  ...
+# Subtest: says when neither the LLM nor an auditor was involved
+ok 5 - says when neither the LLM nor an auditor was involved
+  ---
+  duration_ms: 0.196667
+  type: 'test'
+  ...
+# Subtest: never throws on an incomplete entry
+ok 6 - never throws on an incomplete entry
+  ---
+  duration_ms: 0.054833
+  type: 'test'
+  ...
+# Subtest: shows pending advice separately from binding approval and authorization checks
+not ok 7 - shows pending advice separately from binding approval and authorization checks
+  ---
+  duration_ms: 0.258292
+  type: 'test'
+  location: '/Users/venkatrayudu/Workspace/XAI workspace/DIAS/frontend/test/access-log.test.mjs:107:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + null
+    - '2026-10-12T10:00:00Z'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '2026-10-12T10:00:00Z'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/venkatrayudu/Workspace/XAI%20workspace/DIAS/frontend/test/access-log.test.mjs:111:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: orders the log by time without changing the list it was given
+ok 8 - orders the log by time without changing the list it was given
+  ---
+  duration_ms: 5.356667
+  type: 'test'
+  ...
+# Subtest: filters by requester or record text, by LLM recommendation and by auditor decision
+ok 9 - filters by requester or record text, by LLM recommendation and by auditor decision
+  ---
+  duration_ms: 0.379
+  type: 'test'
+  ...
+# Subtest: counts only the filters that are actually set
+ok 10 - counts only the filters that are actually set
+  ---
+  duration_ms: 0.302541
+  type: 'test'
+  ...
+# Subtest: formats a log time as a compact local timestamp
+ok 11 - formats a log time as a compact local timestamp
+  ---
+  duration_ms: 1.189875
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 9
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 52.469708

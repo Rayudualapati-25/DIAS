@@ -679,6 +679,28 @@ class RecordContract extends Contract {
     return JSON.stringify(items);
   }
 
+  /** Public discovery identifiers only; private evidence/custody still requires its read policy. */
+  async QueryEvidenceIndex(ctx, evidenceId) {
+    const caller = getCaller(ctx);
+    if (!caller.role) throw new Error('unauthorized: caller identity has no role attribute');
+    if (!SAFE_ID.test(evidenceId || '')) throw new Error('evidenceId has invalid format');
+    const iterator = await ctx.stub.getStateByPartialCompositeKey(EVIDENCE_KEY, []);
+    const items = [];
+    try {
+      let item = await iterator.next();
+      while (!item.done) {
+        const evidence = JSON.parse(item.value.value.toString());
+        if (evidence.evidenceId === evidenceId) {
+          const record = await this._getRecord(ctx, evidence.recordId);
+          items.push({ evidenceId, recordId: record.recordId, caseId: record.caseId,
+            owningMsp: record.owningMsp, owningAgency: record.owningAgency, owningStation: record.owningStation });
+        }
+        item = await iterator.next();
+      }
+    } finally { await iterator.close(); }
+    return JSON.stringify(items.sort((a, b) => a.recordId.localeCompare(b.recordId)));
+  }
+
   async ListEvidence(ctx, recordId) {
     await this._requireEvidenceReader(ctx, recordId, 'ListEvidence');
     const iterator = await ctx.stub.getStateByPartialCompositeKey(

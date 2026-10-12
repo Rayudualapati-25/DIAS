@@ -120,6 +120,13 @@ router.get('/lookup/:recordId', asyncRoute(async (req, res) => {
   return ok(res, found.data);
 }));
 
+router.get('/evidence-index/:evidenceId', asyncRoute(async (req, res) => {
+  if (!SAFE_ID.test(req.params.evidenceId || '')) return fail(res, 'evidenceId has invalid format');
+  const entries = await fabric.evaluate(req.user.org, req.user.fabricUser,
+    'RecordContract', 'QueryEvidenceIndex', req.params.evidenceId);
+  return ok(res, entries);
+}));
+
 /** Requests visible to this exact requester or to staff at the owning station. */
 router.get('/document-requests/mine', asyncRoute(async (req, res) => {
   const requests = await fabric.evaluate(

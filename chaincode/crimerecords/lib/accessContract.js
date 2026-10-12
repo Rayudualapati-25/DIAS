@@ -1050,6 +1050,74 @@ class AccessContract extends Contract {
     return JSON.stringify(request);
   }
 
+  /** Bounded result, deterministic order; the scan remains a prototype scan. */
+  async _recentRequests(ctx, limitText, identityHash = null) {
+    const limit = Number(limitText || 100);
+    if (!Number.isInteger(limit) || limit < 1 || limit > 500) {
+      throw new Error('limit must be an integer from 1 to 500');
+    }
+    const iterator = await ctx.stub.getStateByPartialCompositeKey(KEYS.REQUEST, []);
+    const requests = [];
+    try {
+      let item = await iterator.next();
+      while (!item.done) {
+        const request = JSON.parse(item.value.value.toString());
+        if (identityHash === null || request.requester.identityHash === identityHash) requests.push(request);
+        item = await iterator.next();
+      }
+    } finally { await iterator.close(); }
+    requests.sort((a, b) => String(b.submittedAtUtc).localeCompare(String(a.submittedAtUtc))
+      || String(b.requestId).localeCompare(String(a.requestId)));
+    return requests.slice(0, limit);
+  }
+
+  /** Request history survives logout/browser loss; the certificate fixes its owner. */
+  async QueryMyAccessRequests(ctx, limitText) {
+    const caller = getCaller(ctx);
+    if (!caller.role || !caller.enrollmentId) throw new Error('unauthorized: an enrolled role is required');
+    return JSON.stringify(await this._recentRequests(ctx, limitText, sha256(caller.id)));
+  }
+
+  /** All workflow stages, including pending requests, reconstructed from Fabric. */
+  async QueryAccessWorkflowLog(ctx, limitText) {
+    const caller = getCaller(ctx);
+    if (!isReviewer(caller)) throw new Error('unauthorized: QueryAccessWorkflowLog requires a reviewer');
+    const callerHash = sha256(caller.id);
+    const entries = [];
+    for (const request of await this._recentRequests(ctx, limitText)) {
+      const id = request.requestId;
+      const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, id));
+      const decision = await this._read(ctx, this._key(ctx, KEYS.AUDITOR_DECISION, id));
+      const outcome = await this._read(ctx, this._key(ctx, KEYS.OUTCOME, id));
+      // A reviewer cannot use this log to inspect their own pending advice.
+      const withheld = Boolean(commitment && !decision && request.requester.identityHash === callerHash);
+      entries.push({
+        requestId: id, recordId: request.recordId, caseId: request.caseId,
+        action: request.action, purpose: request.purpose, status: request.status,
+        requester: { username: request.requester.username, organization: request.requester.organization,
+          role: request.requester.role },
+        submittedAtUtc: request.submittedAtUtc, requestTxId: request.txId,
+        processingPath: request.processingPath,
+        dynamicAuthorizationCheck: request.dynamicAuthorizationCheck,
+        outcome: outcome ? outcome.outcome : null, basis: outcome ? outcome.basis : null,
+        auditor: decision ? { username: decision.auditor.username, role: decision.auditor.role } : null,
+        decision: decision ? decision.decision : null,
+        llmAgreement: decision ? decision.llmAgreement : null,
+        llmRecommendation: withheld ? null : decision ? decision.llmRecommendation
+          : commitment ? recommendationOf(commitment).llmRecommendation : null,
+        generationStatus: withheld ? null : decision ? decision.generationStatus
+          : commitment ? commitment.generationStatus : null,
+        recommendationWithheld: withheld,
+        recommendationTxId: commitment && !withheld ? commitment.txId : null,
+        authorizationId: outcome ? outcome.authorizationId : null,
+        createdAuthorizationId: outcome ? outcome.createdAuthorizationId : null,
+        decidedAtUtc: outcome ? outcome.recordedAtUtc : null,
+        outcomeTxId: outcome ? outcome.txId : null, decisionTxId: decision ? decision.txId : null,
+      });
+    }
+    return JSON.stringify(entries);
+  }
+
   /**
    * κ for one request, or null; readable by its requester and district heads. A
    * requester sees what κ says only once an auditor has decided (design §10).

@@ -1,0 +1,98 @@
+{
+  "baselineCommit": "60a92b0ba53fb019fcff65bbbcbdf4ed8dd832b4",
+  "stagedFiles": [
+    {
+      "file": "backend/src/dias/accessEventOutbox.js",
+      "sha256": "3f9878844709afff5b46d8da2c1a701c64038188bcc3e2831c1daa728554230a"
+    },
+    {
+      "file": "backend/src/dias/recommendationWorker.js",
+      "sha256": "1216838d4828c6856ab466c0b3eb2cd801d8f3c4a0344c12164ac85e7e89828a"
+    },
+    {
+      "file": "backend/src/middleware/accessLogger.js",
+      "sha256": "b87ca2c078d8a5e6f09918b065ce449d4282cb3cb918e620e8a11e65732b4885"
+    },
+    {
+      "file": "backend/src/routes/access.js",
+      "sha256": "7b8902be77f497ed3d7249ef48356bcd61678ed5fced3b16e0bf514b99d4ea35"
+    },
+    {
+      "file": "backend/src/routes/records.js",
+      "sha256": "05098085e1079145ad50a6746d2179d4711c6bac16c7eeddd09926feaba64355"
+    },
+    {
+      "file": "backend/src/server.js",
+      "sha256": "d1668fb3cafb7e655dc8a555cca66a2ea4d2a1f307bff5826f0c32335eb4a576"
+    },
+    {
+      "file": "backend/test/accessEventOutbox.unit.test.js",
+      "sha256": "bd3306832d43a0c61b9882f070db1a90f6d9bb90859bd3ff1620aef86bb737a9"
+    },
+    {
+      "file": "backend/test/accessLogger.unit.test.js",
+      "sha256": "cf2e447e773b9216ce323c834718a5bdd955134dc4642bf268a95065f41fbc53"
+    },
+    {
+      "file": "backend/test/diasBackendRecommendation.unit.test.js",
+      "sha256": "c9155840c08f7749acb66fd2c7da0685217f10f43dc19189484063cc597d5abe"
+    },
+    {
+      "file": "chaincode/crimerecords/lib/accessContract.js",
+      "sha256": "3ae54c6b4bc40e653ae2d4385f1f21399d58b0a28af1c687ba6f1410c684f4dc"
+    },
+    {
+      "file": "chaincode/crimerecords/lib/auditContract.js",
+      "sha256": "6ca2549e613e6228da3c553c5b296658a71c64de5f8c5f862f8139d793f80ff3"
+    },
+    {
+      "file": "chaincode/crimerecords/lib/recordContract.js",
+      "sha256": "7a76681d285404f72cb09642d97185edda247c084e39f2747559309b4f593c02"
+    },
+    {
+      "file": "chaincode/crimerecords/test/diasAuditTrail.test.js",
+      "sha256": "a5ed13530699c183a238045d4ca5060a81f8f27d309b8d48a202aed1bf88a8a2"
+    },
+    {
+      "file": "chaincode/crimerecords/test/diasWorkflowLog.test.js",
+      "sha256": "cd0bfbf477c597b11e8ca1d32fb9037f28a1f271802612799897510737af1eef"
+    },
+    {
+      "file": "docs/design/dias-v3-ledger-schema.md",
+      "sha256": "c03b683fe9d125b172732529671fd497c7fd023ba89bd725483cc11a45d366ab"
+    },
+    {
+      "file": "experiments/check-portal-workflow.js",
+      "sha256": "26b9b81cf1401c81b728accaba048c6eba34eb53c0d079c14a9718fa470dcdbc"
+    },
+    {
+      "file": "frontend/js/core/api.js",
+      "sha256": "cc065df3b873b2c6386685a4a793b212a64931a61838dda6839417d1be33f059"
+    },
+    {
+      "file": "frontend/js/modules/access-log.js",
+      "sha256": "7fb0224efb304754f087038250c57cf447ade5371bd0acfb16f2132cd25caae7"
+    },
+    {
+      "file": "frontend/js/modules/request-access.js",
+      "sha256": "4a97fed6c57c420e3282ff45d8ace7e0fbddb4f385a2d433d8e2e3ab79fdcd99"
+    },
+    {
+      "file": "frontend/js/shared/access-log.js",
+      "sha256": "c65ded06e943aa120f31612a4d7740b69dd55bc2cce7451ffc33c701c3ae278f"
+    },
+    {
+      "file": "frontend/js/shared/search-access.js",
+      "sha256": "7d8bcae8751b521c333f17173cf254f402ae152245b1e6f9eb4640f223c1b33e"
+    },
+    {
+      "file": "frontend/test/access-log.test.mjs",
+      "sha256": "9ecb6db02cb251812bc1508b437368b82a41dd5b173f3d1e6dd35f3e5f14d519"
+    },
+    {
+      "file": "frontend/test/search-access.test.mjs",
+      "sha256": "7cf07bccc51cd79fa70f19f33cb2b61a8564c31abc5e47833c2161782380abd8"
+    }
+  ],
+  "note": "server digest excludes two pre-existing mobile route lines; active server still includes them"
+}
