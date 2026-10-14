@@ -212,6 +212,7 @@ def table_system():
     ]) + " \\\\")
     body = "\n    ".join(lines)
     total = sum(int(r["completed"]) for r in levels)
+    system_note = note(f"Burst levels: the accounts submit one request each at the same time, three times per level ({num(total)} workflows); throughput is the mean $\\pm$ standard deviation of the three runs. One hour: {num(e6['arrivals'])} requests at random times, about six per minute, which sets the throughput; {num(e6['operations_succeeded'])} of {num(e6['operations_total'])} API and ledger operations succeeded. Times exclude human review.")
     return f"""\\begin{{table*}}[tb]
   \\centering
   \\caption{{Whole-System Performance}}
@@ -227,7 +228,7 @@ def table_system():
     {body}
     \\bottomrule
   \\end{{tabular}}
-{note(f"Burst levels: the accounts submit one request each at the same time, three times per level ({num(total)} workflows); throughput is the mean $\\pm$ standard deviation of the three runs. One hour: {num(e6['arrivals'])} requests at random times, about six per minute, which sets the throughput; {num(e6['operations_succeeded'])} of {num(e6['operations_total'])} API and ledger operations succeeded. Times exclude human review.")}\\end{{table*}}
+{system_note}\\end{{table*}}
 """
 
 
@@ -267,6 +268,7 @@ def table_external():
     body = "\n    ".join(lines)
     ci = lambda key, model: cross[key][model]["decisionAccuracyCI"]  # noqa: E731
     span = lambda key, model: f"{fix(100 * ci(key, model)['low'], 1)}--{fix(100 * ci(key, model)['high'], 1)}\\%"  # noqa: E731
+    external_note = note(f"The DIAS rows repeat the balanced group of Table~\\ref{{tab:res-quality}} for comparison. Invalid outputs count as incorrect. 95\\% confidence intervals of the correct-decision rate: LLMAC {span('llmac', 'base')} (untuned) and {span('llmac', 'v7')} (V7); OrgAccess {span('org-easy-binary', 'base')} and {span('org-easy-binary', 'v7')}.")
     return f"""\\begin{{table*}}[tb]
   \\centering
   \\caption{{Comparison on External Access-Control Tasks}}
@@ -281,7 +283,7 @@ def table_external():
     {body}
     \\bottomrule
   \\end{{tabular}}
-{note(f"The DIAS rows repeat the balanced group of Table~\\ref{{tab:res-quality}} for comparison. Invalid outputs count as incorrect. 95\\% confidence intervals of the correct-decision rate: LLMAC {span('llmac', 'base')} (untuned) and {span('llmac', 'v7')} (V7); OrgAccess {span('org-easy-binary', 'base')} and {span('org-easy-binary', 'v7')}.")}\\end{{table*}}
+{external_note}\\end{{table*}}
 """
 
 
