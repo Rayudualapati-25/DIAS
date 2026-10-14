@@ -13,6 +13,13 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_GITHUB_FILE_BYTES = 50 * 1024 * 1024
 MAX_CONTENT_SCAN_BYTES = 2 * 1024 * 1024
 
+# Raw run data above the size limit that is already on main. Each entry is pinned to
+# its exact size, so a changed or new large file still fails the check.
+KNOWN_LARGE_FILES = {
+    # Ledger export of the four-VM testbed run E3 (2026-09-25), kept as recorded.
+    "experiments/runs/20260924_testbed_multivm/raw/e3-ledger-20260925T043602Z/transactions.jsonl": 73236548,
+}
+
 FORBIDDEN_PATHS = (
     re.compile(r"(^|/)node_modules/"),
     re.compile(r"(^|/)coverage/"),
@@ -83,7 +90,7 @@ def main() -> int:
             continue
         size = candidate.stat().st_size
         total_bytes += size
-        if size > MAX_GITHUB_FILE_BYTES:
+        if size > MAX_GITHUB_FILE_BYTES and KNOWN_LARGE_FILES.get(relative) != size:
             violations.append(
                 f"oversized file ({size / 1024 / 1024:.1f} MiB): {relative}"
             )

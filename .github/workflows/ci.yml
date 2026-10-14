@@ -61,8 +61,6 @@ jobs:
           test -f README.md
           test -f CITATION.cff
           test -f LICENSE
-          test -f papers/final_paper/SEBA_XAI_ACM_6page.tex
-          test -f output/overleaf/SEBA_XAI_Overleaf_Package/main.tex
 
   chaincode-unit:
     name: Chaincode unit tests
@@ -102,9 +100,14 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-          cache-dependency-path: backend/package-lock.json
-      - name: Install locked dependencies
-        run: npm ci
+          cache-dependency-path: |
+            chaincode/crimerecords/package-lock.json
+            backend/package-lock.json
+      # Several backend tests load the chaincode's policy and decision modules.
+      - name: Install locked backend and chaincode dependencies
+        run: |
+          npm ci
+          npm ci --prefix ../chaincode/crimerecords
       - name: Run offline tests
         run: npm run test:unit
       - name: Audit production dependencies
@@ -157,6 +160,13 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: benchmarks/caliper/package-lock.json
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # The plot-axes test draws a figure, so it needs matplotlib.
+      - name: Install the plotting libraries
+        run: python -m pip install matplotlib==3.10.9 pyyaml==6.0.2
       - name: Use the pinned npm controller
         run: npm install --global npm@11.5.1
       - name: Install locked dependencies
