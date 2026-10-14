@@ -1,9 +1,4 @@
-"""Generate LIMITATIONS.md and the listener-recovery table.
-
-The listener availability finding gets explicit treatment rather than a footnote,
-and both sides of it are stated: the system failed safely, and it did not stay
-available. Neither half is allowed to stand without the other.
-"""
+"""Generate LIMITATIONS.md and the listener-recovery table."""
 
 import json
 import pathlib

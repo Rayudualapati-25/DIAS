@@ -1,15 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Register and activate the DIAS governance policy on the ledger (design §5).
- *
- *   node scripts/dias/register-policy.js [--registrar audit:sp.north] [--activator audit:cfo.north]
- *     [--bundle policies/dias-governance-policy-v1.json]
- *
- * Two different AuditMSP district heads are required. Safe to run again. This
- * writes to the ledger of the network the backend configuration points at.
- */
+/** Register and activate the DIAS governance policy on the ledger. */
 
 const path = require('path');
 const fabric = require('../../backend/src/fabric/gateway');

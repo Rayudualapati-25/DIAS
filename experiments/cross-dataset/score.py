@@ -1,21 +1,9 @@
 #!/usr/bin/env python3
-"""
-Score the cross-dataset runs.
-
-Metric definitions mirror experiments/dias-finetuning/v2/eval/metrics.js so the
-numbers are defined exactly as in the paper:
-  - decision accuracy: correct / total, where an invalid reply counts as wrong
-  - balanced accuracy: mean of the ALLOW recall and the DENY recall
-  - macro F1: mean of the two per-class F1 scores
-  - Wilson score interval at z = 1.96
-
-Models are compared only on the example ids BOTH models finished, so a run that
-was still in flight cannot flatter either side.
-"""
+"""Score the cross-dataset runs."""
 import json, os, math, sys, collections
 
 RUN = "experiments/runs/20260924_cross_dataset"
-SETS = ["llmac", "org-easy-binary", "org-easy-partial"]  # hard split omitted: ALLOW class absent
+SETS = ["llmac", "org-easy-binary", "org-easy-partial"]  # Hard split omitted: ALLOW class absent
 MODELS = ["v7", "base"]
 
 def load(model, s):
@@ -44,7 +32,7 @@ def per_class(m, c):
     return rec, prec, f1
 
 def summarize(rows, expected_of):
-    """rows: list of prediction records. expected_of: id -> 'ALLOW'/'DENY'."""
+    """Rows: list of prediction records. expected_of: id -> 'ALLOW'/'DENY'."""
     m = {"ALLOW": {"ALLOW": 0, "DENY": 0, "INVALID": 0},
          "DENY":  {"ALLOW": 0, "DENY": 0, "INVALID": 0}}
     valid = 0
@@ -66,7 +54,7 @@ def summarize(rows, expected_of):
         "allowRecall": None if ar is None else round(ar, 6),
         "denyRecall": None if dr is None else round(dr, 6),
         "confusion": m,
-        "unsafeAllow": m["DENY"]["ALLOW"],   # expected DENY, model said ALLOW
+        "unsafeAllow": m["DENY"]["ALLOW"],   # Expected DENY, model said ALLOW
         "overDeny": m["ALLOW"]["DENY"],
     }
 
@@ -103,7 +91,7 @@ def report():
                 rows = [preds[mm][i] for i in sorted(common)]
                 entry[mm] = summarize(rows, exp)
                 if s == "llmac":
-                    # reason code + policy reference fidelity (LLMAC set has both)
+                    # Reason code + policy reference fidelity (LLMAC set has both)
                     rc = sum(1 for r in rows
                              if (r.get("reasonCode") or "") == cases[r["exampleId"]]["label"]["reason_code"])
                     pr = 0
@@ -114,12 +102,12 @@ def report():
                         if got == want: pr += 1
                     entry[mm]["reasonCodeAccuracy"] = round(rc/len(rows), 6)
                     entry[mm]["policyRefExactAccuracy"] = round(pr/len(rows), 6)
-                    # benign vs adversarial
+                    # Benign vs adversarial
                     for kind in ("benign", "adversarial"):
                         sub = [r for r in rows if cases[r["exampleId"]]["justificationKind"] == kind]
                         if sub:
                             entry[mm][kind] = summarize(sub, exp)
-                    # per policy
+                    # Per policy
                     bysc = collections.defaultdict(list)
                     for r in rows: bysc[cases[r["exampleId"]]["scenario"]].append(r)
                     entry[mm]["byPolicy"] = {k: summarize(v, exp) for k, v in sorted(bysc.items())}

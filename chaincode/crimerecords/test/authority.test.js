@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Rank ladder and authority resolution.
- *
- * Authority is rank-based, not name-based: the head of a station is simply the
- * highest-ranked officer of that department posted there, and the head of a
- * district is the highest-ranked officer of that department in it.
- */
+/** Rank ladder and authority resolution. */
 
 const { expect } = require('chai');
 const {
@@ -70,8 +64,8 @@ describe('authority resolution', () => {
   });
 
   /**
-   * The routing rule: the request goes to the requester's station head when that
-   * head personally holds clearance for the record, otherwise up to the district head.
+   * The routing rule: the request goes to the requester's station head when that head personally holds
+   * clearance for the record, otherwise up to the district head.
    */
   it('routes a request to the station head when that head has the clearance', () => {
     const who = authorityFor(ROSTER, ROSTER[0], 'medium');

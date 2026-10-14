@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Figure for the ledger-growth experiment.
-
-Reads ledger_growth.json (unindexed baseline) and, if present,
-ledger_growth_indexed.json (after CouchDB indexes are deployed).
-
-Log-log axes are deliberate: on them a flat operation has slope 0 and an
-operation whose cost is linear in collection size has slope 1, so the two
-regimes are separable by eye rather than by assertion.
-"""
+"""Figure for the ledger-growth experiment."""
 
 from __future__ import annotations
 
@@ -65,9 +57,7 @@ def main() -> None:
     )
     ax = axes[0] if has_index_arm else axes
 
-    # A null is an operation that failed every sample. It is plotted as a gap
-    # with an explicit failure marker, never as a value, and it is excluded
-    # from the fitted slope so a timeout cannot flatten the trend.
+    # A null is an operation that failed every sample.
     timed_out: list[tuple[float, float]] = []
     print(f"{'operation':<40} {'slope':>7}  {'first':>9} {'last':>9}  failed")
     for key, label, marker, colour in SERIES:
@@ -79,9 +69,9 @@ def main() -> None:
         ax.plot(gx, gy, marker=marker, color=colour, linewidth=1.8,
                 markersize=6, label=label)
         if failed_at and gy:
-            # Mark where the operation stopped returning results at all. The
-            # explanatory text is drawn once, after the loop, so overlapping
-            # per-series labels cannot pile up on the same point.
+            # Mark where the operation stopped returning results at all. The explanatory text is
+            # drawn once, after the loop, so overlapping per-series labels cannot pile up on the
+            # same point.
             ax.scatter(failed_at, [gy[-1]] * len(failed_at), marker="x",
                        s=90, color=colour, linewidths=2.2, zorder=5)
             timed_out.append((failed_at[0], gy[-1]))

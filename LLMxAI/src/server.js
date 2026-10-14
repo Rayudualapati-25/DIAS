@@ -65,8 +65,8 @@ async function readBody(req) {
   }
 }
 
-// The signed-in identity is the ONLY source of subject attributes. Nothing the
-// browser sends in the request body can select or change who the requester is.
+// The signed-in identity is the ONLY source of subject attributes. Nothing the browser sends in the request
+// body can select or change who the requester is.
 function authenticate(req) {
   const token = parseCookies(req.headers?.cookie)[SESSION_COOKIE];
   const session = renewSession(token);
@@ -96,8 +96,8 @@ function validateQuery(body) {
   return query;
 }
 
-// A record may be chosen from the picker or named inside the request sentence.
-// Either way the attributes come from the registry, never from the prose.
+// A record may be chosen from the picker or named inside the request sentence. Either way the attributes
+// come from the registry, never from the prose.
 function resolveRecord(body, query) {
   if (typeof body.recordId === 'string' && body.recordId.length > 0) {
     const selected = findResource(body.recordId);

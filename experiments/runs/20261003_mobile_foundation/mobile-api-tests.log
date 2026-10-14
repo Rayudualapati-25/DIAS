@@ -1,0 +1,13 @@
+
+
+  mobile case batches
+    ✔ covers the baseline exactly in bounded, stable, duplicate-free pages
+    ✔ handles an empty list and a final exact-sized page
+    ✔ rejects forged, expired, login-token and other-account cursors
+    ✔ rejects continuation if the visible case snapshot changes
+    ✔ validates limits and cursor shapes without coercing arrays
+    ✔ requires authentication, validates before reading, and preserves the Fabric identity
+
+
+  6 passing (27ms)
+

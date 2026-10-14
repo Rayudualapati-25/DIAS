@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""Reuse experiment analysis: the paper's reuse-scope comparison, from the live run.
-
-After round r every record has had r repeated requests. For every r the three
-designs of the old replay are compared on the same stream of requests:
-  - no reuse: every request needs the model and an auditor review;
-  - exact-record reuse (DIAS), measured live: what the ledger did;
-  - property-fingerprint reuse (the SEAL design), replayed: the same requests in
-    the order the ledger received them, with the same model answers and the same
-    auditor decisions, and the scope key of the old replay (the governed
-    properties, with no user identity and no record or case id).
-Every count comes from the rows the load generator wrote, and the live grants
-are checked against the authorizations the ledger itself returned.
-
-Usage: python3 analyze_reuse.py --run <results/reuse-...> --plan <plan.json> --out <dir>
-"""
+"""Reuse experiment analysis: the paper's reuse-scope comparison, from the live run."""
 
 import argparse
 import csv
@@ -54,7 +40,10 @@ def canonical_hash(value):
 
 
 def fingerprint(stream):
-    """The old replay's property-fingerprint scope: governed properties only, no identity, record or case id."""
+    """
+    The old replay's property-fingerprint scope: governed properties only, no identity, record or
+    case id.
+    """
     verified = stream["verifiedRequest"]
     return canonical_hash({
         "scopeVersion": "seal-property-fingerprint",
@@ -70,7 +59,10 @@ def fingerprint(stream):
 
 
 def inference_s(row):
-    """Model inference time in seconds; the backend reports a breakdown whose `inference` part is the model call."""
+    """
+    Model inference time in seconds; the backend reports a breakdown whose `inference` part is the
+    model call.
+    """
     latency = row.get("modelLatencyMs")
     if isinstance(latency, dict):
         latency = latency.get("inference")
@@ -78,7 +70,10 @@ def inference_s(row):
 
 
 def queue_s(row):
-    """Seconds a reviewed request waited for the model server: recommendation wait minus the model call."""
+    """
+    Seconds a reviewed request waited for the model server: recommendation wait minus the model
+    call.
+    """
     inference = inference_s(row)
     ready = row.get("recommendationReadyMs")
     return ready / 1000 - inference if inference is not None and ready is not None else None
@@ -94,12 +89,7 @@ def empty_counts():
 
 
 def replay_fingerprint(rows, keys, approve):
-    """Replay the property-fingerprint design over rows in ledger order.
-
-    A request whose key already holds an authorization is granted without review;
-    any other request is reviewed with the answer the model gave it live, and an
-    approved override of a model DENY creates the authorization for its key.
-    """
+    """Replay the property-fingerprint design over rows in ledger order."""
     held = {}
     counts = empty_counts()
     for row in rows:
@@ -125,7 +115,9 @@ def replay_fingerprint(rows, keys, approve):
 
 
 def exact_live(rows):
-    """Count what the ledger did, checking every automatic grant against the authorization it matched."""
+    """
+    Count what the ledger did, checking every automatic grant against the authorization it matched.
+    """
     created = {r["createdAuthorizationId"]: r for r in rows if r.get("createdAuthorizationId")}
     counts = empty_counts()
     for row in rows:
@@ -173,7 +165,10 @@ def conditions(rows, keys, approve, rounds):
 
 
 def check_ledger(rows, ledger_after):
-    """Every authorization the ledger holds for the plan was created by one reviewed row, with its user and record."""
+    """
+    Every authorization the ledger holds for the plan was created by one reviewed row, with its user
+    and record.
+    """
     created = {r["createdAuthorizationId"]: r for r in rows if r.get("createdAuthorizationId")}
     listed = {a["authorizationId"]: a for a in ledger_after["planAuthorizationList"]}
     mismatched = []
@@ -222,7 +217,10 @@ def per_round(rows, windows):
 
 
 def resources(start_s, end_s, container_csv, mac_csv):
-    """CPU (cores) and memory (GB) of every machine over the run window, as in E6; never fails the analysis."""
+    """
+    CPU (cores) and memory (GB) of every machine over the run window, as in E6; never fails the
+    analysis.
+    """
     out = {"window_s": [start_s, end_s]}
     try:
         cpu = prom.window_stats(prom.MACHINE_CPU, start_s, end_s, key=lambda labels: labels["machine"])
@@ -242,7 +240,8 @@ def resources(start_s, end_s, container_csv, mac_csv):
         rss = [v for v in (number(r, "model_rss_bytes") for r in rows) if v is not None]
         gpu = [v for v in (number(r, "gpu_utilization_pct") for r in rows) if v is not None]
         gpu_mem = [v / 1e9 for v in (number(r, "gpu_in_use_memory_bytes") for r in rows) if v is not None]
-        # The model's weights sit in GPU (unified) memory, which the process RSS counts only in part.
+        # The model's weights sit in GPU (unified) memory, which the process RSS counts only in
+        # part.
         out["mac"] = {"samples": len(rows), "model_cpu_mean_cores": mean(model_cpu),
                       "model_cpu_max_cores": max(model_cpu) if model_cpu else None,
                       "model_rss_max_gb": max(rss) / 1e9 if rss else None, "gpu_utilization_mean_pct": mean(gpu),
@@ -251,7 +250,10 @@ def resources(start_s, end_s, container_csv, mac_csv):
 
 
 def resource_outputs(run_info, windows, container_csv, mac_csv, out_dir):
-    """CPU and memory of every machine over the run (with round starts marked) and of every container, as in E6."""
+    """
+    CPU and memory of every machine over the run (with round starts marked) and of every container,
+    as in E6.
+    """
     start_s, end_s = run_info["startedAt"] / 1000, run_info["finishedAt"] / 1000
     marks = [(w["startedAt"] / 1000 - start_s) / 60 for w in windows]
     period = f"over the {(end_s - start_s) / 3600:.1f}-hour run"
@@ -353,7 +355,10 @@ def plot_rounds(rounds, out_dir):
 
 
 def plot_time(times, rounds, out_dir):
-    """(a) Each request's own processing time by component; (b) the wait for the single model server by round."""
+    """
+    (a) Each request's own processing time by component; (b) the wait for the single model server by
+    round.
+    """
     fig, (left, right) = figstyle.figure(width=figstyle.DOUBLE_WIDTH_IN, height=2.2, ncols=2)
     parts = [("Request commit", "reviewed_request_commit"), ("Model inference", "reviewed_model_inference"),
              ("Decision commit", "reviewed_decision_commit")]

@@ -1,19 +1,6 @@
 'use strict';
 
-/**
- * DIAS dynamic (reusable) authorization with exact-record scope.
- *
- * Created only when an auditor's FORCE_ALLOW did not agree with the LLM
- * recommendation shown to the auditor, which means the LLM recommended DENY. The
- * LLM itself runs in the application backend and is never written to the ledger.
- * A later request reuses the authorization only when the stable requester
- * identity, the exact record and case, the action, and the purpose are identical;
- * the verified request facts are unchanged since approval; the authorization is
- * active; it has not expired; and it was issued under the policy version that is
- * active now (v3, design §5 and §9). Matching is exact and deterministic: no
- * similarity, no model, and no retrieval. An authorization of an older schema
- * never matches.
- */
+/** DIAS dynamic (reusable) authorization with exact-record scope. */
 
 const { SAFE_ID, hashObject } = require('../util/validate');
 const { verifiedRequestHash } = require('./verifiedRequest');
@@ -76,8 +63,8 @@ function assertSafeIds(ids) {
 }
 
 /**
- * The only authorization origin DIAS accepts: an auditor FORCE_ALLOW that did not
- * agree with the LLM, which had recommended DENY.
+ * The only authorization origin DIAS accepts: an auditor FORCE_ALLOW that did not agree with the LLM, which
+ * had recommended DENY.
  */
 function createAuthorization({
   txId, timestamp, auditor, scope, verifiedRequest, originatingRequestId,

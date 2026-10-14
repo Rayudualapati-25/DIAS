@@ -1,0 +1,332 @@
+{
+ "halves": [
+  {
+   "config": "mac",
+   "table": [
+    {
+     "key": "submit",
+     "label": "1. Request committed on the ledger",
+     "n": 24,
+     "min": 2063.3,
+     "median": 2080,
+     "mean": 2079.2,
+     "p95": 2091.9,
+     "max": 2095.9
+    },
+    {
+     "key": "recommendation",
+     "label": "2. Recommendation ready (LLM, signature, commitment)",
+     "n": 24,
+     "min": 8485.8,
+     "median": 8925.5,
+     "mean": 9161.7,
+     "p95": 10106,
+     "max": 10122
+    },
+    {
+     "key": "inference",
+     "label": "   of which: model inference",
+     "n": 24,
+     "min": 6381.7,
+     "median": 6824.4,
+     "mean": 7066.1,
+     "p95": 8004.2,
+     "max": 8008.3
+    },
+    {
+     "key": "queue",
+     "label": "3. Auditor reads the queue",
+     "n": 24,
+     "min": 34.7,
+     "median": 40.7,
+     "mean": 40.6,
+     "p95": 44.7,
+     "max": 47.1
+    },
+    {
+     "key": "review",
+     "label": "4. Auditor opens the review",
+     "n": 24,
+     "min": 8.7,
+     "median": 10.6,
+     "mean": 10.7,
+     "p95": 12.5,
+     "max": 14.9
+    },
+    {
+     "key": "decision",
+     "label": "5. Decision recorded and confirmed from the ledger",
+     "n": 24,
+     "min": 2092.3,
+     "median": 2104.2,
+     "mean": 2104.6,
+     "p95": 2122.9,
+     "max": 2127
+    },
+    {
+     "key": "endToEnd",
+     "label": "End to end (stages 1 to 5)",
+     "n": 24,
+     "min": 12733.2,
+     "median": 13161.5,
+     "mean": 13396.8,
+     "p95": 14333.1,
+     "max": 14345.4
+    },
+    {
+     "key": "log",
+     "label": "6. Access log read",
+     "n": 24,
+     "min": 87,
+     "median": 93,
+     "mean": 93.5,
+     "p95": 100.1,
+     "max": 101
+    },
+    {
+     "key": "requesterReadback",
+     "label": "Requester reads the outcome on the Mac",
+     "n": 24,
+     "min": 7.4,
+     "median": 9.4,
+     "mean": 9.8,
+     "p95": 13.7,
+     "max": 16.1
+    },
+    {
+     "key": "quietBeforeRequest",
+     "label": "Wait for a quiet ledger before the request (not counted)",
+     "n": 24,
+     "min": 10825.3,
+     "median": 12242.6,
+     "mean": 12315.3,
+     "p95": 12759.1,
+     "max": 12760.6
+    },
+    {
+     "key": "quietBeforeDecision",
+     "label": "Wait for a quiet ledger before the decision (not counted)",
+     "n": 24,
+     "min": 10621.9,
+     "median": 18889.5,
+     "mean": 18378.5,
+     "p95": 19292.3,
+     "max": 19396
+    }
+   ],
+   "summary": {
+    "planned": 24,
+    "ran": 24,
+    "completed": 24,
+    "checkFailed": 0,
+    "failed": 0,
+    "notRun": 0,
+    "timed": 24,
+    "noUsableAdvice": 0,
+    "granted": 3,
+    "denied": 21,
+    "adviceAllow": 3,
+    "adviceDeny": 21,
+    "adviceFollowed": 24,
+    "adviceMatchesPolicy": 21,
+    "adviceCompared": 24,
+    "ledgerChecksPassed": 216,
+    "ledgerChecksMade": 216,
+    "failedStages": {}
+   }
+  },
+  {
+   "config": "mobile",
+   "table": [
+    {
+     "key": "submit",
+     "label": "1. Request committed on the ledger",
+     "n": 24,
+     "min": 2061.1,
+     "median": 2081.2,
+     "mean": 2080.4,
+     "p95": 2092.7,
+     "max": 2093.8
+    },
+    {
+     "key": "recommendation",
+     "label": "2. Recommendation ready (LLM, signature, commitment)",
+     "n": 24,
+     "min": 8449.6,
+     "median": 9010.7,
+     "mean": 9452.1,
+     "p95": 11967.6,
+     "max": 12855.7
+    },
+    {
+     "key": "inference",
+     "label": "   of which: model inference",
+     "n": 24,
+     "min": 6369.7,
+     "median": 6898.3,
+     "mean": 7361.1,
+     "p95": 9875.8,
+     "max": 10777.3
+    },
+    {
+     "key": "queue",
+     "label": "3. Auditor reads the queue",
+     "n": 24,
+     "min": 517.2,
+     "median": 564.3,
+     "mean": 562.6,
+     "p95": 582.1,
+     "max": 588.9
+    },
+    {
+     "key": "review",
+     "label": "4. Auditor opens the review",
+     "n": 24,
+     "min": 27,
+     "median": 35.8,
+     "mean": 40,
+     "p95": 55,
+     "max": 57.9
+    },
+    {
+     "key": "decision",
+     "label": "5. Decision recorded and confirmed from the ledger",
+     "n": 24,
+     "min": 2108.6,
+     "median": 2121,
+     "mean": 2125.3,
+     "p95": 2143.6,
+     "max": 2157.4
+    },
+    {
+     "key": "endToEnd",
+     "label": "End to end (stages 1 to 5)",
+     "n": 24,
+     "min": 13266.8,
+     "median": 13823.4,
+     "mean": 14260.5,
+     "p95": 16794.8,
+     "max": 17671.2
+    },
+    {
+     "key": "log",
+     "label": "6. Access log read",
+     "n": 24,
+     "min": 130.8,
+     "median": 140.2,
+     "mean": 142.4,
+     "p95": 158.1,
+     "max": 158.6
+    },
+    {
+     "key": "requesterReadback",
+     "label": "Requester reads the outcome on the Mac",
+     "n": 24,
+     "min": 6.7,
+     "median": 9.3,
+     "mean": 10.3,
+     "p95": 14.8,
+     "max": 24.2
+    },
+    {
+     "key": "quietBeforeRequest",
+     "label": "Wait for a quiet ledger before the request (not counted)",
+     "n": 24,
+     "min": 12127,
+     "median": 12758.4,
+     "mean": 12616.3,
+     "p95": 12854.1,
+     "max": 12855.2
+    },
+    {
+     "key": "quietBeforeDecision",
+     "label": "Wait for a quiet ledger before the decision (not counted)",
+     "n": 24,
+     "min": 14277.3,
+     "median": 17967.4,
+     "mean": 17651.2,
+     "p95": 18539.3,
+     "max": 18670.6
+    }
+   ],
+   "summary": {
+    "planned": 24,
+    "ran": 24,
+    "completed": 24,
+    "checkFailed": 0,
+    "failed": 0,
+    "notRun": 0,
+    "timed": 24,
+    "noUsableAdvice": 0,
+    "granted": 4,
+    "denied": 20,
+    "adviceAllow": 4,
+    "adviceDeny": 20,
+    "adviceFollowed": 24,
+    "adviceMatchesPolicy": 21,
+    "adviceCompared": 24,
+    "ledgerChecksPassed": 216,
+    "ledgerChecksMade": 216,
+    "failedStages": {}
+   }
+  }
+ ],
+ "pooled": [
+  {
+   "key": "submit",
+   "label": "1. Request committed on the ledger",
+   "n": 48,
+   "min": 2061.1,
+   "median": 2080.6,
+   "mean": 2079.8,
+   "p95": 2092.7,
+   "max": 2095.9
+  },
+  {
+   "key": "recommendation",
+   "label": "2. Recommendation ready (LLM, signature, commitment)",
+   "n": 48,
+   "min": 8449.6,
+   "median": 9003.1,
+   "mean": 9306.9,
+   "p95": 11329.2,
+   "max": 12855.7
+  },
+  {
+   "key": "inference",
+   "label": "   of which: model inference",
+   "n": 48,
+   "min": 6369.7,
+   "median": 6898.3,
+   "mean": 7213.6,
+   "p95": 9229.8,
+   "max": 10777.3
+  }
+ ],
+ "difference": [
+  {
+   "key": "queue",
+   "macMedian": 40.7,
+   "phoneMedian": 564.3,
+   "differenceMs": 523.6
+  },
+  {
+   "key": "review",
+   "macMedian": 10.6,
+   "phoneMedian": 35.8,
+   "differenceMs": 25.2
+  },
+  {
+   "key": "decision",
+   "macMedian": 2104.2,
+   "phoneMedian": 2121,
+   "differenceMs": 16.8
+  },
+  {
+   "key": "log",
+   "macMedian": 93,
+   "phoneMedian": 140.2,
+   "differenceMs": 47.2
+  }
+ ]
+}

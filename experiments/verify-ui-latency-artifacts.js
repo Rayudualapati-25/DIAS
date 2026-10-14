@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Read-only pre-submission gate for the interactive-latency evidence chain.
- *
- * It recomputes the reported latency summaries from retained per-request
- * samples, validates run and figure manifests, checks the published table
- * copies, and confirms that the current manuscript carries the measured
- * values with the required scope qualifications.
- *
- * Usage: node experiments/verify-ui-latency-artifacts.js
- */
+/** Read-only pre-submission gate for the interactive-latency evidence chain. */
 
 const crypto = require('crypto');
 const fs = require('fs');

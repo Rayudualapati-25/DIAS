@@ -1,12 +1,7 @@
 'use strict';
 
 /**
- * Requester claims K (dias-requester-claims-v1): what the requester asserts but
- * the ledger cannot verify. They are committed with the request and shown to the
- * recommendation model and the auditor as claims, never inside the verified
- * context C. Their digest h_K (domain `claims`) is bound into the signed
- * recommendation provenance, so the model's input claims cannot be changed
- * unnoticed (docs/design/dias-v3-ledger-schema.md §3, §6.1).
+ * Requester claims K (dias-requester-claims-v1): what the requester asserts but the ledger cannot verify.
  */
 
 const { DOMAINS, hashCanonical } = require('./commitments');

@@ -1,11 +1,4 @@
-/**
- * Single-device handoff from a requester session to a separate auditor window.
- *
- * The popup is created synchronously from the request button click so browser
- * popup protection does not discard it. Its cloned session storage is cleared
- * before it loads the application, so requester credentials never become
- * auditor credentials. The auditor must sign in independently.
- */
+/** Single-device handoff from a requester session to a separate auditor window. */
 
 const REQUEST_PARAM = 'auditorRequest';
 const SAFE_REQUEST_ID = /^[A-Za-z0-9._-]{1,128}$/;
@@ -31,8 +24,8 @@ export function prepareAuditorHandoff(browserWindow = window) {
   const popup = browserWindow.open('about:blank', '_blank', POPUP_FEATURES);
   if (!popup) return null;
   try {
-    // A newly opened same-origin window receives a copy of the opener's
-    // sessionStorage. Clear that copy before loading any authenticated UI.
+    // A newly opened same-origin window receives a copy of the opener's sessionStorage. Clear that copy
+    // before loading any authenticated UI.
     popup.sessionStorage.clear();
     popup.opener = null;
     popup.location.replace(new URL('/auditor-handoff.html', browserWindow.location.origin).toString());
@@ -57,7 +50,7 @@ export function completeAuditorHandoff(popup, requestId, browserWindow = window)
 
 export function closeAuditorHandoff(popup) {
   if (!popup || popup.closed) return;
-  try { popup.close(); } catch { /* already navigated or closed */ }
+  try { popup.close(); } catch { /* Already navigated or closed */ }
 }
 
 /** Manual fallback: called from a click after a popup was blocked or closed. */
@@ -67,9 +60,8 @@ export function openAuditorReview(requestId, browserWindow = window) {
     '_blank',
     `${POPUP_FEATURES},noopener`,
   );
-  // With `noopener`, browsers may intentionally return null even when the
-  // window opened. The action has still been requested, so no credential-bearing
-  // handle is retained.
+  // With `noopener`, browsers may intentionally return null even when the window opened. The action has
+  // still been requested, so no credential-bearing handle is retained.
   return opened;
 }
 

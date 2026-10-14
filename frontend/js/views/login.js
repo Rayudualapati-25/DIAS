@@ -1,6 +1,6 @@
 /**
- * Local Fabric-identity selector. Demo accounts are one-click chips so a
- * reviewer can switch departments quickly during a walkthrough.
+ * Local Fabric-identity selector. Demo accounts are one-click chips so a reviewer can switch departments
+ * quickly during a walkthrough.
  */
 
 import { api } from '../core/api.js';
@@ -9,10 +9,8 @@ import { card, field, input, button, hint } from '../core/components.js';
 import { toast } from '../core/toast.js';
 
 /**
- * Kept in sync with the roster in scripts/seed-users-onchain.js, which is what
- * writes these profiles onto the ledger. If sign-in cannot verify any of them,
- * their Fabric identities or ledger profiles are missing — run
- * `make seed-users`.
+ * Kept in sync with the roster in scripts/seed-users-onchain.js, which is what writes these profiles onto
+ * the ledger.
  */
 const DEMO_ACCOUNTS = Object.freeze([
   ['insp.sharma', 'Insp. A. Sharma', 'Police · Inspector'],

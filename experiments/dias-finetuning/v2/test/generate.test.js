@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Generator properties.
- *
- * Reproducibility is the one property an experiment record cannot assert its way
- * into: either the same seed produces the same bytes, or the recorded seed is
- * decoration. The rest of these tests pin invariants a future change could break
- * quietly — a scenario constructor that stops producing the clause it claims, or
- * a split assignment that drifts when families are added.
- */
+/** Generator properties. */
 
 const test = require('node:test');
 const assert = require('node:assert/strict');

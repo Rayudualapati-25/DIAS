@@ -1,0 +1,44 @@
+{
+  "capturedAt": "2026-10-03T17:32:20.078Z",
+  "gitHead": "51baeb4da834245097d4121a869a8ceb9f9da0ea",
+  "node": "v22.20.0",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "javaHome": "/Applications/Android Studio.app/Contents/jbr/Contents/Home",
+  "javaVersion": "25.0.3",
+  "gradle": "9.3.1",
+  "agp": "9.1.1",
+  "compileSdk": 36,
+  "minSdk": 26,
+  "buildTools": "36.1.0",
+  "avd": "Medium_Phone_API_36.1",
+  "androidSerial": "emulator-5554",
+  "mobileApiPort": 3002,
+  "normalWebsitePort": 3001,
+  "liveFabric": {
+    "networkDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/seal-live-run-20261003/network",
+    "channel": "crimechannel",
+    "chaincode": "crimerecords",
+    "identity": "insp.sharma",
+    "scope": "Existing older local deployment; not a DIAS v3 acceptance run"
+  },
+  "verifiedConnections": [
+    "http://10.0.2.2:3002",
+    "http://127.0.0.1:3002 with adb reverse"
+  ],
+  "physicalPhoneAttached": false,
+  "publicTunnelStarted": false,
+  "initialUnrelatedChanges": [
+    "backend/test/architectureGuard.unit.test.js",
+    "backend/test/diasRuntime.unit.test.js",
+    "backend/test/recommendationService.unit.test.js",
+    "backend/test/fixtures/serviceFixtures.js",
+    "backend/test/recommenderServer.unit.test.js",
+    "reports/iteration/iter_20261002_v3_methodology_alignment.md"
+  ],
+  "afterValidation": {
+    "temporaryApi": "stopped",
+    "taskStartedEmulator": "stopped",
+    "normalWebsite": "left running on port 3001"
+  }
+}

@@ -1,0 +1,21 @@
+status 200 count 20
+analyst.rao | forensics | lab-analyst |  | FSL-North | district-north | medium | ["CASE-2026-001"] | active | 
+cfo.north | audit | chief-forensic-officer |  |  | district-north | high | [] | active | 
+ci.central | audit | circle-inspector |  | PS-Central | district-north | high | [] | active | 
+ci.east | audit | circle-inspector |  | PS-East | district-north | medium | [] | active | 
+ci.south | audit | circle-inspector |  | PS-South | district-south | high | [] | active | 
+clerk.das | court | court-clerk |  |  | district-north | low | [] | active | 
+const.verma | police | constable | 1 | PS-Central | district-north | low | [] | active | 
+dc.nair | prosecution | defense-counsel |  |  | district-north | low | [] | active | 
+dir.iyer | forensics | lab-director |  | FSL-North | district-north | high | [] | active | 
+dj.north | audit | district-judge |  |  | district-north | high | [] | active | 
+dp.north | audit | director-of-prosecution |  |  | district-north | high | [] | active | 
+insp.rathore | police | inspector | 3 | PS-East | district-north | high | ["CASE-2026-001"] | active | 
+insp.sharma | police | inspector | 3 | PS-Central | district-north | high | ["CASE-2026-001","CASE-2026-002"] | active | 
+insp.singh | police | inspector | 3 | PS-South | district-south | high | ["CASE-2026-001"] | active | 
+io.krishnan | police | investigating-officer | 3 | PS-Central | district-north | high | ["CASE-2026-001"] | active | 
+judge.rana | court | judge |  |  | district-north | high | [] | active | 
+pp.mehta | prosecution | public-prosecutor |  |  | district-north | high | [] | active | 
+sho.reddy | police | inspector | 3 | PS-Central | district-north | high | [] | active | 
+sp.north | audit | sp |  |  | district-north | high | [] | active | 
+sp.south | audit | sp |  |  | district-south | high | [] | active | 

@@ -1,10 +1,6 @@
 'use strict';
 
-/**
- * A chaincode refusal carries a DIAS error code at the start of its message
- * (docs/design/dias-v3-ledger-schema.md §15). The API maps the code to an HTTP
- * status so a client can tell "not allowed" from "too late" from "malformed".
- */
+/** A chaincode refusal carries a DIAS error code at the start of its message. */
 
 const { expect } = require('chai');
 const { asyncRoute, statusForChaincodeMessage } = require('../src/util/respond');

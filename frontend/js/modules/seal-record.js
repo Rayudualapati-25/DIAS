@@ -1,6 +1,6 @@
 /**
- * Court seal / unseal. Sealing is a verified fact in every later DIAS request for
- * the record, and a decision on a request made before the change is refused.
+ * Court seal / unseal. Sealing is a verified fact in every later DIAS request for the record, and a
+ * decision on a request made before the change is refused.
  */
 
 import { api } from '../core/api.js';

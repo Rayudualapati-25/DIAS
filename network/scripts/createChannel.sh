@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-#
-# Create the application channel and join all 5 department peers.
-# Run with PWD = crime-records-network/network, network containers up.
-#
+# Create the application channel and join all 5 department peers. Run with PWD = crime-records-network/network, network containers up.
 # Usage: createChannel.sh [channel-name]
 
 set -euo pipefail

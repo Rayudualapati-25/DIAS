@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
-#
 # Launch a DIAS V7 LoRA training run under nohup with a complete record.
-#
-# Long runs must survive losing a terminal, so this is written to be started
-# detached and inspected afterwards from the files it leaves behind. It refuses
-# to start if the configuration could damage V6 or resume from an existing
-# adapter, because those are the two mistakes that are unrecoverable rather than
-# merely wasteful.
-#
-#   nohup scripts/dias/train-v7.sh experiments/dias-finetuning/train-v7.yaml \
-#         experiments/runs/<date>_dias_qwen3_lora_v7 > /dev/null 2>&1 &
 set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

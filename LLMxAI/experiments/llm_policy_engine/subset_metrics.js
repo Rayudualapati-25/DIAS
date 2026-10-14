@@ -1,10 +1,7 @@
 'use strict';
 
-// Derive metrics for a fixed subset suite (e.g. test_balanced_60.jsonl) from an
-// evaluation run over its superset, without re-running inference. The subset rows
-// are byte-identical model outputs; only the population changes.
-//
-//   node subset_metrics.js <run.json> <subset.jsonl> <output.json>
+// Derive metrics for a fixed subset suite (e.g. test_balanced_60.jsonl) from an evaluation run over its
+// superset, without re-running inference.
 
 const crypto = require('crypto');
 const fs = require('fs');

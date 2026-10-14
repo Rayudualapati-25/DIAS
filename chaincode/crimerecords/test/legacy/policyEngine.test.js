@@ -1,7 +1,7 @@
 'use strict';
 
-// LEGACY (SEAL / pre-DIAS): exercises retained modules that the DIAS runtime no longer
-// loads and that deployCC.sh excludes from the chaincode package (see architectureGuard.test.js).
+// LEGACY (SEAL / pre-DIAS): exercises retained modules that the DIAS runtime no longer loads and that
+// deployCC.sh excludes from the chaincode package (see architectureGuard.test.js).
 
 const { expect } = require('chai');
 const { evaluate } = require('../../lib/policy/policyEngine');
@@ -84,8 +84,8 @@ describe('policyEngine (crime-policy-v2)', () => {
     expect(out.reasonCode).to.equal('VICTIM_DATA_NOT_NECESSARY');
   });
 
-  // CHANGED in v2: crossing a district is a refusal, not an escalation, and it
-  // applies to every role including the judiciary — a judge serves one district.
+  // CHANGED in v2: crossing a district is a refusal, not an escalation, and it applies to every role
+  // including the judiciary — a judge serves one district.
   it('denies any request that crosses a district, for every role (rule 6)', () => {
     for (const role of ['constable', 'inspector', 'sp', 'commissioner', 'judge', 'district-judge']) {
       const out = run(
@@ -131,8 +131,8 @@ describe('policyEngine (crime-policy-v2)', () => {
       .to.equal('INSUFFICIENT_CLEARANCE');
   });
 
-  // A witness-flagged file carries no extra barrier: whoever may open the case
-  // file sees the witnesses recorded in it.
+  // A witness-flagged file carries no extra barrier: whoever may open the case file sees the witnesses
+  // recorded in it.
   it('never blocks on the witness flag alone', () => {
     expect(run(subject(), record({ witnessFlag: true })).decision).to.equal('allow');
   });

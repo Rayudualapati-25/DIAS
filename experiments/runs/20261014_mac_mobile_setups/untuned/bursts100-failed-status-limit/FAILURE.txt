@@ -1,0 +1,24 @@
+Failed run: untuned model, bursts of 100 (2026-10-14, 19:17-19:50 IST). Kept as evidence; not used for results.
+
+What happened
+- Burst L100-combined: 100 requests were sent at once and all 100 were committed on the ledger.
+- The load script asked the backend for the preparation status of all 100 requests in one call.
+  The status route accepts at most 50 request ids per call and answered HTTP 400
+  ("ids must be 1 to 50 request ids separated by commas"), three times in a row.
+- The script therefore marked all 100 rows as failed at the stage "recommendation" and the
+  auditor decided none of them during the burst (rows.jsonl, error field).
+- After the burst the script closed the leftovers by following their advice on the Mac
+  (bursts.json, closedAfterBurst): 98 were closed, 2 timed out after 5 minutes because the
+  model was still working through the queue of 100.
+- The next burst did not start: the host was not idle (2 waiting), so the script stopped
+  ("the host is not idle: 2 waiting, 0 authorizations active") and run-campaign-100.sh
+  stopped before switching to V7 (campaign.log, 19:50:25).
+- The 2 waiting requests were closed by hand at 19:51 IST by following their advice
+  (closed-by-hand.json): REQ-059db6f9a3ba3347 FORCE_ALLOW (advice ALLOW), REQ-0e917667cdfc3a65
+  FORCE_DENY (advice DENY).
+
+Cause and fix
+- The bursts of 5, 10 and 25 never needed more than 50 ids, so the trial runs did not show it.
+  The one-hour runner already asked in groups of 50.
+- Fixed in experiments/e2e/setup-load.js (statusInChunks: groups of 50, with a test), and the
+  wait for leftovers was raised to 45 minutes. The bursts of 100 were then run again from the start.

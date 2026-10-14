@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""LaTeX result tables for the five Evaluation Setting items, generated from the result files.
-
-Every number is read from a result file (none is typed in), rounded half-up, and written
-as a count first with the percentage in brackets. The tables use the paper's own style
-(booktabs, \\footnotesize, caption above) and new labels (tab:res-*), so they can sit next
-to the older tables in Results.tex without clashing.
-
-Usage: python3 make_evaluation_tables.py --out <file.tex>
-"""
+"""LaTeX result tables for the five Evaluation Setting items, generated from the result files."""
 
 import argparse
 import csv
@@ -20,7 +12,7 @@ MULTIVM = os.path.join(REPO, "experiments/runs/20260924_testbed_multivm/analysis
 REUSE = os.path.join(REPO, "experiments/runs/20260925_reuse_100_users/analysis")
 CROSS = os.path.join(REPO, "experiments/runs/20260924_cross_dataset")
 
-TEST_GROUPS = [  # the order of the Evaluation Setting text
+TEST_GROUPS = [  # The order of the Evaluation Setting text
     ("test-decision-balanced", "Balanced ALLOW/DENY"),
     ("test-reason-balanced", "Reason-focused"),
     ("test-adversarial", "Misleading or instruction-like"),

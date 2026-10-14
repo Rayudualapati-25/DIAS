@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Tiny client for Ollama, the local LLM runner.
- *
- * Ollama runs as a normal program on this Mac (not in Docker) and listens on
- * http://localhost:11434. Nothing here touches the blockchain — this file only
- * sends text to the model and gets text back.
- */
+/** Tiny client for Ollama, the local LLM runner. */
 
 const { OLLAMA_URL, OLLAMA_MODEL, OLLAMA_SEED, OLLAMA_TIMEOUT_MS } = require('../config');
 
@@ -25,14 +19,7 @@ async function isAvailable() {
   }
 }
 
-/**
- * Ask the model to complete a prompt.
- *
- * temperature 0 + a fixed seed mean the same prompt gives the same answer every
- * time. That matters for research: a figure in the paper must be reproducible.
- *
- * Returns { text, model, latencyMs } or throws.
- */
+/** Ask the model to complete a prompt. */
 async function generate(prompt, { system } = {}) {
   const started = Date.now();
   const res = await fetch(`${OLLAMA_URL}/api/generate`, {

@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Plan step 7, backend half: a periodic sweeper records the expiry of every
- * pending request whose review deadline has passed. The contract decides from
- * committed state whether a request is due; the sweeper only asks.
+ * , backend half: a periodic sweeper records the expiry of every pending request whose review deadline has
+ * passed.
  */
 
 const { expect } = require('chai');

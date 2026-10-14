@@ -1,0 +1,55 @@
+{
+ "schema": "dias-100-user-hour-run-v1",
+ "planSha256": "9d4b2c616f7e8b7305b30e55381ba837cca5620c61957f214b1413d438e5d87a",
+ "hourSha256": "3fbbc5e0b89010323a19682066950b4685c53516d105f1d279f8f8a94780c925",
+ "auditor": "sp.north",
+ "planned": 200,
+ "logReads": 120,
+ "officers": 100,
+ "speed": 1,
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "officerPhone": "emulator-5556",
+  "auditorPhone": "emulator-5558",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 490,
+  "chaincodeContainers": [
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767"
+  ]
+ },
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": {
+  "auditor": 152
+ },
+ "quietBeforeMs": 225159.9,
+ "startedAtUtc": "2026-10-14T15:21:32.297Z",
+ "finishedHourAtUtc": "2026-10-14T16:22:07.917Z",
+ "watchError": null,
+ "closedAfterHour": [],
+ "drainMs": 23812,
+ "finishedAtUtc": "2026-10-14T16:29:41.889Z",
+ "completed": 200,
+ "failed": 0,
+ "endChecks": [
+  {
+   "name": "the auditor's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization is left active",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Pending-request expiry sweeper (design §8).
- *
- * A rejected Fabric transaction writes nothing, so a request that passes its
- * review deadline stays "awaiting" until an ExpirePendingRequest transaction
- * records the expiry. This sweeper submits that transaction for every pending
- * request whose deadline has passed. The contract re-checks the deadline against
- * committed state, so an early or repeated call is refused there and changes
- * nothing.
- */
+/** Pending-request expiry sweeper. */
 
 const CONTRACT = 'AccessContract';
 

@@ -1,0 +1,12 @@
+PASS the LLM recommends DENY for the cross-district request, and the advice is committed and verified (advice DENY)
+PASS the auditor grants over the DENY on the phone, and the phone shows it confirmed and first in its access log (OK (1 test))
+PASS the ledger records FORCE_ALLOW against the LLM (NOT_AGREED), with the digest of the auditor note
+PASS that decision created one reusable authorization for exactly this scope (AUTH-8ed186e4d0ff98d5)
+PASS the repeated request on the Mac is granted at once by the authorization (1945.7 ms)
+PASS the reused request has no LLM recommendation and no auditor decision on the ledger (ACCESS_REQUEST_SUBMITTED > DYNAMIC_AUTHORIZATION_CHECKED > AUDITOR_REVIEW_SKIPPED > ACCESS_OUTCOME_RECORDED)
+PASS the access log shows the reuse as granted by the authorization, with the LLM not asked
+PASS the auditor revokes the authorization (status 200)
+PASS after the revocation the same request waits for an auditor again (status 202)
+PASS that request is closed by following the advice (DENY -> FORCE_DENY)
+PASS nothing is left waiting and no authorization is left active (0 waiting, 0 active)
+11 passed, 0 failed

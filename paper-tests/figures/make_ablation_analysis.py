@@ -1,17 +1,4 @@
-"""Ablation analysis: what the authenticated subject context actually buys.
-
-The headline number — joint accuracy falling from 80% to 35% — is easy to
-misread as the model becoming worse at deciding. It does not. This script
-establishes what changed and what did not, directly from the raw rows:
-
-  * Allow recall is zero in BOTH arms. Neither arm ever proposes Allow on this
-    set, so nothing here supports any claim about Allow recall in either
-    direction.
-  * Decision accuracy is a weak discriminator on this set, because 80 of the 100
-    cases are Deny. A model that never proposes Allow already scores 80%.
-  * The entire effect is in the reason code, and the emitted reason-code
-    distribution shows why.
-"""
+"""Ablation analysis: what the authenticated subject context actually buys."""
 
 import json
 import pathlib
@@ -75,9 +62,8 @@ def analyse():
 
 def figure(a):
     """Three panels: what did not change, what did, and the mechanism."""
-    # Three panels do not fit across one IEEE column width without the reason-code
-    # labels colliding with the panel beside them, so the mechanism panel gets the
-    # full width of its own row.
+    # Three panels do not fit across one IEEE column width without the reason-code labels colliding
+    # with the panel beside them, so the mechanism panel gets the full width of its own row.
     fig = plt.figure(figsize=(WIDE, 4.5))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.15], width_ratios=[1.15, 1.0],
                           hspace=0.62, wspace=0.28, top=0.88, bottom=0.09)

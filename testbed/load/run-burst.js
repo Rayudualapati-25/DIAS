@@ -1,21 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * E5: whole-system runs at 10, 25, 50, 75 and 100 simultaneous users.
- *
- * Follows testbed/load/generated/burst-plan.json exactly: five warm-up
- * workflows (not measured), then for every level three repetitions in which
- * users 1..L each start one workflow at the same moment. Between batches the
- * system is left idle for a fixed cool-down, so batches do not overlap and the
- * asynchronous ledger audit writes of one batch finish before the next starts.
- *
- * Output (in --out): requests.jsonl (one row per workflow), batches.json (batch
- * windows for the resource data), run.json (settings and totals).
- *
- * Usage: node testbed/load/run-burst.js --url http://dias-backend:3001/api \
- *          --out /results/<run> [--levels 10,25]
- */
+/** E5: whole-system runs at 10, 25, 50, 75 and 100 simultaneous users. */
 
 const fs = require('fs');
 const os = require('os');
@@ -64,8 +50,8 @@ async function main() {
   const watcher = createWatcher(client);
   const startedAt = now();
 
-  // Sign everyone in first, so measured time starts at the access request.
-  // Each sign-in adds one ledger audit write, which the pause below absorbs.
+  // Sign everyone in first, so measured time starts at the access request. Each sign-in adds one ledger
+  // audit write, which the pause below absorbs.
   await inChunks([...users.keys(), ...AUDITORS], 10, (username) => client.login(username));
   process.stdout.write(`signed in ${users.size + AUDITORS.length} identities\n`);
   await sleep(cooldownMs);

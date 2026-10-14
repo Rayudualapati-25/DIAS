@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-// Testbed preflight: wait through signing AND ledger commitment, rather than
-// using recommendation.ready trace events (which only finish model generation).
+// Testbed preflight: wait through signing AND ledger commitment, rather than using recommendation.ready
+// trace events (which only finish model generation).
 const { createClient, createWatcher } = require('./workflow');
 async function main() {
   const client = createClient(process.env.DIAS_API_URL || 'http://dias-backend:3001/api');

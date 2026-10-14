@@ -1,10 +1,6 @@
 'use strict';
 
-/**
- * Provision the synthetic Fabric identities used by the distinct-user latency
- * experiment. Registration, ledger admission, and case assignment are setup
- * operations and are never included in the measured latency samples.
- */
+/** Provision the synthetic Fabric identities used by the distinct-user latency experiment. */
 
 const crypto = require('crypto');
 const fs = require('fs');

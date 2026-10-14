@@ -2,22 +2,8 @@
 'use strict';
 
 /**
- * The reuse experiment: the rounds of a reuse plan through the live backend,
- * with the scripted fixed-approval auditor.
- *
- * In each round all users start together, and each user sends its three
- * requests one after another in the plan's order for that round. A request that
- * matches an active exact-record authorization is granted by the contract at once
- * (HTTP 201: no model, no auditor). Any other request waits for the model's
- * recommendation and the auditor's decision. The auditor commits FORCE_ALLOW over
- * a model DENY only for an approved base request (which creates the
- * authorization), otherwise follows the model, and denies an unusable
- * recommendation. The next round starts only after every request of the round is
- * decided and a cool-down has passed, so a repeat never overtakes the decision on
- * its own first request. Times contain no human review time.
- *
- * Usage: node testbed/reuse/run.js --plan testbed/reuse/generated/reuse-100-users-plan.json \
- *          --url http://dias-backend:3001/api --out /results/<run>
+ * The reuse experiment: the rounds of a reuse plan through the live backend, with the scripted
+ * fixed-approval auditor.
  */
 
 const fs = require('fs');

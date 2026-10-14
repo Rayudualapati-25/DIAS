@@ -1,11 +1,8 @@
 'use strict';
 
 /**
- * Prompt v1 is frozen. The published dataset and the reported V7 evaluation used
- * it, and the live system moved to prompt v2 in the v3 revision (plan step 5).
- * This test rebuilds every tracked prompt from its recorded facts and
- * justification and compares the digest with the one stored when the dataset was
- * generated, so any change to the v1 prompt text fails here.
+ * Prompt v1 is frozen. The published dataset and the reported V7 evaluation used it, and the live system
+ * moved to prompt v2 in the v3 revision.
  */
 
 const test = require('node:test');

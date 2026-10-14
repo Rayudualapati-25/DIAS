@@ -1,17 +1,4 @@
-"""Join client rows with the backend trace to split each workflow into components.
-
-Components of one approval/deny workflow (all in seconds):
-  request_commit     ledger write 1: CreateAccessRequest (endorse + order + commit)
-  request_api        rest of the submit call (API checks, review-store write, network)
-  queue_wait         waiting for the single recommendation worker
-  llm_inference      model server time for this prompt (Mac GPU, via HTTP)
-  llm_prompt_check   building the prompt and checking the model's answer
-  auditor_pickup     recommendation ready -> auditor view loaded (polling <= 0.1 s + view)
-  decision_commit    ledger write 2: SubmitAuditorDecision (endorse + order + commit)
-  decision_api       rest of the decision call
-The components add up to the client's end-to-end time by construction; the
-notification delay inside auditor_pickup is reported so the split can be checked.
-"""
+"""Join client rows with the backend trace to split each workflow into components."""
 
 import json
 from collections import defaultdict
@@ -55,12 +42,7 @@ def index_trace(trace_rows):
 
 
 def split(row, events):
-    """Seconds per component for one completed client row, or None if the trace is incomplete.
-
-    Only durations are combined, never absolute times from two processes, so a
-    clock offset between the backend and the load generator cannot leak into the
-    split. By construction the components add up to the client's end-to-end time.
-    """
+    """Seconds per component for one completed client row, or None if the trace is incomplete."""
     need = ["request_commit", "decision_commit", "recommendation.enqueued", "recommendation.started",
             "recommendation.ready", "model.response"]
     if row.get("status") != "completed" or any(key not in events for key in need):
@@ -74,9 +56,9 @@ def split(row, events):
     inference_ms = model["inferenceMs"]
     queue_ms = started["at"] - enqueued["at"]
     worker_ms = ready["at"] - started["at"]
-    # Client-observed wait for the recommendation minus the backend's own
-    # enqueue-to-ready time: the review-store polling delay (<= 0.1 s) and the
-    # few milliseconds between enqueueing and the HTTP response.
+    # Client-observed wait for the recommendation minus the backend's own enqueue-to-ready time: the
+    # review-store polling delay (<= 0.1 s) and the few milliseconds between enqueueing and the HTTP
+    # response.
     notify_ms = row["recommendationReadyMs"] - (ready["at"] - enqueued["at"])
     parts_ms = {
         "request_commit": req["totalMs"],

@@ -1,0 +1,64 @@
+{
+ "schema": "dias-setup-reuse-run-v1",
+ "planSha256": "040f0809049c620f7610fa5b1123992c8a28357099472ff6bd915afb5d6915a1",
+ "planned": 1,
+ "auditor": "sp.north",
+ "order": [
+  "R-MM-01"
+ ],
+ "startedAtUtc": "2026-10-14T01:25:57.091Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "officerPhone": "emulator-5556",
+  "auditorPhone": "emulator-5558",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 62,
+  "chaincodeContainers": [
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767"
+  ]
+ },
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": {},
+ "finishedAtUtc": "2026-10-14T01:29:32.881Z",
+ "bases": [
+  {
+   "id": "R-MM-01",
+   "cell": "MM",
+   "status": "done",
+   "authorizationId": "AUTH-0040799972f5af17",
+   "revokeMs": 1896
+  }
+ ],
+ "done": 1,
+ "notExercised": 0,
+ "failed": 0,
+ "requests": 6,
+ "unverified": 1,
+ "endChecks": [
+  {
+   "name": "the reuse experiment: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "3 of 3 found"
+  },
+  {
+   "name": "the reuse experiment: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization is left active",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

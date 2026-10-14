@@ -1,0 +1,2549 @@
+{
+ "label": "untuned",
+ "planSha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f",
+ "analyzedAtUtc": "2026-10-14T17:30:14.746Z",
+ "steps": {
+  "run": {
+   "schema": "dias-setup-steps-run-v1",
+   "planSha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f",
+   "planned": 96,
+   "auditor": "sp.north",
+   "order": [
+    "S-PP-01",
+    "S-MM-01",
+    "S-MP-01",
+    "S-PM-01",
+    "S-PP-02",
+    "S-MP-02",
+    "S-PM-02",
+    "S-MM-02",
+    "S-MM-03",
+    "S-PP-03",
+    "S-PM-03",
+    "S-MP-03",
+    "S-PM-04",
+    "S-MP-04",
+    "S-PP-04",
+    "S-MM-04",
+    "S-PM-05",
+    "S-PP-05",
+    "S-MM-05",
+    "S-MP-05",
+    "S-MP-06",
+    "S-MM-06",
+    "S-PP-06",
+    "S-PM-06",
+    "S-MM-07",
+    "S-PP-07",
+    "S-PM-07",
+    "S-MP-07",
+    "S-MP-08",
+    "S-MM-08",
+    "S-PP-08",
+    "S-PM-08",
+    "S-MP-09",
+    "S-PM-09",
+    "S-PP-09",
+    "S-MM-09",
+    "S-MM-10",
+    "S-PP-10",
+    "S-MP-10",
+    "S-PM-10",
+    "S-PM-11",
+    "S-PP-11",
+    "S-MP-11",
+    "S-MM-11",
+    "S-PP-12",
+    "S-MP-12",
+    "S-PM-12",
+    "S-MM-12",
+    "S-PP-13",
+    "S-MP-13",
+    "S-PM-13",
+    "S-MM-13",
+    "S-MM-14",
+    "S-MP-14",
+    "S-PP-14",
+    "S-PM-14",
+    "S-PM-15",
+    "S-MP-15",
+    "S-PP-15",
+    "S-MM-15",
+    "S-MP-16",
+    "S-PM-16",
+    "S-MM-16",
+    "S-PP-16",
+    "S-MP-17",
+    "S-PP-17",
+    "S-PM-17",
+    "S-MM-17",
+    "S-PM-18",
+    "S-MP-18",
+    "S-MM-18",
+    "S-PP-18",
+    "S-MM-19",
+    "S-MP-19",
+    "S-PM-19",
+    "S-PP-19",
+    "S-PP-20",
+    "S-MM-20",
+    "S-MP-20",
+    "S-PM-20",
+    "S-PM-21",
+    "S-MP-21",
+    "S-MM-21",
+    "S-PP-21",
+    "S-PM-22",
+    "S-MP-22",
+    "S-MM-22",
+    "S-PP-22",
+    "S-MP-23",
+    "S-PP-23",
+    "S-PM-23",
+    "S-MM-23",
+    "S-MM-24",
+    "S-MP-24",
+    "S-PP-24",
+    "S-PM-24"
+   ],
+   "startedAtUtc": "2026-10-14T05:40:56.559Z",
+   "environment": {
+    "api": "http://127.0.0.1:3001/api",
+    "node": "v22.20.0",
+    "officerPhone": "emulator-5556",
+    "auditorPhone": "emulator-5558",
+    "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+    "gitUncommittedEntries": 62,
+    "chaincodeContainers": [
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767"
+    ]
+   },
+   "staging": "backend/data/dias-reviews/host-20261006/access-events",
+   "phoneSignInMs": {
+    "auditor": 152.2,
+    "officer": 156.5
+   },
+   "finishedAtUtc": "2026-10-14T06:57:07.206Z",
+   "ran": 96,
+   "completed": 96,
+   "failed": 0,
+   "endChecks": [
+    {
+     "name": "workflows 1 to 24: every auditor review is in the searches-and-reads log on the ledger",
+     "ok": true,
+     "detail": "24 of 24 found"
+    },
+    {
+     "name": "workflows 1 to 24: no call was refused or failed",
+     "ok": true,
+     "detail": "0 since the run began"
+    },
+    {
+     "name": "workflows 25 to 48: every auditor review is in the searches-and-reads log on the ledger",
+     "ok": true,
+     "detail": "24 of 24 found"
+    },
+    {
+     "name": "workflows 25 to 48: no call was refused or failed",
+     "ok": true,
+     "detail": "0 since the run began"
+    },
+    {
+     "name": "workflows 49 to 72: every auditor review is in the searches-and-reads log on the ledger",
+     "ok": true,
+     "detail": "24 of 24 found"
+    },
+    {
+     "name": "workflows 49 to 72: no call was refused or failed",
+     "ok": true,
+     "detail": "0 since the run began"
+    },
+    {
+     "name": "workflows 73 to 96: every auditor review is in the searches-and-reads log on the ledger",
+     "ok": true,
+     "detail": "24 of 24 found"
+    },
+    {
+     "name": "workflows 73 to 96: no call was refused or failed",
+     "ok": true,
+     "detail": "0 since the run began"
+    },
+    {
+     "name": "the auditor's phone session ended cleanly",
+     "ok": true,
+     "detail": "OK (1 test)"
+    },
+    {
+     "name": "the officer's phone session ended cleanly",
+     "ok": true,
+     "detail": "OK (1 test)"
+    },
+    {
+     "name": "an officer outside the reviewers reads every workflow in the access log: who, which file, decision, outcome",
+     "ok": true,
+     "detail": "96 of 96 shown to clerk.das"
+    },
+    {
+     "name": "that log holds no transaction identifier and no digest",
+     "ok": true,
+     "detail": "264 entries read"
+    },
+    {
+     "name": "while a request waited, another officer saw who asked for which file but not the advice; the auditor saw the advice",
+     "ok": true,
+     "detail": "4 of 4 sampled workflows"
+    },
+    {
+     "name": "each requester finds their own requests with the final outcome",
+     "ok": true,
+     "detail": "12 of 12 requesters"
+    },
+    {
+     "name": "no request is left waiting for an auditor",
+     "ok": true,
+     "detail": "0 waiting"
+    },
+    {
+     "name": "no reusable authorization is left active",
+     "ok": true,
+     "detail": "0 active"
+    }
+   ]
+  },
+  "usedForTimes": 93,
+  "ran": 96
+ },
+ "reuse": {
+  "run": {
+   "schema": "dias-setup-reuse-run-v1",
+   "planSha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f",
+   "planned": 12,
+   "auditor": "sp.north",
+   "order": [
+    "R-MM-01",
+    "R-PP-01",
+    "R-MP-01",
+    "R-PM-01",
+    "R-MM-02",
+    "R-PP-02",
+    "R-MP-02",
+    "R-PM-02",
+    "R-MM-03",
+    "R-PP-03",
+    "R-MP-03",
+    "R-PM-03"
+   ],
+   "startedAtUtc": "2026-10-14T06:57:10.397Z",
+   "environment": {
+    "api": "http://127.0.0.1:3001/api",
+    "node": "v22.20.0",
+    "officerPhone": "emulator-5556",
+    "auditorPhone": "emulator-5558",
+    "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+    "gitUncommittedEntries": 62,
+    "chaincodeContainers": [
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767"
+    ]
+   },
+   "staging": "backend/data/dias-reviews/host-20261006/access-events",
+   "phoneSignInMs": {
+    "auditor": 147.6,
+    "officer": 161
+   },
+   "finishedAtUtc": "2026-10-14T07:33:36.244Z",
+   "bases": [
+    {
+     "id": "R-MM-01",
+     "cell": "MM",
+     "status": "done",
+     "authorizationId": "AUTH-a38913edc96b8ada",
+     "revokeMs": 2080.8
+    },
+    {
+     "id": "R-PP-01",
+     "cell": "PP",
+     "status": "done",
+     "authorizationId": "AUTH-cfbbba973fc28e97",
+     "revokeMs": 2068.1
+    },
+    {
+     "id": "R-MP-01",
+     "cell": "MP",
+     "status": "done",
+     "authorizationId": "AUTH-be3730967797d8d9",
+     "revokeMs": 2077.9
+    },
+    {
+     "id": "R-PM-01",
+     "cell": "PM",
+     "status": "done",
+     "authorizationId": "AUTH-1675c2550e4430c1",
+     "revokeMs": 2061.3
+    },
+    {
+     "id": "R-MM-02",
+     "cell": "MM",
+     "status": "done",
+     "authorizationId": "AUTH-32de06569e5398f7",
+     "revokeMs": 2068.3
+    },
+    {
+     "id": "R-PP-02",
+     "cell": "PP",
+     "status": "done",
+     "authorizationId": "AUTH-a521153d1bb88614",
+     "revokeMs": 2066.9
+    },
+    {
+     "id": "R-MP-02",
+     "cell": "MP",
+     "status": "done",
+     "authorizationId": "AUTH-613955689c33babb",
+     "revokeMs": 2073.6
+    },
+    {
+     "id": "R-PM-02",
+     "cell": "PM",
+     "status": "done",
+     "authorizationId": "AUTH-d4b03622e662ad8c",
+     "revokeMs": 2055.6
+    },
+    {
+     "id": "R-MM-03",
+     "cell": "MM",
+     "status": "done",
+     "authorizationId": "AUTH-b190117d95cdcc0b",
+     "revokeMs": 2061.2
+    },
+    {
+     "id": "R-PP-03",
+     "cell": "PP",
+     "status": "done",
+     "authorizationId": "AUTH-8c0a1456f430850f",
+     "revokeMs": 2072.4
+    },
+    {
+     "id": "R-MP-03",
+     "cell": "MP",
+     "status": "done",
+     "authorizationId": "AUTH-6bd733e54df73a78",
+     "revokeMs": 2065.3
+    },
+    {
+     "id": "R-PM-03",
+     "cell": "PM",
+     "status": "done",
+     "authorizationId": "AUTH-d84e2524ae9a482e",
+     "revokeMs": 2065.4
+    }
+   ],
+   "done": 12,
+   "notExercised": 0,
+   "failed": 0,
+   "requests": 72,
+   "unverified": 0,
+   "endChecks": [
+    {
+     "name": "the auditor's phone session ended cleanly",
+     "ok": true,
+     "detail": "OK (1 test)"
+    },
+    {
+     "name": "the officer's phone session ended cleanly",
+     "ok": true,
+     "detail": "OK (1 test)"
+    },
+    {
+     "name": "the reuse experiment: every auditor review is in the searches-and-reads log on the ledger",
+     "ok": true,
+     "detail": "36 of 36 found"
+    },
+    {
+     "name": "the reuse experiment: no call was refused or failed",
+     "ok": true,
+     "detail": "0 since the run began"
+    },
+    {
+     "name": "no request is left waiting for an auditor",
+     "ok": true,
+     "detail": "0 waiting"
+    },
+    {
+     "name": "no reusable authorization is left active",
+     "ok": true,
+     "detail": "0 active"
+    }
+   ]
+  }
+ },
+ "load": {
+  "run": {
+   "schema": "dias-setup-load-run-v1",
+   "planSha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f",
+   "planned": 18,
+   "auditor": "sp.north",
+   "order": [
+    "L-phone-only-10-r1",
+    "L-phone-only-25-r1",
+    "L-mac-only-10-r1",
+    "L-combined-10-r1",
+    "L-mac-only-25-r1",
+    "L-combined-25-r1",
+    "L-phone-only-05-r1",
+    "L-combined-05-r1",
+    "L-mac-only-05-r1",
+    "L-combined-10-r2",
+    "L-phone-only-10-r2",
+    "L-phone-only-25-r2",
+    "L-phone-only-05-r2",
+    "L-mac-only-10-r2",
+    "L-mac-only-25-r2",
+    "L-combined-05-r2",
+    "L-combined-25-r2",
+    "L-mac-only-05-r2"
+   ],
+   "startedAtUtc": "2026-10-14T07:33:38.240Z",
+   "environment": {
+    "api": "http://127.0.0.1:3001/api",
+    "node": "v22.20.0",
+    "officerPhone": "emulator-5556",
+    "auditorPhone": "emulator-5558",
+    "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+    "gitUncommittedEntries": 62,
+    "chaincodeContainers": [
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767"
+    ]
+   },
+   "staging": "backend/data/dias-reviews/host-20261006/access-events",
+   "phoneSignInMs": {
+    "auditor": 156.6
+   },
+   "enrolledOfficers": 12,
+   "finishedAtUtc": "2026-10-14T08:25:39.597Z",
+   "ran": 18,
+   "requested": 240,
+   "verified": 240,
+   "failed": 0,
+   "endChecks": [
+    {
+     "name": "the auditor's phone session ended cleanly",
+     "ok": true,
+     "detail": "OK (1 test)"
+    },
+    {
+     "name": "no request is left waiting for an auditor",
+     "ok": true,
+     "detail": "0 waiting"
+    },
+    {
+     "name": "no reusable authorization is left active",
+     "ok": true,
+     "detail": "0 active"
+    }
+   ]
+  },
+  "bursts": [
+   {
+    "id": "L-phone-only-10-r1",
+    "setup": "phone-only",
+    "level": 10,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:34:56.898Z",
+    "requested": 10,
+    "accepted": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMs": 96679.7,
+    "decisionsPerMinute": 6.2,
+    "submitMs": {
+     "n": 10,
+     "min": 139.7,
+     "median": 160.4,
+     "mean": 160.5,
+     "p95": 181.1,
+     "max": 181.1
+    },
+    "adviceReadyAfterMs": {
+     "n": 10,
+     "min": 8878,
+     "median": 51612,
+     "mean": 51537.6,
+     "p95": 94416.5,
+     "max": 94416.5
+    },
+    "decidedAfterMs": {
+     "n": 10,
+     "min": 11145.7,
+     "median": 53859.9,
+     "mean": 53777.3,
+     "p95": 96679.7,
+     "max": 96679.7
+    },
+    "quietBeforeMs": 78504.3,
+    "drainMs": 19484.2,
+    "checks": [
+     {
+      "name": "L-phone-only-10-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "10 of 10 found"
+     },
+     {
+      "name": "L-phone-only-10-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-phone-only-25-r1",
+    "setup": "phone-only",
+    "level": 25,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:37:23.274Z",
+    "requested": 25,
+    "accepted": 25,
+    "decided": 25,
+    "verified": 25,
+    "failed": 0,
+    "makespanMs": 266679.2,
+    "decisionsPerMinute": 5.6,
+    "submitMs": {
+     "n": 25,
+     "min": 193.6,
+     "median": 277.6,
+     "mean": 649.4,
+     "p95": 2209.5,
+     "max": 2212.3
+    },
+    "adviceReadyAfterMs": {
+     "n": 25,
+     "min": 8959.9,
+     "median": 129608.2,
+     "mean": 132427.7,
+     "p95": 254447.6,
+     "max": 264436.6
+    },
+    "decidedAfterMs": {
+     "n": 25,
+     "min": 11236.2,
+     "median": 131925.2,
+     "mean": 134702.9,
+     "p95": 256751.3,
+     "max": 266679.2
+    },
+    "quietBeforeMs": 14906.2,
+    "drainMs": 18152.9,
+    "checks": [
+     {
+      "name": "L-phone-only-25-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "25 of 25 found"
+     },
+     {
+      "name": "L-phone-only-25-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-mac-only-10-r1",
+    "setup": "mac-only",
+    "level": 10,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:42:38.289Z",
+    "requested": 10,
+    "accepted": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMs": 96482.3,
+    "decisionsPerMinute": 6.2,
+    "submitMs": {
+     "n": 10,
+     "min": 135.6,
+     "median": 167.3,
+     "mean": 165.4,
+     "p95": 191.5,
+     "max": 191.5
+    },
+    "adviceReadyAfterMs": {
+     "n": 10,
+     "min": 9390.7,
+     "median": 52928.6,
+     "mean": 52468.1,
+     "p95": 94319.7,
+     "max": 94319.7
+    },
+    "decidedAfterMs": {
+     "n": 10,
+     "min": 11561,
+     "median": 55143.9,
+     "mean": 54659.4,
+     "p95": 96482.3,
+     "max": 96482.3
+    },
+    "quietBeforeMs": 14789.1,
+    "drainMs": 8448.7,
+    "checks": [
+     {
+      "name": "L-mac-only-10-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "10 of 10 found"
+     },
+     {
+      "name": "L-mac-only-10-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-combined-10-r1",
+    "setup": "combined",
+    "level": 10,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:44:53.370Z",
+    "requested": 10,
+    "accepted": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMs": 96569,
+    "decisionsPerMinute": 6.2,
+    "submitMs": {
+     "n": 10,
+     "min": 138.6,
+     "median": 162.5,
+     "mean": 161.4,
+     "p95": 183.2,
+     "max": 183.2
+    },
+    "adviceReadyAfterMs": {
+     "n": 10,
+     "min": 9752.9,
+     "median": 50892.8,
+     "mean": 51401.6,
+     "p95": 94313,
+     "max": 94313
+    },
+    "decidedAfterMs": {
+     "n": 10,
+     "min": 11973.4,
+     "median": 53138.6,
+     "mean": 53644.7,
+     "p95": 96569,
+     "max": 96569
+    },
+    "quietBeforeMs": 14906.8,
+    "drainMs": 8204.4,
+    "checks": [
+     {
+      "name": "L-combined-10-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "10 of 10 found"
+     },
+     {
+      "name": "L-combined-10-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-mac-only-25-r1",
+    "setup": "mac-only",
+    "level": 25,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:47:08.385Z",
+    "requested": 25,
+    "accepted": 25,
+    "decided": 25,
+    "verified": 25,
+    "failed": 0,
+    "makespanMs": 232486.6,
+    "decisionsPerMinute": 6.5,
+    "submitMs": {
+     "n": 25,
+     "min": 188.2,
+     "median": 258.4,
+     "mean": 636.9,
+     "p95": 2213.3,
+     "max": 2216.8
+    },
+    "adviceReadyAfterMs": {
+     "n": 25,
+     "min": 10393.6,
+     "median": 119368.4,
+     "mean": 119402.6,
+     "p95": 220965,
+     "max": 230266.7
+    },
+    "decidedAfterMs": {
+     "n": 25,
+     "min": 12641.7,
+     "median": 121571.1,
+     "mean": 121630.2,
+     "p95": 223191.8,
+     "max": 232486.6
+    },
+    "quietBeforeMs": 14922.1,
+    "drainMs": 7393.6,
+    "checks": [
+     {
+      "name": "L-mac-only-25-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "25 of 25 found"
+     },
+     {
+      "name": "L-mac-only-25-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-combined-25-r1",
+    "setup": "combined",
+    "level": 25,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:51:38.396Z",
+    "requested": 25,
+    "accepted": 25,
+    "decided": 25,
+    "verified": 25,
+    "failed": 0,
+    "makespanMs": 234763.8,
+    "decisionsPerMinute": 6.4,
+    "submitMs": {
+     "n": 25,
+     "min": 188.2,
+     "median": 273.2,
+     "mean": 646.1,
+     "p95": 2215.4,
+     "max": 2221.7
+    },
+    "adviceReadyAfterMs": {
+     "n": 25,
+     "min": 9102.7,
+     "median": 123055,
+     "mean": 122068.8,
+     "p95": 223706,
+     "max": 232518
+    },
+    "decidedAfterMs": {
+     "n": 25,
+     "min": 11341.4,
+     "median": 125255,
+     "mean": 124318,
+     "p95": 225955.5,
+     "max": 234763.8
+    },
+    "quietBeforeMs": 14904.6,
+    "drainMs": 20171.7,
+    "checks": [
+     {
+      "name": "L-combined-25-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "25 of 25 found"
+     },
+     {
+      "name": "L-combined-25-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-phone-only-05-r1",
+    "setup": "phone-only",
+    "level": 5,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:56:23.400Z",
+    "requested": 5,
+    "accepted": 5,
+    "decided": 5,
+    "verified": 5,
+    "failed": 0,
+    "makespanMs": 50944.7,
+    "decisionsPerMinute": 5.9,
+    "submitMs": {
+     "n": 5,
+     "min": 2118.4,
+     "median": 2132.4,
+     "mean": 2131.9,
+     "p95": 2142.7,
+     "max": 2142.7
+    },
+    "adviceReadyAfterMs": {
+     "n": 5,
+     "min": 10872.9,
+     "median": 28876.7,
+     "mean": 29311.8,
+     "p95": 48610.7,
+     "max": 48610.7
+    },
+    "decidedAfterMs": {
+     "n": 5,
+     "min": 13204.7,
+     "median": 31186.8,
+     "mean": 31620.3,
+     "p95": 50944.7,
+     "max": 50944.7
+    },
+    "quietBeforeMs": 14826,
+    "drainMs": 8813.1,
+    "checks": [
+     {
+      "name": "L-phone-only-05-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "5 of 5 found"
+     },
+     {
+      "name": "L-phone-only-05-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-combined-05-r1",
+    "setup": "combined",
+    "level": 5,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:57:53.460Z",
+    "requested": 5,
+    "accepted": 5,
+    "decided": 5,
+    "verified": 5,
+    "failed": 0,
+    "makespanMs": 51152.8,
+    "decisionsPerMinute": 5.9,
+    "submitMs": {
+     "n": 5,
+     "min": 2113.5,
+     "median": 2126.5,
+     "mean": 2126.2,
+     "p95": 2137.7,
+     "max": 2137.7
+    },
+    "adviceReadyAfterMs": {
+     "n": 5,
+     "min": 11273.3,
+     "median": 28735.5,
+     "mean": 29411.4,
+     "p95": 48910.9,
+     "max": 48910.9
+    },
+    "decidedAfterMs": {
+     "n": 5,
+     "min": 13442.8,
+     "median": 30961.4,
+     "mean": 31650.7,
+     "p95": 51152.8,
+     "max": 51152.8
+    },
+    "quietBeforeMs": 14907.3,
+    "drainMs": 8723,
+    "checks": [
+     {
+      "name": "L-combined-05-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "5 of 5 found"
+     },
+     {
+      "name": "L-combined-05-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-mac-only-05-r1",
+    "setup": "mac-only",
+    "level": 5,
+    "repeat": 1,
+    "startedAtUtc": "2026-10-14T07:59:23.487Z",
+    "requested": 5,
+    "accepted": 5,
+    "decided": 5,
+    "verified": 5,
+    "failed": 0,
+    "makespanMs": 48972.3,
+    "decisionsPerMinute": 6.1,
+    "submitMs": {
+     "n": 5,
+     "min": 2109.9,
+     "median": 2123.3,
+     "mean": 2123.3,
+     "p95": 2135.4,
+     "max": 2135.4
+    },
+    "adviceReadyAfterMs": {
+     "n": 5,
+     "min": 10776,
+     "median": 28901.6,
+     "mean": 28854.1,
+     "p95": 46760.6,
+     "max": 46760.6
+    },
+    "decidedAfterMs": {
+     "n": 5,
+     "min": 13025.1,
+     "median": 31087.5,
+     "mean": 31065.8,
+     "p95": 48972.3,
+     "max": 48972.3
+    },
+    "quietBeforeMs": 14914.8,
+    "drainMs": 10841.3,
+    "checks": [
+     {
+      "name": "L-mac-only-05-r1: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "5 of 5 found"
+     },
+     {
+      "name": "L-mac-only-05-r1: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-combined-10-r2",
+    "setup": "combined",
+    "level": 10,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:00:53.420Z",
+    "requested": 10,
+    "accepted": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMs": 93300.9,
+    "decisionsPerMinute": 6.4,
+    "submitMs": {
+     "n": 10,
+     "min": 139,
+     "median": 167.3,
+     "mean": 167.8,
+     "p95": 194.4,
+     "max": 194.4
+    },
+    "adviceReadyAfterMs": {
+     "n": 10,
+     "min": 8658.4,
+     "median": 50671.2,
+     "mean": 50434,
+     "p95": 91053.5,
+     "max": 91053.5
+    },
+    "decidedAfterMs": {
+     "n": 10,
+     "min": 10857.4,
+     "median": 52956.2,
+     "mean": 52687.5,
+     "p95": 93300.9,
+     "max": 93300.9
+    },
+    "quietBeforeMs": 14806.5,
+    "drainMs": 11456.7,
+    "checks": [
+     {
+      "name": "L-combined-10-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "10 of 10 found"
+     },
+     {
+      "name": "L-combined-10-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-phone-only-10-r2",
+    "setup": "phone-only",
+    "level": 10,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:03:08.513Z",
+    "requested": 10,
+    "accepted": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMs": 97588.5,
+    "decisionsPerMinute": 6.1,
+    "submitMs": {
+     "n": 10,
+     "min": 157.5,
+     "median": 180.9,
+     "mean": 181.2,
+     "p95": 204,
+     "max": 204
+    },
+    "adviceReadyAfterMs": {
+     "n": 10,
+     "min": 9272.8,
+     "median": 53087.4,
+     "mean": 52967.5,
+     "p95": 95311.2,
+     "max": 95311.2
+    },
+    "decidedAfterMs": {
+     "n": 10,
+     "min": 11565.2,
+     "median": 55423.1,
+     "mean": 55262.7,
+     "p95": 97588.5,
+     "max": 97588.5
+    },
+    "quietBeforeMs": 14897.5,
+    "drainMs": 7207.7,
+    "checks": [
+     {
+      "name": "L-phone-only-10-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "10 of 10 found"
+     },
+     {
+      "name": "L-phone-only-10-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-phone-only-25-r2",
+    "setup": "phone-only",
+    "level": 25,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:05:23.524Z",
+    "requested": 25,
+    "accepted": 25,
+    "decided": 25,
+    "verified": 25,
+    "failed": 0,
+    "makespanMs": 235111.1,
+    "decisionsPerMinute": 6.4,
+    "submitMs": {
+     "n": 25,
+     "min": 181.1,
+     "median": 274.6,
+     "mean": 642.6,
+     "p95": 2217.1,
+     "max": 2223
+    },
+    "adviceReadyAfterMs": {
+     "n": 25,
+     "min": 8946.1,
+     "median": 120598.2,
+     "mean": 121220.6,
+     "p95": 223189.6,
+     "max": 232836.5
+    },
+    "decidedAfterMs": {
+     "n": 25,
+     "min": 11271.1,
+     "median": 122903.4,
+     "mean": 123519.9,
+     "p95": 225508.1,
+     "max": 235111.1
+    },
+    "quietBeforeMs": 14906.3,
+    "drainMs": 19572.2,
+    "checks": [
+     {
+      "name": "L-phone-only-25-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "25 of 25 found"
+     },
+     {
+      "name": "L-phone-only-25-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-phone-only-05-r2",
+    "setup": "phone-only",
+    "level": 5,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:10:08.510Z",
+    "requested": 5,
+    "accepted": 5,
+    "decided": 5,
+    "verified": 5,
+    "failed": 0,
+    "makespanMs": 49540.6,
+    "decisionsPerMinute": 6.1,
+    "submitMs": {
+     "n": 5,
+     "min": 2106.4,
+     "median": 2119,
+     "mean": 2119.1,
+     "p95": 2131.4,
+     "max": 2131.4
+    },
+    "adviceReadyAfterMs": {
+     "n": 5,
+     "min": 10973.1,
+     "median": 29095.8,
+     "mean": 29121,
+     "p95": 47236,
+     "max": 47236
+    },
+    "decidedAfterMs": {
+     "n": 5,
+     "min": 13328.1,
+     "median": 31338.1,
+     "mean": 31425.5,
+     "p95": 49540.6,
+     "max": 49540.6
+    },
+    "quietBeforeMs": 14792.5,
+    "drainMs": 10229.8,
+    "checks": [
+     {
+      "name": "L-phone-only-05-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "5 of 5 found"
+     },
+     {
+      "name": "L-phone-only-05-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-mac-only-10-r2",
+    "setup": "mac-only",
+    "level": 10,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:11:38.545Z",
+    "requested": 10,
+    "accepted": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMs": 96940.4,
+    "decisionsPerMinute": 6.2,
+    "submitMs": {
+     "n": 10,
+     "min": 129.7,
+     "median": 162.6,
+     "mean": 161.5,
+     "p95": 185.2,
+     "max": 185.2
+    },
+    "adviceReadyAfterMs": {
+     "n": 10,
+     "min": 9186.5,
+     "median": 50782.5,
+     "mean": 51355.4,
+     "p95": 94719.4,
+     "max": 94719.4
+    },
+    "decidedAfterMs": {
+     "n": 10,
+     "min": 11466.2,
+     "median": 53036.6,
+     "mean": 53583.1,
+     "p95": 96940.4,
+     "max": 96940.4
+    },
+    "quietBeforeMs": 14819,
+    "drainMs": 8001.5,
+    "checks": [
+     {
+      "name": "L-mac-only-10-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "10 of 10 found"
+     },
+     {
+      "name": "L-mac-only-10-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-mac-only-25-r2",
+    "setup": "mac-only",
+    "level": 25,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:13:53.584Z",
+    "requested": 25,
+    "accepted": 25,
+    "decided": 25,
+    "verified": 25,
+    "failed": 0,
+    "makespanMs": 222552.1,
+    "decisionsPerMinute": 6.7,
+    "submitMs": {
+     "n": 25,
+     "min": 188.2,
+     "median": 264.6,
+     "mean": 639.8,
+     "p95": 2212.6,
+     "max": 2218.9
+    },
+    "adviceReadyAfterMs": {
+     "n": 25,
+     "min": 9385.1,
+     "median": 115104.6,
+     "mean": 114360,
+     "p95": 211492.4,
+     "max": 220362.6
+    },
+    "decidedAfterMs": {
+     "n": 25,
+     "min": 11650,
+     "median": 117379.7,
+     "mean": 116604.9,
+     "p95": 213663.7,
+     "max": 222552.1
+    },
+    "quietBeforeMs": 14893.7,
+    "drainMs": 17331.4,
+    "checks": [
+     {
+      "name": "L-mac-only-25-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "25 of 25 found"
+     },
+     {
+      "name": "L-mac-only-25-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-combined-05-r2",
+    "setup": "combined",
+    "level": 5,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:18:23.624Z",
+    "requested": 5,
+    "accepted": 5,
+    "decided": 5,
+    "verified": 5,
+    "failed": 0,
+    "makespanMs": 50998.8,
+    "decisionsPerMinute": 5.9,
+    "submitMs": {
+     "n": 5,
+     "min": 2126.9,
+     "median": 2140.4,
+     "mean": 2140.5,
+     "p95": 2153,
+     "max": 2153
+    },
+    "adviceReadyAfterMs": {
+     "n": 5,
+     "min": 10758.9,
+     "median": 28829.9,
+     "mean": 29458.5,
+     "p95": 48758.2,
+     "max": 48758.2
+    },
+    "decidedAfterMs": {
+     "n": 5,
+     "min": 12988.5,
+     "median": 31017.7,
+     "mean": 31702.3,
+     "p95": 50998.8,
+     "max": 50998.8
+    },
+    "quietBeforeMs": 14884.5,
+    "drainMs": 8825.8,
+    "checks": [
+     {
+      "name": "L-combined-05-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "5 of 5 found"
+     },
+     {
+      "name": "L-combined-05-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-combined-25-r2",
+    "setup": "combined",
+    "level": 25,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:19:53.578Z",
+    "requested": 25,
+    "accepted": 25,
+    "decided": 25,
+    "verified": 25,
+    "failed": 0,
+    "makespanMs": 223195.4,
+    "decisionsPerMinute": 6.7,
+    "submitMs": {
+     "n": 25,
+     "min": 169.3,
+     "median": 265.5,
+     "mean": 641.2,
+     "p95": 2242.5,
+     "max": 2249.1
+    },
+    "adviceReadyAfterMs": {
+     "n": 25,
+     "min": 9184.2,
+     "median": 113117.9,
+     "mean": 113846.6,
+     "p95": 210414,
+     "max": 220906.7
+    },
+    "decidedAfterMs": {
+     "n": 25,
+     "min": 11475.4,
+     "median": 115366.5,
+     "mean": 116131.8,
+     "p95": 212689,
+     "max": 223195.4
+    },
+    "quietBeforeMs": 14810.6,
+    "drainMs": 16739.6,
+    "checks": [
+     {
+      "name": "L-combined-25-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "25 of 25 found"
+     },
+     {
+      "name": "L-combined-25-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   },
+   {
+    "id": "L-mac-only-05-r2",
+    "setup": "mac-only",
+    "level": 5,
+    "repeat": 2,
+    "startedAtUtc": "2026-10-14T08:24:23.598Z",
+    "requested": 5,
+    "accepted": 5,
+    "decided": 5,
+    "verified": 5,
+    "failed": 0,
+    "makespanMs": 51738.8,
+    "decisionsPerMinute": 5.8,
+    "submitMs": {
+     "n": 5,
+     "min": 2119.4,
+     "median": 2132.6,
+     "mean": 2132.2,
+     "p95": 2143.3,
+     "max": 2143.3
+    },
+    "adviceReadyAfterMs": {
+     "n": 5,
+     "min": 11716.9,
+     "median": 30741.9,
+     "mean": 30750.6,
+     "p95": 49526.1,
+     "max": 49526.1
+    },
+    "decidedAfterMs": {
+     "n": 5,
+     "min": 13911.1,
+     "median": 32959.8,
+     "mean": 32973.1,
+     "p95": 51738.8,
+     "max": 51738.8
+    },
+    "quietBeforeMs": 14790.4,
+    "drainMs": 8203.2,
+    "checks": [
+     {
+      "name": "L-mac-only-05-r2: every auditor review is in the searches-and-reads log on the ledger",
+      "ok": true,
+      "detail": "5 of 5 found"
+     },
+     {
+      "name": "L-mac-only-05-r2: no call was refused or failed",
+      "ok": true,
+      "detail": "0 since the run began"
+     }
+    ],
+    "closedAfterBurst": []
+   }
+  ]
+ },
+ "hour": {
+  "run": {
+   "schema": "dias-100-user-hour-run-v1",
+   "planSha256": "9d4b2c616f7e8b7305b30e55381ba837cca5620c61957f214b1413d438e5d87a",
+   "hourSha256": "3fbbc5e0b89010323a19682066950b4685c53516d105f1d279f8f8a94780c925",
+   "auditor": "sp.north",
+   "planned": 200,
+   "logReads": 120,
+   "officers": 100,
+   "speed": 1,
+   "environment": {
+    "api": "http://127.0.0.1:3001/api",
+    "node": "v22.20.0",
+    "officerPhone": "emulator-5556",
+    "auditorPhone": "emulator-5558",
+    "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+    "gitUncommittedEntries": 490,
+    "chaincodeContainers": [
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767",
+     "diasrecords_3.1-167985391c430e1eaf1ce767"
+    ]
+   },
+   "staging": "backend/data/dias-reviews/host-20261006/access-events",
+   "phoneSignInMs": {
+    "auditor": 152
+   },
+   "quietBeforeMs": 219984.5,
+   "startedAtUtc": "2026-10-14T12:39:15.809Z",
+   "finishedHourAtUtc": "2026-10-14T13:39:45.846Z",
+   "watchError": null,
+   "closedAfterHour": [],
+   "drainMs": 26782,
+   "finishedAtUtc": "2026-10-14T13:47:13.584Z",
+   "completed": 200,
+   "failed": 0,
+   "endChecks": [
+    {
+     "name": "the auditor's phone session ended cleanly",
+     "ok": true,
+     "detail": "OK (1 test)"
+    },
+    {
+     "name": "no request is left waiting for an auditor",
+     "ok": true,
+     "detail": "0 waiting"
+    },
+    {
+     "name": "no reusable authorization is left active",
+     "ok": true,
+     "detail": "0 active"
+    }
+   ]
+  }
+ },
+ "tables": {
+  "steps_by_cell": [
+   {
+    "group": "MM",
+    "n": 22,
+    "endToEndMedianMs": 13192.7,
+    "endToEndMeanMs": 13392.4,
+    "endToEndP95Ms": 14206.7,
+    "endToEndMinMs": 12674.3,
+    "endToEndMaxMs": 14858.8,
+    "submitMedianMs": 2092.4,
+    "recommendationMedianMs": 8905.2,
+    "inferenceMedianMs": 6827,
+    "queueMedianMs": 56.8,
+    "reviewMedianMs": 12.5,
+    "decisionMedianMs": 2110.3,
+    "logMedianMs": 119.5,
+    "outcomeMedianMs": 37.7,
+    "quietBeforeRequestMedianMs": 16726.5,
+    "quietBeforeDecisionMedianMs": 14036.4
+   },
+   {
+    "group": "PP",
+    "n": 23,
+    "endToEndMedianMs": 13316,
+    "endToEndMeanMs": 13462.6,
+    "endToEndP95Ms": 14704.3,
+    "endToEndMinMs": 12847.3,
+    "endToEndMaxMs": 15316.4,
+    "submitMedianMs": 2102.4,
+    "recommendationMedianMs": 8989.7,
+    "inferenceMedianMs": 6913.1,
+    "queueMedianMs": 75,
+    "reviewMedianMs": 36.1,
+    "decisionMedianMs": 2110.4,
+    "logMedianMs": 148.1,
+    "outcomeMedianMs": 37.9,
+    "quietBeforeRequestMedianMs": 20170.1,
+    "quietBeforeDecisionMedianMs": 10332
+   },
+   {
+    "group": "MP",
+    "n": 24,
+    "endToEndMedianMs": 13199.7,
+    "endToEndMeanMs": 13414.3,
+    "endToEndP95Ms": 14343.3,
+    "endToEndMinMs": 12877.7,
+    "endToEndMaxMs": 14446.7,
+    "submitMedianMs": 2089.7,
+    "recommendationMedianMs": 8888.3,
+    "inferenceMedianMs": 6815.5,
+    "queueMedianMs": 72.6,
+    "reviewMedianMs": 32.6,
+    "decisionMedianMs": 2114.8,
+    "logMedianMs": 145,
+    "outcomeMedianMs": 37,
+    "quietBeforeRequestMedianMs": 16672.7,
+    "quietBeforeDecisionMedianMs": 14196.6
+   },
+   {
+    "group": "PM",
+    "n": 24,
+    "endToEndMedianMs": 13275.4,
+    "endToEndMeanMs": 13350.4,
+    "endToEndP95Ms": 13916.3,
+    "endToEndMinMs": 12798.1,
+    "endToEndMaxMs": 14597.9,
+    "submitMedianMs": 2102.8,
+    "recommendationMedianMs": 8988.8,
+    "inferenceMedianMs": 6914.7,
+    "queueMedianMs": 59.8,
+    "reviewMedianMs": 12.7,
+    "decisionMedianMs": 2113,
+    "logMedianMs": 121,
+    "outcomeMedianMs": 42.8,
+    "quietBeforeRequestMedianMs": 18398.9,
+    "quietBeforeDecisionMedianMs": 12114.7
+   },
+   {
+    "group": "mac-only",
+    "n": 22,
+    "endToEndMedianMs": 13192.7,
+    "endToEndMeanMs": 13392.4,
+    "endToEndP95Ms": 14206.7,
+    "endToEndMinMs": 12674.3,
+    "endToEndMaxMs": 14858.8,
+    "submitMedianMs": 2092.4,
+    "recommendationMedianMs": 8905.2,
+    "inferenceMedianMs": 6827,
+    "queueMedianMs": 56.8,
+    "reviewMedianMs": 12.5,
+    "decisionMedianMs": 2110.3,
+    "logMedianMs": 119.5,
+    "outcomeMedianMs": 37.7,
+    "quietBeforeRequestMedianMs": 16726.5,
+    "quietBeforeDecisionMedianMs": 14036.4
+   },
+   {
+    "group": "phone-only",
+    "n": 23,
+    "endToEndMedianMs": 13316,
+    "endToEndMeanMs": 13462.6,
+    "endToEndP95Ms": 14704.3,
+    "endToEndMinMs": 12847.3,
+    "endToEndMaxMs": 15316.4,
+    "submitMedianMs": 2102.4,
+    "recommendationMedianMs": 8989.7,
+    "inferenceMedianMs": 6913.1,
+    "queueMedianMs": 75,
+    "reviewMedianMs": 36.1,
+    "decisionMedianMs": 2110.4,
+    "logMedianMs": 148.1,
+    "outcomeMedianMs": 37.9,
+    "quietBeforeRequestMedianMs": 20170.1,
+    "quietBeforeDecisionMedianMs": 10332
+   },
+   {
+    "group": "combined",
+    "n": 48,
+    "endToEndMedianMs": 13206.9,
+    "endToEndMeanMs": 13382.3,
+    "endToEndP95Ms": 14343.3,
+    "endToEndMinMs": 12798.1,
+    "endToEndMaxMs": 14597.9,
+    "submitMedianMs": 2096.6,
+    "recommendationMedianMs": 8918.3,
+    "inferenceMedianMs": 6850.5,
+    "queueMedianMs": 64.4,
+    "reviewMedianMs": 15.8,
+    "decisionMedianMs": 2113.1,
+    "logMedianMs": 138.6,
+    "outcomeMedianMs": 38.4,
+    "quietBeforeRequestMedianMs": 18008,
+    "quietBeforeDecisionMedianMs": 12719.4
+   },
+   {
+    "group": "all",
+    "n": 93,
+    "endToEndMedianMs": 13226,
+    "endToEndMeanMs": 13404.5,
+    "endToEndP95Ms": 14446.7,
+    "endToEndMinMs": 12674.3,
+    "endToEndMaxMs": 15316.4,
+    "submitMedianMs": 2096.5,
+    "recommendationMedianMs": 8927.9,
+    "inferenceMedianMs": 6860,
+    "queueMedianMs": 64.7,
+    "reviewMedianMs": 16.5,
+    "decisionMedianMs": 2112.1,
+    "logMedianMs": 135.8,
+    "outcomeMedianMs": 37.9,
+    "quietBeforeRequestMedianMs": 18352.9,
+    "quietBeforeDecisionMedianMs": 12659.6
+   }
+  ],
+  "steps_by_seat": [
+   {
+    "person": "officer",
+    "step": "submit",
+    "macN": 46,
+    "macMedianMs": 2091,
+    "macMeanMs": 2090.2,
+    "phoneN": 47,
+    "phoneMedianMs": 2102.4,
+    "phoneMeanMs": 2102.1,
+    "differenceMs": 11.4,
+    "differenceLowMs": 8.2,
+    "differenceHighMs": 14.8
+   },
+   {
+    "person": "officer",
+    "step": "outcome",
+    "macN": 46,
+    "macMedianMs": 37.6,
+    "macMeanMs": 37.7,
+    "phoneN": 47,
+    "phoneMedianMs": 41,
+    "phoneMeanMs": 40.8,
+    "differenceMs": 3.4,
+    "differenceLowMs": 0.5,
+    "differenceHighMs": 5.7
+   },
+   {
+    "person": "auditor",
+    "step": "queue",
+    "macN": 46,
+    "macMedianMs": 57.7,
+    "macMeanMs": 58,
+    "phoneN": 47,
+    "phoneMedianMs": 73.2,
+    "phoneMeanMs": 75.2,
+    "differenceMs": 15.5,
+    "differenceLowMs": 12.2,
+    "differenceHighMs": 18.7
+   },
+   {
+    "person": "auditor",
+    "step": "review",
+    "macN": 46,
+    "macMedianMs": 12.6,
+    "macMeanMs": 12.8,
+    "phoneN": 47,
+    "phoneMedianMs": 34.3,
+    "phoneMeanMs": 33.1,
+    "differenceMs": 21.7,
+    "differenceLowMs": 19.6,
+    "differenceHighMs": 24.9
+   },
+   {
+    "person": "auditor",
+    "step": "decision",
+    "macN": 46,
+    "macMedianMs": 2112.1,
+    "macMeanMs": 2111.6,
+    "phoneN": 47,
+    "phoneMedianMs": 2112.3,
+    "phoneMeanMs": 2111.2,
+    "differenceMs": 0.2,
+    "differenceLowMs": -6.6,
+    "differenceHighMs": 5.5
+   },
+   {
+    "person": "auditor",
+    "step": "log",
+    "macN": 46,
+    "macMedianMs": 120,
+    "macMeanMs": 121.3,
+    "phoneN": 47,
+    "phoneMedianMs": 146.2,
+    "phoneMeanMs": 146.5,
+    "differenceMs": 26.2,
+    "differenceLowMs": 22.4,
+    "differenceHighMs": 29.3
+   },
+   {
+    "person": "auditor",
+    "step": "all",
+    "macN": 46,
+    "macMedianMs": 2304.7,
+    "macMeanMs": 2303.7,
+    "phoneN": 47,
+    "phoneMedianMs": 2366.6,
+    "phoneMeanMs": 2366,
+    "differenceMs": 61.9,
+    "differenceLowMs": 51.2,
+    "differenceHighMs": 69.7
+   }
+  ],
+  "steps_setup_differences": [
+   {
+    "comparison": "phone-only vs mac-only",
+    "differenceMs": 123.3,
+    "lowMs": -342.5,
+    "highMs": 376.3
+   },
+   {
+    "comparison": "combined vs mac-only",
+    "differenceMs": 14.2,
+    "lowMs": -387,
+    "highMs": 318.6
+   },
+   {
+    "comparison": "PP vs MM",
+    "differenceMs": 123.3,
+    "lowMs": -342.5,
+    "highMs": 376.3
+   },
+   {
+    "comparison": "MP vs MM",
+    "differenceMs": 7,
+    "lowMs": -395.4,
+    "highMs": 318.7
+   },
+   {
+    "comparison": "PM vs MM",
+    "differenceMs": 82.7,
+    "lowMs": -381.6,
+    "highMs": 375.8
+   }
+  ],
+  "steps_correctness": [
+   {
+    "group": "MM",
+    "planned": 24,
+    "ran": 24,
+    "completed": 24,
+    "ledgerChecksPassed": 216,
+    "ledgerChecksMade": 216,
+    "officerViewOk": 24,
+    "adviceAllow": 3,
+    "adviceDeny": 19,
+    "noUsableAdvice": 2,
+    "adviceMatchesPolicy": 20,
+    "adviceAllowWherePolicyDenies": 1,
+    "adviceDenyWherePolicyAllows": 1,
+    "granted": 3,
+    "denied": 21
+   },
+   {
+    "group": "PP",
+    "planned": 24,
+    "ran": 24,
+    "completed": 24,
+    "ledgerChecksPassed": 216,
+    "ledgerChecksMade": 216,
+    "officerViewOk": 24,
+    "adviceAllow": 4,
+    "adviceDeny": 19,
+    "noUsableAdvice": 1,
+    "adviceMatchesPolicy": 21,
+    "adviceAllowWherePolicyDenies": 1,
+    "adviceDenyWherePolicyAllows": 1,
+    "granted": 4,
+    "denied": 20
+   },
+   {
+    "group": "MP",
+    "planned": 24,
+    "ran": 24,
+    "completed": 24,
+    "ledgerChecksPassed": 216,
+    "ledgerChecksMade": 216,
+    "officerViewOk": 24,
+    "adviceAllow": 3,
+    "adviceDeny": 21,
+    "noUsableAdvice": 0,
+    "adviceMatchesPolicy": 22,
+    "adviceAllowWherePolicyDenies": 0,
+    "adviceDenyWherePolicyAllows": 2,
+    "granted": 3,
+    "denied": 21
+   },
+   {
+    "group": "PM",
+    "planned": 24,
+    "ran": 24,
+    "completed": 24,
+    "ledgerChecksPassed": 216,
+    "ledgerChecksMade": 216,
+    "officerViewOk": 24,
+    "adviceAllow": 2,
+    "adviceDeny": 22,
+    "noUsableAdvice": 0,
+    "adviceMatchesPolicy": 24,
+    "adviceAllowWherePolicyDenies": 0,
+    "adviceDenyWherePolicyAllows": 0,
+    "granted": 2,
+    "denied": 22
+   },
+   {
+    "group": "all",
+    "planned": 96,
+    "ran": 96,
+    "completed": 96,
+    "ledgerChecksPassed": 864,
+    "ledgerChecksMade": 864,
+    "officerViewOk": 96,
+    "adviceAllow": 12,
+    "adviceDeny": 81,
+    "noUsableAdvice": 3,
+    "adviceMatchesPolicy": 87,
+    "adviceAllowWherePolicyDenies": 2,
+    "adviceDenyWherePolicyAllows": 4,
+    "granted": 12,
+    "denied": 84
+   }
+  ],
+  "reuse": [
+   {
+    "group": "officer on mac",
+    "bases": 6,
+    "exercised": 6,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 13838.7,
+    "reusedRequestMedianMs": 2092.1,
+    "reusedOutcomeReadMedianMs": 26.2,
+    "savedMs": 11746.6,
+    "savedPercent": 84.9,
+    "repeatsGrantedAtOnce": 18,
+    "repeats": 18,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   },
+   {
+    "group": "officer on phone",
+    "bases": 6,
+    "exercised": 6,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 14213.3,
+    "reusedRequestMedianMs": 2098.5,
+    "reusedOutcomeReadMedianMs": 24.2,
+    "savedMs": 12114.8,
+    "savedPercent": 85.2,
+    "repeatsGrantedAtOnce": 18,
+    "repeats": 18,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   },
+   {
+    "group": "MM",
+    "bases": 3,
+    "exercised": 3,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 13722.7,
+    "reusedRequestMedianMs": 2092,
+    "reusedOutcomeReadMedianMs": 27.2,
+    "savedMs": 11630.7,
+    "savedPercent": 84.8,
+    "repeatsGrantedAtOnce": 9,
+    "repeats": 9,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   },
+   {
+    "group": "PP",
+    "bases": 3,
+    "exercised": 3,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 14266.9,
+    "reusedRequestMedianMs": 2096.6,
+    "reusedOutcomeReadMedianMs": 23.4,
+    "savedMs": 12170.3,
+    "savedPercent": 85.3,
+    "repeatsGrantedAtOnce": 9,
+    "repeats": 9,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   },
+   {
+    "group": "MP",
+    "bases": 3,
+    "exercised": 3,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 13954.6,
+    "reusedRequestMedianMs": 2094.5,
+    "reusedOutcomeReadMedianMs": 25.6,
+    "savedMs": 11860.1,
+    "savedPercent": 85,
+    "repeatsGrantedAtOnce": 9,
+    "repeats": 9,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   },
+   {
+    "group": "PM",
+    "bases": 3,
+    "exercised": 3,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 14159.7,
+    "reusedRequestMedianMs": 2099.2,
+    "reusedOutcomeReadMedianMs": 24.4,
+    "savedMs": 12060.5,
+    "savedPercent": 85.2,
+    "repeatsGrantedAtOnce": 9,
+    "repeats": 9,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   },
+   {
+    "group": "all",
+    "bases": 12,
+    "exercised": 12,
+    "notExercised": 0,
+    "failed": 0,
+    "firstRequestMedianMs": 14057.2,
+    "reusedRequestMedianMs": 2096.5,
+    "reusedOutcomeReadMedianMs": 25.6,
+    "savedMs": 11960.7,
+    "savedPercent": 85.1,
+    "repeatsGrantedAtOnce": 36,
+    "repeats": 36,
+    "nearMissGrantedAtOnce": 0,
+    "afterRevokeGrantedAtOnce": 0
+   }
+  ],
+  "load": [
+   {
+    "setup": "mac-only",
+    "level": 5,
+    "bursts": 2,
+    "requested": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMeanMs": 50355.6,
+    "makespanMinMs": 48972.3,
+    "makespanMaxMs": 51738.8,
+    "secondsPerRequest": 10.1,
+    "decisionsPerMinuteMean": 5.9,
+    "pooledRequests": 10,
+    "submitMedianMs": 2128.1,
+    "submitP95Ms": 2143.3,
+    "submitMaxMs": 2143.3,
+    "adviceReadyMedianMs": 29821.8,
+    "adviceReadyMaxMs": 49526.1,
+    "decidedAfterMedianMs": 32023.7,
+    "decidedAfterP95Ms": 51738.8,
+    "decidedAfterMaxMs": 51738.8,
+    "adviceIntervalMedianMs": 9248.7,
+    "decisionLagMedianMs": 2215.3,
+    "decisionLagMaxMs": 2264.8,
+    "drainMeanMs": 9522.3
+   },
+   {
+    "setup": "mac-only",
+    "level": 10,
+    "bursts": 2,
+    "requested": 20,
+    "decided": 20,
+    "verified": 20,
+    "failed": 0,
+    "makespanMeanMs": 96711.4,
+    "makespanMinMs": 96482.3,
+    "makespanMaxMs": 96940.4,
+    "secondsPerRequest": 9.7,
+    "decisionsPerMinuteMean": 6.2,
+    "pooledRequests": 20,
+    "submitMedianMs": 164.5,
+    "submitP95Ms": 185.9,
+    "submitMaxMs": 191.5,
+    "adviceReadyMedianMs": 52401.4,
+    "adviceReadyMaxMs": 94719.4,
+    "decidedAfterMedianMs": 54632.5,
+    "decidedAfterP95Ms": 96482.3,
+    "decidedAfterMaxMs": 96940.4,
+    "adviceIntervalMedianMs": 9119.6,
+    "decisionLagMedianMs": 2212.8,
+    "decisionLagMaxMs": 2279.7,
+    "drainMeanMs": 8225.1
+   },
+   {
+    "setup": "mac-only",
+    "level": 25,
+    "bursts": 2,
+    "requested": 50,
+    "decided": 50,
+    "verified": 50,
+    "failed": 0,
+    "makespanMeanMs": 227519.4,
+    "makespanMinMs": 222552.1,
+    "makespanMaxMs": 232486.6,
+    "secondsPerRequest": 9.1,
+    "decisionsPerMinuteMean": 6.6,
+    "pooledRequests": 50,
+    "submitMedianMs": 263,
+    "submitP95Ms": 2213.3,
+    "submitMaxMs": 2218.9,
+    "adviceReadyMedianMs": 117236.5,
+    "adviceReadyMaxMs": 230266.7,
+    "decidedAfterMedianMs": 119475.4,
+    "decidedAfterP95Ms": 222552.1,
+    "decidedAfterMaxMs": 232486.6,
+    "adviceIntervalMedianMs": 8865.9,
+    "decisionLagMedianMs": 2238.8,
+    "decisionLagMaxMs": 2311.4,
+    "drainMeanMs": 12362.5
+   },
+   {
+    "setup": "phone-only",
+    "level": 5,
+    "bursts": 2,
+    "requested": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMeanMs": 50242.6,
+    "makespanMinMs": 49540.6,
+    "makespanMaxMs": 50944.7,
+    "secondsPerRequest": 10,
+    "decisionsPerMinuteMean": 6,
+    "pooledRequests": 10,
+    "submitMedianMs": 2126.5,
+    "submitP95Ms": 2142.7,
+    "submitMaxMs": 2142.7,
+    "adviceReadyMedianMs": 28986.3,
+    "adviceReadyMaxMs": 48610.7,
+    "decidedAfterMedianMs": 31262.5,
+    "decidedAfterP95Ms": 50944.7,
+    "decidedAfterMaxMs": 50944.7,
+    "adviceIntervalMedianMs": 9135.8,
+    "decisionLagMedianMs": 2313.6,
+    "decisionLagMaxMs": 2355,
+    "drainMeanMs": 9521.5
+   },
+   {
+    "setup": "phone-only",
+    "level": 10,
+    "bursts": 2,
+    "requested": 20,
+    "decided": 20,
+    "verified": 20,
+    "failed": 0,
+    "makespanMeanMs": 97134.1,
+    "makespanMinMs": 96679.7,
+    "makespanMaxMs": 97588.5,
+    "secondsPerRequest": 9.7,
+    "decisionsPerMinuteMean": 6.2,
+    "pooledRequests": 20,
+    "submitMedianMs": 171.7,
+    "submitP95Ms": 199.1,
+    "submitMaxMs": 204,
+    "adviceReadyMedianMs": 51612,
+    "adviceReadyMaxMs": 95311.2,
+    "decidedAfterMedianMs": 53859.9,
+    "decidedAfterP95Ms": 96679.7,
+    "decidedAfterMaxMs": 97588.5,
+    "adviceIntervalMedianMs": 9355.6,
+    "decisionLagMedianMs": 2258.5,
+    "decisionLagMaxMs": 2377.6,
+    "drainMeanMs": 13346
+   },
+   {
+    "setup": "phone-only",
+    "level": 25,
+    "bursts": 2,
+    "requested": 50,
+    "decided": 50,
+    "verified": 50,
+    "failed": 0,
+    "makespanMeanMs": 250895.2,
+    "makespanMinMs": 235111.1,
+    "makespanMaxMs": 266679.2,
+    "secondsPerRequest": 10,
+    "decisionsPerMinuteMean": 6,
+    "pooledRequests": 50,
+    "submitMedianMs": 276.1,
+    "submitP95Ms": 2212.3,
+    "submitMaxMs": 2223,
+    "adviceReadyMedianMs": 125103.2,
+    "adviceReadyMaxMs": 264436.6,
+    "decidedAfterMedianMs": 127414.3,
+    "decidedAfterP95Ms": 246602.4,
+    "decidedAfterMaxMs": 266679.2,
+    "adviceIntervalMedianMs": 9618.8,
+    "decisionLagMedianMs": 2282.1,
+    "decisionLagMaxMs": 2357.9,
+    "drainMeanMs": 18862.6
+   },
+   {
+    "setup": "combined",
+    "level": 5,
+    "bursts": 2,
+    "requested": 10,
+    "decided": 10,
+    "verified": 10,
+    "failed": 0,
+    "makespanMeanMs": 51075.8,
+    "makespanMinMs": 50998.8,
+    "makespanMaxMs": 51152.8,
+    "secondsPerRequest": 10.2,
+    "decisionsPerMinuteMean": 5.9,
+    "pooledRequests": 10,
+    "submitMedianMs": 2133.6,
+    "submitP95Ms": 2153,
+    "submitMaxMs": 2153,
+    "adviceReadyMedianMs": 28782.7,
+    "adviceReadyMaxMs": 48910.9,
+    "decidedAfterMedianMs": 30989.6,
+    "decidedAfterP95Ms": 51152.8,
+    "decidedAfterMaxMs": 51152.8,
+    "adviceIntervalMedianMs": 9288.4,
+    "decisionLagMedianMs": 2236.8,
+    "decisionLagMaxMs": 2328.4,
+    "drainMeanMs": 8774.4
+   },
+   {
+    "setup": "combined",
+    "level": 10,
+    "bursts": 2,
+    "requested": 20,
+    "decided": 20,
+    "verified": 20,
+    "failed": 0,
+    "makespanMeanMs": 94935,
+    "makespanMinMs": 93300.9,
+    "makespanMaxMs": 96569,
+    "secondsPerRequest": 9.5,
+    "decisionsPerMinuteMean": 6.3,
+    "pooledRequests": 20,
+    "submitMedianMs": 164.8,
+    "submitP95Ms": 189.6,
+    "submitMaxMs": 194.4,
+    "adviceReadyMedianMs": 50718.8,
+    "adviceReadyMaxMs": 94313,
+    "decidedAfterMedianMs": 52978.6,
+    "decidedAfterP95Ms": 93300.9,
+    "decidedAfterMaxMs": 96569,
+    "adviceIntervalMedianMs": 8924.9,
+    "decisionLagMedianMs": 2251.4,
+    "decisionLagMaxMs": 2326.8,
+    "drainMeanMs": 9830.6
+   },
+   {
+    "setup": "combined",
+    "level": 25,
+    "bursts": 2,
+    "requested": 50,
+    "decided": 50,
+    "verified": 50,
+    "failed": 0,
+    "makespanMeanMs": 228979.6,
+    "makespanMinMs": 223195.4,
+    "makespanMaxMs": 234763.8,
+    "secondsPerRequest": 9.2,
+    "decisionsPerMinuteMean": 6.6,
+    "pooledRequests": 50,
+    "submitMedianMs": 268.9,
+    "submitP95Ms": 2237,
+    "submitMaxMs": 2249.1,
+    "adviceReadyMedianMs": 117868.5,
+    "adviceReadyMaxMs": 232518,
+    "decidedAfterMedianMs": 120195.2,
+    "decidedAfterP95Ms": 223195.4,
+    "decidedAfterMaxMs": 234763.8,
+    "adviceIntervalMedianMs": 9033.5,
+    "decisionLagMedianMs": 2271.4,
+    "decisionLagMaxMs": 2374.1,
+    "drainMeanMs": 18455.7
+   }
+  ],
+  "hour_summary": [
+   {
+    "requests": 200,
+    "completed": 200,
+    "failed": 0,
+    "submitMedianMs": 1537.6,
+    "adviceWaitMedianMs": 11316.1,
+    "inferenceMedianMs": 7148.6,
+    "decisionLagMedianMs": 2077.3,
+    "endToEndMedianMs": 13446,
+    "endToEndP95Ms": 40653.5,
+    "endToEndMaxMs": 73659.6,
+    "outcomeReadMedianMs": 46.6,
+    "accessLogReads": 120,
+    "accessLogReadMedianMs": 286.7,
+    "accessLogReadP95Ms": 362.7
+   }
+  ],
+  "hour_windows": [
+   {
+    "fromMinute": 0,
+    "sent": 26,
+    "completed": 26,
+    "endToEndMedianMs": 13451.4,
+    "endToEndMaxMs": 23254.3
+   },
+   {
+    "fromMinute": 10,
+    "sent": 28,
+    "completed": 28,
+    "endToEndMedianMs": 13576.8,
+    "endToEndMaxMs": 31756.5
+   },
+   {
+    "fromMinute": 20,
+    "sent": 35,
+    "completed": 35,
+    "endToEndMedianMs": 12658.4,
+    "endToEndMaxMs": 26580.7
+   },
+   {
+    "fromMinute": 30,
+    "sent": 24,
+    "completed": 24,
+    "endToEndMedianMs": 12676.3,
+    "endToEndMaxMs": 19058.2
+   },
+   {
+    "fromMinute": 40,
+    "sent": 50,
+    "completed": 50,
+    "endToEndMedianMs": 22560.8,
+    "endToEndMaxMs": 73659.6
+   },
+   {
+    "fromMinute": 50,
+    "sent": 37,
+    "completed": 37,
+    "endToEndMedianMs": 13258.6,
+    "endToEndMaxMs": 22216.9
+   }
+  ],
+  "hour_resources": [
+   {
+    "part": "chaincode",
+    "samples": 860,
+    "cpuMeanPercent": 1,
+    "cpuP95Percent": 5.4,
+    "cpuMaxPercent": 19.2,
+    "memoryMeanMiB": 366.3,
+    "memoryMaxMiB": 375.6,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "peers",
+    "samples": 860,
+    "cpuMeanPercent": 16.1,
+    "cpuP95Percent": 27,
+    "cpuMaxPercent": 38,
+    "memoryMeanMiB": 744.2,
+    "memoryMaxMiB": 771.8,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "CouchDB",
+    "samples": 860,
+    "cpuMeanPercent": 11.2,
+    "cpuP95Percent": 25.8,
+    "cpuMaxPercent": 56.1,
+    "memoryMeanMiB": 490.8,
+    "memoryMaxMiB": 561.9,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "orderer",
+    "samples": 860,
+    "cpuMeanPercent": 0.3,
+    "cpuP95Percent": 0.7,
+    "cpuMaxPercent": 1.8,
+    "memoryMeanMiB": 65.6,
+    "memoryMaxMiB": 84.3,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "certificate authorities",
+    "samples": 860,
+    "cpuMeanPercent": 0,
+    "cpuP95Percent": 0,
+    "cpuMaxPercent": 0,
+    "memoryMeanMiB": 57.5,
+    "memoryMaxMiB": 57.5,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "phone emulators",
+    "samples": 860,
+    "cpuMeanPercent": 43.2,
+    "cpuP95Percent": 112.9,
+    "cpuMaxPercent": 922.7,
+    "memoryMeanMiB": 9522.7,
+    "memoryMaxMiB": 10698,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "model server",
+    "samples": 860,
+    "cpuMeanPercent": 6.3,
+    "cpuP95Percent": 35.9,
+    "cpuMaxPercent": 59.6,
+    "memoryMeanMiB": 8260.2,
+    "memoryMaxMiB": 8262.7,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "backend",
+    "samples": 860,
+    "cpuMeanPercent": 0.8,
+    "cpuP95Percent": 3.2,
+    "cpuMaxPercent": 36,
+    "memoryMeanMiB": 161.1,
+    "memoryMaxMiB": 174.9,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "Mac (whole machine)",
+    "samples": 860,
+    "cpuMeanPercent": 2.7,
+    "cpuP95Percent": 4.2,
+    "cpuMaxPercent": 5.1,
+    "memoryMeanMiB": 41615.4,
+    "memoryMaxMiB": 46465,
+    "cpuUnit": "load average (1 min)"
+   }
+  ],
+  "bursts100": [
+   {
+    "setup": "mac-only",
+    "level": 100,
+    "bursts": 1,
+    "requested": 100,
+    "decided": 100,
+    "verified": 100,
+    "failed": 0,
+    "makespanMeanMs": 898275.8,
+    "makespanMinMs": 898275.8,
+    "makespanMaxMs": 898275.8,
+    "secondsPerRequest": 9,
+    "decisionsPerMinuteMean": 6.7,
+    "pooledRequests": 100,
+    "submitMedianMs": 870.1,
+    "submitP95Ms": 1172.8,
+    "submitMaxMs": 1200.8,
+    "adviceReadyMedianMs": 447587.2,
+    "adviceReadyMaxMs": 895850.5,
+    "decidedAfterMedianMs": 449895,
+    "decidedAfterP95Ms": 849597.7,
+    "decidedAfterMaxMs": 898275.8,
+    "adviceIntervalMedianMs": 9029.1,
+    "decisionLagMedianMs": 2489.1,
+    "decisionLagMaxMs": 2717.8,
+    "drainMeanMs": 16537.9
+   },
+   {
+    "setup": "phone-only",
+    "level": 100,
+    "bursts": 1,
+    "requested": 100,
+    "decided": 100,
+    "verified": 100,
+    "failed": 0,
+    "makespanMeanMs": 890154.5,
+    "makespanMinMs": 890154.5,
+    "makespanMaxMs": 890154.5,
+    "secondsPerRequest": 8.9,
+    "decisionsPerMinuteMean": 6.7,
+    "pooledRequests": 100,
+    "submitMedianMs": 811.5,
+    "submitP95Ms": 1162.6,
+    "submitMaxMs": 1193.5,
+    "adviceReadyMedianMs": 469989.6,
+    "adviceReadyMaxMs": 887651.8,
+    "decidedAfterMedianMs": 472539.7,
+    "decidedAfterP95Ms": 850359.3,
+    "decidedAfterMaxMs": 890154.5,
+    "adviceIntervalMedianMs": 9194.5,
+    "decisionLagMedianMs": 2538.4,
+    "decisionLagMaxMs": 2703,
+    "drainMeanMs": 9462.8
+   },
+   {
+    "setup": "combined",
+    "level": 100,
+    "bursts": 1,
+    "requested": 100,
+    "decided": 100,
+    "verified": 100,
+    "failed": 0,
+    "makespanMeanMs": 998358.4,
+    "makespanMinMs": 998358.4,
+    "makespanMaxMs": 998358.4,
+    "secondsPerRequest": 10,
+    "decisionsPerMinuteMean": 6,
+    "pooledRequests": 100,
+    "submitMedianMs": 798,
+    "submitP95Ms": 1139.8,
+    "submitMaxMs": 1169,
+    "adviceReadyMedianMs": 529336.6,
+    "adviceReadyMaxMs": 995869.8,
+    "decidedAfterMedianMs": 531831,
+    "decidedAfterP95Ms": 954242.7,
+    "decidedAfterMaxMs": 998358.4,
+    "adviceIntervalMedianMs": 10006,
+    "decisionLagMedianMs": 2489.2,
+    "decisionLagMaxMs": 2686.6,
+    "drainMeanMs": 13190.3
+   }
+  ],
+  "bursts100_resources": [
+   {
+    "part": "chaincode",
+    "samples": 667,
+    "cpuMeanPercent": 1.4,
+    "cpuP95Percent": 8.1,
+    "cpuMaxPercent": 40.1,
+    "memoryMeanMiB": 373.8,
+    "memoryMaxMiB": 383.2,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "peers",
+    "samples": 667,
+    "cpuMeanPercent": 15.8,
+    "cpuP95Percent": 30.6,
+    "cpuMaxPercent": 72.5,
+    "memoryMeanMiB": 753.5,
+    "memoryMaxMiB": 844.6,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "CouchDB",
+    "samples": 667,
+    "cpuMeanPercent": 14,
+    "cpuP95Percent": 38.2,
+    "cpuMaxPercent": 102.4,
+    "memoryMeanMiB": 508.4,
+    "memoryMaxMiB": 553.5,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "orderer",
+    "samples": 667,
+    "cpuMeanPercent": 0.3,
+    "cpuP95Percent": 0.7,
+    "cpuMaxPercent": 6.3,
+    "memoryMeanMiB": 64.7,
+    "memoryMaxMiB": 92.9,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "certificate authorities",
+    "samples": 667,
+    "cpuMeanPercent": 0,
+    "cpuP95Percent": 0,
+    "cpuMaxPercent": 0,
+    "memoryMeanMiB": 57.5,
+    "memoryMaxMiB": 57.5,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "phone emulators",
+    "samples": 667,
+    "cpuMeanPercent": 63.8,
+    "cpuP95Percent": 389.4,
+    "cpuMaxPercent": 948.9,
+    "memoryMeanMiB": 10778.5,
+    "memoryMaxMiB": 10875.1,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "model server",
+    "samples": 667,
+    "cpuMeanPercent": 14.3,
+    "cpuP95Percent": 37.6,
+    "cpuMaxPercent": 62.6,
+    "memoryMeanMiB": 8262.6,
+    "memoryMaxMiB": 8263,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "backend",
+    "samples": 667,
+    "cpuMeanPercent": 3.8,
+    "cpuP95Percent": 8.5,
+    "cpuMaxPercent": 35.1,
+    "memoryMeanMiB": 194.1,
+    "memoryMaxMiB": 198,
+    "cpuUnit": "% of one core"
+   },
+   {
+    "part": "Mac (whole machine)",
+    "samples": 667,
+    "cpuMeanPercent": 3,
+    "cpuP95Percent": 4.5,
+    "cpuMaxPercent": 5.4,
+    "memoryMeanMiB": 42596.4,
+    "memoryMaxMiB": 45762,
+    "cpuUnit": "load average (1 min)"
+   }
+  ],
+  "model_quality": [
+   {
+    "label": "untuned-qwen3-14b-4bit",
+    "modelId": "qwen3-14b-4bit-untuned",
+    "adapterId": null,
+    "promptVersion": "dias-recommendation-prompt-v2",
+    "examples": 600,
+    "validAnswers": 541,
+    "decisionAccuracy": 0.650647,
+    "accuracyLow": 0.609537,
+    "accuracyHigh": 0.689633,
+    "balancedAccuracy": 0.651148,
+    "macroF1": 0.623205,
+    "falseAllow": 21,
+    "falseAllowRate": 0.077778,
+    "falseDeny": 168,
+    "falseDenyRate": 0.619926,
+    "reasonCodeAccuracy": 0.439926,
+    "latencyMedianMs": 7627.6,
+    "latencyP95Ms": 10411.8
+   }
+  ]
+ }
+}

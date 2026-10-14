@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * DIAS request and authorization lifecycle events.
- *
- * Every workflow stage is its own ledger state entry, keyed by its owner (request
- * or authorization ID) and a zero-padded sequence number, so the ordered history
- * can be read back from committed Fabric state together with the transaction
- * that wrote each stage. Fabric keeps one chaincode event per transaction, so that
- * event lists every stage the transaction committed.
- */
+/** DIAS request and authorization lifecycle events. */
 
 const { putJson } = require('../util/state');
 

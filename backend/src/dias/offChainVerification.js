@@ -1,21 +1,6 @@
 'use strict';
 
-/**
- * Audit reconstruction of the off-chain objects (design §3, §4; paper §IV-G).
- *
- * The ledger commits a digest of each object the auditor saw or wrote: the
- * justification (h_J on the request), the recommendation object M (h_M in κ) and
- * the auditor note (h_N in the decision). The objects themselves stay in the
- * review store. For each one this reports:
- *
- *   verified       the stored copy hashes to the committed digest;
- *   mismatch       it does not: the copy was changed after the digest was committed;
- *   missing        a digest is committed, but no copy is available;
- *   not-committed  the ledger holds no digest (no κ, no note, or an older record).
- *
- * A digest proves what the object was when it was committed. It cannot bring
- * back a lost object.
- */
+/** Audit reconstruction of the off-chain objects. */
 
 const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
 const { checkRecommendationIntegrity } = require('./recommendationIntegrity');
@@ -63,12 +48,7 @@ function verifyOffChainObjects({ trail, entry }) {
 }
 
 /**
- * The request trail a reviewer receives: the ledger's trail and the verification
- * of each off-chain object. The off-chain text itself — the justification, the
- * recommendation and the auditor's note, clearly marked as off-chain — is added
- * only for an audit-organisation district head (`auditor`, design §10). Any
- * other viewer receives the ledger's trail unchanged, and so does a reviewer who
- * made the request themselves: for their own request they are the requester.
+ * The request trail a reviewer receives: the ledger's trail and the verification of each off-chain object.
  */
 function reviewerTrail({ trail, entry, auditor = false }) {
   if (trail.viewer !== 'reviewer' || trail.isRequester === true) return trail;

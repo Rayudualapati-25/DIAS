@@ -1,14 +1,4 @@
-"""Load a saved LoRA checkpoint and confirm it produces parseable binary output.
-
-A training run that ends with exit code 0 has proved only that it ran. The
-checkpoint is useful only if the weights load and the model still emits the
-response contract, so this loads the adapter from disk, asks it real v2 prompts,
-and reports what came back. It makes no accuracy claim: three prompts cannot
-measure a model.
-
-  .venv-qwen-policy/bin/python experiments/dias-finetuning/v2/eval/checkpoint_inference.py \
-      <adapter-path> <prompt-dir> <output.json>
-"""
+"""Load a saved LoRA checkpoint and confirm it produces parseable binary output."""
 import json
 import pathlib
 import sys

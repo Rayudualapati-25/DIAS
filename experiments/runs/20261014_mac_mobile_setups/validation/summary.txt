@@ -1,0 +1,24 @@
+js syntax: 643 checked, 0 failed
+python syntax: 68 checked, 0 failed
+shell syntax: 56 checked, 0 failed
+present README.md
+present CITATION.cff
+present LICENSE
+chaincode: exit 0
+backend: exit 0
+policies: exit 1
+frontend: exit 0
+dataset: exit 0
+caliper-config: exit 1
+experiment-scripts: exit 0
+testbed-python: exit 0
+make-check: exit 2
+policies (after restoring the two policy documents): exit 0
+make check without repo-check (compose config, bash -n): exit 0
+caliper-config without the installation check (Caliper CLI not installed here): exit 1
+caliper scripts without the two parts that need the Caliper packages (check-installation, validate-configs): exit 1
+caliper syntax checks and the latency-axes test (all parts that need no Caliper packages): exit 0
+caliper: check-installation, validate-configs and test-runner-helpers need @hyperledger/caliper-cli/caliper-core, which are not installed on this Mac (npm install not run: it downloads packages)
+mobile unit tests + lint (gradle --offline): exit 0
+mobile unit tests: 29 run, 0 failed; lint: 0 errors, 5 warnings
+mobile device tests on emulator-5554 (no apiBase, so the live-host tests skip): OK (44 tests)

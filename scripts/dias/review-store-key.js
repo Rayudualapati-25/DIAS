@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Generate a key for the encrypted off-chain review store (design §10).
- *
- *   node scripts/dias/review-store-key.js [--append FILE]
- *
- * Prints the two settings the backend needs, or appends them to FILE (for
- * example .env, which is never committed) without printing the key. To rotate,
- * move the old pair into DIAS_REVIEW_STORE_PREVIOUS_KEYS as id:key before
- * replacing it. Losing the key loses the stored reviews.
- */
+/** Generate a key for the encrypted off-chain review store. */
 
 const crypto = require('crypto');
 const fs = require('fs');

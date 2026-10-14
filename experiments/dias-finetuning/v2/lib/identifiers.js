@@ -1,18 +1,6 @@
 'use strict';
 
-/**
- * Neutral identifiers.
- *
- * The v1 dataset encoded the answer in its identifiers: usernames contained the
- * role and the split name, and each reason code occupied its own contiguous
- * record-number range. A model can reach high accuracy on data like that without
- * reading the policy at all, and the evaluation cannot tell the difference.
- *
- * Identifiers here are opaque hashes of a private salt and a counter, so they
- * carry no role, no split, no label, no reason code and no ordering. Two
- * identifiers from the same generation run are unrelated to each other; the same
- * seed reproduces them exactly.
- */
+/** Neutral identifiers. */
 
 const crypto = require('crypto');
 
@@ -24,9 +12,8 @@ function createIdentifierFactory(seed) {
   function token(kind, width) {
     const index = (counters.get(kind) || 0) + 1;
     counters.set(kind, index);
-    // The salt is mixed in first so the digest is not a function of the index
-    // alone: without it, identifiers would be comparable across runs and an
-    // adjacent pair would be adjacent in every dataset.
+    // The salt is mixed in first so the digest is not a function of the index alone: without it,
+    // identifiers would be comparable across runs and an adjacent pair would be adjacent in every dataset.
     return crypto.createHash('sha256')
       .update(`${seed}::identifier::${kind}::${index}`)
       .digest('hex')

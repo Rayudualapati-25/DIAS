@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-#
-# Wait for the full reuse run's load generator to exit, then finalize it (evaluate-only ledger
-# check, collection, analysis) and copy the analysis into the results folder in Downloads, if it
-# exists. Everything is logged to ~/dias-testbed/logs/await-reuse.log.
+# Wait for the full reuse run's load generator to exit, then finalize it (evaluate-only ledger check, collection, analysis) and copy the analysis into the results folder in Downloads, if it exists.
 # Usage: nohup bash testbed/scripts/await_reuse.sh > /dev/null 2>&1 &
 set -uo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

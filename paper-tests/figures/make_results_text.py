@@ -1,17 +1,4 @@
-"""Generate RESULTS_DRAFT.md and results.tex from the experiment result files.
-
-Every quantity is substituted from a result file. The claim wording is fixed
-here deliberately, so that a re-run changes the numbers but cannot quietly
-upgrade an observation into a guarantee:
-
-  - what was observed on an evaluated set is written as an observation on that
-    set, with the set size stated;
-  - nothing is called significant unless a paired test in 05-statistics.json
-    supports it, and where a test does not support it that is stated;
-  - the ledger stage is described as submission and commit together, because the
-    gateway does not expose endorsement separately from ordering and commit;
-  - evidence is described as tamper-evident, never tamper-proof.
-"""
+"""Generate RESULTS_DRAFT.md and results.tex from the experiment result files."""
 
 import json
 import pathlib
@@ -269,9 +256,8 @@ def build(exp01, exp02, exp03, exp04, stats, abl_analysis, halt):
           + " ".join(f"With the {r['scenario']}, the observed outcome was {r.get('outcome')}."
                      for r in rows if r.get("outcome")) + "\n")
 
-    # The reliability section is not complete without the failure that was
-    # observed before supervision was added. Both halves are stated, and the
-    # supervised result is never presented as a property of the frozen system.
+    # The reliability section is not complete without the failure that was observed before
+    # supervision was added.
     if halt:
         st = halt["stabilityDegradation"]
         w("The ten clean runs above were obtained under an external supervisor, and that "
@@ -434,14 +420,14 @@ def _performance_text(exp04, attribution=None):
 
 
 def _latex_body(block):
-    """Escape what LaTeX needs escaped and turn backticks into \\texttt."""
+    r"""Escape what LaTeX needs escaped and turn backticks into \texttt."""
     BS = chr(92)
-    # Scientific notation reads fine as "3.0e-6" in the draft but should be
-    # typeset properly in the paper.
+    # Scientific notation reads fine as "3.0e-6" in the draft but should be typeset properly in the
+    # paper.
     text = re.sub(r"(\d+\.\d+)e-(\d+)", r"\1" + BS + BS + r"times10^{-\2}", block)
     text = text.replace("%", BS + "%")
-    # Reason codes appear as bare words in the prose; their underscores need
-    # escaping wherever they are not already inside a texttt span.
+    # Reason codes appear as bare words in the prose; their underscores need escaping wherever they
+    # are not already inside a texttt span.
     text = re.sub(r"\b[A-Z]+(?:_[A-Z]+)+\b",
                   lambda m: m.group(0).replace("_", BS + "_"), text)
     parts = text.split("`")

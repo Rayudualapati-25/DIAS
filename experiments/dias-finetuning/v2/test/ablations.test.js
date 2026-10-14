@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Ablation correctness.
- *
- * An ablation is only interpretable if it changes exactly one thing. These tests
- * assert that every ablated prompt is byte-identical to the control outside the
- * region it redacts, that the redaction actually removed the information, and
- * that the answer never leaks into the prompt.
- */
+/** Ablation correctness. */
 
 const fs = require('fs');
 const path = require('path');
@@ -117,9 +110,8 @@ test('no-action-purpose keeps the fields it is not ablating', () => {
 });
 
 test('no ablated prompt contains the answer', () => {
-  // The system prompt legitimately contains the strings "ALLOW" and "DENY" as
-  // part of the response schema, so a bare class-name search would be a false
-  // positive. What must never appear is the completion itself or its reason.
+  // The system prompt legitimately contains the strings "ALLOW" and "DENY" as part of the response schema,
+  // so a bare class-name search would be a false positive.
   for (const example of examples) {
     const inputs = inputsFor(example);
     const completion = JSON.stringify(example.label);

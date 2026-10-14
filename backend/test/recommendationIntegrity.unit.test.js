@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Before an auditor decides, the stored recommendation object M must match its
- * ledger commitment κ: h_M, the value, the status and every binding (paper §IV-D,
- * design §6). Any difference is a mismatch the decision is refused on.
+ * Before an auditor decides, the stored recommendation object M must match its ledger commitment κ: h_M,
+ * the value, the status and every binding.
  */
 
 const { expect } = require('chai');

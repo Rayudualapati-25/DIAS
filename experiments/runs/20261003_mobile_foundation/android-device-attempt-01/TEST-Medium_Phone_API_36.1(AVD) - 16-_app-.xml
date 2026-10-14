@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="9" failures="2" errors="0" skipped="0" time="1.271" timestamp="2026-10-03T17:22:43" hostname="localhost">
+  <testsuite name="org.dias.mobile.data.FoundationTest" tests="7" failures="0" errors="0" skipped="0" time="0.104" timestamp="2026-10-03T17:22:43" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="failedRefreshPreservesExistingSnapshot" classname="org.dias.mobile.data.FoundationTest" time="0.007" />
+    <testcase name="batchesPersistAcrossDatabaseReopen" classname="org.dias.mobile.data.FoundationTest" time="0.033" />
+    <testcase name="repeatedPageIsIdempotent" classname="org.dias.mobile.data.FoundationTest" time="0.001" />
+    <testcase name="failedPageTransactionPreservesRowsAndCursor" classname="org.dias.mobile.data.FoundationTest" time="0.033" />
+    <testcase name="hostAndAccountCachesAreIsolated" classname="org.dias.mobile.data.FoundationTest" time="0.0" />
+    <testcase name="offlineReadsWorkWhileNetworkOnlyAblationFails" classname="org.dias.mobile.data.FoundationTest" time="0.03" />
+    <testcase name="refreshReplacesRemovedCasesAndClearRemovesContinuation" classname="org.dias.mobile.data.FoundationTest" time="0.0" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.data.HostConnectionTest" tests="2" failures="2" errors="0" skipped="0" time="0.215" timestamp="2026-10-03T17:22:43" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="emulatorAliasToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.214">
+      <failure>org.dias.mobile.data.ApiFailure: internal error
+at org.dias.mobile.data.ApiClient.request(ApiClient.kt:74)
+at org.dias.mobile.data.ApiClient.request$default(ApiClient.kt:40)
+at org.dias.mobile.data.ApiClient.login(ApiClient.kt:21)
+at org.dias.mobile.data.HostConnectionTest.connect(HostConnectionTest.kt:22)
+at org.dias.mobile.data.HostConnectionTest.emulatorAliasToMacApiAndFabric(HostConnectionTest.kt:13)
+</failure>
+    </testcase>
+    <testcase name="reverseForwardingToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.001">
+      <failure>org.dias.mobile.data.ApiFailure: internal error
+at org.dias.mobile.data.ApiClient.request(ApiClient.kt:74)
+at org.dias.mobile.data.ApiClient.request$default(ApiClient.kt:40)
+at org.dias.mobile.data.ApiClient.login(ApiClient.kt:21)
+at org.dias.mobile.data.HostConnectionTest.connect(HostConnectionTest.kt:22)
+at org.dias.mobile.data.HostConnectionTest.reverseForwardingToMacApiAndFabric(HostConnectionTest.kt:14)
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

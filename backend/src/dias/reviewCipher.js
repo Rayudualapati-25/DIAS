@@ -1,19 +1,6 @@
 'use strict';
 
-/**
- * Encryption of the off-chain review store at rest (design §10).
- *
- * AES-256-GCM with a random 96-bit IV per write. The additional authenticated
- * data is the envelope schema version and the request identifier, so a file moved
- * to another request does not open. Each envelope names the key that sealed it;
- * earlier keys stay available for reading after a rotation, and every new write
- * uses the current key.
- *
- * What this protects: copies of the store at rest and in backups. What it does
- * not: the backend process, which holds the key. Losing the key loses the
- * off-chain objects; the ledger still holds their digests, the recommendation
- * value and the status.
- */
+/** Encryption of the off-chain review store at rest. */
 
 const crypto = require('crypto');
 
@@ -104,8 +91,8 @@ function parsePreviousKeys(value) {
 }
 
 /**
- * The store's cipher from configuration. A missing or malformed key stops
- * start-up with an instruction, instead of reviews failing one by one.
+ * The store's cipher from configuration. A missing or malformed key stops start-up with an instruction,
+ * instead of reviews failing one by one.
  */
 function loadReviewCipher(settings) {
   if (!settings.DIAS_REVIEW_STORE_KEY) {

@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-#
-# Issue the testbed's organization, peer and orderer identities from its own
-# Fabric CAs. Runs inside a hyperledger/fabric-ca container on the diasnet
-# overlay network, with the testbed directory mounted at /testbed.
-#
-# Mirrors network/scripts/registerEnroll.sh, with three orderers instead of one
-# and CA host names instead of localhost ports. Nothing here touches the shared
-# single-host network or its CA databases.
+# Issue the testbed's organization, peer and orderer identities from its own Fabric CAs.
 set -euo pipefail
 
 TB=/testbed

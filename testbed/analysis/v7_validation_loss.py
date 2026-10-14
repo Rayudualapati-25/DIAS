@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""V7 validation loss during training, read from the MLX-LM training log.
-
-The log has a "Iter N: Val loss X" line at iteration 1 (before the first
-update), every 250 iterations, and at the last iteration. The plot shows the
-scheduled values from iteration 250 on and ends with the final value; the
-iteration-1 value (1.423) is left out so the later values stay readable, and
-the paper text reports it.
-
-Usage: python3 v7_validation_loss.py --log <training.log> --out <path without extension>
-"""
+"""V7 validation loss during training, read from the MLX-LM training log."""
 
 import argparse
 import os
@@ -32,11 +23,7 @@ def read_losses(path: str) -> list[tuple[int, float]]:
 
 
 def plotted_points(points: list[tuple[int, float]]) -> list[tuple[int, float]]:
-    """Scheduled validations from iteration 250 on, then the final one.
-
-    The scheduled value just before the end (iteration 5,250) is dropped because
-    the final value (iteration 5,254) sits on top of it.
-    """
+    """Scheduled validations from iteration 250 on, then the final one."""
     final = points[-1]
     scheduled = [p for p in points if p[0] % EVAL_EVERY == 0 and final[0] - p[0] >= EVAL_EVERY]
     return scheduled + [final]

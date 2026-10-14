@@ -1,15 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Current-DIAS concurrent-user performance experiment.
- *
- * One request per distinct signed-in user is launched at each concurrency level.
- * Recommendation readiness is observed from the backend's atomic off-chain
- * store, avoiding repeated HTTP polling (which itself creates Fabric audit
- * transactions).  Each result is then fetched once through the auditor API and
- * finalized with the recommendation-aligned decision.
- */
+/** Current-DIAS concurrent-user performance experiment. */
 
 const fs = require('fs');
 const path = require('path');

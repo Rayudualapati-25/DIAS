@@ -1,0 +1,45 @@
+{
+ "schema": "dias-setup-load-run-v1",
+ "planSha256": "040f0809049c620f7610fa5b1123992c8a28357099472ff6bd915afb5d6915a1",
+ "planned": 1,
+ "auditor": "sp.north",
+ "order": [
+  "L-mac-only-02-r1"
+ ],
+ "startedAtUtc": "2026-10-14T01:24:42.397Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "officerPhone": "emulator-5556",
+  "auditorPhone": "emulator-5558",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 62,
+  "chaincodeContainers": [
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767"
+  ]
+ },
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": {},
+ "enrolledOfficers": 2,
+ "finishedAtUtc": "2026-10-14T01:25:50.544Z",
+ "ran": 1,
+ "requested": 2,
+ "verified": 2,
+ "failed": 0,
+ "endChecks": [
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization is left active",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

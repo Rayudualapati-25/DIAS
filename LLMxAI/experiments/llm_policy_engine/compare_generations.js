@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Side-by-side metrics and rule-order behaviour for two or more model generations.
- *
- *   node compare_generations.js LABEL=run.json [LABEL=run.json ...]
- *
- * The runtime safety-guard replay (auto-decided vs routed to AuditMSP, and unsafe
- * allows surviving the guard) has one authoritative implementation elsewhere:
- * experiments/analyze-llm-safety-guard.js. Do not duplicate it here.
- */
+/** Side-by-side metrics and rule-order behaviour for two or more model generations. */
 
 const fs = require('fs');
 const path = require('path');

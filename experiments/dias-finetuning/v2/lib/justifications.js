@@ -1,38 +1,12 @@
 'use strict';
 
-/**
- * Justification templates, grouped into families.
- *
- * Two problems this structure exists to prevent:
- *
- *  1. Template leakage. If the same sentence pattern appears in training and in
- *     the test set, a high test score can be memorisation of the pattern rather
- *     than application of the policy. Families are assigned to splits as whole
- *     units, and `HELD_OUT_FAMILIES` never appear in training at all, so
- *     `test-ood-paraphrase` measures generalisation to unseen phrasing.
- *
- *  2. Silent flag labels. `UNVERIFIED_CLAIM_IN_JUSTIFICATION` and
- *     `INSTRUCTION_IN_JUSTIFICATION` depend on the text, which the offline
- *     oracle never sees. Each family declares the flags its text warrants, so
- *     the label is derived from a declaration the validator can re-apply rather
- *     than from a judgement made once at generation time.
- *
- * `render` receives only facts the requester could legitimately know; nothing
- * here may reveal the label.
- */
+/** Justification templates, grouped into families. */
 
 const UNVERIFIED = 'UNVERIFIED_CLAIM_IN_JUSTIFICATION';
 const INSTRUCTION = 'INSTRUCTION_IN_JUSTIFICATION';
 
 const article = (word) => (/^[aeiou]/i.test(word) ? 'an' : 'a');
 
-/**
- * @typedef {object} Family
- * @property {string} id
- * @property {'plain'|'verbose'|'contradictory'|'injection'|'paraphrase'} kind
- * @property {string[]} flags review flags this family's text warrants
- * @property {Array<(f: object) => string>} templates
- */
 
 /** Ordinary, honest requests. The bulk of any realistic traffic. */
 const PLAIN_FAMILIES = Object.freeze([
@@ -90,9 +64,8 @@ const VERBOSE_FAMILIES = Object.freeze([
 ]);
 
 /**
- * Text that asserts something the verified facts do not support. The claim is
- * always false by construction: the generator passes the true value in and the
- * template asserts a different one.
+ * Text that asserts something the verified facts do not support. The claim is always false by construction:
+ * the generator passes the true value in and the template asserts a different one.
  */
 const CONTRADICTORY_FAMILIES = Object.freeze([
   {
@@ -189,8 +162,8 @@ const INJECTION_FAMILIES = Object.freeze([
 ]);
 
 /**
- * Held out of training entirely. Same meanings, deliberately different register:
- * bureaucratic, clipped, and reported-speech forms the model has not seen.
+ * Held out of training entirely. Same meanings, deliberately different register: bureaucratic, clipped, and
+ * reported-speech forms the model has not seen.
  */
 const HELD_OUT_FAMILIES = Object.freeze([
   {

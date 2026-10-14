@@ -1,0 +1,51 @@
+┌─────────┬───────────────────────────────────────────────────────────────┬──────────────────┬──────────┬──────────┐
+│ (index) │ measure                                                       │ unit             │ untuned  │ v7       │
+├─────────┼───────────────────────────────────────────────────────────────┼──────────────────┼──────────┼──────────┤
+│ 0       │ 'end-to-end median, mac-only'                                 │ 'ms'             │ 13192.7  │ 14147.3  │
+│ 1       │ 'end-to-end median, phone-only'                               │ 'ms'             │ 13316    │ 14374.7  │
+│ 2       │ 'end-to-end median, combined'                                 │ 'ms'             │ 13206.9  │ 14187.4  │
+│ 3       │ 'end-to-end median, all'                                      │ 'ms'             │ 13226    │ 14246.3  │
+│ 4       │ 'model inference median (live)'                               │ 'ms'             │ 6860     │ 7782.9   │
+│ 5       │ 'reuse: first request median'                                 │ 'ms'             │ 14057.2  │ 14157.2  │
+│ 6       │ 'reuse: reused request median'                                │ 'ms'             │ 2096.5   │ 2100.3   │
+│ 7       │ 'reuse: requests exercised (of 12)'                           │ 'count'          │ 12       │ 12       │
+│ 8       │ 'load: 25 at once, all decided after (mean of 2), mac-only'   │ 'ms'             │ 227519.4 │ 258979   │
+│ 9       │ 'load: 25 at once, all decided after (mean of 2), phone-only' │ 'ms'             │ 250895.2 │ 282185.5 │
+│ 10      │ 'load: 25 at once, all decided after (mean of 2), combined'   │ 'ms'             │ 228979.6 │ 252263.1 │
+│ 11      │ 'quality: decisionAccuracy'                                   │ 'share of valid' │ 0.650647 │ 0.973333 │
+│ 12      │ 'quality: validAnswers'                                       │ 'of 600'         │ 541      │ 600      │
+│ 13      │ 'quality: falseAllow'                                         │ 'count'          │ 21       │ 7        │
+│ 14      │ 'quality: falseDeny'                                          │ 'count'          │ 168      │ 9        │
+│ 15      │ 'quality: macroF1'                                            │ 'score'          │ 0.623205 │ 0.973333 │
+└─────────┴───────────────────────────────────────────────────────────────┴──────────────────┴──────────┴──────────┘
+paired, V7 minus untuned, same request: {
+ "inference": {
+  "n": 96,
+  "median": 804.5,
+  "low": 505.5,
+  "high": 1014.1
+ },
+ "endToEnd": {
+  "n": 93,
+  "median": 944.6,
+  "low": 643.4,
+  "high": 1131.6
+ },
+ "completionTokens": {
+  "n": 96,
+  "median": -20.5,
+  "low": -30,
+  "high": -12
+ }
+}
+advice on the same live requests: {
+ "requests": 96,
+ "bothAnswered": 93,
+ "sameAdvice": 83,
+ "untunedMatchesPolicy": 87,
+ "v7MatchesPolicy": 92,
+ "untunedAllowWherePolicyDenies": 2,
+ "v7AllowWherePolicyDenies": 4,
+ "untunedNoUsableAdvice": 3,
+ "v7NoUsableAdvice": 0
+}

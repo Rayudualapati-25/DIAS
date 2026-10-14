@@ -1,10 +1,4 @@
-"""Ordered classification rules for ``build_inventory.py``.
-
-The first rule whose ``pattern`` matches a repository-relative path wins. Rules
-record the audit's *proposed* action; the moves that were actually performed are
-listed in ``trashy/MANIFEST.csv``. Each rule states the evidence for its
-decision in ``notes`` so that the inventory can be reviewed row by row.
-"""
+"""Ordered classification rules for ``build_inventory.py``."""
 
 # Directory names whose contents are collapsed into one inventory row.
 COLLAPSE_DIR_NAMES = {"node_modules", "__pycache__", ".nyc_output", "coverage"}

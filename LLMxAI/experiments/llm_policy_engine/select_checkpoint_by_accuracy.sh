@@ -1,8 +1,5 @@
 #!/bin/bash
 # Select the V4 checkpoint by held-out DECISION ACCURACY, not validation loss.
-# V3 selected on loss, which for a short templated JSON output is dominated by
-# formatting tokens rather than the token that carries the decision - and it
-# picked the final checkpoint by default.
 set -u
 REPO=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 cd "$REPO" || exit 1

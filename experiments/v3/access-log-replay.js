@@ -1,29 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Access-log policy replay (plan step 6).
- *
- * Replays the HTTP calls recorded in real testbed backend traces through the
- * backend's own classifier (backend/src/middleware/accessLogger.js) and counts
- * the access-log ledger writes each logging mode would submit:
- *
- *   all       every attributable call, as the evaluated v2 system did;
- *   security  the v3 default (sensitive reads always; other calls only when
- *             refused or failed).
- *
- * The all-mode replay uses the evaluated v2 classifier itself (read from the
- * baseline tag) and is checked call by call against the access-log writes the
- * trace records (fabric.submit RecordAccessEvent, whose first argument is the
- * action, submitted just after the response). A call with no matching write
- * within one second is reported with its time, so lost writes can be explained.
- * The measured latency of the recorded writes is their cost.
- *
- *   node experiments/v3/access-log-replay.js --out DIR --trace PATH[@since=OTHER] ...
- *
- * `@since=OTHER` keeps only events after the last event of trace OTHER, for a
- * trace file that kept growing across runs. Offline: it reads saved traces only.
- */
+/** Access-log policy replay. */
 
 const fs = require('fs');
 const path = require('path');
@@ -85,12 +63,7 @@ function loggedAction(classify, event) {
 
 const readTrace = (file) => fs.readFileSync(file, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 
-/**
- * Calls whose access-log write was never recorded. The logger submits a write
- * as soon as the response finishes, so per action the calls (by finish time) and
- * the writes (by submit start, not by commit order) are merged in time order; a
- * call with no write submitted within one second has no recorded write.
- */
+/** Calls whose access-log write was never recorded. */
 function unrecordedCalls(calls, writes) {
   const missing = [];
   let writesWithoutCall = 0;

@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
-"""Resource sampler for M5, the Mac that runs the MLX model server.
-
-Every --interval seconds it appends one CSV row: the model server's CPU (in
-cores, where 1.0 is one fully used core) and resident memory, the whole Mac's
-CPU and memory, and the GPU's utilisation and in-use memory as reported by the
-IOAccelerator statistics (no administrator rights needed). The four testbed VMs
-are measured from inside by cAdvisor/node-exporter; this file covers the fifth
-machine.
-
-Usage: python3 mac_sampler.py --pid-file <model-server.pid> --out <file.csv>
-"""
+"""Resource sampler for M5, the Mac that runs the MLX model server."""
 
 import argparse
 import csv

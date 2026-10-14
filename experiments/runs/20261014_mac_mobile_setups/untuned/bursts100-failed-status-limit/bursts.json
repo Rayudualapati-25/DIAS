@@ -1,0 +1,533 @@
+[
+ {
+  "id": "L100-combined",
+  "setup": "combined",
+  "level": 100,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T13:54:29.105Z",
+  "requested": 100,
+  "accepted": 100,
+  "decided": 0,
+  "verified": 0,
+  "failed": 100,
+  "makespanMs": null,
+  "decisionsPerMinute": null,
+  "submitMs": null,
+  "adviceReadyAfterMs": null,
+  "decidedAfterMs": null,
+  "quietBeforeMs": 430265.1,
+  "drainMs": 382264,
+  "checks": [
+   {
+    "name": "L100-combined: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": false,
+    "detail": "0 of 0 found"
+   },
+   {
+    "name": "L100-combined: no call was refused or failed",
+    "ok": false,
+    "detail": "sp.north dias.auditor.queue.status rejected; sp.north dias.auditor.queue.status rejected; sp.north dias.auditor.queue.status rejected"
+   }
+  ],
+  "closedAfterBurst": [
+   {
+    "requestId": "REQ-059db6f9a3ba3347",
+    "error": "no recommendation within 300000 ms"
+   },
+   {
+    "requestId": "REQ-0691639078d21349",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-093e71cbdfb6bb3e",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-0e917667cdfc3a65",
+    "error": "no recommendation within 300000 ms"
+   },
+   {
+    "requestId": "REQ-0fdcd93ef007f422",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-1411cfa1659133ff",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-16a4675051e2f911",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-1815d4c67eb5ffc2",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-18aed0366ca29686",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-18eca1556c7c512c",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-19b266b6733c3717",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-1d3990b69d300edf",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-20be33283507bc7c",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-21b4f7dba6c1ec4d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-22f93c01a2a2e6b1",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-266d939e1ee61862",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-26a22a7784ae91cb",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-26fc2e92b35ddda5",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-2b0bda9b5cfa0ead",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-2b14f7b1fd25eb02",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-2f7c1f2f95affcbc",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-2f913bbf928ddfff",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-31d9ba5401481760",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-323ba911bee4c487",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-39cffd8e4214baf3",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-3a4f9be6fb457fdf",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-4352b0c5ef33e2ff",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-44d4ee57fbc3f976",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-47dd298c79e764d9",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-4c7ef33881fbbd7e",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-4e2f253fab04becf",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-4e67fea0446b84a5",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-4ef46b5742132ac3",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-55c2eb0dbb9326b3",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-571881e6d08c6532",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-5b2a444a6937ef60",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-5e7a8e81b5396ad7",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-6100b1fa6d1a01e6",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-635174e0ce7147e0",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-65b4df5485b35649",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-681cc77f6993b3a7",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-68ea5929514417fe",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-69397fdeb2b6a603",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-6961d0099972f30d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-6ca8f6a99fd15c7d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-71880cc075219f88",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-7213469de05e5496",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-74d47b4ea25bf67e",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-78694df1d6b258dc",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-7c519e35d9c09ddc",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-7e62cc434accac5c",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-822fb0f591f56b0e",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-8279cf8d3120023b",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-833a1175409105ee",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-83a2c35e4e54fc80",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-849b3643d36fbdc4",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-85ebe54089b095a8",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-9171c0a6cbe06509",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-969fc3a0394848ea",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-9708662f9bbcda88",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-985dabe054cbff70",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-9b8614ded93dfef3",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-9ebbf199ef099845",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-a37247564ebc82d8",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-a5c9f7378524247d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-a9db295bda000d53",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-aeb174edfc17b073",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-af36c364c23a37ca",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-afce896a03f6f45b",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-b0867cf1f8340f86",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-b09c2ed13a257b02",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-b12c391e4802264e",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-b3fe38d7b7e8e9da",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-b67be73c492ee42d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-b8b1f86a6863d789",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-c02f96cead597e88",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-c1298c6b0f7c1d4b",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-c16ba3fd0818cdbc",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-c3bfd49e6afa09a2",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-c6630e65aa2f021d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-c78b7c63156ffb58",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-ce4405daa960d2d3",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-cf195a0c966e1a52",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-d0abe99c0f57bbc7",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-dc74dc63956220c0",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-dde41b9b2217977c",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-de8d4c918af48773",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-de954648f7a7ecc8",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-dedc7bdbbefebb89",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-e2b9f0ebf6b3dfb8",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-e615c73ce3b382d9",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-ea52e1d0dcfd8cee",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-f0c0b2fb3def880f",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-f2310adbdae06134",
+    "decision": "FORCE_ALLOW",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-f2ca1077ddb4f497",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-f40a6c403fde6293",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-f474836e5f52a40a",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-f76c3542bf36407f",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-fa937c4fb9f4858d",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   },
+   {
+    "requestId": "REQ-fe005390bb26f4e6",
+    "decision": "FORCE_DENY",
+    "lostSubmission": false
+   }
+  ]
+ }
+]

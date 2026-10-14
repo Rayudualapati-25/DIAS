@@ -1,14 +1,8 @@
 'use strict';
 
 /**
- * Plan step 11 (backend side): the auditor note is made durable before its
- * decision is submitted, and every way the submission can end leaves the note
- * in a known state (design §11; paper §IV-E, Algorithm 1 lines 18 and 29–30).
- *
- *   staged    the note is on disk; the decision is not known to be committed;
- *   committed the ledger holds the decision with this note's digest h_N;
- *   dropped   the ledger refused the decision, or another decision closed the
- *             request, so this note's digest can never be committed.
+ * (backend side): the auditor note is made durable before its decision is submitted, and every way the
+ * submission can end leaves the note in a known state.
  */
 
 const fs = require('fs');
@@ -34,11 +28,7 @@ function ledgerDecision(requestId, { decision = 'FORCE_ALLOW', noteHash = NOTE_H
   };
 }
 
-/**
- * A ledger whose review read returns `commitment` and, once `decided` is set, the
- * decision. `submit` runs `onSubmit` first, so a test can look at the store at the
- * moment the decision is sent, or make the submission fail.
- */
+/** A ledger whose review read returns `commitment` and, once `decided` is set, the decision. */
 function fakeLedger({ commitment, onSubmit = async () => {} }) {
   const state = { decided: null, submissions: [] };
   return {

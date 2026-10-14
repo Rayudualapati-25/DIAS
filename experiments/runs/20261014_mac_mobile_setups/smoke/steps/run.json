@@ -1,0 +1,89 @@
+{
+ "schema": "dias-setup-steps-run-v1",
+ "planSha256": "040f0809049c620f7610fa5b1123992c8a28357099472ff6bd915afb5d6915a1",
+ "planned": 4,
+ "auditor": "sp.north",
+ "order": [
+  "S-PP-01",
+  "S-MM-01",
+  "S-PM-01",
+  "S-MP-01"
+ ],
+ "startedAtUtc": "2026-10-14T01:12:15.210Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "officerPhone": "emulator-5556",
+  "auditorPhone": "emulator-5554",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 60,
+  "chaincodeContainers": [
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767"
+  ]
+ },
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": {
+  "auditor": 679.7,
+  "officer": 274.1
+ },
+ "finishedAtUtc": "2026-10-14T01:16:09.959Z",
+ "ran": 4,
+ "completed": 4,
+ "failed": 0,
+ "endChecks": [
+  {
+   "name": "workflows 1 to 4: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "4 of 4 found"
+  },
+  {
+   "name": "workflows 1 to 4: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "the auditor's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "the officer's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "an officer outside the reviewers reads every workflow in the access log: who, which file, decision, outcome",
+   "ok": true,
+   "detail": "4 of 4 shown to clerk.das"
+  },
+  {
+   "name": "that log holds no transaction identifier and no digest",
+   "ok": true,
+   "detail": "150 entries read"
+  },
+  {
+   "name": "while a request waited, another officer saw who asked for which file but not the advice; the auditor saw the advice",
+   "ok": true,
+   "detail": "4 of 4 sampled workflows"
+  },
+  {
+   "name": "each requester finds their own requests with the final outcome",
+   "ok": true,
+   "detail": "4 of 4 requesters"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization is left active",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

@@ -1,20 +1,6 @@
 'use strict';
 
-/**
- * The pre-review recommendation commitment κ and its signed provenance
- * (docs/design/dias-v3-ledger-schema.md §6).
- *
- * κ binds one recommendation outcome — value, specific generation status, model
- * version and the digest h_M of the complete off-chain recommendation object —
- * to the request it answers: its verified-context digest, claims digest,
- * justification digest and policy. The recommendation service signs exactly
- * those fields together with the request identifier and the channel (Ed25519),
- * so a commitment cannot be altered, invented by a party without the registered
- * key, or replayed onto another request, policy or network.
- *
- * Nothing here runs, prompts, parses or scores a model. The contract checks form,
- * binding and signature; whether a recommendation is right is the auditor's call.
- */
+/** The pre-review recommendation commitment κ and its signed provenance. */
 
 const crypto = require('crypto');
 const { assertDigest, canonicalJson } = require('./commitments');
@@ -145,9 +131,8 @@ function verifyProvenance({ publicKeyPem, payload, signature }) {
 }
 
 /**
- * What a decision is compared with: the committed value when the generation
- * succeeded, otherwise UNAVAILABLE with the specific status (or NOT_COMMITTED
- * when no commitment exists at all).
+ * What a decision is compared with: the committed value when the generation succeeded, otherwise
+ * UNAVAILABLE with the specific status (or NOT_COMMITTED when no commitment exists at all).
  */
 function recommendationOf(commitment) {
   if (!commitment) {

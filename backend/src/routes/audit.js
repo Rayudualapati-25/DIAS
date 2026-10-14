@@ -12,10 +12,7 @@ const { requireAuth, requireRole } = require('../middleware/auth');
 const router = express.Router();
 router.use(requireAuth);
 
-// Mirrors AuditContract's reviewer roles exactly. The chaincode is the real
-// boundary and enforces both organisation and role; keeping the API list
-// identical means an unauthorised caller is refused early with 403 rather than
-// late with a chaincode error.
+// Mirrors AuditContract's reviewer roles exactly.
 const { SEAL_AUTHORITY_ROLES, DISTRICT_HEAD_ROLES } =
   require('../../../chaincode/crimerecords/lib/policy/policyV1');
 const REVIEWER_ROLES = [...new Set([...SEAL_AUTHORITY_ROLES, ...DISTRICT_HEAD_ROLES])];
@@ -29,8 +26,7 @@ router.get('/trail/:recordId', requireRole(...REVIEWER_ROLES), asyncRoute(async 
 }));
 
 /**
- * Recompute the agency-held raw-content hash and compare it with Fabric's
- * immutable metadata commitment.
+ * Recompute the agency-held raw-content hash and compare it with Fabric's immutable metadata commitment.
  */
 router.post('/verify-payload/:recordId', requireRole(...REVIEWER_ROLES),
   asyncRoute(async (req, res) => {
@@ -44,9 +40,7 @@ router.post('/verify-payload/:recordId', requireRole(...REVIEWER_ROLES),
     return ok(res, { ...result, verifiedAt: new Date().toISOString() });
   }));
 
-/**
- * Direct Fabric access events: who searched, read or received a case file.
- */
+/** Direct Fabric access events: who searched, read or received a case file. */
 router.get('/access-log', requireRole(...REVIEWER_ROLES), asyncRoute(async (req, res) => {
   const limit = Math.min(Number(req.query.limit) || 50, 500);
   const entries = await fabric.evaluate(
@@ -72,17 +66,9 @@ router.get('/access-log/verify', requireRole(...REVIEWER_ROLES), asyncRoute(asyn
 }));
 
 /**
- * Complete lifecycle of one access request: who requested which record, the
- * dynamic-authorization check, the pre-review commitment κ, the auditor decision
- * with its agreement (or the skip), authorization changes and the access
- * outcome, each with the Fabric transaction that committed it.
- *
- * The chaincode authorises the trail itself, so no role guard is applied here
- * beyond authentication. A reviewer also receives the check of each off-chain
- * object against the digest the ledger committed for it. Only an
- * audit-organisation district head receives the off-chain review itself — the
- * justification, the recommendation and the auditor's note — clearly separated
- * (design §10).
+ * Complete lifecycle of one access request: who requested which record, the dynamic-authorization check,
+ * the pre-review commitment κ, the auditor decision with its agreement (or the skip), authorization changes
+ * and the access outcome, each with the Fabric transaction that committed it.
  */
 router.get('/request-trail/:requestId', asyncRoute(async (req, res) => {
   const trail = await fabric.evaluate(

@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * The controlled, deterministic half of the LLM decision protocol.
- *
- * Qwen supplies only an advisory compact classification. This module derives
- * the effective classification, explanation, and disagreement state from the
- * deployed policy. It is intentionally shared by the AI service and chaincode
- * so Fabric can independently reproduce the safety decision it is asked to
- * commit.
- */
+/** The controlled, deterministic half of the LLM decision protocol. */
 
 const { evaluate } = require('./policyEngine');
 const REASON_DECISION = require('./reasonDecisions');
@@ -90,9 +82,8 @@ const REASON_DETAILS = Object.freeze({
 });
 
 /**
- * Reason codes only this module can produce. The model is never permitted to
- * emit them, so they cannot be forged into an escalation by the model itself
- * and they never appear as a training label.
+ * Reason codes only this module can produce. The model is never permitted to emit them, so they cannot be
+ * forged into an escalation by the model itself and they never appear as a training label.
  */
 const SYSTEM_REASON_CODES = Object.freeze([
   'MODEL_POLICY_DISAGREEMENT', 'MODEL_INPUT_DISAGREEMENT',
@@ -102,16 +93,7 @@ const MODEL_REASON_CODES = Object.freeze(
   Object.keys(REASON_DECISION).filter((code) => !SYSTEM_REASON_CODES.includes(code))
 );
 
-/**
- * The operation and purpose the policy is evaluated against.
- *
- * These are CANONICAL REQUEST INPUTS: the requester commits them with the
- * request, the chaincode validates them against the policy vocabulary before
- * any inference happens, and they are inside the committed context hash. The
- * deterministic evaluation therefore never consumes the model's reading of the
- * request. They are authoritative for what was ASKED, not for what the
- * requester truly intends — purpose remains a requester assertion.
- */
+/** The operation and purpose the policy is evaluated against. */
 function canonicalRequest(trusted) {
   const context = trusted.requestContext || {};
   return { action: context.action, purpose: context.purpose };
@@ -127,19 +109,8 @@ function policyEnvironment(trusted, purpose) {
 }
 
 /**
- * Compare the model's proposal against a policy result computed from canonical
- * request facts and governed state alone.
- *
- * Two independent conditions must both hold for the model's result to stand:
- *
- *   input agreement  - the model read the same operation and purpose that the
- *                      requester committed. Checked first, because a policy
- *                      comparison against a misread request is meaningless.
- *   policy agreement - the deterministic engine, run on the canonical inputs,
- *                      reaches the identical decision and reason code.
- *
- * Either failure yields ESCALATE. Neither can substitute a different allow or
- * deny for the model's proposal.
+ * Compare the model's proposal against a policy result computed from canonical request facts and governed
+ * state alone.
  */
 function deriveEffectiveClassification(advisory, trusted) {
   const canonical = canonicalRequest(trusted);
@@ -170,9 +141,8 @@ function materializeDecision(classification, trusted) {
   const details = REASON_DETAILS[classification.reasonCode];
   if (!details) throw new Error('cannot explain an unknown policy reason');
   const canonical = canonicalRequest(trusted);
-  // Use the deployed policy engine's own evidence when it produced this reason.
-  // A system-generated reason uses its fixed controlled evidence rather than
-  // pretending the model supplied it.
+  // Use the deployed policy engine's own evidence when it produced this reason. A system-generated reason
+  // uses its fixed controlled evidence rather than pretending the model supplied it.
   const policyResult = SYSTEM_REASON_CODES.includes(classification.reasonCode)
     ? null
     : evaluate(
@@ -187,8 +157,8 @@ function materializeDecision(classification, trusted) {
   return {
     decision: REASON_DECISION[classification.reasonCode],
     reasonCode: classification.reasonCode,
-    // The request as COMMITTED, never as the model read it. What the model read
-    // is retained verbatim in the signed inference descriptor instead.
+    // The request as COMMITTED, never as the model read it. What the model read is retained verbatim in the
+    // signed inference descriptor instead.
     parsedRequest: {
       action: canonical.action,
       purpose: canonical.purpose,

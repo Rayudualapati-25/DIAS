@@ -80,9 +80,8 @@ class GovernanceContract extends Contract {
     if (!SAFE_ID.test(departmentId) || !ORG_TO_MSP[departmentId]) {
       throw new Error('departmentId must be a known agency identifier');
     }
-    // Station and district heads sit in the authority organisation, so no
-    // department holds a senior enough rank to register itself. Registering a
-    // department is an act of the district authority, like admitting a user.
+    // Station and district heads sit in the authority organisation, so no department holds a senior enough
+    // rank to register itself.
     const caller = getCaller(ctx);
     requireMsp(caller, [MSP.AUDIT], 'CreateDepartment');
     requireRole(caller, [...DISTRICT_HEAD_ROLES], 'CreateDepartment');
@@ -96,8 +95,8 @@ class GovernanceContract extends Contract {
     );
     const department = {
       docType: 'department', departmentId, ...profile,
-      // Owned by the department it describes, not by the authority that
-      // registered it — the registrar is recorded separately.
+      // Owned by the department it describes, not by the authority that registered it — the registrar is
+      // recorded separately.
       owningMsp: ORG_TO_MSP[departmentId],
       registeredByMsp: caller.mspId,
       registeredByRole: caller.role,
@@ -222,8 +221,8 @@ class GovernanceContract extends Contract {
   }
 
   /**
-   * DIAS workflow parameters (design §8). Set by an active AuditMSP district
-   * head; each change is a new state version with its author and transaction.
+   * DIAS workflow parameters. Set by an active AuditMSP district head; each change is a new state version
+   * with its author and transaction.
    */
   async SetDiasParameters(ctx, parametersJson) {
     const { caller } = await requireActiveDistrictHead(ctx, { action: 'SetDiasParameters' });
@@ -254,8 +253,8 @@ class GovernanceContract extends Contract {
   }
 
   /**
-   * Register a governance policy version by the digest of its canonical bundle
-   * (design §5). The policy text never reaches the ledger.
+   * Register a governance policy version by the digest of its canonical bundle. The policy text never
+   * reaches the ledger.
    */
   async RegisterPolicyVersion(ctx, policyVersion, policyHash, bundleId) {
     const { caller } = await requireActiveDistrictHead(ctx, { action: 'RegisterPolicyVersion' });
@@ -288,8 +287,8 @@ class GovernanceContract extends Contract {
   }
 
   /**
-   * Make a registered version the active policy. A second district head must do
-   * it (two-person rule, design D-02); the previous version is retired for good.
+   * Make a registered version the active policy. A second district head must do it; the previous version is
+   * retired for good.
    */
   async ActivatePolicyVersion(ctx, policyVersion) {
     const { caller } = await requireActiveDistrictHead(ctx, { action: 'ActivatePolicyVersion' });
@@ -343,12 +342,7 @@ class GovernanceContract extends Contract {
     return this._queryAll(ctx, POLICY_VERSION_KEY);
   }
 
-  /**
-   * Register the recommendation service's Ed25519 public key (design §6.1). Its
-   * identifier is the SHA-256 of the DER public key, computed here, so the key
-   * and the identifier a commitment names cannot disagree. Rotation: register the
-   * new key, switch the service, then revoke the old key.
-   */
+  /** Register the recommendation service's Ed25519 public key. */
   async RegisterRecommendationSigner(ctx, publicKeyPem, label) {
     const { caller } = await requireActiveDistrictHead(ctx, { action: 'RegisterRecommendationSigner' });
     const keyId = signerKeyIdOf(publicKeyPem);

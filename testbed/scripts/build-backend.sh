@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Stage the backend sources into the shared testbed folder and build the
-# dias-backend:testbed image on M4. Prints the hash of the staged sources.
+# Stage the backend sources into the shared testbed folder and build the dias-backend:testbed image on M4. Prints the hash of the staged sources.
 set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 TB="${TB:-${HOME}/dias-testbed}"

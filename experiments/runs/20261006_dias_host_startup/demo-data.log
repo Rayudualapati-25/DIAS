@@ -1,0 +1,14 @@
+/Library/Developer/CommandLineTools/usr/bin/make seed-domain SEED_DOMAIN_ARGS=--with-demo-cases
+CHANNEL=diaschannel CHAINCODE=diasrecords node scripts/seed-domain.js --with-demo-cases
+skip      CreateDepartment police: already on the ledger
+skip      CreateDepartment forensics: already on the ledger
+skip      CreateDepartment prosecution: already on the ledger
+skip      CreateDepartment court: already on the ledger
+skip      CreateDepartment audit: already on the ledger
+on-chain  CreateCase CASE-2026-001
+on-chain  CreateCase CASE-2026-002
+/Library/Developer/CommandLineTools/usr/bin/make seed-records
+CHANNEL=diaschannel CHAINCODE=diasrecords node scripts/seed-demo-records.js
+on-chain  REC-FIR-001
+on-chain  REC-EVIDENCE-001
+on-chain  REC-JUVENILE-001

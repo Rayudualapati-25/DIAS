@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Aggregate the three load-test repetitions and draw the paper figure.
-
-Reads latency_by_concurrency_run{1,2,3}.csv, averages each metric across the
-repetitions, reports the spread, and writes:
-
-  latency_summary_aggregated.csv   mean and standard deviation per level
-  latency_vs_concurrency.png       two-panel figure for the paper
-"""
+"""Aggregate the three load-test repetitions and draw the paper figure."""
 
 from __future__ import annotations
 

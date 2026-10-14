@@ -1,29 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Build a stratified training subset for a learning curve or a bounded pilot.
- *
- * Why a subset at all: with the complete policy rendered in every prompt, one
- * epoch of the full 5,254-example training pool is ~10.6M tokens and, at the
- * measured throughput of this machine, roughly a day of wall-clock time. That
- * is a real constraint on how many configurations can be compared, and pouring
- * all of it into a single run assumes more data helps — which is the thing a
- * learning curve is supposed to establish rather than assume.
- *
- * How the subset is chosen: proportionally within strata of
- * (scenario × label × justification kind), so a smaller set keeps the same
- * shape as the full one. Coverage is then repaired — every reason code and
- * every scenario family present in the pool must survive, because a subset that
- * silently drops SEALED_RECORD is not a smaller version of the task, it is a
- * different one.
- *
- * Selection is deterministic from a seed, and nested: the 400-example subset is
- * a subset of the 800-example one, so a learning curve measures the effect of
- * ADDING data rather than the effect of two unrelated samples.
- *
- *   node experiments/dias-finetuning/v2/make-training-subset.js --sizes 400,800,1600
- */
+/** Build a stratified training subset for a learning curve or a bounded pilot. */
 
 const fs = require('fs');
 const path = require('path');
@@ -52,8 +30,8 @@ const stratumOf = (example) =>
   `${example.scenario.split(':')[0]}|${example.label.recommendation}|${example.justificationKind}`;
 
 /**
- * A deterministic priority per example. Ordering by it and taking a prefix gives
- * nested subsets for free: a shorter prefix is always contained in a longer one.
+ * A deterministic priority per example. Ordering by it and taking a prefix gives nested subsets for free: a
+ * shorter prefix is always contained in a longer one.
  */
 function prioritized(examples, seed) {
   return [...examples]
@@ -103,8 +81,8 @@ function allocate(strata, size) {
 }
 
 /**
- * Make sure every reason code and scenario in the pool survives, swapping in a
- * missing one for a surplus example from the largest stratum.
+ * Make sure every reason code and scenario in the pool survives, swapping in a missing one for a surplus
+ * example from the largest stratum.
  */
 function repairCoverage(selected, pool, size) {
   const chosen = new Map(selected.map((example) => [example.exampleId, example]));

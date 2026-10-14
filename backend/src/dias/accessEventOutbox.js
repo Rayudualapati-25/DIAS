@@ -1,8 +1,8 @@
 'use strict';
 
-/** Encrypted staging of application events; Fabric remains the final access log.
- * A file is removed only after a confirmed idempotent submit. Unreadable or failed
- * entries stay on disk for operator recovery. No credentials/tokens are staged.
+/**
+ * Encrypted staging of application events; Fabric remains the final access log. A file is removed only
+ * after a confirmed idempotent submit.
  */
 const fs = require('fs');
 const path = require('path');

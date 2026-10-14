@@ -1,0 +1,113 @@
+{
+ "schema": "dias-e2e-run-v2",
+ "planSha256": "411ad2ceb0c031e71672ef343d07f09f4ce614ec1e839e8cc95710c3172d9567",
+ "planned": 48,
+ "auditor": "sp.north",
+ "order": [
+  "E2Q-MAC-01",
+  "E2Q-MOB-01",
+  "E2Q-MAC-02",
+  "E2Q-MOB-02",
+  "E2Q-MOB-03",
+  "E2Q-MAC-03",
+  "E2Q-MAC-04",
+  "E2Q-MOB-04",
+  "E2Q-MOB-05",
+  "E2Q-MAC-05",
+  "E2Q-MAC-06",
+  "E2Q-MOB-06",
+  "E2Q-MOB-07",
+  "E2Q-MAC-07",
+  "E2Q-MOB-08",
+  "E2Q-MAC-08",
+  "E2Q-MOB-09",
+  "E2Q-MAC-09",
+  "E2Q-MAC-10",
+  "E2Q-MOB-10",
+  "E2Q-MAC-11",
+  "E2Q-MOB-11",
+  "E2Q-MOB-12",
+  "E2Q-MAC-12",
+  "E2Q-MOB-13",
+  "E2Q-MAC-13",
+  "E2Q-MAC-14",
+  "E2Q-MOB-14",
+  "E2Q-MOB-15",
+  "E2Q-MAC-15",
+  "E2Q-MAC-16",
+  "E2Q-MOB-16",
+  "E2Q-MOB-17",
+  "E2Q-MAC-17",
+  "E2Q-MAC-18",
+  "E2Q-MOB-18",
+  "E2Q-MOB-19",
+  "E2Q-MAC-19",
+  "E2Q-MOB-20",
+  "E2Q-MAC-20",
+  "E2Q-MAC-21",
+  "E2Q-MOB-21",
+  "E2Q-MAC-22",
+  "E2Q-MOB-22",
+  "E2Q-MAC-23",
+  "E2Q-MOB-23",
+  "E2Q-MAC-24",
+  "E2Q-MOB-24"
+ ],
+ "startedAtUtc": "2026-10-13T17:57:04.333Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 35,
+  "chaincode": "diasrecords_3.0-5fbef89a8a17e237"
+ },
+ "decisionsBefore": 98,
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": 712,
+ "finishedAtUtc": "2026-10-13T18:36:33.364Z",
+ "ran": 48,
+ "completed": 48,
+ "failed": 0,
+ "endChecks": [
+  {
+   "name": "every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "48 of 48 found"
+  },
+  {
+   "name": "the run caused no refused or failed call",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "the reduced decision log an ordinary user reads grew by one entry per workflow",
+   "ok": true,
+   "detail": "98 -> 146, 48 workflows"
+  },
+  {
+   "name": "that reduced log shows no name or case file",
+   "ok": true,
+   "detail": "146 entries"
+  },
+  {
+   "name": "each requester finds their own requests with the final outcome",
+   "ok": true,
+   "detail": "12 of 12 requesters"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization was created",
+   "ok": true,
+   "detail": "0 active"
+  },
+  {
+   "name": "the phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  }
+ ]
+}

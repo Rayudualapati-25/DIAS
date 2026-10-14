@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Template explanation writer — no AI involved.
- *
- * Two jobs:
- *  1. Fallback. If Ollama is off, users still get a readable sentence.
- *  2. Baseline. The experiment compares the LLM against this, so it has to be
- *     genuinely good, not a straw man.
- *
- * It is fully deterministic: same artifact in, same sentence out.
- */
+/** Template explanation writer — no AI involved. */
 
 // Plain-English sentence for each reason the policy engine can return.
 const REASON_SENTENCE = Object.freeze({
@@ -46,9 +37,7 @@ const OUTCOME = Object.freeze({
 });
 
 /**
- * Turn attribute names the chaincode uses (subject.clearance) into readable
- * words (requester clearance). Naming the attributes matters: the paper's
- * quality metric checks whether the text actually mentions what decided it.
+ * Turn attribute names the chaincode uses (subject.clearance) into readable words (requester clearance).
  */
 const ATTRIBUTE_WORDS = Object.freeze({
   'subject.role': 'requester role',
@@ -91,11 +80,7 @@ function joinWords(items) {
   return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
 }
 
-/**
- * Build the explanation sentence from a committed artifact.
- * @param {object} explanation stored artifact (decision, reasonCode, decisiveAttributes, counterfactual, policyVersion)
- * @param {object} context     { subject, environment, record } for concrete values
- */
+/** Build the explanation sentence from a committed artifact. */
 function render(explanation, context = {}) {
   const outcome = OUTCOME[explanation.decision] || `Decision '${explanation.decision}' was recorded`;
   const because = REASON_SENTENCE[explanation.reasonCode] || `the policy returned ${explanation.reasonCode}`;

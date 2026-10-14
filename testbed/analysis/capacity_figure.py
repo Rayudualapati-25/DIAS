@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Capacity of each component in one unit (operations per minute), from E3, E4, E5.
-
-The whole workflow cannot run faster than its slowest component; this figure
-puts the components side by side so the bottleneck is visible. The value axis is
-logarithmic because the components differ by orders of magnitude; every bar
-carries its exact value.
-
-Usage: python3 capacity_figure.py --analysis <run>/analysis
-"""
+"""Capacity of each component in one unit (operations per minute), from E3, E4, E5."""
 
 import argparse
 import json

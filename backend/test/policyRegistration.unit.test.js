@@ -1,10 +1,6 @@
 'use strict';
 
-/**
- * Seeding the governed policy (plan step 8): one district head registers the
- * policy digest, a second activates it. Re-running is safe; a different digest
- * under the same version is an error, never a silent overwrite.
- */
+/** Seeding the governed policy: one district head registers the policy digest, a second activates it. */
 
 const { expect } = require('chai');
 const { registerAndActivatePolicy, policyIdentity } = require('../src/dias/policyRegistration');

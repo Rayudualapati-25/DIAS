@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * DIAS access routes: request submission and the auditor decision.
- *
- * What the routes must get right is what reaches the ledger: the request with
- * only the justification's digest, and the auditor decision with only the note's
- * digest. The recommendation the decision is compared with is the commitment κ
- * already on the ledger; the routes refuse to decide on an object that does not
- * match it. Everything else stays off-chain. Note staging is tested in
- * auditorNote.unit.test.js.
- */
+/** DIAS access routes: request submission and the auditor decision. */
 
 const fs = require('fs');
 const os = require('os');

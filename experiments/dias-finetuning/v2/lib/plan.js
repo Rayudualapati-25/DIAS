@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * How many families of each kind to build, and which justification families
- * each kind may draw from.
- *
- * The counts are a starting pool, not a claim about the right training size.
- * The final training count is chosen from a learning curve over subsets of this
- * pool (see the training plan); generating more duplicated synthetic examples is
- * not assumed to help.
- */
+/** How many families of each kind to build, and which justification families each kind may draw from. */
 
 const {
   CONTRADICTORY_FAMILIES, INJECTION_FAMILIES, PLAIN_FAMILIES, VERBOSE_FAMILIES,
@@ -24,11 +16,7 @@ const POOLS = Object.freeze({
   injection: ids(INJECTION_FAMILIES),
 });
 
-/**
- * Mixture used for ordinary scenarios. Adversarial text is a minority of
- * training traffic, as it would be in reality, but is never absent: a model that
- * has seen no injection attempts has no reason to resist one.
- */
+/** Mixture used for ordinary scenarios. */
 const DEFAULT_MIX = Object.freeze([
   { pool: 'plain', weight: 0.55 },
   { pool: 'verbose', weight: 0.10 },
@@ -54,20 +42,13 @@ function pickPool(rng, mix) {
   return mix[mix.length - 1].pool;
 }
 
-/**
- * Generation plan.
- *
- * `variants` is how many phrasings of the same facts a family contains. Keeping
- * it above one is what makes family grouping meaningful; keeping it small stops
- * the dataset from being mostly repetition.
- */
+/** Generation plan. */
 const PLAN = Object.freeze({
   cleanAllow: { families: 900, variants: 2, mix: DEFAULT_MIX },
   singleViolation: { familiesPerClause: 110, variants: 2, mix: DEFAULT_MIX },
-  // Multi-clause and adversarial families are generated well above their
-  // training need: only the ~20% of families that land in `test` can fill
-  // `test-multi-rule` and `test-adversarial`, and a held-out set is not worth
-  // reporting if it is too small to separate models.
+  // Multi-clause and adversarial families are generated well above their training need: only the ~20% of
+  // families that land in `test` can fill `test-multi-rule` and `test-adversarial`, and a held-out set is
+  // not worth reporting if it is too small to separate models.
   multiViolation: { families: 1000, variants: 2, mix: DEFAULT_MIX },
   nearMiss: { familiesPerKind: 110, variants: 2, mix: DEFAULT_MIX },
   adversarial: { families: 1000, variants: 2, mix: ADVERSARIAL_MIX },

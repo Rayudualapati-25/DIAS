@@ -43,8 +43,8 @@ if (!['llm-only', 'legacy-baseline'].includes(ACCESS_POLICY_MODE)) {
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const BUNDLED_LLM_ADAPTER_HASH = '5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe';
-// A mobile development API can reuse the currently running Mac network's
-// enrolled identities without copying its keys into another checkout.
+// A mobile development API can reuse the currently running Mac network's enrolled identities without
+// copying its keys into another checkout.
 const NETWORK_DIR = process.env.FABRIC_NETWORK_DIR
   ? path.resolve(REPO_ROOT, process.env.FABRIC_NETWORK_DIR)
   : path.join(REPO_ROOT, 'network');
@@ -66,13 +66,9 @@ const LLM_POLICY_ADAPTER_PATH = process.env.LLM_POLICY_ADAPTER_PATH
     REPO_ROOT,
     'LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best'
   );
-// --- DIAS (binary ALLOW/DENY advisory recommender) ------------------------
-//
-// The DIAS runtime is deliberately separate from the SEAL-era settings above so
-// the two can run side by side: SEAL keeps port 8080 and the v6 adapter, DIAS
-// points at its own model server and its own channel and chaincode. The LLM is
-// called by this backend; its recommendation is kept off-chain for the auditor
-// screen, and only the auditor decision and its LLM agreement reach the ledger.
+// --- DIAS (binary ALLOW/DENY advisory recommender) ------------------------ The DIAS runtime is
+// deliberately separate from the SEAL-era settings above so the two can run side by side: SEAL keeps port
+// 8080 and the v6 adapter, DIAS points at its own model server and its own channel and chaincode.
 const resolveFromRepo = (value, fallback) => {
   if (!value) return fallback;
   return path.isAbsolute(value) ? path.normalize(value) : path.resolve(REPO_ROOT, value);
@@ -88,14 +84,13 @@ const DIAS_REVIEW_STORE_DIR = resolveFromRepo(
   path.join(REPO_ROOT, 'backend', 'data', 'dias-reviews')
 );
 
-// The Fabric CLI binaries ship with the workspace rather than the system.
-// fabric-ca-client is used to register and enrol new department users, exactly
-// as scripts/seed-identities.sh does, so web-created identities are
-// byte-identical to seeded ones.
+// The Fabric CLI binaries ship with the workspace rather than the system. fabric-ca-client is used to
+// register and enrol new department users, exactly as scripts/seed-identities.sh does, so web-created
+// identities are byte-identical to seeded ones.
 const FABRIC_BIN = path.resolve(NETWORK_DIR, '..', '..', 'fabric-samples', 'bin');
 
-// caPort/caName are what fabric-ca-client needs to register and enrol a new
-// user into that department; they mirror network/compose/compose-ca.yaml.
+// caPort/caName are what fabric-ca-client needs to register and enrol a new user into that department; they
+// mirror network/compose/compose-ca.yaml.
 const BASE_ORG_CONFIG = Object.freeze({
   police: {
     mspId: 'PoliceMSP',
@@ -141,14 +136,7 @@ const BASE_ORG_CONFIG = Object.freeze({
 
 const PEER_ENDPOINT = /^[A-Za-z0-9.-]+:\d{1,5}$/;
 
-/**
- * Peer addresses for a backend that does not run next to the peers.
- *
- * The multi-machine testbed runs this backend on its own VM, where each
- * organization's peer is reached by host name over the Docker overlay network:
- * FABRIC_PEER_ENDPOINTS='{"police":"peer0.police.example.com:7051", ...}'.
- * Unset, every organization keeps its localhost address.
- */
+/** Peer addresses for a backend that does not run next to the peers. */
 function parsePeerEndpoints(text, orgs) {
   if (!text || text.trim() === '') return {};
   let parsed;
@@ -189,8 +177,8 @@ module.exports = Object.freeze({
   CORS_ORIGIN,
   ACCESS_POLICY_MODE,
 
-  // Local LLM used only to reword decisions into plain language.
-  // Change OLLAMA_MODEL to any model you have pulled (e.g. llama3.1:8b).
+  // Local LLM used only to reword decisions into plain language. Change OLLAMA_MODEL to any model you have
+  // pulled (e.g. llama3.1:8b).
   OLLAMA_URL: process.env.OLLAMA_URL || 'http://localhost:11434',
   OLLAMA_MODEL: process.env.OLLAMA_MODEL || 'llama3.2:3b',
   OLLAMA_SEED: Number(process.env.OLLAMA_SEED || 42),
@@ -205,22 +193,16 @@ module.exports = Object.freeze({
   LLM_POLICY_ADAPTER_PATH,
   LLM_POLICY_SIGNING_KEY_PATH,
 
-  // Signing in has to read the account before it knows which department the
-  // account belongs to, so that one lookup uses a fixed identity. The audit
-  // organisation is the right one to hold it: oversight already reads across
-  // all five departments, and UserContract.ReadUser is evaluate-only.
+  // Signing in has to read the account before it knows which department the account belongs to, so that one
+  // lookup uses a fixed identity.
   AUTH_ORG: process.env.AUTH_ORG || 'audit',
-  // A district head of the authority organisation. Sign-in must read a profile
-  // before it knows which department the person belongs to, so that one lookup
-  // uses a fixed identity; the authority organisation already reads across all
-  // departments and UserContract.ReadUser is evaluate-only.
+  // A district head of the authority organisation.
   AUTH_USER: process.env.AUTH_USER || 'sp.north',
 
   JWT_SECRET,
   JWT_EXPIRY: '8h',
-  // DIAS runs on its own five-organization channel under its own chaincode
-  // name, so the earlier crimechannel/crimerecords deployment keeps running
-  // untouched.
+  // DIAS runs on its own five-organization channel under its own chaincode name, so the earlier
+  // crimechannel/crimerecords deployment keeps running untouched.
   CHANNEL: process.env.CHANNEL || 'diaschannel',
   CHAINCODE: process.env.CHAINCODE || 'diasrecords',
   NETWORK_DIR,
@@ -229,8 +211,7 @@ module.exports = Object.freeze({
   ORG_CONFIG,
   parsePeerEndpoints,
 
-  // DIAS recommendation model endpoint. Defaults to port 8081 so a DIAS run
-  // never contends with the SEAL v6 server on 8080.
+  // DIAS recommendation model endpoint.
   DIAS_MODEL_URL: process.env.DIAS_MODEL_URL || 'http://127.0.0.1:8081/v1',
   DIAS_MODEL_SERVED_NAME: process.env.DIAS_MODEL_SERVED_NAME || 'default_model',
   DIAS_MODEL_TIMEOUT_MS: Number(process.env.DIAS_MODEL_TIMEOUT_MS || 120000),
@@ -240,9 +221,8 @@ module.exports = Object.freeze({
   DIAS_POLICY_BUNDLE_PATH,
   DIAS_REVIEW_STORE_DIR,
 
-  // Identity of the model the backend serves, kept with each off-chain
-  // recommendation. The defaults describe the untuned base model; set the
-  // adapter fields when a fine-tuned adapter is served.
+  // Identity of the model the backend serves, kept with each off-chain recommendation. The defaults
+  // describe the untuned base model; set the adapter fields when a fine-tuned adapter is served.
   DIAS_MODEL_ID: process.env.DIAS_MODEL_ID || 'qwen3-14b-4bit-untuned',
   DIAS_MODEL_FAMILY: process.env.DIAS_MODEL_FAMILY || 'qwen3',
   DIAS_BASE_MODEL: process.env.DIAS_BASE_MODEL || 'mlx-community/Qwen3-14B-4bit',
@@ -252,25 +232,24 @@ module.exports = Object.freeze({
   DIAS_ADAPTER_ID: process.env.DIAS_ADAPTER_ID || null,
   DIAS_ADAPTER_HASH: process.env.DIAS_ADAPTER_HASH || null,
 
-  // Encryption of the off-chain review store at rest (design §10): the current
-  // key (base64, 32 bytes), its identifier, and `id:key` pairs of earlier keys.
-  // Create a key with scripts/dias/review-store-key.js.
+  // Encryption of the off-chain review store at rest: the current key (base64, 32 bytes), its identifier,
+  // and `id:key` pairs of earlier keys.
   DIAS_REVIEW_STORE_KEY: process.env.DIAS_REVIEW_STORE_KEY || '',
   DIAS_REVIEW_STORE_KEY_ID: process.env.DIAS_REVIEW_STORE_KEY_ID || '',
   DIAS_REVIEW_STORE_PREVIOUS_KEYS: process.env.DIAS_REVIEW_STORE_PREVIOUS_KEYS || '',
 
-  // How often the backend records the expiry of requests past their review
-  // deadline (design §8). 0 disables the sweeper.
+  // How often the backend records the expiry of requests past their review deadline. 0 disables the
+  // sweeper.
   DIAS_EXPIRY_SWEEP_SECONDS: Number(process.env.DIAS_EXPIRY_SWEEP_SECONDS || 300),
 
-  // The backend's Ed25519 recommendation signing key (design §6.1). Its public
-  // key must be registered on the ledger (scripts/dias/register-recommender-key.js).
+  // The backend's Ed25519 recommendation signing key. Its public key must be registered on the ledger
+  // (scripts/dias/register-recommender-key.js).
   DIAS_RECOMMENDER_SIGNING_KEY_FILE: resolveFromRepo(
     process.env.DIAS_RECOMMENDER_SIGNING_KEY_FILE,
     path.join(REPO_ROOT, 'backend', 'data', 'dias-recommender-signing-key.pem')
   ),
-  // The identity that relays signed commitments to the ledger. Any member may;
-  // the commitment's authority is its signature.
+  // The identity that relays signed commitments to the ledger. Any member may; the commitment's authority
+  // is its signature.
   DIAS_RELAY_ORG: process.env.DIAS_RELAY_ORG || process.env.AUTH_ORG || 'audit',
   DIAS_RELAY_USER: process.env.DIAS_RELAY_USER || process.env.AUTH_USER || 'sp.north',
 });

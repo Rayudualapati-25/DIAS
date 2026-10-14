@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * AuditContract — verification and reconstruction for reviewers.
- *
- * GetRequestAuditTrail rebuilds the DIAS lifecycle of one request from committed
- * Fabric world state and key history: who requested which record, the dynamic
- * authorization check, and the auditor decision with its LLM agreement. It does
- * not keep a separate log: every item it returns was written by the transaction
- * named next to it.
- */
+/** AuditContract — verification and reconstruction for reviewers. */
 
 const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
@@ -117,8 +109,8 @@ class AuditContract extends Contract {
   }
 
   /**
-   * Compare the hash recomputed by the backend over agency-held raw content
-   * with the immutable commitment in Fabric metadata.
+   * Compare the hash recomputed by the backend over agency-held raw content with the immutable commitment
+   * in Fabric metadata.
    */
   async VerifyRecordPayload(ctx, recordId, contentHash) {
     const record = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.RECORD, [recordId]));
@@ -132,8 +124,8 @@ class AuditContract extends Contract {
   }
 
   /**
-   * Commit one authenticated API access event. The actor is always derived
-   * from the signing certificate; callers cannot name a different actor.
+   * Commit one authenticated API access event. The actor is always derived from the signing certificate;
+   * callers cannot name a different actor.
    */
   async RecordAccessEvent(ctx, action, targetJson, outcome, statusCode) {
     return this._recordAccessEvent(ctx, action, targetJson, outcome, statusCode, null);
@@ -249,10 +241,9 @@ class AuditContract extends Contract {
   }
 
   /**
-   * Complete lifecycle of one request: submission, dynamic authorization check,
-   * auditor decision with its LLM agreement (or skip), dynamic authorization
-   * creation and later changes, and the access outcome, each with the transaction
-   * that committed it. Readable by reviewers and by the requester.
+   * Complete lifecycle of one request: submission, dynamic authorization check, auditor decision with its
+   * LLM agreement (or skip), dynamic authorization creation and later changes, and the access outcome, each
+   * with the transaction that committed it.
    */
   async GetRequestAuditTrail(ctx, requestId) {
     if (!SAFE_ID.test(requestId || '')) throw new Error('requestId has invalid format');
@@ -269,10 +260,9 @@ class AuditContract extends Contract {
     const outcome = await readJson(ctx, ctx.stub.createCompositeKey(KEYS.OUTCOME, [requestId]));
     const committed = await readJson(ctx, ctx.stub.createCompositeKey(COMMITMENT_KEY, [requestId]));
     const events = await readRequestEvents(ctx, requestId);
-    // The requester rule comes before reviewer rights (design §10): whoever made
-    // the request learns the recommendation with the auditor's decision, never
-    // ahead of it, and never reads the digest of the auditor's note — also when
-    // they hold a reviewer or auditor role themselves.
+    // The requester rule comes before reviewer rights: whoever made the request learns the recommendation
+    // with the auditor's decision, never ahead of it, and never reads the digest of the auditor's note —
+    // also when they hold a reviewer or auditor role themselves.
     const withhold = requester && !decided && Boolean(committed);
     const recommendationCommitment = withhold ? withheldCommitment(committed) : committed;
     const auditorDecision = requester ? decisionForRequester(decided) : decided;

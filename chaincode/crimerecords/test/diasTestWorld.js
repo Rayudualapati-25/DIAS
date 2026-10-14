@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Test world for the DIAS contracts.
- *
- * One committed ledger that every signed transaction reads from and writes back
- * to. A transaction that throws writes nothing, as on Fabric. The LLM runs in the
- * application backend, so this world submits requests and auditor decisions
- * carrying the recommendation value the auditor was shown — ALLOW, DENY, or
- * UNAVAILABLE. Nothing else about the LLM reaches the ledger.
- */
+/** Test world for the DIAS contracts. */
 
 const AccessContract = require('../lib/accessContract');
 const AuditContract = require('../lib/auditContract');
@@ -23,7 +15,7 @@ const {
   provenanceMessage, provenancePayload,
 } = require('../lib/dias/recommendationCommitment');
 
-/** The recommendation service's signing key in these tests (Ed25519, as in design §6.1). */
+/** The recommendation service's signing key in these tests. */
 function createSigner() {
   const { privateKey, publicKey } = crypto.generateKeyPairSync('ed25519');
   return {
@@ -165,8 +157,8 @@ function createDiasWorld() {
     },
 
     /**
-     * The commitment κ the recommendation service would produce for a request:
-     * bound to the request's committed hashes and policy, signed by `sign`.
+     * The commitment κ the recommendation service would produce for a request: bound to the request's
+     * committed hashes and policy, signed by `sign`.
      */
     commitmentFor(requestId, {
       recommendation = 'ALLOW', generationStatus = 'OK', modelVersion = 'mlx-community/Qwen3-14B-4bit@a4d9b2df',
@@ -235,10 +227,8 @@ function createDiasWorld() {
     },
 
     /**
-     * Commit the recommendation (unless one is committed already, or `recommendation`
-     * is null for "none at all"), then submit the auditor decision. A note hash is
-     * supplied whenever the agreement requires one, unless the test passes its own.
-     * 'UNAVAILABLE' commits a failed generation with that status.
+     * Commit the recommendation (unless one is committed already, or `recommendation` is null for "none at
+     * all"), then submit the auditor decision.
      */
     async decide(requestId, decision, recommendation = 'ALLOW', {
       validUntilUtc = '', caller = CALLERS.auditor, timestamp, noteHash, generationStatus,

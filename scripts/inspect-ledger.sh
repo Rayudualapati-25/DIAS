@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# Read actual channel membership, heights, definitions and DIAS commitments.
-# No transactions, key copying or credential-bearing CouchDB URLs.
-# FABRIC_NETWORK_DIR=/active/network INSPECT_OUT=/fresh/output scripts/inspect-ledger.sh --no-pause
+# Read actual channel membership, heights, definitions and DIAS commitments. No transactions, key copying or credential-bearing CouchDB URLs.
 set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORKSPACE="$(cd "${PROJECT_DIR}/.." && pwd)"

@@ -1,28 +1,4 @@
-/**
- * THE MODULE REGISTRY.
- *
- * ============================================================================
- *  TO ADD A NEW MODULE
- *  1. create `js/modules/my-thing.js` exporting a default descriptor
- *  2. import it below and add it to MODULES
- *  That is all. Navigation, routing and access filtering happen automatically.
- * ============================================================================
- *
- * Descriptor shape:
- *
- *   export default {
- *     id:      'my-thing',        // URL becomes #/my-thing — must be unique
- *     title:   'My thing',        // shown in the sidebar
- *     group:   'Records',         // sidebar section: Records | Review | Audit | ...
- *     order:   50,                // sort order inside the group
- *     allow:   { roles: [...] },  // see core/access.js; omit for "everyone"
- *     summary: 'One line shown under the page title.',
- *     mount({ user, navigate }) { return someElement; },
- *   }
- *
- * `mount` is called every time the module is opened, so build fresh nodes and
- * kick off your own data loading (see `asyncRegion` in core/components.js).
- */
+/** THE MODULE REGISTRY. */
 
 import requestAccess from './request-access.js';
 import decisionLog from './decision-log.js';

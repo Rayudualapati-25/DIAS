@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="31" failures="0" errors="0" skipped="1" time="43.33" timestamp="2026-10-13T17:06:34" hostname="localhost">
+  <testsuite name="org.dias.mobile.data.ActivitySmokeTest" tests="1" failures="0" errors="0" skipped="0" time="2.41" timestamp="2026-10-13T17:06:34" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="connectSignInCacheAndSignOutThroughScreen" classname="org.dias.mobile.data.ActivitySmokeTest" time="2.41" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.data.FoundationTest" tests="7" failures="0" errors="0" skipped="0" time="0.075" timestamp="2026-10-13T17:06:34" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="failedRefreshPreservesExistingSnapshot" classname="org.dias.mobile.data.FoundationTest" time="0.033" />
+    <testcase name="batchesPersistAcrossDatabaseReopen" classname="org.dias.mobile.data.FoundationTest" time="0.003" />
+    <testcase name="repeatedPageIsIdempotent" classname="org.dias.mobile.data.FoundationTest" time="0.034" />
+    <testcase name="failedPageTransactionPreservesRowsAndCursor" classname="org.dias.mobile.data.FoundationTest" time="0.002" />
+    <testcase name="hostAndAccountCachesAreIsolated" classname="org.dias.mobile.data.FoundationTest" time="0.002" />
+    <testcase name="offlineReadsWorkWhileNetworkOnlyAblationFails" classname="org.dias.mobile.data.FoundationTest" time="0.001" />
+    <testcase name="refreshReplacesRemovedCasesAndClearRemovesContinuation" classname="org.dias.mobile.data.FoundationTest" time="0.0" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.data.HostConnectionTest" tests="2" failures="0" errors="0" skipped="0" time="0.139" timestamp="2026-10-13T17:06:34" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="emulatorAliasToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.085" />
+    <testcase name="reverseForwardingToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.054" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.screen.AccessLogScreenTest" tests="7" failures="0" errors="0" skipped="0" time="7.8" timestamp="2026-10-13T17:06:34" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="aRefusedFullLogFallsBackToTheReducedOne" classname="org.dias.mobile.screen.AccessLogScreenTest" time="0.998" />
+    <testcase name="aReviewerReadsTheFullLogWithNamesCaseFilesAndWaitingRequests" classname="org.dias.mobile.screen.AccessLogScreenTest" time="0.948" />
+    <testcase name="aReadCutOffAtOneHundredSaysOlderRequestsAreNotShown" classname="org.dias.mobile.screen.AccessLogScreenTest" time="0.986" />
+    <testcase name="olderEntriesAreReachedPageByPage" classname="org.dias.mobile.screen.AccessLogScreenTest" time="1.029" />
+    <testcase name="anOfficerReadsTheReducedLogAndTheirOwnRequestsInFull" classname="org.dias.mobile.screen.AccessLogScreenTest" time="1.204" />
+    <testcase name="anEmptyLogSaysSoAndAFailedReadKeepsWhatWasShown" classname="org.dias.mobile.screen.AccessLogScreenTest" time="1.202" />
+    <testcase name="signingOutOrAnExpiredSessionRemovesTheLogFromTheScreen" classname="org.dias.mobile.screen.AccessLogScreenTest" time="1.433" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.screen.AuditorDecisionScreenTest" tests="11" failures="0" errors="0" skipped="0" time="14.887" timestamp="2026-10-13T17:06:34" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="aLostConnectionAfterSendingClosesTheReview" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.398" />
+    <testcase name="anUnconfirmedSubmissionIsNotOfferedForABlindRetry" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.404" />
+    <testcase name="aGrantOverACommittedDenialSaysItCreatesAReusableAuthorization" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.376" />
+    <testcase name="anOfficerIsNeverOfferedTheAuditorScreen" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="0.903" />
+    <testcase name="aDenialAgainstTheLlmNeedsAReasonBeforeItIsSent" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.531" />
+    <testcase name="adviceStillBeingPreparedCannotBeDecided" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.126" />
+    <testcase name="adviceThatWasNeverCommittedIsNotTreatedAsARecommendation" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.151" />
+    <testcase name="anAuditorGrantsARequestTheLlmAlsoAllowed" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.485" />
+    <testcase name="aRefusalThatWroteNothingKeepsTheReviewOpenForCorrection" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.849" />
+    <testcase name="signingOutLeavesNothingOfTheReviewInTheHiddenScreen" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.247" />
+    <testcase name="aReplyThatCannotBeReadClosesTheReview" classname="org.dias.mobile.screen.AuditorDecisionScreenTest" time="1.417" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.screen.LiveHostScreenTest" tests="3" failures="0" errors="0" skipped="1" time="5.609" timestamp="2026-10-13T17:06:34" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="aReviewerSeesOnThePhoneEveryRequestThePortalLogHolds" classname="org.dias.mobile.screen.LiveHostScreenTest" time="2.417" />
+    <testcase name="anOfficerSeesTheReducedLogAndTheirOwnRequests" classname="org.dias.mobile.screen.LiveHostScreenTest" time="2.472" />
+    <testcase name="anAuditorDecidesANamedRequestOnThePhoneAndTheLogShowsIt" classname="org.dias.mobile.screen.LiveHostScreenTest" time="0.72">
+      <skipped />
+    </testcase>
+  </testsuite>
+</testsuites>

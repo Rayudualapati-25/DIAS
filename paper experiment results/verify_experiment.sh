@@ -1,23 +1,5 @@
 #!/usr/bin/env bash
-#
-# Independent verification that the ledger-growth experiment ran against a real
-# Hyperledger Fabric network, and that its numbers are not self-reported.
-#
-# The load harness measured itself. This script deliberately does NOT trust it:
-# every check here uses a different tool, a different code path, or the ledger's
-# own cryptographic record.
-#
-#   1. environment fingerprint   what was actually running
-#   2. block height              the ledger grew by real blocks
-#   3. transaction provenance    sampled records resolve to committed txids
-#   4. block retrieval           those txids are inside real blocks (qscc)
-#   5. endorsement               blocks carry peer signatures
-#   6. independent record count  CouchDB agrees with the API
-#   7. independent timing        curl re-measures what the Node harness claimed
-#
-# Read-only. Safe to run on a live network, but run it AFTER a measurement
-# sweep finishes so the peer is not competing with the experiment.
-#
+# Independent verification that the ledger-growth experiment ran against a real Hyperledger Fabric network, and that its numbers are not self-reported.
 # Usage: bash verify_experiment.sh [samples]
 
 set -uo pipefail

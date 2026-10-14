@@ -1,383 +1,295 @@
-# DIAS Crime Records Network
+# DIAS: Dynamic and Explainable Access Control for Blockchain-enabled Inter-organizational Data Sharing
 
-DIAS is a research prototype for **Dynamic and Explainable Access Control for
-Blockchain-enabled Inter-organizational Data Sharing** among five organizations
-on a permissioned Hyperledger Fabric channel. The LLM runs in the application
-backend; there is no AI organization.
+DIAS is a research prototype for sharing case files between five criminal-justice
+organizations (police, forensics, prosecution, court and an audit office) on a
+permissioned Hyperledger Fabric network. When an officer asks for a case file, a
+language model gives advice (ALLOW or DENY), but an auditor makes the final
+decision. Every request, the advice and the decision are recorded on the ledger.
 
-**The model recommends, a human auditor decides, and only an auditor's override
-of a model DENY can create a reusable authorization.** Everything in the
-codebase exists to make that true by construction rather than by convention.
+All data in this repository is synthetic. It is a research prototype, not a
+police system.
 
-It is not a CCTNS/ICJS replacement and it is not a production police system. All
-demonstration data is synthetic, and the governance policy is a synthetic
-research policy, not an official one — see
-[`docs/policies/policy-open-questions.md`](docs/policies/policy-open-questions.md).
+Authors: Alapati Venkat Rayudu and Tirthankar Sengupta, Department of Computer
+Science and Engineering, SRM University-AP (see `CITATION.cff`).
 
-> **Standalone DIAS snapshot.** This folder is an independent copy containing
-> the application, Fabric configuration, retained evidence, and the model-portable
-> synthetic fine-tuning datasets. Changes here do not modify the original
-> `wt-dias` worktree or the `crime-records-network` tree that holds V6.
+## How a request works
 
-## Start here
-
-| To understand | Read |
-| --- | --- |
-| How the system is put together and why | [`docs/architecture.md`](docs/architecture.md) |
-| What happens on one request, end to end | [`docs/walkthrough.md`](docs/walkthrough.md) |
-| The retired AI-organization design (historical) | [`docs/ai-as-network-participant.md`](docs/ai-as-network-participant.md) |
-| The governance policy of record | [`docs/policies/governance-policy-specification.md`](docs/policies/governance-policy-specification.md) |
-| Decisions that were open, and how they were resolved | [`docs/policies/policy-open-questions.md`](docs/policies/policy-open-questions.md) |
-| The training/evaluation dataset | [`experiments/dias-finetuning/v2/README.md`](experiments/dias-finetuning/v2/README.md) |
-
-## Architecture
-
-The component, trust-boundary, scope and ledger design is in
-[`docs/architecture.md`](docs/architecture.md). Older architecture figures are
-retained as historical artifacts and do **not** describe the DIAS authority flow.
+1. An officer asks for a case file: which file, what operation (view, export or
+   annotate), for what purpose, and a short reason.
+2. The chaincode records the request with the officer's verified attributes
+   (role, station, district, clearance, case assignments). In the same
+   transaction it checks whether an active *reusable authorization* exists for
+   exactly this officer, file, operation and purpose.
+   - If one exists, the request is granted at once. No model and no auditor are needed.
+3. Otherwise the backend sends the request and the written policy to the model
+   (Qwen3-14B, 4-bit, served locally). The model answers ALLOW or DENY with a
+   reason code and the policy clauses it used.
+4. The backend signs this recommendation and commits its hash to the ledger
+   *before* the auditor sees it, so it cannot be changed afterwards.
+5. An auditor (a district head of the audit organization) reviews the request
+   and the advice and records FORCE_ALLOW or FORCE_DENY. The chaincode itself
+   works out whether the auditor agreed with the committed advice.
+6. If the auditor grants a request that the model advised to deny, the chaincode
+   creates a reusable authorization for exactly that scope. It can be revoked
+   at any time and can have an expiry date.
+7. The officer sees the outcome. After a denial the officer can also read the
+   model's explanation; before the decision nothing from the model is shown.
 
 ```text
-Browser
-  -> Node.js API (validation and Fabric Gateway, signing as the logged-in user)
-  -> chaincode commits the request log (who requested which record, action, purpose)
-     and checks the latest active dynamic authorization in the same transaction
-     -> exact match: GRANTED automatically; the model and the auditor are skipped
-     -> no match:    the backend asks the LLM for an advisory ALLOW/DENY
-                     recommendation and keeps it off-chain for the auditor screen
-                     (or stores that none could be produced)
-                     -> an AuditMSP district head chooses FORCE_ALLOW or FORCE_DENY
-                     -> the chaincode commits the decision log: the decision and
-                        whether it AGREED, NOT_AGREED, or had NO_RECOMMENDATION
-                     -> ONLY FORCE_ALLOW that did not agree with an LLM DENY
-                        creates an exact-record dynamic authorization
-  -> only a granted outcome releases metadata and permits a PDF request, and the
-     grant basis is re-checked at release time
-  -> the owning station uploads the PDF off-chain; Fabric records its hash and release
-  -> every settled request appears in the decision log, which any signed-in identity
-     on the channel can read: who asked for which case file, what was decided, by
-     whom, and whether it agreed with the LLM
+officer (web portal or phone)
+  -> backend (Node.js, Fabric Gateway, signs as the logged-in officer)
+     -> chaincode: record request + check reusable authorization (same transaction)
+        match    -> GRANTED, done
+        no match -> backend asks the LLM -> signed advice, hash committed on the ledger
+                 -> auditor decides (web portal or phone) -> decision, agreement and outcome
+                    committed in one transaction
+  -> access log on the ledger: who asked for which file, the advice, the decision
 ```
 
-The identity that raised a request may never decide it: an auditor who opens
-their own request finds both buttons disabled and is told which other district
-head can decide it.
+## Who can see what
 
-Fabric is authoritative for application-domain state:
+- Every officer with an active credential can read the access log: who asked for
+  which case file, what the model recommended and what the auditor decided.
+- While a request is still waiting, its advice is shown only to reviewers (audit,
+  court and prosecution heads), never to the officer who made the request.
+- Officers outside the reviewers do not get transaction ids or the hashes used
+  by the authorization check.
+- The requester's free-text reason, the model's explanation and the auditor's
+  note stay off the ledger, in an encrypted store in the backend
+  (AES-256-GCM). Only their hashes go on the ledger.
+- The log of searches and reads (who opened what) is for reviewers only.
 
-- departments and identity-backed user profiles;
-- cases, record metadata, content hashes, and off-chain references;
-- access requests (who requested which record, with the action, purpose and
-  verified facts), auditor decisions with their LLM agreement, access outcomes,
-  and exact-record dynamic authorizations with their full lifecycle. The LLM
-  recommendation, the requester's justification and the auditor's reason are
-  kept off-chain in the backend's review store (`backend/data/dias-reviews/`);
-- evidence metadata, custody transfers, court workflow, and audit events.
+## Components
 
-Raw crime-record content and evidence bytes are deliberately **not** placed on
-the shared blockchain. The prototype stores them as permission-restricted files
-in each agency's local vault and commits a SHA-256 content hash and `vault://`
-reference to Fabric. This avoids replicating victim data and large files to every
-peer. A production system would replace this adapter with an encrypted,
-agency-controlled document/object store.
-
-There is no application PostgreSQL or SQLite database and no hidden database
-fallback. CouchDB is the configured Fabric peer world-state database, not an
-independent source of truth. Fabric CA maintains its own internal identity
-registry as infrastructure.
-
-## Authentication and the wallet
-
-Each demo user has:
-
-1. an X.509 certificate and private key issued by that department's Fabric CA;
-2. a `UserProfile` ledger asset containing role, rank, department, station,
-   jurisdiction, clearance, assignment, and credential status.
-
-The local MSP folder is the Fabric "wallet": it contains the certificate and
-private key used to sign transactions. It is not application data and it does
-not contain a blockchain balance or a password.
-
-No password or password hash is stored on-chain. The development login screen
-selects an already-enrolled server-held identity and proves it can sign a
-Fabric request. This is a custodial local-demo identity selector, not a secure
-production login. A deployment would use user-controlled keys, hardware-backed
-credentials, or an enterprise identity provider mapped to Fabric identities.
-
-## DIAS authority model
-
-The model's vocabulary is **binary**: `ALLOW` or `DENY`. `ESCALATE` is not a
-label. Failure to generate — unreachable, timed out, unparseable, context
-overflow, policy context unavailable — is a *generation status*, never a
-recommendation. The backend calls the model itself; there is no AI organization
-on the DIAS channel.
-
-The model is always advisory. On a dynamic-authorization miss an AuditMSP
-district head is the final authority and chooses `FORCE_ALLOW` or `FORCE_DENY`.
-The backend works out whether that decision agreed with the stored LLM
-recommendation and commits it with the decision. A reason is mandatory whenever
-the auditor did not agree with the model or no recommendation exists; it is kept
-with the off-chain review, not on the ledger.
-
-| Model | Auditor | Outcome | Ledger records | Dynamic authorization |
-| --- | --- | --- | --- | --- |
-| ALLOW | FORCE_ALLOW | granted | AGREED | none |
-| ALLOW | FORCE_DENY | denied | NOT_AGREED | none |
-| DENY | FORCE_DENY | denied | AGREED | none |
-| **DENY** | **FORCE_ALLOW** | **granted** | **NOT_AGREED** | **created** |
-| none (generation failed) | either | as the auditor decided | NO_RECOMMENDATION | none |
-
-### Exact-record scope
-
-An authorization is scoped to
-
-```
-stableUserId · recordId · caseId · action · purpose
-```
-
-plus the committed hash of the governed conditions, and it matches only while it
-is active, unrevoked, unexpired and the facts are unchanged.
-
-> **This replaces the earlier property-fingerprint design.** The SEAL-era rule
-> was a hash over governed *properties* and could therefore apply to a different
-> record that happened to share them. A rule for one record now authorizes that
-> record and no other. Live scenario R6 demonstrates that a different record,
-> action, purpose or user all miss.
-
-Matching reads the latest committed world state inside the same transaction that
-commits the request, never a local cache. Revocation is explicit, reasoned and
-its own transaction: `FORCE_DENY` never implicitly revokes.
-
-### Evidence
-
-Fourteen acceptance scenarios (81 checks) were run through the backend API
-against `diasrecords` 2.2 on the live five-organization `diaschannel`; transaction
-ids and lifecycle traces are in
-[`experiments/runs/20260916_dias_backend_llm_acceptance_054757/`](experiments/runs/20260916_dias_backend_llm_acceptance_054757/acceptance.json)
-and summarised in
-[`reports/iteration/iter_048_auditor_decision_and_public_log.md`](reports/iteration/iter_048_auditor_decision_and_public_log.md);
-the same scenarios passed unchanged against 2.1
-([`iter_047`](reports/iteration/iter_047_dias_bug_sweep.md)).
-The same scenarios first passed against 2.0, after two attempts that failed on
-harness defects; all three are kept in
-[`experiments/runs/20260915_dias_backend_llm_acceptance/`](experiments/runs/20260915_dias_backend_llm_acceptance/acceptance.json)
-([`iter_046`](reports/iteration/iter_046_dias_backend_llm.md)).
-Run them again with `make dias-acceptance`; each run gets its own folder.
-
-The earlier fifteen-scenario run
-([`iter_036`](reports/iteration/iter_036_dias_live_fabric.md)) tested the
-retired AI-organization design and is kept as evidence for that design only.
+| Folder | What it is |
+| --- | --- |
+| `chaincode/crimerecords` | Fabric chaincode `diasrecords` 3.1 (Node.js): access requests, auditor decisions, reusable authorizations, records, users, audit trail |
+| `backend` | Node.js/Express API on port 3001: sign-in, Fabric Gateway, the model call, signing, encrypted review store, access logging |
+| `frontend` | Web portal (plain JavaScript modules) served by the backend |
+| `mobile/android` | Android app (Kotlin): sign-in, request access, auditor decisions, access log, case summaries |
+| `policies` | The written governance policy and a reference implementation used to check the model offline |
+| `docs` | The policy as readable text (generated from the bundle by `policies/tools/render-policy-spec.js`), its open questions, and architecture figures |
+| `network` | Fabric network configuration and scripts (five organizations on `diaschannel`) |
+| `experiments` | Experiment scripts, the fine-tuning data and evaluation, and all run outputs (`experiments/runs`) |
+| `testbed` | Four-VM testbed setup and its analysis scripts |
+| `LLMxAI` | Model training and evaluation work for the LLM (adapters are not in Git) |
+| `results` | Result tables (CSV) and figures |
+| `benchmarks/caliper` | Hyperledger Caliper benchmark setup (older SEAL-era deployment) |
 
 ## Requirements
 
-- Docker or Colima with the Docker CLI available;
-- Node.js 20+ for the application (22.9+ for `npm start` in `backend/`, which
-  reads `.env` with `--env-file-if-exists`) and Node.js 22 with npm 11.5.1 for the
-  isolated Caliper workspace;
-- Hyperledger Fabric binaries, configuration, and Docker images in the sibling
-  `../fabric-samples` directory;
-- Apple Silicon and MLX-LM (`.venv-qwen-policy`) for the local Qwen3-14B model
-  server, `make dias-model`;
-- Ollama `qwen3:14b` for the controlled untuned baselines.
+- macOS on Apple Silicon (the model runs with MLX), Docker or Colima
+- Node.js 22, Python 3.11+
+- Hyperledger Fabric 2.5 binaries and images in `../fabric-samples`
+- `.venv-qwen-policy` with `mlx-lm` for the model server
+- Android Studio (for the phone app)
 
-## Start from a clean local network
+## Running the prototype
 
 ```bash
-cp .env.example .env  # replace JWT_SECRET before non-disposable use
-make doctor
+cp .env.example .env      # set JWT_SECRET and the review store key
 make install
-make all           # network, identities, DIAS channel, chaincode and seed data
+make all                  # Fabric network, identities, diaschannel, chaincode, seed data
+make dias-model           # Qwen3-14B on port 8081 (DIAS_ADAPTER=<folder> for the fine-tuned V7)
+make dias-backend         # API and web portal on http://localhost:3001
 ```
 
-`make all` performs, in order:
+Open `http://localhost:3001` and sign in as a seeded officer such as
+`insp.sharma` (requests access) or `sp.north` (auditor). The demo sign-in picks
+a Fabric identity held by the server; there are no passwords.
+
+The phone app: open `mobile/android` in Android Studio and run it on an
+emulator. It reaches the Mac at `http://10.0.2.2:3001`.
+
+## Tests
 
 ```bash
-make up            # base Fabric network: CAs, orderer, peers, world state (tears down a previous one)
-make seed          # issue deterministic X.509 demo identities
-make dias-all      # create diaschannel, deploy diasrecords 2.2, seed users and departments
+make test                                   # chaincode, backend, policies, frontend, dataset
+node --test experiments/e2e/*.test.js       # experiment scripts
+cd mobile/android && ./gradlew :app:testDebugUnitTest
 ```
 
-A fresh install holds **no case and no case file**: create the first case under
-"Cases" and the first record under "File a record", as a police officer such as
-`insp.sharma`. The live suites (`make smoke`, `make dias-acceptance`) need fixed
-fixtures instead, which `make dias-demo-data` writes (two cases, three case files).
+The Android screen tests run on an emulator with
+`adb shell am instrument -w org.dias.mobile.dev.test/androidx.test.runner.AndroidJUnitRunner`.
 
-DIAS runs on its own five-organization channel (`diaschannel`, no AI
-organization). The base network still starts the SEAL-era six-organization
-channel `crimechannel`, which DIAS does not use. On a network that is already
-up, `make dias-all` alone adds DIAS without touching `crimechannel`.
+## Experiments of 14 October 2026
 
-Start the model server and the API. Port **8081** is the DIAS default so that an
-existing service on 8080 is never disturbed; the API calls the model itself:
+All runs are in `experiments/runs/20261014_mac_mobile_setups/` (raw rows, logs,
+CPU/memory samples, run summaries). The result tables are in `results/tables/`
+(files starting with `20261014_setups_`) and the figures in
+`results/plots/dias-setups/`.
+
+### Setup
+
+- One Mac (Apple Silicon, 64 GB) running the whole Fabric network (five
+  organizations, 2 s block timeout, 10 transactions per block), the backend and
+  the model server.
+- Two models: the untuned Qwen3-14B (4-bit) and our fine-tuned V7 adapter, both
+  with the same prompt. Every test was run once with each model on the same
+  planned requests.
+- Two Android emulators with identical settings: one for the officer and one for
+  the auditor. (An older emulator was not used: it added about 0.5 s to every new
+  network connection, see `phones/idle-probe-*.json`.)
+- "Mac" means the calls the web portal makes, sent from a script. "Phone" means
+  the real app screen on the emulator, driven by an instrumented test. Officer and
+  auditor can each be on the Mac or the phone, which gives four combinations:
+  Mac only, phone only, and two mixed ones.
+- The auditor is a script that follows the committed advice, so there is no
+  human thinking time in any number.
+
+### What was measured
+
+1. **Step times** – 96 requests per model, one at a time, 24 in each combination,
+   same mix of files, operations and purposes in each. Before every timed ledger
+   write the script waits until the backend has finished writing its own log
+   events, so writes do not share a block by accident.
+2. **Reusable authorization** – 12 requests that the policy denies. The auditor
+   overrides the model's DENY, the same request is sent 3 more times, then a
+   near miss (other purpose), then the authorization is revoked and the request
+   is sent once more.
+3. **Bursts** – 5, 10, 25 and 100 requests sent at the same moment, for Mac only,
+   phone only and mixed.
+4. **One hour with 100 officers** – 100 new officers were registered on the
+   network (copies of the existing officer profiles). They sent 200 requests at
+   random moments over one hour, read their outcomes, and every 30 s one of them
+   read the access log. CPU and memory of every part were sampled every 5 s.
+5. **Model quality** – 600 balanced test cases (`test-decision-balanced`),
+   compared with the written policy.
+
+Every request in every test was checked on the ledger afterwards (decision,
+auditor, outcome, agreement with the committed advice, one transaction).
+
+### Results
+
+Correctness: all 96 + 96 step requests, 144 reuse requests, 480 burst requests
+(5/10/25), 600 burst requests (100), and 400 hour requests were decided and
+verified on the ledger. One run failed and was repeated (see below).
+
+**Time from request to confirmed decision (median of 96 requests per model; for
+the untuned model, of the 93 requests that got usable advice)**
+
+| Setup | Untuned | V7 |
+| --- | --- | --- |
+| Mac only | 13.19 s | 14.15 s |
+| Phone only | 13.32 s | 14.37 s |
+| Officer Mac, auditor phone | 13.20 s | 14.29 s |
+| Officer phone, auditor Mac | 13.28 s | 14.02 s |
+
+- The setups do not differ significantly: phone only minus Mac only is +0.12 s
+  (95% CI −0.34 to +0.38 s) for the untuned model and +0.23 s (−0.34 to +0.60 s)
+  for V7.
+- The phone makes the auditor's own steps about 0.06 s slower (untuned: +62 ms,
+  95% CI 51–70 ms) and the officer's request about 0.01 s slower.
+- Most of the time is the model (about 6.9 s untuned, 7.8 s V7) and three ledger
+  writes of about 2.1 s each. V7 is 0.94 s slower per request (95% CI
+  0.64–1.13 s) even though it writes fewer tokens.
+
+**Reusable authorization**
+
+| | Untuned | V7 |
+| --- | --- | --- |
+| First request (model + auditor) | 14.06 s | 14.16 s |
+| Repeated request (granted at once) | 2.10 s | 2.10 s |
+| Time saved | 85.1 % | 85.2 % |
+| Repeats granted at once | 36 / 36 | 36 / 36 |
+| Near misses or revoked scopes granted | 0 / 24 | 0 / 24 |
+
+**Many requests at once (time until the last one was decided, mean of 2 runs)**
+
+| Requests | Untuned | V7 |
+| --- | --- | --- |
+| 5 | 50–51 s | 56–58 s |
+| 10 | 95–97 s | 104–107 s |
+| 25 | 228–251 s | 252–282 s |
+| 100 (one run per setup) | 890–998 s | 959–1085 s |
+
+The model handles one request at a time (about 9–11 s each), so the system
+decides between 5.3 and 6.7 requests per minute in every setup. After the advice is ready
+the auditor's decision is committed about 2.2–2.6 s later. With 100 requests at
+once, 95 % of the requests themselves were committed within 1.2 s (blocks fill up
+at 10 transactions).
+
+**One hour, 100 officers, 200 requests**
+
+| | Untuned | V7 |
+| --- | --- | --- |
+| Verified | 200 / 200 | 200 / 200 |
+| Request to decision, median | 13.4 s | 15.0 s |
+| 95th percentile | 40.7 s | 44.9 s |
+| Access log read (100 entries), median | 0.29 s | 0.39 s |
+
+In the busiest 10 minutes (50 requests) the median rose to 22.6 s (untuned) and
+23.8 s (V7) because of the model queue. Average CPU over the hour (one core = 100 %): Fabric peers about
+16–17 %, CouchDB 11–13 %, chaincode 1 %, orderer under 1 %, backend about 1 %. The
+model server used about 8.1 GiB of memory; its GPU use was not sampled.
+
+**Model quality (600 test cases)**
+
+| | Untuned | V7 |
+| --- | --- | --- |
+| Valid answers | 541 | 600 |
+| Accuracy (of valid answers) | 65.1 % (95% CI 61.0–69.0) | 97.3 % (95.7–98.4) |
+| Macro F1 | 0.623 | 0.973 |
+| Wrongly ALLOW (of 270 or 300 DENY cases) | 21 | 7 |
+| Wrongly DENY | 168 | 9 |
+
+In the live step test V7's advice matched the written policy for 92 of 96
+requests (untuned: 87 of 93 with usable advice), but V7 recommended ALLOW where
+the policy says DENY 4 times (untuned 2). The auditor makes the final decision
+in every case.
+
+### The failed run
+
+The first try of the untuned bursts of 100 failed: the script asked the backend
+for the status of 100 requests in one call, but the backend allows at most 50, so
+no request was decided during the burst. The script closed the leftovers and the
+campaign stopped. The run is kept in
+`experiments/runs/20261014_mac_mobile_setups/untuned/bursts100-failed-status-limit/`
+with a `FAILURE.txt`. After fixing the script (status in groups of 50) the bursts
+were run again from the start; only the repeated run is used above.
+
+### Running the experiments again
 
 ```bash
-make dias-model    # Qwen3-14B-4bit on :8081 (DIAS_ADAPTER=<dir> for a fine-tune)
-make dias-backend  # API and web interface on :3001
+node experiments/e2e/setup-plan.js 20261014 plan.json          # the plan of the step/reuse/load tests
+node experiments/e2e/setup-steps.js --plan plan.json --out OUT --staging backend/data/dias-reviews/<store>/access-events
+node experiments/e2e/setup-reuse.js --plan plan.json --out OUT --staging ...
+node experiments/e2e/setup-load.js  --plan plan.json --out OUT --staging ...
+node experiments/e2e/plan100.js 2026101400 plan-100.json        # the 100-user plan
+node experiments/e2e/setup-hour.js  --plan plan-100.json --out OUT --staging ...
+node experiments/e2e/setup-analyze.js --run RUN --plan plan.json --tables results/tables --date DATE --label MODEL
+python3 experiments/e2e/setup_figures.py RUNS results/plots/dias-setups
 ```
 
-A request waits as `awaiting-auditor` until an auditor decides; the auditor screen
-shows the LLM recommendation once the backend has prepared it. Nothing is
-released while a request waits.
+`run-campaign.sh` and `run-campaign-100.sh` in the run folder show the exact
+order used, including the model switches.
 
-Then open `http://localhost:3001` and select a seeded Fabric identity such as
-`insp.sharma` (requester) or `sp.north` (auditor); no application password is
-requested.
+## Earlier evidence
 
-To serve a fine-tuned adapter, pass its directory to `make dias-model` and give
-the backend the matching identity (`DIAS_MODEL_ID`, `DIAS_ADAPTER_ID`,
-`DIAS_ADAPTER_HASH`) so each stored recommendation names the model that made it.
+Earlier runs are kept under `experiments/runs/` with their raw data, for example
+the four-VM testbed (`20260924_testbed_multivm`), the cross-dataset test
+(`20260924_cross_dataset`), the 100-user reuse test (`20260925_reuse_100_users`)
+and the model training and evaluation runs from September 2026.
 
-Useful commands:
+## Limitations
 
-```bash
-make test             # offline suites: chaincode, backend, policies, frontend, dataset
-make smoke            # live API suite against the running DIAS backend (make test-live)
-make dias-acceptance  # full live acceptance run, written to a new experiments/runs/ folder
-make verify-log       # read direct-ledger access events
-make inspect          # inspect the DIAS channel: blocks, endorsements, history
-make prove            # permissioned-network checks (writes a proof record under CASE-PROOF)
-make down             # stop and remove the generated local network
-```
-
-## Manual Caliper benchmark suite
-
-The Caliper suite measures the SEAL-era `crimerecords` deployment on
-`crimechannel` and is kept with its retained evidence; it has not been retargeted
-to DIAS. With that deployment running, prepare the current identities
-and then start the low-load test manually. On a clean checkout, install and
-validate the pinned controller first:
-
-```bash
-make caliper-install
-make caliper-check
-make caliper-prepare
-make caliper-smoke
-```
-
-Caliper is installed in the isolated `benchmarks/caliper` workspace. Each test
-creates a new retained directory under `experiments/runs/`. The initial smoke
-test checks connectivity only; it is not a paper-quality performance result.
-See `benchmarks/caliper/README.md` and `benchmarks/caliper/EXPERIMENT_PLAN.md`
-before running a formal comparison.
-
-After the smoke test passes, start and check the local metrics collector before
-using any of the five manual test commands:
-
-```bash
-make caliper-monitoring-up
-make caliper-monitoring-check
-make caliper-read
-make caliper-write
-make caliper-load
-make caliper-mixed
-make caliper-endurance
-```
-
-Run these one at a time. The endurance target lasts two hours; the other targets
-are shorter pilots that should be reviewed before endurance testing.
-
-## Main components
-
-```text
-chaincode/crimerecords/lib/
-  governanceContract.js   departments, cases, court workflow
-  userContract.js         identity-backed UserProfile and status history
-  recordContract.js       record/evidence metadata, custody, protected release
-  accessContract.js       request log, auditor decision log with LLM agreement,
-                          outcomes, exact-record dynamic authorizations
-  auditContract.js        complete request reconstruction and verification
-  dias/                   verified request, lifecycle events, authorization
-                          scope/matching; the shared LLM response schema used by
-                          the backend and the dataset tooling
-  policy/                 SEAL-era modules, retained OFFLINE only and excluded
-                          from the deployed package by deployCC.sh
-
-backend/src/
-  fabric/                 per-user Fabric Gateway and CA registration
-  dias/                   policy context, the single prompt, the response
-                          parser, the recommender, the off-chain review store,
-                          the recommendation worker, LLM agreement
-  llm/                    SEAL-era modules, unreachable from the DIAS runtime
-                          (proved by backend/test/architectureGuard.unit.test.js)
-  routes/                 domain API routes
-  storage/vault.js        replaceable agency file-vault adapter
-
-frontend/js/modules/      request-access.js (find a case file, request it, read the
-                          decision, collect the PDF), decision-log.js (the public
-                          ledger view), auditor-review.js, cases, records, PDF
-                          requests, evidence, audit, departments, officers
-LLMxAI/                   fine-tuned Qwen adapter, training/evaluation data,
-                          retained runs, model server scripts, and result tables
-solidity-frontend/        standalone EVM companion prototype with its own UI,
-                          README, and retained evidence
-```
-
-## GitHub repository readiness
-
-The repository includes a GitHub Actions workflow for checks that do not
-require a live Fabric network:
-
-- publication-boundary, Compose, and source-syntax checks;
-- chaincode unit tests with enforced coverage thresholds;
-- deterministic backend unit and security tests;
-- policy package, frontend, and dataset/evaluation tests;
-- Caliper configuration, runner-helper, and plot-axis validation;
-- production dependency audits for the backend and chaincode.
-
-The live API suite (`make smoke`) and the acceptance run (`make dias-acceptance`)
-are local live-network checks because they need `make all`, seeded Fabric
-identities, the model server, and the backend running on `localhost:3001`. See `CONTRIBUTING.md` and
-`docs/github-repository.md` for the local verification commands, evidence
-policy, and publication checklist.
-
-For local environment settings, copy `.env.example` if needed and set a real
-`JWT_SECRET` before running anything beyond the disposable local demo.
+- Everything runs on one Mac: one Fabric network with one orderer, the backend
+  and the model. This says nothing about fault tolerance or several sites. (An
+  earlier four-VM test is in `experiments/runs/20260924_testbed_multivm/`.)
+- The phones are emulators on the same Mac, not real phones on a real network.
+  In the 100-user tests the officers are scripts that send the portal's or the
+  app's calls; only the auditor uses a real app screen.
+- The auditor in the experiments is a script. Real auditors would take longer.
+- The model answers one request at a time, which limits the system to about 5–7
+  decisions per minute on this machine.
+- V7 still gives some unsafe ALLOW advice (7 of 300 DENY test cases); the human
+  auditor is the safeguard.
+- Demo sign-in selects a server-held Fabric identity; there are no user-held keys.
+- Member organizations can read every block from their own peers; the
+  visibility rules control what the API and the contract return, not what a
+  peer stores.
+- The data and the governance policy are synthetic.
 
 ## License
 
-Apache License 2.0. See `LICENSE`.
-
-## Citation
-
-GitHub can generate a software citation from `CITATION.cff`. The manuscript is
-kept outside this repository until publication; the evidence behind it is under
-`experiments/runs/`, `results/` and `reports/`.
-
-## Known limitations
-
-- The network runs on one computer with one orderer; it does not demonstrate
-  production fault tolerance or multi-site performance.
-- Demo private keys are held by the backend and login is identity selection.
-- The filesystem vault has restrictive file permissions but no at-rest
-  encryption, HSM/KMS integration, malware scanning, or retention policy.
-- The prototype treats an authorized auditor as final, including when the model
-  disagrees. That is the design, not an oversight.
-- Usernames and requested record IDs are visible to all channel members in this
-  research design; production privacy controls are not implemented.
-- A dynamic authorization is a standing exception. It is exact-scoped,
-  attributed, revocable and expirable, but an auditor can still create one that
-  should not exist. The auditor screen states before the click whether one will
-  be created.
-- `FORCE_DENY` on a later request does **not** revoke an existing authorization
-  covering the same scope. This is deliberate — see
-  [`docs/policies/policy-open-questions.md`](docs/policies/policy-open-questions.md)
-  §10 — and the risk it leaves is recorded there.
-- The governance policy is a synthetic research policy derived from the SEAL-era
-  tables, not official Indian police policy. Sealed-record handling, absolute
-  jurisdiction boundaries, clearance as a total order, and the absence of any
-  break-glass path are documented decisions with stated alternatives.
-- The datasets are synthetic. `data-v2-binary` is validated (25/25 checks) but
-  **not** human-reviewed; its review sample is `pending_manual_review`.
-- The ledger proves who requested which record, what the auditor decided and
-  the agreement value the backend reported. It does **not** prove what the LLM
-  recommended: the recommendation, the justification and the auditor's reason
-  are kept in the backend review store, which is not replicated and has no
-  tamper evidence.
-- The chaincode trusts the backend's agreement value. A compromised backend could
-  report `NOT_AGREED` for an LLM ALLOW and so turn an auditor's `FORCE_ALLOW`
-  into a dynamic authorization. The auditor role, the self-decision rule and the
-  facts check are still enforced on-chain.
-- There is no live CCTNS/ICJS integration and no real personal or crime data.
-- Fabric strengthens identity, provenance, freshness, approval integrity, and
-  tamper evidence; it cannot make an incorrect model decision correct.
-- Security, privacy, legal compliance, and production readiness have not been
-  established by this prototype.
+Apache License 2.0, see `LICENSE`.

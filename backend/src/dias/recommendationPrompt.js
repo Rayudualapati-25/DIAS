@@ -1,17 +1,8 @@
 'use strict';
 
 /**
- * The DIAS recommendation prompt, shared by live inference, dataset generation,
- * and evaluation so training and serving cannot drift.
- *
- * Two versions exist:
- *   - v2 (current, plan step 5): the verified context C as facts, and the
- *     requester's claims in a separate block marked as unverified;
- *   - v1 (historical): the prompt of the published dataset and of the reported V7
- *     evaluation, which placed the self-declared emergency flag and a constant
- *     approval flag inside the verified request. Its text must never change;
- *     experiments/dias-finetuning/v2/test/promptV1Frozen.test.js compares it with
- *     every tracked test prompt.
+ * The DIAS recommendation prompt, shared by live inference, dataset generation, and evaluation so training
+ * and serving cannot drift.
  */
 
 const verifiedRequestV1 = require('../../../chaincode/crimerecords/lib/dias/verifiedRequestV1');

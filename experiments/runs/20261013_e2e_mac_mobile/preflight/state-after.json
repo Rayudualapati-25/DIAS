@@ -1,0 +1,28 @@
+{
+ "observedAtUtc": "2026-10-13T17:39:54.833763+00:00",
+ "ledger": {
+  "requests": 96,
+  "byStatus": {
+   "denied": 72,
+   "granted": 21,
+   "cancelled": 3
+  },
+  "byOutcomeAndBasis": {
+   "DENIED/AUDITOR_DECISION": 72,
+   "GRANTED/AUDITOR_DECISION": 16,
+   "GRANTED/DYNAMIC_AUTHORIZATION": 5,
+   "CANCELLED/REQUESTER_CANCELLED": 3
+  },
+  "pendingForAuditor": 0,
+  "activeAuthorizations": 0,
+  "authorizationsByStatus": {
+   "revoked": 5
+  }
+ },
+ "requestsAddedToday": 68,
+ "backendHealth": {
+  "success": true,
+  "data": "ok",
+  "error": null
+ }
+}

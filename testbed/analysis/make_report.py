@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble REPORT.md and tables.tex from the analysis summaries.
-
-Every number in the outputs is read from a summary JSON written by the
-analysis scripts; none is typed in. Sections whose data are missing are
-skipped and named at the end.
-
-Usage: python3 make_report.py --results <dir with e*-summary.json> --out <dir>
-"""
+"""Assemble REPORT.md and tables.tex from the analysis summaries."""
 
 import argparse
 import json

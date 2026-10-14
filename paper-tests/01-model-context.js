@@ -1,22 +1,6 @@
 'use strict';
 
-/**
- * EXPERIMENT 01 — authorization model effectiveness and trusted-subject context.
- *
- * RQ1: how accurately does the fine-tuned model perform SEAL authorization, and
- *      how much does the authenticated subject context contribute?
- *
- * Every metric here is recomputed from the per-case rows of the retained
- * evaluation runs, not read from their stored summaries. The recomputation is
- * compared against each file's own summary and the difference is reported, so a
- * hand-edited summary cannot pass unnoticed.
- *
- * This experiment deliberately reports NOTHING about the deterministic
- * validator. The retained runs replay a guard derived from the model's own
- * action and purpose, and their dataset carries no committed action/purpose, so
- * those columns describe the pre-hardening validator and cannot support any
- * claim about the deployed two-condition guard. Experiment 02 owns that claim.
- */
+/** EXPERIMENT 01 — authorization model effectiveness and trusted-subject context. */
 
 const fs = require('fs');
 const path = require('path');
@@ -28,14 +12,7 @@ const {
 const RUNS = path.join(REPO, 'experiments/runs/20260906_seal_precision_e2e');
 const DATA = path.join(REPO, 'experiments/policy-v2-precision/data');
 
-/**
- * The retained runs. `arm` is the prompt configuration the harness used:
- *   grounded    full system prompt: ordered policy rules, the RBAC row for the
- *               authenticated role, exemption lists, clearance ordering
- *   short       the base instruction only, without the injected policy
- *   no-subject  grounded prompt, but every authenticated subject attribute
- *               value replaced with null (record context left intact)
- */
+/** The retained runs. */
 const RUN_FILES = [
   { file: 'proposed_grounded_v6_best.json', label: 'V6 grounded', split: 'test' },
   { file: 'proposed_grounded_v4.json', label: 'V4 grounded', split: 'test' },
@@ -72,11 +49,7 @@ function classMetrics(rows, label) {
   };
 }
 
-/**
- * Rows whose schema was rejected have no prediction. They are counted as
- * incorrect everywhere and given their own confusion-matrix column, because
- * "produced nothing usable" is a different failure from "predicted wrongly".
- */
+/** Rows whose schema was rejected have no prediction. */
 function confusionMatrix(rows) {
   const matrix = {};
   DECISIONS.forEach((truth) => {

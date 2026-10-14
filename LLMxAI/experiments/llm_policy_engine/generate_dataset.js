@@ -16,17 +16,13 @@ const {
 const ROOT = path.resolve(__dirname, '..', '..');
 const DATA_DIR = path.join(__dirname, process.env.SEBA_DATA_DIR || 'data_v3');
 const SEED = 42;
-// Default 'reason' reproduces the V3 dataset exactly: an equal number of examples
-// per reason code. Because 7 of the 12 codes deny, 3 escalate and 2 allow, that
-// yields a 58/25/17 decision split, and V3 learned to answer 'deny' when unsure.
-// 'decision' instead equalises the three decision classes, which is what the model
-// actually has to choose between.
+// Default 'reason' reproduces the V3 dataset exactly: an equal number of examples per reason code.
 const BALANCE = process.env.SEBA_BALANCE || 'reason';
 const SPLITS = (process.env.SEBA_SPLITS || 'train,valid,test').split(',');
 const SPLIT_COUNTS = Object.freeze({ train: 240, valid: 30, test: 30 });
 const DECISION_CLASS_SIZE = Object.freeze({ train: 1680, valid: 210 });
 
-// examples to generate for one reason code in one split
+// Examples to generate for one reason code in one split
 function perReasonCount(split, reason) {
   if (BALANCE !== 'decision' || !DECISION_CLASS_SIZE[split]) return SPLIT_COUNTS[split];
   const decision = REASON_DECISION[reason];
@@ -343,8 +339,8 @@ function makeExample(split, reason, ordinal, random) {
   }
   const adversarial = (split === 'test' && ordinal % 3 === 0)
     || (split === 'train' && ordinal % 4 === 0)
-    // V3's validation split contained no adversarial examples at all, so checkpoint
-    // selection was blind to the injection cases the test suite is 40% made of.
+    // V3's validation split contained no adversarial examples at all, so checkpoint selection was blind to
+    // the injection cases the test suite is 40% made of.
     || (split === 'valid' && BALANCE === 'decision' && ordinal % 3 === 0);
   const query = renderQuery(split, scenario, random, adversarial);
   const requestContext = {

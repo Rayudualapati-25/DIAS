@@ -1,18 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Build the model comparison tables from evaluation runs that already exist.
- *
- * It reads `metrics.json` from each run directory and emits CSV and LaTeX. It
- * never runs inference, so a table can be rebuilt after a metric definition
- * changes without spending hours of GPU time, and two models are only ever
- * compared on sets both actually ran.
- *
- *   node experiments/dias-finetuning/v2/eval/compare.js \
- *     --runs untuned=experiments/runs/.../baseline,v7=experiments/runs/.../v7 \
- *     --out results/tables
- */
+/** Build the model comparison tables from evaluation runs that already exist. */
 
 const fs = require('fs');
 const path = require('path');

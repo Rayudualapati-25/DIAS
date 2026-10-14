@@ -2,12 +2,8 @@
 'use strict';
 
 /**
- * Close every request still waiting for an auditor, the way the load generator
- * does (the decision follows the stored recommendation), so an aborted run
- * leaves nothing pending on the ledger. Waits for recommendations still being
- * prepared.
- *
- * Usage: node testbed/load/close-pending.js --url http://dias-backend:3001/api
+ * Close every request still waiting for an auditor, the way the load generator does (the decision follows
+ * the stored recommendation), so an aborted run leaves nothing pending on the ledger.
  */
 
 const { createClient, sleep, auditorFor } = require('./workflow');

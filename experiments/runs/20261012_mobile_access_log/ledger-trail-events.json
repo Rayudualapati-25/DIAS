@@ -1,0 +1,56 @@
+[
+ {
+  "seq": 1,
+  "eventType": "ACCESS_REQUEST_SUBMITTED",
+  "txId": "79a8697d7f40eaa0",
+  "decision": null,
+  "llmAgreement": null,
+  "outcome": null,
+  "actor": null
+ },
+ {
+  "seq": 2,
+  "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+  "txId": "79a8697d7f40eaa0",
+  "decision": null,
+  "llmAgreement": null,
+  "outcome": "NO_AUTHORIZATION",
+  "actor": null
+ },
+ {
+  "seq": 3,
+  "eventType": "RECOMMENDATION_COMMITTED",
+  "txId": "71c7ce06450bb722",
+  "decision": null,
+  "llmAgreement": null,
+  "outcome": null,
+  "actor": null
+ },
+ {
+  "seq": 4,
+  "eventType": "AUDITOR_DECISION_RECORDED",
+  "txId": "99b5da4c4a91ab6f",
+  "decision": "FORCE_DENY",
+  "llmAgreement": null,
+  "outcome": null,
+  "actor": null
+ },
+ {
+  "seq": 5,
+  "eventType": "AGREEMENT_DERIVED",
+  "txId": "99b5da4c4a91ab6f",
+  "decision": "FORCE_DENY",
+  "llmAgreement": "NOT_AGREED",
+  "outcome": null,
+  "actor": null
+ },
+ {
+  "seq": 6,
+  "eventType": "ACCESS_OUTCOME_RECORDED",
+  "txId": "99b5da4c4a91ab6f",
+  "decision": null,
+  "llmAgreement": null,
+  "outcome": "DENIED",
+  "actor": null
+ }
+]

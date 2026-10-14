@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-#
-# Collect every raw result into the run folder, run all analyses in order, and
-# retain structured analyses, figures and observed provenance for later reporting.
+# Collect every raw result into the run folder, run all analyses in order, and retain structured analyses, figures and observed provenance for later reporting.
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

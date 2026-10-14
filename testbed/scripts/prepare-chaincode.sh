@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Stage a reproducible v3 package with production dependencies. No ledger writes.
-# TB=/absolute/testbed-directory testbed/scripts/prepare-chaincode.sh
 set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 TB="${TB:-${HOME}/dias-testbed}"

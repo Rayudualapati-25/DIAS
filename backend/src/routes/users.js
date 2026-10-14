@@ -1,24 +1,6 @@
 'use strict';
 
-/**
- * User administration — the two-step registration this system is built around.
- *
- *   Step 1 (CA):     the department's Fabric CA issues an X.509 identity, with
- *                    the officer's role, station and clearance signed into the
- *                    certificate. The CA uses its own embedded registry.
- *   Step 2 (LEDGER): a CreateUser transaction writes the account onto the
- *                    blockchain, endorsed and replicated to all five
- *                    departments.
- *
- * Both steps are needed. Step 1 alone gives someone a certificate that no
- * account exists for; step 2 alone gives an account that cannot sign anything.
- *
- * Authorisation is decided by UserContract. The ledger transaction is signed by
- * the logged-in officer, and admitting or changing any department's officer is
- * an act of the district authority: a district head of the authority
- * organisation (AuditMSP). This route mirrors that rule only to refuse early,
- * before a certificate is issued for a transaction certain to be rejected.
- */
+/** User administration — the two-step registration this system is built around. */
 
 const express = require('express');
 const { z } = require('zod');
@@ -62,8 +44,8 @@ const registerSchema = z.object({
   displayName: z.string().min(1).max(120),
   org: z.enum(ORGS),
   role: z.enum(ROLES),
-  // Certificate attributes. role is taken from the field above so the account
-  // record and the certificate can never disagree about it.
+  // Certificate attributes. role is taken from the field above so the account record and the certificate
+  // can never disagree about it.
   rank: z.string().regex(ATTR_VALUE).optional(),
   station: z.string().regex(ATTR_VALUE).optional(),
   jurisdiction: z.string().regex(ATTR_VALUE),
@@ -103,10 +85,7 @@ router.post('/', asyncRoute(async (req, res) => {
   if (!parsed.success) return fail(res, parsed.error.issues[0].message);
   const input = parsed.data;
 
-  // Refuse an unauthorised registration before issuing a certificate. The
-  // chaincode is still the authority — this only stops the CA handing out a
-  // certificate for a transaction that is certain to be rejected, which would
-  // strand an identity belonging to no account.
+  // Refuse an unauthorised registration before issuing a certificate.
   const refusal = administrationRefusal(req.user);
   if (refusal) return fail(res, refusal.error, refusal.status);
 
@@ -130,8 +109,8 @@ router.post('/', asyncRoute(async (req, res) => {
     },
   });
 
-  // Step 2 — the authorization profile, onto the ledger, signed by the
-  // admitting officer. No application password or password hash exists.
+  // Step 2 — the authorization profile, onto the ledger, signed by the admitting officer. No application
+  // password or password hash exists.
   let account;
   try {
     account = await users.create(
@@ -151,8 +130,8 @@ router.post('/', asyncRoute(async (req, res) => {
         credentialStatus: 'active',
       });
   } catch (err) {
-    // The chaincode refused, so there must be no certificate left over for an
-    // account that was never created.
+    // The chaincode refused, so there must be no certificate left over for an account that was never
+    // created.
     ca.removeEnrollment(input.org, input.username);
     throw err;
   }

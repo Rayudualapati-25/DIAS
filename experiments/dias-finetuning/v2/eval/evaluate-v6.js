@@ -1,17 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Evaluate the retained V6 adapter on the DIAS v2 held-out sets.
- *
- * V6 is a historical reference. The adaptations required to ask it these
- * questions at all are recorded in the output, and the report must present the
- * comparison as a reference point rather than a fair head-to-head — V6 is not
- * shown the action or the purpose, which V7 receives as verified facts.
- *
- *   node experiments/dias-finetuning/v2/eval/evaluate-v6.js \
- *     --url http://127.0.0.1:8080/v1 --out experiments/runs/<date>_dias_v6_reference
- */
+/** Evaluate the retained V6 adapter on the DIAS v2 held-out sets. */
 
 const fs = require('fs');
 const path = require('path');
@@ -95,8 +85,8 @@ async function main() {
           status: parsed.status,
           sealDecision: parsed.sealDecision,
           sealReasonCode: parsed.sealReasonCode ?? null,
-          // V6 has to infer these; V7 is told them. Recorded so the report can
-          // separate "misread the request" from "misapplied the policy".
+          // V6 has to infer these; V7 is told them. Recorded so the report can separate "misread the
+          // request" from "misapplied the policy".
           inferredAction: parsed.inferredAction ?? null,
           inferredPurpose: parsed.inferredPurpose ?? null,
           trueAction: example.verifiedRequest.request.action,

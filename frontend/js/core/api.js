@@ -1,20 +1,10 @@
-/**
- * API client and session.
- *
- * Adding an endpoint: put it in the matching group below. Groups mirror the
- * backend routers (auth / users / departments / cases / records / access /
- * audit), so the two stay easy to compare.
- *
- * Every call returns the unwrapped `data` or throws an Error carrying the
- * server's message — callers never see the {success, data, error} envelope.
- */
+/** API client and session. */
 
 const BASE = '/api';
 const TOKEN_KEY = 'crn.token';
 const USER_KEY = 'crn.user';
 
-// ---------------------------------------------------------------------------
-// Session
+// --------------------------------------------------------------------------- Session
 // ---------------------------------------------------------------------------
 
 export const session = {
@@ -39,8 +29,7 @@ export function setSessionExpiredHandler(handler) {
   onSessionExpired = handler;
 }
 
-// ---------------------------------------------------------------------------
-// Transport
+// --------------------------------------------------------------------------- Transport
 // ---------------------------------------------------------------------------
 
 async function request(method, path, body) {
@@ -71,8 +60,8 @@ async function request(method, path, body) {
     onSessionExpired();
     throw new Error('your session expired — please sign in again');
   }
-  // The status travels with the error, so a screen can tell a refusal (4xx)
-  // from an outcome the server could not confirm (503).
+  // The status travels with the error, so a screen can tell a refusal (4xx) from an outcome the server
+  // could not confirm (503).
   if (!json.success) throw Object.assign(new Error(json.error || `request failed (${res.status})`), { status: res.status });
   return json.data;
 }
@@ -104,9 +93,8 @@ const query = (params) => {
   return usable.length ? `?${new URLSearchParams(usable).toString()}` : '';
 };
 
-// ---------------------------------------------------------------------------
-// Endpoints, grouped to match the backend routers
-// ---------------------------------------------------------------------------
+// --------------------------------------------------------------------------- Endpoints, grouped to match
+// the backend routers ---------------------------------------------------------------------------
 
 export const api = {
   auth: {
@@ -118,8 +106,8 @@ export const api = {
     me: () => request('GET', '/auth/me'),
   },
 
-  // Accounts live on the ledger, not in a database. `register` performs both
-  // halves in one call: a Fabric CA enrolment, then a CreateUser transaction.
+  // Accounts live on the ledger, not in a database. `register` performs both halves in one call: a Fabric
+  // CA enrolment, then a CreateUser transaction.
   users: {
     list: () => request('GET', '/users'),
     get: (username) => request('GET', `/users/${username}`),
@@ -174,15 +162,15 @@ export const api = {
   },
 
   access: {
-    // One request endpoint. The response says whether an active dynamic
-    // authorization settled it outright or whether an auditor must decide.
+    // One request endpoint. The response says whether an active dynamic authorization settled it outright
+    // or whether an auditor must decide.
     request: (body) => request('POST', '/access/request', body),
     accessRequest: (requestId) => request('GET', `/access/request/${requestId}`),
     // Withdraw a request that is still waiting for an auditor.
     cancelRequest: (requestId) => request('POST', `/access/request/${requestId}/cancel`),
     requestTrail: (requestId) => request('GET', `/access/request/${requestId}/trail`),
-    // The "why" behind one decision. Everyone reads the model's structured
-    // account; its free text comes back only for the requester and auditors.
+    // The "why" behind one decision. Everyone reads the model's structured account; its free text comes
+    // back only for the requester and auditors.
     requestRecommendation: (requestId) =>
       request('GET', `/access/request/${requestId}/recommendation`),
     forRecord: (recordId) => request('GET', `/access/record/${recordId}`),
@@ -197,9 +185,8 @@ export const api = {
     auditorPendingStatus: (requestIds) =>
       request('GET', `/access/auditor/pending/status${query({ ids: requestIds.join(',') })}`),
     auditorReview: (requestId) => request('GET', `/access/auditor/${requestId}`),
-    // FORCE_ALLOW / FORCE_DENY. `reason` is mandatory whenever the auditor does not
-    // agree with the LLM recommendation or none exists; the backend enforces it and
-    // works out the agreement itself.
+    // FORCE_ALLOW / FORCE_DENY. `reason` is mandatory whenever the auditor does not agree with the LLM
+    // recommendation or none exists; the backend enforces it and works out the agreement itself.
     auditorDecision: (requestId, decision, reason, validUntilUtc) =>
       request('POST', `/access/auditor/${requestId}/decision`,
         validUntilUtc ? { decision, reason, validUntilUtc } : { decision, reason }),

@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Live DIAS acceptance scenarios, run through the application backend.
- *
- * The LLM is a real model, so a scenario that needs a particular recommendation
- * first reads what the model recommended and is reported NOT EXERCISED when no
- * request received it, instead of passing quietly.
- */
+/** Live DIAS acceptance scenarios, run through the application backend. */
 
 const {
   check, ledgerOnly, notExercised, scenario, sleep, stagesOf,
@@ -228,8 +222,8 @@ async function closePending(client, pending) {
 }
 
 /**
- * R8: FORCE_DENY over an LLM ALLOW. Uses a near miss that received ALLOW when
- * there is one; otherwise raises a request the policy allows and overrides it.
+ * R8: FORCE_DENY over an LLM ALLOW. Uses a near miss that received ALLOW when there is one; otherwise
+ * raises a request the policy allows and overrides it.
  */
 async function overrideAllow(client, overriddenAllows, knownAllowSpec = SPECS.assignedAnnotate) {
   const title = 'Decision log: auditor overrides an LLM ALLOW';
@@ -238,8 +232,6 @@ async function overrideAllow(client, overriddenAllows, knownAllowSpec = SPECS.as
       { requests: overriddenAllows.map(({ label, requestId }) => ({ label, requestId })) });
   }
   // Re-submit a specification already observed to receive ALLOW in this run.
-  // An agreed ALLOW creates no reusable authorization, so this remains a fresh
-  // auditor decision and does not depend on an assumed model output.
   const candidate = await submitForReview(client, knownAllowSpec);
   const closed = await closeOne(client, { label: 'known ALLOW replay', requestId: candidate.requestId });
   if (closed.llm !== 'ALLOW') {

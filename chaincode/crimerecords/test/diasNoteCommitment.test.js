@@ -1,11 +1,8 @@
 'use strict';
 
 /**
- * Plan step 11 (contract side): the auditor note commitment h_N (design §7;
- * paper §IV-E, Algorithm 1 lines 18 and 29–30). The note text stays off-chain;
- * the decision carries only its digest. A decision that does not agree with the
- * committed recommendation, or has none to agree with, must carry a note digest,
- * and is otherwise rejected with no writes. An agreeing decision may carry one.
+ * (contract side): the auditor note commitment h_N. The note text stays off-chain; the decision carries
+ * only its digest.
  */
 
 const chai = require('chai');

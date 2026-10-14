@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Caller identity helpers.
- *
- * Every authorization decision in this chaincode goes through here, reading
- * the caller's MSP and X.509 attributes from the transaction context. This is
- * the fix for the "no authorization" finding in the previous audit chaincode:
- * nothing is trusted from request payloads, only from the signed identity.
- */
+/** Caller identity helpers. */
 
 const MSP = Object.freeze({
   POLICE: 'PoliceMSP',
@@ -23,9 +16,8 @@ const ATTRIBUTE_NAMES = Object.freeze([
 ]);
 
 /**
- * Snapshot the caller's identity attributes. Missing attributes become null;
- * downstream policy rules treat null as "not granted".
- * Returns a new object every call (no shared mutable state).
+ * Snapshot the caller's identity attributes. Missing attributes become null; downstream policy rules treat
+ * null as "not granted".
  */
 function getCaller(ctx) {
   const cid = ctx.clientIdentity;
@@ -46,9 +38,8 @@ function getCaller(ctx) {
 }
 
 /**
- * Fabric ClientIdentity#getID returns `x509::<subject>::<issuer>`. Depending
- * on the SDK/OpenSSL version, the subject DN is slash- or comma-delimited.
- * Parse only the subject section and accept both canonical encodings.
+ * Fabric ClientIdentity#getID returns `x509::<subject>::<issuer>`. Depending on the SDK/OpenSSL version,
+ * the subject DN is slash- or comma-delimited.
  */
 function enrollmentIdFromX509Id(id) {
   const subject = String(id || '').split('::')[1] || '';

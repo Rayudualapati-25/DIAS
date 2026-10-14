@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Architecture guard: the deployed DIAS chaincode contains no policy engine.
- *
- * The retained SEAL-era rule engine and disagreement guard stay in the repository
- * as offline research artifacts only. These tests fail if a contract starts
- * importing them again, if the package stops excluding them, or if runtime code
- * reaches the offline reference oracle.
- */
+/** Architecture guard: the deployed DIAS chaincode contains no policy engine. */
 
 const fs = require('fs');
 const path = require('path');
@@ -76,10 +69,8 @@ describe('architecture guard: the DIAS runtime has no policy engine', () => {
   });
 
   /**
-   * v3 replaces the v2 rule "no recommendation module at all": the contract now
-   * commits a signed recommendation and verifies its provenance (design §6). What
-   * must still never run in chaincode is the model itself: no response parser, no
-   * prompt, no network call, and no model or AI-organisation registration.
+   * v3 replaces the v2 rule "no recommendation module at all": the contract now commits a signed
+   * recommendation and verifies its provenance.
    */
   it('loads only the recommendation commitment, never a model, parser, prompt or registration', () => {
     const recommendationModules = graph.filter((file) => /recommendation|provenance/i.test(file));

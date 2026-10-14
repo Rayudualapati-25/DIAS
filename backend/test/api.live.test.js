@@ -1,26 +1,6 @@
 'use strict';
 
-/**
- * Live DIAS API integration tests.
- *
- * These need a running stack — Fabric with `diasrecords` on `diaschannel`, the
- * model server, and the API on port 3001 — so they are NOT part of the default
- * unit suite. A missing service produces a named precondition failure rather
- * than a confusing fetch error.
- *
- *   make dias-model      # terminal 1
- *   make dias-backend    # terminal 2
- *   make smoke           # this suite
- *
- * The suite exercises the HTTP layer of the current design: the request log, the
- * LLM recommendation kept in the backend, the auditor decision log with its LLM
- * agreement, the audit trail, and the public case-file lookup. The full scenario
- * matrix (every agreement combination, reuse, revocation, expiry) is the live
- * acceptance run, `make dias-acceptance`.
- *
- * Every decision this suite records is FORCE_DENY, so it never creates a dynamic
- * authorization and can be run repeatedly against the same ledger.
- */
+/** Live DIAS API integration tests. */
 
 const { expect } = require('chai');
 

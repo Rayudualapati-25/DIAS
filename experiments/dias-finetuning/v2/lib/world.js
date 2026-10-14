@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * The synthetic world the dataset is drawn from.
- *
- * Districts and stations are real, distinct names. v1 expressed a
- * cross-jurisdiction case as the literal string `outside-<district>`, which made
- * the label readable from the surface form of one field; a model could score
- * perfectly on cross-jurisdiction examples without comparing the two
- * jurisdictions at all. Here a mismatch is simply two different district names,
- * so the comparison has to be performed.
- */
+/** The synthetic world the dataset is drawn from. */
 
 const DISTRICTS = Object.freeze([
   'north-hills', 'riverside', 'old-town', 'harbour-point', 'eastgate',
@@ -35,9 +26,8 @@ function stationIn(organization, district, index) {
 }
 
 /**
- * Roles grouped by the policy property that matters for a scenario, computed
- * from the bundle rather than restated, so a policy change cannot leave a stale
- * list behind in the generator.
+ * Roles grouped by the policy property that matters for a scenario, computed from the bundle rather than
+ * restated, so a policy change cannot leave a stale list behind in the generator.
  */
 function roleIndex(bundle) {
   const roles = Object.entries(bundle.roles).map(([role, meta]) => ({

@@ -34,8 +34,8 @@ export default {
       ),
     });
 
-    // GovernanceContract.CreateDepartment: registering any department is an act of
-    // a district head of the authority organisation.
+    // GovernanceContract.CreateDepartment: registering any department is an act of a district head of the
+    // authority organisation.
     const create = canAdministerOfficers(user)
       ? card('Register a department',
         'Bootstrap operation for a department that is not yet on the ledger. The '

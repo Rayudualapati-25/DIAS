@@ -1,3 +1,11 @@
+import { ALLOW, canAccess } from '../core/access.js';
+
+/** The tabs of the access log a user is offered. Every signed-in officer reads the access requests. */
+export function accessLogTabIds(user) {
+  if (!user) return [];
+  return canAccess(user, ALLOW.REVIEWER) ? ['requests', 'events'] : ['requests'];
+}
+
 /** Turn the safe, structured Fabric access-event target into a compact label. */
 export function accessTargetSummary(target) {
   if (!target || typeof target !== 'object') return '—';
@@ -22,8 +30,7 @@ export function accessTargetSummary(target) {
   return parts.join(' · ') || '—';
 }
 
-// ---------------------------------------------------------------------------
-// The access-request log
+// --------------------------------------------------------------------------- The access-request log
 // ---------------------------------------------------------------------------
 
 /** Order of the time column. */
@@ -49,7 +56,7 @@ function llmCell(entry) {
   }
   if (entry.status === 'awaiting-auditor') {
     return entry.recommendationWithheld
-      ? { value: 'NONE', label: 'Withheld until decision', detail: 'this is your own request' }
+      ? { value: 'NONE', label: 'Withheld until decision', detail: 'shown once the auditor has decided' }
       : { value: 'NONE', label: 'Being prepared', detail: 'awaiting a committed recommendation' };
   }
   return { value: 'NOT_RECORDED', label: 'Not recorded', detail: 'the request ended without a decision' };
@@ -94,11 +101,13 @@ function decisionCell(entry) {
 }
 
 /**
- * One row of the access log, from an entry of the ledger's decision log: who
- * requested, what was requested, what the LLM recommended, and what the auditor
- * decided — stated together with the recommendation it was taken against.
+ * One row of the access log, from an entry of the ledger's decision log: who requested, what was requested,
+ * what the LLM recommended, and what the auditor decided — stated together with the recommendation it was
+ * taken against.
  */
-export function accessRequestRow(entry) {
+export function accessRequestRow(given) {
+  // Advice marked as withheld is never shown, whatever value came with it.
+  const entry = given?.recommendationWithheld ? { ...given, llmRecommendation: null, llmAgreement: null } : given;
   const requester = entry?.requester || {};
   return {
     requestId: entry?.requestId ?? null,

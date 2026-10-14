@@ -2,14 +2,8 @@
 'use strict';
 
 /**
- * E7 plan: twelve minutes of random (Poisson) arrivals at six per minute, used
- * while one orderer and then one peer are stopped and restarted.
- *
- * Court users are left out: their own peer (peer0.court) is the one stopped, and
- * a user reaches the ledger only through their own organization's peer. The
- * seed differs from the E5/E6 plans, which stay unchanged.
- *
- * Usage: node testbed/load/fault-plan.js
+ * E7 plan: twelve minutes of random (Poisson) arrivals at six per minute, used while one orderer and then
+ * one peer are stopped and restarted.
  */
 
 const fs = require('fs');

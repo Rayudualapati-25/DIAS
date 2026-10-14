@@ -31,9 +31,8 @@ function modelSubject(profile) {
   };
 }
 
-// The requester may name the record inside their own sentence. Only the record
-// identifier is read from untrusted prose; every resource attribute still comes
-// from the registry lookup below.
+// The requester may name the record inside their own sentence. Only the record identifier is read from
+// untrusted prose; every resource attribute still comes from the registry lookup below.
 function resolveRecordFromQuery(query) {
   if (typeof query !== 'string') return null;
   const upper = query.toUpperCase();

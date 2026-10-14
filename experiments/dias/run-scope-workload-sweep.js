@@ -1,14 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Workload-sensitivity extension of the DIAS scope ablation.
- *
- * The existing two-arm replay is the source of truth for exact-record and
- * property-fingerprint behavior.  This runner varies only repetitions and the
- * number of different records sharing governed properties, and adds a no-reuse
- * reference arm.  Every cell is retained as its own normal scope-ablation run.
- */
+/** Workload-sensitivity extension of the DIAS scope ablation. */
 
 const fs = require('fs');
 const path = require('path');

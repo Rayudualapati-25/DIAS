@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-#
-# After a reuse run: check the ledger again (evaluate only), collect the raw results into
-# experiments/runs/20260925_reuse_100_users/, and run the analysis.
-#
+# After a reuse run: check the ledger again (evaluate only), collect the raw results into experiments/runs/20260925_reuse_100_users/, and run the analysis.
 # Usage: bash testbed/scripts/finalize_reuse.sh [--smoke]   (REUSE_PLAN_NAME=<file> picks another smoke plan)
 set -euo pipefail
 

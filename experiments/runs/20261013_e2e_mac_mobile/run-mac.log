@@ -1,0 +1,38 @@
+E2E-MAC-01 completed REQ-0396b065c86ac948 advice=DENY outcome=DENIED e2e=12.7s
+E2E-MAC-02 completed REQ-f49f9d044e78b130 advice=DENY outcome=DENIED e2e=13.3s
+E2E-MAC-03 completed REQ-c334835ac9cb4943 advice=ALLOW outcome=GRANTED e2e=13.9s
+E2E-MAC-04 completed REQ-754c124d373af555 advice=DENY outcome=DENIED e2e=13.3s
+E2E-MAC-05 completed REQ-be41cae2f3233e96 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-06 completed REQ-2db6b2da0eeb1b41 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-07 completed REQ-0beab36057733f37 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-08 completed REQ-622a1e32d1ba27e3 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-09 completed REQ-aab6b4cdadd6717a advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-10 completed REQ-711c6ef189d4cdbf advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-11 completed REQ-ca96d572621ca518 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-12 completed REQ-d7b7cf1bfbe299d8 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-13 completed REQ-a43068f4b9360d7c advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-14 completed REQ-563b20e179dd03e4 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-15 completed REQ-e4770f75df161407 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-16 completed REQ-198b962b545a655e advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-17 completed REQ-9b9ae0162dcb1608 advice=ALLOW outcome=GRANTED e2e=13.0s
+E2E-MAC-18 completed REQ-9f6306d73683d00a advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-19 completed REQ-50d1894ef3c56d28 advice=ALLOW outcome=GRANTED e2e=14.9s
+E2E-MAC-20 completed REQ-2b0644be2248b7a3 advice=DENY outcome=DENIED e2e=14.9s
+E2E-MAC-21 completed REQ-3e6d9c1ce3b3e010 advice=DENY outcome=DENIED e2e=17.0s
+E2E-MAC-22 completed REQ-8f792169569d430c advice=DENY outcome=DENIED e2e=14.6s
+E2E-MAC-23 completed REQ-affab184ae91709f advice=DENY outcome=DENIED e2e=14.9s
+E2E-MAC-24 completed REQ-da861c01a0f3b6a8 advice=DENY outcome=DENIED e2e=14.4s
+E2E-MAC-25 completed REQ-48803d0714ce7808 advice=DENY outcome=DENIED e2e=14.2s
+E2E-MAC-26 completed REQ-c09f6e515f6e2287 advice=DENY outcome=DENIED e2e=13.3s
+E2E-MAC-27 completed REQ-a0ae63aebbaff065 advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-28 completed REQ-bdf1019fd17c585c advice=DENY outcome=DENIED e2e=14.9s
+E2E-MAC-29 completed REQ-f1087dcc7743ebce advice=DENY outcome=DENIED e2e=12.9s
+E2E-MAC-30 completed REQ-4f88c315c97e3a27 advice=DENY outcome=DENIED e2e=12.9s
+PASS every auditor review is in the searches-and-reads log on the ledger (30 of 30 found)
+PASS the reduced decision log an ordinary user reads grew by one entry per workflow (36 -> 66, 30 workflows)
+PASS that reduced log shows no name or case file (66 entries)
+PASS each requester finds their own requests with the final outcome (12 of 12 requesters)
+PASS no request is left waiting for an auditor (0 waiting)
+PASS no reusable authorization was created (0 active)
+30 of 30 workflows completed and verified (30 planned)
+exit=0

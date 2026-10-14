@@ -1,21 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Evaluate one served model over the DIAS v2 held-out sets.
- *
- *   node experiments/dias-finetuning/v2/eval/evaluate.js \
- *     --label untuned-qwen3-14b-4bit \
- *     --url http://127.0.0.1:8081/v1 \
- *     --out experiments/runs/20260912_dias_qwen3_baseline
- *
- * --prompt v1 (default) reproduces the published evaluation; --prompt v2 runs the
- * v3 live prompt over the same cases through runner.v3InputsFor.
- * --help prints this text and exits without contacting the model server.
- *
- * Raw predictions are written per set so any metric can be recomputed without
- * rerunning inference, which is the expensive part.
- */
+/** Evaluate one served model over the DIAS v2 held-out sets. */
 
 const fs = require('fs');
 const path = require('path');
@@ -103,9 +89,6 @@ async function main() {
     const predictionsFile = path.join(outDir, 'predictions', `${name}.jsonl`);
     let results;
     // A six-hour evaluation must not restart from zero after an interruption.
-    // Completed predictions are reused; a partial file is discarded rather than
-    // mixed with a later run, because the two halves would come from different
-    // server states.
     if (args['skip-existing'] && fs.existsSync(predictionsFile)) {
       const existing = fs.readFileSync(predictionsFile, 'utf8').split('\n').filter(Boolean)
         .map((line) => JSON.parse(line));

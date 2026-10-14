@@ -1,16 +1,6 @@
 'use strict';
 
-/**
- * Plot evaluation results as plain SVG.
- *
- * SVG is written directly rather than through a plotting library: it adds no
- * dependency to a repository that must run from a clean checkout, the output is
- * deterministic so a regenerated figure produces an empty diff, and the file is
- * readable text rather than a binary an editor cannot show.
- *
- * Figures are theme-neutral (explicit colours, no reliance on a page
- * background) because they end up in a paper, a report and a browser.
- */
+/** Plot evaluation results as plain SVG. */
 
 const PALETTE = Object.freeze({
   allow: '#2f7d4f',
@@ -38,8 +28,8 @@ function frame({ width, height, margin, title, children }) {
 }
 
 /**
- * Grouped bars: one group per set, one bar per model.
- * `value` reads the metric; `max` fixes the scale so figures are comparable.
+ * Grouped bars: one group per set, one bar per model. `value` reads the metric; `max` fixes the scale so
+ * figures are comparable.
  */
 function groupedBars({ title, groups, series, value, yLabel, max = 1, width = 820, height = 400 }) {
   const margin = { top: 50, right: 170, bottom: 82, left: 60 };

@@ -1,23 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Live DIAS acceptance run through the application backend.
- *
- * Nothing is mocked. Requests go through the backend HTTP API exactly as the web
- * interface sends them; the backend calls the real LLM and keeps its
- * recommendation off-chain; every ledger claim is checked against committed
- * Fabric state read back through the API. A second backend with an unreachable
- * model endpoint is started only for the no-recommendation scenario.
- *
- * Needs the DIAS channel and chaincode, seeded users and records, the model
- * server, and the backend at DIAS_API_URL (default http://localhost:3001/api).
- *
- *   node scripts/dias/run-backend-acceptance.js --out experiments/runs/<date>_dias_backend_llm_acceptance_<time>
- *
- * The output directory must not already hold a run: earlier evidence is never
- * overwritten.
- */
+/** Live DIAS acceptance run through the application backend. */
 
 const fs = require('fs');
 const path = require('path');
@@ -42,7 +26,7 @@ async function waitForHealth(url, timeoutMs) {
       const response = await fetch(`${url}/health`);
       if (response.ok) return;
     } catch {
-      // not up yet
+      // Not up yet
     }
     if (Date.now() > deadline) throw new Error(`backend at ${url} did not become healthy`);
     await sleep(500);
@@ -52,8 +36,8 @@ async function waitForHealth(url, timeoutMs) {
 /** A second backend on the same ledger whose model endpoint cannot be reached. */
 async function startOfflineModelBackend(outDir) {
   const logFile = fs.openSync(path.join(outDir, 'offline-model-backend.log'), 'a');
-  // This isolated test process serves only requests submitted to it. It must
-  // not start the normal expiry/recovery workers against the shared ledger.
+  // This isolated test process serves only requests submitted to it. It must not start the normal
+  // expiry/recovery workers against the shared ledger.
   const child = spawn(process.execPath, ['-e',
     `require(${JSON.stringify(path.join(REPO, 'backend', 'src', 'server.js'))}).app.listen(process.env.PORT, '127.0.0.1')`], {
     env: {

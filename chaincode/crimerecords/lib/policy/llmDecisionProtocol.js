@@ -12,9 +12,7 @@ const {
   materializeDecision,
 } = require('./controlledDecision');
 
-// Model generations that speak this output contract. Which one is ALLOWED to attest
-// decisions is a governance decision recorded on the ledger (ActivateLLMPolicyModel);
-// this list only pins the protocol compatibility of each generation.
+// Model generations that speak this output contract.
 const SUPPORTED_MODEL_VERSIONS = Object.freeze([
   'qwen3-14b-seba-lora-v4',
   'qwen3-14b-seba-lora-v5',
@@ -83,8 +81,8 @@ function validateModelDecision(input, trusted) {
       || parsed.caseId !== trusted.record.caseId) {
     throw new Error('parsed request: model changed a ledger resource attribute');
   }
-  // The recorded operation and purpose must be the ones committed with the
-  // request, not the ones the model read out of the request text.
+  // The recorded operation and purpose must be the ones committed with the request, not the ones the model
+  // read out of the request text.
   const canonical = canonicalRequest(trusted);
   if (parsed.action !== canonical.action || parsed.purpose !== canonical.purpose) {
     throw new Error('parsed request: does not match the committed operation and purpose');

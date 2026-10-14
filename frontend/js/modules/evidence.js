@@ -1,8 +1,4 @@
-/**
- * Evidence chain: attach a commitment, list what is attached, read the private
- * detail. Only the hash is public; narrative detail goes to the
- * `evidenceDetails` private data collection (Police, Forensics, Prosecution, Court).
- */
+/** Evidence chain: attach a commitment, list what is attached, read the private detail. */
 
 import { api } from '../core/api.js';
 import { canAttachEvidence, canTransferCustody } from '../core/access.js';
@@ -131,8 +127,8 @@ export default {
   title: 'Evidence',
   group: 'Records',
   order: 40,
-  // Anyone may list; only forensics may attach, so the attach panel is hidden
-  // for others while the list stays available.
+  // Anyone may list; only forensics may attach, so the attach panel is hidden for others while the list
+  // stays available.
   allow: undefined,
   summary: 'Attach and inspect evidence commitments.',
 

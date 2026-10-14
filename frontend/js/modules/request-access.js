@@ -1,15 +1,4 @@
-/**
- * The requester's screen, from finding a case file to opening it.
- *
- *   enter the identifier, operation, purpose and reason -> Search
- *   -> the ledger records the request and checks the exact dynamic authorization
- *   -> a match grants at once; otherwise an auditor decides, advised by the LLM
- *   -> a granted view opens the metadata and the complete-PDF hand-over
- *
- * Looking an identifier up is public: it reads the record index — identifier,
- * case and owning station — and never the protected metadata. Nothing protected
- * is read until the ledger holds a granted decision for this exact identity.
- */
+/** The requester's screen, from finding a case file to opening it. */
 
 import { api } from '../core/api.js';
 import { el } from '../core/dom.js';
@@ -78,11 +67,7 @@ function decisionSummary(decision) {
 
 const listed = (values, none) => (values.length > 0 ? values.join(', ') : none);
 
-/**
- * The auditor's decision and, when the request was denied, the LLM's explanation
- * (design §10). The backend has already applied the rule for this officer; an
- * allowed request names the recommendation without its explanation.
- */
+/** The auditor's decision and, when the request was denied, the LLM's explanation. */
 function decisionExplanation(detail) {
   const view = requesterDecisionView(detail);
   if (!view.decided) return null;
@@ -362,8 +347,8 @@ export default {
         return;
       }
       await showProgress(result);
-      // The ledger holds only the justification's fingerprint (h_J). Recomputing it
-      // here lets the requester confirm the text they wrote is the text committed.
+      // The ledger holds only the justification's fingerprint (h_J). Recomputing it here lets the requester
+      // confirm the text they wrote is the text committed.
       const commitment = justificationCommitmentView(sentJustification, result);
       if (commitment.status === 'match') {
         outcome.append(callout('good', 'Your justification is committed unchanged',

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-#
-# Create MSP material for all 5 department orgs + the orderer org via Fabric CA.
-# Run with PWD = crime-records-network/network, CAs already up.
+# Create MSP material for all 5 department orgs + the orderer org via Fabric CA. Run with PWD = crime-records-network/network, CAs already up.
 
 set -euo pipefail
 

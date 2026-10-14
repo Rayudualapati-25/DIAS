@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-#
-# Shared org metadata + peer CLI environment helpers.
-# Source this from scripts that run with PWD = crime-records-network/network.
+# Shared org metadata + peer CLI environment helpers. Source this from scripts that run with PWD = crime-records-network/network.
 
 # The Fabric binaries live in the parent workspace, not on the system PATH.
 # network-up.sh exports the PATH before calling its children, but `make deploy`

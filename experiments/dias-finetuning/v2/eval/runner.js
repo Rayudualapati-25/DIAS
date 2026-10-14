@@ -1,18 +1,6 @@
 'use strict';
 
-/**
- * Evaluation runner.
- *
- * Calls the model through the SAME recommender the live service uses, so an
- * evaluation number describes the deployed path rather than a parallel one built
- * for measuring. That means generation failures are surfaced as statuses here
- * exactly as they are on the ledger, and the metrics can separate "wrong" from
- * "absent".
- *
- * Decoding is fixed: temperature 0, top_p 1, thinking disabled, a fixed token
- * budget. Nothing about the run is sampled, so a rerun on the same server
- * reproduces the same predictions.
- */
+/** Evaluation runner. */
 
 const fs = require('fs');
 const path = require('path');
@@ -24,8 +12,8 @@ const {
 } = require('../../../../backend/src/dias/recommendationPrompt');
 
 /**
- * v1 reproduces the published evaluation exactly. v2 is the v3 live prompt; its
- * cases go through v3InputsFor, because the dataset was built under the v1 schema.
+ * v1 reproduces the published evaluation exactly. v2 is the v3 live prompt; its cases go through
+ * v3InputsFor, because the dataset was built under the v1 schema.
  */
 const PROMPT_VERSIONS = Object.freeze({ v1: PROMPT_VERSION_V1, v2: PROMPT_VERSION });
 const V2_INPUT_ADAPTER = 'v1 case -> v3 verified context (action, purpose) + requester claims '
@@ -45,13 +33,7 @@ function readCases(datasetDir, name) {
     .split('\n').filter(Boolean).map((line) => JSON.parse(line));
 }
 
-/**
- * Build a recommender pointed at one served model.
- *
- * `modelIdentity` is descriptive here rather than ledger-derived: an evaluation
- * is off-chain, so nothing verifies it. It is recorded verbatim in the results
- * so a number can always be traced to the weights that produced it.
- */
+/** Build a recommender pointed at one served model. */
 function createEvaluationRecommender({
   url, servedModel, adapterPath, modelIdentity, maxTokens, timeoutMs, prompt = 'v1',
 }) {
@@ -63,7 +45,7 @@ function createEvaluationRecommender({
   });
 }
 
-/** The v3 inputs for a dataset case built under the v1 schema (plan step 5). */
+/** The v3 inputs for a dataset case built under the v1 schema. */
 function v3InputsFor(example) {
   const { requester, resource, request } = example.verifiedRequest;
   return {

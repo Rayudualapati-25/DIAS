@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-12",
+  "mode": "Android Studio debug app on Medium Phone API 36.1 (Android 16)",
+  "host": "http://10.0.2.2:3001 -> Mac normal DIAS API / Fabric Gateway",
+  "requestId": "REQ-3d53f119d2d59d3a",
+  "recordId": "REC-FIR-001",
+  "action": "annotate",
+  "purpose": "investigation",
+  "requester": "insp.sharma",
+  "auditor": "sp.north",
+  "synthetic": true,
+  "unit": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "device": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "gradleTasks": [
+    "assembleDebug",
+    "testDebugUnitTest",
+    "lintDebug",
+    "connectedDebugAndroidTest"
+  ],
+  "networkArguments": {
+    "apiBase": "http://10.0.2.2:3001",
+    "reverseBase": "http://127.0.0.1:3001",
+    "username": "insp.sharma"
+  }
+}

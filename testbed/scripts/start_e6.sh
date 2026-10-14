@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-#
-# Start the one-hour E6 run from the same pre-registered plan, after checking that the testbed is ready:
-#   1. the model server answers and both recorders (Mac and per-container) are running;
-#   2. the backend has no recommendation still being prepared;
-#   3. requests left open by a stopped attempt are closed (the decision follows the stored recommendation)
-#      and the backend trace shows every created request has a decision;
-#   4. the old loadgen-e6 container is removed and E6 starts under a fresh run name.
-# While E6 runs (about 65 minutes) send nothing else to the model server and keep the Mac awake.
+# Start the one-hour E6 run from the same pre-registered plan, after checking that the testbed is ready.
 set -euo pipefail
 
 TB="${TB:-${HOME}/dias-testbed}"

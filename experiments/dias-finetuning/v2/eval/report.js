@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Build the figures and tables for one or more evaluation runs.
- *
- * Reads `metrics.json` from each run directory. It runs no inference, so every
- * artifact can be regenerated from evidence that already exists.
- *
- *   node experiments/dias-finetuning/v2/eval/report.js \
- *     --runs untuned=experiments/runs/..._baseline,v7=experiments/runs/..._v7 \
- *     --plots results/plots/dias --tables results/tables
- */
+/** Build the figures and tables for one or more evaluation runs. */
 
 const fs = require('fs');
 const path = require('path');

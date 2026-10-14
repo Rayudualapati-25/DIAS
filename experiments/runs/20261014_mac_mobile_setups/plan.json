@@ -1,0 +1,4347 @@
+{
+ "schema": "dias-setup-plan-v1",
+ "seed": 20261014,
+ "auditor": "sp.north",
+ "steps": {
+  "perCell": 24,
+  "items": [
+   {
+    "id": "S-MM-01",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "dir.iyer",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MM-01."
+   },
+   {
+    "id": "S-MM-02",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.sharma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MM-02."
+   },
+   {
+    "id": "S-MM-03",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "sho.reddy",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MM-03."
+   },
+   {
+    "id": "S-MM-04",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "clerk.das",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MM-04."
+   },
+   {
+    "id": "S-MM-05",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "analyst.rao",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MM-05."
+   },
+   {
+    "id": "S-MM-06",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "judge.rana",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MM-06."
+   },
+   {
+    "id": "S-MM-07",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "pp.mehta",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MM-07."
+   },
+   {
+    "id": "S-MM-08",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.rathore",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MM-08."
+   },
+   {
+    "id": "S-MM-09",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.sharma",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MM-09."
+   },
+   {
+    "id": "S-MM-10",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.rathore",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MM-10."
+   },
+   {
+    "id": "S-MM-11",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "const.verma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MM-11."
+   },
+   {
+    "id": "S-MM-12",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "const.verma",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MM-12."
+   },
+   {
+    "id": "S-MM-13",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "io.krishnan",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MM-13."
+   },
+   {
+    "id": "S-MM-14",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.singh",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MM-14."
+   },
+   {
+    "id": "S-MM-15",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.singh",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MM-15."
+   },
+   {
+    "id": "S-MM-16",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "pp.mehta",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MM-16."
+   },
+   {
+    "id": "S-MM-17",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "analyst.rao",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MM-17."
+   },
+   {
+    "id": "S-MM-18",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "dc.nair",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MM-18."
+   },
+   {
+    "id": "S-MM-19",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "judge.rana",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MM-19."
+   },
+   {
+    "id": "S-MM-20",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "dir.iyer",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MM-20."
+   },
+   {
+    "id": "S-MM-21",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "sho.reddy",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MM-21."
+   },
+   {
+    "id": "S-MM-22",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "io.krishnan",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MM-22."
+   },
+   {
+    "id": "S-MM-23",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "dc.nair",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MM-23."
+   },
+   {
+    "id": "S-MM-24",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "clerk.das",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MM-24."
+   },
+   {
+    "id": "S-PP-01",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "dir.iyer",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PP-01."
+   },
+   {
+    "id": "S-PP-02",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "pp.mehta",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PP-02."
+   },
+   {
+    "id": "S-PP-03",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "clerk.das",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PP-03."
+   },
+   {
+    "id": "S-PP-04",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "judge.rana",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PP-04."
+   },
+   {
+    "id": "S-PP-05",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "pp.mehta",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PP-05."
+   },
+   {
+    "id": "S-PP-06",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.singh",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PP-06."
+   },
+   {
+    "id": "S-PP-07",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.rathore",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PP-07."
+   },
+   {
+    "id": "S-PP-08",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "clerk.das",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PP-08."
+   },
+   {
+    "id": "S-PP-09",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "analyst.rao",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PP-09."
+   },
+   {
+    "id": "S-PP-10",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "dc.nair",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PP-10."
+   },
+   {
+    "id": "S-PP-11",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "dir.iyer",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PP-11."
+   },
+   {
+    "id": "S-PP-12",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "sho.reddy",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PP-12."
+   },
+   {
+    "id": "S-PP-13",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "io.krishnan",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PP-13."
+   },
+   {
+    "id": "S-PP-14",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "const.verma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PP-14."
+   },
+   {
+    "id": "S-PP-15",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "io.krishnan",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PP-15."
+   },
+   {
+    "id": "S-PP-16",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.sharma",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PP-16."
+   },
+   {
+    "id": "S-PP-17",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.singh",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PP-17."
+   },
+   {
+    "id": "S-PP-18",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.rathore",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PP-18."
+   },
+   {
+    "id": "S-PP-19",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.sharma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PP-19."
+   },
+   {
+    "id": "S-PP-20",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "judge.rana",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PP-20."
+   },
+   {
+    "id": "S-PP-21",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "dc.nair",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PP-21."
+   },
+   {
+    "id": "S-PP-22",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "analyst.rao",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PP-22."
+   },
+   {
+    "id": "S-PP-23",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "const.verma",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PP-23."
+   },
+   {
+    "id": "S-PP-24",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "sho.reddy",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PP-24."
+   },
+   {
+    "id": "S-MP-01",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "judge.rana",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MP-01."
+   },
+   {
+    "id": "S-MP-02",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "io.krishnan",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MP-02."
+   },
+   {
+    "id": "S-MP-03",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "analyst.rao",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MP-03."
+   },
+   {
+    "id": "S-MP-04",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "insp.rathore",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MP-04."
+   },
+   {
+    "id": "S-MP-05",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "const.verma",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MP-05."
+   },
+   {
+    "id": "S-MP-06",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "const.verma",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MP-06."
+   },
+   {
+    "id": "S-MP-07",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "clerk.das",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MP-07."
+   },
+   {
+    "id": "S-MP-08",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "sho.reddy",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MP-08."
+   },
+   {
+    "id": "S-MP-09",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "dc.nair",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MP-09."
+   },
+   {
+    "id": "S-MP-10",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "insp.singh",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MP-10."
+   },
+   {
+    "id": "S-MP-11",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "analyst.rao",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MP-11."
+   },
+   {
+    "id": "S-MP-12",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "sho.reddy",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MP-12."
+   },
+   {
+    "id": "S-MP-13",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "pp.mehta",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MP-13."
+   },
+   {
+    "id": "S-MP-14",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "dir.iyer",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MP-14."
+   },
+   {
+    "id": "S-MP-15",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "insp.sharma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MP-15."
+   },
+   {
+    "id": "S-MP-16",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "insp.sharma",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-MP-16."
+   },
+   {
+    "id": "S-MP-17",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "pp.mehta",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MP-17."
+   },
+   {
+    "id": "S-MP-18",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "io.krishnan",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MP-18."
+   },
+   {
+    "id": "S-MP-19",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "insp.rathore",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MP-19."
+   },
+   {
+    "id": "S-MP-20",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "judge.rana",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-MP-20."
+   },
+   {
+    "id": "S-MP-21",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "insp.singh",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MP-21."
+   },
+   {
+    "id": "S-MP-22",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "clerk.das",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-MP-22."
+   },
+   {
+    "id": "S-MP-23",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "dir.iyer",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MP-23."
+   },
+   {
+    "id": "S-MP-24",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "dc.nair",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-MP-24."
+   },
+   {
+    "id": "S-PM-01",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "insp.sharma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PM-01."
+   },
+   {
+    "id": "S-PM-02",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "const.verma",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PM-02."
+   },
+   {
+    "id": "S-PM-03",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "dc.nair",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PM-03."
+   },
+   {
+    "id": "S-PM-04",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "clerk.das",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PM-04."
+   },
+   {
+    "id": "S-PM-05",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "insp.sharma",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PM-05."
+   },
+   {
+    "id": "S-PM-06",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "analyst.rao",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PM-06."
+   },
+   {
+    "id": "S-PM-07",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "clerk.das",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PM-07."
+   },
+   {
+    "id": "S-PM-08",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "judge.rana",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PM-08."
+   },
+   {
+    "id": "S-PM-09",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "sho.reddy",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PM-09."
+   },
+   {
+    "id": "S-PM-10",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "analyst.rao",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PM-10."
+   },
+   {
+    "id": "S-PM-11",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "dir.iyer",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PM-11."
+   },
+   {
+    "id": "S-PM-12",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "dir.iyer",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PM-12."
+   },
+   {
+    "id": "S-PM-13",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "insp.singh",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PM-13."
+   },
+   {
+    "id": "S-PM-14",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "pp.mehta",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PM-14."
+   },
+   {
+    "id": "S-PM-15",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "insp.rathore",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PM-15."
+   },
+   {
+    "id": "S-PM-16",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "io.krishnan",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PM-16."
+   },
+   {
+    "id": "S-PM-17",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "judge.rana",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request S-PM-17."
+   },
+   {
+    "id": "S-PM-18",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "sho.reddy",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "view",
+    "purpose": "prosecution",
+    "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request S-PM-18."
+   },
+   {
+    "id": "S-PM-19",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "insp.rathore",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PM-19."
+   },
+   {
+    "id": "S-PM-20",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "pp.mehta",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PM-20."
+   },
+   {
+    "id": "S-PM-21",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "const.verma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PM-21."
+   },
+   {
+    "id": "S-PM-22",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "dc.nair",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "judicial-proceeding",
+    "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request S-PM-22."
+   },
+   {
+    "id": "S-PM-23",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "io.krishnan",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PM-23."
+   },
+   {
+    "id": "S-PM-24",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "insp.singh",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "audit-review",
+    "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request S-PM-24."
+   }
+  ],
+  "order": [
+   "S-PP-01",
+   "S-MM-01",
+   "S-MP-01",
+   "S-PM-01",
+   "S-PP-02",
+   "S-MP-02",
+   "S-PM-02",
+   "S-MM-02",
+   "S-MM-03",
+   "S-PP-03",
+   "S-PM-03",
+   "S-MP-03",
+   "S-PM-04",
+   "S-MP-04",
+   "S-PP-04",
+   "S-MM-04",
+   "S-PM-05",
+   "S-PP-05",
+   "S-MM-05",
+   "S-MP-05",
+   "S-MP-06",
+   "S-MM-06",
+   "S-PP-06",
+   "S-PM-06",
+   "S-MM-07",
+   "S-PP-07",
+   "S-PM-07",
+   "S-MP-07",
+   "S-MP-08",
+   "S-MM-08",
+   "S-PP-08",
+   "S-PM-08",
+   "S-MP-09",
+   "S-PM-09",
+   "S-PP-09",
+   "S-MM-09",
+   "S-MM-10",
+   "S-PP-10",
+   "S-MP-10",
+   "S-PM-10",
+   "S-PM-11",
+   "S-PP-11",
+   "S-MP-11",
+   "S-MM-11",
+   "S-PP-12",
+   "S-MP-12",
+   "S-PM-12",
+   "S-MM-12",
+   "S-PP-13",
+   "S-MP-13",
+   "S-PM-13",
+   "S-MM-13",
+   "S-MM-14",
+   "S-MP-14",
+   "S-PP-14",
+   "S-PM-14",
+   "S-PM-15",
+   "S-MP-15",
+   "S-PP-15",
+   "S-MM-15",
+   "S-MP-16",
+   "S-PM-16",
+   "S-MM-16",
+   "S-PP-16",
+   "S-MP-17",
+   "S-PP-17",
+   "S-PM-17",
+   "S-MM-17",
+   "S-PM-18",
+   "S-MP-18",
+   "S-MM-18",
+   "S-PP-18",
+   "S-MM-19",
+   "S-MP-19",
+   "S-PM-19",
+   "S-PP-19",
+   "S-PP-20",
+   "S-MM-20",
+   "S-MP-20",
+   "S-PM-20",
+   "S-PM-21",
+   "S-MP-21",
+   "S-MM-21",
+   "S-PP-21",
+   "S-PM-22",
+   "S-MP-22",
+   "S-MM-22",
+   "S-PP-22",
+   "S-MP-23",
+   "S-PP-23",
+   "S-PM-23",
+   "S-MM-23",
+   "S-MM-24",
+   "S-MP-24",
+   "S-PP-24",
+   "S-PM-24"
+  ]
+ },
+ "reuse": {
+  "basesPerCell": 3,
+  "repeatsPerBase": 3,
+  "bases": [
+   {
+    "id": "R-MM-01",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.rathore",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "investigation",
+    "first": {
+     "id": "R-MM-01-first",
+     "username": "insp.rathore",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MM-01-repeat1",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-01-repeat1."
+     },
+     {
+      "id": "R-MM-01-repeat2",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-01-repeat2."
+     },
+     {
+      "id": "R-MM-01-repeat3",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MM-01-nearmiss",
+     "username": "insp.rathore",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MM-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MM-01-afterrevoke",
+     "username": "insp.rathore",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PP-01",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "sho.reddy",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "defense-preparation",
+    "first": {
+     "id": "R-PP-01-first",
+     "username": "sho.reddy",
+     "recordId": "REC-JUVENILE-001",
+     "action": "view",
+     "purpose": "defense-preparation",
+     "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PP-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PP-01-repeat1",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PP-01-repeat1."
+     },
+     {
+      "id": "R-PP-01-repeat2",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PP-01-repeat2."
+     },
+     {
+      "id": "R-PP-01-repeat3",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PP-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PP-01-nearmiss",
+     "username": "sho.reddy",
+     "recordId": "REC-JUVENILE-001",
+     "action": "view",
+     "purpose": "prosecution",
+     "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request R-PP-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PP-01-afterrevoke",
+     "username": "sho.reddy",
+     "recordId": "REC-JUVENILE-001",
+     "action": "view",
+     "purpose": "defense-preparation",
+     "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PP-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-MP-01",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "sho.reddy",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "first": {
+     "id": "R-MP-01-first",
+     "username": "sho.reddy",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MP-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MP-01-repeat1",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MP-01-repeat1."
+     },
+     {
+      "id": "R-MP-01-repeat2",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MP-01-repeat2."
+     },
+     {
+      "id": "R-MP-01-repeat3",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MP-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MP-01-nearmiss",
+     "username": "sho.reddy",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-MP-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MP-01-afterrevoke",
+     "username": "sho.reddy",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MP-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PM-01",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "clerk.das",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "first": {
+     "id": "R-PM-01-first",
+     "username": "clerk.das",
+     "recordId": "REC-JUVENILE-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PM-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PM-01-repeat1",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PM-01-repeat1."
+     },
+     {
+      "id": "R-PM-01-repeat2",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PM-01-repeat2."
+     },
+     {
+      "id": "R-PM-01-repeat3",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PM-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PM-01-nearmiss",
+     "username": "clerk.das",
+     "recordId": "REC-JUVENILE-001",
+     "action": "export",
+     "purpose": "prosecution",
+     "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request R-PM-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PM-01-afterrevoke",
+     "username": "clerk.das",
+     "recordId": "REC-JUVENILE-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PM-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-MM-02",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "judge.rana",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "first": {
+     "id": "R-MM-02-first",
+     "username": "judge.rana",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MM-02-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MM-02-repeat1",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MM-02-repeat1."
+     },
+     {
+      "id": "R-MM-02-repeat2",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MM-02-repeat2."
+     },
+     {
+      "id": "R-MM-02-repeat3",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MM-02-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MM-02-nearmiss",
+     "username": "judge.rana",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-MM-02-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MM-02-afterrevoke",
+     "username": "judge.rana",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MM-02-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PP-02",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.sharma",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "export",
+    "purpose": "judicial-proceeding",
+    "first": {
+     "id": "R-PP-02-first",
+     "username": "insp.sharma",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "export",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-PP-02-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PP-02-repeat1",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-PP-02-repeat1."
+     },
+     {
+      "id": "R-PP-02-repeat2",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-PP-02-repeat2."
+     },
+     {
+      "id": "R-PP-02-repeat3",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-PP-02-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PP-02-nearmiss",
+     "username": "insp.sharma",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "export",
+     "purpose": "prosecution",
+     "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request R-PP-02-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PP-02-afterrevoke",
+     "username": "insp.sharma",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "export",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-PP-02-afterrevoke."
+    }
+   },
+   {
+    "id": "R-MP-02",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "analyst.rao",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "first": {
+     "id": "R-MP-02-first",
+     "username": "analyst.rao",
+     "recordId": "REC-FIR-001",
+     "action": "annotate",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MP-02-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MP-02-repeat1",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MP-02-repeat1."
+     },
+     {
+      "id": "R-MP-02-repeat2",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MP-02-repeat2."
+     },
+     {
+      "id": "R-MP-02-repeat3",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MP-02-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MP-02-nearmiss",
+     "username": "analyst.rao",
+     "recordId": "REC-FIR-001",
+     "action": "annotate",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MP-02-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MP-02-afterrevoke",
+     "username": "analyst.rao",
+     "recordId": "REC-FIR-001",
+     "action": "annotate",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MP-02-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PM-02",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "pp.mehta",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "audit-review",
+    "first": {
+     "id": "R-PM-02-first",
+     "username": "pp.mehta",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-02-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PM-02-repeat1",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-02-repeat1."
+     },
+     {
+      "id": "R-PM-02-repeat2",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-02-repeat2."
+     },
+     {
+      "id": "R-PM-02-repeat3",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-02-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PM-02-nearmiss",
+     "username": "pp.mehta",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "defense-preparation",
+     "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PM-02-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PM-02-afterrevoke",
+     "username": "pp.mehta",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-02-afterrevoke."
+    }
+   },
+   {
+    "id": "R-MM-03",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "insp.singh",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "first": {
+     "id": "R-MM-03-first",
+     "username": "insp.singh",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-03-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MM-03-repeat1",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-03-repeat1."
+     },
+     {
+      "id": "R-MM-03-repeat2",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-03-repeat2."
+     },
+     {
+      "id": "R-MM-03-repeat3",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-03-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MM-03-nearmiss",
+     "username": "insp.singh",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-03-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MM-03-afterrevoke",
+     "username": "insp.singh",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-03-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PP-03",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "const.verma",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "first": {
+     "id": "R-PP-03-first",
+     "username": "const.verma",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PP-03-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PP-03-repeat1",
+      "username": "const.verma",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PP-03-repeat1."
+     },
+     {
+      "id": "R-PP-03-repeat2",
+      "username": "const.verma",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PP-03-repeat2."
+     },
+     {
+      "id": "R-PP-03-repeat3",
+      "username": "const.verma",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PP-03-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PP-03-nearmiss",
+     "username": "const.verma",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PP-03-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PP-03-afterrevoke",
+     "username": "const.verma",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-PP-03-afterrevoke."
+    }
+   },
+   {
+    "id": "R-MP-03",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "dc.nair",
+    "recordId": "REC-EVIDENCE-001",
+    "action": "annotate",
+    "purpose": "forensic-analysis",
+    "first": {
+     "id": "R-MP-03-first",
+     "username": "dc.nair",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-03-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MP-03-repeat1",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-03-repeat1."
+     },
+     {
+      "id": "R-MP-03-repeat2",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-03-repeat2."
+     },
+     {
+      "id": "R-MP-03-repeat3",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-03-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MP-03-nearmiss",
+     "username": "dc.nair",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "prosecution",
+     "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request R-MP-03-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MP-03-afterrevoke",
+     "username": "dc.nair",
+     "recordId": "REC-EVIDENCE-001",
+     "action": "annotate",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-03-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PM-03",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "dir.iyer",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "audit-review",
+    "first": {
+     "id": "R-PM-03-first",
+     "username": "dir.iyer",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-03-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PM-03-repeat1",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-03-repeat1."
+     },
+     {
+      "id": "R-PM-03-repeat2",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-03-repeat2."
+     },
+     {
+      "id": "R-PM-03-repeat3",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-03-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PM-03-nearmiss",
+     "username": "dir.iyer",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-PM-03-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PM-03-afterrevoke",
+     "username": "dir.iyer",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-03-afterrevoke."
+    }
+   }
+  ],
+  "order": [
+   "R-MM-01",
+   "R-PP-01",
+   "R-MP-01",
+   "R-PM-01",
+   "R-MM-02",
+   "R-PP-02",
+   "R-MP-02",
+   "R-PM-02",
+   "R-MM-03",
+   "R-PP-03",
+   "R-MP-03",
+   "R-PM-03"
+  ]
+ },
+ "load": {
+  "levels": [
+   5,
+   10,
+   25
+  ],
+  "repeats": 2,
+  "bursts": [
+   {
+    "id": "L-phone-only-10-r1",
+    "setup": "phone-only",
+    "level": 10,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-phone-only-10-r1-01",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-10-r1-01."
+     },
+     {
+      "id": "L-phone-only-10-r1-02",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-10-r1-02."
+     },
+     {
+      "id": "L-phone-only-10-r1-03",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r1-03."
+     },
+     {
+      "id": "L-phone-only-10-r1-04",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r1-04."
+     },
+     {
+      "id": "L-phone-only-10-r1-05",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-10-r1-05."
+     },
+     {
+      "id": "L-phone-only-10-r1-06",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-10-r1-06."
+     },
+     {
+      "id": "L-phone-only-10-r1-07",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r1-07."
+     },
+     {
+      "id": "L-phone-only-10-r1-08",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-10-r1-08."
+     },
+     {
+      "id": "L-phone-only-10-r1-09",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-10-r1-09."
+     },
+     {
+      "id": "L-phone-only-10-r1-10",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-10-r1-10."
+     }
+    ]
+   },
+   {
+    "id": "L-phone-only-25-r1",
+    "setup": "phone-only",
+    "level": 25,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-phone-only-25-r1-01",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r1-01."
+     },
+     {
+      "id": "L-phone-only-25-r1-02",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r1-02."
+     },
+     {
+      "id": "L-phone-only-25-r1-03",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r1-03."
+     },
+     {
+      "id": "L-phone-only-25-r1-04",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r1-04."
+     },
+     {
+      "id": "L-phone-only-25-r1-05",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-25-r1-05."
+     },
+     {
+      "id": "L-phone-only-25-r1-06",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r1-06."
+     },
+     {
+      "id": "L-phone-only-25-r1-07",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r1-07."
+     },
+     {
+      "id": "L-phone-only-25-r1-08",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r1-08."
+     },
+     {
+      "id": "L-phone-only-25-r1-09",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r1-09."
+     },
+     {
+      "id": "L-phone-only-25-r1-10",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r1-10."
+     },
+     {
+      "id": "L-phone-only-25-r1-11",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r1-11."
+     },
+     {
+      "id": "L-phone-only-25-r1-12",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r1-12."
+     },
+     {
+      "id": "L-phone-only-25-r1-13",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r1-13."
+     },
+     {
+      "id": "L-phone-only-25-r1-14",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r1-14."
+     },
+     {
+      "id": "L-phone-only-25-r1-15",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r1-15."
+     },
+     {
+      "id": "L-phone-only-25-r1-16",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r1-16."
+     },
+     {
+      "id": "L-phone-only-25-r1-17",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r1-17."
+     },
+     {
+      "id": "L-phone-only-25-r1-18",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r1-18."
+     },
+     {
+      "id": "L-phone-only-25-r1-19",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r1-19."
+     },
+     {
+      "id": "L-phone-only-25-r1-20",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r1-20."
+     },
+     {
+      "id": "L-phone-only-25-r1-21",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r1-21."
+     },
+     {
+      "id": "L-phone-only-25-r1-22",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r1-22."
+     },
+     {
+      "id": "L-phone-only-25-r1-23",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r1-23."
+     },
+     {
+      "id": "L-phone-only-25-r1-24",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r1-24."
+     },
+     {
+      "id": "L-phone-only-25-r1-25",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r1-25."
+     }
+    ]
+   },
+   {
+    "id": "L-mac-only-10-r1",
+    "setup": "mac-only",
+    "level": 10,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-mac-only-10-r1-01",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r1-01."
+     },
+     {
+      "id": "L-mac-only-10-r1-02",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-10-r1-02."
+     },
+     {
+      "id": "L-mac-only-10-r1-03",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-10-r1-03."
+     },
+     {
+      "id": "L-mac-only-10-r1-04",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r1-04."
+     },
+     {
+      "id": "L-mac-only-10-r1-05",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-10-r1-05."
+     },
+     {
+      "id": "L-mac-only-10-r1-06",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r1-06."
+     },
+     {
+      "id": "L-mac-only-10-r1-07",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-10-r1-07."
+     },
+     {
+      "id": "L-mac-only-10-r1-08",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r1-08."
+     },
+     {
+      "id": "L-mac-only-10-r1-09",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-10-r1-09."
+     },
+     {
+      "id": "L-mac-only-10-r1-10",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-10-r1-10."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-10-r1",
+    "setup": "combined",
+    "level": 10,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-combined-10-r1-01",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-10-r1-01."
+     },
+     {
+      "id": "L-combined-10-r1-02",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-10-r1-02."
+     },
+     {
+      "id": "L-combined-10-r1-03",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-10-r1-03."
+     },
+     {
+      "id": "L-combined-10-r1-04",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-10-r1-04."
+     },
+     {
+      "id": "L-combined-10-r1-05",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-10-r1-05."
+     },
+     {
+      "id": "L-combined-10-r1-06",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-10-r1-06."
+     },
+     {
+      "id": "L-combined-10-r1-07",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-10-r1-07."
+     },
+     {
+      "id": "L-combined-10-r1-08",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-10-r1-08."
+     },
+     {
+      "id": "L-combined-10-r1-09",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-10-r1-09."
+     },
+     {
+      "id": "L-combined-10-r1-10",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-10-r1-10."
+     }
+    ]
+   },
+   {
+    "id": "L-mac-only-25-r1",
+    "setup": "mac-only",
+    "level": 25,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-mac-only-25-r1-01",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r1-01."
+     },
+     {
+      "id": "L-mac-only-25-r1-02",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r1-02."
+     },
+     {
+      "id": "L-mac-only-25-r1-03",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r1-03."
+     },
+     {
+      "id": "L-mac-only-25-r1-04",
+      "officer": "mac",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r1-04."
+     },
+     {
+      "id": "L-mac-only-25-r1-05",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r1-05."
+     },
+     {
+      "id": "L-mac-only-25-r1-06",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r1-06."
+     },
+     {
+      "id": "L-mac-only-25-r1-07",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r1-07."
+     },
+     {
+      "id": "L-mac-only-25-r1-08",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r1-08."
+     },
+     {
+      "id": "L-mac-only-25-r1-09",
+      "officer": "mac",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r1-09."
+     },
+     {
+      "id": "L-mac-only-25-r1-10",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r1-10."
+     },
+     {
+      "id": "L-mac-only-25-r1-11",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r1-11."
+     },
+     {
+      "id": "L-mac-only-25-r1-12",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r1-12."
+     },
+     {
+      "id": "L-mac-only-25-r1-13",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r1-13."
+     },
+     {
+      "id": "L-mac-only-25-r1-14",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-25-r1-14."
+     },
+     {
+      "id": "L-mac-only-25-r1-15",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r1-15."
+     },
+     {
+      "id": "L-mac-only-25-r1-16",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r1-16."
+     },
+     {
+      "id": "L-mac-only-25-r1-17",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-25-r1-17."
+     },
+     {
+      "id": "L-mac-only-25-r1-18",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r1-18."
+     },
+     {
+      "id": "L-mac-only-25-r1-19",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r1-19."
+     },
+     {
+      "id": "L-mac-only-25-r1-20",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r1-20."
+     },
+     {
+      "id": "L-mac-only-25-r1-21",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r1-21."
+     },
+     {
+      "id": "L-mac-only-25-r1-22",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r1-22."
+     },
+     {
+      "id": "L-mac-only-25-r1-23",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r1-23."
+     },
+     {
+      "id": "L-mac-only-25-r1-24",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r1-24."
+     },
+     {
+      "id": "L-mac-only-25-r1-25",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r1-25."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-25-r1",
+    "setup": "combined",
+    "level": 25,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-combined-25-r1-01",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-25-r1-01."
+     },
+     {
+      "id": "L-combined-25-r1-02",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-02."
+     },
+     {
+      "id": "L-combined-25-r1-03",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r1-03."
+     },
+     {
+      "id": "L-combined-25-r1-04",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r1-04."
+     },
+     {
+      "id": "L-combined-25-r1-05",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-25-r1-05."
+     },
+     {
+      "id": "L-combined-25-r1-06",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-06."
+     },
+     {
+      "id": "L-combined-25-r1-07",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-07."
+     },
+     {
+      "id": "L-combined-25-r1-08",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r1-08."
+     },
+     {
+      "id": "L-combined-25-r1-09",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r1-09."
+     },
+     {
+      "id": "L-combined-25-r1-10",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-10."
+     },
+     {
+      "id": "L-combined-25-r1-11",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-25-r1-11."
+     },
+     {
+      "id": "L-combined-25-r1-12",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r1-12."
+     },
+     {
+      "id": "L-combined-25-r1-13",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-13."
+     },
+     {
+      "id": "L-combined-25-r1-14",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-25-r1-14."
+     },
+     {
+      "id": "L-combined-25-r1-15",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r1-15."
+     },
+     {
+      "id": "L-combined-25-r1-16",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r1-16."
+     },
+     {
+      "id": "L-combined-25-r1-17",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r1-17."
+     },
+     {
+      "id": "L-combined-25-r1-18",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r1-18."
+     },
+     {
+      "id": "L-combined-25-r1-19",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r1-19."
+     },
+     {
+      "id": "L-combined-25-r1-20",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-20."
+     },
+     {
+      "id": "L-combined-25-r1-21",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-25-r1-21."
+     },
+     {
+      "id": "L-combined-25-r1-22",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r1-22."
+     },
+     {
+      "id": "L-combined-25-r1-23",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r1-23."
+     },
+     {
+      "id": "L-combined-25-r1-24",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r1-24."
+     },
+     {
+      "id": "L-combined-25-r1-25",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r1-25."
+     }
+    ]
+   },
+   {
+    "id": "L-phone-only-05-r1",
+    "setup": "phone-only",
+    "level": 5,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-phone-only-05-r1-01",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-05-r1-01."
+     },
+     {
+      "id": "L-phone-only-05-r1-02",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-05-r1-02."
+     },
+     {
+      "id": "L-phone-only-05-r1-03",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-05-r1-03."
+     },
+     {
+      "id": "L-phone-only-05-r1-04",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-05-r1-04."
+     },
+     {
+      "id": "L-phone-only-05-r1-05",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-05-r1-05."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-05-r1",
+    "setup": "combined",
+    "level": 5,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-combined-05-r1-01",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-05-r1-01."
+     },
+     {
+      "id": "L-combined-05-r1-02",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-05-r1-02."
+     },
+     {
+      "id": "L-combined-05-r1-03",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-05-r1-03."
+     },
+     {
+      "id": "L-combined-05-r1-04",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-05-r1-04."
+     },
+     {
+      "id": "L-combined-05-r1-05",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-05-r1-05."
+     }
+    ]
+   },
+   {
+    "id": "L-mac-only-05-r1",
+    "setup": "mac-only",
+    "level": 5,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-mac-only-05-r1-01",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-05-r1-01."
+     },
+     {
+      "id": "L-mac-only-05-r1-02",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-05-r1-02."
+     },
+     {
+      "id": "L-mac-only-05-r1-03",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-05-r1-03."
+     },
+     {
+      "id": "L-mac-only-05-r1-04",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-05-r1-04."
+     },
+     {
+      "id": "L-mac-only-05-r1-05",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-05-r1-05."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-10-r2",
+    "setup": "combined",
+    "level": 10,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-combined-10-r2-01",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-10-r2-01."
+     },
+     {
+      "id": "L-combined-10-r2-02",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-10-r2-02."
+     },
+     {
+      "id": "L-combined-10-r2-03",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-10-r2-03."
+     },
+     {
+      "id": "L-combined-10-r2-04",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-10-r2-04."
+     },
+     {
+      "id": "L-combined-10-r2-05",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-10-r2-05."
+     },
+     {
+      "id": "L-combined-10-r2-06",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-10-r2-06."
+     },
+     {
+      "id": "L-combined-10-r2-07",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-10-r2-07."
+     },
+     {
+      "id": "L-combined-10-r2-08",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-10-r2-08."
+     },
+     {
+      "id": "L-combined-10-r2-09",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-10-r2-09."
+     },
+     {
+      "id": "L-combined-10-r2-10",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-10-r2-10."
+     }
+    ]
+   },
+   {
+    "id": "L-phone-only-10-r2",
+    "setup": "phone-only",
+    "level": 10,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-phone-only-10-r2-01",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-10-r2-01."
+     },
+     {
+      "id": "L-phone-only-10-r2-02",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-10-r2-02."
+     },
+     {
+      "id": "L-phone-only-10-r2-03",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-10-r2-03."
+     },
+     {
+      "id": "L-phone-only-10-r2-04",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-10-r2-04."
+     },
+     {
+      "id": "L-phone-only-10-r2-05",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-10-r2-05."
+     },
+     {
+      "id": "L-phone-only-10-r2-06",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-10-r2-06."
+     },
+     {
+      "id": "L-phone-only-10-r2-07",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r2-07."
+     },
+     {
+      "id": "L-phone-only-10-r2-08",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r2-08."
+     },
+     {
+      "id": "L-phone-only-10-r2-09",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r2-09."
+     },
+     {
+      "id": "L-phone-only-10-r2-10",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-10-r2-10."
+     }
+    ]
+   },
+   {
+    "id": "L-phone-only-25-r2",
+    "setup": "phone-only",
+    "level": 25,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-phone-only-25-r2-01",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-01."
+     },
+     {
+      "id": "L-phone-only-25-r2-02",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-02."
+     },
+     {
+      "id": "L-phone-only-25-r2-03",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r2-03."
+     },
+     {
+      "id": "L-phone-only-25-r2-04",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-04."
+     },
+     {
+      "id": "L-phone-only-25-r2-05",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-25-r2-05."
+     },
+     {
+      "id": "L-phone-only-25-r2-06",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r2-06."
+     },
+     {
+      "id": "L-phone-only-25-r2-07",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-07."
+     },
+     {
+      "id": "L-phone-only-25-r2-08",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-25-r2-08."
+     },
+     {
+      "id": "L-phone-only-25-r2-09",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-09."
+     },
+     {
+      "id": "L-phone-only-25-r2-10",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r2-10."
+     },
+     {
+      "id": "L-phone-only-25-r2-11",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r2-11."
+     },
+     {
+      "id": "L-phone-only-25-r2-12",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r2-12."
+     },
+     {
+      "id": "L-phone-only-25-r2-13",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-13."
+     },
+     {
+      "id": "L-phone-only-25-r2-14",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r2-14."
+     },
+     {
+      "id": "L-phone-only-25-r2-15",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-25-r2-15."
+     },
+     {
+      "id": "L-phone-only-25-r2-16",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-25-r2-16."
+     },
+     {
+      "id": "L-phone-only-25-r2-17",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r2-17."
+     },
+     {
+      "id": "L-phone-only-25-r2-18",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-25-r2-18."
+     },
+     {
+      "id": "L-phone-only-25-r2-19",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r2-19."
+     },
+     {
+      "id": "L-phone-only-25-r2-20",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r2-20."
+     },
+     {
+      "id": "L-phone-only-25-r2-21",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-25-r2-21."
+     },
+     {
+      "id": "L-phone-only-25-r2-22",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r2-22."
+     },
+     {
+      "id": "L-phone-only-25-r2-23",
+      "officer": "phone",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-25-r2-23."
+     },
+     {
+      "id": "L-phone-only-25-r2-24",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-phone-only-25-r2-24."
+     },
+     {
+      "id": "L-phone-only-25-r2-25",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-phone-only-25-r2-25."
+     }
+    ]
+   },
+   {
+    "id": "L-phone-only-05-r2",
+    "setup": "phone-only",
+    "level": 5,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-phone-only-05-r2-01",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-05-r2-01."
+     },
+     {
+      "id": "L-phone-only-05-r2-02",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-05-r2-02."
+     },
+     {
+      "id": "L-phone-only-05-r2-03",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-phone-only-05-r2-03."
+     },
+     {
+      "id": "L-phone-only-05-r2-04",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-05-r2-04."
+     },
+     {
+      "id": "L-phone-only-05-r2-05",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-phone-only-05-r2-05."
+     }
+    ]
+   },
+   {
+    "id": "L-mac-only-10-r2",
+    "setup": "mac-only",
+    "level": 10,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-mac-only-10-r2-01",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-10-r2-01."
+     },
+     {
+      "id": "L-mac-only-10-r2-02",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-10-r2-02."
+     },
+     {
+      "id": "L-mac-only-10-r2-03",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-10-r2-03."
+     },
+     {
+      "id": "L-mac-only-10-r2-04",
+      "officer": "mac",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-10-r2-04."
+     },
+     {
+      "id": "L-mac-only-10-r2-05",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-10-r2-05."
+     },
+     {
+      "id": "L-mac-only-10-r2-06",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-10-r2-06."
+     },
+     {
+      "id": "L-mac-only-10-r2-07",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r2-07."
+     },
+     {
+      "id": "L-mac-only-10-r2-08",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r2-08."
+     },
+     {
+      "id": "L-mac-only-10-r2-09",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-10-r2-09."
+     },
+     {
+      "id": "L-mac-only-10-r2-10",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-10-r2-10."
+     }
+    ]
+   },
+   {
+    "id": "L-mac-only-25-r2",
+    "setup": "mac-only",
+    "level": 25,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-mac-only-25-r2-01",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r2-01."
+     },
+     {
+      "id": "L-mac-only-25-r2-02",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r2-02."
+     },
+     {
+      "id": "L-mac-only-25-r2-03",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r2-03."
+     },
+     {
+      "id": "L-mac-only-25-r2-04",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r2-04."
+     },
+     {
+      "id": "L-mac-only-25-r2-05",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r2-05."
+     },
+     {
+      "id": "L-mac-only-25-r2-06",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r2-06."
+     },
+     {
+      "id": "L-mac-only-25-r2-07",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r2-07."
+     },
+     {
+      "id": "L-mac-only-25-r2-08",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r2-08."
+     },
+     {
+      "id": "L-mac-only-25-r2-09",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-25-r2-09."
+     },
+     {
+      "id": "L-mac-only-25-r2-10",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r2-10."
+     },
+     {
+      "id": "L-mac-only-25-r2-11",
+      "officer": "mac",
+      "username": "insp.rathore",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r2-11."
+     },
+     {
+      "id": "L-mac-only-25-r2-12",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r2-12."
+     },
+     {
+      "id": "L-mac-only-25-r2-13",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r2-13."
+     },
+     {
+      "id": "L-mac-only-25-r2-14",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-25-r2-14."
+     },
+     {
+      "id": "L-mac-only-25-r2-15",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r2-15."
+     },
+     {
+      "id": "L-mac-only-25-r2-16",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-25-r2-16."
+     },
+     {
+      "id": "L-mac-only-25-r2-17",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r2-17."
+     },
+     {
+      "id": "L-mac-only-25-r2-18",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r2-18."
+     },
+     {
+      "id": "L-mac-only-25-r2-19",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-25-r2-19."
+     },
+     {
+      "id": "L-mac-only-25-r2-20",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-25-r2-20."
+     },
+     {
+      "id": "L-mac-only-25-r2-21",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r2-21."
+     },
+     {
+      "id": "L-mac-only-25-r2-22",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-25-r2-22."
+     },
+     {
+      "id": "L-mac-only-25-r2-23",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-mac-only-25-r2-23."
+     },
+     {
+      "id": "L-mac-only-25-r2-24",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-25-r2-24."
+     },
+     {
+      "id": "L-mac-only-25-r2-25",
+      "officer": "mac",
+      "username": "insp.rathore",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-mac-only-25-r2-25."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-05-r2",
+    "setup": "combined",
+    "level": 5,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-combined-05-r2-01",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-05-r2-01."
+     },
+     {
+      "id": "L-combined-05-r2-02",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-05-r2-02."
+     },
+     {
+      "id": "L-combined-05-r2-03",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-05-r2-03."
+     },
+     {
+      "id": "L-combined-05-r2-04",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-05-r2-04."
+     },
+     {
+      "id": "L-combined-05-r2-05",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-05-r2-05."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-25-r2",
+    "setup": "combined",
+    "level": 25,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-combined-25-r2-01",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-25-r2-01."
+     },
+     {
+      "id": "L-combined-25-r2-02",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r2-02."
+     },
+     {
+      "id": "L-combined-25-r2-03",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-03."
+     },
+     {
+      "id": "L-combined-25-r2-04",
+      "officer": "phone",
+      "username": "dc.nair",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r2-04."
+     },
+     {
+      "id": "L-combined-25-r2-05",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-05."
+     },
+     {
+      "id": "L-combined-25-r2-06",
+      "officer": "phone",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-06."
+     },
+     {
+      "id": "L-combined-25-r2-07",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-07."
+     },
+     {
+      "id": "L-combined-25-r2-08",
+      "officer": "phone",
+      "username": "insp.rathore",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r2-08."
+     },
+     {
+      "id": "L-combined-25-r2-09",
+      "officer": "mac",
+      "username": "const.verma",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r2-09."
+     },
+     {
+      "id": "L-combined-25-r2-10",
+      "officer": "phone",
+      "username": "io.krishnan",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-25-r2-10."
+     },
+     {
+      "id": "L-combined-25-r2-11",
+      "officer": "mac",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r2-11."
+     },
+     {
+      "id": "L-combined-25-r2-12",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-12."
+     },
+     {
+      "id": "L-combined-25-r2-13",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-25-r2-13."
+     },
+     {
+      "id": "L-combined-25-r2-14",
+      "officer": "phone",
+      "username": "const.verma",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-25-r2-14."
+     },
+     {
+      "id": "L-combined-25-r2-15",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r2-15."
+     },
+     {
+      "id": "L-combined-25-r2-16",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-combined-25-r2-16."
+     },
+     {
+      "id": "L-combined-25-r2-17",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r2-17."
+     },
+     {
+      "id": "L-combined-25-r2-18",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-18."
+     },
+     {
+      "id": "L-combined-25-r2-19",
+      "officer": "mac",
+      "username": "sho.reddy",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-25-r2-19."
+     },
+     {
+      "id": "L-combined-25-r2-20",
+      "officer": "phone",
+      "username": "analyst.rao",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-combined-25-r2-20."
+     },
+     {
+      "id": "L-combined-25-r2-21",
+      "officer": "mac",
+      "username": "dir.iyer",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r2-21."
+     },
+     {
+      "id": "L-combined-25-r2-22",
+      "officer": "phone",
+      "username": "pp.mehta",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-combined-25-r2-22."
+     },
+     {
+      "id": "L-combined-25-r2-23",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r2-23."
+     },
+     {
+      "id": "L-combined-25-r2-24",
+      "officer": "phone",
+      "username": "insp.sharma",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-25-r2-24."
+     },
+     {
+      "id": "L-combined-25-r2-25",
+      "officer": "mac",
+      "username": "insp.rathore",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "prosecution",
+      "justification": "Needed to prepare the prosecution of this case. Synthetic three-setup experiment request L-combined-25-r2-25."
+     }
+    ]
+   },
+   {
+    "id": "L-mac-only-05-r2",
+    "setup": "mac-only",
+    "level": 5,
+    "repeat": 2,
+    "requests": [
+     {
+      "id": "L-mac-only-05-r2-01",
+      "officer": "mac",
+      "username": "io.krishnan",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-05-r2-01."
+     },
+     {
+      "id": "L-mac-only-05-r2-02",
+      "officer": "mac",
+      "username": "dc.nair",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-05-r2-02."
+     },
+     {
+      "id": "L-mac-only-05-r2-03",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-05-r2-03."
+     },
+     {
+      "id": "L-mac-only-05-r2-04",
+      "officer": "mac",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "view",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-mac-only-05-r2-04."
+     },
+     {
+      "id": "L-mac-only-05-r2-05",
+      "officer": "mac",
+      "username": "analyst.rao",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request L-mac-only-05-r2-05."
+     }
+    ]
+   }
+  ],
+  "order": [
+   "L-phone-only-10-r1",
+   "L-phone-only-25-r1",
+   "L-mac-only-10-r1",
+   "L-combined-10-r1",
+   "L-mac-only-25-r1",
+   "L-combined-25-r1",
+   "L-phone-only-05-r1",
+   "L-combined-05-r1",
+   "L-mac-only-05-r1",
+   "L-combined-10-r2",
+   "L-phone-only-10-r2",
+   "L-phone-only-25-r2",
+   "L-phone-only-05-r2",
+   "L-mac-only-10-r2",
+   "L-mac-only-25-r2",
+   "L-combined-05-r2",
+   "L-combined-25-r2",
+   "L-mac-only-05-r2"
+  ]
+ },
+ "sha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f"
+}

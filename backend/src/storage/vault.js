@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Minimal agency-controlled raw-content vault for the research prototype.
- *
- * This is deliberately a filesystem, not an application database. Fabric is
- * authoritative for the record metadata, reference, hash and access decision;
- * this module only holds the sensitive bytes that must not be replicated to
- * every channel peer. A production deployment would replace this adapter with
- * each agency's encrypted object/document store.
- */
+/** Minimal agency-controlled raw-content vault for the research prototype. */
 
 const crypto = require('crypto');
 const fs = require('fs');

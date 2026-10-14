@@ -1,0 +1,80 @@
+{
+ "startedAtUtc": "2026-10-13T17:18:47.883Z",
+ "request": {
+  "username": "insp.singh",
+  "recordId": "REC-FIR-001",
+  "action": "view",
+  "purpose": "investigation"
+ },
+ "auditor": "sp.north",
+ "checks": [
+  {
+   "name": "the LLM recommends DENY for the cross-district request, and the advice is committed and verified",
+   "ok": true,
+   "detail": "advice DENY"
+  },
+  {
+   "name": "the auditor grants over the DENY on the phone, and the phone shows it confirmed and first in its access log",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "the ledger records FORCE_ALLOW against the LLM (NOT_AGREED), with the digest of the auditor note",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "name": "that decision created one reusable authorization for exactly this scope",
+   "ok": true,
+   "detail": "AUTH-8ed186e4d0ff98d5"
+  },
+  {
+   "name": "the repeated request on the Mac is granted at once by the authorization",
+   "ok": true,
+   "detail": "1945.7 ms"
+  },
+  {
+   "name": "the reused request has no LLM recommendation and no auditor decision on the ledger",
+   "ok": true,
+   "detail": "ACCESS_REQUEST_SUBMITTED > DYNAMIC_AUTHORIZATION_CHECKED > AUDITOR_REVIEW_SKIPPED > ACCESS_OUTCOME_RECORDED"
+  },
+  {
+   "name": "the access log shows the reuse as granted by the authorization, with the LLM not asked",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "name": "the auditor revokes the authorization",
+   "ok": true,
+   "detail": "status 200"
+  },
+  {
+   "name": "after the revocation the same request waits for an auditor again",
+   "ok": true,
+   "detail": "status 202"
+  },
+  {
+   "name": "that request is closed by following the advice",
+   "ok": true,
+   "detail": "DENY -> FORCE_DENY"
+  },
+  {
+   "name": "nothing is left waiting and no authorization is left active",
+   "ok": true,
+   "detail": "0 waiting, 0 active"
+  }
+ ],
+ "evidence": {
+  "overriddenRequestId": "REQ-806697acdedfea64",
+  "authorizationId": "AUTH-8ed186e4d0ff98d5",
+  "reusedRequestId": "REQ-aed538bfd4b7a0aa",
+  "reuseMs": 1945.7,
+  "afterRevocationRequestId": "REQ-469a103fe08a28c4"
+ },
+ "summary": {
+  "passed": 11,
+  "failed": 0,
+  "error": null
+ },
+ "finishedAtUtc": "2026-10-13T17:19:12.585Z"
+}

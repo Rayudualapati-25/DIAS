@@ -1,17 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Smoke test of the full testbed path before any measured run.
- *
- * Sends four workflows (two the policy allows, two it denies) whose facts are
- * in neither experiment plan, then checks, for each one:
- *  - the request committed and a V7 recommendation was produced;
- *  - the auditor decision committed with the recommendation value on-chain and
- *    the agreement derived by the chaincode;
- *  - the ledger trail holds the request and the decision but not the
- *    justification or the model's reason text (they stay off-chain).
- */
+/** Smoke test of the full testbed path before any measured run. */
 
 const fs = require('fs');
 const path = require('path');

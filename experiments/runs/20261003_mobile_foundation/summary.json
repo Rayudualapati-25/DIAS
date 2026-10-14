@@ -1,0 +1,92 @@
+{
+  "androidDevice": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "androidUnit": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "androidDebugAndReleaseBuild": "passed",
+  "androidLint": "passed, only pinned-tool-version warning",
+  "backendFocused": {
+    "passed": 53,
+    "failed": 0
+  },
+  "backendFullSuite": {
+    "status": "blocked",
+    "reason": "pre-existing untracked recommenderServer.unit.test.js requires missing recommender-service/server"
+  },
+  "backendExcludingMissingFile": {
+    "passed": 283,
+    "failed": 4,
+    "reason": "existing modified architectureGuard/diasRuntime tests expect unfinished recommender service separation"
+  },
+  "transport": [
+    {
+      "dataset": "deterministic_synthetic_53_cases",
+      "baseline": {
+        "requests": 1,
+        "rows": 53,
+        "maxRowsPerResponse": 53
+      },
+      "batched": {
+        "requests": 3,
+        "rows": 53,
+        "maxRowsPerResponse": 20,
+        "batchSizes": [
+          20,
+          20,
+          13
+        ],
+        "exactCoverage": true
+      },
+      "noBatchAblation": {
+        "requests": 1,
+        "maxRowsPerResponse": 53
+      }
+    },
+    {
+      "dataset": "live_local_Fabric_cases",
+      "baseline": {
+        "requests": 1,
+        "rows": 2,
+        "maxRowsPerResponse": 2
+      },
+      "batched": {
+        "requests": 1,
+        "rows": 2,
+        "maxRowsPerResponse": 2,
+        "batchSizes": [
+          2
+        ],
+        "exactCoverage": true
+      },
+      "noBatchAblation": {
+        "requests": 1,
+        "maxRowsPerResponse": 2
+      }
+    }
+  ],
+  "noCacheAblation": {
+    "fixtureRows": 45,
+    "cachedRowsWhileOffline": 20,
+    "networkOnlyWhileOffline": "IOException",
+    "source": "FoundationTest.offlineReadsWorkWhileNetworkOnlyAblationFails"
+  },
+  "limitations": [
+    "No physical-phone or public-tunnel test",
+    "Live host uses older crimechannel/crimerecords",
+    "No latest DIAS v3 live acceptance claim",
+    "Host ledger queries still load all cases",
+    "No model was added or compared; these are mobile transport and persistence checks"
+  ],
+  "repositoryChecks": {
+    "status": "blocked",
+    "reason": "Existing retained testbed transactions.jsonl is 69.8 MiB; make check stops at repo-check prerequisite"
+  }
+}

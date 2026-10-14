@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Fabric commit conflicts.
- *
- * A transaction that loses an MVCC or phantom-read race is rejected at commit and
- * writes nothing, so proposing it again against the new state is safe. The API
- * retries a few times and, if the race keeps being lost, says so plainly instead
- * of answering "internal error".
- */
+/** Fabric commit conflicts. */
 
 const { expect } = require('chai');
 

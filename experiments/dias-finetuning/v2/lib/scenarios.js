@@ -1,23 +1,6 @@
 'use strict';
 
-/**
- * Scenario constructors.
- *
- * Each constructor builds a verified request that exercises one policy situation
- * by construction, then lets the offline oracle label it. The constructor never
- * decides the label: it decides the *situation*, and if a constructor and the
- * oracle ever disagree about what situation was built, the validator catches it.
- *
- * Two properties every constructor must preserve:
- *
- *   - Policy-irrelevant fields (emergencyFlag, approvalTokenPresent, witnessFlag,
- *     rank, station, owning agency and station) are drawn independently of the
- *     label. v1 set emergencyFlag to false in every single example, which made
- *     it useless as a distractor and untested as a non-exception.
- *   - Fields the scenario is not about are drawn from the full legal range, not
- *     pinned to a convenient value. v1 used only `high` and `low` clearance, so
- *     the ordered comparison was never exercised.
- */
+/** Scenario constructors. */
 
 const { CREDENTIAL_STATUSES, DISTRICTS, clearanceSplit, roleIndex, stationIn } = require('./world');
 const {
@@ -31,8 +14,8 @@ function ambientFacts(rng, bundle, { organization, district }) {
   return {
     rank: String(rng.int(1, 7)),
     station: stationIn(organization, district, rng.int(1, 4)),
-    // Both flags are policy-irrelevant under GP-CONTEXT:C1 and must therefore be
-    // uncorrelated with the label; they are drawn here and nowhere else.
+    // Both flags are policy-irrelevant under GP-CONTEXT:C1 and must therefore be uncorrelated with the
+    // label; they are drawn here and nowhere else.
     emergencyFlag: rng.bool(0.25),
     approvalTokenPresent: rng.bool(0.25),
     witnessFlag: rng.bool(0.3),
@@ -43,13 +26,7 @@ function assemble({ requester, resource, request }) {
   return { requester, resource, request };
 }
 
-/**
- * What the oracle says about these facts.
- *
- * The oracle needs a caseId, which the constructors leave for the generator to
- * fill with a neutral identifier, so a placeholder is supplied here. It affects
- * no clause: no clause in policy v1 reads the case identifier.
- */
+/** What the oracle says about these facts. */
 function verdictFor(bundle, facts) {
   return evaluateReference(bundle, {
     ...facts,
@@ -57,15 +34,7 @@ function verdictFor(bundle, facts) {
   });
 }
 
-/**
- * Facts only if they really exhibit the clauses the caller asked for.
- *
- * Mutations interact: replacing a role to break the organization clause can
- * simultaneously satisfy the juvenile clause, so a scenario that names two
- * clauses may end up exhibiting one. Returning null lets the caller retry with a
- * different base rather than silently producing an example whose recorded
- * `targetClauses` is a fiction.
- */
+/** Facts only if they really exhibit the clauses the caller asked for. */
 function onlyIfExhibits(bundle, facts, clauses) {
   if (facts === null || facts === undefined) return null;
   if (clauses.length === 0) {
@@ -76,8 +45,8 @@ function onlyIfExhibits(bundle, facts, clauses) {
 }
 
 /**
- * Build a request that satisfies every clause. Everything not fixed by the
- * ALLOW requirement is drawn freely, so clean examples span the whole world.
+ * Build a request that satisfies every clause. Everything not fixed by the ALLOW requirement is drawn
+ * freely, so clean examples span the whole world.
  */
 function cleanAllow(rng, bundle, index = roleIndex(bundle)) {
   const order = bundle.vocabularies.clearanceOrder;
@@ -181,9 +150,8 @@ const SINGLE_VIOLATIONS = Object.freeze({
 const SINGLE_VIOLATION_CLAUSES = Object.freeze(Object.keys(SINGLE_VIOLATIONS));
 
 /**
- * A request violating exactly the named clause, or null when this clean base
- * cannot express that violation (a court identity cannot fail the seal clause).
- * Callers retry with a different base rather than forcing an unnatural one.
+ * A request violating exactly the named clause, or null when this clean base cannot express that violation
+ * (a court identity cannot fail the seal clause).
  */
 function singleViolation(rng, bundle, clause, index = roleIndex(bundle)) {
   const base = cleanAllow(rng, bundle, index);
@@ -203,11 +171,7 @@ function multiViolation(rng, bundle, clauses, index = roleIndex(bundle)) {
   return onlyIfExhibits(bundle, facts, clauses);
 }
 
-/**
- * A near miss: one field away from the opposite label. These are where a model
- * that has learned surface correlations rather than the policy fails, so they
- * are generated deliberately rather than left to chance.
- */
+/** A near miss: one field away from the opposite label. */
 const NEAR_MISS_BUILDERS = Object.freeze({
   /** Clearance exactly meets sensitivity — allowed — versus one level short. */
   'clearance-boundary': (rng, bundle, index) => {
@@ -319,9 +283,8 @@ const NEAR_MISS_BUILDERS = Object.freeze({
 const NEAR_MISS_KINDS = Object.freeze(Object.keys(NEAR_MISS_BUILDERS));
 
 /**
- * A near-miss pair, or a pair with a null half when the construction did not
- * actually produce opposite labels. The caller retries rather than emitting a
- * pair that does not demonstrate the boundary it is named for.
+ * A near-miss pair, or a pair with a null half when the construction did not actually produce opposite
+ * labels.
  */
 function nearMiss(rng, bundle, kind, index = roleIndex(bundle)) {
   const pair = NEAR_MISS_BUILDERS[kind](rng, bundle, index);

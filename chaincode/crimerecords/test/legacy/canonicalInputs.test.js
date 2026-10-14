@@ -1,19 +1,9 @@
 'use strict';
 
-// LEGACY (SEAL / pre-DIAS): exercises retained modules that the DIAS runtime no longer
-// loads and that deployCC.sh excludes from the chaincode package (see architectureGuard.test.js).
+// LEGACY (SEAL / pre-DIAS): exercises retained modules that the DIAS runtime no longer loads and that
+// deployCC.sh excludes from the chaincode package (see architectureGuard.test.js).
 
-/**
- * The safety guard must evaluate policy on CANONICAL request facts.
- *
- * Before this suite existed the deterministic check consumed the model's own
- * `action` and `purpose`, so a misread request produced a policy result computed
- * from that same misreading and the two trivially agreed. These tests pin the
- * corrected boundary: the operation and purpose come from the request the
- * requester committed, the model's reading of them is compared rather than
- * trusted, and no disagreement of any kind may turn into an automatic grant or
- * denial.
- */
+/** The safety guard must evaluate policy on CANONICAL request facts. */
 
 const { expect } = require('chai');
 const chai = require('chai');
@@ -114,9 +104,7 @@ describe('canonical request facts drive the deterministic safety check', () => {
     });
 
     it('evaluates policy on the canonical action, not the one the model reported', () => {
-      // A constable may view a FIR but has no export permission at all. If the
-      // engine consumed the model's action it would return RBAC_NO_PERMISSION;
-      // reading the canonical action it returns the allow the request deserves.
+      // A constable may view a FIR but has no export permission at all.
       const trusted = allowingContext({
         subject: { role: 'constable', clearance: 'medium' },
       });
@@ -211,16 +199,16 @@ describe('canonical request facts drive the deterministic safety check', () => {
     });
 
     it('never shows the canonical operation or purpose to the model', () => {
-      // If the prompt carried them the model would echo them back and the
-      // comparison above would prove nothing.
+      // If the prompt carried them the model would echo them back and the comparison above would prove
+      // nothing.
       const shown = promptRequestContext(allowingContext().requestContext);
       expect(shown).to.not.have.property('action');
       expect(shown).to.not.have.property('purpose');
     });
 
     it('rejects a purpose outside the policy vocabulary before inference', () => {
-      // The chaincode allow-list enforces this at request time; here we confirm
-      // the engine itself refuses an unknown purpose rather than defaulting.
+      // The chaincode allow-list enforces this at request time; here we confirm the engine itself refuses
+      // an unknown purpose rather than defaulting.
       const trusted = allowingContext({ requestContext: { purpose: 'marketing' } });
       expect(policyTruth(trusted).reasonCode).to.equal('INVALID_PURPOSE');
     });

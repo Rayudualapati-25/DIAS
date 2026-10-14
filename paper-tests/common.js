@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Shared plumbing for the paper experiments.
- *
- * This file adds no measurement logic of its own. It verifies that the system
- * is in the frozen configuration, stamps that configuration onto every result
- * file, and re-exports the repository's existing API and Fabric clients so the
- * experiments do not carry duplicate copies of them.
- */
+/** Shared plumbing for the paper experiments. */
 
 const fs = require('fs');
 const os = require('os');
@@ -28,9 +21,8 @@ const API = process.env.API_BASE || 'http://127.0.0.1:3001/api';
 const MODEL_URL = process.env.LLM_POLICY_URL || 'http://127.0.0.1:8080/v1';
 
 /**
- * The configuration these experiments are only valid against. A mismatch means
- * the numbers cannot be compared with the rest of the evaluation, so preflight
- * stops rather than reconfiguring anything.
+ * The configuration these experiments are only valid against. A mismatch means the numbers cannot be
+ * compared with the rest of the evaluation, so preflight stops rather than reconfiguring anything.
  */
 const FROZEN = Object.freeze({
   organizations: 6,
@@ -48,12 +40,8 @@ const FROZEN = Object.freeze({
 // ---------------------------------------------------------------- HTTP client
 
 /**
- * A transport failure carries almost nothing in its own message: node's fetch
- * reports every socket-level problem as the same "fetch failed". The underlying
- * cause chain is where the useful detail lives (ECONNRESET, ECONNREFUSED,
- * UND_ERR_SOCKET and so on), so it is unwrapped here and attached to the thrown
- * error. Nothing is retried: a transport failure is evidence and it is reported
- * as such, not smoothed over until the run looks clean.
+ * A transport failure carries almost nothing in its own message: node's fetch reports every socket-level
+ * problem as the same "fetch failed".
  */
 function describeCause(error) {
   const chain = [];
@@ -65,18 +53,7 @@ function describeCause(error) {
   return chain;
 }
 
-/**
- * Ceiling on a single API call.
- *
- * The API answers a decision request by polling for at most 90 s and then
- * returning 202, so every legitimate response arrives well inside this. The
- * ceiling exists because a request that never settles is otherwise unbounded:
- * an experiment observed a socket to the API move to CLOSED while the fetch
- * promise stayed pending, which stalled a run indefinitely and produced no
- * evidence at all. A timeout converts that into a recorded, classified failure.
- * It is deliberately above the API's own ceiling so it can never truncate a
- * response the system would have produced.
- */
+/** Ceiling on a single API call. */
 const API_TIMEOUT_MS = Number(process.env.PAPER_API_TIMEOUT_MS || 120000);
 
 async function api(method, route, { token, body, raw = false } = {}) {
@@ -163,15 +140,7 @@ function hardware() {
   };
 }
 
-/**
- * Provenance recorded on every result file.
- *
- * Two commits matter and they are not the same one. `frozenBaseline` is the
- * implementation under measurement (the paper-freeze-v1 tag). `harnessCommit`
- * is whatever HEAD is when the experiment runs, which also carries the
- * measurement harness and any measurement-only instrumentation. Reporting only
- * one of them would attribute results to the wrong tree.
- */
+/** Provenance recorded on every result file. */
 const FROZEN_TAG = 'paper-freeze-v1';
 
 function provenance() {
@@ -231,11 +200,7 @@ async function reachable(url) {
   }
 }
 
-/**
- * Verify the frozen configuration. Throws with every difference listed; never
- * reconfigures anything. `requirePending` is relaxed only by the experiment
- * that deliberately leaves escalations behind.
- */
+/** Verify the frozen configuration. Throws with every difference listed; never reconfigures anything. */
 async function preflight({ requirePending = 0, requireServices = true } = {}) {
   const problems = [];
   const notes = [];
@@ -341,8 +306,8 @@ function stats(values) {
 const round = (x) => Math.round(x * 100) / 100;
 
 /**
- * Accuracy proportions keep four decimals. Two would turn 0.585 into 0.59 and
- * silently change a number the paper quotes.
+ * Accuracy proportions keep four decimals. Two would turn 0.585 into 0.59 and silently change a number the
+ * paper quotes.
  */
 const ratio = (x) => (x === null || x === undefined ? null : Math.round(x * 10000) / 10000);
 

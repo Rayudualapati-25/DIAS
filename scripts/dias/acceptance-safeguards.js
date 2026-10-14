@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * Live DIAS acceptance scenarios for the safeguards: revocation and expiry, an
- * auditor deciding their own request, a decision on changed facts, a missing LLM
- * recommendation, the application access log, and the absence of LLM data on the
- * ledger.
+ * Live DIAS acceptance scenarios for the safeguards: revocation and expiry, an auditor deciding their own
+ * request, a decision on changed facts, a missing LLM recommendation, the application access log, and the
+ * absence of LLM data on the ledger.
  */
 
 const {

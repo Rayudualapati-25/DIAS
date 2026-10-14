@@ -1,15 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Evaluate-only ledger check for a reuse plan: submits no transaction. Lists
- * every dynamic authorization (any status) whose scope names a record of the
- * plan, and every one on the ledger in total, so the run can show that it
- * started from none and that each one it created covers exactly one user and
- * one record.
- *
- * Usage: node testbed/reuse/check-ledger.js --plan <plan.json> --label before|after --out <file.json>
- */
+/** Evaluate-only ledger check for a reuse plan: submits no transaction. */
 
 const fs = require('fs');
 const path = require('path');

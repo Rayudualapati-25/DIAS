@@ -48,7 +48,7 @@ def test_fingerprint_replay_grants_siblings_and_repeats_from_one_approval():
     ]
     counts = replay_fingerprint(rows, keys, {"A": True})
     assert counts["reviews"] == 1 and counts["automatic_grants"] == 3
-    assert counts["grants_on_a_different_record"] == 2  # the sibling in rounds 0 and 1
+    assert counts["grants_on_a_different_record"] == 2  # The sibling in rounds 0 and 1
     assert counts["authorizations_created"] == 1
     assert replay_fingerprint(rows[:2], keys, {"A": False})["automatic_grants"] == 0
 

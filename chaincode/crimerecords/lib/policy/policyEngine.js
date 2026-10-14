@@ -1,17 +1,8 @@
 'use strict';
 
 /**
- * Deterministic policy engine: evaluates a structured access request and
- * returns { decision, reasonCode, decisiveAttributes, counterfactual }.
- *
- * decision  : 'allow' | 'deny' | 'escalate'
- *
- * v2: no emergency override, districts are a hard boundary for every role, and a
- * clearance shortfall is a refusal the requester appeals to their own authority
- * rather than an automatic escalation.
- * Rules run in a fixed order; the first terminal rule wins, and the rule
- * that fired names the decisive attributes — this is what makes the
- * explanation artifact reviewable rather than decorative.
+ * Deterministic policy engine: evaluates a structured access request and returns { decision, reasonCode,
+ * decisiveAttributes, counterfactual }.
  */
 
 const {
@@ -20,9 +11,7 @@ const {
 } = require('./policyV1');
 const { RANK_TABLE } = require('./authority');
 
-// A role name is meaningful only inside the operational organization that owns
-// its rank ladder.  This prevents, for example, an AuditMSP identity whose
-// administrative title happens to be "sp" from inheriting PoliceMSP powers.
+// A role name is meaningful only inside the operational organization that owns its rank ladder.
 const MSP_DEPARTMENT = Object.freeze({
   PoliceMSP: 'police',
   ForensicsMSP: 'forensics',
@@ -40,12 +29,6 @@ function result(decision, reasonCode, decisiveAttributes, counterfactual) {
   });
 }
 
-/**
- * @param {object} subject  caller attribute snapshot (from identity.getCaller)
- * @param {object} record   record metadata from the ledger
- * @param {string} action   'view' | 'export' | 'annotate'
- * @param {object} env      { purpose, emergencyFlag, courtLink, approvalToken }
- */
 function evaluate(subject, record, action, env) {
   // Rule 1 — credential state (PBAC: revocation handling).
   if (subject.credentialStatus !== 'active') {
@@ -59,10 +42,8 @@ function evaluate(subject, record, action, env) {
       `the purpose barrier would be removed if purpose were one of [${PURPOSES.join(', ')}]; remaining policy conditions would still be evaluated`);
   }
 
-  // Rule 3 — RBAC base matrix: both the authenticated organization and role
-  // must identify the same operational department, then the role must permit
-  // this action on this type. AuditMSP and AIOrgMSP are deliberately outside
-  // the operational record-access ladders.
+  // Rule 3 — RBAC base matrix: both the authenticated organization and role must identify the same
+  // operational department, then the role must permit this action on this type.
   const roleDefinition = RANK_TABLE[subject.role];
   const expectedDepartment = MSP_DEPARTMENT[subject.mspId];
   const rolePerms = expectedDepartment && roleDefinition
@@ -82,17 +63,15 @@ function evaluate(subject, record, action, env) {
       'the seal barrier would be removed if the record were not sealed or the requester belonged to CourtMSP; remaining policy conditions would still be evaluated');
   }
 
-  // Rule 5 — juvenile protection is a hard deny except for the narrowly
-  // enumerated legal roles. Rank alone never overrides this rule.
+  // Rule 5 — juvenile protection is a hard deny except for the narrowly enumerated legal roles. Rank alone
+  // never overrides this rule.
   if (record.juvenileFlag && !JUVENILE_ALLOWED.includes(subject.role)) {
     return result('deny', 'JUVENILE_PROTECTED',
       ['object.juvenileFlag', 'subject.role'],
       'the juvenile-protection barrier would be removed if the record were not juvenile-protected or the requester held a role in the juvenile exception; remaining policy conditions would still be evaluated');
   }
 
-  // Rule 5b — data minimization for forensic work. Evidence metadata remains
-  // queryable, but a forensic identity does not receive a victim-protected raw
-  // record merely because it has an evidence-analysis role.
+  // Rule 5b — data minimization for forensic work.
   if (record.victimProtectionFlag
       && [ 'lab-analyst', 'lab-director' ].includes(subject.role)) {
     return result('deny', 'VICTIM_DATA_NOT_NECESSARY',
@@ -100,10 +79,8 @@ function evaluate(subject, record, action, env) {
       'the data-minimization barrier would be removed if the requested resource did not contain victim-protected raw data; remaining policy conditions would still be evaluated');
   }
 
-  // Rule 6 — jurisdiction. A district is a hard boundary for EVERY role: a judge
-  // serves one district's court, and seniority does not reach across districts.
-  // There is no emergency override; a refused requester appeals to the authority
-  // in their own chain of command instead.
+  // Rule 6 — jurisdiction. A district is a hard boundary for EVERY role: a judge serves one district's
+  // court, and seniority does not reach across districts.
   if (subject.jurisdiction !== record.jurisdiction) {
     return result('deny', 'CROSS_JURISDICTION',
       ['subject.jurisdiction', 'object.jurisdiction'],
@@ -112,8 +89,8 @@ function evaluate(subject, record, action, env) {
 
   // Rule 7 — case assignment (ABAC): non-exempt roles must be assigned.
   if (!ASSIGNMENT_EXEMPT.includes(subject.role)) {
-    // Split on comma or pipe: Fabric CA's --id.attrs uses commas as the
-    // attribute separator, so certificates carry assignments pipe-separated.
+    // Split on comma or pipe: Fabric CA's --id.attrs uses commas as the attribute separator, so
+    // certificates carry assignments pipe-separated.
     const assignments = subject.caseAssignments
       ? subject.caseAssignments.split(/[,|]/).map((s) => s.trim())
       : [];

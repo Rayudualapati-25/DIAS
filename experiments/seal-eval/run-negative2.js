@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-/**
- * SEAL adversarial checks, independent of the model server.
- * A well-formed decision artifact is constructed deterministically from the
- * policy engine, so the ledger-side validation classes can be exercised
- * without invoking the language model.
- */
+/** SEAL adversarial checks, independent of the model server. */
 const fs = require('fs'), crypto = require('crypto');
 const fabric = require('../../backend/src/fabric/gateway');
 const { signAttestation } = require('../../backend/src/llm/policyAttestation');
@@ -34,9 +29,7 @@ async function api(m, p, { token, body } = {}) {
 }
 const login = async (u) => (await api('POST', '/auth/login', { body: { username: u } })).json.data.token;
 
-/** Build a valid, policy-consistent decision artifact for a request context.
- *  Mirrors the current protocol: the model supplies only an advisory compact
- *  classification, and the controlled module derives decision + explanation. */
+/** Build a valid, policy-consistent decision artifact for a request context. */
 function buildArtifact(ctx) {
   const { subject, record } = ctx.snapshot;
   const trusted = { subject, record, requestContext: ctx.snapshot.requestContext || {} };

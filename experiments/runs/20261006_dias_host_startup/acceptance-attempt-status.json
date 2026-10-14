@@ -1,0 +1,13 @@
+{
+  "status": "stopped_incompatible_runner",
+  "observedFailure": "R1 rejects justificationHash because it searches any justification substring.",
+  "blockingMismatch": "readyReview waits for recommendationState=ready; the current auditor API reports committed after a signed ledger commitment.",
+  "sourceEvidence": [
+    "scripts/dias/acceptance-scenarios.js",
+    "scripts/dias/acceptance-client.js",
+    "current-review-shape.json"
+  ],
+  "requestId": "REQ-24601cfdab132c5f",
+  "fullSuitePassClaimed": false,
+  "endedAt": "2026-10-06T09:41:46.281Z"
+}

@@ -1,26 +1,6 @@
 #!/usr/bin/env bash
-#
-# Prove this is a complete permissioned blockchain, not a database with extra
-# steps. Ten checks, each one reading from the live network rather than from
-# anything this project wrote about itself.
-#
-# The claim being tested, check by check:
-#   1  membership is closed and cryptographically defined
-#   2  every organisation holds the same chain, byte for byte
-#   3  blocks are hash-linked, so history cannot be rewritten silently
-#   4  ordering is by consensus, not by one server deciding
-#   5  no single organisation can commit a write
-#   6  a forged identity is rejected before the chaincode even runs
-#   7  authorisation is computed on-chain from a signed certificate
-#   8  organisations can be denied read access to data, not just write access
-#   9  past versions of a record survive every update
-#  10  identities are issued and registered, not self-asserted
-#
+# Prove this is a complete permissioned blockchain, not a database with extra steps. Ten checks, each one reading from the live network rather than from anything this project wrote about itself.
 # Usage:  make prove        (the DIAS channel: CHANNEL=diaschannel CC=diasrecords ORG_SET=dias)
-# Needs:  the network up with DIAS deployed and seeded (make all)
-#
-# Checks 5, 8 and 9 write to the ledger: a proof record and evidence under the
-# dedicated case CASE-PROOF, and a suspension of const.verma that is reverted.
 
 set -uo pipefail
 

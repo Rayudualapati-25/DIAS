@@ -1,17 +1,6 @@
 'use strict';
 
-/**
- * Backend architecture guard.
- *
- * DIAS's central constraint is that the model is advisory and nothing corrects
- * it at runtime. That is an architectural property, not a behaviour any single
- * unit test can demonstrate: it holds only while no live code path can reach a
- * deterministic policy evaluator.
- *
- * This suite walks the real `require` graph from the live entry points and fails
- * if a forbidden module is reachable, so the property is checked by construction
- * rather than asserted in prose.
- */
+/** Backend architecture guard. */
 
 const fs = require('fs');
 const path = require('path');
@@ -22,19 +11,13 @@ const REPO_ROOT = path.resolve(__dirname, '..', '..');
 
 /** The processes that actually run in DIAS mode. */
 const ENTRY_POINTS = Object.freeze([
-  'backend/src/server.js',          // the one backend process
-  'backend/src/routes/access.js',   // request submission, LLM recommendation, auditor, authorizations
-  'backend/src/routes/audit.js',    // audit trail
-  'backend/src/dias/runtime.js',    // composition root
+  'backend/src/server.js',          // The one backend process
+  'backend/src/routes/access.js',   // Request submission, LLM recommendation, auditor, authorizations
+  'backend/src/routes/audit.js',    // Audit trail
+  'backend/src/dias/runtime.js',    // Composition root
 ]);
 
-/**
- * Modules that must never be reachable from a live DIAS path.
- *
- * The reference oracle is a legitimate part of the repository — it labels the
- * training data and validates the dataset offline — which is exactly why its
- * absence from the runtime has to be enforced rather than assumed.
- */
+/** Modules that must never be reachable from a live DIAS path. */
 const FORBIDDEN = Object.freeze([
   { file: 'policies/reference-oracle/referencePolicyOracle.js', why: 'the offline reference oracle must never judge a live recommendation' },
   { file: 'chaincode/crimerecords/lib/policy/policyEngine.js', why: 'the SEAL deterministic policy engine must not run in the live path' },
@@ -47,11 +30,7 @@ const FORBIDDEN = Object.freeze([
   { file: 'backend/src/llm/ollama.js', why: 'the SEAL wording model is not part of the DIAS runtime' },
 ]);
 
-/**
- * Resolve the transitive require graph of an entry point without executing it.
- * `Module._resolveFilename` is the same resolver `require` uses, so an alias or
- * a computed-looking path that node would follow is followed here too.
- */
+/** Resolve the transitive require graph of an entry point without executing it. */
 function requireGraph(entryRelative) {
   const entry = path.join(REPO_ROOT, entryRelative);
   const seen = new Set();
@@ -105,12 +84,8 @@ describe('DIAS backend architecture guard', () => {
   });
 
   /**
-   * v3 replaces the v2 rule "no recommendation signer at all": the backend now
-   * signs each recommendation so the ledger can verify it (design §6.1). What must
-   * still hold is that there is no AI organisation and no separate recommendation
-   * service: the retired listener, attestation and service modules stay gone, and
-   * the signing module has no Fabric identity, so no path from it reaches the
-   * Fabric gateway or the offline oracle.
+   * v3 replaces the v2 rule "no recommendation signer at all": the backend now signs each recommendation so
+   * the ledger can verify it.
    */
   it('has no AI-organisation listener and no separate recommendation service; the signer has no Fabric identity', () => {
     for (const retired of ['backend/src/ai/start.js', 'backend/src/dias/recommendationService.js',

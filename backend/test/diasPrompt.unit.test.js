@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * The recommendation prompt, in two versions.
- *
- * v2 (current, plan step 5) shows the verified context C as facts and the
- * requester's claims in a separate block marked unverified. v1 is the historical
- * prompt of the published dataset and the reported V7 evaluation; it must stay
- * byte-identical (experiments/dias-finetuning/v2/test/promptV1Frozen.test.js
- * checks it against every tracked test prompt).
- */
+/** The recommendation prompt, in two versions. */
 
 const { expect } = require('chai');
 const { createPolicyContextProvider } = require('../src/dias/policyContextProvider');

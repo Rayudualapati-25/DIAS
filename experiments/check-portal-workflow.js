@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-// Writes only synthetic demo requests/decisions and one evidence fixture. Any
-// authorization created by this check is revoked in finally. Never reset/seed.
+// Writes only synthetic demo requests/decisions and one evidence fixture. Any authorization created by this
+// check is revoked in finally.
 const fs = require('fs');
 const path = require('path');
 const { pathToFileURL } = require('url');
@@ -41,7 +41,13 @@ async function run() {
   check('request history is restored from Fabric and restricted to its signing identity',
     history.storage === 'fabric-ledger' && history.entries.length > 0
     && history.entries.every((r) => r.requester.username === 'insp.sharma'));
-  check('a non-reviewer cannot read all workflow requests', (await get('/access/workflow-log', 'insp.sharma')).status === 403);
+  // Every officer reads the request log. Transaction identifiers and the digests of the authorization check
+  // stay with the reviewers.
+  const officerLog = await get('/access/workflow-log?limit=100', 'insp.sharma');
+  check('an officer outside the reviewers reads the whole request log, without transactions or digests',
+    officerLog.status === 200 && officerLog.data.entries.length > 0
+    && officerLog.data.entries.every((r) => r.requester && r.requester.username && r.recordId
+      && !('requestTxId' in r) && !/Hash"/.test(JSON.stringify(r))));
   check('invalid history limit is refused', (await get('/access/requests/mine?limit=0', 'insp.sharma')).status === 400);
   const files = await apiFor('const.verma').records.search({ caseId: 'CASE-2026-001' });
   check('case discovery returns identifiers without protected content', files.length > 0

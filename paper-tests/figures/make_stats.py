@@ -1,14 +1,4 @@
-"""Paired statistical tests over the retained model runs.
-
-Every comparison here is paired on the case id, so the two arms are compared on
-exactly the same cases. McNemar's exact test is used because the outcomes are
-paired and binary; the exact binomial form is used throughout rather than the
-chi-square approximation, since the discordant counts are small.
-
-Nothing is called significant on the strength of a rounded difference: the test
-statistic, the discordant counts and the p-value are all reported, and the
-comparison is only meaningful for the arms that were run on the same split.
-"""
+"""Paired statistical tests over the retained model runs."""
 
 import json
 import math
@@ -31,8 +21,10 @@ def rows_by_id(filename):
 
 
 def joint_correct(row):
-    """The joint criterion used throughout: a schema-valid output whose action,
-    purpose, decision and reason code all match the expected case."""
+    """
+    The joint criterion used throughout: a schema-valid output whose action, purpose, decision and
+    reason code all match the expected case.
+    """
     if not row.get("valid"):
         return False
     pred, exp = row.get("prediction") or {}, row["expected"]
@@ -46,8 +38,10 @@ def decision_correct(row):
 
 
 def mcnemar(a_correct, b_correct):
-    """Exact McNemar over paired binary outcomes. b and c are the discordant
-    pairs: b = only the first arm correct, c = only the second."""
+    """
+    Exact McNemar over paired binary outcomes. b and c are the discordant pairs: b = only the first
+    arm correct, c = only the second.
+    """
     b = sum(1 for x, y in zip(a_correct, b_correct) if x and not y)
     c = sum(1 for x, y in zip(a_correct, b_correct) if y and not x)
     n = b + c
@@ -56,8 +50,10 @@ def mcnemar(a_correct, b_correct):
 
 
 def wilson(successes, total, z=1.959963985):
-    """Wilson score interval — behaves sensibly at proportions near 0 and 1,
-    where the normal approximation does not."""
+    """
+    Wilson score interval — behaves sensibly at proportions near 0 and 1, where the normal
+    approximation does not.
+    """
     if total == 0:
         return (None, None)
     p = successes / total
@@ -68,9 +64,10 @@ def wilson(successes, total, z=1.959963985):
 
 
 def verify_against_experiment(pairs, exp01):
-    """Recompute each arm's accuracies from the raw rows and check them against
-    the figures Experiment 01 reported. A mismatch means the criterion applied
-    here is not the criterion behind the published numbers, so it stops."""
+    """
+    Recompute each arm's accuracies from the raw rows and check them against the figures Experiment
+    01 reported.
+    """
     stored = {}
     for arm in exp01["summary"]["arms"]:
         stored[arm["label"]] = arm

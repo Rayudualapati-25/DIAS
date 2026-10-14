@@ -1,9 +1,4 @@
-"""Shared plotting style and helpers for the SEAL paper figures.
-
-Every figure is built from the experiment result JSON. No metric is written into
-plotting code: if a number appears on an axis it was read from a result file, so
-a figure can never drift away from the run that produced it.
-"""
+"""Shared plotting style and helpers for the SEAL paper figures."""
 
 import json
 import pathlib
@@ -20,8 +15,8 @@ TABLES = RESULTS / "tables"
 COL = 3.45
 WIDE = 7.16
 
-# Colourblind-safe (Okabe-Ito). Decision classes keep the same colour in every
-# figure so a reader can carry the mapping from one plot to the next.
+# Colourblind-safe (Okabe-Ito). Decision classes keep the same colour in every figure so a reader
+# can carry the mapping from one plot to the next.
 INK = "#1a1a1a"
 GRID = "#d9d9d9"
 DECISION = {
@@ -89,7 +84,7 @@ def save(fig, stem):
 
 
 def write_table(stem, header, rows):
-    """Write a table as CSV, and as a LaTeX booktabs body for direct \\input."""
+    r"""Write a table as CSV, and as a LaTeX booktabs body for direct \input."""
     TABLES.mkdir(parents=True, exist_ok=True)
     csv_path = TABLES / f"{stem}.csv"
     with csv_path.open("w") as fh:

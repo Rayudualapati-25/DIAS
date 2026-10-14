@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""E1/E2: recommendation quality recomputed from the raw prediction files.
-
-Reads every stored prediction of the untuned model and of V7 and recomputes all
-counts; the stored metric summaries are only used to cross-check. Every score
-is also written as a plain question with a count, e.g. "Of the 300 requests
-the policy allows, how many did the model recommend allowing?"
-
-Usage: python3 accuracy.py --out <dir>
-"""
+"""E1/E2: recommendation quality recomputed from the raw prediction files."""
 
 import argparse
 import csv

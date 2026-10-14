@@ -1,37 +1,12 @@
 'use strict';
 
-/**
- * Prompt ablations.
- *
- * Each ablation removes exactly one component of what the model is shown and
- * leaves everything else identical, so a drop in accuracy is attributable to
- * that component rather than to a differently-shaped prompt.
- *
- * These are INPUT ablations, evaluated on an already-trained model. The two
- * DATA ablations the plan also calls for — training without adversarial
- * examples, and training without multi-rule examples — require separate
- * training runs and separate datasets; they are driven by
- * `experiments/dias-finetuning/v2/eval/dataAblations.js`.
- *
- * A removed block is replaced by an explicit marker rather than deleted
- * silently. A model that simply sees a shorter prompt might do better by
- * accident; a model told "this information was withheld" is being asked the
- * question the ablation intends.
- */
+/** Prompt ablations. */
 
 const {
   buildRecommendationMessagesV1: buildRecommendationMessages,
 } = require('../../../../backend/src/dias/recommendationPrompt');
 
-/**
- * Ablations redact the RENDERED prompt rather than the structured inputs.
- *
- * Two reasons. The verified request is schema-validated — a boolean field has no
- * "withheld" value, so blanking it upstream fails validation rather than
- * producing a prompt. And redacting the rendered text guarantees the ablated
- * prompt differs from the control ONLY inside the redacted region: everything
- * else is byte-identical, which is what makes the comparison attributable.
- */
+/** Ablations redact the RENDERED prompt rather than the structured inputs. */
 
 const WITHHELD = '[WITHHELD FOR THIS EVALUATION]';
 const REQUEST_HEADER = 'VERIFIED REQUEST (authoritative facts from Hyperledger Fabric state):';
@@ -72,12 +47,7 @@ function redactPolicy() {
     + 'The governance policy text was withheld for this evaluation.';
 }
 
-/**
- * Each ablation is a transform over the rendered sections.
- * A removed block is REPLACED by an explicit marker, never silently deleted: a
- * model that merely sees a shorter prompt might do better by accident, whereas a
- * model told the information was withheld is being asked the intended question.
- */
+/** Each ablation is a transform over the rendered sections. */
 const ABLATIONS = Object.freeze({
   full: {
     label: 'full prompt (control)',

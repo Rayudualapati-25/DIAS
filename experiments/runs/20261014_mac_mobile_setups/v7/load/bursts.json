@@ -1,0 +1,956 @@
+[
+ {
+  "id": "L-phone-only-10-r1",
+  "setup": "phone-only",
+  "level": 10,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:20:14.447Z",
+  "requested": 10,
+  "accepted": 10,
+  "decided": 10,
+  "verified": 10,
+  "failed": 0,
+  "makespanMs": 105702.9,
+  "decisionsPerMinute": 5.7,
+  "submitMs": {
+   "n": 10,
+   "min": 145.9,
+   "median": 165.9,
+   "mean": 167.1,
+   "p95": 195,
+   "max": 195
+  },
+  "adviceReadyAfterMs": {
+   "n": 10,
+   "min": 9200.6,
+   "median": 56366.7,
+   "mean": 56348.5,
+   "p95": 103357,
+   "max": 103357
+  },
+  "decidedAfterMs": {
+   "n": 10,
+   "min": 11531.4,
+   "median": 58709.6,
+   "mean": 58690.2,
+   "p95": 105702.9,
+   "max": 105702.9
+  },
+  "quietBeforeMs": 80780.1,
+  "drainMs": 7908.8,
+  "checks": [
+   {
+    "name": "L-phone-only-10-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "10 of 10 found"
+   },
+   {
+    "name": "L-phone-only-10-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-phone-only-25-r1",
+  "setup": "phone-only",
+  "level": 25,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:22:38.270Z",
+  "requested": 25,
+  "accepted": 25,
+  "decided": 25,
+  "verified": 25,
+  "failed": 0,
+  "makespanMs": 292821.1,
+  "decisionsPerMinute": 5.1,
+  "submitMs": {
+   "n": 25,
+   "min": 181.5,
+   "median": 261.7,
+   "mean": 642.5,
+   "p95": 2241.6,
+   "max": 2246
+  },
+  "adviceReadyAfterMs": {
+   "n": 25,
+   "min": 10221.7,
+   "median": 145755.8,
+   "mean": 147659.6,
+   "p95": 278873,
+   "max": 290503.4
+  },
+  "decidedAfterMs": {
+   "n": 25,
+   "min": 12583.8,
+   "median": 148136.2,
+   "mean": 150017,
+   "p95": 281189.7,
+   "max": 292821.1
+  },
+  "quietBeforeMs": 14825.8,
+  "drainMs": 6893.3,
+  "checks": [
+   {
+    "name": "L-phone-only-25-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "25 of 25 found"
+   },
+   {
+    "name": "L-phone-only-25-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-mac-only-10-r1",
+  "setup": "mac-only",
+  "level": 10,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:28:08.324Z",
+  "requested": 10,
+  "accepted": 10,
+  "decided": 10,
+  "verified": 10,
+  "failed": 0,
+  "makespanMs": 105566.3,
+  "decisionsPerMinute": 5.7,
+  "submitMs": {
+   "n": 10,
+   "min": 145.2,
+   "median": 168.9,
+   "mean": 168.6,
+   "p95": 193.1,
+   "max": 193.1
+  },
+  "adviceReadyAfterMs": {
+   "n": 10,
+   "min": 9765.2,
+   "median": 56295.5,
+   "mean": 56216.8,
+   "p95": 103251,
+   "max": 103251
+  },
+  "decidedAfterMs": {
+   "n": 10,
+   "min": 12032.4,
+   "median": 58579,
+   "mean": 58509.5,
+   "p95": 105566.3,
+   "max": 105566.3
+  },
+  "quietBeforeMs": 14819,
+  "drainMs": 14307.6,
+  "checks": [
+   {
+    "name": "L-mac-only-10-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "10 of 10 found"
+   },
+   {
+    "name": "L-mac-only-10-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-combined-10-r1",
+  "setup": "combined",
+  "level": 10,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:30:38.319Z",
+  "requested": 10,
+  "accepted": 10,
+  "decided": 10,
+  "verified": 10,
+  "failed": 0,
+  "makespanMs": 105421.9,
+  "decisionsPerMinute": 5.7,
+  "submitMs": {
+   "n": 10,
+   "min": 139.7,
+   "median": 167.5,
+   "mean": 167.5,
+   "p95": 193.8,
+   "max": 193.8
+  },
+  "adviceReadyAfterMs": {
+   "n": 10,
+   "min": 10897.4,
+   "median": 57774.2,
+   "mean": 57115,
+   "p95": 103088.3,
+   "max": 103088.3
+  },
+  "decidedAfterMs": {
+   "n": 10,
+   "min": 13130.2,
+   "median": 60058.5,
+   "mean": 59425.3,
+   "p95": 105421.9,
+   "max": 105421.9
+  },
+  "quietBeforeMs": 14812.3,
+  "drainMs": 14306.9,
+  "checks": [
+   {
+    "name": "L-combined-10-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "10 of 10 found"
+   },
+   {
+    "name": "L-combined-10-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-mac-only-25-r1",
+  "setup": "mac-only",
+  "level": 25,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:33:08.358Z",
+  "requested": 25,
+  "accepted": 25,
+  "decided": 25,
+  "verified": 25,
+  "failed": 0,
+  "makespanMs": 259550.7,
+  "decisionsPerMinute": 5.8,
+  "submitMs": {
+   "n": 25,
+   "min": 191.7,
+   "median": 271.1,
+   "mean": 650,
+   "p95": 2242.7,
+   "max": 2248.9
+  },
+  "adviceReadyAfterMs": {
+   "n": 25,
+   "min": 11440.1,
+   "median": 132348.2,
+   "mean": 134093.5,
+   "p95": 246809.2,
+   "max": 257222.2
+  },
+  "decidedAfterMs": {
+   "n": 25,
+   "min": 13726.3,
+   "median": 134604.7,
+   "mean": 136382.2,
+   "p95": 249095.3,
+   "max": 259550.7
+  },
+  "quietBeforeMs": 14843.2,
+  "drainMs": 10284.7,
+  "checks": [
+   {
+    "name": "L-mac-only-25-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "25 of 25 found"
+   },
+   {
+    "name": "L-mac-only-25-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-combined-25-r1",
+  "setup": "combined",
+  "level": 25,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:38:08.326Z",
+  "requested": 25,
+  "accepted": 25,
+  "decided": 25,
+  "verified": 25,
+  "failed": 0,
+  "makespanMs": 252149.7,
+  "decisionsPerMinute": 5.9,
+  "submitMs": {
+   "n": 25,
+   "min": 214.9,
+   "median": 287.5,
+   "mean": 665.5,
+   "p95": 2251.2,
+   "max": 2256.9
+  },
+  "adviceReadyAfterMs": {
+   "n": 25,
+   "min": 10082.4,
+   "median": 131113.7,
+   "mean": 131025.6,
+   "p95": 240118.2,
+   "max": 249878.5
+  },
+  "decidedAfterMs": {
+   "n": 25,
+   "min": 12418.6,
+   "median": 133459.6,
+   "mean": 133370.5,
+   "p95": 242513.1,
+   "max": 252149.7
+  },
+  "quietBeforeMs": 14747.8,
+  "drainMs": 17757.6,
+  "checks": [
+   {
+    "name": "L-combined-25-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "25 of 25 found"
+   },
+   {
+    "name": "L-combined-25-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-phone-only-05-r1",
+  "setup": "phone-only",
+  "level": 5,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:43:08.349Z",
+  "requested": 5,
+  "accepted": 5,
+  "decided": 5,
+  "verified": 5,
+  "failed": 0,
+  "makespanMs": 54846.7,
+  "decisionsPerMinute": 5.5,
+  "submitMs": {
+   "n": 5,
+   "min": 2122.7,
+   "median": 2135.1,
+   "mean": 2134.5,
+   "p95": 2145.6,
+   "max": 2145.6
+  },
+  "adviceReadyAfterMs": {
+   "n": 5,
+   "min": 12383.2,
+   "median": 33049.4,
+   "mean": 32820.8,
+   "p95": 52467.4,
+   "max": 52467.4
+  },
+  "decidedAfterMs": {
+   "n": 5,
+   "min": 14669.9,
+   "median": 35415.4,
+   "mean": 35159.6,
+   "p95": 54846.7,
+   "max": 54846.7
+  },
+  "quietBeforeMs": 14845.2,
+  "drainMs": 19969.1,
+  "checks": [
+   {
+    "name": "L-phone-only-05-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "5 of 5 found"
+   },
+   {
+    "name": "L-phone-only-05-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-combined-05-r1",
+  "setup": "combined",
+  "level": 5,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:44:53.421Z",
+  "requested": 5,
+  "accepted": 5,
+  "decided": 5,
+  "verified": 5,
+  "failed": 0,
+  "makespanMs": 55816.4,
+  "decisionsPerMinute": 5.4,
+  "submitMs": {
+   "n": 5,
+   "min": 2114.5,
+   "median": 2125.7,
+   "mean": 2125.6,
+   "p95": 2136.4,
+   "max": 2136.4
+  },
+  "adviceReadyAfterMs": {
+   "n": 5,
+   "min": 13266.8,
+   "median": 32109.9,
+   "mean": 32897.7,
+   "p95": 53520.6,
+   "max": 53520.6
+  },
+  "decidedAfterMs": {
+   "n": 5,
+   "min": 15521.9,
+   "median": 34400.1,
+   "mean": 35194.1,
+   "p95": 55816.4,
+   "max": 55816.4
+  },
+  "quietBeforeMs": 14822.9,
+  "drainMs": 18979.1,
+  "checks": [
+   {
+    "name": "L-combined-05-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "5 of 5 found"
+   },
+   {
+    "name": "L-combined-05-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-mac-only-05-r1",
+  "setup": "mac-only",
+  "level": 5,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T10:46:38.373Z",
+  "requested": 5,
+  "accepted": 5,
+  "decided": 5,
+  "verified": 5,
+  "failed": 0,
+  "makespanMs": 55198.6,
+  "decisionsPerMinute": 5.4,
+  "submitMs": {
+   "n": 5,
+   "min": 2103.1,
+   "median": 2116.4,
+   "mean": 2115.9,
+   "p95": 2126.1,
+   "max": 2126.1
+  },
+  "adviceReadyAfterMs": {
+   "n": 5,
+   "min": 12675.4,
+   "median": 33179.9,
+   "mean": 32818.2,
+   "p95": 52887.3,
+   "max": 52887.3
+  },
+  "decidedAfterMs": {
+   "n": 5,
+   "min": 14930,
+   "median": 35461.5,
+   "mean": 35112,
+   "p95": 55198.6,
+   "max": 55198.6
+  },
+  "quietBeforeMs": 14819.9,
+  "drainMs": 19652.4,
+  "checks": [
+   {
+    "name": "L-mac-only-05-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "5 of 5 found"
+   },
+   {
+    "name": "L-mac-only-05-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-combined-10-r2",
+  "setup": "combined",
+  "level": 10,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T10:48:23.372Z",
+  "requested": 10,
+  "accepted": 10,
+  "decided": 10,
+  "verified": 10,
+  "failed": 0,
+  "makespanMs": 104663.9,
+  "decisionsPerMinute": 5.7,
+  "submitMs": {
+   "n": 10,
+   "min": 138,
+   "median": 165.2,
+   "mean": 164.2,
+   "p95": 187.2,
+   "max": 187.2
+  },
+  "adviceReadyAfterMs": {
+   "n": 10,
+   "min": 10932,
+   "median": 56786.6,
+   "mean": 56383,
+   "p95": 102332.6,
+   "max": 102332.6
+  },
+  "decidedAfterMs": {
+   "n": 10,
+   "min": 13195,
+   "median": 59148.9,
+   "mean": 58709.7,
+   "p95": 104663.9,
+   "max": 104663.9
+  },
+  "quietBeforeMs": 14830.5,
+  "drainMs": 15138,
+  "checks": [
+   {
+    "name": "L-combined-10-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "10 of 10 found"
+   },
+   {
+    "name": "L-combined-10-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-phone-only-10-r2",
+  "setup": "phone-only",
+  "level": 10,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T10:50:53.414Z",
+  "requested": 10,
+  "accepted": 10,
+  "decided": 10,
+  "verified": 10,
+  "failed": 0,
+  "makespanMs": 102790.1,
+  "decisionsPerMinute": 5.8,
+  "submitMs": {
+   "n": 10,
+   "min": 164.8,
+   "median": 191,
+   "mean": 190.4,
+   "p95": 213.3,
+   "max": 213.3
+  },
+  "adviceReadyAfterMs": {
+   "n": 10,
+   "min": 9878.4,
+   "median": 55394.9,
+   "mean": 55305.1,
+   "p95": 100471.9,
+   "max": 100471.9
+  },
+  "decidedAfterMs": {
+   "n": 10,
+   "min": 12348.1,
+   "median": 57706.2,
+   "mean": 57656.6,
+   "p95": 102790.1,
+   "max": 102790.1
+  },
+  "quietBeforeMs": 14797.7,
+  "drainMs": 16940.2,
+  "checks": [
+   {
+    "name": "L-phone-only-10-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "10 of 10 found"
+   },
+   {
+    "name": "L-phone-only-10-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-phone-only-25-r2",
+  "setup": "phone-only",
+  "level": 25,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T10:53:23.449Z",
+  "requested": 25,
+  "accepted": 25,
+  "decided": 25,
+  "verified": 25,
+  "failed": 0,
+  "makespanMs": 271549.9,
+  "decisionsPerMinute": 5.5,
+  "submitMs": {
+   "n": 25,
+   "min": 177.6,
+   "median": 266.8,
+   "mean": 644.3,
+   "p95": 2232,
+   "max": 2236.9
+  },
+  "adviceReadyAfterMs": {
+   "n": 25,
+   "min": 11043.8,
+   "median": 141330.7,
+   "mean": 140095.4,
+   "p95": 257707.2,
+   "max": 269215.4
+  },
+  "decidedAfterMs": {
+   "n": 25,
+   "min": 13421.9,
+   "median": 143745.8,
+   "mean": 142474.1,
+   "p95": 260089,
+   "max": 271549.9
+  },
+  "quietBeforeMs": 14819.9,
+  "drainMs": 13098.4,
+  "checks": [
+   {
+    "name": "L-phone-only-25-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "25 of 25 found"
+   },
+   {
+    "name": "L-phone-only-25-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-phone-only-05-r2",
+  "setup": "phone-only",
+  "level": 5,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T10:58:38.433Z",
+  "requested": 5,
+  "accepted": 5,
+  "decided": 5,
+  "verified": 5,
+  "failed": 0,
+  "makespanMs": 60419.7,
+  "decisionsPerMinute": 5,
+  "submitMs": {
+   "n": 5,
+   "min": 2103.4,
+   "median": 2115.1,
+   "mean": 2113.5,
+   "p95": 2119.9,
+   "max": 2119.9
+  },
+  "adviceReadyAfterMs": {
+   "n": 5,
+   "min": 12565.5,
+   "median": 34473.7,
+   "mean": 34861.5,
+   "p95": 58052.1,
+   "max": 58052.1
+  },
+  "decidedAfterMs": {
+   "n": 5,
+   "min": 14907.6,
+   "median": 36852.3,
+   "mean": 37221.7,
+   "p95": 60419.7,
+   "max": 60419.7
+  },
+  "quietBeforeMs": 14800.6,
+  "drainMs": 14219.1,
+  "checks": [
+   {
+    "name": "L-phone-only-05-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "5 of 5 found"
+   },
+   {
+    "name": "L-phone-only-05-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-mac-only-10-r2",
+  "setup": "mac-only",
+  "level": 10,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T11:00:23.383Z",
+  "requested": 10,
+  "accepted": 10,
+  "decided": 10,
+  "verified": 10,
+  "failed": 0,
+  "makespanMs": 107480.4,
+  "decisionsPerMinute": 5.6,
+  "submitMs": {
+   "n": 10,
+   "min": 146.4,
+   "median": 168.3,
+   "mean": 168.9,
+   "p95": 190.7,
+   "max": 190.7
+  },
+  "adviceReadyAfterMs": {
+   "n": 10,
+   "min": 11781.8,
+   "median": 58375.5,
+   "mean": 58342.7,
+   "p95": 105212.8,
+   "max": 105212.8
+  },
+  "decidedAfterMs": {
+   "n": 10,
+   "min": 14055,
+   "median": 60717.5,
+   "mean": 60646.8,
+   "p95": 107480.4,
+   "max": 107480.4
+  },
+  "quietBeforeMs": 14729.7,
+  "drainMs": 12414.9,
+  "checks": [
+   {
+    "name": "L-mac-only-10-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "10 of 10 found"
+   },
+   {
+    "name": "L-mac-only-10-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-mac-only-25-r2",
+  "setup": "mac-only",
+  "level": 25,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T11:02:53.434Z",
+  "requested": 25,
+  "accepted": 25,
+  "decided": 25,
+  "verified": 25,
+  "failed": 0,
+  "makespanMs": 258407.3,
+  "decisionsPerMinute": 5.8,
+  "submitMs": {
+   "n": 25,
+   "min": 206,
+   "median": 287.1,
+   "mean": 663.3,
+   "p95": 2243.5,
+   "max": 2248.2
+  },
+  "adviceReadyAfterMs": {
+   "n": 25,
+   "min": 9127.7,
+   "median": 132395.6,
+   "mean": 133132.7,
+   "p95": 247010.8,
+   "max": 256080.6
+  },
+  "decidedAfterMs": {
+   "n": 25,
+   "min": 11489.1,
+   "median": 134671.3,
+   "mean": 135459.2,
+   "p95": 249299.6,
+   "max": 258407.3
+  },
+  "quietBeforeMs": 14828.5,
+  "drainMs": 11396.1,
+  "checks": [
+   {
+    "name": "L-mac-only-25-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "25 of 25 found"
+   },
+   {
+    "name": "L-mac-only-25-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-combined-05-r2",
+  "setup": "combined",
+  "level": 5,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T11:07:53.474Z",
+  "requested": 5,
+  "accepted": 5,
+  "decided": 5,
+  "verified": 5,
+  "failed": 0,
+  "makespanMs": 55858.2,
+  "decisionsPerMinute": 5.4,
+  "submitMs": {
+   "n": 5,
+   "min": 2123.4,
+   "median": 2135.3,
+   "mean": 2135.6,
+   "p95": 2146.6,
+   "max": 2146.6
+  },
+  "adviceReadyAfterMs": {
+   "n": 5,
+   "min": 11818.7,
+   "median": 33032.2,
+   "mean": 32986.4,
+   "p95": 53573.8,
+   "max": 53573.8
+  },
+  "decidedAfterMs": {
+   "n": 5,
+   "min": 14150.7,
+   "median": 35359.7,
+   "mean": 35323,
+   "p95": 55858.2,
+   "max": 55858.2
+  },
+  "quietBeforeMs": 14730,
+  "drainMs": 18947.9,
+  "checks": [
+   {
+    "name": "L-combined-05-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "5 of 5 found"
+   },
+   {
+    "name": "L-combined-05-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-combined-25-r2",
+  "setup": "combined",
+  "level": 25,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T11:09:38.506Z",
+  "requested": 25,
+  "accepted": 25,
+  "decided": 25,
+  "verified": 25,
+  "failed": 0,
+  "makespanMs": 252376.4,
+  "decisionsPerMinute": 5.9,
+  "submitMs": {
+   "n": 25,
+   "min": 175.4,
+   "median": 259.2,
+   "mean": 631.4,
+   "p95": 2205.9,
+   "max": 2210.9
+  },
+  "adviceReadyAfterMs": {
+   "n": 25,
+   "min": 9527.8,
+   "median": 128251.3,
+   "mean": 128685.2,
+   "p95": 238793,
+   "max": 250011.5
+  },
+  "decidedAfterMs": {
+   "n": 25,
+   "min": 11849.6,
+   "median": 130637.6,
+   "mean": 131048.9,
+   "p95": 241181.5,
+   "max": 252376.4
+  },
+  "quietBeforeMs": 14820.5,
+  "drainMs": 17458.4,
+  "checks": [
+   {
+    "name": "L-combined-25-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "25 of 25 found"
+   },
+   {
+    "name": "L-combined-25-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L-mac-only-05-r2",
+  "setup": "mac-only",
+  "level": 5,
+  "repeat": 2,
+  "startedAtUtc": "2026-10-14T11:14:38.492Z",
+  "requested": 5,
+  "accepted": 5,
+  "decided": 5,
+  "verified": 5,
+  "failed": 0,
+  "makespanMs": 58168.6,
+  "decisionsPerMinute": 5.2,
+  "submitMs": {
+   "n": 5,
+   "min": 2113.6,
+   "median": 2127.3,
+   "mean": 2127.2,
+   "p95": 2138.5,
+   "max": 2138.5
+  },
+  "adviceReadyAfterMs": {
+   "n": 5,
+   "min": 13056.2,
+   "median": 34146.9,
+   "mean": 34175.7,
+   "p95": 55818.3,
+   "max": 55818.3
+  },
+  "decidedAfterMs": {
+   "n": 5,
+   "min": 15388.7,
+   "median": 36460.7,
+   "mean": 36509.1,
+   "p95": 58168.6,
+   "max": 58168.6
+  },
+  "quietBeforeMs": 14742.3,
+  "drainMs": 16670.1,
+  "checks": [
+   {
+    "name": "L-mac-only-05-r2: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "5 of 5 found"
+   },
+   {
+    "name": "L-mac-only-05-r2: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ }
+]

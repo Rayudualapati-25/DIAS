@@ -1,23 +1,6 @@
 'use strict';
 
-/**
- * HISTORICAL — the v1 verified request (dias-verified-request-v1).
- *
- * Kept byte-for-byte so that prompt v1, the published dataset
- * (experiments/dias-finetuning/data-v2-binary) and the evaluation that produced
- * the reported V7 numbers stay reproducible. The v3 contract does not use it:
- * v1 placed the self-declared emergencyFlag and a constant approvalTokenPresent
- * inside the verified request. See ./verifiedRequest.js for the v3 context.
- *
- * The verified request a DIAS recommendation is based on.
- *
- * Built only from committed Fabric state (certificate-bound UserProfile, Case
- * assignment, record metadata) and the requester's committed action and purpose.
- * The recommendation assistant, the synthetic dataset, and the ledger hash all use
- * this exact shape, so what the model sees is what the ledger commits to.
- * Identity (username, enrollment ID) and record/request identifiers are
- * deliberately absent: they are audit facts, not policy facts.
- */
+/** HISTORICAL — the v1 verified request (dias-verified-request-v1). */
 
 const { hashObject } = require('../util/validate');
 

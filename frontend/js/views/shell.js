@@ -1,9 +1,6 @@
 /**
- * The signed-in application shell: header, sidebar navigation, and the region
- * where the active module renders.
- *
- * The shell knows nothing about individual modules — it works entirely from the
- * registry, so adding a module never requires editing this file.
+ * The signed-in application shell: header, sidebar navigation, and the region where the active module
+ * renders.
  */
 
 import { el } from '../core/dom.js';
@@ -99,8 +96,8 @@ export function buildShell(user, onSignOut) {
       return;
     }
     if (!canAccess(user, module.allow)) {
-      // Reachable by typing a URL. The backend would refuse anyway; this just
-      // explains it rather than showing a broken screen.
+      // Reachable by typing a URL. The backend would refuse anyway; this just explains it rather than
+      // showing a broken screen.
       replace(content, card('Not available for your role', null,
         hint(`"${module.title}" is limited to other roles. `),
         hint('Your role: ', user.role)));

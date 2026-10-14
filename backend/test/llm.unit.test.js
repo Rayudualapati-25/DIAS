@@ -1,9 +1,6 @@
 'use strict';
 
-/**
- * Unit tests for the explainable-AI module.
- * These do NOT need Ollama running or the Fabric network up.
- */
+/** Unit tests for the explainable-AI module. These do NOT need Ollama running or the Fabric network up. */
 
 const { expect } = require('chai');
 const { buildPrompt, validate } = require('../src/llm/explain');
@@ -69,8 +66,8 @@ describe('prompt construction', () => {
   });
 
   it('never sends case contents or personal identifiers to the model', () => {
-    // The privacy claim of the whole system: sensitive content stays out of
-    // any extra component, including the LLM.
+    // The privacy claim of the whole system: sensitive content stays out of any extra component, including
+    // the LLM.
     const withSecrets = {
       ...DECISION,
       payload: { summary: 'CANARY-CASE-NARRATIVE', complainant: 'CANARY-NAME' },
@@ -180,8 +177,8 @@ describe('grounding validation', () => {
   });
 
   it('warns but still accepts text that drops the counterfactual', () => {
-    // Incomplete is not the same as wrong: the text is shown, and the gap is
-    // recorded so it can be reported as a quality metric.
+    // Incomplete is not the same as wrong: the text is shown, and the gap is recorded so it can be reported
+    // as a quality metric.
     const text = 'Access was escalated for senior review because the requester clearance ' +
       'sits below the record sensitivity level for this request.';
     const result = validate(text, DECISION);

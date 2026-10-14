@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""Single-column, two-panel candidates for the paper's results figures.
-
-The supervisor asked for two related graphs to share one IEEE column instead of
-one graph per column, for line thickness and style to carry the series, and for
-a readable CPU-usage graph. Every series here differs by line style and marker
-as well as colour, so the figures survive grayscale print. Node names follow the
-paper's testbed figure (Node 1-3, Application node, Model node).
-
-Figures written to --out:
-  pair_resources   (a) CPU of each node, (b) memory of each node   [E6, one hour]
-  pair_performance (a) ledger operations vs clients, (b) whole system vs users  [E3, E4, E5]
-  reuse_rounds     cumulative reviews avoided and unapproved grants per round   [reuse run]
-
-Usage: python3 paper_pairs.py --repo <DIAS repo root> --out <folder>
-"""
+"""Single-column, two-panel candidates for the paper's results figures."""
 
 import argparse
 import csv

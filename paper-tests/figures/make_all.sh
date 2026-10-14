@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-#
 # Regenerate every figure, table and paper document from the result files.
-#
-# The interpreter is chosen rather than assumed: `python3` on this machine can
-# resolve to a build without numpy depending on how the shell was started, which
-# silently breaks regeneration. This picks the first interpreter that actually
-# has the plotting and statistics stack, and says which one it used.
-#
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 

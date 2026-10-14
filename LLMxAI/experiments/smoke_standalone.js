@@ -44,8 +44,8 @@ const cases = [
   },
 ];
 
-// Identity now comes from the signed-in session, so each case signs in as its
-// own officer and reuses that session cookie for the decision request.
+// Identity now comes from the signed-in session, so each case signs in as its own officer and reuses that
+// session cookie for the decision request.
 async function signIn(profileId) {
   const response = await fetch(`${URL}/api/login`, {
     method: 'POST',

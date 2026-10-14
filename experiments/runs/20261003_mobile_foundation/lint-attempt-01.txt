@@ -1,0 +1,105 @@
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt:56: Error: Call requires API level 30 (current min is 26): android.view.WindowInsets#getInsets [NewApi]
+                val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars())
+                                  ~~~~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt:56: Error: Call requires API level 30 (current min is 26): android.view.WindowInsets.Type#systemBars [NewApi]
+                val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars())
+                                                                           ~~~~~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt:57: Error: Field requires API level 29 (current min is 26): android.graphics.Insets#bottom [NewApi]
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
+                                                                 ~~~~~~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt:57: Error: Field requires API level 29 (current min is 26): android.graphics.Insets#left [NewApi]
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
+                                ~~~~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt:57: Error: Field requires API level 29 (current min is 26): android.graphics.Insets#right [NewApi]
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
+                                                     ~~~~~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt:57: Error: Field requires API level 29 (current min is 26): android.graphics.Insets#top [NewApi]
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
+                                           ~~~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/res/values/styles.xml:7: Error: android:windowLightNavigationBar requires API level 27 (current min is 26) [NewApi]
+        <item name="android:windowLightNavigationBar">true</item>
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NewApi":
+   This check scans through all the Android API calls in the application and
+   warns about any calls that are not available on all versions targeted by
+   this application (according to its minimum SDK attribute in the manifest).
+
+   If you really want to use this API and don't need to support older devices
+   just set the minSdkVersion in your build.gradle or AndroidManifest.xml
+   files.
+
+   If your code is deliberately accessing newer APIs, and you have ensured
+   (e.g. with conditional execution) that this code will only ever be called
+   on a supported platform, then you can annotate your class or method with
+   the @TargetApi annotation specifying the local minimum SDK to apply, such
+   as @TargetApi(11), such that this check considers 11 rather than your
+   manifest file's minimum SDK as the required API level.
+
+   If you are deliberately setting android: attributes in style definitions,
+   make sure you place this in a values-vNN folder in order to avoid running
+   into runtime conflicts on certain devices where manufacturers have added
+   custom attributes whose ids conflict with the new ones on later platforms.
+
+   Similarly, you can use tools:targetApi="11" in an XML file to indicate that
+   the element will only be inflated in an adequate context.
+
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/debug/res/xml/network_security_config.xml:5: Error: Missing includeSubdomains attribute [NetworkSecurityConfig]
+        <domain>10.0.2.2</domain>
+         ~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/debug/res/xml/network_security_config.xml:6: Error: Missing includeSubdomains attribute [NetworkSecurityConfig]
+        <domain>127.0.0.1</domain>
+         ~~~~~~
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/debug/res/xml/network_security_config.xml:7: Error: Missing includeSubdomains attribute [NetworkSecurityConfig]
+        <domain>localhost</domain>
+         ~~~~~~
+
+   Explanation for issues of type "NetworkSecurityConfig":
+   Ensures that a <network-security-config> file, which is pointed to by an
+   android:networkSecurityConfig attribute in the manifest file, is valid
+
+   https://developer.android.com/preview/features/security-config.html
+
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/gradle/wrapper/gradle-wrapper.properties:3: Warning: A newer version of Gradle than 9.3.1 is available: 9.8.0 [AndroidGradlePluginVersion]
+distributionUrl=https\://downloads.gradle.org/distributions/gradle-9.3.1-bin.zip
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/AndroidManifest.xml:5: Warning: The attribute android:allowBackup is deprecated from Android 12 and higher and may be removed in future versions. Consider adding the attribute android:dataExtractionRules specifying an @xml resource which configures cloud backups and device transfers on Android 12 and higher. [DataExtractionRules]
+        android:allowBackup="false"
+                             ~~~~~
+
+   Explanation for issues of type "DataExtractionRules":
+   Before Android 12, the attributes android:allowBackup and
+   android:fullBackupContent were used to configure all forms of backup,
+   including cloud backups, device-to-device transfers and adb backup.
+
+   In Android 12 and higher, these attributes have been deprecated and will
+   only apply to cloud backups. You should instead use the attribute
+   android:dataExtractionRules, specifying an @xml resource that configures
+   which files to back up, for cloud backups and for device-to-device
+   transfers, separately. If your minSdkVersion supports older versions,
+   you'll still want to specify an android:fullBackupContent resource if the
+   default behavior is not right for your app.
+
+   https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   https://goo.gle/DataExtractionRules
+
+/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/src/main/AndroidManifest.xml:4: Warning: Should explicitly set android:icon, there is no default [MissingApplicationIcon]
+    <application
+     ~~~~~~~~~~~
+
+   Explanation for issues of type "MissingApplicationIcon":
+   You should set an icon for the application as whole because there is no
+   default. This attribute must be set as a reference to a drawable resource
+   containing the image (for example @drawable/icon).
+
+   https://developer.android.com/studio/publish/preparing#publishing-configure
+
+10 errors, 3 warnings

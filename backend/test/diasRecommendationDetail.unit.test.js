@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Who may read the LLM's account of a recommendation (design §10, step 13).
- *
- * An audit-organisation district head reads it at any time. The officer who made
- * the request reads it according to the auditor's decision (author's rule,
- * 2026-10-08): nothing before a decision; the explanation and the decision when
- * the request was denied; the decision and the recommendation value, without the
- * explanation, when it was allowed. Nobody else reads it. District-head roles
- * exist in every organisation, so the organisation is checked as well as the role.
- */
+/** Who may read the LLM's account of a recommendation. */
 
 const { expect } = require('chai');
 
@@ -197,8 +188,8 @@ describe('LLM explanation of a request', () => {
       }
     });
 
-    // Security review, 2026-10-08: an officer who is also a reviewer or an auditor
-    // is still the requester of their own request. The ledger trail says so.
+    // Security review, 2026-10-08: an officer who is also a reviewer or an auditor is still the requester
+    // of their own request. The ledger trail says so.
     it('treats an audit district head as the requester of their own request', () => {
       const own = { viewer: 'reviewer', isRequester: true };
       const waiting = ask(AUDITOR, { ...trailWith(own), isRequester: true });

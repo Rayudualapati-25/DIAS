@@ -1,9 +1,7 @@
 'use strict';
 
-// Re-score retained evaluation runs under the current output contract, in which the
-// decision is derived from the reason code rather than taken from the model.
-// The raw model outputs are unchanged and no inference is re-run, so this is an
-// ablation of the output contract, not a new experiment arm.
+// Re-score retained evaluation runs under the current output contract, in which the decision is derived
+// from the reason code rather than taken from the model.
 
 const fs = require('fs');
 const path = require('path');

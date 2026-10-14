@@ -1,0 +1,41 @@
+2026-10-14 11:10:53 untuned steps: start
+2026-10-14 12:27:07 untuned steps: exit 0 (96 of 96 workflows completed and verified (96 planned))
+2026-10-14 12:27:07 untuned reuse: start
+2026-10-14 13:03:36 untuned reuse: exit 0 (12 of 12 reuse requests went through all five steps; 72 of 72 requests verified)
+2026-10-14 13:03:36 untuned load: start
+2026-10-14 13:55:39 untuned load: exit 0 (240 of 240 requests decided and verified in 18 bursts (18 planned))
+2026-10-14 13:55:45 v7: model server up 17704 (adapter: LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7)
+2026-10-14 13:56:05 v7: backend up 17816 (model: v7)
+2026-10-14 13:56:05 v7 steps: start
+2026-10-14 15:12:23 v7 steps: exit 0 (96 of 96 workflows completed and verified (96 planned))
+2026-10-14 15:12:24 v7 reuse: start
+2026-10-14 15:48:51 v7 reuse: exit 0 (12 of 12 reuse requests went through all five steps; 72 of 72 requests verified)
+2026-10-14 15:48:51 v7 load: start
+2026-10-14 16:46:09 v7 load: exit 0 (240 of 240 requests decided and verified in 18 bursts (18 planned))
+2026-10-14 16:46:09 v7 quality: start
+2026-10-14 16:46:11 registration: start
+2026-10-14 16:50:00 registration: exit 0 (100 registered now, 100 of 100 sign in)
+2026-10-14 18:05:17 v7 quality: exit 0 (  valid 600/600  accuracy 0.973333  macroF1 0.973333  falseALLOW 7  falseDENY 9  p95 8835.3 ms written to /Users/venkatrayudu/Workspace/XAI workspace/DIAS/experiments/runs/20261014_mac_mobile_setups/v7/quality )
+2026-10-14 18:05:20 restore: model server up 43256 (adapter: none)
+2026-10-14 18:05:22 restore: backend up 43301 (model: untuned)
+2026-10-14 18:05:22 restore: the untuned model and the backend are back as before the campaign
+2026-10-14 18:05:22 campaign finished
+2026-10-14 18:05:32 100 users: start
+2026-10-14 18:05:32 untuned hour: start
+2026-10-14 19:17:14 untuned hour: exit 0 (200 of 200 requests decided, read by their officer and verified)
+2026-10-14 19:17:14 untuned bursts100: start
+2026-10-14 19:50:25 untuned bursts100: exit 1 (the host is not idle: 2 waiting, 0 authorizations active)
+2026-10-14 19:50:25 STOP (100 users): the host is not idle before switching to V7
+2026-10-14 19:51:52 100 users: start
+2026-10-14 19:51:52 untuned hour: already run, skipped
+2026-10-14 19:51:52 untuned bursts100: start
+2026-10-14 20:47:28 untuned bursts100: exit 0 (300 of 300 requests decided and verified in 3 bursts (3 planned))
+2026-10-14 20:47:34 v7 (100 users): model server up 65167 (adapter: LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-dias-lora-v7)
+2026-10-14 20:47:43 v7 (100 users): backend up 65237 (model: v7)
+2026-10-14 20:47:43 v7 hour: start
+2026-10-14 21:59:42 v7 hour: exit 0 (200 of 200 requests decided, read by their officer and verified)
+2026-10-14 21:59:43 v7 bursts100: start
+2026-10-14 22:59:19 v7 bursts100: exit 0 (300 of 300 requests decided and verified in 3 bursts (3 planned))
+2026-10-14 22:59:23 restore (100 users): model server up 66045 (adapter: none)
+2026-10-14 22:59:36 restore (100 users): backend up 66143 (model: untuned)
+2026-10-14 22:59:36 100 users: finished; the untuned model and the backend are back as before the campaign

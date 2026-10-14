@@ -1,18 +1,4 @@
-/**
- * Pure DIAS view-model helpers shared by the requester and auditor screens.
- *
- * The vocabulary here is deliberately strict about one thing: a recommendation
- * is not a decision. `recommendationView` never produces an outcome, and
- * `outcomeView` never reads the model's answer. Keeping the two apart in the
- * view model is what stops a screen from showing "DENY" as though access had
- * been refused when no auditor has looked at it yet.
- *
- * The backend asks the model itself. The complete recommendation
- * object stays off-chain; before review its digest h_M, value, generation status
- * and request bindings are committed on the ledger (κ). Agreement is computed by
- * the contract against κ, never against what the backend reports (paper Eq. 3),
- * and these helpers recompute the digests so a screen can show a mismatch.
- */
+/** Pure DIAS view-model helpers shared by the requester and auditor screens. */
 
 import { hashCanonical, hashText, isDigest } from './commitments.js';
 
@@ -20,11 +6,7 @@ const BOUND_FIELDS = Object.freeze([
   'contextHash', 'claimsHash', 'justificationHash', 'policyVersion', 'policyHash', 'modelVersion',
 ]);
 
-/**
- * Is the recommendation object shown to the auditor the one committed on the
- * ledger before review (κ)? Recomputed here, independently of the backend:
- * h_M, the value, the status, the request and every binding (paper §IV-D).
- */
+/** Is the recommendation object shown to the auditor the one committed on the ledger before review (κ)? */
 export function recommendationIntegrity(review) {
   const commitment = review?.commitment || null;
   const object = review?.recommendationObject || null;
@@ -50,9 +32,8 @@ export function recommendationIntegrity(review) {
 }
 
 /**
- * The recommendation a decision is compared with: the committed κ when there
- * is one (with the explanation text of the verified object), otherwise the
- * stored failure record, otherwise none.
+ * The recommendation a decision is compared with: the committed κ when there is one (with the explanation
+ * text of the verified object), otherwise the stored failure record, otherwise none.
  */
 export function committedRecommendation(review) {
   const commitment = review?.commitment;
@@ -66,11 +47,7 @@ export function committedRecommendation(review) {
   return review?.recommendation || null;
 }
 
-/**
- * Does the justification digest the ledger committed (h_J) belong to the text
- * this requester sent? Recomputed in the browser, so a backend that altered the
- * text before hashing it is caught by the requester (design §4).
- */
+/** Does the justification digest the ledger committed (h_J) belong to the text this requester sent? */
 export function justificationCommitmentView(sentText, request) {
   const committed = request?.justificationHash;
   if (!isDigest(committed)) return { status: 'absent', committed: null, computed: null };
@@ -136,9 +113,8 @@ const AUTHORITY_LABEL = Object.freeze({
 });
 
 /**
- * A committed access decision, as its requester sees it: the outcome and who
- * decided it — an auditor or an active dynamic authorization. It carries no
- * model output; the LLM recommendation belongs to the auditor's review.
+ * A committed access decision, as its requester sees it: the outcome and who decided it — an auditor or an
+ * active dynamic authorization.
  */
 export function accessDecisionView(decision) {
   const granted = decision?.status === STATUS.GRANTED;
@@ -169,12 +145,7 @@ export function isRecommendationPreparing(review) {
   return PREPARING_STATES.includes(review?.recommendationState);
 }
 
-/**
- * The model's advisory answer, or an explicit statement that none exists.
- * `state` is the backend's preparation state: 'pending' while the LLM is still
- * working, 'ready' once a result (or a failure) is stored, and 'not-generated'
- * when the backend never prepared one. The auditor still decides in every case.
- */
+/** The model's advisory answer, or an explicit statement that none exists. */
 export function recommendationView(recommendation, state = recommendation ? 'ready' : 'not-generated') {
   if (state === 'pending') {
     return { available: false, pending: true, status: 'PENDING', label: 'being prepared', advisory: true };
@@ -232,12 +203,8 @@ export function agreementLabel(value) {
 const LLM_VALUE_TEXT = Object.freeze({ ALLOW: 'ALLOW', DENY: 'DENY' });
 
 /**
- * What the officer who made a request is shown about its decision (design §10).
- * The auditor's decision is shown once there is one. The LLM's explanation is
- * shown only when the request was denied; when it was allowed the recommendation
- * is named without its explanation; before a decision, or when no auditor
- * decided, nothing from the LLM is shown. `detail` is the backend's answer for
- * this caller, which has already applied the rule.
+ * What the officer who made a request is shown about its decision. The auditor's decision is shown once
+ * there is one.
  */
 export function requesterDecisionView(detail) {
   const decision = detail?.decision || null;
@@ -250,8 +217,8 @@ export function requesterDecisionView(detail) {
   ];
   if (!detail.explanationVisible) return { decided: true, rows, explanation: null };
   if (!detail.available) {
-    // The ledger knows whether the LLM recommended something; when it did, only
-    // the explanation is missing from this backend's store.
+    // The ledger knows whether the LLM recommended something; when it did, only the explanation is missing
+    // from this backend's store.
     const cause = LLM_VALUE_TEXT[decision.llmRecommendation] ? 'explanation-missing' : 'no-recommendation';
     return { decided: true, rows, explanation: { available: false, cause } };
   }
@@ -270,9 +237,8 @@ export function requesterDecisionView(detail) {
 }
 
 /**
- * One row of the decision log. A reviewer receives full entries; every other
- * identity receives reduced ones (`redacted`), which carry no names, case files,
- * authorizations or transactions (design §10).
+ * One row of the decision log. A reviewer receives full entries; every other identity receives reduced ones
+ * (`redacted`), which carry no names, case files, authorizations or transactions.
  */
 export function decisionLogRow(entry) {
   const redacted = entry?.redacted === true;
@@ -299,10 +265,8 @@ export function decisionLogRow(entry) {
 }
 
 /**
- * Whether this auditor decision will create a reusable dynamic authorization.
- * Exactly one combination does: the model recommended DENY and the auditor
- * overrides to FORCE_ALLOW. Everything else, including a failed generation,
- * leaves the authorization set untouched.
+ * Whether this auditor decision will create a reusable dynamic authorization. Exactly one combination does:
+ * the model recommended DENY and the auditor overrides to FORCE_ALLOW.
  */
 export function willCreateAuthorization(recommendation, decision) {
   return decision === 'FORCE_ALLOW'
@@ -310,8 +274,8 @@ export function willCreateAuthorization(recommendation, decision) {
 }
 
 /**
- * Whether the auditor must supply a reason: any divergence from the model, and
- * any decision taken when no recommendation exists.
+ * Whether the auditor must supply a reason: any divergence from the model, and any decision taken when no
+ * recommendation exists.
  */
 export function requiresOverrideReason(recommendation, decision) {
   return llmAgreement(recommendation, decision) !== LLM_AGREEMENT.AGREED;
@@ -331,15 +295,7 @@ export function authorizationOutcomeNote(recommendation, decision) {
     + 'FORCE ALLOW produces one.';
 }
 
-/**
- * May this auditor decide this request, and if not, why?
- *
- * Two rules the chaincode and the backend enforce, checked here first so the
- * screen can say so before the auditor presses a button rather than after:
- * the identity that raised a request may never decide it, and a decision waits
- * until the LLM recommendation (or its failure) is stored, because the ledger
- * records whether the decision agreed with it.
- */
+/** May this auditor decide this request, and if not, why? */
 export function decisionAvailability(review, viewerUsername) {
   const requester = review?.request?.requester?.username;
   if (!review || !viewerUsername || !requester) {
@@ -411,8 +367,8 @@ export function reviewSummary(review) {
     victimProtectionFlag: resource.victimProtectionFlag,
     action: asked.action ?? request.action,
     purpose: asked.purpose ?? request.purpose,
-    // The requester's own statement, committed as a claim outside the verified
-    // context (v3); null on a request that carries no claims record.
+    // The requester's own statement, committed as a claim outside the verified context (v3); null on a
+    // request that carries no claims record.
     emergencyDeclared: request.requesterClaims ? request.requesterClaims.emergencyDeclared : null,
     justification: review?.justification ?? null,
     llmReason: recommendation.reason ?? null,
@@ -456,10 +412,8 @@ export function isDenialOverrideAuthorization(authorization) {
 }
 
 /**
- * What the auditor screen says when a decision call fails. A 503 means the
- * ledger did not answer in time: the decision may still commit and the note is
- * saved. No status at all means no response reached the browser. In both cases
- * saying "nothing was recorded" would be wrong.
+ * What the auditor screen says when a decision call fails. A 503 means the ledger did not answer in time:
+ * the decision may still commit and the note is saved.
  */
 export function decisionFailureView({ status, message } = {}) {
   const text = String(message || 'the decision could not be recorded');

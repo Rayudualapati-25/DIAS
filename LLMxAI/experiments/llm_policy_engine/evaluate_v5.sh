@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-#
-# Post-training pipeline for the V5 adapter:
-#   1. checkpoint selection on data_v5/valid_selection_120.jsonl
-#   2. promote the selected checkpoint to adapters/qwen3-14b-seba-lora-v5-best
-#   3. evaluate V5-best and V4-best on the retained V4 suite and the new V5 suite
-#      (balanced-60 metrics are derived from the full-360 rows by subset, not re-run)
-#   4. V5 subject-ablation on the V5 balanced-60 suite
-# Run from the LLMxAI directory with the MLX server up on :8080.
+# Post-training pipeline for the V5 adapter.
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/../.."
 

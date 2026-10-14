@@ -1,0 +1,41 @@
+CHANNEL=diaschannel CHAINCODE=diasrecords node scripts/seed-users-onchain.js
+[0;34mon-chain  audit/sp.north  (sp)  [genesis bootstrap][0m
+[0;34mon-chain  audit/sp.south  (sp)[0m
+[0;34mon-chain  audit/cfo.north  (chief-forensic-officer)[0m
+[0;34mon-chain  audit/dp.north  (director-of-prosecution)[0m
+[0;34mon-chain  audit/dj.north  (district-judge)[0m
+[0;34mon-chain  audit/ci.central  (circle-inspector)[0m
+[0;34mon-chain  audit/ci.east  (circle-inspector)[0m
+[0;34mon-chain  audit/ci.south  (circle-inspector)[0m
+[0;34mon-chain  police/sho.reddy  (inspector)[0m
+[0;34mon-chain  police/insp.sharma  (inspector)[0m
+[0;34mon-chain  police/const.verma  (constable)[0m
+[0;34mon-chain  police/io.krishnan  (investigating-officer)[0m
+[0;34mon-chain  police/insp.rathore  (inspector)[0m
+[0;34mon-chain  police/insp.singh  (inspector)[0m
+[0;34mon-chain  forensics/dir.iyer  (lab-director)[0m
+[0;34mon-chain  forensics/analyst.rao  (lab-analyst)[0m
+[0;34mon-chain  prosecution/pp.mehta  (public-prosecutor)[0m
+[0;34mon-chain  prosecution/dc.nair  (defense-counsel)[0m
+[0;34mon-chain  court/judge.rana  (judge)[0m
+[0;34mon-chain  court/clerk.das  (court-clerk)[0m
+
+20 account(s) written to the ledger, 0 already present.
+Open http://localhost:3001 and select any enrolled identity above.
+CHANNEL=diaschannel CHAINCODE=diasrecords node scripts/seed-domain.js 
+on-chain  CreateDepartment police
+on-chain  CreateDepartment forensics
+on-chain  CreateDepartment prosecution
+on-chain  CreateDepartment court
+on-chain  CreateDepartment audit
+skip      demo cases: pass --with-demo-cases (make dias-demo-data) to create them
+CHANNEL=diaschannel CHAINCODE=diasrecords node scripts/dias/register-policy.js
+{
+  "registered": true,
+  "activated": true,
+  "policyVersion": "dias-governance-policy-v1",
+  "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+  "bundleId": "dias-governance-policy"
+}
+CHANNEL=diaschannel CHAINCODE=diasrecords node scripts/dias/register-recommender-key.js
+{"keyId":"3f65dd432f0979226ce4b4005d090a8d96c7fb786bf2edfa86d3e9e0a62c9d0d","registered":true}

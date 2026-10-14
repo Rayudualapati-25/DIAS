@@ -1,11 +1,8 @@
 'use strict';
 
 /**
- * The evaluation adapter for prompt v2 (plan step 5). The dataset stores v1
- * cases, whose verified request carries the self-declared emergency flag and an
- * approval flag. Under v3 the flag becomes a requester claim and the approval
- * flag is dropped; the policy labels do not change (see the label-invariance
- * run in experiments/runs/).
+ * The evaluation adapter for prompt v2. The dataset stores v1 cases, whose verified request carries the
+ * self-declared emergency flag and an approval flag.
  */
 
 const test = require('node:test');

@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Composition of the v3 recommendation path: the backend itself asks the model.
- * The runtime loads the backend's Ed25519 signing key, binds the signed
- * recommender to the policy the backend holds, and gives the worker a ledger and
- * a relay identity. A missing or wrong key stops start-up with an instruction,
- * instead of recommendations failing one by one.
- */
+/** Composition of the v3 recommendation path: the backend itself asks the model. */
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -53,9 +47,7 @@ describe('DIAS runtime (v3)', () => {
     expect(runtime.worker).to.have.property('enqueue');
   });
 
-  // Author's decision, 2026-10-08: the backend asks the LLM itself. Nothing in the
-  // runtime depends on NODE_ENV today; this guards against a separate-service mode,
-  // or a refusal of the in-backend recommender, being added back.
+  // The backend asks the LLM itself.
   it('has no separate-service mode: production builds the same in-backend recommender', () => {
     const runtime = createDiasRuntime({
       settings: settings(dir, {

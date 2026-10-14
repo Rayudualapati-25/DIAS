@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Records authenticated API calls directly on the Fabric ledger.
- *
- * Stages a small encrypted event before a buffered response ends; Fabric submits
- * happen afterwards and are retried. A staging failure refuses the response.
- *
- * Only who/what/when is recorded — never the case narrative, the payload
- * contents or a token. Search filters ARE recorded, because "who
- * went looking for this case" is exactly the signal an auditor needs.
- */
+/** Records authenticated API calls directly on the Fabric ledger. */
 
 const { getAccessEventOutbox } = require('../dias/accessEventOutbox');
 
@@ -19,12 +10,8 @@ const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
 const identifier = (value) => (typeof value === 'string' && SAFE_ID.test(value) ? value : null);
 
 /**
- * Map a request to a stable action name and a safe target.
- * Returns null for requests that are not worth logging (health checks, statics).
- *
- * Takes a snapshot { method, path, query, body } rather than the live request:
- * Express rewrites req.url while nested routers dispatch, so by the time the
- * response has finished the path no longer identifies the route.
+ * Map a request to a stable action name and a safe target. Returns null for requests that are not worth
+ * logging (health checks, statics).
  */
 function describeRaw(snapshot) {
   const path = snapshot.path;
@@ -58,8 +45,8 @@ function describeRaw(snapshot) {
   if (evidenceIndexMatch) {
     return { action: 'record.search', target: { filters: { evidenceId: evidenceIndexMatch[1] } } };
   }
-  // The full-document (PDF) workflow shares the /records prefix but names a
-  // request rather than a record, so it is classified before the record routes.
+  // The full-document (PDF) workflow shares the /records prefix but names a request rather than a record,
+  // so it is classified before the record routes.
   if (path === '/records/document-requests/mine') {
     return { action: 'document.request.list', target: null };
   }
@@ -238,8 +225,8 @@ function describeRaw(snapshot) {
     return { action: 'audit.accesslog.read', target: null };
   }
 
-  // Anything else, including retired routes, is logged by path only: no body
-  // field of an unrecognised request is ever copied into the ledger.
+  // Anything else, including retired routes, is logged by path only: no body field of an unrecognised
+  // request is ever copied into the ledger.
   return { action: `api${path.replace(/\//g, '.')}`, target: null };
 }
 
@@ -298,21 +285,7 @@ function withResponseTarget(described, responseTarget) {
   return safeTarget({ ...described.target, ...extra });
 }
 
-/**
- * Logging policy (docs/design/dias-v3-ledger-schema.md §12).
- *
- *   SENSITIVE     reads of protected or personal data, identity events and
- *                 searches: logged in every mode, because the read itself leaves
- *                 no other trace;
- *   LEDGER_WRITE  calls that submit their own transaction: a success is already
- *                 its own ledger record, so it is logged only when refused or
- *                 failed;
- *   ROUTINE       low-value reads: logged only when refused or failed.
- *
- * DIAS_ACCESS_LOG_MODE=security applies the classes (the v3 default);
- * DIAS_ACCESS_LOG_MODE=all logs every attributable call, as v2 did, so v2 runs
- * can be reproduced. An action without a class is treated as SENSITIVE.
- */
+/** Logging policy. */
 const LOG_CLASS = Object.freeze({
   SENSITIVE: 'sensitive',
   LEDGER_WRITE: 'ledger-write',
@@ -405,8 +378,8 @@ function outcomeFor(status, action) {
 
 function createAccessLogger({ outbox = null, log = console } = {}) {
   return function accessLogger(req, res, next) {
-  // Snapshot now: req.url is mutated by nested routers before 'finish' fires.
-  // req.originalUrl is the one field Express never rewrites.
+  // Snapshot now: req.url is mutated by nested routers before 'finish' fires. req.originalUrl is the one
+  // field Express never rewrites.
   const snapshot = {
     method: req.method,
     path: req.originalUrl.split('?')[0].replace(/^\/api/, '') || '/',
@@ -421,8 +394,8 @@ function createAccessLogger({ outbox = null, log = console } = {}) {
     try {
       const described = describe(snapshot);
       const user = req.user || {};
-      // Fabric needs a signing identity. Failed/anonymous logins are reported
-      // by the web server but cannot honestly be attributed on-chain.
+      // Fabric needs a signing identity. Failed/anonymous logins are reported by the web server but cannot
+      // honestly be attributed on-chain.
       if (!staged && described && user.org && user.fabricUser) {
         const action = described.action === 'auth.login' && res.statusCode !== 200
           ? 'auth.login_failed' : described.action;

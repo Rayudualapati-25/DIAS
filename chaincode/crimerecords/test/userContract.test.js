@@ -9,8 +9,8 @@ const { buildMockContext, cloneInto, CALLERS } = require('./testHelpers');
 
 const contract = new UserContract();
 
-// District heads of every department sit in the authority organisation and are
-// the only identities that may admit a user to any department.
+// District heads of every department sit in the authority organisation and are the only identities that may
+// admit a user to any department.
 const ADMIN = {
   mspId: 'AuditMSP',
   attrs: {
@@ -53,10 +53,8 @@ function asUser(state, overrides = {}) {
 describe('UserContract', () => {
   describe('genesis bootstrap', () => {
     /**
-     * Only district heads may admit users, and district heads are themselves
-     * users — so on an empty ledger nobody can create anyone. One admission is
-     * therefore permitted to an AuditMSP administrator, and only while the ledger
-     * holds no users at all.
+     * Only district heads may admit users, and district heads are themselves users — so on an empty ledger
+     * nobody can create anyone.
      */
     it('lets an AuditMSP administrator admit the very first user', async () => {
       const ctx = buildMockContext({ mspId: 'AuditMSP', attrs: {}, identityId: 'auditadmin' });
@@ -120,9 +118,8 @@ describe('UserContract', () => {
     // A working officer cannot admit anyone, whatever their department.
     await expect(create(buildMockContext(CALLERS.inspector)))
       .to.be.rejectedWith(/requires membership in \[AuditMSP\]/);
-    // Nor can a station head — only a district-head rank in the authority org.
-    // The ledger must already hold a user, otherwise the one-time genesis
-    // bootstrap applies and rank is not yet being enforced.
+    // Nor can a station head — only a district-head rank in the authority org. The ledger must already hold
+    // a user, otherwise the one-time genesis bootstrap applies and rank is not yet being enforced.
     const stationHeadCtx = buildMockContext({
       mspId: 'AuditMSP',
       attrs: { role: 'circle-inspector', jurisdiction: 'district-north', credentialStatus: 'active' },

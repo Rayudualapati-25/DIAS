@@ -10,9 +10,8 @@ const { buildMockContext, cloneInto, seedCase, CALLERS, RECORD_META } = require(
 
 const contract = new RecordContract();
 
-// v3: every grant carries the policy it was issued under, and release requires
-// that policy to be the active one (plan step 8). These hand-built fixtures use
-// the same binding as the active policy they seed.
+// v3: every grant carries the policy it was issued under, and release requires that policy to be the active
+// one.
 const POLICY = Object.freeze({ policyVersion: 'dias-governance-policy-v1', policyHash: 'c'.repeat(64) });
 
 async function seedActivePolicy(ctx) {
@@ -525,8 +524,8 @@ describe('RecordContract', () => {
         Buffer.from(JSON.stringify(decision))
       );
       if (authorization) {
-        // Every authorization the contract writes carries its exact scope; release
-        // compares it with the grant (plan step 4).
+        // Every authorization the contract writes carries its exact scope; release compares it with the
+        // grant.
         const scope = {
           stableUserId: 'PoliceMSP::insp.test', recordId: 'FIR-1', caseId: 'CASE-1',
           action, purpose: 'investigation',

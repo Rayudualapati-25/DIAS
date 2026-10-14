@@ -1,13 +1,4 @@
-/**
- * Everyone on the ledger.
- *
- * This list is not read from a database — it is a chaincode query over the
- * profiles written by UserContract, so it shows exactly what every department's
- * peer holds. No application password or password hash exists.
- *
- * Revoking is deliberately not a delete. The record stays, its status changes,
- * and both the admission and the revocation remain in the key's history.
- */
+/** Everyone on the ledger. */
 
 import { api } from '../core/api.js';
 import { ORG_LABEL, canAdministerOfficers } from '../core/access.js';
@@ -32,8 +23,8 @@ export default {
 
   mount({ user }) {
     const detail = slot();
-    // UserContract lets a district head of the authority organisation change an
-    // officer of any department. Anything else is hidden here and refused there.
+    // UserContract lets a district head of the authority organisation change an officer of any department.
+    // Anything else is hidden here and refused there.
     const mayAdminister = () => canAdministerOfficers(user);
 
     const showHistory = async (username) => {
@@ -57,9 +48,8 @@ export default {
           { emptyMessage: 'No history for this account.' }));
     };
 
-    // Declared before the region that calls it: the region renders after an
-    // await, so a later declaration would happen to work, and would break the
-    // moment the data came from a cache.
+    // Declared before the region that calls it: the region renders after an await, so a later declaration
+    // would happen to work, and would break the moment the data came from a cache.
     const changeStatus = async (username, status) => {
       const updated = await attempt(
         () => api.users.setStatus(username, status),

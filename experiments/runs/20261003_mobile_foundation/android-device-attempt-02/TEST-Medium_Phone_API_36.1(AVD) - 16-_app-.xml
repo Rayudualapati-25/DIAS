@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="9" failures="0" errors="0" skipped="0" time="1.03" timestamp="2026-10-03T17:24:49" hostname="localhost">
+  <testsuite name="org.dias.mobile.data.FoundationTest" tests="7" failures="0" errors="0" skipped="0" time="0.171" timestamp="2026-10-03T17:24:49" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="failedRefreshPreservesExistingSnapshot" classname="org.dias.mobile.data.FoundationTest" time="0.006" />
+    <testcase name="batchesPersistAcrossDatabaseReopen" classname="org.dias.mobile.data.FoundationTest" time="0.034" />
+    <testcase name="repeatedPageIsIdempotent" classname="org.dias.mobile.data.FoundationTest" time="0.028" />
+    <testcase name="failedPageTransactionPreservesRowsAndCursor" classname="org.dias.mobile.data.FoundationTest" time="0.001" />
+    <testcase name="hostAndAccountCachesAreIsolated" classname="org.dias.mobile.data.FoundationTest" time="0.035" />
+    <testcase name="offlineReadsWorkWhileNetworkOnlyAblationFails" classname="org.dias.mobile.data.FoundationTest" time="0.036" />
+    <testcase name="refreshReplacesRemovedCasesAndClearRemovesContinuation" classname="org.dias.mobile.data.FoundationTest" time="0.031" />
+  </testsuite>
+  <testsuite name="org.dias.mobile.data.HostConnectionTest" tests="2" failures="0" errors="0" skipped="0" time="0.332" timestamp="2026-10-03T17:24:49" hostname="localhost">
+    <properties>
+      <property name="device" value="Medium_Phone_API_36.1(AVD) - 16" />
+      <property name="flavor" value="" />
+      <property name="project" value=":app" />
+    </properties>
+    <testcase name="emulatorAliasToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.272" />
+    <testcase name="reverseForwardingToMacApiAndFabric" classname="org.dias.mobile.data.HostConnectionTest" time="0.06" />
+  </testsuite>
+</testsuites>

@@ -1,10 +1,4 @@
-/**
- * Hash routing: `#/search`, `#/audit-trail`, ...
- *
- * Why a router at all: with many modules you want a refresh to keep you on the
- * same screen, and you want to send someone a link to one. The URL is the single
- * source of truth for "which module is open".
- */
+/** Hash routing: `#/search`, `#/audit-trail`,... */
 
 const listeners = new Set();
 

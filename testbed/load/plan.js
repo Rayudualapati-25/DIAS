@@ -1,29 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Pre-registered load plan for the multi-VM experiments.
- *
- * Produces, deterministically from one seed:
- *  - the 100 load-test users (clones of the 12 requester profiles of the demo
- *    world; identical policy facts, distinct names and certificates);
- *  - every request of the whole-system runs (E5: 10/25/50/75/100 users, three
- *    repetitions) and of the one-hour run (E6), each with the answer the written
- *    policy gives for it (the offline reference oracle; never part of the
- *    DIAS runtime).
- *
- * Design rules, so that load levels are comparable:
- *  - user i sends the i-th request of every batch; a batch of L users is users
- *    1..L, so every level reuses the same users and adds new ones;
- *  - odd users send requests the policy allows, even users requests it denies,
- *    so every batch is balanced (ceil(L/2) allow, floor(L/2) deny);
- *  - profiles are assigned to users in a fixed cycle, so the role mix is the
- *    same at every level;
- *  - within one run no two requests have the same verified facts, so the model
- *    server's prompt cache cannot make later requests cheaper than earlier ones.
- *
- * Usage: node testbed/load/plan.js [--out <dir>]
- */
+/** Pre-registered load plan for the multi-VM experiments. */
 
 const fs = require('fs');
 const path = require('path');
@@ -164,15 +142,14 @@ function justification(request, serial, random) {
 }
 
 /**
- * Draw without replacement from a profile's pool of one expectation. Denials
- * cycle over the profile's reason codes so every run covers them all.
+ * Draw without replacement from a profile's pool of one expectation. Denials cycle over the profile's
+ * reason codes so every run covers them all.
  */
 function makeDrawer(pools, random) {
   const shuffled = new Map();
   const reasonTurn = new Map();
-  // Two profiles can share every policy fact (for example two inspectors of one
-  // station asking about a case neither is assigned to), so uniqueness is kept
-  // across the whole run, not per profile.
+  // Two profiles can share every policy fact (for example two inspectors of one station asking about a case
+  // neither is assigned to), so uniqueness is kept across the whole run, not per profile.
   const used = new Set();
   for (const [key, list] of pools) shuffled.set(key, shuffle(list, random));
   return function draw(profileName, expected) {

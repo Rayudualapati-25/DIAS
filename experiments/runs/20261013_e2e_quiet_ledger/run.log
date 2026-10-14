@@ -1,0 +1,58 @@
+E2Q-MAC-01 decided REQ-6a647d569677de69 outcome=DENIED e2e=13.3s
+E2Q-MOB-01 decided REQ-f7f33ed8c786a411 outcome=DENIED e2e=14.0s
+E2Q-MAC-02 decided REQ-462f5081e42c7c96 outcome=GRANTED e2e=14.3s
+E2Q-MOB-02 decided REQ-fcbae3eda36735b7 outcome=GRANTED e2e=15.1s
+E2Q-MOB-03 decided REQ-b07c3b6edc734d1c outcome=DENIED e2e=13.8s
+E2Q-MAC-03 decided REQ-c2abbaeb0f76564d outcome=DENIED e2e=13.0s
+E2Q-MAC-04 decided REQ-9ee219c67e5d7496 outcome=DENIED e2e=13.0s
+E2Q-MOB-04 decided REQ-dc405aedfeaa97f5 outcome=DENIED e2e=13.6s
+E2Q-MOB-05 decided REQ-e9f0800a1c4fbbaa outcome=DENIED e2e=13.9s
+E2Q-MAC-05 decided REQ-9feaadab71e9118d outcome=DENIED e2e=13.2s
+E2Q-MAC-06 decided REQ-4f30300c92f81cac outcome=DENIED e2e=13.6s
+E2Q-MOB-06 decided REQ-6db0b45e402a9cc3 outcome=DENIED e2e=13.5s
+E2Q-MOB-07 decided REQ-1441dad02c7c18af outcome=DENIED e2e=14.0s
+E2Q-MAC-07 decided REQ-69887e606dab83ba outcome=DENIED e2e=14.2s
+E2Q-MOB-08 decided REQ-ce92007964b0bb59 outcome=DENIED e2e=13.4s
+E2Q-MAC-08 decided REQ-999774062e8db02c outcome=DENIED e2e=12.9s
+E2Q-MOB-09 decided REQ-b0a781ef16e99e1e outcome=GRANTED e2e=14.4s
+E2Q-MAC-09 decided REQ-9745b2c12377f86f outcome=GRANTED e2e=13.6s
+E2Q-MAC-10 decided REQ-f4f89b32a4739faf outcome=DENIED e2e=13.4s
+E2Q-MOB-10 decided REQ-bb988ff9913df48d outcome=GRANTED e2e=14.0s
+E2Q-MAC-11 decided REQ-7b174a3545080311 outcome=DENIED e2e=13.0s
+E2Q-MOB-11 decided REQ-119c5aca7f7034dc outcome=DENIED e2e=16.1s
+E2Q-MOB-12 decided REQ-77387f409a4b832b outcome=DENIED e2e=13.8s
+E2Q-MAC-12 decided REQ-28cb05f8bd4129a3 outcome=DENIED e2e=12.9s
+E2Q-MOB-13 decided REQ-3b61223dbade5967 outcome=DENIED e2e=13.9s
+E2Q-MAC-13 decided REQ-c4d4386c443f8a52 outcome=DENIED e2e=14.3s
+E2Q-MAC-14 decided REQ-a862e12f758d84a5 outcome=DENIED e2e=13.2s
+E2Q-MOB-14 decided REQ-5b8637f3704eb4bc outcome=DENIED e2e=13.6s
+E2Q-MOB-15 decided REQ-d1fc1bda208fcd3f outcome=DENIED e2e=14.8s
+E2Q-MAC-15 decided REQ-276c5b47afc881e2 outcome=DENIED e2e=13.5s
+E2Q-MAC-16 decided REQ-e44abbad08e57166 outcome=GRANTED e2e=13.6s
+E2Q-MOB-16 decided REQ-2c4c0885bc23ca8a outcome=GRANTED e2e=17.7s
+E2Q-MOB-17 decided REQ-aba3372bfd33eb02 outcome=DENIED e2e=13.6s
+E2Q-MAC-17 decided REQ-f6c8bceca94c3be2 outcome=DENIED e2e=14.3s
+E2Q-MAC-18 decided REQ-bbcf9729cc65bba3 outcome=DENIED e2e=12.7s
+E2Q-MOB-18 decided REQ-7c6df07d8d6539a4 outcome=DENIED e2e=13.8s
+E2Q-MOB-19 decided REQ-662a18a8d716e396 outcome=DENIED e2e=16.8s
+E2Q-MAC-19 decided REQ-abe1472d84e6cb9e outcome=DENIED e2e=13.1s
+E2Q-MOB-20 decided REQ-93b876a32bb78ae5 outcome=DENIED e2e=13.3s
+E2Q-MAC-20 decided REQ-b497127f416fd8e3 outcome=DENIED e2e=13.0s
+E2Q-MAC-21 decided REQ-5a0c043b3083b8ab outcome=DENIED e2e=13.2s
+E2Q-MOB-21 decided REQ-4f5968b723d6e128 outcome=DENIED e2e=14.6s
+E2Q-MAC-22 decided REQ-34ae1b1a1e39b88f outcome=DENIED e2e=13.0s
+E2Q-MOB-22 decided REQ-2af747f4d991f949 outcome=DENIED e2e=13.6s
+E2Q-MAC-23 decided REQ-056c8c495a288350 outcome=DENIED e2e=14.1s
+E2Q-MOB-23 decided REQ-0d220cbb306c0661 outcome=DENIED e2e=13.5s
+E2Q-MAC-24 decided REQ-7d2d2971a020ac47 outcome=DENIED e2e=13.0s
+E2Q-MOB-24 decided REQ-6ddb1c8bfc64affd outcome=DENIED e2e=13.4s
+PASS every auditor review is in the searches-and-reads log on the ledger (48 of 48 found)
+PASS the run caused no refused or failed call (0 since the run began)
+PASS the reduced decision log an ordinary user reads grew by one entry per workflow (98 -> 146, 48 workflows)
+PASS that reduced log shows no name or case file (146 entries)
+PASS each requester finds their own requests with the final outcome (12 of 12 requesters)
+PASS no request is left waiting for an auditor (0 waiting)
+PASS no reusable authorization was created (0 active)
+PASS the phone session ended cleanly (OK (1 test))
+48 of 48 workflows completed and verified (48 planned)
+exit=0

@@ -1,0 +1,266 @@
+{
+ "runs": [
+  {
+   "config": "mac",
+   "table": [
+    {
+     "key": "submit",
+     "label": "1. Request committed on the ledger",
+     "n": 30,
+     "min": 1817.3,
+     "median": 2005.6,
+     "mean": 2003.7,
+     "p95": 2043.6,
+     "max": 2082.6
+    },
+    {
+     "key": "recommendation",
+     "label": "2. Recommendation ready (LLM, signature, commitment)",
+     "n": 30,
+     "min": 8785.6,
+     "median": 8991.3,
+     "mean": 9554.8,
+     "p95": 11008.3,
+     "max": 13042.3
+    },
+    {
+     "key": "inference",
+     "label": "   of which: model inference",
+     "n": 30,
+     "min": 6695.2,
+     "median": 7464.1,
+     "mean": 7861.1,
+     "p95": 10758.4,
+     "max": 12171.5
+    },
+    {
+     "key": "queue",
+     "label": "3. Auditor reads the queue",
+     "n": 30,
+     "min": 20.4,
+     "median": 31.1,
+     "mean": 30.4,
+     "p95": 36.7,
+     "max": 38.6
+    },
+    {
+     "key": "review",
+     "label": "4. Auditor opens the review",
+     "n": 30,
+     "min": 9.8,
+     "median": 12.2,
+     "mean": 12.6,
+     "p95": 15.9,
+     "max": 16.6
+    },
+    {
+     "key": "decision",
+     "label": "5. Decision recorded and confirmed from the ledger",
+     "n": 30,
+     "min": 1824.3,
+     "median": 1903.9,
+     "mean": 1925.1,
+     "p95": 2062.1,
+     "max": 2063.4
+    },
+    {
+     "key": "endToEnd",
+     "label": "End to end (stages 1 to 5)",
+     "n": 30,
+     "min": 12683.8,
+     "median": 12932.4,
+     "mean": 13526.6,
+     "p95": 14937.1,
+     "max": 17000.9
+    },
+    {
+     "key": "log",
+     "label": "6. Access log read",
+     "n": 30,
+     "min": 49,
+     "median": 61.2,
+     "mean": 62.1,
+     "p95": 80.7,
+     "max": 84
+    },
+    {
+     "key": "requesterReadback",
+     "label": "Requester reads the outcome on the Mac",
+     "n": 30,
+     "min": 8.2,
+     "median": 9.2,
+     "mean": 9.3,
+     "p95": 11.3,
+     "max": 11.6
+    }
+   ],
+   "summary": {
+    "planned": 30,
+    "ran": 30,
+    "completed": 30,
+    "checkFailed": 0,
+    "failed": 0,
+    "notRun": 0,
+    "granted": 3,
+    "denied": 27,
+    "adviceAllow": 3,
+    "adviceDeny": 27,
+    "adviceFollowed": 30,
+    "adviceMatchesPolicy": 28,
+    "adviceCompared": 30,
+    "ledgerChecksPassed": 270,
+    "ledgerChecksMade": 270,
+    "failedStages": {}
+   }
+  },
+  {
+   "config": "mobile",
+   "table": [
+    {
+     "key": "submit",
+     "label": "1. Request committed on the ledger",
+     "n": 30,
+     "min": 821.5,
+     "median": 1286.1,
+     "mean": 1342.3,
+     "p95": 1826.6,
+     "max": 2085.2
+    },
+    {
+     "key": "recommendation",
+     "label": "2. Recommendation ready (LLM, signature, commitment)",
+     "n": 30,
+     "min": 8151.4,
+     "median": 9571,
+     "mean": 9818.5,
+     "p95": 12422,
+     "max": 13244.3
+    },
+    {
+     "key": "inference",
+     "label": "   of which: model inference",
+     "n": 30,
+     "min": 6910.9,
+     "median": 8071,
+     "mean": 8490.2,
+     "p95": 10626.6,
+     "max": 10997
+    },
+    {
+     "key": "queue",
+     "label": "3. Auditor reads the queue",
+     "n": 30,
+     "min": 37.7,
+     "median": 65.6,
+     "mean": 65.8,
+     "p95": 83.7,
+     "max": 86.1
+    },
+    {
+     "key": "review",
+     "label": "4. Auditor opens the review",
+     "n": 30,
+     "min": 45.2,
+     "median": 51.5,
+     "mean": 51.9,
+     "p95": 68,
+     "max": 77.6
+    },
+    {
+     "key": "decision",
+     "label": "5. Decision recorded and confirmed from the ledger",
+     "n": 30,
+     "min": 254.4,
+     "median": 1823,
+     "mean": 1763.1,
+     "p95": 2306.8,
+     "max": 5810.8
+    },
+    {
+     "key": "endToEnd",
+     "label": "End to end (stages 1 to 5)",
+     "n": 30,
+     "min": 10898.4,
+     "median": 12430.1,
+     "mean": 13041.6,
+     "p95": 15809.5,
+     "max": 17427.2
+    },
+    {
+     "key": "log",
+     "label": "6. Access log read",
+     "n": 30,
+     "min": 138.8,
+     "median": 163.7,
+     "mean": 167.6,
+     "p95": 195.1,
+     "max": 206
+    },
+    {
+     "key": "requesterReadback",
+     "label": "Requester reads the outcome on the Mac",
+     "n": 30,
+     "min": 10.5,
+     "median": 14.5,
+     "mean": 15,
+     "p95": 18.7,
+     "max": 19.6
+    },
+    {
+     "key": "phoneSignIn",
+     "label": "Phone sign-in (not part of the end-to-end time)",
+     "n": 30,
+     "min": 494.7,
+     "median": 677.5,
+     "mean": 670.4,
+     "p95": 703,
+     "max": 708.4
+    }
+   ],
+   "summary": {
+    "planned": 30,
+    "ran": 30,
+    "completed": 30,
+    "checkFailed": 0,
+    "failed": 0,
+    "notRun": 0,
+    "granted": 2,
+    "denied": 28,
+    "adviceAllow": 2,
+    "adviceDeny": 27,
+    "adviceFollowed": 29,
+    "adviceMatchesPolicy": 28,
+    "adviceCompared": 29,
+    "ledgerChecksPassed": 270,
+    "ledgerChecksMade": 270,
+    "failedStages": {}
+   }
+  }
+ ],
+ "difference": [
+  {
+   "key": "queue",
+   "macMedian": 31.1,
+   "phoneMedian": 65.6,
+   "differenceMs": 34.5
+  },
+  {
+   "key": "review",
+   "macMedian": 12.2,
+   "phoneMedian": 51.5,
+   "differenceMs": 39.3
+  },
+  {
+   "key": "decision",
+   "macMedian": 1903.9,
+   "phoneMedian": 1823,
+   "differenceMs": -80.9
+  },
+  {
+   "key": "log",
+   "macMedian": 61.2,
+   "phoneMedian": 163.7,
+   "differenceMs": 102.5
+  }
+ ]
+}

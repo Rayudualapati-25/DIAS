@@ -1,0 +1,12 @@
+Repository hygiene, 2026-10-14
+files changed or new: 985 (828 present, the rest deleted)
+larger than 5 MiB among them: none
+OS files, caches, build outputs, node_modules: none
+tool-attribution wording: none; 'OpenAI-compatible' (the model server's API format) appears in 7 code files
+key, certificate and .env files: none (backend/data and *.pem are ignored)
+secrets: the first scan's pattern was rejected by the shell's grep and is not counted;
+  rerun with /usr/bin/grep over every tracked file and the added lines of the commits:
+  only placeholder or test values (.env.example, backend/src/config.js development
+  fallback, backend/test/setup.unit.js, experiments/run-mobile-foundation.js)
+check-repository.py: exit 1, only the oversized file already on main
+  (experiments/runs/20260924_testbed_multivm/raw/e3-ledger-20260925T043602Z/transactions.jsonl, 69.8 MiB)

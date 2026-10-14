@@ -2,31 +2,8 @@
 'use strict';
 
 /**
- * Pre-registered plan for the reuse experiment at 100 users: the live version of
- * the scope replay behind the paper's "Reusable Authorization Scope" figure.
- *
- * The old replay (experiments/dias/run-scope-workload-sweep.js) used 60 synthetic
- * users, one case each, two sibling records per case, and 0, 1, 3 and 7 repeated
- * requests per record. This plan keeps that design and runs it on the testbed:
- *  - users: the 100 testbed load users. User i sends one base request whose
- *    policy answer is fixed by the slot (odd ALLOW, even DENY), with verified
- *    facts that differ between users, as in the E5 plan;
- *  - records: each base request gets its own copy of the chosen world record in
- *    the world case, plus two siblings with the same record properties in a
- *    different case (a copy of the world case with the same assigned users). That
- *    is 300 records, each requested by exactly one user with one action and purpose;
- *  - rounds 0..7: in round 0 every user sends its three requests once, and every
- *    later round repeats all of them, so after round r each record has had r
- *    repeated requests (the paper's conditions are r = 0, 1, 3 and 7);
- *  - auditor: one approval decision per base request, drawn once in sorted order
- *    before anything runs (the fixed-approval correction of reviewer comment 32).
- *    The auditor overrides a model DENY to FORCE_ALLOW only for an approved base
- *    request, whose siblings share its decision, and otherwise follows the model;
- *  - justification: one fixed text per record, so a repeated request is the same
- *    request again and the model receives the same prompt.
- *
- * Usage: node testbed/reuse/plan.js [--smoke] [--prefix <record prefix> --seed <n>] [--out <file>]
- * (--prefix gives a repeated smoke test its own records, since a record keeps its authorizations.)
+ * Pre-registered plan for the reuse experiment at 100 users: the live version of the scope replay behind
+ * the paper's "Reusable Authorization Scope" figure.
  */
 
 const fs = require('fs');
@@ -86,8 +63,8 @@ function verifiedFor(profile, record, action, purpose) {
 }
 
 /**
- * Draw one base request per user without repeating verified facts across users.
- * Denials cycle over each profile's reason codes, as in the E5 plan.
+ * Draw one base request per user without repeating verified facts across users. Denials cycle over each
+ * profile's reason codes, as in the E5 plan.
  */
 function drawBases(users, bundle, random) {
   const pools = new Map();

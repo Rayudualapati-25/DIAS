@@ -6,7 +6,7 @@ const SESSION_COOKIE = 'llmxai_session';
 const SESSION_TTL_MS = Number(process.env.LLMXAI_SESSION_TTL_MS || 30 * 60 * 1000);
 const TOKEN_BYTES = 32;
 
-// token -> frozen session record. Replaced, never mutated in place.
+// Token -> frozen session record. Replaced, never mutated in place.
 const store = new Map();
 
 function newToken() {

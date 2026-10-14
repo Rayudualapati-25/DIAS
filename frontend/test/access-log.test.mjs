@@ -16,10 +16,9 @@ test('shows public lookup filters and handles an empty target', () => {
 });
 
 
-// ---------------------------------------------------------------------------
-// The access-request log: who requested, what, the LLM recommendation, and the
-// auditor decision stated together with that recommendation.
-// ---------------------------------------------------------------------------
+// --------------------------------------------------------------------------- The access-request log: who
+// requested, what, the LLM recommendation, and the auditor decision stated together with that
+// recommendation. ---------------------------------------------------------------------------
 
 import {
   NO_FILTERS, SORT, accessRequestRow, activeFilterCount, filterAccessRows, sortAccessRows,
@@ -119,10 +118,24 @@ test('shows pending advice separately from binding approval and authorization ch
   const withheld = accessRequestRow(ledgerEntry({ outcome: null, decision: null,
     status: 'awaiting-auditor', llmRecommendation: null, recommendationWithheld: true }));
   assert.equal(withheld.llm.label, 'Withheld until decision');
+  // The same words fit the reader's own request and another officer's waiting request.
+  assert.equal(withheld.llm.detail, 'shown once the auditor has decided');
   const reused = accessRequestRow(ledgerEntry({ basis: 'DYNAMIC_AUTHORIZATION',
     dynamicAuthorizationCheck: { outcome: 'MATCH', authorizationId: 'AUTH-9' } }));
   assert.deepEqual(reused.authorization, { label: 'MATCH', detail: 'AUTH-9' });
   assert.equal(reused.approval.label, 'GRANTED');
+});
+
+test('never shows advice that is marked as withheld, whatever value came with it', () => {
+  const row = accessRequestRow({ requestId: 'REQ-3', recordId: 'REC-FIR-001', status: 'awaiting-auditor',
+    llmRecommendation: 'DENY', recommendationWithheld: true });
+  assert.deepEqual(row.llm, { value: 'NONE', label: 'Withheld until decision', detail: 'shown once the auditor has decided' });
+  assert.equal(filterAccessRows([row], { ...NO_FILTERS, llm: 'DENY' }).length, 0);
+  // A request that ended without a decision shows no advice either.
+  const ended = accessRequestRow({ requestId: 'REQ-4', status: 'cancelled', outcome: 'CANCELLED',
+    llmRecommendation: 'ALLOW', recommendationWithheld: true });
+  assert.equal(ended.llm.label, 'Not recorded');
+  assert.ok(!JSON.stringify([row, ended]).includes('DENY') && !JSON.stringify(ended).includes('ALLOW'));
 });
 
 test('orders the log by time without changing the list it was given', () => {

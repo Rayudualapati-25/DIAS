@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-#
-# Evaluate every saved LoRA checkpoint of one training run on the validation
-# selection suite and report the best by decision accuracy (ties: joint accuracy,
-# then lower false-allow rate, then the later checkpoint). Mirrors the V4 procedure.
-#
+# Evaluate every saved LoRA checkpoint of one training run on the validation selection suite and report the best by decision accuracy (ties: joint accuracy, then lower false-allow rate, then the later checkpoint).
 # Usage: select_checkpoint.sh <adapter-dir> <selection-jsonl> <run-dir>
 #   env: LLM_POLICY_MODEL_VERSION (must match the dataset), MLX_URL (default :8080)
 set -euo pipefail

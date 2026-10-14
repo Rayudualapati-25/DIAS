@@ -1,17 +1,4 @@
-/**
- * Watching for LLM recommendations that are still being prepared.
- *
- * The auditor screen shows "Being prepared" while the backend asks the LLM. This
- * watch asks the backend every few seconds whether those recommendations are
- * ready and tells the screen the moment one is, so the auditor does not have to
- * press Refresh. The check reads no case data and is not written to the access
- * log; the queue itself is loaded again only when something became ready.
- *
- * It ends by itself when nothing is left to wait for or the screen is gone. It
- * gives up, and tells the screen so, when the backend refuses a check, when the
- * network fails several times in a row, or after WATCH_LIMIT_MS. The Refresh
- * buttons keep working in every one of those cases.
- */
+/** Watching for LLM recommendations that are still being prepared. */
 
 import { isRecommendationPreparing } from './dias.js';
 
@@ -35,14 +22,7 @@ export function preparingRequestIds(reviews) {
 const chunked = (items, size) => Array.from(
   { length: Math.ceil(items.length / size) }, (_, index) => items.slice(index * size, (index + 1) * size));
 
-/**
- * @param {object} options
- * @param {(ids: string[]) => Promise<{requestId: string, preparing: boolean}[]>} options.check
- *   asked with at most WATCH_MAX_IDS ids per call
- * @param {(readyIds: string[]) => void} options.onReady watched requests stopped being prepared
- * @param {(reason: string) => void} [options.onStopped] the watch gave up (a WATCH_STOPPED value)
- * @param {() => boolean} [options.isActive] false once the screen has been left
- */
+/** Asked with at most WATCH_MAX_IDS ids per call */
 export function createRecommendationWatch({
   check,
   onReady,
@@ -58,11 +38,11 @@ export function createRecommendationWatch({
   let deadline = 0;
   let failures = 0;
   let timer = null;
-  // Every watch() and stop() starts a new generation, so the answer to a check
-  // that was already in flight is ignored instead of scheduling a second chain.
+  // Every watch() and stop() starts a new generation, so the answer to a check that was already in flight
+  // is ignored instead of scheduling a second chain.
   let generation = 0;
-  // A request reported ready is never waited for again, so a view that still
-  // calls it pending cannot make this watch reload the queue in a loop.
+  // A request reported ready is never waited for again, so a view that still calls it pending cannot make
+  // this watch reload the queue in a loop.
   const reported = new Set();
 
   function cancel() {

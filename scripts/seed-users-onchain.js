@@ -1,38 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Write the seeded department identities onto the ledger.
- *
- * scripts/seed-identities.sh does half the job: it registers and enrols the
- * thirteen officers with their departments' Fabric CAs, which gives each of
- * them an X.509 certificate. That is the CA's business and does not create an
- * application authorization profile on the blockchain.
- *
- * This script does the other half: a CreateUser transaction per officer, so
- * each one has an account on the ledger. Until that runs, nobody can sign in,
- * because sign-in verifies the selected certificate against that ledger
- * profile and there is no user/password database to fall back on.
- *
- * Each department admits its own people, signed by that department's senior
- * officer, because that is what UserContract requires. The senior officer
- * registers themselves first; the chaincode authorises on the role in their
- * certificate, not on an account that does not exist yet.
- *
- * Usage: node scripts/seed-users-onchain.js   (from crime-records-network/)
- */
+/** Write the seeded department identities onto the ledger. */
 
 const users = require('../backend/src/fabric/users');
 const ca = require('../backend/src/fabric/ca');
 
-// The roster must stay in step with network/scripts/seed-identities.sh: the
-// role here is the account's role, the role there is signed into the
-// certificate, and UserContract will happily store a mismatch that then fails
-// every access check. Keep them equal.
-// org -> the senior officer who admits that department's users.
-// Only a district head of the authority organisation may admit a user, so every
-// department is registered by its own district head. The first head is admitted by
-// the one-time genesis bootstrap, using the authority organisation's CA admin.
+// The roster must stay in step with network/scripts/seed-identities.sh: the role here is the account's
+// role, the role there is signed into the certificate, and UserContract will happily store a mismatch that
+// then fails every access check.
 const BOOTSTRAP = Object.freeze({ org: 'audit', user: 'Admin' });
 const REGISTRAR = Object.freeze({
   police: 'sp.north',
@@ -43,9 +19,8 @@ const REGISTRAR = Object.freeze({
 });
 
 /**
- * The authority organisation, admitted first. A district head must exist before
- * anybody else can be created, because only a district head may admit a user.
- * The very first of them is admitted through the one-time genesis bootstrap.
+ * The authority organisation, admitted first. A district head must exist before anybody else can be
+ * created, because only a district head may admit a user.
  */
 const AUTHORITY_ROSTER = [
   ['sp.north', 'audit', 'SP (district-north)', 'sp', 'active'],
@@ -64,14 +39,7 @@ const ROSTER = [
   ['insp.sharma', 'police', 'Insp. A. Sharma', 'inspector', 'active'],
   ['const.verma', 'police', 'Const. R. Verma', 'constable', 'active'],
   ['io.krishnan', 'police', 'IO S. Krishnan', 'investigating-officer', 'active'],
-  // Deliberately an ACTIVE account despite the name. Two different things are
-  // called revoked here and only one of them applies:
-  //   - the certificate attribute credentialStatus=revoked, set in
-  //     seed-identities.sh, which makes the access policy deny every request
-  //     with reason CRED_NOT_ACTIVE. That is the case the paper measures.
-  //   - the account status below, which decides whether they can sign in.
-  // Rathore has to be able to sign in for that denial to be observable, so the
-  // account stays active and the revocation lives in the certificate.
+  // Deliberately an ACTIVE account despite the name.
   ['insp.rathore', 'police', 'Insp. V. Rathore (revoked credential)', 'inspector', 'active'],
   ['insp.singh', 'police', 'Insp. P. Singh (cross-district)', 'inspector', 'active'],
   ['dir.iyer', 'forensics', 'Dir. M. Iyer', 'lab-director', 'active'],
@@ -96,9 +64,9 @@ const USER_CONTEXT = Object.freeze({
   'dc.nair': { jurisdiction: 'district-north', clearance: 'low' },
   'judge.rana': { jurisdiction: 'district-north', clearance: 'high' },
   'clerk.das': { jurisdiction: 'district-north', clearance: 'low' },
-  // Authority body. Station heads carry a station; district heads do not.
-  // ci.east deliberately holds only medium clearance, so a request for a
-  // high-sensitivity record at PS-East passes him and reaches the district head.
+  // Authority body. Station heads carry a station; district heads do not. ci.east deliberately holds only
+  // medium clearance, so a request for a high-sensitivity record at PS-East passes him and reaches the
+  // district head.
   'sp.north': { jurisdiction: 'district-north', clearance: 'high' },
   'sp.south': { jurisdiction: 'district-south', clearance: 'high' },
   'cfo.north': { jurisdiction: 'district-north', clearance: 'high' },
@@ -109,13 +77,7 @@ const USER_CONTEXT = Object.freeze({
   'ci.south': { station: 'PS-South', jurisdiction: 'district-south', clearance: 'high' },
 });
 
-/**
- * The real reason a transaction failed.
- *
- * fabric-gateway reports a rejected endorsement as a generic "10 ABORTED" and puts
- * each peer's actual chaincode message in `details`. Reading only `message` loses
- * it, which turns an ordinary "already exists" into a fatal error on a re-run.
- */
+/** The real reason a transaction failed. */
 function chaincodeMessage(error) {
   const parts = [String(error.message || error)];
   for (const detail of error.details || []) {
@@ -142,10 +104,8 @@ async function main() {
   let created = 0;
   let skipped = 0;
 
-  // The first authority identity is admitted by the CA administrator through the
-  // genesis bootstrap; from the second onwards a district head is already in place.
-  // On a re-run the ledger already holds users, so the bootstrap is closed and must
-  // not be attempted — the chaincode would refuse an administrator without a rank.
+  // The first authority identity is admitted by the CA administrator through the genesis bootstrap; from
+  // the second onwards a district head is already in place.
   let bootstrapped = false;
   try {
     const existing = await users.list(BOOTSTRAP.org, BOOTSTRAP.user);

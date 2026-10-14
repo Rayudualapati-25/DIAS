@@ -6,8 +6,8 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 
-// Defaults reproduce the retained V4 analysis; every path is overridable so the
-// same replay can be run for a later model generation without a second copy.
+// Defaults reproduce the retained V4 analysis; every path is overridable so the same replay can be run for
+// a later model generation without a second copy.
 const DEFAULTS = Object.freeze({
   source: 'LLMxAI/experiments/runs/20260902_qwen3_policy_engine_eval_v4/proposed_full360.json',
   'subject-ablation': 'LLMxAI/experiments/runs/20260902_qwen3_policy_engine_eval_v4/subject_ablation.json',
@@ -58,9 +58,8 @@ function score(rows, guardEnabled) {
   };
 
   for (const row of rows) {
-    // Output that fails the schema never reaches the ledger: the backend rejects it
-    // and returns 503 without writing a decision, so it is neither an automatic
-    // outcome nor an escalation. Counted separately rather than silently dropped.
+    // Output that fails the schema never reaches the ledger: the backend rejects it and returns 503 without
+    // writing a decision, so it is neither an automatic outcome nor an escalation.
     if (!row.prediction) {
       totals.rejectedOutputCount += 1;
       if (row.expected.decision !== 'allow') totals.expectedNonAllowCount += 1;

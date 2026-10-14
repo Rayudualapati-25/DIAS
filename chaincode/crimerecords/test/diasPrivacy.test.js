@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Plan step 13 — who may read what (design §10).
- *
- * Record history, the evidence list and custody chain, and the decision log were
- * readable by every identity. Each is now refused or redacted for a caller
- * outside its column in the design's visibility table. A requester also learns
- * what the LLM recommended only once an auditor has decided (author's rule,
- * 2026-10-08).
- */
+/** — who may read what. */
 
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
@@ -130,8 +122,10 @@ describe('DIAS privacy controls (plan step 13)', () => {
       await world.decide(request.requestId, 'FORCE_DENY', 'DENY');
     });
 
-    it('is full for reviewers', async () => {
-      for (const caller of [CALLERS.auditor, CALLERS.districtJudge, CALLERS.judge]) {
+    it('is full for every enrolled officer, reviewer or not', async () => {
+      const policeSp = posted(CALLERS.inspector, { role: 'sp', station: 'PS-South' }, 'sp.police');
+      for (const caller of [CALLERS.auditor, CALLERS.districtJudge, CALLERS.judge,
+        CALLERS.inspector, CALLERS.constable, CALLERS.analyst, CALLERS.prosecutor, policeSp]) {
         const [entry] = await log(caller);
         expect(entry, caller.identityId).to.include({
           requestId: request.requestId, recordId: 'FIR-1', caseId: 'CASE-1', outcome: 'DENIED',
@@ -143,29 +137,34 @@ describe('DIAS privacy controls (plan step 13)', () => {
       }
     });
 
-    it('is redacted for everyone else, the requester included', async () => {
+    it('gives an officer exactly the decision fields, and only a reviewer the transactions', async () => {
+      const fields = ['action', 'auditor', 'authorizationId', 'basis', 'caseId', 'createdAuthorizationId',
+        'decidedAtUtc', 'decision', 'generationStatus', 'llmAgreement', 'llmRecommendation', 'outcome', 'purpose',
+        'recordId', 'requestId', 'requester'];
+      for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst, CALLERS.prosecutor]) {
+        expect(Object.keys((await log(caller))[0]).sort(), caller.identityId).to.deep.equal(fields);
+      }
+      for (const caller of [CALLERS.auditor, CALLERS.districtJudge, CALLERS.judge]) {
+        expect(Object.keys((await log(caller))[0]).sort(), caller.identityId)
+          .to.deep.equal([...fields, 'decisionTxId', 'outcomeTxId'].sort());
+      }
+    });
+
+    it('still carries nothing of the justification, the LLM text or the auditor note', async () => {
+      const entries = await log(CALLERS.constable);
+      expect(JSON.stringify(entries)).to.not.match(/Reviewing the FIR|"reason"|"justification"|"noteHash"|identityHash/);
+    });
+
+    it('is refused to an identity without an enrolled role', async () => {
+      const noRole = posted(CALLERS.inspector, { role: '' }, 'no.role');
+      await expect(log(noRole)).to.be.rejectedWith(/unauthorized/);
+    });
+
+    it('gives a district-head role name in the police organisation no review right elsewhere', async () => {
       // District-head role names exist in every organisation; in the police one confers no review.
       const policeSp = posted(CALLERS.inspector, { role: 'sp', station: 'PS-South' }, 'sp.police');
       await expect(read(policeSp, (ctx) => records().GetRecordHistory(ctx, 'FIR-1')))
         .to.be.rejectedWith(/unauthorized: GetRecordHistory/);
-      for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst, CALLERS.prosecutor, policeSp]) {
-        const entries = await log(caller);
-        expect(entries, caller.identityId).to.deep.equal([{
-          redacted: true,
-          outcome: 'DENIED',
-          basis: 'AUDITOR_DECISION',
-          decision: 'FORCE_DENY',
-          llmRecommendation: 'DENY',
-          llmAgreement: 'AGREED',
-          generationStatus: 'OK',
-          action: 'view',
-          purpose: 'investigation',
-          requester: { organization: 'police' },
-          decidedAtUtc: entries[0].decidedAtUtc,
-        }]);
-        // No identity, record, case, request or transaction identifier survives.
-        expect(JSON.stringify(entries)).to.not.match(/insp\.test|sp\.test|FIR-1|CASE-1|REQ-|f{20}/);
-      }
     });
   });
 
@@ -217,8 +216,8 @@ describe('DIAS privacy controls (plan step 13)', () => {
       expect(reviewerView.auditorDecision.noteHash).to.match(/^[0-9a-f]{64}$/);
       const requesterView = await trail(CALLERS.inspector, request.requestId);
       expect(requesterView.auditorDecision).to.include({ decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED' });
-      // The auditor's note is never the requester's to read, and an unsalted digest
-      // would let a guessed note be confirmed.
+      // The auditor's note is never the requester's to read, and an unsalted digest would let a guessed
+      // note be confirmed.
       expect(JSON.stringify(requesterView)).to.not.include(reviewerView.auditorDecision.noteHash);
       expect(requesterView.auditorDecision).to.not.have.property('noteHash');
     });
@@ -233,9 +232,9 @@ describe('DIAS privacy controls (plan step 13)', () => {
       expect(committedEvent.data).to.include({ recommendation: 'DENY', generationStatus: 'OK' });
     });
 
-    // Security review, 2026-10-08: the requester rule comes before reviewer or
-    // auditor rights, or an officer holding both could read the recommendation of
-    // their own request early and re-request until it says ALLOW.
+    // Security review, 2026-10-08: the requester rule comes before reviewer or auditor rights, or an
+    // officer holding both could read the recommendation of their own request early and re-request until it
+    // says ALLOW.
     for (const [who, own] of [['a court reviewer', CALLERS.judge], ['an audit district head', CALLERS.auditor2]]) {
       it(`is withheld from ${who} for their own request until another auditor has decided`, async () => {
         const { result: mine } = await world.submit(own, { recordId: 'FIR-2' });

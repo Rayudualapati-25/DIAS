@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Ledger-growth probe: how long the list reads take as the ledger grows.
- *
- * QueryPendingAuditorRequests and QueryAccessDecisions both scan every request
- * or decision ever written before they filter or sort, so their time grows with
- * the ledger; GetRequest reads one key and should stay flat. One client, one
- * read at a time (no other load), ten samples each.
- *
- * Usage: node testbed/load/probe-reads.js --label after-e5 --out /results/probes
- */
+/** Ledger-growth probe: how long the list reads take as the ledger grows. */
 
 const fs = require('fs');
 const path = require('path');

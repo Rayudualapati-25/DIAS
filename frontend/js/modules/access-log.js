@@ -1,19 +1,6 @@
-/**
- * The access log.
- *
- * "Access requests" is the log itself. For every request on the ledger
- * it shows who requested which case file, what the LLM recommended, and what the
- * auditor decided — stated together with the recommendation it was taken
- * against, the access outcome and authorization check. It is reconstructed from ledger records;
- * it, and none of the LLM's text is shown.
- *
- * "Searches and reads" keeps the application access events: who searched, who
- * read a record, who received a case file. Those are submitted directly as
- * Fabric transactions; there is no external access-log database.
- */
+/** The access log. */
 
 import { api } from '../core/api.js';
-import { ALLOW } from '../core/access.js';
 import {
   card, grid, table, button, badge, mono, hint, callout, slot, replace,
   asyncRegion, attempt, el, tabs, iconButton, field, input, select,
@@ -21,7 +8,7 @@ import {
 import { dateTime, actor, count, timestamp } from '../core/format.js';
 import { actionLabel, outcomeKind } from '../shared/vocab.js';
 import {
-  NO_FILTERS, SORT, accessRequestRow, accessTargetSummary, activeFilterCount,
+  NO_FILTERS, SORT, accessLogTabIds, accessRequestRow, accessTargetSummary, activeFilterCount,
   filterAccessRows, sortAccessRows,
 } from '../shared/access-log.js';
 
@@ -225,15 +212,16 @@ export default {
   title: 'Access log',
   group: 'Audit',
   order: 30,
-  allow: ALLOW.REVIEWER,
+  allow: undefined,
   summary: 'Who requested what, what the LLM recommended, and what the auditor decided.',
 
-  mount() {
+  mount({ user }) {
+    const offered = accessLogTabIds(user);
     // The page heading above already names the screen, so the card starts at the tabs.
     return grid(card(null, null,
       tabs([
         { id: 'requests', label: 'Access requests', render: requestsPanel },
         { id: 'events', label: 'Searches and reads', render: eventsPanel },
-      ])));
+      ].filter((tab) => offered.includes(tab.id)))));
   },
 };

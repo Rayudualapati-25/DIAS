@@ -1,0 +1,454 @@
+{
+  "requestId": "REQ-3d53f119d2d59d3a",
+  "requesterUsername": "insp.sharma",
+  "requesterView": {
+    "requestId": "REQ-3d53f119d2d59d3a",
+    "status": "granted",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "outcomeId": "OUTCOME-9581d593680bc6e0"
+  },
+  "trail": {
+    "requestId": "REQ-3d53f119d2d59d3a",
+    "viewer": "reviewer",
+    "isRequester": false,
+    "summary": {
+      "requestId": "REQ-3d53f119d2d59d3a",
+      "requester": "insp.sharma",
+      "stableUserId": "PoliceMSP::insp.sharma",
+      "action": "annotate",
+      "purpose": "investigation",
+      "recordId": "REC-FIR-001",
+      "status": "granted",
+      "dynamicAuthorization": {
+        "outcome": "NO_AUTHORIZATION",
+        "authorizationId": null
+      },
+      "auditor": {
+        "username": "sp.north",
+        "role": "sp",
+        "decision": "FORCE_ALLOW",
+        "llmRecommendation": "ALLOW",
+        "llmAgreement": "AGREED",
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7"
+      },
+      "createdAuthorizationId": null,
+      "recommendation": {
+        "commitmentId": "KAPPA-6cf5281c9f163113",
+        "recommendation": "ALLOW",
+        "generationStatus": "OK",
+        "recommendationHash": "c46d78a3e91842d0fce136f7ece2c5f10efd8a02e3c67fee7b62c09d01b5ce4c",
+        "txId": "6cf5281c9f16311371a0246ec17d3e360b4cba14b2615fae3d5e043c979c23d6"
+      },
+      "outcome": {
+        "outcome": "GRANTED",
+        "basis": "AUDITOR_DECISION",
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7"
+      }
+    },
+    "request": {
+      "action": "annotate",
+      "auditorDecisionId": "AUDIT-9581d593680bc6e0",
+      "auditorReviewStatus": "FORCE_ALLOW",
+      "authorizationScope": {
+        "action": "annotate",
+        "caseId": "CASE-2026-001",
+        "purpose": "investigation",
+        "recordId": "REC-FIR-001",
+        "scopeVersion": "dias-authorization-scope-exact-record-v1",
+        "stableUserId": "PoliceMSP::insp.sharma"
+      },
+      "authorizationScopeHash": "09dca05f4b434d2667a2b29bb0833c42b34d1e31a86514d1e67a9107569b6d34",
+      "caseId": "CASE-2026-001",
+      "committedCertificateCredentialStatus": "active",
+      "createdAuthorizationId": null,
+      "docType": "diasAccessRequest",
+      "dynamicAuthorizationCheck": {
+        "authorizationId": null,
+        "checkedAtUtc": "2026-10-12T07:18:04.240Z",
+        "conditionsHash": "4ef607cd4968511b74545cb27727d903bf45853ebc0b31bd9b883c5bbdc19ce3",
+        "generation": null,
+        "matched": false,
+        "outcome": "NO_AUTHORIZATION",
+        "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+        "policyVersion": "dias-governance-policy-v1",
+        "scopeHash": "09dca05f4b434d2667a2b29bb0833c42b34d1e31a86514d1e67a9107569b6d34",
+        "stateVersion": null,
+        "status": null
+      },
+      "generationStatus": "OK",
+      "justificationHash": "955b7c58672c1bcdf02ff14f1364243443f2286d0ce96941bdb25a81ef1e3ce3",
+      "lifecycleSeq": 6,
+      "llmAgreement": "AGREED",
+      "llmRecommendation": "ALLOW",
+      "outcomeId": "OUTCOME-9581d593680bc6e0",
+      "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+      "policyVersion": "dias-governance-policy-v1",
+      "processingPath": "auditor-review",
+      "purpose": "investigation",
+      "recommendationCommitmentId": "KAPPA-6cf5281c9f163113",
+      "recordId": "REC-FIR-001",
+      "requestId": "REQ-3d53f119d2d59d3a",
+      "requester": {
+        "identityHash": "f27444f5e1edfe86af8dfb6b4ca4cbfe7ac9ddf1b19eee36e658b29e5dc0b16f",
+        "mspId": "PoliceMSP",
+        "organization": "police",
+        "role": "inspector",
+        "stableUserId": "PoliceMSP::insp.sharma",
+        "username": "insp.sharma"
+      },
+      "requesterClaims": {
+        "emergencyDeclared": false
+      },
+      "requesterClaimsHash": "5bd68d37861c3d1e987510d1b592bf4bc4c7f11d8a1e0fcc53167ba67d3751cf",
+      "requesterClaimsSchemaVersion": "dias-requester-claims-v1",
+      "reviewDeadlineUtc": "2026-10-15T07:18:04.240Z",
+      "schemaVersion": "dias-access-request-v3",
+      "status": "granted",
+      "submittedAtUtc": "2026-10-12T07:18:04.240Z",
+      "txId": "3d53f119d2d59d3a00242ebd89c31c1dc5e13179aeee03ac16638fa34546e27c",
+      "verifiedRequest": {
+        "request": {
+          "action": "annotate",
+          "purpose": "investigation"
+        },
+        "requester": {
+          "assignedToRequestedCase": true,
+          "clearance": "high",
+          "credentialStatus": "active",
+          "jurisdiction": "district-north",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "rank": "3",
+          "role": "inspector",
+          "station": "PS-Central"
+        },
+        "resource": {
+          "caseId": "CASE-2026-001",
+          "jurisdiction": "district-north",
+          "juvenileFlag": false,
+          "owningAgency": "police",
+          "owningStation": "PS-Central",
+          "recordType": "fir",
+          "sealed": false,
+          "sensitivityLevel": "medium",
+          "victimProtectionFlag": false,
+          "witnessFlag": false
+        }
+      },
+      "verifiedRequestHash": "4ef607cd4968511b74545cb27727d903bf45853ebc0b31bd9b883c5bbdc19ce3",
+      "verifiedRequestSchemaVersion": "dias-verified-context-v3"
+    },
+    "lifecycle": [
+      {
+        "actor": {
+          "identityHash": "f27444f5e1edfe86af8dfb6b4ca4cbfe7ac9ddf1b19eee36e658b29e5dc0b16f",
+          "mspId": "PoliceMSP",
+          "role": "inspector",
+          "username": "insp.sharma"
+        },
+        "data": {
+          "action": "annotate",
+          "caseId": "CASE-2026-001",
+          "justificationHash": "955b7c58672c1bcdf02ff14f1364243443f2286d0ce96941bdb25a81ef1e3ce3",
+          "mspId": "PoliceMSP",
+          "organization": "police",
+          "policyVersion": "dias-governance-policy-v1",
+          "purpose": "investigation",
+          "recordId": "REC-FIR-001",
+          "requestId": "REQ-3d53f119d2d59d3a",
+          "role": "inspector",
+          "schemaVersion": "dias-access-request-v3",
+          "stableUserId": "PoliceMSP::insp.sharma",
+          "submittedAtUtc": "2026-10-12T07:18:04.240Z",
+          "username": "insp.sharma"
+        },
+        "docType": "diasRequestEvent",
+        "eventType": "ACCESS_REQUEST_SUBMITTED",
+        "requestId": "REQ-3d53f119d2d59d3a",
+        "schemaVersion": "dias-lifecycle-event-v2",
+        "seq": 1,
+        "timestamp": "2026-10-12T07:18:04.240Z",
+        "txId": "3d53f119d2d59d3a00242ebd89c31c1dc5e13179aeee03ac16638fa34546e27c"
+      },
+      {
+        "actor": {
+          "identityHash": "f27444f5e1edfe86af8dfb6b4ca4cbfe7ac9ddf1b19eee36e658b29e5dc0b16f",
+          "mspId": "PoliceMSP",
+          "role": "inspector",
+          "username": "insp.sharma"
+        },
+        "data": {
+          "authorizationId": null,
+          "checkedAtUtc": "2026-10-12T07:18:04.240Z",
+          "conditionsHash": "4ef607cd4968511b74545cb27727d903bf45853ebc0b31bd9b883c5bbdc19ce3",
+          "generation": null,
+          "matched": false,
+          "outcome": "NO_AUTHORIZATION",
+          "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+          "policyVersion": "dias-governance-policy-v1",
+          "scopeHash": "09dca05f4b434d2667a2b29bb0833c42b34d1e31a86514d1e67a9107569b6d34",
+          "stateSource": "committed world state read in this transaction",
+          "stateVersion": null,
+          "status": null
+        },
+        "docType": "diasRequestEvent",
+        "eventType": "DYNAMIC_AUTHORIZATION_CHECKED",
+        "requestId": "REQ-3d53f119d2d59d3a",
+        "schemaVersion": "dias-lifecycle-event-v2",
+        "seq": 2,
+        "timestamp": "2026-10-12T07:18:04.240Z",
+        "txId": "3d53f119d2d59d3a00242ebd89c31c1dc5e13179aeee03ac16638fa34546e27c"
+      },
+      {
+        "actor": {
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "username": "sp.north"
+        },
+        "data": {
+          "commitmentId": "KAPPA-6cf5281c9f163113",
+          "generationStatus": "OK",
+          "modelVersion": "mlx-community/Qwen3-14B-4bit@a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "recommendation": "ALLOW",
+          "recommendationHash": "c46d78a3e91842d0fce136f7ece2c5f10efd8a02e3c67fee7b62c09d01b5ce4c",
+          "signerKeyId": "3f65dd432f0979226ce4b4005d090a8d96c7fb786bf2edfa86d3e9e0a62c9d0d"
+        },
+        "docType": "diasRequestEvent",
+        "eventType": "RECOMMENDATION_COMMITTED",
+        "requestId": "REQ-3d53f119d2d59d3a",
+        "schemaVersion": "dias-lifecycle-event-v2",
+        "seq": 3,
+        "timestamp": "2026-10-12T07:18:14.259Z",
+        "txId": "6cf5281c9f16311371a0246ec17d3e360b4cba14b2615fae3d5e043c979c23d6"
+      },
+      {
+        "actor": {
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "username": "sp.north"
+        },
+        "data": {
+          "auditorDecisionHash": "3e44e17344a09bffba4a40db7f2a5f78f066ccaa217865bb3de6cf8a018edce5",
+          "auditorDecisionId": "AUDIT-9581d593680bc6e0",
+          "auditorMsp": "AuditMSP",
+          "auditorRole": "sp",
+          "auditorStableUserId": "AuditMSP::sp.north",
+          "auditorUsername": "sp.north",
+          "decision": "FORCE_ALLOW",
+          "noteHash": "e3db270aa30fd7bb856ddea478cc4fad2c70a4a5bc484dcd363641cd7656e487",
+          "verifiedRequestHash": "4ef607cd4968511b74545cb27727d903bf45853ebc0b31bd9b883c5bbdc19ce3"
+        },
+        "docType": "diasRequestEvent",
+        "eventType": "AUDITOR_DECISION_RECORDED",
+        "requestId": "REQ-3d53f119d2d59d3a",
+        "schemaVersion": "dias-lifecycle-event-v2",
+        "seq": 4,
+        "timestamp": "2026-10-12T07:23:41.063Z",
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7"
+      },
+      {
+        "actor": {
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "username": "sp.north"
+        },
+        "data": {
+          "decision": "FORCE_ALLOW",
+          "generationStatus": "OK",
+          "llmAgreement": "AGREED",
+          "llmRecommendation": "ALLOW",
+          "recommendationCommitmentId": "KAPPA-6cf5281c9f163113"
+        },
+        "docType": "diasRequestEvent",
+        "eventType": "AGREEMENT_DERIVED",
+        "requestId": "REQ-3d53f119d2d59d3a",
+        "schemaVersion": "dias-lifecycle-event-v2",
+        "seq": 5,
+        "timestamp": "2026-10-12T07:23:41.063Z",
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7"
+      },
+      {
+        "actor": {
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "username": "sp.north"
+        },
+        "data": {
+          "action": "annotate",
+          "auditorDecisionId": "AUDIT-9581d593680bc6e0",
+          "authorizationId": null,
+          "basis": "AUDITOR_DECISION",
+          "createdAuthorizationId": null,
+          "llmRecommendation": "ALLOW",
+          "outcome": "GRANTED",
+          "outcomeId": "OUTCOME-9581d593680bc6e0",
+          "recordId": "REC-FIR-001",
+          "stableUserId": "PoliceMSP::insp.sharma"
+        },
+        "docType": "diasRequestEvent",
+        "eventType": "ACCESS_OUTCOME_RECORDED",
+        "requestId": "REQ-3d53f119d2d59d3a",
+        "schemaVersion": "dias-lifecycle-event-v2",
+        "seq": 6,
+        "timestamp": "2026-10-12T07:23:41.063Z",
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7"
+      }
+    ],
+    "transactions": [
+      {
+        "txId": "3d53f119d2d59d3a00242ebd89c31c1dc5e13179aeee03ac16638fa34546e27c",
+        "timestamp": "2026-10-12T07:18:04.240Z",
+        "actor": {
+          "identityHash": "f27444f5e1edfe86af8dfb6b4ca4cbfe7ac9ddf1b19eee36e658b29e5dc0b16f",
+          "mspId": "PoliceMSP",
+          "role": "inspector",
+          "username": "insp.sharma"
+        },
+        "stages": [
+          "ACCESS_REQUEST_SUBMITTED",
+          "DYNAMIC_AUTHORIZATION_CHECKED"
+        ]
+      },
+      {
+        "txId": "6cf5281c9f16311371a0246ec17d3e360b4cba14b2615fae3d5e043c979c23d6",
+        "timestamp": "2026-10-12T07:18:14.259Z",
+        "actor": {
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "username": "sp.north"
+        },
+        "stages": [
+          "RECOMMENDATION_COMMITTED"
+        ]
+      },
+      {
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7",
+        "timestamp": "2026-10-12T07:23:41.063Z",
+        "actor": {
+          "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+          "mspId": "AuditMSP",
+          "role": "sp",
+          "username": "sp.north"
+        },
+        "stages": [
+          "AUDITOR_DECISION_RECORDED",
+          "AGREEMENT_DERIVED",
+          "ACCESS_OUTCOME_RECORDED"
+        ]
+      }
+    ],
+    "recommendationCommitment": {
+      "claimsHash": "5bd68d37861c3d1e987510d1b592bf4bc4c7f11d8a1e0fcc53167ba67d3751cf",
+      "commitmentId": "KAPPA-6cf5281c9f163113",
+      "committedAtUtc": "2026-10-12T07:18:14.259Z",
+      "contextHash": "4ef607cd4968511b74545cb27727d903bf45853ebc0b31bd9b883c5bbdc19ce3",
+      "docType": "diasRecommendationCommitment",
+      "generationStatus": "OK",
+      "justificationHash": "955b7c58672c1bcdf02ff14f1364243443f2286d0ce96941bdb25a81ef1e3ce3",
+      "modelVersion": "mlx-community/Qwen3-14B-4bit@a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+      "policyVersion": "dias-governance-policy-v1",
+      "recommendation": "ALLOW",
+      "recommendationHash": "c46d78a3e91842d0fce136f7ece2c5f10efd8a02e3c67fee7b62c09d01b5ce4c",
+      "relayedBy": {
+        "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+        "mspId": "AuditMSP",
+        "role": "sp",
+        "username": "sp.north"
+      },
+      "requestId": "REQ-3d53f119d2d59d3a",
+      "schemaVersion": "dias-recommendation-commitment-v1",
+      "signature": "ER4TAzZ36V2pvK5S/FhVut2vtZTDUlH5vd5xC2BPe4c0azej+ibAm5krscIKoivUDh8N7S6Q0xI3PYjDeEmxDw==",
+      "signerKeyId": "3f65dd432f0979226ce4b4005d090a8d96c7fb786bf2edfa86d3e9e0a62c9d0d",
+      "txId": "6cf5281c9f16311371a0246ec17d3e360b4cba14b2615fae3d5e043c979c23d6"
+    },
+    "auditorDecision": {
+      "auditor": {
+        "identityHash": "ed57f5bfcfbfb509c497a0c061c05874cac569f442fbee3b7b9c897717e7a8d2",
+        "mspId": "AuditMSP",
+        "role": "sp",
+        "stableUserId": "AuditMSP::sp.north",
+        "username": "sp.north"
+      },
+      "auditorDecisionHash": "3e44e17344a09bffba4a40db7f2a5f78f066ccaa217865bb3de6cf8a018edce5",
+      "auditorDecisionId": "AUDIT-9581d593680bc6e0",
+      "authorizationCreated": false,
+      "createdAuthorizationId": null,
+      "decidedAtUtc": "2026-10-12T07:23:41.063Z",
+      "decision": "FORCE_ALLOW",
+      "docType": "diasAuditorDecision",
+      "generationStatus": "OK",
+      "llmAgreement": "AGREED",
+      "llmRecommendation": "ALLOW",
+      "noteHash": "e3db270aa30fd7bb856ddea478cc4fad2c70a4a5bc484dcd363641cd7656e487",
+      "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+      "policyVersion": "dias-governance-policy-v1",
+      "recommendationCommitmentId": "KAPPA-6cf5281c9f163113",
+      "recommendationHash": "c46d78a3e91842d0fce136f7ece2c5f10efd8a02e3c67fee7b62c09d01b5ce4c",
+      "recordId": "REC-FIR-001",
+      "requestId": "REQ-3d53f119d2d59d3a",
+      "schemaVersion": "dias-auditor-decision-v3",
+      "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7",
+      "verifiedRequestHash": "4ef607cd4968511b74545cb27727d903bf45853ebc0b31bd9b883c5bbdc19ce3"
+    },
+    "accessOutcome": {
+      "action": "annotate",
+      "auditorDecisionId": "AUDIT-9581d593680bc6e0",
+      "authorizationGeneration": null,
+      "authorizationId": null,
+      "basis": "AUDITOR_DECISION",
+      "caseId": "CASE-2026-001",
+      "createdAuthorizationId": null,
+      "docType": "diasAccessOutcome",
+      "llmRecommendation": "ALLOW",
+      "originatingAuditorDecisionId": null,
+      "originatingRequestId": null,
+      "outcome": "GRANTED",
+      "outcomeId": "OUTCOME-9581d593680bc6e0",
+      "policyHash": "9c66ce9ec8954dd0a976db933336aa05dd45acd683abf56f8a65472a4d298c81",
+      "policyVersion": "dias-governance-policy-v1",
+      "purpose": "investigation",
+      "recordId": "REC-FIR-001",
+      "recordedAtUtc": "2026-10-12T07:23:41.063Z",
+      "requestId": "REQ-3d53f119d2d59d3a",
+      "requester": {
+        "identityHash": "f27444f5e1edfe86af8dfb6b4ca4cbfe7ac9ddf1b19eee36e658b29e5dc0b16f",
+        "mspId": "PoliceMSP",
+        "organization": "police",
+        "role": "inspector",
+        "stableUserId": "PoliceMSP::insp.sharma",
+        "username": "insp.sharma"
+      },
+      "schemaVersion": "dias-access-outcome-v3",
+      "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7"
+    },
+    "dynamicAuthorizations": [],
+    "requestKeyHistory": [
+      {
+        "txId": "9581d593680bc6e0c6d41277cc817a106622a6c58cc4c4f66f64c3dcf7fddba7",
+        "timestamp": "2026-10-12T07:23:41.063Z",
+        "isDelete": false
+      },
+      {
+        "txId": "6cf5281c9f16311371a0246ec17d3e360b4cba14b2615fae3d5e043c979c23d6",
+        "timestamp": "2026-10-12T07:18:14.259Z",
+        "isDelete": false
+      },
+      {
+        "txId": "3d53f119d2d59d3a00242ebd89c31c1dc5e13179aeee03ac16638fa34546e27c",
+        "timestamp": "2026-10-12T07:18:04.240Z",
+        "isDelete": false
+      }
+    ],
+    "provenanceSource": "Hyperledger Fabric world state and key history",
+    "generatedAtUtc": "2026-10-12T07:24:49.735Z"
+  },
+  "stillPending": false
+}

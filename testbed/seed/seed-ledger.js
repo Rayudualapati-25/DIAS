@@ -2,16 +2,8 @@
 'use strict';
 
 /**
- * Seed the testbed ledger through the DIAS chaincode, with the same contract
- * calls and identities the single-host seed scripts use:
- *  1. user accounts (genesis bootstrap by the Audit admin, then district heads
- *     admit everyone else), including the 100 load-test users;
- *  2. the five departments;
- *  3. the cases, with every clone of an assigned profile on the case;
- *  4. the case files, each with an off-chain payload commitment.
- * Idempotent: anything already on the ledger is skipped.
- *
- * Runs inside the dias-backend:testbed image on the diasnet overlay network.
+ * Seed the testbed ledger through the DIAS chaincode, with the same contract calls and identities the
+ * single-host seed scripts use.
  */
 
 const path = require('path');
@@ -148,8 +140,8 @@ async function seedRecords() {
 }
 
 async function main() {
-  // Load the existing operator-managed key before mutating the ledger. Never
-  // replace it here: existing commitments must remain verifiable.
+  // Load the existing operator-managed key before mutating the ledger. Never replace it here: existing
+  // commitments must remain verifiable.
   const signer = createRecommendationSigner({ privateKeyPem:
     fs.readFileSync(config.DIAS_RECOMMENDER_SIGNING_KEY_FILE, 'utf8') });
   await seedUsers();

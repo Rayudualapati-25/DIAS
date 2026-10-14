@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Canonical DIAS governance policy bundle: loading, validation, hashing, and
- * clause references. Shared by the recommendation runtime, dataset tooling, and
- * evaluation. This module contains no access-decision logic.
+ * Canonical DIAS governance policy bundle: loading, validation, hashing, and clause references. Shared by
+ * the recommendation runtime, dataset tooling, and evaluation.
  */
 
 const crypto = require('crypto');

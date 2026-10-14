@@ -1,27 +1,6 @@
 'use strict';
 
-/**
- * AccessContract — the DIAS access-request workflow (contract v2).
- *
- * 1. CreateAccessRequest (requester) commits who asked for which record, with the
- *    action and purpose, and in the same transaction checks the exact dynamic
- *    authorization for it. A match grants access without auditor review; a miss
- *    waits for the auditor.
- * 2. SubmitAuditorDecision (AuditMSP district head) commits FORCE_ALLOW or
- *    FORCE_DENY together with the LLM recommendation the auditor was shown:
- *    ALLOW, DENY, or UNAVAILABLE when the backend had no recommendation to show.
- *    The LLM runs in the application backend, but its recommendation is
- *    committed here, so the ledger records what was recommended as well as what
- *    was decided. Agreement is derived from the two, never supplied. A
- *    FORCE_ALLOW over an LLM DENY creates an exact-record dynamic authorization.
- *    The access outcome is recorded last.
- *
- *    Only the recommendation value is committed. Its free-text reason, its
- *    reason code and its model provenance stay off the ledger.
- *
- * Every stage is an ordered lifecycle event under the request ID. This contract
- * never evaluates governance policy.
- */
+/** AccessContract — the DIAS access-request workflow (contract v2). */
 
 const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
@@ -32,7 +11,9 @@ const { putJson } = require('./util/state');
 const { requireActiveDistrictHead } = require('./dias/auditorAuthority');
 const { ACTIONS, PURPOSES, DISTRICT_HEAD_ROLES } = require('./policy/policyV1');
 const KEYS = require('./dias/keys');
-const { isReviewer, redactDecisionLogEntry, withheldCommitment } = require('./dias/visibility');
+const {
+  authorizationCheckResult, isActiveOfficer, isReviewer, withheldCommitment, withoutTransactionIds,
+} = require('./dias/visibility');
 const {
   EVENT, actorFrom, appendAuthorizationEvents, appendRequestEvents, emitLifecycle,
   readAuthorizationEvents,
@@ -86,11 +67,11 @@ const LLM_AGREEMENT = Object.freeze({
   NOT_AGREED: 'NOT_AGREED',
   NO_RECOMMENDATION: 'NO_RECOMMENDATION',
 });
-/** Agreements whose decision must carry the auditor note digest h_N (design §7). */
+/** Agreements whose decision must carry the auditor note digest h_N. */
 const NOTE_REQUIRED = Object.freeze([LLM_AGREEMENT.NOT_AGREED, LLM_AGREEMENT.NO_RECOMMENDATION]);
 /**
- * The recommendation value a decision is compared with, read from κ. UNAVAILABLE
- * covers a failed or missing generation; the specific status is kept beside it.
+ * The recommendation value a decision is compared with, read from κ. UNAVAILABLE covers a failed or missing
+ * generation; the specific status is kept beside it.
  */
 const LLM_RECOMMENDATION = Object.freeze({
   ALLOW: 'ALLOW',
@@ -107,11 +88,8 @@ const ORG_TO_MSP = Object.freeze({
 });
 
 /**
- * The requester's input. `action` and `purpose` are what is being asked for and
- * enter the verified context; `emergencyDeclared` is the requester's own
- * statement and is recorded as a claim, outside it (plan step 5).
- * `justificationHash` is h_J: the justification text stays off-chain and only
- * its digest is committed (plan step 9, design §4).
+ * The requester's input. `action` and `purpose` are what is being asked for and enter the verified context;
+ * `emergencyDeclared` is the requester's own statement and is recorded as a claim, outside it.
  */
 const REQUEST_INPUT_SCHEMA = Object.freeze({
   action: { type: 'string', required: true, enum: [...ACTIONS] },
@@ -124,9 +102,8 @@ const shortTxId = (ctx) => ctx.stub.getTxID().slice(0, 16);
 const token = (value) => String(value || '').trim().toUpperCase().replace(/[-\s]+/g, '_');
 
 /**
- * Agreement is derived here from the committed recommendation and the auditor
- * decision, so the ledger can never hold an agreement value that contradicts the
- * recommendation recorded beside it.
+ * Agreement is derived here from the committed recommendation and the auditor decision, so the ledger can
+ * never hold an agreement value that contradicts the recommendation recorded beside it.
  */
 function agreementFor(decision, llmRecommendation) {
   if (llmRecommendation === LLM_RECOMMENDATION.UNAVAILABLE) {
@@ -402,11 +379,7 @@ class AccessContract extends Contract {
     };
   }
 
-  /**
-   * Step 1 — the requester submits a request. The request log records who asked
-   * for which record, with the action and purpose, and the exact dynamic
-   * authorization is checked against committed state in the same transaction.
-   */
+  /** Step 1 — the requester submits a request. */
   async CreateAccessRequest(ctx, recordId, requestJson) {
     if (!SAFE_ID.test(recordId || '')) throw new Error('recordId has invalid format');
     const caller = getCaller(ctx);
@@ -687,13 +660,7 @@ class AccessContract extends Contract {
     };
   }
 
-  /**
-   * Step 2 (pre-review) — commit the recommendation κ before any auditor review
-   * (design §6). Any member identity may relay it: its authority comes from the
-   * recommendation service's signature, which binds it to this request, its
-   * committed hashes, its policy and this channel. One commitment per request; an
-   * identical resubmission is a safe retry that writes nothing.
-   */
+  /** Step 2 (pre-review) — commit the recommendation κ before any auditor review. */
   async CommitRecommendation(ctx, requestId, commitmentJson) {
     const caller = getCaller(ctx);
     if (caller.role === null) throw new Error('unauthorized: caller identity has no role attribute');
@@ -765,10 +732,8 @@ class AccessContract extends Contract {
   }
 
   /**
-   * Step 3 — an AuditMSP district head commits the binding decision. The
-   * recommendation it is compared with is read from κ, never supplied by the
-   * caller, and the contract derives the agreement (paper Eq. 3). `noteHash` is
-   * h_N, the digest of the auditor's off-chain note.
+   * Step 3 — an AuditMSP district head commits the binding decision. The recommendation it is compared with
+   * is read from κ, never supplied by the caller, and the contract derives the agreement (paper Eq.
    */
   async SubmitAuditorDecision(ctx, requestId, decisionText, noteHash, validUntilUtc) {
     const caller = this._requireAuditor(ctx, 'SubmitAuditorDecision');
@@ -795,8 +760,8 @@ class AccessContract extends Contract {
     const committed = recommendationOf(await this._read(ctx, this._key(ctx, COMMITMENT_KEY, requestId)));
     const { llmRecommendation, generationStatus, recommendationCommitmentId, recommendationHash } = committed;
     const llmAgreement = agreementFor(decision, llmRecommendation);
-    // h_N: a decision that departs from the committed recommendation, or has none
-    // to follow, must commit to the auditor's off-chain note (design §7).
+    // h_N: a decision that departs from the committed recommendation, or has none to follow, must commit to
+    // the auditor's off-chain note.
     if (NOTE_REQUIRED.includes(llmAgreement) && note === null) {
       throw new Error(`DIAS_NOTE_REQUIRED: a decision recorded as ${llmAgreement} must carry the digest `
         + 'of the auditor note (noteHash)');
@@ -910,8 +875,8 @@ class AccessContract extends Contract {
   }
 
   /**
-   * Close a pending request without an auditor decision: its outcome, the
-   * access-decision index entry and the lifecycle events are written together.
+   * Close a pending request without an auditor decision: its outcome, the access-decision index entry and
+   * the lifecycle events are written together.
    */
   async _closePending(ctx, request, { caller, outcome, basis, eventType, eventData, status, reviewStatus }) {
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
@@ -939,11 +904,7 @@ class AccessContract extends Contract {
     return JSON.stringify({ request: stored, accessOutcome: written.record });
   }
 
-  /**
-   * Record that a pending request passed its review deadline (design §8). Any
-   * member identity may submit it — the backend's sweeper does — because the
-   * contract decides from committed state whether the request is due.
-   */
+  /** Record that a pending request passed its review deadline. */
   async ExpirePendingRequest(ctx, requestId) {
     const caller = getCaller(ctx);
     if (caller.role === null) throw new Error('unauthorized: caller identity has no role attribute');
@@ -951,8 +912,8 @@ class AccessContract extends Contract {
     this._requireStatus(request, REQUEST_STATUS.AWAITING_AUDITOR);
     const timestamp = ctx.stub.getDateTimestamp().toISOString();
     const deadlinePassed = Boolean(request.reviewDeadlineUtc) && timestamp >= request.reviewDeadlineUtc;
-    // A request made under a policy that is no longer active can never be
-    // decided (design §5), so it may be closed at once.
+    // A request made under a policy that is no longer active can never be decided, so it may be closed at
+    // once.
     const active = await readActivePolicy(ctx);
     const policyChanged = Boolean(active) && !isBoundTo(request, active);
     if (!deadlinePassed && !policyChanged) {
@@ -1050,6 +1011,15 @@ class AccessContract extends Contract {
     return JSON.stringify(request);
   }
 
+  /** The caller of an access-log read: an enrolled officer with an active credential. */
+  _requireLogReader(ctx, action) {
+    const caller = getCaller(ctx);
+    if (!isActiveOfficer(caller)) {
+      throw new Error(`unauthorized: ${action} requires an enrolled role with an active credential`);
+    }
+    return caller;
+  }
+
   /** Bounded result, deterministic order; the scan remains a prototype scan. */
   async _recentRequests(ctx, limitText, identityHash = null) {
     const limit = Number(limitText || 100);
@@ -1078,27 +1048,32 @@ class AccessContract extends Contract {
     return JSON.stringify(await this._recentRequests(ctx, limitText, sha256(caller.id)));
   }
 
-  /** All workflow stages, including pending requests, reconstructed from Fabric. */
+  /**
+   * All workflow stages, including pending requests, reconstructed from Fabric. Every enrolled officer
+   * reads who requested which record and what was decided.
+   */
   async QueryAccessWorkflowLog(ctx, limitText) {
-    const caller = getCaller(ctx);
-    if (!isReviewer(caller)) throw new Error('unauthorized: QueryAccessWorkflowLog requires a reviewer');
+    const caller = this._requireLogReader(ctx, 'QueryAccessWorkflowLog');
     const callerHash = sha256(caller.id);
+    const reviewer = isReviewer(caller);
     const entries = [];
     for (const request of await this._recentRequests(ctx, limitText)) {
       const id = request.requestId;
       const commitment = await this._read(ctx, this._key(ctx, COMMITMENT_KEY, id));
       const decision = await this._read(ctx, this._key(ctx, KEYS.AUDITOR_DECISION, id));
       const outcome = await this._read(ctx, this._key(ctx, KEYS.OUTCOME, id));
-      // A reviewer cannot use this log to inspect their own pending advice.
-      const withheld = Boolean(commitment && !decision && request.requester.identityHash === callerHash);
-      entries.push({
+      // Pending advice is shown to a reviewer, except on that reviewer's own request.
+      const withheld = Boolean(commitment && !decision
+        && (!reviewer || request.requester.identityHash === callerHash));
+      const entry = {
         requestId: id, recordId: request.recordId, caseId: request.caseId,
         action: request.action, purpose: request.purpose, status: request.status,
         requester: { username: request.requester.username, organization: request.requester.organization,
           role: request.requester.role },
         submittedAtUtc: request.submittedAtUtc, requestTxId: request.txId,
         processingPath: request.processingPath,
-        dynamicAuthorizationCheck: request.dynamicAuthorizationCheck,
+        dynamicAuthorizationCheck: reviewer ? request.dynamicAuthorizationCheck
+          : authorizationCheckResult(request.dynamicAuthorizationCheck),
         outcome: outcome ? outcome.outcome : null, basis: outcome ? outcome.basis : null,
         auditor: decision ? { username: decision.auditor.username, role: decision.auditor.role } : null,
         decision: decision ? decision.decision : null,
@@ -1113,14 +1088,15 @@ class AccessContract extends Contract {
         createdAuthorizationId: outcome ? outcome.createdAuthorizationId : null,
         decidedAtUtc: outcome ? outcome.recordedAtUtc : null,
         outcomeTxId: outcome ? outcome.txId : null, decisionTxId: decision ? decision.txId : null,
-      });
+      };
+      entries.push(reviewer ? entry : withoutTransactionIds(entry));
     }
     return JSON.stringify(entries);
   }
 
   /**
-   * κ for one request, or null; readable by its requester and district heads. A
-   * requester sees what κ says only once an auditor has decided (design §10).
+   * κ for one request, or null; readable by its requester and district heads. A requester sees what κ says
+   * only once an auditor has decided.
    */
   async GetRecommendationCommitment(ctx, requestId) {
     const caller = getCaller(ctx);
@@ -1138,16 +1114,14 @@ class AccessContract extends Contract {
 
   /** The committed request and its recommendation commitment κ (null before one exists). */
   /**
-   * What an auditor reviews: the request, its pre-review commitment κ and, once
-   * decided, the decision with its note digest h_N. The backend reads the
-   * decision back after an uncertain submission to settle its staged note
-   * (design §11).
+   * What an auditor reviews: the request, its pre-review commitment κ and, once decided, the decision with
+   * its note digest h_N.
    */
   async GetAuditorReview(ctx, requestId) {
     const caller = this._requireAuditor(ctx, 'GetAuditorReview');
     const request = await this._getRequest(ctx, requestId);
-    // A district head who made the request is its requester, not its auditor: the
-    // review carries the recommendation and the note digest (design §10).
+    // A district head who made the request is its requester, not its auditor: the review carries the
+    // recommendation and the note digest.
     if (request.requester.identityHash === sha256(caller.id)) {
       throw new Error('unauthorized: a district head cannot review their own request; '
         + 'another district head decides it');
@@ -1227,21 +1201,12 @@ class AccessContract extends Contract {
   }
 
   /**
-   * The decision log: for every settled request, who asked for which record, what
-   * was decided — by an auditor, or automatically by a dynamic authorization —
-   * and the LLM recommendation that decision was taken against, which is
-   * UNAVAILABLE when the backend had none to show. A reviewer reads it in full.
-   * Every other identity on the channel reads it redacted (design §10): what was
-   * decided and against which recommendation stays checkable by all, without who
-   * asked, for which record, or who decided. It carries no identity hash, no
-   * justification, and none of the LLM's reasoning or model provenance.
-   *
-   * The scan reads every outcome and returns the newest `limit`, which is
-   * adequate for a research prototype, not for a production log.
+   * The decision log: for every settled request, who asked for which record, what was decided — by an
+   * auditor, or automatically by a dynamic authorization — and the LLM recommendation that decision was
+   * taken against, which is UNAVAILABLE when the backend had none to show.
    */
   async QueryAccessDecisions(ctx, limitText) {
-    const caller = getCaller(ctx);
-    if (caller.role === null) throw new Error('unauthorized: caller identity has no role attribute');
+    const reviewer = isReviewer(this._requireLogReader(ctx, 'QueryAccessDecisions'));
     const limit = Number(limitText || 50);
     if (!Number.isInteger(limit) || limit < 1 || limit > 500) {
       throw new Error('limit must be an integer from 1 to 500');
@@ -1254,15 +1219,15 @@ class AccessContract extends Contract {
       result = await iterator.next();
     }
     await iterator.close();
-    // Newest first; the request id breaks ties so the order never depends on how
-    // the state database happened to return the keys.
+    // Newest first; the request id breaks ties so the order never depends on how the state database
+    // happened to return the keys.
     outcomes.sort((left, right) => String(right.recordedAtUtc).localeCompare(String(left.recordedAtUtc))
       || String(right.requestId).localeCompare(String(left.requestId)));
 
     const entries = [];
     for (const outcome of outcomes.slice(0, limit)) {
       const decision = await this._read(ctx, this._key(ctx, KEYS.AUDITOR_DECISION, outcome.requestId));
-      entries.push({
+      const entry = {
         requestId: outcome.requestId,
         recordId: outcome.recordId,
         caseId: outcome.caseId,
@@ -1285,9 +1250,10 @@ class AccessContract extends Contract {
         decidedAtUtc: outcome.recordedAtUtc,
         outcomeTxId: outcome.txId,
         decisionTxId: decision ? decision.txId : null,
-      });
+      };
+      entries.push(reviewer ? entry : withoutTransactionIds(entry));
     }
-    return JSON.stringify(isReviewer(caller) ? entries : entries.map(redactDecisionLogEntry));
+    return JSON.stringify(entries);
   }
 
   async GetDecision(ctx, recordId, decisionId) {

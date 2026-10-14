@@ -1,9 +1,4 @@
-"""Generate EXPERIMENTAL_SETUP.md and FIGURE_TABLE_MAP.md from the result files.
-
-The setup document is generated rather than written by hand so that it always
-describes the configuration that actually produced the numbers. If a run is
-repeated under a different configuration, this file changes with it.
-"""
+"""Generate EXPERIMENTAL_SETUP.md and FIGURE_TABLE_MAP.md from the result files."""
 
 import json
 import pathlib
@@ -15,8 +10,8 @@ from style import RESULTS, FIGURES, TABLES, load
 
 PAPER = RESULTS / "paper"
 
-# What each artefact is evidence for. The wording here is the claim the artefact
-# can support, deliberately no stronger.
+# What each artefact is evidence for. The wording here is the claim the artefact can support,
+# deliberately no stronger.
 ARTEFACTS = [
     ("fig01_model_effectiveness", "01-model-context.json",
      "Joint, decision and reason-code accuracy for the three retained arms on the "
@@ -166,8 +161,6 @@ def setup_document():
         lines += [f"- {gap}" for gap in exp01["summary"]["gaps"]] + [""]
 
     # Experiments were run at different harness commits as the harness was fixed.
-    # The implementation under measurement is the same in every row; only the
-    # measurement code differs, so both are recorded per experiment.
     prov_rows = []
     for name, doc in present:
         m = doc["metadata"]

@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * DIAS completion checklist, computed rather than asserted.
- *
- * Every item is decided by inspecting an artifact on disk: a passing test run, a
- * metrics file, a hash, a committed transaction record. Nothing here is a claim
- * a person typed in. An item with no evidence is NOT READY — not "probably
- * fine" — because a checklist that can only say yes is decoration.
- *
- *   node scripts/dias/readiness.js [--json <file>]
- */
+/** DIAS completion checklist, computed rather than asserted. */
 
 const fs = require('fs');
 const path = require('path');
@@ -19,8 +10,8 @@ const { execSync } = require('child_process');
 
 const REPO = path.resolve(__dirname, '..', '..');
 const V6_SHA = '5f5fba8e9e19b2c4b1a2dcd1968100a2e875dde8addd0f89ff0c9385fcd601fe';
-// The V6 adapter lives in the sibling crime-records-network checkout; its bytes are
-// never in this repository. Override the location with DIAS_V6_ADAPTER_PATH.
+// The V6 adapter lives in the sibling crime-records-network checkout; its bytes are never in this
+// repository. Override the location with DIAS_V6_ADAPTER_PATH.
 const V6_ADAPTER = process.env.DIAS_V6_ADAPTER_PATH || path.resolve(REPO, '..', 'crime-records-network',
   'LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best/adapters.safetensors');
 

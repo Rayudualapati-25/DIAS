@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-#
-# Run the remaining testbed experiments back to back, after E6 has finished:
-#   replay of the E5 recommendation errors (determinism check), probe after E6,
-#   E7 fault test, probe after E7, E4 model alone, E3 ledger alone, probe after E3.
-# The chain stops at the first failed step and runs nothing after it, so no test
-# runs on a degraded network or is mixed with a failed one.
-# Everything is logged to ~/dias-testbed/logs/remaining.log.
+# Run the remaining testbed experiments back to back, after E6 has finished: replay of the E5 recommendation errors (determinism check), probe after E6, E7 fault test, probe after E7, E4 model alone, E3 ledger alone, probe after E3. The chain stops at the first failed step and runs nothing after it, so no test runs on a degraded network or is mixed with a failed one.
 set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

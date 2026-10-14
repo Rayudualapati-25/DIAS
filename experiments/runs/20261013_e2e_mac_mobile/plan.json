@@ -1,0 +1,549 @@
+{
+ "schema": "dias-e2e-plan-v1",
+ "seed": 20261013,
+ "perConfig": 30,
+ "auditor": "sp.north",
+ "items": [
+  {
+   "id": "E2E-MAC-01",
+   "config": "mac",
+   "username": "const.verma",
+   "recordId": "REC-JUVENILE-001",
+   "action": "export",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MAC-01."
+  },
+  {
+   "id": "E2E-MAC-02",
+   "config": "mac",
+   "username": "analyst.rao",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MAC-02."
+  },
+  {
+   "id": "E2E-MAC-03",
+   "config": "mac",
+   "username": "io.krishnan",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MAC-03."
+  },
+  {
+   "id": "E2E-MAC-04",
+   "config": "mac",
+   "username": "analyst.rao",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MAC-04."
+  },
+  {
+   "id": "E2E-MAC-05",
+   "config": "mac",
+   "username": "dir.iyer",
+   "recordId": "REC-JUVENILE-001",
+   "action": "annotate",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MAC-05."
+  },
+  {
+   "id": "E2E-MAC-06",
+   "config": "mac",
+   "username": "sho.reddy",
+   "recordId": "REC-JUVENILE-001",
+   "action": "annotate",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MAC-06."
+  },
+  {
+   "id": "E2E-MAC-07",
+   "config": "mac",
+   "username": "insp.rathore",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MAC-07."
+  },
+  {
+   "id": "E2E-MAC-08",
+   "config": "mac",
+   "username": "dc.nair",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MAC-08."
+  },
+  {
+   "id": "E2E-MAC-09",
+   "config": "mac",
+   "username": "judge.rana",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MAC-09."
+  },
+  {
+   "id": "E2E-MAC-10",
+   "config": "mac",
+   "username": "insp.singh",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MAC-10."
+  },
+  {
+   "id": "E2E-MAC-11",
+   "config": "mac",
+   "username": "insp.singh",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MAC-11."
+  },
+  {
+   "id": "E2E-MAC-12",
+   "config": "mac",
+   "username": "clerk.das",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MAC-12."
+  },
+  {
+   "id": "E2E-MAC-13",
+   "config": "mac",
+   "username": "dir.iyer",
+   "recordId": "REC-FIR-001",
+   "action": "view",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MAC-13."
+  },
+  {
+   "id": "E2E-MAC-14",
+   "config": "mac",
+   "username": "const.verma",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MAC-14."
+  },
+  {
+   "id": "E2E-MAC-15",
+   "config": "mac",
+   "username": "sho.reddy",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MAC-15."
+  },
+  {
+   "id": "E2E-MAC-16",
+   "config": "mac",
+   "username": "insp.singh",
+   "recordId": "REC-JUVENILE-001",
+   "action": "annotate",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MAC-16."
+  },
+  {
+   "id": "E2E-MAC-17",
+   "config": "mac",
+   "username": "io.krishnan",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MAC-17."
+  },
+  {
+   "id": "E2E-MAC-18",
+   "config": "mac",
+   "username": "insp.rathore",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MAC-18."
+  },
+  {
+   "id": "E2E-MAC-19",
+   "config": "mac",
+   "username": "io.krishnan",
+   "recordId": "REC-FIR-001",
+   "action": "view",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MAC-19."
+  },
+  {
+   "id": "E2E-MAC-20",
+   "config": "mac",
+   "username": "insp.sharma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MAC-20."
+  },
+  {
+   "id": "E2E-MAC-21",
+   "config": "mac",
+   "username": "pp.mehta",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MAC-21."
+  },
+  {
+   "id": "E2E-MAC-22",
+   "config": "mac",
+   "username": "clerk.das",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MAC-22."
+  },
+  {
+   "id": "E2E-MAC-23",
+   "config": "mac",
+   "username": "const.verma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MAC-23."
+  },
+  {
+   "id": "E2E-MAC-24",
+   "config": "mac",
+   "username": "sho.reddy",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MAC-24."
+  },
+  {
+   "id": "E2E-MAC-25",
+   "config": "mac",
+   "username": "pp.mehta",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MAC-25."
+  },
+  {
+   "id": "E2E-MAC-26",
+   "config": "mac",
+   "username": "insp.rathore",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MAC-26."
+  },
+  {
+   "id": "E2E-MAC-27",
+   "config": "mac",
+   "username": "dc.nair",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MAC-27."
+  },
+  {
+   "id": "E2E-MAC-28",
+   "config": "mac",
+   "username": "insp.sharma",
+   "recordId": "REC-JUVENILE-001",
+   "action": "export",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MAC-28."
+  },
+  {
+   "id": "E2E-MAC-29",
+   "config": "mac",
+   "username": "judge.rana",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MAC-29."
+  },
+  {
+   "id": "E2E-MAC-30",
+   "config": "mac",
+   "username": "insp.sharma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MAC-30."
+  },
+  {
+   "id": "E2E-MOB-01",
+   "config": "mobile",
+   "username": "pp.mehta",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MOB-01."
+  },
+  {
+   "id": "E2E-MOB-02",
+   "config": "mobile",
+   "username": "analyst.rao",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MOB-02."
+  },
+  {
+   "id": "E2E-MOB-03",
+   "config": "mobile",
+   "username": "io.krishnan",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MOB-03."
+  },
+  {
+   "id": "E2E-MOB-04",
+   "config": "mobile",
+   "username": "sho.reddy",
+   "recordId": "REC-FIR-001",
+   "action": "view",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MOB-04."
+  },
+  {
+   "id": "E2E-MOB-05",
+   "config": "mobile",
+   "username": "sho.reddy",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MOB-05."
+  },
+  {
+   "id": "E2E-MOB-06",
+   "config": "mobile",
+   "username": "io.krishnan",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MOB-06."
+  },
+  {
+   "id": "E2E-MOB-07",
+   "config": "mobile",
+   "username": "insp.sharma",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MOB-07."
+  },
+  {
+   "id": "E2E-MOB-08",
+   "config": "mobile",
+   "username": "pp.mehta",
+   "recordId": "REC-JUVENILE-001",
+   "action": "annotate",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MOB-08."
+  },
+  {
+   "id": "E2E-MOB-09",
+   "config": "mobile",
+   "username": "insp.rathore",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MOB-09."
+  },
+  {
+   "id": "E2E-MOB-10",
+   "config": "mobile",
+   "username": "dc.nair",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MOB-10."
+  },
+  {
+   "id": "E2E-MOB-11",
+   "config": "mobile",
+   "username": "insp.rathore",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MOB-11."
+  },
+  {
+   "id": "E2E-MOB-12",
+   "config": "mobile",
+   "username": "insp.singh",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MOB-12."
+  },
+  {
+   "id": "E2E-MOB-13",
+   "config": "mobile",
+   "username": "insp.singh",
+   "recordId": "REC-JUVENILE-001",
+   "action": "export",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MOB-13."
+  },
+  {
+   "id": "E2E-MOB-14",
+   "config": "mobile",
+   "username": "const.verma",
+   "recordId": "REC-JUVENILE-001",
+   "action": "export",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MOB-14."
+  },
+  {
+   "id": "E2E-MOB-15",
+   "config": "mobile",
+   "username": "insp.singh",
+   "recordId": "REC-FIR-001",
+   "action": "view",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MOB-15."
+  },
+  {
+   "id": "E2E-MOB-16",
+   "config": "mobile",
+   "username": "dir.iyer",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MOB-16."
+  },
+  {
+   "id": "E2E-MOB-17",
+   "config": "mobile",
+   "username": "clerk.das",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "annotate",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MOB-17."
+  },
+  {
+   "id": "E2E-MOB-18",
+   "config": "mobile",
+   "username": "dc.nair",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MOB-18."
+  },
+  {
+   "id": "E2E-MOB-19",
+   "config": "mobile",
+   "username": "insp.sharma",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MOB-19."
+  },
+  {
+   "id": "E2E-MOB-20",
+   "config": "mobile",
+   "username": "const.verma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MOB-20."
+  },
+  {
+   "id": "E2E-MOB-21",
+   "config": "mobile",
+   "username": "clerk.das",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MOB-21."
+  },
+  {
+   "id": "E2E-MOB-22",
+   "config": "mobile",
+   "username": "insp.sharma",
+   "recordId": "REC-JUVENILE-001",
+   "action": "view",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MOB-22."
+  },
+  {
+   "id": "E2E-MOB-23",
+   "config": "mobile",
+   "username": "judge.rana",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MOB-23."
+  },
+  {
+   "id": "E2E-MOB-24",
+   "config": "mobile",
+   "username": "dir.iyer",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MOB-24."
+  },
+  {
+   "id": "E2E-MOB-25",
+   "config": "mobile",
+   "username": "insp.rathore",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "defense-preparation",
+   "justification": "Needed to prepare the defence in this case. Synthetic end-to-end experiment request E2E-MOB-25."
+  },
+  {
+   "id": "E2E-MOB-26",
+   "config": "mobile",
+   "username": "analyst.rao",
+   "recordId": "REC-FIR-001",
+   "action": "annotate",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2E-MOB-26."
+  },
+  {
+   "id": "E2E-MOB-27",
+   "config": "mobile",
+   "username": "const.verma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2E-MOB-27."
+  },
+  {
+   "id": "E2E-MOB-28",
+   "config": "mobile",
+   "username": "io.krishnan",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MOB-28."
+  },
+  {
+   "id": "E2E-MOB-29",
+   "config": "mobile",
+   "username": "sho.reddy",
+   "recordId": "REC-JUVENILE-001",
+   "action": "export",
+   "purpose": "judicial-proceeding",
+   "justification": "Needed for a judicial proceeding in this case. Synthetic end-to-end experiment request E2E-MOB-29."
+  },
+  {
+   "id": "E2E-MOB-30",
+   "config": "mobile",
+   "username": "judge.rana",
+   "recordId": "REC-JUVENILE-001",
+   "action": "annotate",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MOB-30."
+  }
+ ],
+ "sha256": "c299f4ad536dfceebb64146bea13769707f955b108b1fe748ad7fea94416483e"
+}

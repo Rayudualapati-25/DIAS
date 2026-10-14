@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-// Live engineering smoke check for the current v3 API. Uses synthetic demo
-// data and actual Fabric/LLM calls. Tokens remain in memory. This is not the
-// legacy acceptance suite, a model benchmark, or mobile synchronization.
+// Live engineering smoke check for the current v3 API. Uses synthetic demo data and actual Fabric/LLM
+// calls.
 const fs = require('fs');
 const path = require('path');
 const { createClient, sleep } = require('../scripts/dias/acceptance-client');

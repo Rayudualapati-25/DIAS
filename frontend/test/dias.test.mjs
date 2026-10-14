@@ -368,10 +368,9 @@ test('lists each off-chain object with its check against the ledger digest', () 
   assert.match(offChainVerificationRows({ note: { status: 'not-committed' } })[0].label, /no digest/);
 });
 
-// ---------------------------------------------------------------------------
-// Step 13: what the officer who made a request is shown about its decision, and
-// the decision log for a caller who only receives the reduced entries.
-// ---------------------------------------------------------------------------
+// --------------------------------------------------------------------------- Step 13: what the officer who
+// made a request is shown about its decision, and the decision log for a caller who only receives the
+// reduced entries. ---------------------------------------------------------------------------
 
 const { requesterDecisionView, decisionLogRow } = await import('../js/shared/dias.js');
 

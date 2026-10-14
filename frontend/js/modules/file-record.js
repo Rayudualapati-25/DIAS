@@ -1,9 +1,4 @@
-/**
- * File a new case record.
- *
- * The narrative goes to agency storage off-chain; only metadata and a SHA-256
- * commitment reach the ledger.
- */
+/** File a new case record. */
 
 import { api } from '../core/api.js';
 import { ALLOW } from '../core/access.js';

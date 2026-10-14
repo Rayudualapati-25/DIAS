@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Write the dataset, its manifest, and the human-review sample.
- *
- * The manifest records the hash of every source the labels depend on — the
- * policy bundle, the oracle, the prompt, the generator modules — and the hash of
- * every artifact written. A dataset whose labels were produced by different
- * source code is then a detectable fact rather than an assumption.
- */
+/** Write the dataset, its manifest, and the human-review sample. */
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -48,13 +41,7 @@ function writeJsonl(file, lines) {
   return { file: path.basename(file), lines: lines.length, sha256: hashFile(path.relative(REPO, file)) };
 }
 
-/**
- * A stratified sample for a person to check, one row per line.
- *
- * It is written as `review_status = pending_manual_review` and must stay that
- * way until somebody actually fills it in. Nothing in the repository may claim
- * the dataset was human-reviewed on the strength of this file existing.
- */
+/** A stratified sample for a person to check, one row per line. */
 function writeReviewSample(file, examples, rng, perStratum) {
   const strata = new Map();
   for (const example of examples) {

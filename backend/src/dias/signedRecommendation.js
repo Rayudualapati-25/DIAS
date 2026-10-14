@@ -1,26 +1,6 @@
 'use strict';
 
-/**
- * The signed recommender: the part of the backend that asks the model and signs
- * what it got (design §2, §6.1). It runs inside the backend process; there is no
- * separate recommendation service (author's decision, 2026-10-08).
- *
- * It receives a committed request's verified context, claims and justification
- * together with the digests and policy the ledger recorded for them. Before
- * judging anything it recomputes those digests and checks that the policy it
- * holds is the request's policy. Then it runs the recommender, builds the
- * recommendation object M, and signs the commitment κ with the backend's
- * recommendation key.
- *
- * When the inputs do not match their digests, or the policy differs, it does not
- * judge: it signs a specific failure status instead, so the ledger records that
- * no recommendation could be produced and why. A signature therefore attests
- * "the holder of this key produced this exact M for this request under this
- * policy"; it does not attest that the recommendation is correct. Because the key
- * is held by the backend, it does not protect against the backend itself.
- *
- * This module has no Fabric identity and never talks to the ledger.
- */
+/** The signed recommender: the part of the backend that asks the model and signs what it got. */
 
 const { verifiedRequestHash } = require('../../../chaincode/crimerecords/lib/dias/verifiedRequest');
 const { requesterClaimsHash } = require('../../../chaincode/crimerecords/lib/dias/requesterClaims');

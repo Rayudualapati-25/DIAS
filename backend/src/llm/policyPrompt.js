@@ -7,8 +7,8 @@ const {
   REASON_DETAILS,
   materializeDecision,
 } = require('../../../chaincode/crimerecords/lib/policy/controlledDecision');
-// Overridable so a new adapter generation can declare its own version without
-// forcing every earlier dataset and retained run to be regenerated.
+// Overridable so a new adapter generation can declare its own version without forcing every earlier dataset
+// and retained run to be regenerated.
 const MODEL_VERSION = process.env.LLM_POLICY_MODEL_VERSION || 'qwen3-14b-seba-lora-v6';
 
 const SYSTEM_PROMPT = [
@@ -55,16 +55,7 @@ const REASON_CODES = Object.freeze([
   'POLICY_SATISFIED',
 ]);
 
-/**
- * The canonical operation and purpose are deliberately withheld from the model.
- *
- * They are the independent inputs the deterministic policy check runs on. If the
- * model were shown them it would simply echo them back, and comparing its
- * classification against them would prove nothing. Keeping them hidden makes the
- * model interpret the request text on its own, so agreement between the two is
- * evidence and disagreement is a real signal that one of them misread the
- * request. Everything else in the request context is still shown.
- */
+/** The canonical operation and purpose are deliberately withheld from the model. */
 const CANONICAL_REQUEST_FIELDS = Object.freeze(['action', 'purpose']);
 
 function promptRequestContext(requestContext) {

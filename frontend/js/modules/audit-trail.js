@@ -1,14 +1,4 @@
-/**
- * Audit trail of one record.
- *
- * The ledger holds the full life of every DIAS request: who requested which
- * record (with the action and purpose), the recommendation committed before
- * review (κ), and the auditor decision with its agreement. This screen
- * reconstructs it from Fabric, lists the access grants and the record's own
- * state history, and — for reviewers — shows the off-chain review the backend
- * kept (justification, recommendation, auditor note), clearly marked as not
- * being on the ledger, with each object checked against its ledger digest.
- */
+/** Audit trail of one record. */
 
 import { api } from '../core/api.js';
 import { ALLOW } from '../core/access.js';

@@ -13,9 +13,8 @@ function fail(res, error, status = 400) {
 }
 
 /**
- * Wrap an async handler: chaincode rejections surface as 4xx with the
- * contract's message; a commit conflict that outlasted its retries is 409;
- * unexpected errors log server-side and return 500.
+ * Wrap an async handler: chaincode rejections surface as 4xx with the contract's message; a commit conflict
+ * that outlasted its retries is 409; unexpected errors log server-side and return 500.
  */
 function asyncRoute(handler) {
   return async (req, res) => {
@@ -32,11 +31,7 @@ function asyncRoute(handler) {
   };
 }
 
-/**
- * Pull the human-readable chaincode error out of a gateway error, if any.
- * The gateway prefixes each detail with "chaincode response 500,"; the person
- * reading the screen needs the contract's sentence, not the transport's.
- */
+/** Pull the human-readable chaincode error out of a gateway error, if any. */
 const CHAINCODE_PREFIX = /^chaincode response \d+,\s*/i;
 
 function extractChaincodeMessage(err) {
@@ -51,13 +46,7 @@ function extractChaincodeMessage(err) {
   return null;
 }
 
-/**
- * HTTP status for a chaincode refusal. DIAS error codes lead the message
- * (docs/design/dias-v3-ledger-schema.md §15): an authority failure is 403, a
- * request that is too late or conflicts with committed state is 409, and any
- * other refusal (malformed input, a signature or note that fails validation) is
- * 422.
- */
+/** HTTP status for a chaincode refusal. */
 const FORBIDDEN = /\b(DIAS_AUDITOR_[A-Z_]+|unauthorized)\b/;
 const CONFLICT = /\bDIAS_(REQUEST_EXPIRED|STALE_POLICY|COMMITMENT_CONFLICT|NO_ACTIVE_POLICY|LEGACY_RECORD)\b/;
 

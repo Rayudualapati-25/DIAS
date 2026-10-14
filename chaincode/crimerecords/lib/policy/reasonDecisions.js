@@ -12,9 +12,8 @@ module.exports = Object.freeze({
   NOT_ASSIGNED: 'deny',
   INSUFFICIENT_CLEARANCE: 'deny',
   MODEL_POLICY_DISAGREEMENT: 'escalate',
-  // The model read the request differently from the canonical operation and
-  // purpose the requester committed. Recorded separately from a policy
-  // disagreement so the two safety mechanisms stay distinguishable in review.
+  // The model read the request differently from the canonical operation and purpose the requester
+  // committed.
   MODEL_INPUT_DISAGREEMENT: 'escalate',
   POLICY_SATISFIED: 'allow',
 });

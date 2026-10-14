@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Who may read what (design §10).
- *
- * Pure rules shared by the contracts. They are interface-level controls: every
- * channel member's peer stores every block, so they govern what a contract
- * returns to a caller, not what a member organisation can read from its own peer.
- */
+/** Who may read what. */
 
 const { MSP } = require('../util/identity');
 const { SEAL_AUTHORITY_ROLES, DISTRICT_HEAD_ROLES } = require('../policy/policyV1');
@@ -15,9 +9,8 @@ const { EVENT } = require('./lifecycle');
 // Reviewer orgs: auditors, the court, and prosecution can reconstruct trails.
 const REVIEWER_MSPS = Object.freeze([MSP.AUDIT, MSP.COURT, MSP.PROSECUTION]);
 /**
- * Membership of a reviewer organisation is not by itself oversight authority.
- * Reading a trail requires a district head, or the court authority that can open
- * a sealed record.
+ * Membership of a reviewer organisation is not by itself oversight authority. Reading a trail requires a
+ * district head, or the court authority that can open a sealed record.
  */
 const REVIEWER_ROLES = Object.freeze([...SEAL_AUTHORITY_ROLES, ...DISTRICT_HEAD_ROLES]);
 /** The organisations that handle evidence; mirrors the evidence collection's members. */
@@ -40,31 +33,32 @@ const isSameDistrictEvidenceMember = (caller, record) => hasActiveCredential(cal
   && EVIDENCE_MSPS.includes(caller.mspId)
   && Boolean(caller.jurisdiction) && caller.jurisdiction === record.jurisdiction;
 
+/** Who reads the access log: every officer with an enrolled role whose certificate credential is active. */
+const isActiveOfficer = (caller) => Boolean(caller.role) && Boolean(caller.enrollmentId)
+  && hasActiveCredential(caller);
+
 /**
- * A decision-log entry for a caller outside the reviewer set (design §10, note
- * 2): what was decided and against which recommendation, without who asked, for
- * which record, who decided, or which transactions.
+ * The authorization check of a request as every officer may read it: what it found, not the digests it
+ * compared.
  */
-function redactDecisionLogEntry(entry) {
-  return {
-    redacted: true,
-    outcome: entry.outcome,
-    basis: entry.basis,
-    decision: entry.decision,
-    llmRecommendation: entry.llmRecommendation,
-    llmAgreement: entry.llmAgreement,
-    generationStatus: entry.generationStatus,
-    action: entry.action,
-    purpose: entry.purpose,
-    requester: { organization: entry.requester.organization },
-    decidedAtUtc: entry.decidedAtUtc,
-  };
+function authorizationCheckResult(check) {
+  if (!check) return null;
+  return { outcome: check.outcome, matched: check.matched, authorizationId: check.authorizationId };
+}
+
+const TRANSACTION_ID_FIELDS = Object.freeze(['requestTxId', 'recommendationTxId', 'decisionTxId', 'outcomeTxId']);
+
+/**
+ * A log entry as an officer outside the reviewers reads it: who asked for which file, the advice, the
+ * decision and the outcome.
+ */
+function withoutTransactionIds(entry) {
+  return Object.fromEntries(Object.entries(entry).filter(([name]) => !TRANSACTION_ID_FIELDS.includes(name)));
 }
 
 /**
- * What a requester sees of κ before an auditor has decided: that it exists, not
- * what it says. A requester learns the recommendation with the decision, never
- * ahead of it (author's rule, 2026-10-08).
+ * What a requester sees of κ before an auditor has decided: that it exists, not what it says. A requester
+ * learns the recommendation with the decision, never ahead of it.
  */
 function withheldCommitment(commitment) {
   return {
@@ -82,11 +76,7 @@ function withholdCommitmentEvent(event) {
 
 const withoutNoteDigest = ({ noteHash: _noteHash, ...rest }) => rest;
 
-/**
- * The auditor's decision as its requester may see it: without the digest of the
- * auditor's note. The note is never the requester's to read, and the digest is
- * unsalted, so a guessed note could be confirmed against it.
- */
+/** The auditor's decision as its requester may see it: without the digest of the auditor's note. */
 function decisionForRequester(decision) {
   return decision ? withoutNoteDigest(decision) : decision;
 }
@@ -101,13 +91,15 @@ module.exports = {
   EVIDENCE_MSPS,
   REVIEWER_MSPS,
   REVIEWER_ROLES,
+  authorizationCheckResult,
   decisionForRequester,
+  isActiveOfficer,
   isAuditor,
   isOwningStation,
   isReviewer,
   isSameDistrictEvidenceMember,
-  redactDecisionLogEntry,
   withheldCommitment,
   withholdCommitmentEvent,
   withoutNoteDigestEvent,
+  withoutTransactionIds,
 };

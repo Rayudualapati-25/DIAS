@@ -1,0 +1,106 @@
+[
+ {
+  "id": "L-combined-02-r1",
+  "setup": "combined",
+  "level": 2,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T05:22:42.925Z",
+  "requested": 2,
+  "accepted": 2,
+  "decided": 2,
+  "verified": 2,
+  "failed": 0,
+  "makespanMs": 23855.8,
+  "decisionsPerMinute": 5,
+  "submitMs": {
+   "n": 2,
+   "min": 2089.4,
+   "median": 2089.4,
+   "mean": 2095.1,
+   "p95": 2100.8,
+   "max": 2100.8
+  },
+  "adviceReadyAfterMs": {
+   "n": 2,
+   "min": 12510.3,
+   "median": 12510.3,
+   "mean": 17030.4,
+   "p95": 21550.5,
+   "max": 21550.5
+  },
+  "decidedAfterMs": {
+   "n": 2,
+   "min": 14630.4,
+   "median": 14630.4,
+   "mean": 19243.1,
+   "p95": 23855.8,
+   "max": 23855.8
+  },
+  "quietBeforeMs": 27795.9,
+  "drainMs": 4476.3,
+  "checks": [
+   {
+    "name": "L-combined-02-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "2 of 2 found"
+   },
+   {
+    "name": "L-combined-02-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ]
+ },
+ {
+  "id": "L-phone-only-02-r1",
+  "setup": "phone-only",
+  "level": 2,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T05:23:22.815Z",
+  "requested": 2,
+  "accepted": 2,
+  "decided": 2,
+  "verified": 2,
+  "failed": 0,
+  "makespanMs": 22195.1,
+  "decisionsPerMinute": 5.4,
+  "submitMs": {
+   "n": 2,
+   "min": 2097.1,
+   "median": 2097.1,
+   "mean": 2101.4,
+   "p95": 2105.7,
+   "max": 2105.7
+  },
+  "adviceReadyAfterMs": {
+   "n": 2,
+   "min": 11074,
+   "median": 11074,
+   "mean": 15485.1,
+   "p95": 19896.1,
+   "max": 19896.1
+  },
+  "decidedAfterMs": {
+   "n": 2,
+   "min": 13465.9,
+   "median": 13465.9,
+   "mean": 17830.5,
+   "p95": 22195.1,
+   "max": 22195.1
+  },
+  "quietBeforeMs": 407.8,
+  "drainMs": 4469.3,
+  "checks": [
+   {
+    "name": "L-phone-only-02-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "2 of 2 found"
+   },
+   {
+    "name": "L-phone-only-02-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ]
+ }
+]

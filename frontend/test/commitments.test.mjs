@@ -1,8 +1,6 @@
 /**
- * The browser's implementation of dias-commitment-hash-v1 must produce exactly
- * the digests of the contract's implementation (docs/design/dias-v3-ledger-schema.md
- * §4). Both are checked against the shared vectors, some computed with the shell,
- * and against each other on generated inputs.
+ * The browser's implementation of dias-commitment-hash-v1 must produce exactly the digests of the
+ * contract's implementation.
  */
 
 import { test } from 'node:test';

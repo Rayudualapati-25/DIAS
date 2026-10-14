@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Policy package completeness.
- *
- * The bundle is the policy of record: the chaincode hashes it, the prompt
- * renders it, the oracle labels the dataset from it, and the specification is
- * generated from it. These tests check the properties the rest of the system
- * assumes and cannot re-derive for itself.
- */
+/** Policy package completeness. */
 
 const fs = require('fs');
 const path = require('path');
@@ -28,8 +21,8 @@ const read = (p) => fs.readFileSync(path.join(REPO, p), 'utf8');
 const { bundle, bundleHash, clauseRefs } = loadBundle();
 
 test('the bundle hash is stable across serializations', () => {
-  // The backend records this hash with every recommendation; a hash that depended
-  // on key order would make that record unverifiable.
+  // The backend records this hash with every recommendation; a hash that depended on key order would make
+  // that record unverifiable.
   const roundTripped = JSON.parse(JSON.stringify(bundle));
   assert.equal(hashObject(roundTripped), bundleHash);
   const shuffled = Object.fromEntries(Object.entries(bundle).reverse());
@@ -141,8 +134,8 @@ test('every oracle verdict satisfies the response schema the backend enforces', 
   ];
   for (const variant of variants) {
     const verdict = evaluateReference(bundle, variant);
-    // The oracle produces the decision fields; a label is the verdict plus the
-    // grounded sentence and the (currently always empty) evidence list.
+    // The oracle produces the decision fields; a label is the verdict plus the grounded sentence and the
+    // (currently always empty) evidence list.
     const response = {
       recommendation: verdict.recommendation,
       reason_code: verdict.reason_code,
@@ -176,8 +169,8 @@ test('the generated specification matches the bundle it documents', () => {
 });
 
 test('the open-questions document exists and is current for this bundle', () => {
-  // The bundle's provenance block points at this file; a dangling pointer would
-  // mean the policy of record cites documentation that does not exist.
+  // The bundle's provenance block points at this file; a dangling pointer would mean the policy of record
+  // cites documentation that does not exist.
   const target = bundle.provenance.openQuestions;
   assert.equal(target, 'docs/policies/policy-open-questions.md');
   const doc = read(target);

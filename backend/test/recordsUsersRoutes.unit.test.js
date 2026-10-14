@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Case-file lookup and officer registration guards.
- *
- * Lookup reads the public record index, so an officer outside the owning station
- * can find a case file before requesting access to it. Registration mirrors
- * UserContract: only a district head of the authority organisation admits an
- * officer, into any department.
- */
+/** Case-file lookup and officer registration guards. */
 
 const { expect } = require('chai');
 

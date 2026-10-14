@@ -2,10 +2,8 @@
 'use strict';
 
 /**
- * Exactly three genuine SEAL acceptance scenarios against the live API, real
- * Qwen service, and real Fabric network. Development/debug runs belong in a
- * different output file; a successful output always contains ALLOW, DENY, and
- * ESCALATE once each.
+ * Exactly three genuine SEAL acceptance scenarios against the live API, real Qwen service, and real Fabric
+ * network.
  */
 
 const crypto = require('crypto');
@@ -193,8 +191,8 @@ async function main() {
     denied: await login('insp.rathore'),
     auditor: await login('sp.north'),
   };
-  // Use the repository's normal opaque record-id form. This tests the policy
-  // task without adding semantic words such as ALLOW/DENY to an identifier.
+  // Use the repository's normal opaque record-id form. This tests the policy task without adding semantic
+  // words such as ALLOW/DENY to an identifier.
   const openRecord = `REC-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
   const reviewRecord = `REC-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
   await createRecord(tokens.owner, openRecord);
@@ -258,9 +256,7 @@ async function main() {
   deny.protectedWorkflow = { metadataReleased: false, responseStatus: deniedMetadata.status };
   tests.push(deny);
 
-  // The canonical request is view/investigation, while the private sentence says
-  // export/prosecution. Qwen must interpret the sentence; the deterministic
-  // input guard then turns the conflict into an AuditMSP-reviewed escalation.
+  // The canonical request is view/investigation, while the private sentence says export/prosecution.
   const escalateQuery = `Export ${reviewRecord} for prosecution.`;
   const escalateResult = await requestDecision(
     tokens.requester, reviewRecord, escalateQuery, 'view', 'investigation'

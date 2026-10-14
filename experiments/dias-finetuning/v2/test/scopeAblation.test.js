@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * The scope ablation must be a fair comparison.
- *
- * Both arms have to see the same requests, the same model labels and the same
- * auditor behaviour, or the difference between them is not attributable to the
- * scope design. These tests pin that, and pin the property the whole design
- * decision rests on: an exact-record authorization can never reach a second
- * record, and a property fingerprint can.
- */
+/** The scope ablation must be a fair comparison. */
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -129,8 +121,8 @@ test('every request is accounted for: skipped or reviewed, never both, never nei
 
 test('with no siblings the two designs are identical, and the report must say so', () => {
   const rng = createRng(2, 'test');
-  // Each case must differ in a GOVERNED property, otherwise they are siblings of
-  // one another and "siblings: 0" would not mean what the test claims.
+  // Each case must differ in a GOVERNED property, otherwise they are siblings of one another and "siblings:
+  // 0" would not mean what the test claims.
   const types = ['fir', 'case-diary', 'evidence', 'forensic-report',
     'witness-statement', 'chargesheet', 'court-order', 'fir'];
   const cases = types.map((recordType, i) => {

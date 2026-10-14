@@ -54,8 +54,126 @@ describe('portal request history and blockchain workflow log', () => {
     expect(entry.authorizationId).to.equal(reused.dynamicAuthorizationCheck.authorizationId);
   });
 
-  it('refuses the full workflow log to a requester without reviewer authority', async () => {
-    await expect(read(CALLERS.inspector, 'QueryAccessWorkflowLog')).to.be.rejectedWith(/unauthorized/);
+  // Every enrolled officer reads the access log in full.
+  it('shows the workflow log, with names and case files, to every enrolled officer', async () => {
+    const { result: request } = await world.submit(CALLERS.inspector);
+    await world.decide(request.requestId, 'FORCE_DENY', 'DENY');
+    for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst, CALLERS.prosecutor, CALLERS.auditor]) {
+      const [entry] = await read(caller, 'QueryAccessWorkflowLog');
+      expect(entry, caller.identityId).to.include({
+        requestId: request.requestId, recordId: 'FIR-1', caseId: 'CASE-1', status: 'denied',
+        decision: 'FORCE_DENY', llmRecommendation: 'DENY', llmAgreement: 'AGREED', outcome: 'DENIED',
+        recommendationWithheld: false,
+      });
+      expect(entry.requester).to.deep.equal({ username: 'insp.test', organization: 'police', role: 'inspector' });
+      expect(entry.auditor).to.deep.equal({ username: 'sp.test', role: 'sp' });
+      expect(JSON.stringify(entry)).to.not.match(/Reviewing the FIR|"reason"|"justification"|"noteHash"|identityHash/);
+    }
+  });
+
+  it('withholds the advice on a request that still waits from every officer who is not a reviewer', async () => {
+    const { result: request } = await world.submit(CALLERS.inspector);
+    await world.commit(request.requestId, world.commitmentFor(request.requestId, { recommendation: 'DENY' }));
+    // The requester rule of 2026-10-08 stays: nobody outside the reviewers learns the advice before the
+    // decision.
+    for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst]) {
+      const [entry] = await read(caller, 'QueryAccessWorkflowLog');
+      expect(entry, caller.identityId).to.include({
+        requestId: request.requestId, recordId: 'FIR-1', status: 'awaiting-auditor',
+        llmRecommendation: null, generationStatus: null, recommendationWithheld: true,
+      });
+      // The transaction that committed the advice is not named to them either.
+      expect(entry).to.not.have.property('recommendationTxId');
+      expect(entry.requester.username).to.equal('insp.test');
+    }
+    await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY');
+    const [decided] = await read(CALLERS.constable, 'QueryAccessWorkflowLog');
+    expect(decided).to.include({ llmRecommendation: 'DENY', decision: 'FORCE_ALLOW', recommendationWithheld: false });
+  });
+
+  it('does not mark a waiting request as withheld when there is no advice yet', async () => {
+    await world.submit(CALLERS.inspector);
+    const [entry] = await read(CALLERS.constable, 'QueryAccessWorkflowLog');
+    expect(entry).to.include({ status: 'awaiting-auditor', llmRecommendation: null, recommendationWithheld: false });
+  });
+
+  it('refuses the workflow log to an identity without an enrolled role', async () => {
+    const noRole = { ...CALLERS.inspector, identityId: 'no.role', attrs: { ...CALLERS.inspector.attrs, role: '' } };
+    await expect(read(noRole, 'QueryAccessWorkflowLog')).to.be.rejectedWith(/unauthorized/);
+  });
+
+  // What every officer reads: who asked for which file, the advice, the decision and the outcome.
+  const OFFICER_FIELDS = Object.freeze([
+    'action', 'auditor', 'authorizationId', 'basis', 'caseId', 'createdAuthorizationId', 'decidedAtUtc',
+    'decision', 'dynamicAuthorizationCheck', 'generationStatus', 'llmAgreement', 'llmRecommendation', 'outcome',
+    'processingPath', 'purpose', 'recommendationWithheld', 'recordId', 'requestId', 'requester', 'status',
+    'submittedAtUtc',
+  ]);
+  const TRANSACTION_FIELDS = Object.freeze(['decisionTxId', 'outcomeTxId', 'recommendationTxId', 'requestTxId']);
+
+  it('gives an officer exactly the log fields, and only a reviewer the transactions and the full authorization check', async () => {
+    const { result: request } = await world.submit(CALLERS.inspector);
+    await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY');
+    for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst, CALLERS.prosecutor]) {
+      const [entry] = await read(caller, 'QueryAccessWorkflowLog');
+      expect(Object.keys(entry).sort(), caller.identityId).to.deep.equal([...OFFICER_FIELDS]);
+      expect(Object.keys(entry.dynamicAuthorizationCheck).sort()).to.deep.equal(['authorizationId', 'matched', 'outcome']);
+      expect(Object.keys(entry.requester).sort()).to.deep.equal(['organization', 'role', 'username']);
+      expect(Object.keys(entry.auditor).sort()).to.deep.equal(['role', 'username']);
+    }
+    for (const caller of [CALLERS.auditor, CALLERS.judge, CALLERS.districtJudge]) {
+      const [entry] = await read(caller, 'QueryAccessWorkflowLog');
+      expect(Object.keys(entry).sort(), caller.identityId).to.deep.equal([...OFFICER_FIELDS, ...TRANSACTION_FIELDS].sort());
+      expect(entry.dynamicAuthorizationCheck).to.have.property('conditionsHash');
+    }
+  });
+
+  it('never lets a stored digest or identity hash into what an officer reads, under any field name', async () => {
+    const { result: request } = await world.submit(CALLERS.inspector);
+    await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY');
+    const stored = world.readRequest(request.requestId);
+    const decision = world.readState('diasAuditorDecision', request.requestId);
+    const commitment = world.readState('diasRecommendationCommitment', request.requestId);
+    // The context digest is unsalted: with the public profile of the requester it would let any officer
+    // test guesses of a file's protected flags.
+    const secrets = [
+      stored.justificationHash, stored.requester.identityHash, stored.dynamicAuthorizationCheck.conditionsHash,
+      stored.dynamicAuthorizationCheck.scopeHash, decision.noteHash, decision.auditor.identityHash,
+      commitment.commitmentId, commitment.recommendationHash,
+    ];
+    expect(secrets.every((value) => typeof value === 'string' && value.length >= 16), JSON.stringify(secrets)).to.equal(true);
+    for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst, CALLERS.prosecutor]) {
+      const text = JSON.stringify([
+        await read(caller, 'QueryAccessWorkflowLog'), await read(caller, 'QueryAccessDecisions', '50'),
+      ]);
+      for (const secret of secrets) expect(text, `${caller.identityId} ${secret}`).to.not.include(secret);
+    }
+  });
+
+  it('keeps the advice of a request that was cancelled or expired while it waited from every non-reviewer', async () => {
+    const { result: cancelled } = await world.submit(CALLERS.inspector);
+    await world.commit(cancelled.requestId, world.commitmentFor(cancelled.requestId, { recommendation: 'DENY' }));
+    await world.cancel(cancelled.requestId);
+    const { result: expired } = await world.submit(CALLERS.constable);
+    await world.commit(expired.requestId, world.commitmentFor(expired.requestId, { recommendation: 'ALLOW' }));
+    await world.expire(expired.requestId, { timestamp: '2027-01-01T00:00:00.000Z' });
+    for (const caller of [CALLERS.inspector, CALLERS.constable, CALLERS.analyst]) {
+      const entries = await read(caller, 'QueryAccessWorkflowLog');
+      for (const [requestId, status] of [[cancelled.requestId, 'cancelled'], [expired.requestId, 'expired']]) {
+        expect(entries.find((entry) => entry.requestId === requestId), `${caller.identityId} ${status}`).to.include({
+          status, llmRecommendation: null, generationStatus: null, llmAgreement: null, recommendationWithheld: true,
+        });
+      }
+    }
+  });
+
+  it('refuses both logs to a certificate whose credential is not active', async () => {
+    await world.submit(CALLERS.inspector);
+    for (const credentialStatus of ['suspended', 'revoked', '']) {
+      const caller = { ...CALLERS.constable, attrs: { ...CALLERS.constable.attrs, credentialStatus } };
+      await expect(read(caller, 'QueryAccessWorkflowLog')).to.be.rejectedWith(/unauthorized.*active credential/);
+      await expect(read(caller, 'QueryAccessDecisions', '50')).to.be.rejectedWith(/unauthorized.*active credential/);
+    }
   });
 
   it('withholds a pending recommendation from a reviewer who is also its requester', async () => {

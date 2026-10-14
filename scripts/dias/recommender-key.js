@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Generate the recommendation service's Ed25519 signing key (design §6.1).
- *
- *   node scripts/dias/recommender-key.js [--out FILE] [--force]
- *
- * Writes the private key with mode 0600 to DIAS_RECOMMENDER_SIGNING_KEY_FILE
- * (default backend/data/dias-recommender-signing-key.pem; *.pem files are never
- * committed) and prints the public key and its key identifier. Register the
- * public key with scripts/dias/register-recommender-key.js.
- */
+/** Generate the recommendation service's Ed25519 signing key. */
 
 const fs = require('fs');
 const path = require('path');

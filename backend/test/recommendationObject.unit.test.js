@@ -1,11 +1,6 @@
 'use strict';
 
-/**
- * The recommendation object M (design §6, §11): exactly what the auditor reviews
- * and what h_M commits to. It must be deterministic for the same model output —
- * no timestamps or latencies — so a retry produces the same digest, and it must
- * always be representable as canonical JSON.
- */
+/** The recommendation object M: exactly what the auditor reviews and what h_M commits to. */
 
 const { expect } = require('chai');
 const {

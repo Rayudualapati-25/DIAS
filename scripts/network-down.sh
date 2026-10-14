@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#
 # Tear down the Crime Records Access Network and remove generated material.
 
 set -uo pipefail

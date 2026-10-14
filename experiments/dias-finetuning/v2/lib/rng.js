@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Deterministic pseudo-randomness for dataset generation.
- *
- * Every draw must be reproducible from a recorded seed, so `Math.random` is
- * never used. Streams are named: `rng.stream('justification')` gives an
- * independent sequence derived from the master seed and that name, so adding a
- * draw in one part of the generator does not shift every later draw elsewhere.
- * Without that, a one-line change silently regenerates the whole dataset.
- */
+/** Deterministic pseudo-randomness for dataset generation. */
 
 const crypto = require('crypto');
 

@@ -1,17 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Validate the written DIAS v2 dataset.
- *
- * Reads the JSONL files from disk and re-derives every property from them. It
- * never imports the generator's in-memory state, so a generator that silently
- * failed to write what it intended produces a validation failure here.
- *
- *   node experiments/dias-finetuning/v2/validate.js [--dir <dataset>] [--json <report>]
- *
- * Exit code 1 when any check fails.
- */
+/** Validate the written DIAS v2 dataset. */
 
 const fs = require('fs');
 const path = require('path');

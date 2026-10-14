@@ -1,0 +1,26 @@
+workflows,stage,n,min_ms,median_ms,mean_ms,p95_ms,max_ms
+all,"1. Request committed on the ledger",48,2061.1,2080.6,2079.8,2092.7,2095.9
+all,"2. Recommendation ready (LLM, signature, commitment)",48,8449.6,9003.1,9306.9,11329.2,12855.7
+all,"of which: model inference",48,6369.7,6898.3,7213.6,9229.8,10777.3
+mac,"1. Request committed on the ledger",24,2063.3,2080,2079.2,2091.9,2095.9
+mac,"2. Recommendation ready (LLM, signature, commitment)",24,8485.8,8925.5,9161.7,10106,10122
+mac,"of which: model inference",24,6381.7,6824.4,7066.1,8004.2,8008.3
+mac,"3. Auditor reads the queue",24,34.7,40.7,40.6,44.7,47.1
+mac,"4. Auditor opens the review",24,8.7,10.6,10.7,12.5,14.9
+mac,"5. Decision recorded and confirmed from the ledger",24,2092.3,2104.2,2104.6,2122.9,2127
+mac,"End to end (stages 1 to 5)",24,12733.2,13161.5,13396.8,14333.1,14345.4
+mac,"6. Access log read",24,87,93,93.5,100.1,101
+mac,"Requester reads the outcome on the Mac",24,7.4,9.4,9.8,13.7,16.1
+mac,"Wait for a quiet ledger before the request (not counted)",24,10825.3,12242.6,12315.3,12759.1,12760.6
+mac,"Wait for a quiet ledger before the decision (not counted)",24,10621.9,18889.5,18378.5,19292.3,19396
+mobile,"1. Request committed on the ledger",24,2061.1,2081.2,2080.4,2092.7,2093.8
+mobile,"2. Recommendation ready (LLM, signature, commitment)",24,8449.6,9010.7,9452.1,11967.6,12855.7
+mobile,"of which: model inference",24,6369.7,6898.3,7361.1,9875.8,10777.3
+mobile,"3. Auditor reads the queue",24,517.2,564.3,562.6,582.1,588.9
+mobile,"4. Auditor opens the review",24,27,35.8,40,55,57.9
+mobile,"5. Decision recorded and confirmed from the ledger",24,2108.6,2121,2125.3,2143.6,2157.4
+mobile,"End to end (stages 1 to 5)",24,13266.8,13823.4,14260.5,16794.8,17671.2
+mobile,"6. Access log read",24,130.8,140.2,142.4,158.1,158.6
+mobile,"Requester reads the outcome on the Mac",24,6.7,9.3,10.3,14.8,24.2
+mobile,"Wait for a quiet ledger before the request (not counted)",24,12127,12758.4,12616.3,12854.1,12855.2
+mobile,"Wait for a quiet ledger before the decision (not counted)",24,14277.3,17967.4,17651.2,18539.3,18670.6

@@ -1,0 +1,328 @@
+TAP version 13
+# Subtest: the plan is fixed by its seed and holds distinct, balanced requests
+ok 1 - the plan is fixed by its seed and holds distinct, balanced requests
+  ---
+  duration_ms: 3.365167
+  type: 'test'
+  ...
+# Subtest: the running order alternates the two halves and lets either go first
+ok 2 - the running order alternates the two halves and lets either go first
+  ---
+  duration_ms: 0.720958
+  type: 'test'
+  ...
+# Subtest: a very small plan still draws a different request for each half
+ok 3 - a very small plan still draws a different request for each half
+  ---
+  duration_ms: 0.675875
+  type: 'test'
+  ...
+# Subtest: a later plan never repeats a request scope of an earlier one
+ok 4 - a later plan never repeats a request scope of an earlier one
+  ---
+  duration_ms: 1.490959
+  type: 'test'
+  ...
+# Subtest: a plan cannot ask for more distinct requests than exist
+ok 5 - a plan cannot ask for more distinct requests than exist
+  ---
+  duration_ms: 0.0805
+  type: 'test'
+  ...
+# Subtest: percentiles use the nearest rank on the sorted values
+ok 6 - percentiles use the nearest rank on the sorted values
+  ---
+  duration_ms: 0.151
+  type: 'test'
+  ...
+# Subtest: the automated auditor follows only a committed, verified recommendation
+ok 7 - the automated auditor follows only a committed, verified recommendation
+  ---
+  duration_ms: 0.14875
+  type: 'test'
+  ...
+# Subtest: a complete reviewed workflow passes every ledger check
+ok 8 - a complete reviewed workflow passes every ledger check
+  ---
+  duration_ms: 0.237583
+  type: 'test'
+  ...
+# Subtest: each ledger fault is caught by its own check
+ok 9 - each ledger fault is caught by its own check
+  ---
+  duration_ms: 0.546041
+  type: 'test'
+  ...
+# Subtest: a decision without a recommendation is checked as such
+ok 10 - a decision without a recommendation is checked as such
+  ---
+  duration_ms: 0.273333
+  type: 'test'
+  ...
+# Subtest: a decision made when no commitment exists is checked against the shorter trail
+ok 11 - a decision made when no commitment exists is checked against the shorter trail
+  ---
+  duration_ms: 0.133875
+  type: 'test'
+  ...
+# Subtest: the ledger counts as quiet only when the staging folder stays empty
+ok 12 - the ledger counts as quiet only when the staging folder stays empty
+  ---
+  duration_ms: 0.194709
+  type: 'test'
+  ...
+# Subtest: the instrumentation result is read from its last lines
+ok 13 - the instrumentation result is read from its last lines
+  ---
+  duration_ms: 0.238166
+  type: 'test'
+  ...
+# Subtest: the end-to-end time is the sum of the processing stages, with none missing
+ok 14 - the end-to-end time is the sum of the processing stages, with none missing
+  ---
+  duration_ms: 0.057166
+  type: 'test'
+  ...
+# Subtest: the stage table uses only completed workflows that had usable advice
+ok 15 - the stage table uses only completed workflows that had usable advice
+  ---
+  duration_ms: 0.302
+  type: 'test'
+  ...
+# Subtest: the run summary counts outcomes, advice and checks without hiding failures
+ok 16 - the run summary counts outcomes, advice and checks without hiding failures
+  ---
+  duration_ms: 0.156083
+  type: 'test'
+  ...
+# Subtest: stages that do not depend on the auditor are pooled over both kinds of workflow
+ok 17 - stages that do not depend on the auditor are pooled over both kinds of workflow
+  ---
+  duration_ms: 0.059917
+  type: 'test'
+  ...
+# Subtest: the phone difference compares medians of the auditor stages only
+ok 18 - the phone difference compares medians of the auditor stages only
+  ---
+  duration_ms: 0.111375
+  type: 'test'
+  ...
+# Subtest: times use only workflows that completed, passed every check and had usable advice
+ok 19 - times use only workflows that completed, passed every check and had usable advice
+  ---
+  duration_ms: 0.554833
+  type: 'test'
+  ...
+# Subtest: the step table has one line per cell and per setup, with the stages of the end-to-end time
+ok 20 - the step table has one line per cell and per setup, with the stages of the end-to-end time
+  ---
+  duration_ms: 0.76875
+  type: 'test'
+  ...
+# Subtest: each seat is compared between the Mac and the phone on the steps that person makes
+ok 21 - each seat is compared between the Mac and the phone on the steps that person makes
+  ---
+  duration_ms: 58.290958
+  type: 'test'
+  ...
+# Subtest: correctness counts every workflow, also those left out of the times
+ok 22 - correctness counts every workflow, also those left out of the times
+  ---
+  duration_ms: 0.286834
+  type: 'test'
+  ...
+# Subtest: the reuse table sets a reviewed first request against its repeats, per officer seat
+ok 23 - the reuse table sets a reviewed first request against its repeats, per officer seat
+  ---
+  duration_ms: 0.42625
+  type: 'test'
+  ...
+# Subtest: the load table keeps the burst times per burst and pools the per-request times
+ok 24 - the load table keeps the burst times per burst and pools the per-request times
+  ---
+  duration_ms: 0.530708
+  type: 'test'
+  ...
+# Subtest: the quality row reads the balanced decision test of one model
+ok 25 - the quality row reads the balanced decision test of one model
+  ---
+  duration_ms: 0.137208
+  type: 'test'
+  ...
+# Subtest: a table is written as CSV with a header and quoted text
+ok 26 - a table is written as CSV with a header and quoted text
+  ---
+  duration_ms: 0.121417
+  type: 'test'
+  ...
+# Subtest: the difference of two medians comes with a seeded 95% bootstrap interval
+ok 27 - the difference of two medians comes with a seeded 95% bootstrap interval
+  ---
+  duration_ms: 21.412958
+  type: 'test'
+  ...
+# Subtest: each setup is compared with the Mac alone on the end-to-end time
+ok 28 - each setup is compared with the Mac alone on the end-to-end time
+  ---
+  duration_ms: 2.719166
+  type: 'test'
+  ...
+# Subtest: the two models are compared request by request on the same plan
+ok 29 - the two models are compared request by request on the same plan
+  ---
+  duration_ms: 0.570791
+  type: 'test'
+  ...
+# Subtest: the hour is summarized per request and per ten-minute window
+ok 30 - the hour is summarized per request and per ten-minute window
+  ---
+  duration_ms: 0.199708
+  type: 'test'
+  ...
+# Subtest: resources are summarized per part, with the components of the Fabric network grouped
+ok 31 - resources are summarized per part, with the components of the Fabric network grouped
+  ---
+  duration_ms: 0.30875
+  type: 'test'
+  ...
+# Subtest: the plan is a pure function of its seed and carries its own digest
+ok 32 - the plan is a pure function of its seed and carries its own digest
+  ---
+  duration_ms: 18.260792
+  type: 'test'
+  ...
+# Subtest: no request scope and no justification is used twice in the plan, except a repeat of its own request
+ok 33 - no request scope and no justification is used twice in the plan, except a repeat of its own request
+  ---
+  duration_ms: 0.75325
+  type: 'test'
+  ...
+# Subtest: every cell of the step experiment has the same size and the same mix
+ok 34 - every cell of the step experiment has the same size and the same mix
+  ---
+  duration_ms: 0.187791
+  type: 'test'
+  ...
+# Subtest: the step experiment runs the four cells once per block, never in a fixed order
+ok 35 - the step experiment runs the four cells once per block, never in a fixed order
+  ---
+  duration_ms: 0.429542
+  type: 'test'
+  ...
+# Subtest: the reuse experiment deals denied requests evenly to the cells, each with repeats and two counter-checks
+ok 36 - the reuse experiment deals denied requests evenly to the cells, each with repeats and two counter-checks
+  ---
+  duration_ms: 5.442666
+  type: 'test'
+  ...
+# Subtest: no step or load request asks for a file and operation the reuse experiment authorizes
+ok 37 - no step or load request asks for a file and operation the reuse experiment authorizes
+  ---
+  duration_ms: 0.319459
+  type: 'test'
+  ...
+# Subtest: the load experiment has one burst per setup, level and repeat, with officers spread evenly
+ok 38 - the load experiment has one burst per setup, level and repeat, with officers spread evenly
+  ---
+  duration_ms: 0.283542
+  type: 'test'
+  ...
+# Subtest: a smaller plan keeps the same structure
+ok 39 - a smaller plan keeps the same structure
+  ---
+  duration_ms: 0.392
+  type: 'test'
+  ...
+# Subtest: a submitted request is read the same way from either surface
+ok 40 - a submitted request is read the same way from either surface
+  ---
+  duration_ms: 0.312708
+  type: 'test'
+  ...
+# Subtest: free text for a phone command survives the shell and decodes to itself
+ok 41 - free text for a phone command survives the shell and decodes to itself
+  ---
+  duration_ms: 0.394709
+  type: 'test'
+  ...
+# Subtest: the newest log entry is the last decided, then the highest request number
+ok 42 - the newest log entry is the last decided, then the highest request number
+  ---
+  duration_ms: 5.184292
+  type: 'test'
+  ...
+# Subtest: the officer must be shown the outcome, and the explanation only after a denial that had advice
+ok 43 - the officer must be shown the outcome, and the explanation only after a denial that had advice
+  ---
+  duration_ms: 0.062083
+  type: 'test'
+  ...
+# Subtest: the store watcher reports when a new review was stored and last rewritten, and ignores what was there
+ok 44 - the store watcher reports when a new review was stored and last rewritten, and ignores what was there
+  ---
+  duration_ms: 29.319792
+  type: 'test'
+  ...
+# Subtest: runner options need the plan, the run folder and the staging folder
+ok 45 - runner options need the plan, the run folder and the staging folder
+  ---
+  duration_ms: 0.206333
+  type: 'test'
+  ...
+# Subtest: in a burst the auditor sits where the setup says, alternating in the combined setup
+ok 46 - in a burst the auditor sits where the setup says, alternating in the combined setup
+  ---
+  duration_ms: 0.068
+  type: 'test'
+  ...
+# Subtest: a decided request of a burst is checked against its entry in the reviewer log
+ok 47 - a decided request of a burst is checked against its entry in the reviewer log
+  ---
+  duration_ms: 0.150833
+  type: 'test'
+  ...
+# Subtest: a burst is summarized by when its last request was decided
+ok 48 - a burst is summarized by when its last request was decided
+  ---
+  duration_ms: 0.20825
+  type: 'test'
+  ...
+# Subtest: a reused request must show no advice, no auditor, and a grant by its own authorization
+ok 49 - a reused request must show no advice, no auditor, and a grant by its own authorization
+  ---
+  duration_ms: 0.114792
+  type: 'test'
+  ...
+# Subtest: an override is checked with the authorization it creates, in the decision transaction
+ok 50 - an override is checked with the authorization it creates, in the decision transaction
+  ---
+  duration_ms: 0.298375
+  type: 'test'
+  ...
+# Subtest: the reuse clean-up revokes only what this run created, and goes on after a failed revocation
+ok 51 - the reuse clean-up revokes only what this run created, and goes on after a failed revocation
+  ---
+  duration_ms: 0.207958
+  type: 'test'
+  ...
+# Subtest: after a burst, every request of it that still waits is closed, also one whose submission reply was lost
+ok 52 - after a burst, every request of it that still waits is closed, also one whose submission reply was lost
+  ---
+  duration_ms: 0.270041
+  type: 'test'
+  ...
+# Subtest: the preparation status of many requests is asked in groups of at most 50
+ok 53 - the preparation status of many requests is asked in groups of at most 50
+  ---
+  duration_ms: 0.145375
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 129.150083

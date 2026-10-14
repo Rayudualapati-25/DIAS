@@ -1,0 +1,11 @@
+E2S-MAC-01 decided REQ-fe3df3f6b3e0fc08 outcome=GRANTED e2e=17.1s
+E2S-MOB-01 decided REQ-3c7a057022be2c7a outcome=DENIED e2e=13.5s
+PASS every auditor review is in the searches-and-reads log on the ledger (2 of 2 found)
+PASS the run caused no refused or failed call (0 since the run began)
+PASS the reduced decision log an ordinary user reads grew by one entry per workflow (96 -> 98, 2 workflows)
+PASS that reduced log shows no name or case file (98 entries)
+PASS each requester finds their own requests with the final outcome (2 of 2 requesters)
+PASS no request is left waiting for an auditor (0 waiting)
+PASS no reusable authorization was created (0 active)
+PASS the phone session ended cleanly (OK (1 test))
+2 of 2 workflows completed and verified (2 planned)

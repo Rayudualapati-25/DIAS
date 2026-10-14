@@ -168,7 +168,7 @@ def references_for(rel: str, token_index, corpus, basename_counts) -> set[str]:
     base = rel.rsplit("/", 1)[-1]
     candidates = {rel}
     parts = rel.split("/")
-    # the path as written relative to any ancestor directory
+    # The path as written relative to any ancestor directory
     for i in range(1, len(parts)):
         candidates.add("/".join(parts[i:]))
     distinctive = (

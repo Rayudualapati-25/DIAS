@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * User accounts, read from and written to the ledger.
- *
- * There is no users table and no application password store. Fabric CA issues
- * the X.509 identity; UserContract holds its authorization profile and status.
- *
- * The fixed audit identity performs the initial public lookup. The selected
- * user's own certificate must then successfully call AuthenticateCurrentUser.
- */
+/** User accounts, read from and written to the ledger. */
 
 const { evaluate, submit } = require('./gateway');
 const { AUTH_ORG, AUTH_USER } = require('../config');
@@ -24,8 +16,10 @@ async function readForLogin(username) {
   }
 }
 
-/** Prove that the backend has the selected enrolled identity and that its
- * certificate attributes still match the active ledger profile. */
+/**
+ * Prove that the backend has the selected enrolled identity and that its certificate attributes still match
+ * the active ledger profile.
+ */
 function authenticate(org, fabricUser, username) {
   return evaluate(org, fabricUser, CONTRACT, 'AuthenticateCurrentUser', username);
 }
@@ -41,9 +35,8 @@ function list(org, fabricUser) {
 }
 
 /**
- * Write a new account onto the ledger, signed by the officer admitting them.
- * The chaincode enforces that this officer holds an administrative role in the
- * department they are registering into.
+ * Write a new account onto the ledger, signed by the officer admitting them. The chaincode enforces that
+ * this officer holds an administrative role in the department they are registering into.
  */
 function create(org, fabricUser, userId, profile) {
   return submit(org, fabricUser, CONTRACT, 'CreateUser', userId, JSON.stringify(profile));

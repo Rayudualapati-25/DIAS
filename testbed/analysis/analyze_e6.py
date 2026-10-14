@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
-"""E6 analysis: the one-hour run with 100 users (after InterSnap's resilience test).
-
-Outputs:
-  - success and failure count per operation type (InterSnap Fig. 13 style);
-  - CPU (cores) and memory (GB) of every machine over the hour, M1-M4 from
-    node-exporter inside the VMs and M5 (the Mac with the model) from the Mac
-    sampler (InterSnap Fig. 14 style, one panel per machine);
-  - per-container mean and peak CPU and peak memory over the hour;
-  - workflow latency over time and read latency against ledger size.
-
-Usage: python3 analyze_e6.py --run <results/e6-...> --mac-samples <csv> --out <dir>
-"""
+"""E6 analysis: the one-hour run with 100 users (after InterSnap's resilience test)."""
 
 import argparse
 import csv
@@ -91,7 +80,10 @@ def mac_series(path, start_s, end_s):
 
 
 def drift(series, start_s, end_s, scale=1.0, span_s=300):
-    """Mean of the first and of the last five minutes of a [(t, value)] series, and the change between them."""
+    """
+    Mean of the first and of the last five minutes of a [(t, value)] series, and the change between
+    them.
+    """
     first = [v / scale for t, v in series if t < start_s + span_s]
     last = [v / scale for t, v in series if t > end_s - span_s]
     if not first or not last:
@@ -100,7 +92,10 @@ def drift(series, start_s, end_s, scale=1.0, span_s=300):
 
 
 def by_ten_minutes(rows, start_ms, bins=6):
-    """Workflows grouped by the ten-minute block in which they started (the last arrival joins the last block)."""
+    """
+    Workflows grouped by the ten-minute block in which they started (the last arrival joins the last
+    block).
+    """
     out = []
     for i in range(bins):
         group = [r for r in rows if min(int((r["startedAt"] - start_ms) // 600000), bins - 1) == i]
@@ -143,10 +138,7 @@ def plot_operations(ops, out):
 
 
 def plot_machines(cpu, mem, mac_rows, start_s, out, name="e6_machines_cpu_memory", marks=None):
-    """One small panel per machine: CPU in cores (top row) and memory in GB (bottom row).
-
-    `marks` are minutes at which to draw a thin vertical line in every panel (for example round starts).
-    """
+    """One small panel per machine: CPU in cores (top row) and memory in GB (bottom row)."""
     machines = ["m1", "m2", "m3", "m4", "m5"]
     titles = {"m1": "M1 (Police,\norderer 1)", "m2": "M2 (Forensics, Prosecution,\norderer 2)",
               "m3": "M3 (Court, Audit,\norderer 3)", "m4": "M4 (backend,\nmonitoring)", "m5": "M5 (Mac:\nLLM server)"}

@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Ledger growth: read time of the list queries against the number of requests
-on the ledger (from probes.jsonl), with the request counts taken from the runs.
-
-Usage: python3 ledger_growth.py --probes <probes.jsonl> --counts <counts.json> --out <dir>
-counts.json maps each probe label to {"requests": N, "decisions": M}.
+"""
+Ledger growth: read time of the list queries against the number of requests on the ledger (from
+probes.jsonl), with the request counts taken from the runs.
 """
 
 import argparse

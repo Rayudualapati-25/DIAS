@@ -1,20 +1,6 @@
 'use strict';
 
-/**
- * The recommendation object M (dias-recommendation-object-v1; design §6, §11).
- *
- * M is what the auditor reviews and what h_M commits to: the generation status,
- * the recommendation (or the error when there is none), the normalized model
- * output, the bindings to the request (context, claims and justification digests,
- * policy) and the model provenance. Timestamps, latencies and token counts are
- * kept outside M, so the same deterministic model output always yields the same
- * object and digest, which keeps retries safe.
- *
- * Model and server text can contain unpaired surrogates (a JSON "\ud800" escape
- * parses to one). Canonical JSON cannot represent them, so they are replaced by
- * U+FFFD here; the replacement is deterministic and the result is what is stored
- * and hashed.
- */
+/** The recommendation object M. */
 
 const { DOMAINS, hashCanonical } = require('../../../chaincode/crimerecords/lib/dias/commitments');
 
@@ -34,7 +20,7 @@ function wellFormed(value) {
   return value;
 }
 
-/** base@revision, plus the adapter digest when an adapter is served. */
+/** Base@revision, plus the adapter digest when an adapter is served. */
 function modelVersionOf(model) {
   const base = `${model.baseModel}@${model.baseModelRevision}`;
   return model.adapterHash ? `${base}+adapter:${model.adapterHash}` : base;

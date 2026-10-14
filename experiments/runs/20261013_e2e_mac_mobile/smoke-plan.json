@@ -1,0 +1,45 @@
+{
+ "schema": "dias-e2e-plan-v1",
+ "seed": 99,
+ "perConfig": 2,
+ "auditor": "sp.north",
+ "items": [
+  {
+   "id": "E2E-MAC-01",
+   "config": "mac",
+   "username": "insp.rathore",
+   "recordId": "REC-FIR-001",
+   "action": "view",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MAC-01."
+  },
+  {
+   "id": "E2E-MAC-02",
+   "config": "mac",
+   "username": "const.verma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MAC-02."
+  },
+  {
+   "id": "E2E-MOB-01",
+   "config": "mobile",
+   "username": "insp.rathore",
+   "recordId": "REC-FIR-001",
+   "action": "export",
+   "purpose": "forensic-analysis",
+   "justification": "Needed for forensic analysis of the case material. Synthetic end-to-end experiment request E2E-MOB-01."
+  },
+  {
+   "id": "E2E-MOB-02",
+   "config": "mobile",
+   "username": "const.verma",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "investigation",
+   "justification": "Needed for the ongoing investigation of this case. Synthetic end-to-end experiment request E2E-MOB-02."
+  }
+ ],
+ "sha256": "01ca264f06562395863a4e9f4b5f428bed4f1f2ae00a3bc73fc18e6185453ee8"
+}

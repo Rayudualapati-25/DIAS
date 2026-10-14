@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Fail when the Git publication surface contains secrets or local state.
-
-The check inspects tracked files plus untracked, non-ignored files. That makes it
-useful both in CI and before this repository's first commit.
-"""
+"""Fail when the Git publication surface contains secrets or local state."""
 
 from __future__ import annotations
 
@@ -54,9 +50,8 @@ def publication_files() -> list[str]:
 
 
 def forbidden_path(path: str) -> bool:
-    # Versioned configuration templates are publication inputs, including a
-    # component-local template. Only real or suffixed environment files are
-    # local state.
+    # Versioned configuration templates are publication inputs, including a component-local
+    # template. Only real or suffixed environment files are local state.
     if path == ".env.example" or path.endswith("/.env.example"):
         return False
     if path == ".env" or path.startswith(".env.") or "/.env" in path:

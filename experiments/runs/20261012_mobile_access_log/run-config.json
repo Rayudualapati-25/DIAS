@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-12",
+  "mode": "Android Studio debug app on Medium Phone API 36.1 (Android 16)",
+  "host": "http://10.0.2.2:3001 -> Mac normal DIAS API / Fabric Gateway (diasrecords 3.0, sequence 4)",
+  "model": "untuned Qwen3-14B on port 8081 (unchanged)",
+  "liveDecision": {
+    "requestId": "REQ-79a8697d7f40eaa0",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "investigation",
+    "requester": "insp.sharma",
+    "auditor": "sp.north",
+    "llmRecommendation": "ALLOW",
+    "decision": "FORCE_DENY",
+    "llmAgreement": "NOT_AGREED",
+    "outcome": "DENIED",
+    "outcomeId": "OUTCOME-99b5da4c4a91ab6f",
+    "createdAuthorizationId": null,
+    "synthetic": true
+  },
+  "unit": { "tests": 19, "failures": 0, "errors": 0, "skipped": 0 },
+  "device": {
+    "tests": 31, "failures": 0, "errors": 0, "skipped": 1,
+    "skippedTest": "LiveHostScreenTest.anAuditorDecidesANamedRequestOnThePhoneAndTheLogShowsIt (writes to the ledger; run once separately, see live-auditor-decision.log)"
+  },
+  "everyUser": { "identities": 20, "fullLog": 6, "reducedLogAndOwnRequests": 14, "failures": 0,
+    "note": "run before the review fixes; not repeated afterwards, to add no more events to the ledger" },
+  "testArtifactsOnLedger": { "refusedReviewerLogReads": 17, "file": "refused-probe-events.json",
+    "note": "the first live test runs asked for the reviewer log as non-reviewers; the probe was removed" },
+  "gradleTasks": ["assembleDebug", "testDebugUnitTest", "lintDebug", "connectedDebugAndroidTest"],
+  "networkArguments": {
+    "apiBase": "http://10.0.2.2:3001",
+    "reverseBase": "http://127.0.0.1:3001",
+    "username": "insp.sharma",
+    "reviewerUsername": "sp.north"
+  }
+}

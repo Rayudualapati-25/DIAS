@@ -1,27 +1,12 @@
 'use strict';
 
-/**
- * Metrics for a binary advisory recommender.
- *
- * The asymmetry that matters is recorded explicitly. A false ALLOW is a
- * recommendation to release material the policy protects; a false DENY delays
- * legitimate work. Both are reported as counts and rates, never folded into a
- * single accuracy number, because averaging them hides the one that matters.
- *
- * A response that is not schema-valid is NOT a wrong decision — it is an absent
- * one. Counting an unparseable answer as a DENY would flatter any model that
- * fails safe by accident, so invalid responses are excluded from the decision
- * metrics and reported separately as a validity rate.
- */
+/** Metrics for a binary advisory recommender. */
 
 const CLASSES = Object.freeze(['ALLOW', 'DENY']);
 
 const rate = (numerator, denominator) =>
   (denominator === 0 ? null : Number((numerator / denominator).toFixed(6)));
 
-/**
- * @param {Array<{expected: object, predicted: object|null, status: string}>} results
- */
 function confusion(results) {
   const matrix = { ALLOW: { ALLOW: 0, DENY: 0 }, DENY: { ALLOW: 0, DENY: 0 } };
   for (const result of results) {
@@ -50,8 +35,8 @@ function percentile(values, q) {
 }
 
 /**
- * Wilson score interval. A proportion from a few hundred examples needs one:
- * quoting 0.91 without it invites a comparison the sample cannot support.
+ * Wilson score interval. A proportion from a few hundred examples needs one: quoting 0.91 without it
+ * invites a comparison the sample cannot support.
  */
 function wilson(successes, total, z = 1.96) {
   if (total === 0) return null;
@@ -66,10 +51,6 @@ function wilson(successes, total, z = 1.96) {
   };
 }
 
-/**
- * @param {Array} results one entry per evaluated example
- * @returns {object} every metric the evaluation plan requires
- */
 function summarize(results) {
   const total = results.length;
   const valid = results.filter((r) => r.predicted !== null);
@@ -84,8 +65,8 @@ function summarize(results) {
   const deny = perClass(matrix, 'DENY');
   const correct = matrix.ALLOW.ALLOW + matrix.DENY.DENY;
 
-  // Balanced accuracy is the mean of the two recalls, so a model that always
-  // says DENY scores 0.5 rather than the class prior.
+  // Balanced accuracy is the mean of the two recalls, so a model that always says DENY scores 0.5 rather
+  // than the class prior.
   const balanced = allow.recall === null || deny.recall === null
     ? null : Number(((allow.recall + deny.recall) / 2).toFixed(6));
   const macroF1 = allow.f1 === null || deny.f1 === null
@@ -123,8 +104,7 @@ function summarize(results) {
     allow,
     deny,
 
-    // The safety guardrail, stated as a count and a rate over the examples that
-    // could have produced it.
+    // The safety guardrail, stated as a count and a rate over the examples that could have produced it.
     falseAllow: {
       count: matrix.DENY.ALLOW,
       ofDenyExamples: rate(matrix.DENY.ALLOW, matrix.DENY.ALLOW + matrix.DENY.DENY),

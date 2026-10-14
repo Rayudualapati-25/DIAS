@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Testbed layout figure: four VMs joined by a Docker Swarm overlay network, and
-the Mac that hosts them and serves the LLM.
-
-Usage: python3 testbed_diagram.py --out <dir>
+"""
+Testbed layout figure: four VMs joined by a Docker Swarm overlay network, and the Mac that hosts
+them and serves the LLM.
 """
 
 import argparse

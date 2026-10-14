@@ -1,0 +1,4 @@
+setup,level,bursts,requested,decided,verified,failed,makespanMeanMs,makespanMinMs,makespanMaxMs,secondsPerRequest,decisionsPerMinuteMean,pooledRequests,submitMedianMs,submitP95Ms,submitMaxMs,adviceReadyMedianMs,adviceReadyMaxMs,decidedAfterMedianMs,decidedAfterP95Ms,decidedAfterMaxMs,adviceIntervalMedianMs,decisionLagMedianMs,decisionLagMaxMs,drainMeanMs
+mac-only,100,1,100,100,100,0,898275.8,898275.8,898275.8,9,6.7,100,870.1,1172.8,1200.8,447587.2,895850.5,449895,849597.7,898275.8,9029.1,2489.1,2717.8,16537.9
+phone-only,100,1,100,100,100,0,890154.5,890154.5,890154.5,8.9,6.7,100,811.5,1162.6,1193.5,469989.6,887651.8,472539.7,850359.3,890154.5,9194.5,2538.4,2703,9462.8
+combined,100,1,100,100,100,0,998358.4,998358.4,998358.4,10,6,100,798,1139.8,1169,529336.6,995869.8,531831,954242.7,998358.4,10006,2489.2,2686.6,13190.3

@@ -1,10 +1,6 @@
 'use strict';
 
-/**
- * Multi-machine testbed support: peer addresses from settings, and the
- * experiment timing trace. Both are off by default; these tests pin that the
- * defaults are unchanged and that the traced path behaves like the library's.
- */
+/** Multi-machine testbed support: peer addresses from settings, and the experiment timing trace. */
 
 const fs = require('fs');
 const os = require('os');

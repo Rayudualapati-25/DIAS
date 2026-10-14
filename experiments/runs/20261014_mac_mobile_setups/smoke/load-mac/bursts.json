@@ -1,0 +1,54 @@
+[
+ {
+  "id": "L-mac-only-02-r1",
+  "setup": "mac-only",
+  "level": 2,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T01:25:02.718Z",
+  "requested": 2,
+  "accepted": 2,
+  "decided": 2,
+  "verified": 2,
+  "failed": 0,
+  "makespanMs": 37003.1,
+  "decisionsPerMinute": 3.2,
+  "submitMs": {
+   "n": 2,
+   "min": 2077.2,
+   "median": 2077.2,
+   "mean": 2082.3,
+   "p95": 2087.4,
+   "max": 2087.4
+  },
+  "adviceReadyAfterMs": {
+   "n": 2,
+   "min": 16825.5,
+   "median": 16825.5,
+   "mean": 25857.7,
+   "p95": 34889.9,
+   "max": 34889.9
+  },
+  "decidedAfterMs": {
+   "n": 2,
+   "min": 18959.1,
+   "median": 18959.1,
+   "mean": 27981.1,
+   "p95": 37003.1,
+   "max": 37003.1
+  },
+  "quietBeforeMs": 20152.8,
+  "drainMs": 4558.5,
+  "checks": [
+   {
+    "name": "L-mac-only-02-r1: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "2 of 2 found"
+   },
+   {
+    "name": "L-mac-only-02-r1: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ]
+ }
+]

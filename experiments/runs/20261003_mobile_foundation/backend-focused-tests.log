@@ -1,0 +1,76 @@
+
+
+  mobile case batches
+    ✔ covers the baseline exactly in bounded, stable, duplicate-free pages
+    ✔ handles an empty list and a final exact-sized page
+    ✔ rejects forged, expired, login-token and other-account cursors
+    ✔ rejects continuation if the visible case snapshot changes
+    ✔ validates limits and cursor shapes without coercing arrays
+    ✔ requires authentication, validates before reading, and preserves the Fabric identity
+
+  case-file lookup
+    ✔ finds a case file through the public index for an officer outside the owning station
+    ✔ answers 404 when the index holds no such case file
+    ✔ refuses a malformed identifier before reaching the ledger
+    ✔ returns only the public index fields even if more come back
+
+  officer administration guard
+    ✔ lets a district head of the authority organisation admit officers to any department
+    ✔ refuses everyone else before a certificate is issued
+
+  security configuration
+    ✔ fails fast when production has no JWT secret
+    ✔ retains a loudly warned fallback for local development only
+    ✔ defaults CORS to the local API origin and accepts an explicit origin (52ms)
+    ✔ rejects a wildcard CORS configuration
+    ✔ allows only mutually exclusive LLM and legacy policy modes (75ms)
+    ✔ resolves a relative agency vault path from the repository root
+    ✔ allows same-origin or originless requests and rejects other origins
+    ✔ emits CORS headers only for the configured browser origin
+
+  Fabric CA enrolment secrets
+    ✔ generates distinct URL-safe 256-bit secrets
+
+  accessLogger.describe
+    ✔ records a DIAS request action and correlates its Fabric request ID
+    ✔ classifies a direct record lookup as a search for that identifier
+    ✔ records auditor decisions without the auditor reason
+    ✔ gives retired SEAL-era routes only a generic action and never their request body
+    ✔ names current DIAS request and authorization routes
+    ✔ names a case read and current request audit routes
+    ✔ records a gated metadata read as its own action with the decision that unlocked it
+    ✔ records reading one decision against its record and decision
+    ✔ does not mistake the document-request routes for a record called "document-requests"
+    ✔ records a full-document request against its record and decision
+    ✔ names the case list instead of a generic api path
+    ✔ keeps existing classifications unchanged
+
+  access-log policy (plan step 6)
+    ✔ names every current API route with its own action
+    ✔ copies only identifiers into the new targets, never free text
+    ✔ gives every named action a class, and an unknown action the sensitive class
+    ✔ in security mode logs sensitive reads always and other calls only when refused or failed
+    ✔ in all mode logs every call, as v2 did
+    ✔ defaults to security and refuses an unknown mode
+
+  access-log policy coverage
+    ✔ classifies the action of every mounted route explicitly
+
+  chaincode error status mapping
+    ✔ maps "DIAS_AUDITOR_INACTIVE" to 403
+    ✔ maps "DIAS_AUDITOR_OUT_OF_DISTRICT" to 403
+    ✔ maps "DIAS_AUDITOR_CLEARANCE" to 403
+    ✔ maps "unauthorized" to 403
+    ✔ maps "DIAS_REQUEST_EXPIRED" to 409
+    ✔ maps "DIAS_STALE_POLICY" to 409
+    ✔ maps "DIAS_COMMITMENT_CONFLICT" to 409
+    ✔ maps "DIAS_NO_ACTIVE_POLICY" to 409
+    ✔ maps "DIAS_LEGACY_RECORD" to 409
+    ✔ maps "DIAS_SIGNATURE_INVALID" to 422
+    ✔ maps "DIAS_NOTE_REQUIRED" to 422
+    ✔ maps "access request" to 422
+    ✔ answers through asyncRoute with the mapped status and the contract sentence
+
+
+  53 passing (278ms)
+

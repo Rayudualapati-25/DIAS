@@ -37,8 +37,7 @@ describe('AuditContract', () => {
         username: 'sp.test', decision: 'FORCE_ALLOW', llmAgreement: 'NOT_AGREED',
       });
       expect(result.summary.outcome).to.include({ outcome: 'GRANTED', basis: 'AUDITOR_DECISION' });
-      // v3: request, pre-review commitment and decision are three transactions
-      // (paper Algorithm 1: two commits before review, one atomic final commit).
+      // v3: request, pre-review commitment and decision are three transactions.
       expect(result.transactions.map((transaction) => transaction.stages)).to.deep.equal([
         ['ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED'],
         ['RECOMMENDATION_COMMITTED'],
@@ -133,6 +132,16 @@ describe('AuditContract', () => {
       const events = JSON.parse(await audit.QueryAccessEvents(asCaller(CALLERS.auditor, state), '50'));
       expect(events).to.have.length(1);
       await expect(audit.QueryAccessEvents(state, '50')).to.be.rejectedWith(/requires membership in/);
+    });
+
+    it('refuses the searches-and-reads log to a member of a reviewer organisation without a reviewer role', async () => {
+      const state = buildMockContext(CALLERS.inspector);
+      await audit.RecordAccessEvent(state, 'record.read', '{}', 'ok', '200');
+      // Since 2026-10-14 every officer reads the request log; this log stays with the reviewers.
+      for (const role of ['public-prosecutor', 'court-clerk']) {
+        const member = { ...CALLERS.prosecutor, attrs: { ...CALLERS.prosecutor.attrs, role } };
+        await expect(audit.QueryAccessEvents(asCaller(member, state), '50')).to.be.rejectedWith(/requires role in/);
+      }
     });
 
     it('deduplicates a retried application event by signing identity and rejects changed data', async () => {

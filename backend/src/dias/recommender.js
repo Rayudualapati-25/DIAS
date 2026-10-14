@@ -1,13 +1,8 @@
 'use strict';
 
 /**
- * DIAS recommendation call: verified request + governance policy context +
- * untrusted justification -> an advisory ALLOW/DENY recommendation, or an
- * explicit generation-failure status with no recommendation.
- *
- * Provenance is generated here, never by the model. The recommender returns the
- * model's recommendation unchanged whenever it satisfies the response schema; it
- * never consults a rule engine and never grants access.
+ * DIAS recommendation call: verified request + governance policy context + untrusted justification -> an
+ * advisory ALLOW/DENY recommendation, or an explicit generation-failure status with no recommendation.
  */
 
 const { sha256, hashObject } = require('../../../policies/lib/bundle');
@@ -32,9 +27,9 @@ const PROVENANCE_SCHEMA_VERSION = 'dias-recommendation-provenance-v1';
 const DEFAULTS = Object.freeze({ maxPromptChars: 24000, maxTokens: 256, timeoutMs: 60000 });
 
 /**
- * v2 is the live prompt (verified context plus a separate claims block). v1 is
- * kept only so the published dataset's evaluation can be reproduced exactly: its
- * inputs are v1-shaped and its provenance hashes follow the v1 rules.
+ * v2 is the live prompt (verified context plus a separate claims block). v1 is kept only so the published
+ * dataset's evaluation can be reproduced exactly: its inputs are v1-shaped and its provenance hashes follow
+ * the v1 rules.
  */
 const PROMPTS = Object.freeze({
   v2: Object.freeze({
@@ -237,12 +232,8 @@ function createRecommender({
   }
 
   /**
-   * A failure the backend determined before or instead of an inference call:
-   * a committed-hash mismatch, or a policy bundle that is not the active one.
-   * The hashes come from the ledger rather than from anything recomputed here,
-   * because the point of these statuses is that what we hold cannot be trusted.
-   * Provenance has exactly one author, so this shares the shape `recommend`
-   * produces and no caller ever assembles provenance of its own.
+   * A failure the backend determined before or instead of an inference call: a committed-hash mismatch, or
+   * a policy bundle that is not the active one.
    */
   function unavailable({
     requestId, verifiedRequestHash: committedRequestHash, requesterClaimsHash: committedClaimsHash = null,

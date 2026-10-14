@@ -1,21 +1,6 @@
 'use strict';
 
-/**
- * The auditor note, made durable before its decision (design §7, §11; paper
- * §IV-E, Algorithm 1 lines 18 and 29–30).
- *
- * The note text stays off-chain and the decision carries only its digest h_N:
- *   1. validate the text (1–2,000 characters, not only whitespace);
- *   2. stage {noteHash, text, decision} in the review store;
- *   3. submit the decision;
- *   4. mark the note committed.
- * A failed submission is settled by reading the decision back from the ledger,
- * and notes still staged when a process stopped are settled at start-up.
- *
- * The ledger and the review store are not updated atomically. A committed
- * decision whose note was later lost keeps its h_N, which proves only that a
- * note with that digest existed when the decision was made.
- */
+/** The auditor note, made durable before its decision. */
 
 const { DOMAINS, hashText } = require('../../../chaincode/crimerecords/lib/dias/commitments');
 
@@ -45,13 +30,7 @@ function committedNoteRecord(recorded, local) {
   };
 }
 
-/**
- * Settle the staged notes of one request against the ledger's review read:
- * - decided: the note whose digest the decision carries is committed, and every
- *   other staged note is dropped;
- * - closed without a decision (expired, cancelled): every staged note is dropped;
- * - still awaiting review: nothing changes.
- */
+/** Settle the staged notes of one request against the ledger's review read. */
 function settleStagedNotes({ store, requestId, review }) {
   const entry = store.read(requestId);
   const staged = entry ? entry.stagedNotes || [] : [];

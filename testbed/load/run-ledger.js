@@ -1,27 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * E3: capacity of the blockchain part alone, one contract function at a time.
- *
- * A closed-loop fixed-load driver (the same idea as Hyperledger Caliper's
- * fixed-load rate controller): at each level, exactly C transactions are kept
- * in flight — C simultaneous clients, each sending its next transaction as soon
- * as the previous one returns. Levels C = 10, 25, 50, 75, 100.
- *
- * For every level the rounds are:
- *   W1 CreateAccessRequest    (write; the 100 load users as requesters), 60 s
- *   W2 SubmitAuditorDecision  (write; the Audit district heads decide every
- *                              request W1 created, so nothing is left pending)
- *   R1 GetRequest             (read; evaluate only, no ordering), 30 s
- *   R2 QueryAccessDecisions   (read; the public decision log, newest 50), 30 s
- *
- * Each write is timed in three stages with the Fabric Gateway client:
- * endorsement, hand-off to the ordering service, and the wait until the block
- * holding it is committed. No LLM is involved.
- *
- * Usage: node testbed/load/run-ledger.js --out /results/<run> [--levels 10,25]
- */
+/** E3: capacity of the blockchain part alone, one contract function at a time. */
 
 const fs = require('fs');
 const path = require('path');
@@ -166,8 +146,8 @@ async function main() {
   const rowsFile = path.join(outDir, 'transactions.jsonl');
   const users = JSON.parse(fs.readFileSync(path.join(__dirname, 'generated', 'users.json'), 'utf8'));
   const auditors = ['sp.north', 'sp.south', 'dj.north'];
-  // Users with a revoked certificate credential are left out: their requests are
-  // policy denials, not ledger load.
+  // Users with a revoked certificate credential are left out: their requests are policy denials, not ledger
+  // load.
   const requesterContracts = users.filter((user) => user.certCredentialStatus === 'active')
     .map((user) => ({ user, contract: contractFor(user.org, user.username, 'AccessContract') }));
   const auditorContracts = auditors.map((username) => contractFor('audit', username, 'AccessContract'));

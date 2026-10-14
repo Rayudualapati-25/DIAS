@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-"""E5 analysis: whole-system latency, components, throughput, accuracy and
-resources at 10, 25, 50, 75 and 100 simultaneous users.
-
-Usage: python3 analyze_e5.py --run <results/e5-...> --out <dir>
-Every number written here is computed from the raw rows of the run, the
-backend trace and Prometheus; nothing is typed in by hand.
+"""
+E5 analysis: whole-system latency, components, throughput, accuracy and resources at 10, 25, 50, 75
+and 100 simultaneous users.
 """
 
 import argparse
@@ -55,9 +52,10 @@ def wilson(k, n, z=1.959964):
 
 
 def resources(windows, container_csv):
-    """Per machine (node-exporter via Prometheus) and per container (docker-stats sampler)
-    CPU in cores and memory in MB over the batch windows. Container data exist only for
-    windows after the sampler started; windows before it are left out, not guessed."""
+    """
+    Per machine (node-exporter via Prometheus) and per container (docker-stats sampler) CPU in cores
+    and memory in MB over the batch windows.
+    """
     machine = {}
     container = {}
     first = container_stats.first_sample_time(container_csv) if container_csv else None
@@ -228,8 +226,10 @@ SERVICE = [("request_commit", "Request commit (ledger)"), ("llm_inference", "LLM
 
 
 def plot_components(per_level, out):
-    """Top: mean time per workflow including the wait for the model queue.
-    Bottom: the same workflows without the queue wait, so every component is readable."""
+    """
+    Top: mean time per workflow including the wait for the model queue. Bottom: the same workflows
+    without the queue wait, so every component is readable.
+    """
     users = [lv["users"] for lv in per_level]
     x = list(range(len(users)))
     comp = [lv["components_mean_s"] for lv in per_level]

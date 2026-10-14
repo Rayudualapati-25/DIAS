@@ -1,0 +1,211 @@
+{
+ "schema": "dias-setup-steps-run-v1",
+ "planSha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f",
+ "planned": 96,
+ "auditor": "sp.north",
+ "order": [
+  "S-PP-01",
+  "S-MM-01",
+  "S-MP-01",
+  "S-PM-01",
+  "S-PP-02",
+  "S-MP-02",
+  "S-PM-02",
+  "S-MM-02",
+  "S-MM-03",
+  "S-PP-03",
+  "S-PM-03",
+  "S-MP-03",
+  "S-PM-04",
+  "S-MP-04",
+  "S-PP-04",
+  "S-MM-04",
+  "S-PM-05",
+  "S-PP-05",
+  "S-MM-05",
+  "S-MP-05",
+  "S-MP-06",
+  "S-MM-06",
+  "S-PP-06",
+  "S-PM-06",
+  "S-MM-07",
+  "S-PP-07",
+  "S-PM-07",
+  "S-MP-07",
+  "S-MP-08",
+  "S-MM-08",
+  "S-PP-08",
+  "S-PM-08",
+  "S-MP-09",
+  "S-PM-09",
+  "S-PP-09",
+  "S-MM-09",
+  "S-MM-10",
+  "S-PP-10",
+  "S-MP-10",
+  "S-PM-10",
+  "S-PM-11",
+  "S-PP-11",
+  "S-MP-11",
+  "S-MM-11",
+  "S-PP-12",
+  "S-MP-12",
+  "S-PM-12",
+  "S-MM-12",
+  "S-PP-13",
+  "S-MP-13",
+  "S-PM-13",
+  "S-MM-13",
+  "S-MM-14",
+  "S-MP-14",
+  "S-PP-14",
+  "S-PM-14",
+  "S-PM-15",
+  "S-MP-15",
+  "S-PP-15",
+  "S-MM-15",
+  "S-MP-16",
+  "S-PM-16",
+  "S-MM-16",
+  "S-PP-16",
+  "S-MP-17",
+  "S-PP-17",
+  "S-PM-17",
+  "S-MM-17",
+  "S-PM-18",
+  "S-MP-18",
+  "S-MM-18",
+  "S-PP-18",
+  "S-MM-19",
+  "S-MP-19",
+  "S-PM-19",
+  "S-PP-19",
+  "S-PP-20",
+  "S-MM-20",
+  "S-MP-20",
+  "S-PM-20",
+  "S-PM-21",
+  "S-MP-21",
+  "S-MM-21",
+  "S-PP-21",
+  "S-PM-22",
+  "S-MP-22",
+  "S-MM-22",
+  "S-PP-22",
+  "S-MP-23",
+  "S-PP-23",
+  "S-PM-23",
+  "S-MM-23",
+  "S-MM-24",
+  "S-MP-24",
+  "S-PP-24",
+  "S-PM-24"
+ ],
+ "startedAtUtc": "2026-10-14T08:26:09.219Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "officerPhone": "emulator-5556",
+  "auditorPhone": "emulator-5558",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 62,
+  "chaincodeContainers": [
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767"
+  ]
+ },
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": {
+  "auditor": 154,
+  "officer": 154.4
+ },
+ "finishedAtUtc": "2026-10-14T09:42:23.930Z",
+ "ran": 96,
+ "completed": 96,
+ "failed": 0,
+ "endChecks": [
+  {
+   "name": "workflows 1 to 24: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "24 of 24 found"
+  },
+  {
+   "name": "workflows 1 to 24: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "workflows 25 to 48: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "24 of 24 found"
+  },
+  {
+   "name": "workflows 25 to 48: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "workflows 49 to 72: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "24 of 24 found"
+  },
+  {
+   "name": "workflows 49 to 72: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "workflows 73 to 96: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "24 of 24 found"
+  },
+  {
+   "name": "workflows 73 to 96: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "the auditor's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "the officer's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "an officer outside the reviewers reads every workflow in the access log: who, which file, decision, outcome",
+   "ok": true,
+   "detail": "96 of 96 shown to clerk.das"
+  },
+  {
+   "name": "that log holds no transaction identifier and no digest",
+   "ok": true,
+   "detail": "500 entries read"
+  },
+  {
+   "name": "while a request waited, another officer saw who asked for which file but not the advice; the auditor saw the advice",
+   "ok": true,
+   "detail": "4 of 4 sampled workflows"
+  },
+  {
+   "name": "each requester finds their own requests with the final outcome",
+   "ok": true,
+   "detail": "12 of 12 requesters"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization is left active",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

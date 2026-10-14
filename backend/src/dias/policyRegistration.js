@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Register and activate the governance policy on the ledger (design §5).
- *
- * The digest is computed here from the canonical bundle; the ledger never holds
- * the policy text. Registration and activation need two different AuditMSP
- * district heads, so this takes two identities. It is safe to run again: an
- * already active policy is left alone, and a version registered under a
- * different digest is an error rather than something to overwrite.
- */
+/** Register and activate the governance policy on the ledger. */
 
 const path = require('path');
 const { loadBundle } = require('../../../policies/lib/bundle');

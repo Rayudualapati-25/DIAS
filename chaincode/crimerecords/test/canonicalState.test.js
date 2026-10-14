@@ -1,18 +1,6 @@
 'use strict';
 
-/**
- * Storage determinism.
- *
- * Fabric compares endorsers' write sets byte for byte. JSON.stringify preserves
- * insertion order, so two peers that read a stored value whose keys are ordered
- * differently produce different bytes for a logically identical update, and
- * every later write to that key fails endorsement with "ProposalResponsePayloads
- * do not match". The peer log named it exactly: same key set, different key
- * order, "write value mismatch".
- *
- * These tests pin both halves of the fix: the serializer is order-independent,
- * and no contract may write JSON to state without it.
- */
+/** Storage determinism. */
 
 const fs = require('fs');
 const path = require('path');
@@ -26,8 +14,8 @@ const CONTRACTS = fs.readdirSync(LIB).filter((f) => f.endsWith('Contract.js'));
 describe('canonical ledger state', () => {
   describe('the serializer is independent of insertion order', () => {
     it('produces identical bytes for the same content inserted in any order', () => {
-      // Exactly the shape that failed on the live network: one peer had read a
-      // value where decisionId came early, another where it had been appended.
+      // Exactly the shape that failed on the live network: one peer had read a value where decisionId came
+      // early, another where it had been appended.
       const asDecided = {
         docType: 'accessRequest',
         requestId: 'req-1',
@@ -99,12 +87,10 @@ describe('canonical ledger state', () => {
 
       it(`${file} never serialises STATE with JSON.stringify`, () => {
         const source = fs.readFileSync(path.join(LIB, file), 'utf8');
-        // JSON.stringify is still correct for two things and only two:
-        //   - transaction return values, which the contract API requires;
-        //   - setEvent payloads, which are fixed object literals in source, so
-        //     their key order is identical on every peer (verified: no event
-        //     payload is built by spreading a value read from state).
-        // What must never happen is JSON.stringify reaching putState.
+        // JSON.stringify is still correct for two things and only two: - transaction return values, which
+        // the contract API requires; - setEvent payloads, which are fixed object literals in source, so
+        // their key order is identical on every peer (verified: no event payload is built by spreading a
+        // value read from state).
         const stateWrite = /putState\s*\([^;]*JSON\.stringify/.test(source);
         expect(
           stateWrite,
@@ -114,8 +100,8 @@ describe('canonical ledger state', () => {
 
       it(`${file} builds no event payload from spread state`, () => {
         const source = fs.readFileSync(path.join(LIB, file), 'utf8');
-        // An event payload IS part of the proposal response, so if one were ever
-        // built by spreading a stored object it would diverge the same way.
+        // An event payload IS part of the proposal response, so if one were ever built by spreading a
+        // stored object it would diverge the same way.
         const events = source.match(/setEvent\([^;]*?\)\);/gs) || [];
         events.forEach((e) => {
           expect(/\.\.\./.test(e), `${file} spreads state into an event payload`)
@@ -127,7 +113,7 @@ describe('canonical ledger state', () => {
     it('every contract imports the shared writer', () => {
       CONTRACTS.forEach((file) => {
         const source = fs.readFileSync(path.join(LIB, file), 'utf8');
-        if (!/putJson\s*\(/.test(source)) return; // a contract that writes nothing is fine
+        if (!/putJson\s*\(/.test(source)) return; // A contract that writes nothing is fine
         expect(source, `${file} uses putJson without importing it`)
           .to.contain("require('./util/state')");
       });

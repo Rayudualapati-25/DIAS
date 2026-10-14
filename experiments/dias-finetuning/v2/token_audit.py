@@ -1,14 +1,6 @@
-"""Token-length audit for the DIAS v2 dataset, using the exact Qwen3 tokenizer
-and the exact chat template mlx-lm applies during training.
-
-max_seq_length must be justified by measurement, not guessed: a value below the
-longest example silently truncates the completion, and the model then learns to
-emit a JSON object that does not close. Every set is measured, and the report
-records how many examples any candidate limit would truncate.
-
-Usage (repository root):
-  HF_HUB_OFFLINE=1 .venv-qwen-policy/bin/python experiments/dias-finetuning/v2/token_audit.py \
-      experiments/dias-finetuning/data-v2-binary <output.json>
+"""
+Token-length audit for the DIAS v2 dataset, using the exact Qwen3 tokenizer and the exact chat
+template mlx-lm applies during training.
 """
 import json
 import statistics

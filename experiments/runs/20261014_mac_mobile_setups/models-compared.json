@@ -1,0 +1,131 @@
+{
+ "lines": [
+  {
+   "measure": "end-to-end median, mac-only",
+   "unit": "ms",
+   "untuned": 13192.7,
+   "v7": 14147.3
+  },
+  {
+   "measure": "end-to-end median, phone-only",
+   "unit": "ms",
+   "untuned": 13316,
+   "v7": 14374.7
+  },
+  {
+   "measure": "end-to-end median, combined",
+   "unit": "ms",
+   "untuned": 13206.9,
+   "v7": 14187.4
+  },
+  {
+   "measure": "end-to-end median, all",
+   "unit": "ms",
+   "untuned": 13226,
+   "v7": 14246.3
+  },
+  {
+   "measure": "model inference median (live)",
+   "unit": "ms",
+   "untuned": 6860,
+   "v7": 7782.9
+  },
+  {
+   "measure": "reuse: first request median",
+   "unit": "ms",
+   "untuned": 14057.2,
+   "v7": 14157.2
+  },
+  {
+   "measure": "reuse: reused request median",
+   "unit": "ms",
+   "untuned": 2096.5,
+   "v7": 2100.3
+  },
+  {
+   "measure": "reuse: requests exercised (of 12)",
+   "unit": "count",
+   "untuned": 12,
+   "v7": 12
+  },
+  {
+   "measure": "load: 25 at once, all decided after (mean of 2), mac-only",
+   "unit": "ms",
+   "untuned": 227519.4,
+   "v7": 258979
+  },
+  {
+   "measure": "load: 25 at once, all decided after (mean of 2), phone-only",
+   "unit": "ms",
+   "untuned": 250895.2,
+   "v7": 282185.5
+  },
+  {
+   "measure": "load: 25 at once, all decided after (mean of 2), combined",
+   "unit": "ms",
+   "untuned": 228979.6,
+   "v7": 252263.1
+  },
+  {
+   "measure": "quality: decisionAccuracy",
+   "unit": "share of valid",
+   "untuned": 0.650647,
+   "v7": 0.973333
+  },
+  {
+   "measure": "quality: validAnswers",
+   "unit": "of 600",
+   "untuned": 541,
+   "v7": 600
+  },
+  {
+   "measure": "quality: falseAllow",
+   "unit": "count",
+   "untuned": 21,
+   "v7": 7
+  },
+  {
+   "measure": "quality: falseDeny",
+   "unit": "count",
+   "untuned": 168,
+   "v7": 9
+  },
+  {
+   "measure": "quality: macroF1",
+   "unit": "score",
+   "untuned": 0.623205,
+   "v7": 0.973333
+  }
+ ],
+ "paired": {
+  "inference": {
+   "n": 96,
+   "median": 804.5,
+   "low": 505.5,
+   "high": 1014.1
+  },
+  "endToEnd": {
+   "n": 93,
+   "median": 944.6,
+   "low": 643.4,
+   "high": 1131.6
+  },
+  "completionTokens": {
+   "n": 96,
+   "median": -20.5,
+   "low": -30,
+   "high": -12
+  }
+ },
+ "agreement": {
+  "requests": 96,
+  "bothAnswered": 93,
+  "sameAdvice": 83,
+  "untunedMatchesPolicy": 87,
+  "v7MatchesPolicy": 92,
+  "untunedAllowWherePolicyDenies": 2,
+  "v7AllowWherePolicyDenies": 4,
+  "untunedNoUsableAdvice": 3,
+  "v7NoUsableAdvice": 0
+ }
+}

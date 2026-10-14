@@ -1,0 +1,479 @@
+{
+  "observedAt": "2026-10-07T15:14:16.272Z",
+  "note": "Current source snapshot at report finalization on October 7; not a fabricated snapshot from the original run time.",
+  "gitHead": "51baeb4da834245097d4121a869a8ceb9f9da0ea",
+  "files": [
+    {
+      "path": "backend/src/config.js",
+      "bytes": 11469,
+      "sha256": "a02d00601f749d0cf8682ec4369bfd341cafa30c317449f0ece0d646edf3a773"
+    },
+    {
+      "path": "backend/src/mobile/casePage.js",
+      "bytes": 2477,
+      "sha256": "e0e6b5db13e3875b06c54b1b807c117b6f6e33a4c77a351d71690a40782163d8"
+    },
+    {
+      "path": "backend/src/routes/mobile.js",
+      "bytes": 1177,
+      "sha256": "41994f130b80bba7a30e4e44c5aeeef670f3dc595158ca58caeb81e29b340677"
+    },
+    {
+      "path": "backend/src/server.js",
+      "bytes": 4203,
+      "sha256": "65ffb2cdef134b02f80a4070816b1a54a6fe3b44446fc58891f460374491cd6f"
+    },
+    {
+      "path": "chaincode/collections-config.json",
+      "bytes": 720,
+      "sha256": "be576619f2b7d57f019c98df9f2de80e2ae6dda34bed5385fd2418993c22dd89"
+    },
+    {
+      "path": "chaincode/crimerecords/.DS_Store",
+      "bytes": 6148,
+      "sha256": "2b834b5ae6866488e831a4a996a66a917b6e10d40b0acf03bc80b25f59a4269c"
+    },
+    {
+      "path": "chaincode/crimerecords/.nyc_output/dfe9666f-7157-4478-9ab7-da9c9f4e56ab.json",
+      "bytes": 376333,
+      "sha256": "fb91da0e81acb119f86220cd74240e1ab3f8cab728fa0dbd7adcaedf2ddf77d5"
+    },
+    {
+      "path": "chaincode/crimerecords/.nyc_output/processinfo/dfe9666f-7157-4478-9ab7-da9c9f4e56ab.json",
+      "bytes": 3227,
+      "sha256": "e36a14737f1e9521e5143cfa860fa050fbee79cfea292645fe181e9fef55404d"
+    },
+    {
+      "path": "chaincode/crimerecords/.nyc_output/processinfo/index.json",
+      "bytes": 3910,
+      "sha256": "3fb5f62c3195ad6907016a31ba539a313a207d29795f87cb10c0e54cbd02e9de"
+    },
+    {
+      "path": "chaincode/crimerecords/META-INF/statedb/couchdb/indexes/indexDocTypeCaseId.json",
+      "bytes": 157,
+      "sha256": "4483f5866d95091ad877e1ed8dcb743af650198413e2cd5d2f26f978263866aa"
+    },
+    {
+      "path": "chaincode/crimerecords/index.js",
+      "bytes": 655,
+      "sha256": "3ecf496b7beb0d9fdfd3d3d10a4543d0635537e05b9ac0bd082ab38e5eea2634"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/accessContract.js",
+      "bytes": 52347,
+      "sha256": "16e2ed9d836741b213169419244f41eeaf878f126915f8e40c9d01a4c092b461"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/auditContract.js",
+      "bytes": 11751,
+      "sha256": "a5cb8fb861541c489de94867589b5e2b4d3b88966aa212112b316dbd4b7ead73"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/auditorAuthority.js",
+      "bytes": 3906,
+      "sha256": "20d3f480f2bc1ae8cac162c67ec25600d585cc6002e623b623340537e963efc6"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/authorization.js",
+      "bytes": 8044,
+      "sha256": "12b99c41cb072f0a8cc2f385df40f15b9f02959086253dfcfe0d32fa0e3da13a"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/commitments.js",
+      "bytes": 4192,
+      "sha256": "2b20863d547d9aa40ae44c34f70af841318651809fb511e33fd653933bc7f62e"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/keys.js",
+      "bytes": 302,
+      "sha256": "ecf3debd1bcf40214eca74bf365a1f3b5fcd579fde0869e2c4d7d24c965bcdf8"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/lifecycle.js",
+      "bytes": 4129,
+      "sha256": "3a1aeb52b6eee477ab062839a4ed22ae1d010f263411a81eabb2631ee9932a80"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/parameters.js",
+      "bytes": 2345,
+      "sha256": "aa68fa1ae5095b338c0ea4e4afe27b770e70cf659f1114bf7badfa345d841eb0"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/policyRegistry.js",
+      "bytes": 3273,
+      "sha256": "dd9f79f11e15e027870a4fb688c34a630049e3935dfd5c63639f092fc23b4412"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/recommendationCommitment.js",
+      "bytes": 7128,
+      "sha256": "180c7c9a46cd4537017370ca3ec9b68ac7b9951d665c41709bb834e20fac79a0"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/recommendationSchema.js",
+      "bytes": 4230,
+      "sha256": "f640ff7c1d5e41eb5dffc17f5b22d074e461498ef6547c72cd4089b4dd9b6279"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/requesterClaims.js",
+      "bytes": 1496,
+      "sha256": "6c7c2e23631d467d476cd9acd3565c582e3ed9ead95542dc20ba9a6cd94ae5ab"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/verifiedRequest.js",
+      "bytes": 4910,
+      "sha256": "f767a6a7ffb7cc758a1c982e874e0fd5a6a5ed9c31360bbc41e65ddbe52c7200"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/dias/verifiedRequestV1.js",
+      "bytes": 5255,
+      "sha256": "320645f9d764c022774e400e3bcf46ad2a22d3a6c21bb29cd042aa99870d276c"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/governanceContract.js",
+      "bytes": 17650,
+      "sha256": "e28fb10a1506dca601747e7f60c3b4ad1c9a3741272d88025cae15de8402665d"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/authority.js",
+      "bytes": 5871,
+      "sha256": "1036edf354a92b141d41557fc523096ca40083dbe0ebc2da5455706d74cddf20"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/controlledDecision.js",
+      "bytes": 11073,
+      "sha256": "d5fb9106d43e705f8cf0c1e598db70b473fc99a922f53be183df4cd1034eed68"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/dynamicPolicy.js",
+      "bytes": 5288,
+      "sha256": "e8cccbe8b692f086a9c08233c1e44f87042f6ff024e440cdb78c9f875a8d86e6"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/llmDecisionProtocol.js",
+      "bytes": 8672,
+      "sha256": "2288849ee4891c729c122972554c07abcbb97d3780219e9df5cfd49f08828da8"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/policyEngine.js",
+      "bytes": 7688,
+      "sha256": "46eb9deff6eb251fe7cd445c079ca7901cf5ca4e5d5fd7eb75abc0d4295028be"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/policyV1.js",
+      "bytes": 4989,
+      "sha256": "fbb606d142be9f09628384c3972e7ebdfee39f47725b2e8d9ab973b34f45599e"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/policy/reasonDecisions.js",
+      "bytes": 734,
+      "sha256": "d79efad4eb407ec1702ec1c305fd60b824ce5689a18ffb420b4a0e7b03863ca6"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/recordContract.js",
+      "bytes": 27223,
+      "sha256": "dda7fef88ca231caf3573380cc8a87bc869f7e67cc8c4d9f2a853de03fd883fa"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/userContract.js",
+      "bytes": 9140,
+      "sha256": "ba97ed444b414661e7f90b6b27085c2bd241acadfe8a08d1f2e50818ea874b0a"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/util/identity.js",
+      "bytes": 2544,
+      "sha256": "56316dca210e9410f23d4ba0c79b51e5b23c56c8a49b3de89dc7a2a29820f793"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/util/state.js",
+      "bytes": 1719,
+      "sha256": "a3faeda59e6d0f965c3e86a6e996b3fecba238f8464fef404eeeca9b913356fb"
+    },
+    {
+      "path": "chaincode/crimerecords/lib/util/validate.js",
+      "bytes": 3160,
+      "sha256": "324ffa59947a74f30ecdcae14a7f65b0fbe3f3b4a96fa18c9db3f66a2f4a3ac9"
+    },
+    {
+      "path": "chaincode/crimerecords/package-lock.json",
+      "bytes": 128392,
+      "sha256": "3a056bb2dfb3c7c284bab6aba78c3439deb6b6182f2e25aed884138c326d9176"
+    },
+    {
+      "path": "chaincode/crimerecords/package.json",
+      "bytes": 918,
+      "sha256": "f41b0026412eeb607d1eaa260b8da21b74dda4dd8e49c793259df36cd1adf07b"
+    },
+    {
+      "path": "chaincode/crimerecords/test/architectureGuard.test.js",
+      "bytes": 3989,
+      "sha256": "f6ee45fd56e214c07ffb4884f040b01d66c701159f415d03b527c39a4fb145a2"
+    },
+    {
+      "path": "chaincode/crimerecords/test/authority.test.js",
+      "bytes": 4989,
+      "sha256": "eef0affb8b8a8911d8ce5d69d549a3294601908e4f5c3939af8604dae339d71c"
+    },
+    {
+      "path": "chaincode/crimerecords/test/canonicalState.test.js",
+      "bytes": 5879,
+      "sha256": "b3ec66f64504c1291b039b665c333cf66f16625e86c2a5531a1845bd2bf69bf4"
+    },
+    {
+      "path": "chaincode/crimerecords/test/commitments.test.js",
+      "bytes": 4656,
+      "sha256": "5dd312de781036d54b966e54002ac42671f450f9fec65928162b1de2cf7ae993"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasAccessSecurity.test.js",
+      "bytes": 12719,
+      "sha256": "1ee897fe982828065f8199d650114cb4b3e279b1c7149e74df509d1592351ca6"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasAccessWorkflow.test.js",
+      "bytes": 19869,
+      "sha256": "4a5fd3a0749b135de60e73ebb506df631f359dd547532fd9ab10782511b9ea88"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasAuditTrail.test.js",
+      "bytes": 8520,
+      "sha256": "68f7bda640c2ddddb23accc5114aed3b90cbef307816fb065101113b1dc31f0a"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasAuditorAuthority.test.js",
+      "bytes": 6229,
+      "sha256": "0abc253b4d967dcc9a9a2b40c2739e935b212f645eedf46b92592b55a6dc1783"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasAuthorization.test.js",
+      "bytes": 9096,
+      "sha256": "f59de321a95df5733811b7754edcb27636ad16771bedcae4869b5d7ecbc3d920"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasLifecycle.test.js",
+      "bytes": 3403,
+      "sha256": "cb9fd354e19ec8f9d051ef2f6e6a4f26c4f79985b3a3e5cc11c6238df4f944ad"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasNoteCommitment.test.js",
+      "bytes": 4824,
+      "sha256": "c6627c4157f4f6e7e65caf2a0d8998f35c2b94bd233f36f3343e4e67673918c2"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasPolicyBinding.test.js",
+      "bytes": 10105,
+      "sha256": "b1252be4a81a81dcd4a367c27a57875cccc08bcecbb801939046102ef070f32d"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasRecommendationCommitment.test.js",
+      "bytes": 13164,
+      "sha256": "0f16a4b294f4c283b7d43ef189d9e01d6de5c4d5421ff437a9b3c17fd99f5ac3"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasRelease.test.js",
+      "bytes": 5904,
+      "sha256": "fb645fd91cb336aa75deca40f0cf98bd949b400fc31ca0e51026f7def1001cc4"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasRequestLifecycle.test.js",
+      "bytes": 6735,
+      "sha256": "3ab2193808727e9c2c914a17b4bf1f83fcba14400ee72e3c00cf26885e63c6bd"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasSchema.test.js",
+      "bytes": 8973,
+      "sha256": "ed289905fcfb96c9584db8570e35227083a480e403e272f4e705429f19aa3e13"
+    },
+    {
+      "path": "chaincode/crimerecords/test/diasTestWorld.js",
+      "bytes": 12479,
+      "sha256": "e26f65c9869dad4624e5d286abe6bdababc5d8ce17f49aad1b61cd5a38392739"
+    },
+    {
+      "path": "chaincode/crimerecords/test/fixtures/commitment-vectors.json",
+      "bytes": 2226,
+      "sha256": "fdaf35fce589e5906e4eeb78351081ab2ccd02f18b9e0da0fa26be9b18da86ac"
+    },
+    {
+      "path": "chaincode/crimerecords/test/governanceContract.test.js",
+      "bytes": 7698,
+      "sha256": "c4736f2979c15407265923c4db86d9f1a43d1be6e14711646517aba43e907096"
+    },
+    {
+      "path": "chaincode/crimerecords/test/legacy/canonicalInputs.test.js",
+      "bytes": 13781,
+      "sha256": "fae582e3a4f268b0b2612b8001924899a6425fa64ea5f33d02bfac20145607d5"
+    },
+    {
+      "path": "chaincode/crimerecords/test/legacy/dynamicPolicy.test.js",
+      "bytes": 7069,
+      "sha256": "7bfa96bb8cb9ea04ce0a49bb1167f4b256c873d0564e9ff9b1217973a6f8e9c6"
+    },
+    {
+      "path": "chaincode/crimerecords/test/legacy/policyEngine.test.js",
+      "bytes": 6424,
+      "sha256": "9b66d9ff5676523151de788478c2ba603856c9ca695477c3397b2bcdd9c7a7c2"
+    },
+    {
+      "path": "chaincode/crimerecords/test/legacy/structuredExplanation.test.js",
+      "bytes": 12483,
+      "sha256": "acf4a7d9df62978005f1e99df9af3e636063696b64e403ac0b792a2fe23f578b"
+    },
+    {
+      "path": "chaincode/crimerecords/test/recordContract.test.js",
+      "bytes": 26653,
+      "sha256": "9bd08e29cded52a3c535e94254d056f3fd13abb890a852d84b5c7326cd5b9d13"
+    },
+    {
+      "path": "chaincode/crimerecords/test/testHelpers.js",
+      "bytes": 6774,
+      "sha256": "cf49830b1fcc42a05d96e05fa859b4b645e3ea770f20d98df2fbc75dab9a2d9e"
+    },
+    {
+      "path": "chaincode/crimerecords/test/userContract.test.js",
+      "bytes": 8872,
+      "sha256": "96b80311ecebb79ce73554cbd4adda2197030e0329bd00fdb3902fb152534e15"
+    },
+    {
+      "path": "experiments/check-dias-host.js",
+      "bytes": 7695,
+      "sha256": "e31cb372a510699cc2bb2c5221cf7244d7e579899d76f45eeefb16bf910bcd5f"
+    },
+    {
+      "path": "experiments/run-mobile-foundation.js",
+      "bytes": 5118,
+      "sha256": "8742823ecaf4fa411869d6c81dcd368336d401a633d1107c09eda026d9cd8eca"
+    },
+    {
+      "path": "mobile/android/app/build.gradle",
+      "bytes": 973,
+      "sha256": "31b4dcdbd12a91c166d33a4dee5f0d6300a552d7c5cbf0069721baff798ca5e4"
+    },
+    {
+      "path": "mobile/android/app/src/androidTest/kotlin/org/dias/mobile/data/ActivitySmokeTest.kt",
+      "bytes": 2543,
+      "sha256": "a0eec0c7795bd0374c3354bbf338e0316b4a1504d1764e50e774a1d75c82be17"
+    },
+    {
+      "path": "mobile/android/app/src/androidTest/kotlin/org/dias/mobile/data/FoundationTest.kt",
+      "bytes": 5445,
+      "sha256": "c5edbd0acfde6f3c50d4e794d2b79a9df0e380ec5e984408697d0d87db3e8983"
+    },
+    {
+      "path": "mobile/android/app/src/androidTest/kotlin/org/dias/mobile/data/HostConnectionTest.kt",
+      "bytes": 1875,
+      "sha256": "4663be91e874b04fc8ac564d9a15812dce969e546ed10af11a41d90cb25520f5"
+    },
+    {
+      "path": "mobile/android/app/src/debug/res/xml/network_security_config.xml",
+      "bytes": 402,
+      "sha256": "073ac2ac23d6c6206291944d55093ad6f22a3eb4bbc16a1795905b19db171a5e"
+    },
+    {
+      "path": "mobile/android/app/src/main/AndroidManifest.xml",
+      "bytes": 977,
+      "sha256": "9fd2b135e5e6b6b9ce3f4dd3056c9c07df8c1f2b6c2a24471b57f0362f8184f0"
+    },
+    {
+      "path": "mobile/android/app/src/main/kotlin/org/dias/mobile/data/ApiClient.kt",
+      "bytes": 3924,
+      "sha256": "fd2e10eed4127819b33ddfcec343fb268a63c364ff4da6996a6fabc4e044c630"
+    },
+    {
+      "path": "mobile/android/app/src/main/kotlin/org/dias/mobile/data/CaseDatabase.kt",
+      "bytes": 3998,
+      "sha256": "c88e4788540ce4910da67219a81f625a44a0f9cc51c196e74fda6ec3ebe4e0e6"
+    },
+    {
+      "path": "mobile/android/app/src/main/kotlin/org/dias/mobile/data/CaseRepository.kt",
+      "bytes": 1071,
+      "sha256": "71f2fa68f828ea87ef277ca976d3eb4b67faef36c0cab8798798c5d0c62fc22a"
+    },
+    {
+      "path": "mobile/android/app/src/main/kotlin/org/dias/mobile/data/HostAddress.kt",
+      "bytes": 1020,
+      "sha256": "74319197d4ca9631ea3105879419cc739b87908139548742c033f01f558352a8"
+    },
+    {
+      "path": "mobile/android/app/src/main/kotlin/org/dias/mobile/domain/Models.kt",
+      "bytes": 1405,
+      "sha256": "820a2624f9200f381dd607310b870ce2f7f0a3e416195e3211cdef2d9bb3064c"
+    },
+    {
+      "path": "mobile/android/app/src/main/kotlin/org/dias/mobile/presentation/MainActivity.kt",
+      "bytes": 11368,
+      "sha256": "6221685742ce0e22b7a04a9803c31de43672904e56a7f92babacb1955523e26c"
+    },
+    {
+      "path": "mobile/android/app/src/main/res/drawable/ic_dias.xml",
+      "bytes": 462,
+      "sha256": "acd4506ed070608db29327bffbf1d20523b83e78c981575bc1cd118d2c7e7fb1"
+    },
+    {
+      "path": "mobile/android/app/src/main/res/values/styles.xml",
+      "bytes": 392,
+      "sha256": "d2778bf2efcceb04c3708f9c1625de143473ebd0709ce27b6343de00fc983e52"
+    },
+    {
+      "path": "mobile/android/app/src/main/res/xml/data_extraction_rules.xml",
+      "bytes": 630,
+      "sha256": "eda9dddce1e895de1efd716fe75e244187bf8f91a3bb7444c6ea1731e51c74a8"
+    },
+    {
+      "path": "mobile/android/app/src/main/res/xml/network_security_config.xml",
+      "bytes": 146,
+      "sha256": "dea35ebed76536c24c13f74036f02dc874f944147cb3a49c2ad0550f71e3e0c7"
+    },
+    {
+      "path": "mobile/android/app/src/test/kotlin/org/dias/mobile/data/HostAddressTest.kt",
+      "bytes": 1522,
+      "sha256": "7df9d4b2c1d1b4beab1b1f5890e8549970266b4028858e6ba24b7d13bdaf9ed5"
+    },
+    {
+      "path": "mobile/android/build.gradle",
+      "bytes": 73,
+      "sha256": "47e094b953d3951ab097c173a334a41a5ae80f9d9980f459b1b7b48436df7805"
+    },
+    {
+      "path": "mobile/android/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 340,
+      "sha256": "5fcc8974afe5ad4cc548de11ede66be7c478b6655c75f4ac53ab09e95dd44dbd"
+    },
+    {
+      "path": "mobile/android/settings.gradle",
+      "bytes": 282,
+      "sha256": "c0c07da1b2b8010813213ff4364fe28209555d8b0067bb275cf1cda735b5da8f"
+    },
+    {
+      "path": "network/scripts/createChannel.sh",
+      "bytes": 2184,
+      "sha256": "3df19312cfdd62a93b42eaafff2a5eae72029b91aa2bdbfab347374ad4af4b13"
+    },
+    {
+      "path": "network/scripts/deployCC.sh",
+      "bytes": 5836,
+      "sha256": "3b4f6885281aa8d6c17b318f5aebe46c20474743de739cc2475267e97a3743e9"
+    },
+    {
+      "path": "scripts/mobile-connect.sh",
+      "bytes": 1030,
+      "sha256": "de125b0a41f1006afe2e237aafc58226d803b0da074fabfb342260bb02585779"
+    },
+    {
+      "path": "scripts/mobile-host.js",
+      "bytes": 712,
+      "sha256": "f495eac6047b0d905df94c15b7587a606122b294d4ab83b00e51bfaa0ded5fc3"
+    }
+  ],
+  "deploymentArtifacts": [
+    {
+      "path": "experiments/runs/20261006_dias_host_startup/channel-artifacts/diaschannel.block",
+      "bytes": 34408,
+      "sha256": "d3b53ca0c4655b85e604377940c4db337a4cb3b0961f5621b856eb5ebab9608e"
+    },
+    {
+      "path": "experiments/runs/20261006_dias_host_startup/channel-artifacts/diasrecords_2.2.tar.gz",
+      "bytes": 77822,
+      "sha256": "55399cc675b5773ad9579f788c6e9a265ff056a65a8d975d11e1483f83a7afd5"
+    }
+  ]
+}

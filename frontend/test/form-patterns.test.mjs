@@ -1,9 +1,4 @@
-/**
- * HTML `pattern` attributes are compiled by current browsers with the RegExp `v`
- * flag. A pattern that is valid without it — an unescaped `-` at the end of a
- * character class, for example — is then invalid, the browser logs an error on
- * every submit, and the field silently loses its validation.
- */
+/** HTML `pattern` attributes are compiled by current browsers with the RegExp `v` flag. */
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

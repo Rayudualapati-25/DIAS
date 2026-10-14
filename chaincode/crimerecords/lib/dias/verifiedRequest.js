@@ -1,21 +1,6 @@
 'use strict';
 
-/**
- * The verified context C a DIAS request is evaluated on (dias-verified-context-v3).
- *
- * Built only from committed Fabric state — the certificate-bound UserProfile, the
- * case assignment, the record metadata — and the requester's committed action and
- * purpose. Nothing the requester merely asserts belongs here: a self-declared
- * emergency is a requester claim (./requesterClaims.js), and v1's
- * approvalTokenPresent, which no mechanism ever set, is gone.
- *
- * Identity and record identifiers are deliberately absent: they are bound through
- * the request record and the exact scope σ (design decision D-01).
- *
- * h_C is the canonical digest of C in the `context` domain
- * (docs/design/dias-v3-ledger-schema.md §4). The v1 shape survives only in
- * ./verifiedRequestV1.js for the historical prompt and dataset.
- */
+/** The verified context C a DIAS request is evaluated on (dias-verified-context-v3). */
 
 const { DOMAINS, hashCanonical } = require('./commitments');
 

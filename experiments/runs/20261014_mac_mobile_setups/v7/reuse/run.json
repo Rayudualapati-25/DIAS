@@ -1,0 +1,165 @@
+{
+ "schema": "dias-setup-reuse-run-v1",
+ "planSha256": "39cf70993234eba363a341efccc57cd5d383cd10856d26e2988247ae79beb04f",
+ "planned": 12,
+ "auditor": "sp.north",
+ "order": [
+  "R-MM-01",
+  "R-PP-01",
+  "R-MP-01",
+  "R-PM-01",
+  "R-MM-02",
+  "R-PP-02",
+  "R-MP-02",
+  "R-PM-02",
+  "R-MM-03",
+  "R-PP-03",
+  "R-MP-03",
+  "R-PM-03"
+ ],
+ "startedAtUtc": "2026-10-14T09:42:27.248Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "officerPhone": "emulator-5556",
+  "auditorPhone": "emulator-5558",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 63,
+  "chaincodeContainers": [
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767",
+   "diasrecords_3.1-167985391c430e1eaf1ce767"
+  ]
+ },
+ "staging": "backend/data/dias-reviews/host-20261006/access-events",
+ "phoneSignInMs": {
+  "auditor": 157.9,
+  "officer": 146
+ },
+ "finishedAtUtc": "2026-10-14T10:18:51.452Z",
+ "bases": [
+  {
+   "id": "R-MM-01",
+   "cell": "MM",
+   "status": "done",
+   "authorizationId": "AUTH-b24b8ccb8163a1c2",
+   "revokeMs": 2078.9
+  },
+  {
+   "id": "R-PP-01",
+   "cell": "PP",
+   "status": "done",
+   "authorizationId": "AUTH-36033f4e2ef0e4aa",
+   "revokeMs": 2074.7
+  },
+  {
+   "id": "R-MP-01",
+   "cell": "MP",
+   "status": "done",
+   "authorizationId": "AUTH-7b264498592cc1e3",
+   "revokeMs": 2081.7
+  },
+  {
+   "id": "R-PM-01",
+   "cell": "PM",
+   "status": "done",
+   "authorizationId": "AUTH-384388ae38ae9374",
+   "revokeMs": 2075.8
+  },
+  {
+   "id": "R-MM-02",
+   "cell": "MM",
+   "status": "done",
+   "authorizationId": "AUTH-9dda2cfbb694b90f",
+   "revokeMs": 2076.2
+  },
+  {
+   "id": "R-PP-02",
+   "cell": "PP",
+   "status": "done",
+   "authorizationId": "AUTH-6b0e93999b09de49",
+   "revokeMs": 2064.1
+  },
+  {
+   "id": "R-MP-02",
+   "cell": "MP",
+   "status": "done",
+   "authorizationId": "AUTH-b9c1d2c11959b2bc",
+   "revokeMs": 2081.3
+  },
+  {
+   "id": "R-PM-02",
+   "cell": "PM",
+   "status": "done",
+   "authorizationId": "AUTH-1f75fd395f8f94cc",
+   "revokeMs": 2079.8
+  },
+  {
+   "id": "R-MM-03",
+   "cell": "MM",
+   "status": "done",
+   "authorizationId": "AUTH-19bee3247d9cd48b",
+   "revokeMs": 2079.4
+  },
+  {
+   "id": "R-PP-03",
+   "cell": "PP",
+   "status": "done",
+   "authorizationId": "AUTH-d57a076675b072ee",
+   "revokeMs": 2075.5
+  },
+  {
+   "id": "R-MP-03",
+   "cell": "MP",
+   "status": "done",
+   "authorizationId": "AUTH-f8b7b84cfa488005",
+   "revokeMs": 2076.7
+  },
+  {
+   "id": "R-PM-03",
+   "cell": "PM",
+   "status": "done",
+   "authorizationId": "AUTH-1d8785e77506dd30",
+   "revokeMs": 2076.4
+  }
+ ],
+ "done": 12,
+ "notExercised": 0,
+ "failed": 0,
+ "requests": 72,
+ "unverified": 0,
+ "endChecks": [
+  {
+   "name": "the auditor's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "the officer's phone session ended cleanly",
+   "ok": true,
+   "detail": "OK (1 test)"
+  },
+  {
+   "name": "the reuse experiment: every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "36 of 36 found"
+  },
+  {
+   "name": "the reuse experiment: no call was refused or failed",
+   "ok": true,
+   "detail": "0 since the run began"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization is left active",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

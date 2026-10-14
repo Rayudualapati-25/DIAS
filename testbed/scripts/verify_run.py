@@ -1,19 +1,7 @@
 #!/usr/bin/env python3
-"""Check that a finished workflow run (E6 or E7) is complete and was measured
-under the intended conditions, before any of its numbers are used.
-
-Checks:
-  1. every planned request has exactly one row, and run.json agrees with the rows;
-  2. the facts the ledger committed match the plan for every workflow;
-  3. no model answer reused a cached prompt beyond the shared instruction prefix
-     (a larger cache hit would make that answer unrealistically fast);
-  4. the Mac ran on AC power in High Power Mode for the whole run;
-  5. the Mac and per-container recorders have no gaps longer than 20 s.
-
-Writes verify.json into the run folder and exits 1 if any check fails.
-
-Usage: python3 verify_run.py --run <results dir> --plan <plan json> --trace <backend-trace.jsonl>
-         --power-log <power-log.csv> --mac-samples <mac-samples.csv> --container-stats <container-stats.csv>
+"""
+Check that a finished workflow run (E6 or E7) is complete and was measured under the intended
+conditions, before any of its numbers are used.
 """
 
 import argparse

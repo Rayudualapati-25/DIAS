@@ -1,0 +1,412 @@
+{
+ "schema": "dias-setup-plan-v1",
+ "seed": 20261099,
+ "auditor": "sp.north",
+ "steps": {
+  "perCell": 1,
+  "items": [
+   {
+    "id": "S-MM-01",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "sho.reddy",
+    "recordId": "REC-FIR-001",
+    "action": "view",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-MM-01."
+   },
+   {
+    "id": "S-PP-01",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "insp.sharma",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-PP-01."
+   },
+   {
+    "id": "S-MP-01",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "dc.nair",
+    "recordId": "REC-FIR-001",
+    "action": "annotate",
+    "purpose": "investigation",
+    "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request S-MP-01."
+   },
+   {
+    "id": "S-PM-01",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "io.krishnan",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "defense-preparation",
+    "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request S-PM-01."
+   }
+  ],
+  "order": [
+   "S-PP-01",
+   "S-MM-01",
+   "S-PM-01",
+   "S-MP-01"
+  ]
+ },
+ "reuse": {
+  "basesPerCell": 1,
+  "repeatsPerBase": 3,
+  "bases": [
+   {
+    "id": "R-MM-01",
+    "cell": "MM",
+    "officer": "mac",
+    "auditor": "mac",
+    "setup": "mac-only",
+    "username": "judge.rana",
+    "recordId": "REC-JUVENILE-001",
+    "action": "annotate",
+    "purpose": "judicial-proceeding",
+    "first": {
+     "id": "R-MM-01-first",
+     "username": "judge.rana",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MM-01-repeat1",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-01-repeat1."
+     },
+     {
+      "id": "R-MM-01-repeat2",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-01-repeat2."
+     },
+     {
+      "id": "R-MM-01-repeat3",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MM-01-nearmiss",
+     "username": "judge.rana",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-MM-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MM-01-afterrevoke",
+     "username": "judge.rana",
+     "recordId": "REC-JUVENILE-001",
+     "action": "annotate",
+     "purpose": "judicial-proceeding",
+     "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request R-MM-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PP-01",
+    "cell": "PP",
+    "officer": "phone",
+    "auditor": "phone",
+    "setup": "phone-only",
+    "username": "sho.reddy",
+    "recordId": "REC-JUVENILE-001",
+    "action": "view",
+    "purpose": "investigation",
+    "first": {
+     "id": "R-PP-01-first",
+     "username": "sho.reddy",
+     "recordId": "REC-JUVENILE-001",
+     "action": "view",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-PP-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PP-01-repeat1",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-PP-01-repeat1."
+     },
+     {
+      "id": "R-PP-01-repeat2",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-PP-01-repeat2."
+     },
+     {
+      "id": "R-PP-01-repeat3",
+      "username": "sho.reddy",
+      "recordId": "REC-JUVENILE-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-PP-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PP-01-nearmiss",
+     "username": "sho.reddy",
+     "recordId": "REC-JUVENILE-001",
+     "action": "view",
+     "purpose": "defense-preparation",
+     "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PP-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PP-01-afterrevoke",
+     "username": "sho.reddy",
+     "recordId": "REC-JUVENILE-001",
+     "action": "view",
+     "purpose": "investigation",
+     "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request R-PP-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-MP-01",
+    "cell": "MP",
+    "officer": "mac",
+    "auditor": "phone",
+    "setup": "combined",
+    "username": "pp.mehta",
+    "recordId": "REC-FIR-001",
+    "action": "export",
+    "purpose": "forensic-analysis",
+    "first": {
+     "id": "R-MP-01-first",
+     "username": "pp.mehta",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-MP-01-repeat1",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-01-repeat1."
+     },
+     {
+      "id": "R-MP-01-repeat2",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-01-repeat2."
+     },
+     {
+      "id": "R-MP-01-repeat3",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "export",
+      "purpose": "forensic-analysis",
+      "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-MP-01-nearmiss",
+     "username": "pp.mehta",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-MP-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-MP-01-afterrevoke",
+     "username": "pp.mehta",
+     "recordId": "REC-FIR-001",
+     "action": "export",
+     "purpose": "forensic-analysis",
+     "justification": "Needed for forensic analysis of the case material. Synthetic three-setup experiment request R-MP-01-afterrevoke."
+    }
+   },
+   {
+    "id": "R-PM-01",
+    "cell": "PM",
+    "officer": "phone",
+    "auditor": "mac",
+    "setup": "combined",
+    "username": "clerk.das",
+    "recordId": "REC-JUVENILE-001",
+    "action": "export",
+    "purpose": "defense-preparation",
+    "first": {
+     "id": "R-PM-01-first",
+     "username": "clerk.das",
+     "recordId": "REC-JUVENILE-001",
+     "action": "export",
+     "purpose": "defense-preparation",
+     "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PM-01-first."
+    },
+    "repeats": [
+     {
+      "id": "R-PM-01-repeat1",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PM-01-repeat1."
+     },
+     {
+      "id": "R-PM-01-repeat2",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PM-01-repeat2."
+     },
+     {
+      "id": "R-PM-01-repeat3",
+      "username": "clerk.das",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PM-01-repeat3."
+     }
+    ],
+    "nearMiss": {
+     "id": "R-PM-01-nearmiss",
+     "username": "clerk.das",
+     "recordId": "REC-JUVENILE-001",
+     "action": "export",
+     "purpose": "audit-review",
+     "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request R-PM-01-nearmiss."
+    },
+    "afterRevoke": {
+     "id": "R-PM-01-afterrevoke",
+     "username": "clerk.das",
+     "recordId": "REC-JUVENILE-001",
+     "action": "export",
+     "purpose": "defense-preparation",
+     "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request R-PM-01-afterrevoke."
+    }
+   }
+  ],
+  "order": [
+   "R-MM-01",
+   "R-PP-01",
+   "R-MP-01",
+   "R-PM-01"
+  ]
+ },
+ "load": {
+  "levels": [
+   2
+  ],
+  "repeats": 1,
+  "bursts": [
+   {
+    "id": "L-mac-only-02-r1",
+    "setup": "mac-only",
+    "level": 2,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-mac-only-02-r1-01",
+      "officer": "mac",
+      "username": "judge.rana",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-mac-only-02-r1-01."
+     },
+     {
+      "id": "L-mac-only-02-r1-02",
+      "officer": "mac",
+      "username": "insp.singh",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-mac-only-02-r1-02."
+     }
+    ]
+   },
+   {
+    "id": "L-combined-02-r1",
+    "setup": "combined",
+    "level": 2,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-combined-02-r1-01",
+      "officer": "mac",
+      "username": "pp.mehta",
+      "recordId": "REC-FIR-001",
+      "action": "annotate",
+      "purpose": "judicial-proceeding",
+      "justification": "Needed for a judicial proceeding in this case. Synthetic three-setup experiment request L-combined-02-r1-01."
+     },
+     {
+      "id": "L-combined-02-r1-02",
+      "officer": "phone",
+      "username": "insp.singh",
+      "recordId": "REC-FIR-001",
+      "action": "view",
+      "purpose": "investigation",
+      "justification": "Needed for the ongoing investigation of this case. Synthetic three-setup experiment request L-combined-02-r1-02."
+     }
+    ]
+   },
+   {
+    "id": "L-phone-only-02-r1",
+    "setup": "phone-only",
+    "level": 2,
+    "repeat": 1,
+    "requests": [
+     {
+      "id": "L-phone-only-02-r1-01",
+      "officer": "phone",
+      "username": "dir.iyer",
+      "recordId": "REC-JUVENILE-001",
+      "action": "export",
+      "purpose": "audit-review",
+      "justification": "Needed for an audit review of how this case was handled. Synthetic three-setup experiment request L-phone-only-02-r1-01."
+     },
+     {
+      "id": "L-phone-only-02-r1-02",
+      "officer": "phone",
+      "username": "clerk.das",
+      "recordId": "REC-EVIDENCE-001",
+      "action": "annotate",
+      "purpose": "defense-preparation",
+      "justification": "Needed to prepare the defence in this case. Synthetic three-setup experiment request L-phone-only-02-r1-02."
+     }
+    ]
+   }
+  ],
+  "order": [
+   "L-mac-only-02-r1",
+   "L-combined-02-r1",
+   "L-phone-only-02-r1"
+  ]
+ },
+ "sha256": "040f0809049c620f7610fa5b1123992c8a28357099472ff6bd915afb5d6915a1"
+}

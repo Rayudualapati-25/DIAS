@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-#
-# Package, install, approve and commit the DIAS chaincode on the testbed.
-# Runs inside hyperledger/fabric-tools on the diasnet overlay network with the
-# testbed directory mounted at /testbed. Mirrors network/scripts/deployCC.sh:
-# same private-data collection, same channel endorsement policy (MAJORITY, 3 of
-# 5). The staged source (with production dependencies already installed) is
-# prepared by prepare-chaincode.sh before this runs.
+# Package, install, approve and commit the DIAS chaincode on the testbed. Runs inside hyperledger/fabric-tools on the diasnet overlay network with the testbed directory mounted at /testbed.
 set -euo pipefail
 
 TB=/testbed

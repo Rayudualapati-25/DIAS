@@ -1,0 +1,535 @@
+# proto-message: google.testing.platform.proto.api.core.TestSuiteResult
+# 2026-10-03T17:22:43.958276Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 9
+  device {
+    id: "emulator-5554"
+    friendly_name: "primary"
+  }
+}
+test_status: FAILED
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "failedRefreshPreservesExistingSnapshot"
+    start_time {
+      seconds: 1791048162
+      nanos: 673000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 687000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-failedRefreshPreservesExistingSnapshot.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "batchesPersistAcrossDatabaseReopen"
+    start_time {
+      seconds: 1791048162
+      nanos: 694000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 726000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-batchesPersistAcrossDatabaseReopen.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "repeatedPageIsIdempotent"
+    start_time {
+      seconds: 1791048162
+      nanos: 727000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 727000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-repeatedPageIsIdempotent.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "failedPageTransactionPreservesRowsAndCursor"
+    start_time {
+      seconds: 1791048162
+      nanos: 728000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 760000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-failedPageTransactionPreservesRowsAndCursor.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "hostAndAccountCachesAreIsolated"
+    start_time {
+      seconds: 1791048162
+      nanos: 761000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 761000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-hostAndAccountCachesAreIsolated.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "offlineReadsWorkWhileNetworkOnlyAblationFails"
+    start_time {
+      seconds: 1791048162
+      nanos: 761000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 792000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-offlineReadsWorkWhileNetworkOnlyAblationFails.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "FoundationTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "refreshReplacesRemovedCasesAndClearRemovesContinuation"
+    start_time {
+      seconds: 1791048162
+      nanos: 792000000
+    }
+    end_time {
+      seconds: 1791048162
+      nanos: 793000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.FoundationTest-refreshReplacesRemovedCasesAndClearRemovesContinuation.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "HostConnectionTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "emulatorAliasToMacApiAndFabric"
+    start_time {
+      seconds: 1791048162
+      nanos: 793000000
+    }
+    end_time {
+      seconds: 1791048163
+      nanos: 7000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: FAILED
+  error {
+    error_message: "org.dias.mobile.data.ApiFailure: internal error\nat org.dias.mobile.data.ApiClient.request(ApiClient.kt:74)\nat org.dias.mobile.data.ApiClient.request$default(ApiClient.kt:40)\nat org.dias.mobile.data.ApiClient.login(ApiClient.kt:21)\nat org.dias.mobile.data.HostConnectionTest.connect(HostConnectionTest.kt:22)\nat org.dias.mobile.data.HostConnectionTest.emulatorAliasToMacApiAndFabric(HostConnectionTest.kt:13)\n"
+    error_type: "org.dias.mobile.data.ApiFailure"
+    stack_trace: "org.dias.mobile.data.ApiFailure: internal error\nat org.dias.mobile.data.ApiClient.request(ApiClient.kt:74)\nat org.dias.mobile.data.ApiClient.request$default(ApiClient.kt:40)\nat org.dias.mobile.data.ApiClient.login(ApiClient.kt:21)\nat org.dias.mobile.data.HostConnectionTest.connect(HostConnectionTest.kt:22)\nat org.dias.mobile.data.HostConnectionTest.emulatorAliasToMacApiAndFabric(HostConnectionTest.kt:13)\n"
+  }
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.HostConnectionTest-emulatorAliasToMacApiAndFabric.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "HostConnectionTest"
+    test_package: "org.dias.mobile.data"
+    test_method: "reverseForwardingToMacApiAndFabric"
+    start_time {
+      seconds: 1791048163
+      nanos: 8000000
+    }
+    end_time {
+      seconds: 1791048163
+      nanos: 10000000
+    }
+    device {
+      id: "emulator-5554"
+      friendly_name: "primary"
+    }
+  }
+  test_status: FAILED
+  error {
+    error_message: "org.dias.mobile.data.ApiFailure: internal error\nat org.dias.mobile.data.ApiClient.request(ApiClient.kt:74)\nat org.dias.mobile.data.ApiClient.request$default(ApiClient.kt:40)\nat org.dias.mobile.data.ApiClient.login(ApiClient.kt:21)\nat org.dias.mobile.data.HostConnectionTest.connect(HostConnectionTest.kt:22)\nat org.dias.mobile.data.HostConnectionTest.reverseForwardingToMacApiAndFabric(HostConnectionTest.kt:14)\n"
+    error_type: "org.dias.mobile.data.ApiFailure"
+    stack_trace: "org.dias.mobile.data.ApiFailure: internal error\nat org.dias.mobile.data.ApiClient.request(ApiClient.kt:74)\nat org.dias.mobile.data.ApiClient.request$default(ApiClient.kt:40)\nat org.dias.mobile.data.ApiClient.login(ApiClient.kt:21)\nat org.dias.mobile.data.HostConnectionTest.connect(HostConnectionTest.kt:22)\nat org.dias.mobile.data.HostConnectionTest.reverseForwardingToMacApiAndFabric(HostConnectionTest.kt:14)\n"
+  }
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/logcat-org.dias.mobile.data.HostConnectionTest-reverseForwardingToMacApiAndFabric.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/mobile/android/app/build/outputs/androidTest-results/connected/debug/Medium_Phone_API_36.1(AVD) - 16/testlog/test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

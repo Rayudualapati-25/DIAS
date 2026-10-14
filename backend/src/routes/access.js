@@ -1,26 +1,6 @@
 'use strict';
 
-/**
- * DIAS access API.
- *
- * The workflow this exposes:
- *   1. a requester submits a request under their own Fabric identity; the
- *      chaincode commits who asked for which record and checks the latest active
- *      dynamic authorization in the same transaction — an exact match grants at
- *      once, with the auditor recorded as skipped;
- *   2. otherwise the backend asks the LLM at once, in its own process, for an
- *      advisory ALLOW/DENY recommendation; the object M stays off-chain and its
- *      signed commitment κ (value, specific status, h_M, bindings) is committed
- *      before review;
- *   3. an auditor issues FORCE_ALLOW or FORCE_DENY, which is the final word. The
- *      backend refuses a decision while M does not match κ, and sends only the
- *      decision, the note digest h_N and any expiry; the chaincode derives the
- *      agreement from κ (paper Eq. 3).
- *
- * A recommendation is never returned as a decision. Its reason text, the note
- * and the model provenance stay off-chain. The only 201 "decided" response comes
- * from an access outcome committed on Fabric.
- */
+/** DIAS access API. */
 
 const express = require('express');
 const { z } = require('zod');
@@ -53,14 +33,8 @@ router.use(requireAuth);
 const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
 const CONTRACT = 'AccessContract';
 
-/**
- * Auditors are district heads of the audit organisation. The chaincode is the
- * real boundary and enforces both organisation and role; mirroring the role list
- * here refuses an unauthorised caller early with 403 rather than late with a
- * chaincode error.
- */
+/** Auditors are district heads of the audit organisation. */
 const AUDITOR_ROLES = [...DISTRICT_HEAD_ROLES];
-const { REVIEWER_ROLES } = require('../../../chaincode/crimerecords/lib/dias/visibility');
 
 const ENDORSEMENT_CONVERGENCE_RETRIES = Number(process.env.ENDORSEMENT_CONVERGENCE_RETRIES || 5);
 /** The most requests one auditor-screen status check may ask about. */
@@ -73,10 +47,8 @@ function isEndorsementConvergenceError(error) {
 }
 
 /**
- * A commit is observed first by the submitter's peer, so for a brief interval
- * the endorsing peers can simulate different dynamic-authorization states. That
- * specific failure happens before submission, so a new proposal is safe; no
- * other Fabric failure is retried here.
+ * A commit is observed first by the submitter's peer, so for a brief interval the endorsing peers can
+ * simulate different dynamic-authorization states.
  */
 async function submitAccessRequest(user, args, {
   ledger = fabric,
@@ -94,10 +66,8 @@ async function submitAccessRequest(user, args, {
 }
 
 /**
- * The auditor-facing view of one committed request: the ledger request and its
- * recommendation commitment κ, the off-chain justification and recommendation
- * object M, and whether M matches κ (design §6). The browser recomputes the same
- * integrity check itself; the backend refuses a decision unless it passes.
+ * The auditor-facing view of one committed request: the ledger request and its recommendation commitment κ,
+ * the off-chain justification and recommendation object M, and whether M matches κ.
  */
 function reviewView(request, commitment, entry) {
   const recommendationObject = entry ? entry.recommendationObject || null : null;
@@ -113,12 +83,7 @@ function reviewView(request, commitment, entry) {
   };
 }
 
-/**
- * Keep the off-chain review for a request that waits for the auditor, and queue
- * its LLM recommendation. The request is already committed, so a failure to save
- * the review must not turn into an error for the requester: the auditor then
- * decides without a recommendation, which the ledger records as such.
- */
+/** Keep the off-chain review for a request that waits for the auditor, and queue its LLM recommendation. */
 function openReview({ request, justification, store, worker, log = console }) {
   try {
     store.create({ request, justification });
@@ -138,11 +103,8 @@ function openReview({ request, justification, store, worker, log = console }) {
 }
 
 /**
- * What the backend does with a request the ledger has just committed. A request
- * that an active dynamic authorization granted is finished: no LLM and no
- * auditor. Every other request has its review opened and its LLM recommendation
- * asked for at once, inside this backend; nothing else has to trigger it.
- * `runtime` is read only on that second path.
+ * What the backend does with a request the ledger has just committed. A request that an active dynamic
+ * authorization granted is finished: no LLM and no auditor.
  */
 function answerCommittedRequest({ request, justification, runtime = getDiasRuntime, log = console }) {
   if (request.processingPath === 'dynamic-authorization') {
@@ -172,12 +134,8 @@ function answerCommittedRequest({ request, justification, runtime = getDiasRunti
 }
 
 /**
- * `action` and `purpose` are canonical request facts: the chaincode validates
- * them against the policy vocabulary and commits them in the verified context.
- * `emergencyDeclared` is the requester's own statement and is committed as a
- * claim, outside the verified context (plan step 5). `justification` is the
- * requester's free text; it stays in this backend, goes to the LLM, and is shown
- * to the auditor, but it is never written to the ledger.
+ * `action` and `purpose` are canonical request facts: the chaincode validates them against the policy
+ * vocabulary and commits them in the verified context.
  */
 const requestSchema = z.object({
   recordId: z.string().regex(SAFE_ID),
@@ -200,8 +158,7 @@ function parseAccessRequest(body) {
   const { recordId, justification, action, purpose, emergencyDeclared } = parsed.data;
   let justificationHash;
   try {
-    // h_J over the exact text the requester sent (design §4); the text itself
-    // never reaches the ledger.
+    // h_J over the exact text the requester sent; the text itself never reaches the ledger.
     justificationHash = hashText(DOMAINS.JUSTIFICATION, justification);
   } catch (error) {
     return { error: 'justification cannot be committed: it contains an unpaired surrogate' };
@@ -222,9 +179,8 @@ router.post('/request', asyncRoute(async (req, res) => {
 
   const request = await submitAccessRequest(req.user, [recordId, JSON.stringify(contractInput)]);
 
-  // The application access event is submitted after the HTTP response. Pass
-  // the Fabric-generated identifier to that logger so an auditor can correlate
-  // the API action with this exact on-chain request.
+  // The application access event is submitted after the HTTP response. Pass the Fabric-generated identifier
+  // to that logger so an auditor can correlate the API action with this exact on-chain request.
   res.locals.accessEventTarget = {
     requestId: request.requestId,
     processingPath: request.processingPath,
@@ -249,7 +205,11 @@ router.get('/requests/mine', asyncRoute(async (req, res) => {
   return ok(res, { entries, storage: 'fabric-ledger' });
 }));
 
-router.get('/workflow-log', requireRole(...REVIEWER_ROLES), asyncRoute(async (req, res) => {
+/**
+ * The access log: every request with who asked for which record, what the LLM recommended and what the
+ * auditor decided. Every enrolled officer reads it.
+ */
+router.get('/workflow-log', asyncRoute(async (req, res) => {
   const limit = z.coerce.number().int().min(1).max(500).safeParse(req.query.limit || 100);
   if (!limit.success) return fail(res, 'limit must be an integer from 1 to 500');
   const entries = await fabric.evaluate(req.user.org, req.user.fabricUser, CONTRACT,
@@ -273,12 +233,7 @@ router.get('/request/:requestId/trail', asyncRoute(async (req, res) => {
   return ok(res, trail);
 }));
 
-/**
- * The public decision log: every settled request with what was decided for it.
- * Readable by any signed-in identity, because the point of the shared ledger is
- * that a decision cannot be made invisibly. It carries no justification and
- * nothing the LLM produced.
- */
+/** The public decision log: every settled request with who asked, what was decided and by whom. */
 router.get('/decision-log', asyncRoute(async (req, res) => {
   const limit = Math.min(Math.max(Number(req.query.limit) || 50, 1), 500);
   const entries = await fabric.evaluate(
@@ -286,17 +241,7 @@ router.get('/decision-log', asyncRoute(async (req, res) => {
   return ok(res, { entries, storage: 'fabric-ledger' });
 }));
 
-/**
- * The LLM's account of one request, for the caller (design §10).
- *
- * An audit-organisation district head reads it at any time. The officer who made
- * the request reads it according to the auditor's decision: nothing before one;
- * the decision and the account when denied; the decision and the recommendation
- * value when allowed. Nobody else reads it. The ledger's request trail, read as
- * the caller, says who the caller is to this request and what was decided; the
- * contract refuses it to anyone who is neither a reviewer nor the requester.
- * Nothing about how the recommendation was produced is returned.
- */
+/** The LLM's account of one request, for the caller. */
 router.get('/request/:requestId/recommendation', asyncRoute(async (req, res) => {
   const { requestId } = req.params;
   if (!SAFE_ID.test(requestId || '')) return fail(res, 'requestId has invalid format');
@@ -334,8 +279,8 @@ router.get('/auditor/pending', requireRole(...AUDITOR_ROLES), asyncRoute(async (
 }));
 
 /**
- * The request ids an auditor screen asks about, or null unless the query is 1 to
- * MAX_STATUS_IDS safe identifiers separated by commas.
+ * The request ids an auditor screen asks about, or null unless the query is 1 to MAX_STATUS_IDS safe
+ * identifiers separated by commas.
  */
 function parseStatusIds(value) {
   if (typeof value !== 'string') return null;
@@ -352,15 +297,8 @@ function preparationStatus(ids, store) {
 }
 
 /**
- * Whether the recommendations an auditor screen is waiting for are ready yet. The
- * screen asks this every few seconds while it shows "Being prepared", and loads
- * the queue again once one is ready. It reads only the off-chain review store and
- * returns no case data: no ledger call, and, as a routine read, no access-log
- * transaction when it succeeds (design §12).
- *
- * No chaincode call stands behind this route, so it checks the organisation
- * itself: district-head roles exist in every organisation, and only the audit
- * organisation reviews requests.
+ * Whether the recommendations an auditor screen is waiting for are ready yet. The screen asks this every
+ * few seconds while it shows "Being prepared", and loads the queue again once one is ready.
  */
 function recommendationStatus({ user, query, store }) {
   if (!user || user.org !== AUDIT_ORG || !AUDITOR_ROLES.includes(user.role)) {
@@ -385,14 +323,9 @@ router.get('/auditor/:requestId', requireRole(...AUDITOR_ROLES), asyncRoute(asyn
 }));
 
 /**
- * The final decision. The chaincode derives the agreement from κ, the
- * recommendation committed before review; the backend reads κ only to refuse a
- * decision on a recommendation object that does not match it, and to ask for a
- * reason early. A reason is required whenever the auditor did not simply agree
- * with the committed recommendation. It is written to the review store before
- * the decision is sent, and only its digest h_N reaches the ledger (design §11).
- * `validUntilUtc` is accepted only where a dynamic authorization is created:
- * FORCE_ALLOW over a committed DENY.
+ * The final decision. The chaincode derives the agreement from κ, the recommendation committed before
+ * review; the backend reads κ only to refuse a decision on a recommendation object that does not match it,
+ * and to ask for a reason early.
  */
 const auditorDecisionSchema = z.object({
   decision: z.enum(['FORCE_ALLOW', 'FORCE_DENY']),
@@ -427,11 +360,8 @@ function recoveredResult(review) {
 }
 
 /**
- * The decision submission failed. A refusal from the contract wrote nothing; any
- * other failure (a timeout, a lost response) may still have committed. The
- * decision is read back: when it is this decision, it succeeded. Otherwise the
- * note is dropped if it can never commit, and kept staged if the outcome is
- * unknown, for the next attempt or the start-up reconciliation to settle.
+ * The decision submission failed. A refusal from the contract wrote nothing; any other failure (a timeout,
+ * a lost response) may still have committed.
  */
 async function settleFailedDecision({ error, user, requestId, decision, noteHash, ledger, store }) {
   const review = await ledger.evaluate(user.org, user.fabricUser, CONTRACT, 'GetAuditorReview', requestId)
@@ -454,9 +384,8 @@ async function settleFailedDecision({ error, user, requestId, decision, noteHash
   }
   if (isDefiniteRefusal(error)) {
     if (noteHash) store.dropStagedNote(requestId, noteHash);
-    // The deadline passed, or the policy changed, while the auditor was
-    // reviewing. The refusal wrote nothing, so record the expiry now (best
-    // effort) and report the refusal.
+    // The deadline passed, or the policy changed, while the auditor was reviewing. The refusal wrote
+    // nothing, so record the expiry now (best effort) and report the refusal.
     if (isClosedByLedger(error)) {
       await ledger.submit(user.org, user.fabricUser, CONTRACT, 'ExpirePendingRequest', requestId)
         .catch(() => {});
@@ -477,8 +406,8 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   if (!parsed.success) return { status: 400, error: parsed.error.issues[0].message };
   const { decision, validUntilUtc } = parsed.data;
   const reason = normalizeNote(parsed.data.reason);
-  // An entry that cannot be opened counts as absent: with a commitment on the
-  // ledger the decision is then refused below as "object not available".
+  // An entry that cannot be opened counts as absent: with a commitment on the ledger the decision is then
+  // refused below as "object not available".
   const entry = store.readSafely(requestId);
   if (isRecommendationPreparing(entry)) {
     return {
@@ -488,17 +417,16 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   }
   const review = await ledger.evaluate(user.org, user.fabricUser, CONTRACT, 'GetAuditorReview', requestId);
   if (review.decision) {
-    // A request is decided once. A retry after a lost response lands here, and
-    // its staged note is settled against the decision the ledger holds.
+    // A request is decided once. A retry after a lost response lands here, and its staged note is settled
+    // against the decision the ledger holds.
     settleStagedNotes({ store, requestId, review });
     return {
       status: 409,
       error: `this request was already decided: ${review.decision.decision} in transaction ${review.decision.txId}`,
     };
   }
-  // The recommendation the decision is compared with is the one committed on the
-  // ledger before review (κ), and the auditor may decide only on the object that
-  // matches it (paper §IV-D).
+  // The recommendation the decision is compared with is the one committed on the ledger before review (κ),
+  // and the auditor may decide only on the object that matches it.
   const { commitment } = review;
   if (commitment) {
     const integrity = checkRecommendationIntegrity({
@@ -525,8 +453,7 @@ async function decide({ user, requestId, body, ledger = fabric, store }) {
   if (validUntilUtc && !createsAuthorization(decision, llmAgreement)) {
     return { status: 400, error: 'validUntilUtc applies only when a dynamic authorization is created' };
   }
-  // h_N: the note is durable before the decision is sent, and only its digest
-  // reaches the ledger (design §4, §7, §11).
+  // h_N: the note is durable before the decision is sent, and only its digest reaches the ledger.
   const noteHash = noteHashOf(reason);
   const auditorUsername = user.username || user.fabricUser;
   if (reason) {
@@ -592,9 +519,8 @@ router.get('/dynamic-authorizations/:authorizationId/history', requireRole(...AU
   }));
 
 /**
- * Revocation is explicit and always carries a reason. FORCE_DENY on a later
- * request never revokes anything implicitly, so this is the only way an active
- * authorization stops matching before it expires.
+ * Revocation is explicit and always carries a reason. FORCE_DENY on a later request never revokes anything
+ * implicitly, so this is the only way an active authorization stops matching before it expires.
  */
 const revokeSchema = z.object({ reason: z.string().min(1).max(500) });
 

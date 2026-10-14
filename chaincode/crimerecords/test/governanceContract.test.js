@@ -32,9 +32,8 @@ const DISTRICT_HEAD = {
 describe('GovernanceContract', () => {
   describe('who may create a department', () => {
     /**
-     * Station and district heads sit in the authority organisation, so no
-     * department contains a senior enough rank to register itself. Creating a
-     * department is therefore an act of the authority, like admitting a user.
+     * Station and district heads sit in the authority organisation, so no department contains a senior
+     * enough rank to register itself.
      */
     it('accepts a district head of the authority organisation', async () => {
       const ctx = buildMockContext({

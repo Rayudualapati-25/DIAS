@@ -2,15 +2,8 @@
 'use strict';
 
 /**
- * Derive the canonical DIAS governance policy bundle v1 from the retained
- * crime-policy-v2 tables, or check that the committed bundle still matches.
- *
- * The JSON bundle is the policy of record. This script exists so its tables can
- * be shown to be copied exactly rather than re-typed.
- *
- * Usage (repository root):
- *   node policies/tools/derive-governance-policy-v1.js           write the bundle
- *   node policies/tools/derive-governance-policy-v1.js --check   exit 1 on drift
+ * Derive the canonical DIAS governance policy bundle v1 from the retained crime-policy-v2 tables, or check
+ * that the committed bundle still matches.
  */
 
 const fs = require('fs');

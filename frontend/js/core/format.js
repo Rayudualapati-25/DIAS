@@ -1,8 +1,4 @@
-/**
- * Display formatting. Pure functions, no DOM.
- * Put anything that turns raw data into human text here, so wording stays
- * consistent as modules multiply.
- */
+/** Display formatting. Pure functions, no DOM. */
 
 /** Local date+time, or an em dash for a missing value. */
 export function dateTime(iso) {

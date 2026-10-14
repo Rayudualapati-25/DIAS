@@ -6,3 +6,7 @@
 *.jpeg binary
 *.docx binary
 *.zip binary
+
+# Raw Android test results are kept byte for byte
+experiments/runs/**/device-results.xml -text
+experiments/runs/**/TEST-*.xml -text

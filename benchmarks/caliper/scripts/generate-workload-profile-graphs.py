@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Generate publication-quality methodology figures from Caliper inputs only.
-
-These figures visualize configured offered load and planned workload composition.
-They deliberately do not read placeholder tables or invent performance results.
-"""
+"""Generate publication-quality methodology figures from Caliper inputs only."""
 
 from __future__ import annotations
 
@@ -128,8 +124,8 @@ def annotate_segment(axis, segment: dict, scale: float, maximum_tps: float) -> N
     center = ((segment["start_s"] + segment["end_s"]) / 2) / scale
     target = segment["target_tps"]
     if segment["phase"] == "warmup":
-        # Warm-up segments can be less than one percent of a long run. A
-        # callout keeps their label legible without visually widening them.
+        # Warm-up segments can be less than one percent of a long run. A callout keeps their label
+        # legible without visually widening them.
         axis.annotate(
             f"Warm-up: {target:g} TPS for {format_duration(segment['duration_s'])}",
             xy=(center, target * 0.9),

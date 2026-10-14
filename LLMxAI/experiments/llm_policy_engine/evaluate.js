@@ -167,8 +167,8 @@ function schemaProblems(value) {
   if (typeof value.purpose !== 'string' || !value.purpose) problems.push('invalid purpose');
   if (!['allow', 'deny', 'escalate'].includes(value.decision)) problems.push('invalid decision');
   if (!REASON_CODES.includes(value.reasonCode)) problems.push('invalid reasonCode');
-  // Not a schema failure: the runtime derives the decision from the reason code.
-  // Tracked separately by summarise() as decisionDisagreementRate.
+  // Not a schema failure: the runtime derives the decision from the reason code. Tracked separately by
+  // summarise() as decisionDisagreementRate.
   if (value.policyVersion !== 'crime-policy-v1') problems.push('invalid policyVersion');
   if (value.modelVersion !== MODEL_VERSION) problems.push('invalid modelVersion');
   return problems;
@@ -372,8 +372,8 @@ async function main() {
       classification,
       raw: response.text,
       strictJson: extracted.strict,
-      // Did the model's own decision field contradict the reason code it chose?
-      // Not an error (the runtime derives the decision) but a model-quality signal.
+      // Did the model's own decision field contradict the reason code it chose? Not an error (the runtime
+      // derives the decision) but a model-quality signal.
       decisionDisagreement: Boolean(classification
         && REASON_DECISION[classification.reasonCode]
         && REASON_DECISION[classification.reasonCode] !== classification.decision),

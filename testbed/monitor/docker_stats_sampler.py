@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
-"""Per-container CPU and memory on every testbed VM, every 5 s, via `docker stats`.
-
-cAdvisor cannot read containers on these VMs: Docker 29 here uses the
-containerd image store, and cAdvisor (0.49.1 and 0.53.0 tried) fails with
-"failed to identify the read-write layer ID", so it only reports the whole-VM
-cgroup. Docker's own statistics API does not have that problem. CPU is written
-in cores (docker's percentage / 100, so 1.0 = one full core) and memory in
-bytes as docker reports it (usage without page cache).
-
-Usage: python3 docker_stats_sampler.py --out <file.csv> [--interval 5]
-"""
+"""Per-container CPU and memory on every testbed VM, every 5 s, via `docker stats`."""
 
 import argparse
 import csv

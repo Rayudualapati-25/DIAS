@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Backend/chaincode method compatibility.
- *
- * The DIAS rewrite renamed every access-workflow transaction, and the backend
- * kept calling the old names. Nothing failed until a live call reached the peer,
- * because a Fabric contract method name is just a string on both sides. This
- * suite closes that gap: it extracts every (contract, method) pair the backend
- * actually invokes and asserts the deployed contract classes expose it.
- */
+/** Backend/chaincode method compatibility. */
 
 const fs = require('fs');
 const path = require('path');
@@ -16,12 +8,7 @@ const { expect } = require('chai');
 
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const CHAINCODE_LIB = path.join(REPO_ROOT, 'chaincode', 'crimerecords', 'lib');
-/**
- * Everything that invokes chaincode. `scripts/` is included because the seed
- * scripts are a live path too: seed-domain.js went on calling the SEAL-era
- * PolicyContract methods after the rewrite, and the failure only appeared as a
- * generic endorsement abort during a live deployment.
- */
+/** Everything that invokes chaincode. */
 const CALLER_ROOTS = Object.freeze([
   path.join(REPO_ROOT, 'backend', 'src'),
   path.join(REPO_ROOT, 'scripts'),
@@ -36,11 +23,8 @@ const CONTRACT_FILES = Object.freeze({
 });
 
 /**
- * Every gateway call in the backend names the contract and the method as
- * adjacent arguments: `...(org, user, <contract>, 'SomeMethod'`. The contract is
- * either a string literal or a file-local constant holding one, so both forms
- * are resolved. Reading the source rather than the module graph keeps this
- * independent of how each call is wrapped.
+ * Every gateway call in the backend names the contract and the method as adjacent arguments: `...(org,
+ * user, <contract>, 'SomeMethod'`.
  */
 const CALL_PATTERN = /(?:'(\w+Contract)'|\b([A-Z_][A-Z0-9_]*)\b),\s*\n?\s*'(\w+)'/g;
 const ALIAS_PATTERN = /const\s+([A-Z_][A-Z0-9_]*)\s*=\s*'(\w+Contract)'/g;

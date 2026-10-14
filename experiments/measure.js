@@ -1,11 +1,8 @@
 'use strict';
 
 /**
- * Reproducible live comparison of a role-only baseline with the contextual
- * SEBA-XAI policy. No deliberate database/file corruption endpoint is used.
- *
- * Prerequisites: make all; make backend
- * Output: timestamped JSON and Markdown under experiments/results/.
+ * Reproducible live comparison of a role-only baseline with the contextual SEBA-XAI policy. No deliberate
+ * database/file corruption endpoint is used.
  */
 
 const fs = require('fs');
@@ -40,8 +37,8 @@ async function login(username) {
   return result.data.token;
 }
 
-// Ablation: remove assignment, jurisdiction, protection, credential-state and
-// purpose checks. If the role has a generic view capability, return ALLOW.
+// Ablation: remove assignment, jurisdiction, protection, credential-state and purpose checks. If the role
+// has a generic view capability, return ALLOW.
 function roleOnlyBaseline(role) {
   const viewRoles = new Set([
     'constable', 'sub-inspector', 'inspector', 'sho', 'investigating-officer',

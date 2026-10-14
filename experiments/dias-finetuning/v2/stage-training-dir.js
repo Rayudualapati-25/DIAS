@@ -1,18 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Stage one training directory for MLX-LM.
- *
- * MLX-LM takes a DIRECTORY and expects `train.jsonl` and `valid.jsonl` inside
- * it. A subset is therefore not usable directly — it has to be staged next to
- * the validation set it will be selected on.
- *
- * The validation set is the SAME file for every subset, deliberately: a learning
- * curve whose validation set also changed would measure two things at once.
- *
- *   node experiments/dias-finetuning/v2/stage-training-dir.js --size 1600
- */
+/** Stage one training directory for MLX-LM. */
 
 const fs = require('fs');
 const path = require('path');

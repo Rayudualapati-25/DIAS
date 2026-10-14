@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Single-panel response time against concurrent distinct users.
-
-One line per measured operation. The y value is the mean client-observed
-response time of the requests issued at that user count, computed here from the
-retained per-request samples rather than read from a summary file.
-
-Search and submission come from the primary distinct-user sweep. The authorized
-open comes from the per-user-record release layout, matching the layout the
-manuscript reports for that operation.
-"""
+"""Single-panel response time against concurrent distinct users."""
 
 from __future__ import annotations
 

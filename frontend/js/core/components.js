@@ -1,16 +1,9 @@
-/**
- * Reusable UI pieces.
- *
- * Build new modules out of these rather than raw `el()` calls, so every screen
- * looks and behaves the same. If you need something new, add it here instead of
- * inventing it inside one module.
- */
+/** Reusable UI pieces. */
 
 import { el, append, replace, slot } from './dom.js';
 import { toast } from './toast.js';
 
-// ---------------------------------------------------------------------------
-// Containers
+// --------------------------------------------------------------------------- Containers
 // ---------------------------------------------------------------------------
 
 /** A titled panel. Most module content should live in one of these. */
@@ -36,8 +29,7 @@ export function subheading(text) {
   return el('h3', { class: 'subheading' }, text);
 }
 
-// ---------------------------------------------------------------------------
-// Text and status
+// --------------------------------------------------------------------------- Text and status
 // ---------------------------------------------------------------------------
 
 export function hint(...children) {
@@ -49,13 +41,7 @@ export function mono(text, { truncate = false } = {}) {
     text ?? '—');
 }
 
-/**
- * A status pill. `kind` drives the colour:
- *   allow | granted | ok | yes   -> green
- *   deny  | denied | no | failed -> red
- *   escalate | pending | warn    -> amber
- *   anything else                -> neutral grey
- */
+/** A status pill. */
 export function badge(text, kind = 'neutral') {
   return el('span', { class: `badge ${kind}` }, text);
 }
@@ -69,15 +55,14 @@ export function empty(message = 'Nothing to show yet.') {
   return el('p', { class: 'empty' }, message);
 }
 
-/** A callout box. `tone`: info | good | bad | warn */
+/** A callout box. */
 export function callout(tone, title, ...children) {
   return el('div', { class: `callout ${tone}` },
     title && el('div', { class: 'callout-title' }, title),
     ...children);
 }
 
-// ---------------------------------------------------------------------------
-// Forms
+// --------------------------------------------------------------------------- Forms
 // ---------------------------------------------------------------------------
 
 export function field(label, control, help) {
@@ -95,7 +80,7 @@ export function textarea(name, attrs = {}) {
   return el('textarea', { name, rows: '3', ...attrs });
 }
 
-/** options: array of strings, or [{ value, label }] */
+/** Options: array of strings, or [{ value, label }] */
 export function select(name, options, attrs = {}) {
   return el('select', { name, ...attrs },
     options.map((option) => {
@@ -132,14 +117,7 @@ export function formValues(form) {
   return out;
 }
 
-/**
- * A form whose submit handler is async and cannot double-fire.
- *
- *   form({ submitLabel: 'Search', fields: [...], onSubmit: async (values) => {...} })
- *
- * The submit button disables and shows "Working…" while onSubmit runs, and
- * errors surface as a toast instead of an unhandled rejection.
- */
+/** A form whose submit handler is async and cannot double-fire. */
 export function form({ fields = [], submitLabel = 'Submit', onSubmit, extraActions = [] }) {
   const submit = button(submitLabel, { type: 'submit' });
   const original = submitLabel;
@@ -163,15 +141,13 @@ export function form({ fields = [], submitLabel = 'Submit', onSubmit, extraActio
   return node;
 }
 
-// ---------------------------------------------------------------------------
-// Tabs and icon buttons
+// --------------------------------------------------------------------------- Tabs and icon buttons
 // ---------------------------------------------------------------------------
 
 /**
- * A row of tabs over one panel.
- *   tabs([{ id, label, render }])
- * A tab's `render()` runs the first time it is opened and its node is kept, so
- * a tab that is never opened loads nothing and switching back does not reload.
+ * A row of tabs over one panel. tabs([{ id, label, render }]) A tab's `render()` runs the first time it is
+ * opened and its node is kept, so a tab that is never opened loads nothing and switching back does not
+ * reload.
  */
 export function tabs(items) {
   const panel = slot({ class: 'tab-panel', role: 'tabpanel' });
@@ -213,9 +189,8 @@ function icon(name) {
 }
 
 /**
- * A square button showing only an icon ('refresh' or 'filter'). `label` says
- * what it does, as its tooltip and for screen readers. `pip` is a small number
- * on its corner; `pressed` marks a toggle that is on.
+ * A square button showing only an icon ('refresh' or 'filter'). `label` says what it does, as its tooltip
+ * and for screen readers.
  */
 export function iconButton(name, { label, onclick, pip = 0, pressed } = {}) {
   return el('button', {
@@ -228,13 +203,12 @@ export function iconButton(name, { label, onclick, pip = 0, pressed } = {}) {
   }, icon(name), pip > 0 ? el('span', { class: 'pip' }, String(pip)) : null);
 }
 
-// ---------------------------------------------------------------------------
-// Tables
+// --------------------------------------------------------------------------- Tables
 // ---------------------------------------------------------------------------
 
 /**
- * A table that scrolls horizontally rather than breaking the layout.
- * `rows` is an array of arrays of cell contents (nodes or strings).
+ * A table that scrolls horizontally rather than breaking the layout. `rows` is an array of arrays of cell
+ * contents (nodes or strings).
  */
 export function table(headers, rows, { emptyMessage } = {}) {
   if (!rows || rows.length === 0) return empty(emptyMessage);
@@ -249,13 +223,12 @@ export function detailTable(pairs) {
   return table(['Field', 'Value'], pairs.filter(Boolean));
 }
 
-// ---------------------------------------------------------------------------
-// Async helpers
+// --------------------------------------------------------------------------- Async helpers
 // ---------------------------------------------------------------------------
 
 /**
- * Run an async action, turning failures into a toast rather than a crash.
- * Returns the result, or null if it failed — so callers can `if (!x) return;`.
+ * Run an async action, turning failures into a toast rather than a crash. Returns the result, or null if it
+ * failed — so callers can `if (!x) return;`.
  */
 export async function attempt(action, successMessage) {
   try {
@@ -268,18 +241,7 @@ export async function attempt(action, successMessage) {
   }
 }
 
-/**
- * A region that loads its own data and handles the three states for you.
- *
- *   const region = asyncRegion({
- *     load:   () => api.audit.accessLog(50),
- *     render: (data) => table(...),
- *   });
- *   region.reload();      // call again whenever you want fresh data
- *   region.reload({ quiet: true });   // the same, without blanking what is shown
- *
- * Returns the node, with `.reload()` attached.
- */
+/** A region that loads its own data and handles the three states for you. */
 export function asyncRegion({ load, render, loadingMessage = 'Loading…', immediate = true }) {
   const node = slot({ class: 'region' });
 

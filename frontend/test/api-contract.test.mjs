@@ -1,12 +1,4 @@
-/**
- * Frontend/backend route compatibility.
- *
- * The API client and the Express routers are two independently editable files
- * that agree only by convention. When the DIAS rewrite renamed the access
- * endpoints, nothing failed until a button was pressed in a browser. This test
- * extracts every path the client calls and every path the routers mount, and
- * fails when one names something the other does not.
- */
+/** Frontend/backend route compatibility. */
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -28,12 +20,7 @@ const ROUTERS = Object.freeze({
   departments: 'backend/src/routes/departments.js',
 });
 
-/**
- * `/access/auditor/${requestId}/decision` -> `/access/auditor/:/decision`
- *
- * A trailing `${query({...})}` builds a query string, which Express does not
- * route on, so it is dropped rather than turned into a path segment.
- */
+/** `/access/auditor/${requestId}/decision` -> `/access/auditor/:/decision` */
 function shape(pathname) {
   return pathname
     .replace(/\$\{query\([\s\S]*?\)\}/g, '')

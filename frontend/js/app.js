@@ -1,9 +1,5 @@
 /**
- * Entry point. Deliberately small: it decides "login screen or shell", wires the
- * router, and nothing else.
- *
- * To add a feature you should never need to touch this file — register your
- * module in js/modules/index.js instead.
+ * Entry point. Deliberately small: it decides "login screen or shell", wires the router, and nothing else.
  */
 
 import { session, setSessionExpiredHandler } from './core/api.js';

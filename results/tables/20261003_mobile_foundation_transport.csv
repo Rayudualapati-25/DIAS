@@ -1,0 +1,5 @@
+dataset,variant,requests,rows,max_rows_per_response,exact_coverage
+deterministic_synthetic_53_cases,baseline,1,53,53,
+deterministic_synthetic_53_cases,batched,3,53,20,true
+live_local_Fabric_cases,baseline,1,2,2,
+live_local_Fabric_cases,batched,1,2,2,true

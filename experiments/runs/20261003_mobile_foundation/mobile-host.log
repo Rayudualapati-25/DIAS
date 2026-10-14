@@ -1,0 +1,145 @@
+Mobile development API: http://127.0.0.1:3002
+[api] POST /api/auth/login failed: GatewayError: 14 UNAVAILABLE: No connection established. Last error: Error: unable to verify the first certificate. Resolution note: 
+    at newGatewayError (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/gatewayerror.js:54:12)
+    at Object.callback (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:102:60)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:36)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+    ... 2 lines matching cause stack trace ...
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+  code: 14,
+  details: [],
+  cause: Error: 14 UNAVAILABLE: No connection established. Last error: Error: unable to verify the first certificate. Resolution note: 
+      at callErrorFromStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/call.js:32:19)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:76)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:327:181)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+  for call at
+      at Client.makeUnaryRequest (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:161:32)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:62
+      at new Promise (<anonymous>)
+      at GatewayClientImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:16)
+      at ProposalImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/proposal.js:37:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/gateway.js:85:18)
+      at async Object.readForLogin (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/users.js:20:12)
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/routes/auth.js:30:19
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/util/respond.js:23:7 {
+    code: 14,
+    details: 'No connection established. Last error: Error: unable to verify the first certificate. Resolution note: ',
+    metadata: Metadata {
+      internalRepr: Map(0) {},
+      opaqueData: Map(0) {},
+      options: {}
+    }
+  }
+}
+[api] POST /api/auth/login failed: GatewayError: 14 UNAVAILABLE: No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: 
+    at newGatewayError (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/gatewayerror.js:54:12)
+    at Object.callback (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:102:60)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:36)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+    ... 2 lines matching cause stack trace ...
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+  code: 14,
+  details: [],
+  cause: Error: 14 UNAVAILABLE: No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: 
+      at callErrorFromStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/call.js:32:19)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:76)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:327:181)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+  for call at
+      at Client.makeUnaryRequest (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:161:32)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:62
+      at new Promise (<anonymous>)
+      at GatewayClientImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:16)
+      at ProposalImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/proposal.js:37:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/gateway.js:85:18)
+      at async Object.readForLogin (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/users.js:20:12)
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/routes/auth.js:30:19
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/util/respond.js:23:7 {
+    code: 14,
+    details: 'No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: ',
+    metadata: Metadata {
+      internalRepr: Map(0) {},
+      opaqueData: Map(0) {},
+      options: {}
+    }
+  }
+}
+[api] POST /api/auth/login failed: GatewayError: 14 UNAVAILABLE: No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: 
+    at newGatewayError (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/gatewayerror.js:54:12)
+    at Object.callback (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:102:60)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:36)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+    ... 2 lines matching cause stack trace ...
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+  code: 14,
+  details: [],
+  cause: Error: 14 UNAVAILABLE: No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: 
+      at callErrorFromStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/call.js:32:19)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:76)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:327:181)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+  for call at
+      at Client.makeUnaryRequest (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:161:32)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:62
+      at new Promise (<anonymous>)
+      at GatewayClientImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:16)
+      at ProposalImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/proposal.js:37:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/gateway.js:85:18)
+      at async Object.readForLogin (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/users.js:20:12)
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/routes/auth.js:30:19
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/util/respond.js:23:7 {
+    code: 14,
+    details: 'No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: ',
+    metadata: Metadata {
+      internalRepr: Map(0) {},
+      opaqueData: Map(0) {},
+      options: {}
+    }
+  }
+}
+[api] POST /api/auth/login failed: GatewayError: 14 UNAVAILABLE: No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: 
+    at newGatewayError (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/gatewayerror.js:54:12)
+    at Object.callback (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:102:60)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:36)
+    at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+    ... 2 lines matching cause stack trace ...
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+  code: 14,
+  details: [],
+  cause: Error: 14 UNAVAILABLE: No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: 
+      at callErrorFromStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/call.js:32:19)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:193:76)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:367:141)
+      at Object.onReceiveStatus (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client-interceptors.js:327:181)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/resolving-call.js:135:78
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+  for call at
+      at Client.makeUnaryRequest (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@grpc/grpc-js/build/src/client.js:161:32)
+      at /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:62
+      at new Promise (<anonymous>)
+      at GatewayClientImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/client.js:34:16)
+      at ProposalImpl.evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/node_modules/@hyperledger/fabric-gateway/dist/proposal.js:37:53)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async evaluate (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/gateway.js:85:18)
+      at async Object.readForLogin (/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/fabric/users.js:20:12)
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/routes/auth.js:30:19
+      at async /Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/src/util/respond.js:23:7 {
+    code: 14,
+    details: 'No connection established. Last error: Error: connect ECONNREFUSED ::1:11051. Resolution note: ',
+    metadata: Metadata {
+      internalRepr: Map(0) {},
+      opaqueData: Map(0) {},
+      options: {}
+    }
+  }
+}

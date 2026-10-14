@@ -1,11 +1,8 @@
 'use strict';
 
 /**
- * Local demonstration sign-in backed by a Fabric identity and ledger profile.
- * No password or password hash is stored. The backend proves it can sign with
- * the selected enrolled identity, then issues the browser a short-lived JWT.
- * Because development private keys are server-held, this is a custodial demo
- * selector—not production proof of an end user's key possession.
+ * Local demonstration sign-in backed by a Fabric identity and ledger profile. No password or password hash
+ * is stored.
  */
 
 const express = require('express');

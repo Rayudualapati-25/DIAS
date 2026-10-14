@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-/**
- * SEAL evaluation harness.
- * Drives the live API as real officers and reads the ledger back.
- * Emits raw per-trial data; no statistics are computed here.
- */
+/** SEAL evaluation harness. Drives the live API as real officers and reads the ledger back. */
 const fs = require('fs');
 const path = require('path');
 const BASE = process.env.API_BASE || 'http://localhost:3001/api';

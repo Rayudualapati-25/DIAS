@@ -1,6 +1,6 @@
 /**
- * Check the off-chain record against its on-chain commitment.
- * This is the check that catches someone editing the agency database directly.
+ * Check the off-chain record against its on-chain commitment. This is the check that catches someone
+ * editing the agency database directly.
  */
 
 import { api } from '../core/api.js';

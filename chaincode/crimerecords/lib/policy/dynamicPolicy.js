@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * DIAS exact-match dynamic access policy.
- *
- * These helpers contain no Fabric APIs so the fingerprint and rule-origin
- * contract can be tested independently from chaincode state. Authorization and
- * state transitions remain in AccessContract.
- */
+/** DIAS exact-match dynamic access policy. */
 
 const { hashObject, sha256, SAFE_ID } = require('../util/validate');
 
@@ -21,13 +15,7 @@ function assignedToCase(caseAssignments, caseId) {
   return caseAssignments.split(/[,|]/).map((value) => value.trim()).includes(caseId);
 }
 
-/**
- * Build the authorization identity of a request.
- *
- * recordId, caseId, contentHash, offChainReference and free text are
- * deliberately excluded. A different record may reuse a rule only when every
- * governed security property and the requester's assignment status match.
- */
+/** Build the authorization identity of a request. */
 function buildRequestFingerprint({ governed, record, requestContext }) {
   if (!governed || !record || !requestContext) {
     throw new Error('governed subject, record, and request context are required');
@@ -70,11 +58,7 @@ function fingerprintHash(fingerprint) {
   return hashObject(fingerprint);
 }
 
-/**
- * Materialize the only rule origin DIAS accepts. The caller must already have
- * verified the referenced ledger assets; this helper additionally makes an
- * invalid transition unrepresentable in the stored rule schema.
- */
+/** Materialize the only rule origin DIAS accepts. */
 function createDynamicAccessRuleAsset({
   txId,
   timestamp,

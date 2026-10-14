@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
-"""E3 analysis: the blockchain part alone, per contract function, at 10-100
-transactions in flight. Throughput in committed transactions (or reads) per
-second, latency in milliseconds, and the three stages of a write.
-
-Usage: python3 analyze_e3.py --run <results/e3-...> --out <dir>
+"""
+E3 analysis: the blockchain part alone, per contract function, at 10-100 transactions in flight.
 """
 
 import argparse
@@ -36,7 +33,8 @@ def main():
     levels = sorted({s["level"] for s in summary})
     table = {(s["round"], s["level"]): s for s in summary}
 
-    # Resources per machine and per container during each round (the load generator itself is left out).
+    # Resources per machine and per container during each round (the load generator itself is left
+    # out).
     for s in summary:
         start, end = s["startedAt"] / 1000, s["finishedAt"] / 1000
         cpu = prom.window_stats(prom.MACHINE_CPU, start, end, key=lambda l: l["machine"])

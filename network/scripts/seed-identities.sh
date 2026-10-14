@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-#
-# Register + enroll demo department users with ABAC attributes baked into
-# their X.509 certificates (":ecert" = included in the enrollment cert).
-# Run with PWD = crime-records-network/network, CAs up, MSP material present.
-#
-# caseAssignments uses '|' as separator because ',' separates attributes.
+# Register + enroll demo department users with ABAC attributes baked into their X.509 certificates (":ecert" = included in the enrollment cert).
 
 set -euo pipefail
 

@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""E7 analysis: workflows while the Raft leader orderer and then a peer are down.
-
-Each workflow is placed in the phase in which it started (normal, leader
-orderer stopped, Court peer stopped, all recovered), and per phase the script
-reports how many completed and how long they took. It also reports how long
-the remaining orderers needed to elect a new leader (from their logs) and the
-ledger check the orchestrator made after the run.
-
-Usage: python3 analyze_e7.py --run <results/e7-...> --out <dir>
-"""
+"""E7 analysis: workflows while the Raft leader orderer and then a peer are down."""
 
 import argparse
 import json
@@ -62,8 +53,8 @@ def main():
     leader_start = starts[0]["epoch_s"]
     peer_stop = stops[1]["epoch_s"]
     peer_start = starts[1]["epoch_s"]
-    # The Court peer is stopped a moment after the leader is started again; that gap joins the Court phase so
-    # every workflow falls in exactly one phase.
+    # The Court peer is stopped a moment after the leader is started again; that gap joins the Court
+    # phase so every workflow falls in exactly one phase.
     phases = [("Normal", 0, leader_stop), ("Leader orderer stopped", leader_stop, leader_start),
               ("Court peer stopped", leader_start, peer_start), ("Recovered", peer_start, float("inf"))]
     result = {"phases": [], "timeline": timeline}

@@ -11,8 +11,8 @@ export async function searchForAccess({ api, input, submit }) {
   else if (input.kind === 'record') targets = [await api.records.lookup(identifier)];
   else throw new Error('Choose a search type.');
   if (!Array.isArray(targets) || targets.length === 0) throw new Error('Case file or evidence not found.');
-  // Evidence IDs may occur under several records. Ask the user to choose rather
-  // than silently submitting multiple access requests with different scopes.
+  // Evidence IDs may occur under several records. Ask the user to choose rather than silently submitting
+  // multiple access requests with different scopes.
   const request = targets.length === 1
     ? await (submit || ((record, scope) => api.access.request({ recordId: record.recordId, ...scope })))(targets[0], intent)
     : null;

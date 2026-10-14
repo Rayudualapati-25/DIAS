@@ -1,15 +1,7 @@
 'use strict';
 
 /**
- * The LLM recommendation an auditor decision was taken against, and whether the
- * decision agreed with it.
- *
- * The backend reads both from the stored recommendation; the browser never
- * supplies either. Only the recommendation value is sent to the chaincode, which
- * commits it and derives the agreement itself, so the ledger cannot hold an
- * agreement that contradicts the recommendation beside it. That committed
- * recommendation is also what lets the chaincode create a dynamic authorization
- * only for an auditor FORCE_ALLOW over an LLM DENY.
+ * The LLM recommendation an auditor decision was taken against, and whether the decision agreed with it.
  */
 
 const LLM_AGREEMENT = Object.freeze({
@@ -33,12 +25,7 @@ function hasRecommendation(recommendation) {
     && ['ALLOW', 'DENY'].includes(recommendation.recommendation);
 }
 
-/**
- * The recommendation value committed on the ledger. A generation that did not
- * produce a usable ALLOW or DENY — the model was unreachable, timed out, broke
- * the response schema, overflowed the context, or never ran because the review
- * could not be saved — is recorded as UNAVAILABLE.
- */
+/** The recommendation value committed on the ledger. */
 function llmRecommendationFor(recommendation) {
   return hasRecommendation(recommendation)
     ? recommendation.recommendation : LLM_RECOMMENDATION.UNAVAILABLE;

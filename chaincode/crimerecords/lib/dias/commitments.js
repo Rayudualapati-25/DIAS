@@ -1,21 +1,6 @@
 'use strict';
 
-/**
- * dias-commitment-hash-v1 — the one rule for every DIAS v3 hash commitment
- * (docs/design/dias-v3-ledger-schema.md §4).
- *
- *   digest = SHA-256( UTF-8("DIAS/v3/" + domain) || 0x00 || content )
- *
- * Structured content is canonical JSON: RFC 8785 for the value types DIAS uses
- * (keys sorted by UTF-16 code units, ECMAScript string escaping, no whitespace),
- * restricted to null, booleans, safe integers, strings, arrays and plain objects
- * so that every implementation produces the same bytes. Text content is the exact
- * string, UTF-8 encoded: no trimming and no Unicode normalization.
- *
- * Used unchanged by the contracts and the backend; the browser has its own
- * implementation in frontend/js/shared/commitments.js, tested against the same
- * vectors (test/fixtures/commitment-vectors.json).
- */
+/** dias-commitment-hash-v1 — the one rule for every DIAS v3 hash commitment. */
 
 const crypto = require('crypto');
 

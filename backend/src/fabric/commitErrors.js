@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Commit conflicts.
- *
- * Fabric validates every transaction at commit time. One whose read set was
- * changed by a transaction committed first (MVCC_READ_CONFLICT) or whose range
- * query would now return different keys (PHANTOM_READ_CONFLICT) is marked
- * invalid and writes nothing. Proposing it again simulates it against the new
- * state, where the chaincode re-checks everything, so a bounded retry is safe.
- */
+/** Commit conflicts. */
 
 /** Transaction validation codes for MVCC_READ_CONFLICT and PHANTOM_READ_CONFLICT. */
 const COMMIT_CONFLICT_CODES = Object.freeze([11, 12]);

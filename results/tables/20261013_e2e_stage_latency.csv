@@ -1,0 +1,20 @@
+configuration,stage,n,min_ms,median_ms,mean_ms,p95_ms,max_ms
+mac,"1. Request committed on the ledger",30,1817.3,2005.6,2003.7,2043.6,2082.6
+mac,"2. Recommendation ready (LLM, signature, commitment)",30,8785.6,8991.3,9554.8,11008.3,13042.3
+mac,"of which: model inference",30,6695.2,7464.1,7861.1,10758.4,12171.5
+mac,"3. Auditor reads the queue",30,20.4,31.1,30.4,36.7,38.6
+mac,"4. Auditor opens the review",30,9.8,12.2,12.6,15.9,16.6
+mac,"5. Decision recorded and confirmed from the ledger",30,1824.3,1903.9,1925.1,2062.1,2063.4
+mac,"End to end (stages 1 to 5)",30,12683.8,12932.4,13526.6,14937.1,17000.9
+mac,"6. Access log read",30,49,61.2,62.1,80.7,84
+mac,"Requester reads the outcome on the Mac",30,8.2,9.2,9.3,11.3,11.6
+mobile,"1. Request committed on the ledger",30,821.5,1286.1,1342.3,1826.6,2085.2
+mobile,"2. Recommendation ready (LLM, signature, commitment)",30,8151.4,9571,9818.5,12422,13244.3
+mobile,"of which: model inference",30,6910.9,8071,8490.2,10626.6,10997
+mobile,"3. Auditor reads the queue",30,37.7,65.6,65.8,83.7,86.1
+mobile,"4. Auditor opens the review",30,45.2,51.5,51.9,68,77.6
+mobile,"5. Decision recorded and confirmed from the ledger",30,254.4,1823,1763.1,2306.8,5810.8
+mobile,"End to end (stages 1 to 5)",30,10898.4,12430.1,13041.6,15809.5,17427.2
+mobile,"6. Access log read",30,138.8,163.7,167.6,195.1,206
+mobile,"Requester reads the outcome on the Mac",30,10.5,14.5,15,18.7,19.6
+mobile,"Phone sign-in (not part of the end-to-end time)",30,494.7,677.5,670.4,703,708.4

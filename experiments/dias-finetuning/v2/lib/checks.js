@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Dataset checks.
- *
- * Each check answers one question about the written files, not about the code
- * that produced them. A check that merely restates a generator invariant would
- * pass even if the generator never ran, so every check here re-derives its
- * answer from the JSONL on disk.
- */
+/** Dataset checks. */
 
 const crypto = require('crypto');
 const {
@@ -70,14 +63,7 @@ function checkBalance(sets, tolerance, balancedSets) {
     : fail('balance', problems.join('; '));
 }
 
-/**
- * No prompt appears twice within one set, and no prompt crosses a split.
- *
- * The test sets are deliberately overlapping views of one held-out pool — the
- * same example can be in `test-decision-balanced` and `test-reason-balanced` —
- * so overlap inside `test` is reported as a statistic, not a failure. Overlap
- * ACROSS splits is the leak, and is.
- */
+/** No prompt appears twice within one set, and no prompt crosses a split. */
 function checkDuplicatePrompts(bySet) {
   const problems = [];
   const owners = new Map();
@@ -106,20 +92,15 @@ function checkDuplicatePrompts(bySet) {
     : fail('duplicate-prompts', problems.join('; '));
 }
 
-/**
- * No verified feature set appears in two different splits.
- *
- * This is the leak that matters most: identical facts with different phrasing
- * across a split boundary makes a test score partly a memory test.
- */
+/** No verified feature set appears in two different splits. */
 function checkFeatureLeakage(bySet) {
   const owners = new Map();
   const leaks = [];
   for (const [setName, examples] of Object.entries(bySet)) {
     for (const example of examples) {
-      // caseId is a fresh identifier per family, so exclude it: two families that
-      // happen to share every policy fact are a coincidence, not a leak, and
-      // including the id would hide real collisions behind unique noise.
+      // caseId is a fresh identifier per family, so exclude it: two families that happen to share every
+      // policy fact are a coincidence, not a leak, and including the id would hide real collisions behind
+      // unique noise.
       const { caseId, ...resource } = example.verifiedRequest.resource;
       const key = sha256(JSON.stringify({
         requester: example.verifiedRequest.requester,
@@ -187,13 +168,7 @@ function checkTemplateLeakage(bySet, heldOutFamilyIds) {
     `${held.size} held-out template families, none in training; ${HELD_OUT_SET} uses only them`);
 }
 
-/**
- * Identifiers encode nothing.
- *
- * Checked two ways: the string must not contain the term, and the term must not
- * be predictable from the identifier. The second is the one that catches v1's
- * numeric ranges, where no substring matched but the range did.
- */
+/** Identifiers encode nothing. */
 function checkIdentifierLeakage(all) {
   const problems = [];
   const terms = (example) => [
@@ -215,16 +190,7 @@ function checkIdentifierLeakage(all) {
     : fail('identifier-substring', problems.join('; '));
 }
 
-/**
- * An identifier must not predict the label.
- *
- * v1 gave each reason code its own contiguous record-number range, so a prefix
- * bucket was almost pure. The test is therefore a two-sided binomial test of
- * each prefix bucket against the overall ALLOW rate, Bonferroni-corrected for
- * the number of buckets examined: with hundreds of buckets, a handful of 2-3σ
- * deviations is what independence looks like, and reporting them as leakage
- * would be a false alarm that trains the reader to ignore this check.
- */
+/** An identifier must not predict the label. */
 function checkIdentifierPredictiveness(all, field, prefixLength, { minBucket = 50, sigma = 4 } = {}) {
   const buckets = new Map();
   for (const example of all) {
@@ -298,11 +264,7 @@ function checkPrecedence(all, bundle) {
     : fail('precedence', problems.join('; '));
 }
 
-/**
- * Every explanation cites only clauses the label lists and states nothing the
- * facts do not support. The reason is generated from a template over the facts,
- * so this checks that the template output really is grounded.
- */
+/** Every explanation cites only clauses the label lists and states nothing the facts do not support. */
 function checkExplanationGrounding(all) {
   const problems = [];
   for (const example of all) {
@@ -320,12 +282,7 @@ function checkExplanationGrounding(all) {
     : fail('explanation-grounding', problems.join('; '));
 }
 
-/**
- * Policy-irrelevant fields must not predict the label.
- *
- * v1 set emergencyFlag false in every example, so this check would have reported
- * a degenerate field rather than an independent one.
- */
+/** Policy-irrelevant fields must not predict the label. */
 function checkIrrelevantFieldIndependence(all, tolerance) {
   const fields = [
     ['emergencyFlag', (e) => e.verifiedRequest.request.emergencyFlag],

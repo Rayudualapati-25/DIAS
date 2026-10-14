@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Parse raw model text into a DIAS recommendation.
- *
- * Formatting tolerances are limited and recorded: surrounding whitespace, one
- * empty <think></think> block, and one surrounding markdown code fence. Everything
- * else must satisfy the shared response schema exactly, otherwise the result is
- * INVALID_OUTPUT and no recommendation is fabricated.
- */
+/** Parse raw model text into a DIAS recommendation. */
 
 const {
   GENERATION_STATUS, normalizeRecommendation, validateRecommendationOutput,
@@ -39,10 +32,6 @@ function extractJsonObject(text) {
   }
 }
 
-/**
- * @param {string} text raw model output
- * @param {object} policy { clauseRefs, reasonCodes, reviewFlags } of the active bundle
- */
 function parseRecommendation(text, policy) {
   const extracted = extractJsonObject(text);
   if (extracted.error) {

@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * HTTP client and result helpers for the live DIAS acceptance run.
- *
- * Every call goes through the application backend exactly as the web interface
- * does, so the run exercises the real path: backend LLM call, off-chain review
- * store, and chaincode request and decision logs.
- */
+/** HTTP client and result helpers for the live DIAS acceptance run. */
 
 const POLL_MS = 1000;
 const RECOMMENDATION_TIMEOUT_MS = 600000;
@@ -53,8 +47,8 @@ function createClient(baseUrl) {
   async function readyReview(requestId, { timeoutMs = RECOMMENDATION_TIMEOUT_MS, auditor = 'sp.north' } = {}) {
     const deadline = Date.now() + timeoutMs;
     for (;;) {
-      // The status route reads encrypted storage through the backend, without
-      // opening a review or appending one audit transaction per poll.
+      // The status route reads encrypted storage through the backend, without opening a review or appending
+      // one audit transaction per poll.
       const prepared = await api('GET', `/access/auditor/pending/status?ids=${encodeURIComponent(requestId)}`, { username: auditor });
       if (prepared.status !== 200 || !Array.isArray(prepared.data) || !prepared.data[0]) {
         throw new Error(`preparation status ${requestId}: ${prepared.status} ${prepared.error}`);
@@ -65,11 +59,7 @@ function createClient(baseUrl) {
         continue;
       }
       const result = await review(requestId, auditor);
-      // The request is committed through the requester's peer and read through
-      // the auditor's peer.  Immediately after commit, the latter can briefly
-      // return the chaincode's 422 "does not exist" until it receives the block.
-      // Treat only that convergence window as retryable; every other HTTP error
-      // is still terminal and visible to the run.
+      // The request is committed through the requester's peer and read through the auditor's peer.
       const converging = result.status === 422
         && /does not exist/i.test(String(result.error || ''));
       if (result.status !== 200 && !converging) {
@@ -107,8 +97,8 @@ const stagesOf = (trail) => (trail.lifecycle || []).map((event) => event.eventTy
 
 /** The ledger part of a trail, without the backend's off-chain section. */
 function ledgerOnly(trail) {
-  // Both sections are added by the backend after it reads committed state.
-  // Verification describes checks on the off-chain payload, not ledger fields.
+  // Both sections are added by the backend after it reads committed state. Verification describes checks on
+  // the off-chain payload, not ledger fields.
   const { offChainReview, offChainVerification, ...ledger } = trail;
   return ledger;
 }

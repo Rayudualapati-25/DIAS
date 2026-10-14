@@ -1,12 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Deterministic audit-field completeness check over a retained live acceptance
- * run. This does not impersonate an independent human evaluator: it measures
- * whether the deployed API and retained off-chain review can mechanically
- * reconstruct the facts the paper says are recorded.
- */
+/** Deterministic audit-field completeness check over a retained live acceptance run. */
 
 const fs = require('fs');
 const path = require('path');
@@ -116,8 +111,8 @@ async function main() {
     modelUnavailable: getScenario(acceptance, 'R12').evidence.requestId,
   };
 
-  // Locate the acceptance requests that observed revocation and expiry; the R9
-  // summary retains authorization IDs while the trail retains the exact request.
+  // Locate the acceptance requests that observed revocation and expiry; the R9 summary retains
+  // authorization IDs while the trail retains the exact request.
   const allTrails = [];
   for (const requestId of acceptance.requestIds) {
     const result = await client.trail(requestId);

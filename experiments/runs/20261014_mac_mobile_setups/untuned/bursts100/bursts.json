@@ -1,0 +1,161 @@
+[
+ {
+  "id": "L100-combined",
+  "setup": "combined",
+  "level": 100,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T14:29:03.067Z",
+  "requested": 100,
+  "accepted": 100,
+  "decided": 100,
+  "verified": 100,
+  "failed": 0,
+  "makespanMs": 998358.4,
+  "decisionsPerMinute": 6,
+  "submitMs": {
+   "n": 100,
+   "min": 322.6,
+   "median": 798,
+   "mean": 789,
+   "p95": 1139.8,
+   "max": 1169
+  },
+  "adviceReadyAfterMs": {
+   "n": 100,
+   "min": 9608.7,
+   "median": 529336.6,
+   "mean": 518230.1,
+   "p95": 951858.1,
+   "max": 995869.8
+  },
+  "decidedAfterMs": {
+   "n": 100,
+   "min": 12193.4,
+   "median": 531831,
+   "mean": 520701.1,
+   "p95": 954242.7,
+   "max": 998358.4
+  },
+  "quietBeforeMs": 426247.9,
+  "drainMs": 13190.3,
+  "checks": [
+   {
+    "name": "L100-combined: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "100 of 100 found"
+   },
+   {
+    "name": "L100-combined: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L100-phone-only",
+  "setup": "phone-only",
+  "level": 100,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T14:46:25.060Z",
+  "requested": 100,
+  "accepted": 100,
+  "decided": 100,
+  "verified": 100,
+  "failed": 0,
+  "makespanMs": 890154.5,
+  "decisionsPerMinute": 6.7,
+  "submitMs": {
+   "n": 100,
+   "min": 298.3,
+   "median": 811.5,
+   "mean": 814.6,
+   "p95": 1162.6,
+   "max": 1193.5
+  },
+  "adviceReadyAfterMs": {
+   "n": 100,
+   "min": 9607.7,
+   "median": 469989.6,
+   "mean": 459076.4,
+   "p95": 848298.4,
+   "max": 887651.8
+  },
+  "decidedAfterMs": {
+   "n": 100,
+   "min": 12226.7,
+   "median": 472539.7,
+   "mean": 461569.3,
+   "p95": 850359.3,
+   "max": 890154.5
+  },
+  "quietBeforeMs": 14713.2,
+  "drainMs": 9462.8,
+  "checks": [
+   {
+    "name": "L100-phone-only: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "100 of 100 found"
+   },
+   {
+    "name": "L100-phone-only: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ },
+ {
+  "id": "L100-mac-only",
+  "setup": "mac-only",
+  "level": 100,
+  "repeat": 1,
+  "startedAtUtc": "2026-10-14T15:01:55.154Z",
+  "requested": 100,
+  "accepted": 100,
+  "decided": 100,
+  "verified": 100,
+  "failed": 0,
+  "makespanMs": 898275.8,
+  "decisionsPerMinute": 6.7,
+  "submitMs": {
+   "n": 100,
+   "min": 329.7,
+   "median": 870.1,
+   "mean": 846.8,
+   "p95": 1172.8,
+   "max": 1200.8
+  },
+  "adviceReadyAfterMs": {
+   "n": 100,
+   "min": 9374.7,
+   "median": 447587.2,
+   "mean": 451422.2,
+   "p95": 847218.2,
+   "max": 895850.5
+  },
+  "decidedAfterMs": {
+   "n": 100,
+   "min": 11943.2,
+   "median": 449895,
+   "mean": 453896.4,
+   "p95": 849597.7,
+   "max": 898275.8
+  },
+  "quietBeforeMs": 14737.8,
+  "drainMs": 16537.9,
+  "checks": [
+   {
+    "name": "L100-mac-only: every auditor review is in the searches-and-reads log on the ledger",
+    "ok": true,
+    "detail": "100 of 100 found"
+   },
+   {
+    "name": "L100-mac-only: no call was refused or failed",
+    "ok": true,
+    "detail": "0 since the run began"
+   }
+  ],
+  "closedAfterBurst": []
+ }
+]

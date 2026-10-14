@@ -1,21 +1,6 @@
 'use strict';
 
-/**
- * Recommendations, committed before review (design §6, §11).
- *
- * Once a request is committed and waits for the auditor, the worker asks the
- * backend's signed recommender for an advisory recommendation. That returns
- * the recommendation object M and a signed commitment κ. The worker stores both
- * (state `signed`) BEFORE submitting κ, so a crash or a lost response never loses
- * what was signed: a `signed` entry is resubmitted unchanged, which the contract
- * treats as a safe retry, and an uncertain submission is resolved by reading κ
- * back from the ledger.
- *
- * States: pending → signed → committed, or commit-rejected when the ledger
- * refuses κ for a reason a retry cannot fix (expired, stale policy, mismatch),
- * or failed when the recommender itself could not answer. Requests are answered one
- * at a time so the model server is never flooded.
- */
+/** Recommendations, committed before review. */
 
 const { RECOMMENDATION_STATE, isRecommendationPreparing } = require('./reviewStore');
 const { sameCommitment } = require('../../../chaincode/crimerecords/lib/dias/recommendationCommitment');

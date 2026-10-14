@@ -1,0 +1,59 @@
+{
+ "clerk.das": {
+  "kind": "officer outside the reviewers",
+  "workflowStatus": 200,
+  "entries": 100,
+  "withNamesAndFiles": true,
+  "txIdFields": 0,
+  "authCheckKeys": "authorizationId,matched,outcome",
+  "anyHashInText": false,
+  "decisionStatus": 200,
+  "decisions": 100,
+  "decisionTxIdFields": 0,
+  "redacted": false,
+  "error": null
+ },
+ "insp.sharma": {
+  "kind": "officer outside the reviewers",
+  "workflowStatus": 200,
+  "entries": 100,
+  "withNamesAndFiles": true,
+  "txIdFields": 0,
+  "authCheckKeys": "authorizationId,matched,outcome",
+  "anyHashInText": false,
+  "decisionStatus": 200,
+  "decisions": 100,
+  "decisionTxIdFields": 0,
+  "redacted": false,
+  "error": null
+ },
+ "sp.north": {
+  "kind": "reviewer (auditor)",
+  "workflowStatus": 200,
+  "entries": 100,
+  "withNamesAndFiles": true,
+  "txIdFields": 4,
+  "authCheckKeys": "authorizationId,checkedAtUtc,conditionsHash,generation,matched,outcome,policyHash,policyVersion,scopeHash,stateVersion,status",
+  "anyHashInText": true,
+  "decisionStatus": 200,
+  "decisions": 100,
+  "decisionTxIdFields": 2,
+  "redacted": false,
+  "error": null
+ },
+ "judge.rana": {
+  "kind": "reviewer (court)",
+  "workflowStatus": 200,
+  "entries": 100,
+  "withNamesAndFiles": true,
+  "txIdFields": 4,
+  "authCheckKeys": "authorizationId,checkedAtUtc,conditionsHash,generation,matched,outcome,policyHash,policyVersion,scopeHash,stateVersion,status",
+  "anyHashInText": true,
+  "decisionStatus": 200,
+  "decisions": 100,
+  "decisionTxIdFields": 2,
+  "redacted": false,
+  "error": null
+ }
+}
+searches-and-reads log as the auditor: 200 5 entries

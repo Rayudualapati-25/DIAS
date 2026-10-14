@@ -1,0 +1,34 @@
+[0;34mGenerating genesis block for channel 'diaschannel'[0m
+[34m2026-10-06 15:05:43.058 IST 0001 INFO[0m [common.tools.configtxgen] [34;1mmain[0m -> Loading configuration
+[34m2026-10-06 15:05:43.067 IST 0002 INFO[0m [common.tools.configtxgen.localconfig] [34;1mcompleteInitialization[0m -> orderer type: etcdraft
+[34m2026-10-06 15:05:43.067 IST 0003 INFO[0m [common.tools.configtxgen.localconfig] [34;1mcompleteInitialization[0m -> Orderer.EtcdRaft.Options unset, setting to tick_interval:"500ms" election_tick:10 heartbeat_tick:1 max_inflight_blocks:5 snapshot_interval_size:16777216 
+[34m2026-10-06 15:05:43.067 IST 0004 INFO[0m [common.tools.configtxgen.localconfig] [34;1mLoad[0m -> Loaded configuration: /private/var/folders/hr/fg3wnnyx4xqfgml4q1jxqb2m0000gn/T/dias-host-20261006-V6tgOj/DIAS/network/configtx/configtx.yaml
+[34m2026-10-06 15:05:43.069 IST 0005 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Generating genesis block
+[34m2026-10-06 15:05:43.069 IST 0006 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Creating application channel genesis block
+[34m2026-10-06 15:05:43.070 IST 0007 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Writing genesis block
+[0;34mJoining orderer to the channel (osnadmin)[0m
+Status: 201
+{
+	"name": "diaschannel",
+	"url": "/participation/v1/channels/diaschannel",
+	"consensusRelation": "consenter",
+	"status": "active",
+	"height": 1
+}
+
+[0;34mJoining peer0.police.example.com to 'diaschannel'[0m
+[34m2026-10-06 15:05:43.251 IST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-10-06 15:05:43.421 IST 0002 INFO[0m [channelCmd] [34;1mexecuteJoin[0m -> Successfully submitted proposal to join channel
+[0;34mJoining peer0.forensics.example.com to 'diaschannel'[0m
+[34m2026-10-06 15:05:43.488 IST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-10-06 15:05:43.642 IST 0002 INFO[0m [channelCmd] [34;1mexecuteJoin[0m -> Successfully submitted proposal to join channel
+[0;34mJoining peer0.prosecution.example.com to 'diaschannel'[0m
+[34m2026-10-06 15:05:43.709 IST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-10-06 15:05:43.803 IST 0002 INFO[0m [channelCmd] [34;1mexecuteJoin[0m -> Successfully submitted proposal to join channel
+[0;34mJoining peer0.court.example.com to 'diaschannel'[0m
+[34m2026-10-06 15:05:43.867 IST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-10-06 15:05:43.980 IST 0002 INFO[0m [channelCmd] [34;1mexecuteJoin[0m -> Successfully submitted proposal to join channel
+[0;34mJoining peer0.audit.example.com to 'diaschannel'[0m
+[34m2026-10-06 15:05:44.045 IST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-10-06 15:05:44.120 IST 0002 INFO[0m [channelCmd] [34;1mexecuteJoin[0m -> Successfully submitted proposal to join channel
+[0;34mChannel 'diaschannel' (DiasChannel) created and joined by 5 peers.[0m

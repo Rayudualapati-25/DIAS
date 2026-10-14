@@ -1,22 +1,5 @@
 'use strict';
-/**
- * Generate paper-ready SVG figures from retained Hyperledger Caliper outputs.
- *
- * This script is deliberately strict: it only plots real retained measurement
- * artifacts (`caliper-summary.json` or an HTML report that contains the same
- * benchmark summary table). It does not invent values and exits non-zero if a
- * requested figure has no usable data yet.
- *
- * Figures produced:
- *   - read-performance.svg
- *   - write-performance.svg
- *   - increasing-load.svg
- *   - mixed-workload.svg
- *   - endurance.svg
- *
- * Output directory:
- *   results/plots/caliper-figures/
- */
+/** Generate paper-ready SVG figures from retained Hyperledger Caliper outputs. */
 
 const fs = require('node:fs');
 const path = require('node:path');

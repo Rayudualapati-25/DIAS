@@ -124,8 +124,7 @@ function validateDecision(value, trusted) {
   } else {
     if (!ACTIONS.includes(parsed.action)) problems.push('invalid parsed action');
     if (!boundedString(parsed.purpose, 64)) problems.push('invalid parsed purpose');
-    // The recorded request must be the one the requester committed, never the
-    // model's reading of it.
+    // The recorded request must be the one the requester committed, never the model's reading of it.
     const canonical = canonicalRequest(trusted);
     if (parsed.action !== canonical.action) {
       problems.push('parsedRequest action is not the committed operation');
@@ -202,10 +201,8 @@ function buildMessages(input) {
 }
 
 /**
- * A model answer that misreads the request, or that disagrees with the policy
- * evaluated on the canonical request facts, never becomes an automatic grant or
- * denial. Either failure is converted to ESCALATE for an independent AuditMSP
- * review; neither can substitute a different allow or deny.
+ * A model answer that misreads the request, or that disagrees with the policy evaluated on the canonical
+ * request facts, never becomes an automatic grant or denial.
  */
 function applyPolicySafetyGuard(classification, input) {
   const result = deriveEffectiveClassification(classification, input);

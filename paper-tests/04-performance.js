@@ -1,34 +1,6 @@
 'use strict';
 
-/**
- * EXPERIMENT 04 — latency decomposition and concurrency.
- *
- * RQ4: what latency and scalability overhead does SEAL add on top of the model?
- *
- * WHAT IS MEASURED, AND WHAT IS NOT
- *
- * Three quantities are directly observable without changing the system:
- *
- *   T_model      the inference time recorded inside the signed inference
- *                descriptor, measured around the model HTTP call itself
- *   T_end_to_end the client-observed round trip of POST /access/llm-request
- *   T_remainder  T_end_to_end - T_model
- *
- * T_remainder is reported as ONE figure and is an UPPER BOUND on the SEAL
- * overhead. It contains, and cannot currently separate: the request-creation
- * transaction, the listener's event pickup, the ledger read of the request
- * context, the deterministic guard, explanation materialisation, Ed25519
- * signing, endorsement, ordering, commit, and the API's 250 ms decision poll.
- *
- * T_context, T_validator, T_explanation, T_signature, T_endorsement and
- * T_commit are NOT reported separately. Separating them requires timestamps
- * inside the AI decision service, which is frozen code; that instrumentation is
- * proposed but not applied here. Nothing in this file invents a stage timing.
- *
- * One further decomposition IS available without instrumentation: the model
- * server is called directly with the same prompt shape, which isolates raw
- * inference from everything SEAL adds around it.
- */
+/** EXPERIMENT 04 — latency decomposition and concurrency. */
 
 const path = require('path');
 const {
@@ -57,11 +29,8 @@ const lineCount = (file) => {
 };
 
 /**
- * Stage timings are written by the decision service, one line per answered
- * request, and are read back by window rather than joined per request: the API
- * response does not carry the ledger request id. Each measurement phase records
- * the file offset before it starts and reads only the lines it produced, so a
- * phase never reports another phase's work.
+ * Stage timings are written by the decision service, one line per answered request, and are read back by
+ * window rather than joined per request: the API response does not carry the ledger request id.
  */
 function stagesSince(offset) {
   let lines = [];
@@ -80,9 +49,8 @@ function stagesSince(offset) {
     fabricSubmitCommitMs: of('fabricSubmitCommitMs'),
     decisionServiceTotalMs: of('totalMs'),
     decisions: [...new Set(rows.map((r) => `${r.decision}/${r.reasonCode}`))],
-    // The tail matters here: a single inference exceeding the model timeout was
-    // observed during this evaluation, so the maximum and the count beyond the
-    // timeout are reported rather than the mean alone.
+    // The tail matters here: a single inference exceeding the model timeout was observed during this
+    // evaluation, so the maximum and the count beyond the timeout are reported rather than the mean alone.
     inferencesOver60s: rows.filter((r) => r.inferenceMs > 60000).length,
     maxInferenceMs: Math.max(...rows.map((r) => r.inferenceMs).filter(Number.isFinite)),
   };
@@ -135,8 +103,8 @@ async function oneRequest(token, spec) {
 }
 
 /**
- * Raw model latency, bypassing SEAL entirely. Same decoding parameters and the
- * same prompt builders the runtime uses, so the comparison is like for like.
+ * Raw model latency, bypassing SEAL entirely. Same decoding parameters and the same prompt builders the
+ * runtime uses, so the comparison is like for like.
  */
 async function modelOnly(reps) {
   const subject = {
@@ -172,7 +140,7 @@ async function modelOnly(reps) {
       });
       await res.json();
       samples.push(Date.now() - t0);
-    } catch { /* a failed sample is dropped, and the count reflects it */ }
+    } catch { /* A failed sample is dropped, and the count reflects it */ }
   }
   return samples;
 }
@@ -199,8 +167,8 @@ async function steadyState(tokens, name, spec, reps, warmup) {
   const warm = [];
   for (let i = 0; i < warmup; i += 1) warm.push(await oneRequest(token, spec));
 
-  // Offsets are taken after the warm-up, so warm-up work is excluded from the
-  // steady-state stage figures as well as from the latency figures.
+  // Offsets are taken after the warm-up, so warm-up work is excluded from the steady-state stage figures as
+  // well as from the latency figures.
   const stageOffset = lineCount(STAGE_TIMINGS_FILE);
   const supervisorOffset = lineCount(SUPERVISOR_EVENTS);
   const rows = [];

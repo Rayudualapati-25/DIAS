@@ -225,8 +225,8 @@ def failure_figure():
     ax.grid(axis="y")
     ax.set_title("V7 still fails on adversarial policy-denied requests (6/204; 2.94%)")
 
-    # The requested explicit crossed failure marker: two diagonal strokes plus
-    # unambiguous text, placed over the unsafe-ALLOW bar.
+    # The requested explicit crossed failure marker: two diagonal strokes plus unambiguous text,
+    # placed over the unsafe-ALLOW bar.
     cross_y = max(unsafe * 3.2, 24)
     ax.plot([0.83, 1.17], [cross_y - 13, cross_y + 13], color=COLORS["failure"], linewidth=5, solid_capstyle="round")
     ax.plot([0.83, 1.17], [cross_y + 13, cross_y - 13], color=COLORS["failure"], linewidth=5, solid_capstyle="round")

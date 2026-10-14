@@ -1,0 +1,17 @@
+measure,unit,untuned,v7
+"end-to-end median, mac-only",ms,13192.7,14147.3
+"end-to-end median, phone-only",ms,13316,14374.7
+"end-to-end median, combined",ms,13206.9,14187.4
+"end-to-end median, all",ms,13226,14246.3
+model inference median (live),ms,6860,7782.9
+reuse: first request median,ms,14057.2,14157.2
+reuse: reused request median,ms,2096.5,2100.3
+reuse: requests exercised (of 12),count,12,12
+"load: 25 at once, all decided after (mean of 2), mac-only",ms,227519.4,258979
+"load: 25 at once, all decided after (mean of 2), phone-only",ms,250895.2,282185.5
+"load: 25 at once, all decided after (mean of 2), combined",ms,228979.6,252263.1
+quality: decisionAccuracy,share of valid,0.650647,0.973333
+quality: validAnswers,of 600,541,600
+quality: falseAllow,count,21,7
+quality: falseDeny,count,168,9
+quality: macroF1,score,0.623205,0.973333

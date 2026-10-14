@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-/** Submit a correctly signed but policy-inconsistent artifact to the live
- * chaincode. Success means Fabric rejects it independently of the AI service.
- * Stop the AI listener while this script runs; restart it afterwards so the
- * retained request is answered normally.
+/**
+ * Submit a correctly signed but policy-inconsistent artifact to the live chaincode. Success means Fabric
+ * rejects it independently of the AI service.
  */
 
 const fs = require('fs');
@@ -40,8 +39,8 @@ async function main() {
     reasonCode: 'NOT_ASSIGNED', policyVersion: 'crime-policy-v2',
     modelVersion: registration.modelVersion,
   };
-  // Structurally valid and signed, but unsafe: trusted state says this officer
-  // is assigned and the deterministic result is POLICY_SATISFIED/ALLOW.
+  // Structurally valid and signed, but unsafe: trusted state says this officer is assigned and the
+  // deterministic result is POLICY_SATISFIED/ALLOW.
   const unsafeDecision = materializeDecision(advisory, context.snapshot);
   const inference = {
     adapterHash: registration.adapterHash,

@@ -1,18 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Determinism check for the live-run errors: were they caused by load?
- *
- * For every E5 workflow whose recommendation disagreed with the written policy,
- * this replays the exact stored prompt inputs (the committed verified request
- * and the justification) through the same recommender code and model server,
- * one at a time with no other load, and compares the answer with the one given
- * under load: decision, reason code and the hash of the raw model output.
- *
- * Usage: node testbed/load/replay-errors.js --rows /results/<e5>/requests.jsonl \
- *          --out /results/<e5>/replay-errors.json
- */
+/** Determinism check for the live-run errors: were they caused by load? */
 
 const fs = require('fs');
 const path = require('path');

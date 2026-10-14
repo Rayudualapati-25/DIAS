@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * The backend recommendation path: off-chain review store, LLM agreement, and
- * the worker that answers requests one at a time and resumes after a restart.
+ * The backend recommendation path: off-chain review store, LLM agreement, and the worker that answers
+ * requests one at a time and resumes after a restart.
  */
 
 const fs = require('fs');

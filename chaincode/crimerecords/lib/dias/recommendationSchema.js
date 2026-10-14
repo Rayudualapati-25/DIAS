@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * DIAS recommendation response contract v1.
- *
- * Structural validation only: keys, types, vocabulary, and internal consistency
- * with the registered policy bundle's reason codes, clause references, and review
- * flags. It never compares a recommendation with the verified facts; the auditor
- * is the authority on whether a recommendation is right.
- */
+/** DIAS recommendation response contract v1. */
 
 const RESPONSE_SCHEMA_VERSION = 'dias-recommendation-response-v1';
 const RESPONSE_KEYS = Object.freeze([
@@ -48,10 +41,7 @@ function listProblems(field, value, allowed, maxItems) {
   return new Set(value).size === value.length ? problems : [...problems, `${field} contains duplicates`];
 }
 
-/**
- * Problems with a model response under a registered policy bundle; empty means valid.
- * @param {object} policy { clauseRefs: string[], reasonCodes: {code: 'ALLOW'|'DENY'}, reviewFlags: string[] }
- */
+/** Problems with a model response under a registered policy bundle; empty means valid. */
 function validateRecommendationOutput(value, policy) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     return ['response must be a JSON object'];

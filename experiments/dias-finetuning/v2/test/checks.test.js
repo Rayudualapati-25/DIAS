@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * The checks must be able to fail.
- *
- * A validator that passes on a clean dataset proves nothing on its own — it may
- * simply be incapable of returning false. Every test here injects the exact
- * defect the check exists to catch, including the ones data-v1 actually had, and
- * asserts the check reports it.
- */
+/** The checks must be able to fail. */
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -151,8 +144,8 @@ test('identifier check detects a record id that spells out the reason code', () 
 });
 
 test('predictiveness check detects v1-style per-reason identifier ranges', () => {
-  // v1 gave each reason code its own contiguous range, so a prefix bucket was
-  // pure. This is the exact defect, reproduced.
+  // v1 gave each reason code its own contiguous range, so a prefix bucket was pure. This is the exact
+  // defect, reproduced.
   const corrupted = clone(all);
   let allowIndex = 0;
   let denyIndex = 0;

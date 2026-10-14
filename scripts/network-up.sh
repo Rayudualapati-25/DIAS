@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-#
-# One-command bring-up of the Crime Records Access Network:
-#   6 Fabric CAs -> org MSP generation -> orderer + 5 peers (CouchDB)
-#   -> channel 'crimechannel' created and joined by every department peer.
-#
+# One-command bring-up of the Crime Records Access Network.
 # Usage: scripts/network-up.sh [channel-name]
 
 set -euo pipefail

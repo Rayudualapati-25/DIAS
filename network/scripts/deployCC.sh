@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-#
-# Package, install (5 peers), approve (5 orgs), and commit the crimerecords
-# chaincode with the evidenceDetails private data collection.
-# Run with PWD = crime-records-network/network, network + channel up.
-#
+# Package, install (5 peers), approve (5 orgs), and commit the crimerecords chaincode with the evidenceDetails private data collection.
 # Usage: deployCC.sh [channel] [cc-name] [version] [sequence]
 
 set -euo pipefail

@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the SEBA-XAI architecture diagram as SVG and draw.io XML.
-
-Single source of truth: the NODES / EDGES tables below. Edit them and re-run:
-
-    python3 docs/architecture/generate_architecture.py
-
-Both outputs are written next to this script.
-"""
+"""Generate the SEBA-XAI architecture diagram as SVG and draw.io XML."""
 
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -28,7 +21,7 @@ PALETTE = {
     "esc":     ("#F7EEDA", "#C08A2E", "#3A2C0E"),
 }
 
-# id, x, y, w, h, kind, title, body(list of lines), fontsize
+# Id, x, y, w, h, kind, title, body(list of lines), fontsize
 NODES = [
     # ---------------------------------------------------------------- client
     ("band_client", 60, 70, 1600, 96, "band",
@@ -136,12 +129,10 @@ NODES = [
       "Prometheus scrapes orderer + five peer metrics endpoints during runs."], 11),
 ]
 
-# source, target, label, dashed, route
-#   "v"   src bottom-centre -> dst top-centre (via mid-y corridor)
-#   "h"   src right-centre  -> dst left-centre
-#   "R"   out right, along the right margin, in through dst right edge
-#   "L"   out left,  along the left  margin, in through dst left  edge
-#   "C"   out right, up the corridor between the rule ladder and the artifact
+# Source, target, label, dashed, route "v" src bottom-centre -> dst top-centre (via mid-y corridor)
+# "h" src right-centre -> dst left-centre "R" out right, along the right margin, in through dst
+# right edge "L" out left, along the left margin, in through dst left edge "C" out right, up the
+# corridor between the rule ladder and the artifact
 EDGES = [
     ("ui_access",   "routes",      "signed request",                         False, "v"),
     ("routes",      "fab_gw",      "",                                       False, "v"),
@@ -201,12 +192,12 @@ def build_svg():
     o.append(svg_text(W / 2, 60, "On-chain contextual access control with verifiable explanations for inter-agency crime-record sharing",
                       13, "normal", "#5A6472"))
 
-    # trust boundary
+    # Trust boundary
     o.append(f'<line x1="60" y1="{BOUNDARY_Y}" x2="{W-60}" y2="{BOUNDARY_Y}" stroke="#A63A3A" '
              f'stroke-width="2" stroke-dasharray="10 6"/>')
     o.append(svg_text(W / 2, BOUNDARY_Y - 8, BOUNDARY_TEXT, 11.5, "bold", "#A63A3A"))
 
-    # edges first (behind boxes)
+    # Edges first (behind boxes)
     def chip(cx, cy, t):
         w = len(t) * 6.0 + 10
         return (f'<rect x="{cx-w/2:.1f}" y="{cy-9:.1f}" width="{w:.1f}" height="17" rx="3" '
@@ -252,7 +243,7 @@ def build_svg():
             else:
                 o.append(chip(lx, ly, label))
 
-    # nodes
+    # Nodes
     for nid, x, y, w, h, kind, title, body, fs in NODES:
         fill, stroke, fg = PALETTE[kind]
         is_band = kind == "band"
@@ -299,8 +290,8 @@ def build_drawio():
         raw = f"<b>{title}</b>" if (body or kind == "band") else title
         if body:
             raw += "<br/>" + "<br/>".join(body)
-        # draw.io stores label HTML inside an XML attribute, so the markup
-        # itself must be entity-escaped; draw.io decodes and renders it.
+        # draw.io stores label HTML inside an XML attribute, so the markup itself must be
+        # entity-escaped; draw.io decodes and renders it.
         label = escape(raw, {'"': "&quot;"})
         cells.append(
             f'        <mxCell id="{nid}" value="{label}" style="{DRAWIO_STYLE[kind]}" vertex="1" parent="1">\n'

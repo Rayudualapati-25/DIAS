@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
-#
-# Start the reuse experiment (testbed/reuse/) after the same checks as start_e6.sh:
-#   1. the model server answers, both recorders and the backend run, no load generator runs,
-#      and every VM clock is within 1 s of the Mac;
-#   2. the backend has no recommendation in preparation;
-#   3. the plan and scripts are staged into ~/dias-testbed/reuse (mounted read-only into the
-#      containers), the plan's cases and records are seeded (idempotent), and the ledger holds
-#      no authorization for any record of the plan;
-#   4. the run starts in a detached container under a fresh run name; for the full run the Mac
-#      is kept awake until the load generator exits.
-# While it runs send nothing else to the model server.
-#
+# Start the reuse experiment (testbed/reuse/) after the same checks as start_e6.sh.
 # Usage: bash testbed/scripts/start_reuse.sh [--smoke]   (REUSE_PLAN_NAME=<file> picks another smoke plan)
 set -euo pipefail
 

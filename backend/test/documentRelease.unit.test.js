@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Plan step 4, backend half: the full-document download asks the ledger to
- * re-check the grant before it touches the vault, and still compares the vault
- * bytes with the committed content hash before delivering anything.
+ * , backend half: the full-document download asks the ledger to re-check the grant before it touches the
+ * vault, and still compares the vault bytes with the committed content hash before delivering anything.
  */
 
 const { expect } = require('chai');

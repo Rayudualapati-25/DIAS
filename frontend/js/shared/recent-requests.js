@@ -1,9 +1,6 @@
 /**
- * A requester's own recent access requests, remembered per browser session so
- * they can return to a pending request after navigating away.
- *
- * The ledger stays the source of truth: entries hold only identifiers and the
- * last status seen, and are re-read with api.access.decision when reopened.
+ * A requester's own recent access requests, remembered per browser session so they can return to a pending
+ * request after navigating away.
  */
 
 const KEY_PREFIX = 'crn.recent-requests.';

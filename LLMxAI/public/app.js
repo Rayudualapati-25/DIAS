@@ -79,9 +79,9 @@ function renderDecision(payload) {
   panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// Reproducibility: the interface uses the same decoding settings as the offline
-// evaluator (temperature 0, top_p 1, seed 42, 192 max tokens) and the same prompt
-// contract, so an identical request must return a byte-identical model output.
+// Reproducibility: the interface uses the same decoding settings as the offline evaluator (temperature 0,
+// top_p 1, seed 42, 192 max tokens) and the same prompt contract, so an identical request must return a
+// byte-identical model output.
 function evidenceBlock(evidence) {
   const verdict = state.repeats === 0
     ? ''

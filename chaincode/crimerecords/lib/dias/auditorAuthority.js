@@ -1,16 +1,6 @@
 'use strict';
 
-/**
- * Who may act as a DIAS auditor at the moment of a decision or a revocation.
- *
- * The certificate says what an identity was enrolled as; the ledger profile says
- * what it is now. A district head in the authority organisation may decide only
- * while both are active and agree with each other, and only for a record held in
- * the district they head and at a sensitivity their clearance covers
- * (lib/policy/authority.js defines a district head by jurisdiction and clearance).
- * Every failure throws before anything is written, so a rejected transaction
- * leaves the ledger unchanged.
- */
+/** Who may act as a DIAS auditor at the moment of a decision or a revocation. */
 
 const { MSP, getCaller, requireMsp, requireRole } = require('../util/identity');
 const { DISTRICT_HEAD_ROLES } = require('../policy/policyV1');
@@ -54,8 +44,8 @@ function requireDistrictHeadCertificate(ctx, action) {
 }
 
 /**
- * The full auditor check. `record` is the record the act concerns; without one
- * (governance acts) only the credential and profile are checked.
+ * The full auditor check. `record` is the record the act concerns; without one (governance acts) only the
+ * credential and profile are checked.
  */
 async function requireActiveDistrictHead(ctx, { action, record = null, caller = null }) {
   const certified = caller || requireDistrictHeadCertificate(ctx, action);

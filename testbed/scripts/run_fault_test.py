@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""E7: keep the workflow running while machines' services fail.
-
-Twelve minutes of random arrivals (fault-plan.json) run through the normal
-backend. Three minutes in, the current Raft leader orderer is stopped; at six
-minutes it is started again and the Court peer is stopped; at nine minutes the
-Court peer is started again. Every action is timed. Afterwards the script
-checks that all five peers hold the same ledger height and block hash.
-
-Whatever happens, every orderer and peer is started again before the script
-exits, so a failed test never leaves the network degraded for the next one.
-Exit codes: 0 every check passed; 1 the test could not start; 2 the test ran
-but something failed (listed under "problems" in fault-timeline.json).
-
-Usage: python3 run_fault_test.py --out <results dir on the Mac> --run-name <name>
-"""
+"""E7: keep the workflow running while machines' services fail."""
 
 import argparse
 import json
@@ -120,7 +106,7 @@ def inject_faults(leader, t0, mark, problems):
             mark("stopped" if verb == "stop" else "started", container=container, code=code)
             if code != 0:
                 problems.append(f"docker {verb} {container} failed: {out[-200:]}")
-        time.sleep(12)  # let Raft elect and Prometheus scrape before reading the leader
+        time.sleep(12)  # Let Raft elect and Prometheus scrape before reading the leader
         mark("raft_leader_now", node=raft_leader())
 
 
@@ -207,7 +193,7 @@ def main():
         inject_faults(leader, t0, mark, problems)
         wait_for_exit(mark, problems)
         check_convergence(mark, problems)
-    except Exception as error:  # recorded as a problem; the network is restored below
+    except Exception as error:  # Recorded as a problem; the network is restored below
         problems.append(f"{type(error).__name__}: {error}")
         mark("error", detail=problems[-1])
         docker("m4", "stop", "loadgen-e7")

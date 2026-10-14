@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 /**
- * SEAL adversarial checks. Each attempts a specific abuse and records whether
- * the system refused it and with which error.
+ * SEAL adversarial checks. Each attempts a specific abuse and records whether the system refused it and
+ * with which error.
  */
 const fs = require('fs');
 const crypto = require('crypto');
@@ -80,7 +80,7 @@ async function login(u) {
       record: ctx.snapshot.record, requestContext: ctx.snapshot.requestContext || {} });
     const good = signAttestation({ queryHash: ctx.queryHash, contextHash: ctx.contextHash,
       decision: mr.decision, inference: mr.inference });
-    // flip one base64 character
+    // Flip one base64 character
     const bad = (good[0] === 'A' ? 'B' : 'A') + good.slice(1);
     try {
       await fabric.submit('ai', 'llm-decider', 'AccessContract', 'SubmitLLMDecision',

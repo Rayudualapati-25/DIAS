@@ -1,0 +1,142 @@
+{
+ "note": "Test artifacts: the live access-log test of iteration 077 asked for the reviewer log as each non-reviewer to confirm the refusal. The probe was removed from the test afterwards.",
+ "count": 17,
+ "events": [
+  {
+   "timestamp": "2026-10-12T10:18:39.624Z",
+   "actorUsername": "insp.sharma",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "89efa3a4b8f19a37"
+  },
+  {
+   "timestamp": "2026-10-12T10:32:45.855Z",
+   "actorUsername": "insp.sharma",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "f7e30999a3da6446"
+  },
+  {
+   "timestamp": "2026-10-12T10:35:39.251Z",
+   "actorUsername": "const.verma",
+   "actorRole": "constable",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "4c6f222cf3ada13c"
+  },
+  {
+   "timestamp": "2026-10-12T10:35:41.291Z",
+   "actorUsername": "ci.south",
+   "actorRole": "circle-inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "1fbb1c0d9a1ec95e"
+  },
+  {
+   "timestamp": "2026-10-12T10:36:18.250Z",
+   "actorUsername": "dir.iyer",
+   "actorRole": "lab-director",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "b3dc36836463054e"
+  },
+  {
+   "timestamp": "2026-10-12T10:36:30.568Z",
+   "actorUsername": "ci.central",
+   "actorRole": "circle-inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "da652d0a4f637f73"
+  },
+  {
+   "timestamp": "2026-10-12T10:36:51.091Z",
+   "actorUsername": "clerk.das",
+   "actorRole": "court-clerk",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "762fa0d4cfce2795"
+  },
+  {
+   "timestamp": "2026-10-12T10:36:57.243Z",
+   "actorUsername": "ci.east",
+   "actorRole": "circle-inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "946431dfd0813940"
+  },
+  {
+   "timestamp": "2026-10-12T10:37:09.631Z",
+   "actorUsername": "insp.rathore",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "d3e744e791e8bba2"
+  },
+  {
+   "timestamp": "2026-10-12T10:37:15.774Z",
+   "actorUsername": "analyst.rao",
+   "actorRole": "lab-analyst",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "b28b715005688ce6"
+  },
+  {
+   "timestamp": "2026-10-12T10:37:41.077Z",
+   "actorUsername": "insp.singh",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "3055bc2b6062159d"
+  },
+  {
+   "timestamp": "2026-10-12T10:37:49.298Z",
+   "actorUsername": "insp.sharma",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "518304bb99850452"
+  },
+  {
+   "timestamp": "2026-10-12T10:37:57.522Z",
+   "actorUsername": "io.krishnan",
+   "actorRole": "investigating-officer",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "e6691be5f60e84b8"
+  },
+  {
+   "timestamp": "2026-10-12T10:38:24.202Z",
+   "actorUsername": "pp.mehta",
+   "actorRole": "public-prosecutor",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "8176014d5b4b9846"
+  },
+  {
+   "timestamp": "2026-10-12T10:38:56.987Z",
+   "actorUsername": "dc.nair",
+   "actorRole": "defense-counsel",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "b623eab6a66beebc"
+  },
+  {
+   "timestamp": "2026-10-12T10:39:11.321Z",
+   "actorUsername": "sho.reddy",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "1485e1a6161b34cf"
+  },
+  {
+   "timestamp": "2026-10-12T10:39:30.858Z",
+   "actorUsername": "insp.sharma",
+   "actorRole": "inspector",
+   "action": "dias.workflow-log.read",
+   "outcome": "refused",
+   "txId": "22e3c049c243dc5b"
+  }
+ ]
+}

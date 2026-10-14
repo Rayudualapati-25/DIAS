@@ -1,0 +1,14 @@
+{
+  "before": {
+    "networkDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/network",
+    "reviewStore": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/data/dias-reviews",
+    "vaultDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS/backend/data/agency-vault",
+    "envSha256": "76aab4191581ce1708518f52771a459175a291f86407909958937f42953c9ba8"
+  },
+  "overrides": {
+    "FABRIC_NETWORK_DIR": "/Users/venkatrayudu/Workspace/XAI workspace/seal-live-run-20261003/network",
+    "DIAS_REVIEW_STORE_DIR": "backend/data/dias-reviews/host-20261006",
+    "AGENCY_VAULT_DIR": "backend/data/agency-vault/host-20261006"
+  },
+  "note": "Only the listed runtime paths were updated; no secrets are included in this record. New channel gets separate review/vault subdirectories."
+}

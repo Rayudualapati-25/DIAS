@@ -1,16 +1,6 @@
 'use strict';
 
-/**
- * Cross-surface invariants.
- *
- * Some of this system's correctness lives in the relationship BETWEEN two
- * independently editable files rather than inside either one. The evidence
- * collection was sized for a five-organization network and silently became
- * unsatisfiable when a sixth organization joined; the failure surfaced only as
- * an ENDORSEMENT_POLICY_FAILURE at commit time, long after both files looked
- * individually correct. A comment stating an invariant cannot fail a build.
- * These tests compute each relationship instead of restating it.
- */
+/** Cross-surface invariants. */
 
 const fs = require('fs');
 const path = require('path');
@@ -121,8 +111,8 @@ describe('cross-surface invariants', () => {
       const fromTable = Math.max(
         ...Object.values(controlled.REASON_DETAILS).map((d) => d.decisiveAttributes.length)
       );
-      // The engine builds POLICY_SATISFIED's evidence dynamically, so measure the
-      // widest case it can actually produce rather than trusting the table.
+      // The engine builds POLICY_SATISFIED's evidence dynamically, so measure the widest case it can
+      // actually produce rather than trusting the table.
       const widestAllow = evaluate(
         {
           mspId: 'PoliceMSP',
@@ -179,8 +169,6 @@ describe('cross-surface invariants', () => {
 
     it('the request schema derives its vocabulary from the policy tables', () => {
       // Restating the vocabulary as literals let the API and the chaincode drift.
-      // The route now imports the same frozen arrays the chaincode validates
-      // against, so the relationship is identity rather than agreement.
       expect(accessRoute, 'the route must import ACTIONS/PURPOSES from policyV1')
         .to.match(/const \{[^}]*ACTIONS[^}]*PURPOSES[^}]*\} =\s*\n?\s*require\('\.\.\/\.\.\/\.\.\/chaincode\/crimerecords\/lib\/policy\/policyV1'\)/);
       expect(accessRoute).to.contain('z.enum(ACTIONS)');

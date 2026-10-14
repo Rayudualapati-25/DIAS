@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-/**
- * SEAL evaluation harness (gateway-driven).
- * Submits the request transaction directly, then polls the ledger for the
- * decision, so measurement is not bounded by the web client's timeout and is
- * not quantised by its 250 ms poll. Writes after every trial.
- */
+/** SEAL evaluation harness (gateway-driven). */
 const fs = require('fs');
 const fabric = require('../../backend/src/fabric/gateway');
 const N = Number(process.env.SEAL_TRIALS || 20);

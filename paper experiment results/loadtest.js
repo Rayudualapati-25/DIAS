@@ -1,26 +1,6 @@
 'use strict';
 
-/**
- * Concurrent record-filing latency experiment against the live Fabric network.
- *
- * Question: when N officers file a record at the same instant, what latency
- * does each of them observe?
- *
- * Every measured request is a WRITE (POST /records -> RecordContract
- * CreateCaseRecord), so each one travels the full path: REST validation, vault
- * write, Fabric Gateway, endorsement by the police peer, ordering, block
- * formation, and commit observation. Latency is therefore client-observed
- * end-to-end time, not policy-computation time.
- *
- * Concurrency is genuine: all N requests for a level are released together and
- * awaited as one batch.
- *
- * No two requests write the same ledger key — each gets a unique recordId, and
- * CreateCaseRecord only reads the shared case key. That avoids MVCC read
- * conflicts, so the numbers measure latency rather than write contention.
- *
- * Prerequisites: make all; make backend
- */
+/** Concurrent record-filing latency experiment against the live Fabric network. */
 
 const fs = require('fs');
 const path = require('path');
@@ -28,17 +8,16 @@ const path = require('path');
 const BASE = process.env.API_BASE || 'http://localhost:3001/api';
 const OUT_DIR = __dirname;
 
-// Repeat the whole sweep to expose run-to-run variance. Outputs are suffixed so
-// repetitions never overwrite one another.
+// Repeat the whole sweep to expose run-to-run variance. Outputs are suffixed so repetitions never overwrite
+// one another.
 const RUN_LABEL = process.env.RUN_LABEL || 'run1';
 
-// Levels the experiment sweeps. The single-client level is the control: it
-// exposes the orderer's BatchTimeout, which dominates when no block ever fills.
+// Levels the experiment sweeps. The single-client level is the control: it exposes the orderer's
+// BatchTimeout, which dominates when no block ever fills.
 const LEVELS = [1, 10, 20, 40, 50, 75, 100];
 
-// Police identities permitted to file a record. insp.rathore is deliberately
-// excluded: its certificate carries credentialStatus=revoked, which would mix
-// policy denials into a latency measurement.
+// Police identities permitted to file a record. insp.rathore is deliberately excluded: its certificate
+// carries credentialStatus=revoked, which would mix policy denials into a latency measurement.
 const FILING_IDENTITIES = Object.freeze([
   'sho.reddy', 'insp.sharma', 'const.verma', 'io.krishnan', 'insp.singh',
 ]);

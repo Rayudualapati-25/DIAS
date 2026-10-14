@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// Live check of plan steps 12 and 13 on the running host, after the contract was
-// redeployed. It uses synthetic demo identities and records, real Fabric
-// transactions and the real model, and it WRITES to the ledger: requests, auditor
-// decisions, one dynamic authorization and its revocation. It is an engineering
-// check of who can read what, not a model benchmark and not a load test.
-//
-//   node --env-file-if-exists=.env experiments/check-step13-live.js OUTPUT_DIR [WAITING_REQUEST_ID]
-//
-// WAITING_REQUEST_ID is a request by insp.sharma that still waits for an auditor;
-// without it the check submits a new one.
+// Live check of plan steps 12 and 13 on the running host, after the contract was redeployed.
 
 const fs = require('fs');
 const path = require('path');
@@ -283,30 +274,28 @@ async function ownRequestOfReviewer() {
   }
 }
 
-// --- 3. the decision log: full for reviewers, reduced for everyone else --------
+// --- 3. the decision log: full for every officer; transactions for reviewers only ---- Before it, everyone
+// outside the reviewers read a reduced log.
 async function decisionLog(deniedRequestId) {
-  const identifiers = /insp\.|sp\.north|const\.|analyst\.|REC-|REQ-|CASE-|AUTH-|AUDIT-|OUTCOME-/;
+  const names = (entry) => entry.requester.username === REQUESTER && entry.auditor.username === AUDITOR;
   for (const username of [REQUESTER, 'analyst.rao', 'pp.mehta']) {
     const log = await get('/access/decision-log?limit=100', username);
     const entries = (log.data && log.data.entries) || [];
-    check(`${username} reads the reduced decision log, without names, files or transactions`,
-      log.status === 200 && entries.length > 0 && entries.every((entry) => entry.redacted === true)
-        && !identifiers.test(text(entries)),
+    const denied = entries.find((entry) => entry.requestId === deniedRequestId);
+    check(`${username} reads the full decision log, without transaction identifiers`,
+      log.status === 200 && entries.length > 0
+        && entries.every((entry) => !entry.redacted && entry.requestId && entry.recordId
+          && !('decisionTxId' in entry) && !('outcomeTxId' in entry))
+        && denied && names(denied) && denied.decision === 'FORCE_DENY' && denied.outcome === 'DENIED',
       { status: log.status, entries: entries.length });
-    if (username === REQUESTER) {
-      check('the reduced log still shows what was decided and against which recommendation',
-        entries.some((entry) => entry.decision === 'FORCE_DENY' && entry.outcome === 'DENIED'
-          && ['ALLOW', 'DENY', 'UNAVAILABLE'].includes(entry.llmRecommendation) && entry.requester.organization === 'police'),
-        entries.slice(0, 2));
-    }
   }
   for (const username of [AUDITOR, 'judge.rana', 'sp.south']) {
     const log = await get('/access/decision-log?limit=100', username);
     const entries = (log.data && log.data.entries) || [];
     const denied = entries.find((entry) => entry.requestId === deniedRequestId);
-    check(`${username} reads the full decision log`,
+    check(`${username} reads the full decision log with its transaction identifiers`,
       log.status === 200 && entries.every((entry) => !entry.redacted && entry.requestId)
-        && denied && denied.requester.username === REQUESTER && denied.auditor.username === AUDITOR
+        && denied && names(denied) && Boolean(denied.decisionTxId)
         && Object.prototype.hasOwnProperty.call(denied, 'generationStatus'),
       { status: log.status, entries: entries.length });
   }
@@ -342,8 +331,8 @@ async function recordAndEvidence() {
       allowed ? result.ok && Array.isArray(result.value) : !result.ok && /unauthorized: ListEvidence/.test(result.error),
       result.ok ? `${result.value.length} items` : result.error);
   }
-  // The private evidence detail follows the same district rule. No such evidence
-  // item exists, so an allowed caller gets "no private detail", never "unauthorized".
+  // The private evidence detail follows the same district rule. No such evidence item exists, so an allowed
+  // caller gets "no private detail", never "unauthorized".
   const detail = (org, username) => contractRead(org, username, 'RecordContract', 'GetEvidenceDetail', RECORD, 'EV-NONE');
   const refusedDetail = await detail('police', 'insp.singh');
   check('the private evidence detail is refused for insp.singh (another district)',

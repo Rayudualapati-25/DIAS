@@ -1,26 +1,6 @@
-/**
- * DOM building blocks.
- *
- * Every function returns a NEW node and never mutates one it was given, so
- * views compose without hidden side effects.
- *
- * This file has no knowledge of the application — keep domain logic out of it.
- */
+/** DOM building blocks. */
 
-/**
- * Create an element.
- *   el('div', { class: 'card' }, child, child, ...)
- *
- * Attribute handling:
- *   class            -> className
- *   html             -> innerHTML (use sparingly)
- *   on<Event>        -> addEventListener, e.g. onclick, onsubmit
- *   true             -> boolean attribute
- *   null/undefined/false -> attribute skipped entirely
- *
- * Children are flattened, and null/undefined/false children are dropped, so
- * `cond && el(...)` works inline.
- */
+/** Create an element. el('div', { class: 'card' }, child, child,...) */
 export function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
 

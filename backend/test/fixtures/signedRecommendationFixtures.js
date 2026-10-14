@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * Shared fixtures for the signed-recommender tests: a model identity, the policy
- * the backend holds, an Ed25519 signer, a committed request's inputs with their
- * ledger digests, and a recommender that records its calls.
+ * Shared fixtures for the signed-recommender tests: a model identity, the policy the backend holds, an
+ * Ed25519 signer, a committed request's inputs with their ledger digests, and a recommender that records
+ * its calls.
  */
 
 const crypto = require('crypto');

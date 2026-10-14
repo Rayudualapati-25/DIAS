@@ -1,26 +1,6 @@
 'use strict';
 
-/**
- * EXPERIMENT 03 — security, end-to-end workflows and reliability.
- *
- * RQ3: can authorization evidence be tampered with undetected, and does the
- *      complete six-organization workflow execute Allow, Deny and Escalate?
- * RQ5: does the system behave deterministically under repetition and fail safely
- *      when a component is unavailable?
- *
- * Parts:
- *   A  tamper / security          reuses experiments/seal-eval/run-negative2.js
- *   B  Allow / Deny / Escalate    reuses experiments/run-seal-final-e2e.js
- *   C  sealed-record routing      covered inside B and stressed in F
- *   D  audit-originated escalation resolved by a different Audit reviewer
- *   E  10 consecutive live suites  drives the repository's own integration suite
- *   F  4 x 25 escalation stress
- *   G  component-failure fail-safe checks
- *
- * Parts A-F only observe. Part G deliberately stops components and restores them
- * in a finally block; it is the only part that changes the environment, and it
- * changes no configuration or authorization semantics.
- */
+/** EXPERIMENT 03 — security, end-to-end workflows and reliability. */
 
 const fs = require('fs');
 const path = require('path');
@@ -57,9 +37,8 @@ const SUPERVISOR_EVENTS = process.env.SEAL_SUPERVISOR_EVENTS
 const LISTENER_LOG = process.env.SEAL_LISTENER_LOG || '/tmp/seal-ai.log';
 
 /**
- * Count what the supervisor and the listener recorded, so a stability run that
- * survived a model timeout is reported as a recovery rather than as a clean run.
- * Reading by line offset lets each run report only what happened during it.
+ * Count what the supervisor and the listener recorded, so a stability run that survived a model timeout is
+ * reported as a recovery rather than as a clean run.
  */
 function readLines(file) {
   try { return fs.readFileSync(file, 'utf8').split('\n').filter(Boolean); } catch { return []; }
@@ -109,9 +88,7 @@ async function raise(token, recordId, action, purpose, query) {
       token, body: { recordId, action, purpose, query },
     });
   } catch (error) {
-    // A socket-level failure is not an authorization outcome. It is recorded as
-    // its own category so it can never be mistaken for a Deny, and so that one
-    // dropped connection does not discard every measurement after it.
+    // A socket-level failure is not an authorization outcome.
     if (!error.transport) throw error;
     return { ok: false, transport: true, error: error.message };
   }
@@ -155,8 +132,8 @@ function partSecurity() {
       attack: r.attempt,
       behavedAsIntended: r.refused,
       observed: r.detail,
-      // A control is a case that is SUPPOSED to succeed; the harness marks both
-      // with `refused: true` meaning "behaved as intended", so separate them.
+      // A control is a case that is SUPPOSED to succeed; the harness marks both with `refused: true`
+      // meaning "behaved as intended", so separate them.
       isControl: /control/i.test(r.attempt),
     })),
     summary: {
@@ -297,8 +274,8 @@ async function partStability(runs) {
       ...listenerActivitySince(mark),
     };
     row.clean = row.failed === 0 && row.payloadMismatch === 0 && row.timeouts === 0;
-    // A run that needed the supervisor is not a clean run, but it is also not a
-    // lost run. Recording both keeps the distinction visible in the results.
+    // A run that needed the supervisor is not a clean run, but it is also not a lost run. Recording both
+    // keeps the distinction visible in the results.
     row.recovered = !row.clean && row.listenerRestarts > 0;
     rows.push(row);
     process.stdout.write(
@@ -455,16 +432,13 @@ async function partFailSafe(tokens) {
       try {
         const res = await fetch('http://127.0.0.1:8080/v1/models', { signal: AbortSignal.timeout(3000) });
         if (res.ok) break;
-      } catch { /* keep waiting */ }
+      } catch { /* Keep waiting */ }
       await new Promise((r) => setTimeout(r, 5000));
     }
   });
 
-  // 2. AI listener unavailable
-  // The listener now runs under a supervisor, which would restart it within a
-  // second and quietly turn "listener unavailable" into "listener briefly
-  // restarted". The pause file holds it down for the duration of the scenario so
-  // the test measures what it claims to measure; the finally block releases it.
+  // 2. AI listener unavailable The listener now runs under a supervisor, which would restart it within a
+  // second and quietly turn "listener unavailable" into "listener briefly restarted".
   const PAUSE_FILE = path.join(REPO, 'backend/data/listener-supervisor.paused');
   await record('AI listener unavailable', async () => {
     fs.writeFileSync(PAUSE_FILE, 'held down by paper-test part G\n');
@@ -480,9 +454,9 @@ async function partFailSafe(tokens) {
       protectedDataReleased: false,
     };
   }, async () => {
-    // Releasing the hold is all that is needed: the supervisor brings the
-    // listener back on its next cycle, which is itself the recovery being tested.
-    try { fs.unlinkSync(PAUSE_FILE); } catch { /* already released */ }
+    // Releasing the hold is all that is needed: the supervisor brings the listener back on its next cycle,
+    // which is itself the recovery being tested.
+    try { fs.unlinkSync(PAUSE_FILE); } catch { /* Already released */ }
     for (let i = 0; i < 30; i += 1) {
       await new Promise((r) => setTimeout(r, 1000));
       const alive = spawnSync('pgrep', ['-f', 'src/ai/start.js'], { encoding: 'utf8' });
@@ -561,10 +535,9 @@ async function partFailSafe(tokens) {
   const started = Date.now();
 
   /**
-   * Each part is isolated. A part that throws is recorded as a failed part and
-   * the run continues, because the parts after it measure different properties
-   * and discarding them would hide evidence rather than protect it. A recorded
-   * failure never counts as a pass.
+   * Each part is isolated. A part that throws is recorded as a failed part and the run continues, because
+   * the parts after it measure different properties and discarding them would hide evidence rather than
+   * protect it.
    */
   const partFailures = [];
   async function runPart(key, title, fn, after) {
@@ -586,7 +559,7 @@ async function partFailSafe(tokens) {
       partFailures.push({ part: key, ...record });
       process.stdout.write(`    PART FAILED (recorded, continuing): ${error.message}\n`);
       // Leave the ledger clean for the next part regardless of how this one ended.
-      try { await drainPending(tokens); } catch { /* reported by the next preflight */ }
+      try { await drainPending(tokens); } catch { /* Reported by the next preflight */ }
     }
   }
 

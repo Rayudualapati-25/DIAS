@@ -1,10 +1,8 @@
 'use strict';
 
 /**
- * Audit reconstruction of the off-chain objects (traceability M19; paper §IV-G).
- * The ledger holds a digest of each object the auditor saw or wrote — h_J on the
- * request, h_M in κ, h_N in the decision. A reviewer's request trail reports, for
- * each object, whether the stored copy still hashes to the committed digest.
+ * Audit reconstruction of the off-chain objects. The ledger holds a digest of each object the auditor saw
+ * or wrote — h_J on the request, h_M in κ, h_N in the decision.
  */
 
 const { expect } = require('chai');
@@ -108,9 +106,7 @@ describe('off-chain objects checked against their ledger digests', () => {
     });
   });
 
-  // Design §10: the justification, the full recommendation and the note are for
-  // AuditMSP district heads. A court or prosecution reviewer still learns whether
-  // each object matches its ledger digest, without reading it.
+  // : the justification, the full recommendation and the note are for AuditMSP district heads.
   it('gives another reviewer the verification without the off-chain text', () => {
     const { trail, entry } = decidedCase();
     const view = reviewerTrail({ trail, entry, auditor: false });

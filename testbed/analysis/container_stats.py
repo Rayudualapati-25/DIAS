@@ -1,10 +1,4 @@
-"""Per-container CPU (cores) and memory (MB) from the docker-stats sampler CSV.
-
-cAdvisor could not read containers on the testbed VMs (Docker's containerd
-image store), so per-container figures come from Docker's own statistics API,
-sampled every 5 s by testbed/monitor/docker_stats_sampler.py. Whole-VM figures
-still come from node-exporter through Prometheus.
-"""
+"""Per-container CPU (cores) and memory (MB) from the docker-stats sampler CSV."""
 
 import csv
 from collections import defaultdict
@@ -31,7 +25,10 @@ def first_sample_time(path):
 
 
 def window(path, start_s, end_s):
-    """{(machine, container): {cpu_mean_cores, cpu_max_cores, mem_max_mb, samples}} for samples in [start, end]."""
+    """
+    {(machine, container): {cpu_mean_cores, cpu_max_cores, mem_max_mb, samples}} for samples in
+    [start, end].
+    """
     groups = defaultdict(list)
     for t, machine, container, cpu, mem in load(path):
         if start_s <= t <= end_s:

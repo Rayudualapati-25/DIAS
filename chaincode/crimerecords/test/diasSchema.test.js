@@ -53,9 +53,7 @@ describe('DIAS verified request', () => {
     expect(value.requester.assignedToRequestedCase).to.equal(true);
     expect(value.resource.sealed).to.equal(false);
     expect(value.resource.witnessFlag).to.equal(true);
-    // v3: the request part holds only what the requester asked for. A
-    // self-declared emergency is a claim, kept outside the verified context, and
-    // the approval flag no mechanism ever set is gone (plan step 5).
+    // v3: the request part holds only what the requester asked for.
     expect(value.request).to.deep.equal({ action: 'view', purpose: 'investigation' });
     expect(VERIFIED_REQUEST_SCHEMA_VERSION).to.equal('dias-verified-context-v3');
     for (const [group, fields] of Object.entries(VERIFIED_REQUEST_FIELDS)) {

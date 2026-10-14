@@ -16,6 +16,7 @@ const caseRoutes = require('./routes/cases');
 const recordRoutes = require('./routes/records');
 const accessRoutes = require('./routes/access');
 const auditRoutes = require('./routes/audit');
+const mobileRoutes = require('./routes/mobile');
 const { accessLogger } = require('./middleware/accessLogger');
 const { getDiasRuntime } = require('./dias/runtime');
 const { getAccessEventOutbox } = require('./dias/accessEventOutbox');
@@ -33,8 +34,8 @@ app.use(cors({
     callback(null, isAllowedOrigin(origin));
   },
 }));
-// A full-document upload is base64 JSON. The route still enforces a 5 MiB PDF
-// limit; this slightly larger parser limit accounts for base64 expansion.
+// A full-document upload is base64 JSON. The route still enforces a 5 MiB PDF limit; this slightly larger
+// parser limit accounts for base64 expansion.
 app.use(express.json({ limit: '8mb' }));
 
 // Experiment timing only: one trace line per API call when DIAS_TRACE_FILE is set.
@@ -51,8 +52,8 @@ app.use('/api', (req, res, next) => {
   return next();
 });
 
-// Records authenticated API calls as Fabric transactions. Mounted before the
-// routes so it sees every request; it stages before ending and submits afterwards.
+// Records authenticated API calls as Fabric transactions. Mounted before the routes so it sees every
+// request; it stages before ending and submits afterwards.
 app.use('/api', accessLogger);
 
 app.get('/api/health', (req, res) => res.json({ success: true, data: 'ok', error: null }));
@@ -63,6 +64,7 @@ app.use('/api/cases', caseRoutes);
 app.use('/api/records', recordRoutes);
 app.use('/api/access', accessRoutes);
 app.use('/api/audit', auditRoutes);
+app.use('/api/mobile', mobileRoutes);
 
 // Serve the dashboard from the same origin as the API (no CORS, no build step).
 app.use(express.static(path.resolve(__dirname, '..', '..', 'frontend')));
@@ -72,11 +74,8 @@ app.use('/api', (req, res) =>
 app.use((req, res) => res.status(404).send('not found'));
 
 function startServer(port = PORT) {
-  // Recommendations a previous process left unfinished are answered again, so an
-  // auditor is never left waiting for one that will not arrive.
-  // Every stored review is brought under the current key first (design §10), so
-  // that what the worker resumes is readable: older reviews in the clear are
-  // encrypted, and reviews of an earlier key are re-sealed.
+  // Recommendations a previous process left unfinished are answered again, so an auditor is never left
+  // waiting for one that will not arrive.
   const sealed = getDiasRuntime().store.sealWithCurrentKey();
   if (sealed.unreadable > 0) {
     // eslint-disable-next-line no-console
@@ -86,9 +85,7 @@ function startServer(port = PORT) {
   getDiasRuntime().worker.startRecovery();
   const accessOutbox = getAccessEventOutbox();
   accessOutbox.start();
-  // Auditor notes a previous process staged before an unconfirmed decision are
-  // settled against the ledger (design §11). It runs in the background: a ledger
-  // that is not reachable yet leaves the notes staged and is logged.
+  // Auditor notes a previous process staged before an unconfirmed decision are settled against the ledger.
   reconcileStagedNotes({
     store: getDiasRuntime().store,
     ledger: fabric,
@@ -100,7 +97,7 @@ function startServer(port = PORT) {
     // eslint-disable-next-line no-console
     console.error(`[dias] staged auditor notes could not be settled: ${error.message}`);
   });
-  // Requests past their review deadline are closed on the ledger (design §8).
+  // Requests past their review deadline are closed on the ledger.
   const expirySweeper = createExpirySweeper({
     ledger: fabric,
     identity: { org: AUTH_ORG, fabricUser: AUTH_USER },

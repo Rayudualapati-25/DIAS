@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-#
 # Read the direct-ledger access events and describe Fabric's integrity controls.
-#
 # Usage: ./scripts/verify-access-log.sh
 
 set -uo pipefail

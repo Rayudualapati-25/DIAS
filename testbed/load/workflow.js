@@ -1,16 +1,8 @@
 'use strict';
 
 /**
- * One DIAS approval/deny workflow as a user and an auditor perform it through
- * the backend API, timed on the client side:
- *
- *   submit request -> wait for the LLM recommendation -> auditor opens the
- *   review -> auditor commits the decision that follows the recommendation.
- *
- * The auditor is automated (it follows the recommendation as soon as it is
- * ready), so these times contain no human review time. Readiness is observed through the batched preparation-status API. That route
- * makes no ledger call and writes no successful-read audit transaction. Review
- * payloads stay encrypted and are opened once through the authorized API.
+ * One DIAS approval/deny workflow as a user and an auditor perform it through the backend API, timed on the
+ * client side.
  */
 
 const path = require('path');
@@ -152,9 +144,8 @@ function referenceFor(verifiedRequest) {
 }
 
 /**
- * Run one workflow. Never throws: a failure is returned as a row with
- * status 'failed' and the stage it failed in, so a run always accounts for
- * every planned request.
+ * Run one workflow. Never throws: a failure is returned as a row with status 'failed' and the stage it
+ * failed in, so a run always accounts for every planned request.
  */
 async function runWorkflow({
   client, watcher, request, user, timeoutMs, extra = {}, auditorListsPending = false, requesterReadsBack = false,

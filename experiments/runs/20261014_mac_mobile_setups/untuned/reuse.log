@@ -1,0 +1,19 @@
+R-MM-01 done authorization=AUTH-a38913edc96b8ada repeats granted at once=3/3
+R-PP-01 done authorization=AUTH-cfbbba973fc28e97 repeats granted at once=3/3
+R-MP-01 done authorization=AUTH-be3730967797d8d9 repeats granted at once=3/3
+R-PM-01 done authorization=AUTH-1675c2550e4430c1 repeats granted at once=3/3
+R-MM-02 done authorization=AUTH-32de06569e5398f7 repeats granted at once=3/3
+R-PP-02 done authorization=AUTH-a521153d1bb88614 repeats granted at once=3/3
+R-MP-02 done authorization=AUTH-613955689c33babb repeats granted at once=3/3
+R-PM-02 done authorization=AUTH-d4b03622e662ad8c repeats granted at once=3/3
+R-MM-03 done authorization=AUTH-b190117d95cdcc0b repeats granted at once=3/3
+R-PP-03 done authorization=AUTH-8c0a1456f430850f repeats granted at once=3/3
+R-MP-03 done authorization=AUTH-6bd733e54df73a78 repeats granted at once=3/3
+R-PM-03 done authorization=AUTH-d84e2524ae9a482e repeats granted at once=3/3
+PASS the auditor's phone session ended cleanly (OK (1 test))
+PASS the officer's phone session ended cleanly (OK (1 test))
+PASS the reuse experiment: every auditor review is in the searches-and-reads log on the ledger (36 of 36 found)
+PASS the reuse experiment: no call was refused or failed (0 since the run began)
+PASS no request is left waiting for an auditor (0 waiting)
+PASS no reusable authorization is left active (0 active)
+12 of 12 reuse requests went through all five steps; 72 of 72 requests verified

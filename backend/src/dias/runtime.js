@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Composition root for the DIAS backend recommender.
- *
- * The backend itself calls the LLM, so everything the recommendation needs is
- * assembled here from configuration and from the governance policy bundle on
- * disk: the policy context, the model identity and endpoint, the signing key, the
- * off-chain review store, and the worker that answers requests one at a time.
- * There is no separate recommendation service to start, address or authenticate
- * to (author's decision, 2026-10-08).
- */
+/** Composition root for the DIAS backend recommender. */
 
 const fs = require('fs');
 const config = require('../config');
@@ -49,14 +40,7 @@ function modelSettings(settings) {
   };
 }
 
-/**
- * Build the DIAS runtime.
- *
- * @param {object} options
- * @param {object} [options.settings] configuration (defaults to backend config)
- * @param {Function} [options.loader] bundle loader, for tests
- * @param {object} [options.log] logger, for tests
- */
+/** Build the DIAS runtime. */
 function createDiasRuntime({
   settings = config, loader = loadBundle, log = console, ledger = fabric, signer = null,
 } = {}) {
@@ -64,8 +48,8 @@ function createDiasRuntime({
     bundlePath: settings.DIAS_POLICY_BUNDLE_PATH,
     loader,
   });
-  // Fail at start-up, not on the first request: an unreadable bundle is an
-  // operator problem, not a model failure.
+  // Fail at start-up, not on the first request: an unreadable bundle is an operator problem, not a model
+  // failure.
   const policyBundle = policyContextProvider.bundleInfo();
   const recommender = createRecommender({
     policyContextProvider,
@@ -77,9 +61,8 @@ function createDiasRuntime({
     },
   });
   const policy = policyIdentity(settings.DIAS_POLICY_BUNDLE_PATH);
-  // The backend holds the recommendation signing key and signs what the model
-  // returned. The signature names the key that produced a commitment; it does not
-  // protect against the backend itself (design §2).
+  // The backend holds the recommendation signing key and signs what the model returned. The signature names
+  // the key that produced a commitment; it does not protect against the backend itself.
   const signedRecommender = createSignedRecommender({
     recommender,
     signer: signer || loadSigner(settings.DIAS_RECOMMENDER_SIGNING_KEY_FILE),
@@ -87,7 +70,7 @@ function createDiasRuntime({
     policy,
     model: modelSettings(settings),
   });
-  // The running backend never writes a review in the clear (design §10).
+  // The running backend never writes a review in the clear.
   const store = createReviewStore(settings.DIAS_REVIEW_STORE_DIR, { cipher: loadReviewCipher(settings) });
   const worker = createRecommendationWorker({
     store,

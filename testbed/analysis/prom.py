@@ -1,9 +1,4 @@
-"""Read resource and Fabric metrics from the testbed's Prometheus (on M4).
-
-Everything is queried with the HTTP range API at a 5 s step, the scrape
-interval. CPU is reported in cores (1.0 = one fully used core) and memory in
-MB, never as a percentage of an arbitrary total.
-"""
+"""Read resource and Fabric metrics from the testbed's Prometheus (on M4)."""
 
 import json
 import urllib.parse
@@ -15,8 +10,8 @@ STEP_S = 5
 # Container CPU and memory from cAdvisor (one series per container per VM).
 CONTAINER_CPU = 'sum by (machine, name) (rate(container_cpu_usage_seconds_total{name!=""}[30s]))'
 CONTAINER_MEM = 'sum by (machine, name) (container_memory_working_set_bytes{name!=""})'
-# Whole-VM CPU and memory from node-exporter.
-# Busy time only: idle, I/O wait and hypervisor steal are not work the VM did.
+# Whole-VM CPU and memory from node-exporter. Busy time only: idle, I/O wait and hypervisor steal
+# are not work the VM did.
 MACHINE_CPU = 'sum by (machine) (rate(node_cpu_seconds_total{mode!~"idle|iowait|steal"}[30s]))'
 MACHINE_CORES = 'count by (machine) (node_cpu_seconds_total{mode="idle"})'
 MACHINE_MEM_USED = 'max by (machine) (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)'
@@ -33,7 +28,7 @@ def _get(path, params):
 
 
 def range_query(expr, start_s, end_s, step_s=STEP_S):
-    """[(labels, [(t, value), ...]), ...]"""
+    """[(labels, [(t, value),...]),...]"""
     result = _get("/api/v1/query_range", {"query": expr, "start": f"{start_s:.3f}", "end": f"{end_s:.3f}", "step": step_s})
     return [(series["metric"], [(float(t), float(v)) for t, v in series["values"]]) for series in result]
 

@@ -1,25 +1,6 @@
 'use strict';
 
-/**
- * Does the local LLM write better explanations than a plain template?
- *
- * The paper reports "decisive_attribute_full_text_coverage_rate = 0.781" and
- * calls the text renderer its weakest part. That number is produced by
- * decisive_attribute_text_coverage() in src/seba/xai_quality.py (line 117).
- * This script re-implements the SAME scoring rule so the numbers are comparable,
- * then scores two arms:
- *
- *   A. template  — the deterministic sentence writer (no AI)
- *   B. llm       — the local Ollama model
- *
- * The rule (copied from the Python): an attribute counts as "covered" if the
- * text contains the attribute's words, OR a known hint phrase, OR the concrete
- * value of that attribute.
- *
- * Usage:
- *   npm start                             (in backend/, first)
- *   node experiments/evaluate-explanations.js
- */
+/** Does the local LLM write better explanations than a plain template? */
 
 const fs = require('fs');
 const path = require('path');
@@ -28,15 +9,11 @@ const BASE = process.env.API_BASE || 'http://localhost:3001/api';
 const OUT_DIR = path.resolve(__dirname, 'results');
 const PAPER_BASELINE = { fullCoverage: 0.781, meanCoverage: 0.9310, source: 'paper Section IV-E / results/tables/explanation_audit_quality_summary.csv' };
 
-// ---------------------------------------------------------------------------
-// Scoring: ported from src/seba/xai_quality.py
-// ---------------------------------------------------------------------------
+// --------------------------------------------------------------------------- Scoring: ported from
+// src/seba/xai_quality.py ---------------------------------------------------------------------------
 
 /**
- * Hint phrases per decisive attribute. The first group mirrors the paper's
- * ATTRIBUTE_TEXT_HINTS exactly. The three marked NEW have no entry in the
- * paper's table (its synthetic schema had no separate role/clearance/record-type
- * attribute), so hints are added here and this is stated in the report.
+ * Hint phrases per decisive attribute. The first group mirrors the paper's ATTRIBUTE_TEXT_HINTS exactly.
  */
 const HINTS = Object.freeze({
   'subject.credentialStatus': ['credential'],
@@ -80,7 +57,7 @@ function valueOf(attribute, decisionEvent) {
   return String(value);
 }
 
-/** Fraction of decisive attributes reflected in the text. 0..1 */
+/** Fraction of decisive attributes reflected in the text. */
 function attributeCoverage(attributes, text, decisionEvent) {
   if (!attributes || attributes.length === 0) return 0;
   const haystack = normalize(text);
@@ -103,8 +80,7 @@ function attributeCoverage(attributes, text, decisionEvent) {
   return hits / attributes.length;
 }
 
-// ---------------------------------------------------------------------------
-// Driving the live system
+// --------------------------------------------------------------------------- Driving the live system
 // ---------------------------------------------------------------------------
 
 async function api(method, urlPath, { token, body } = {}) {
@@ -124,8 +100,8 @@ async function login(username) {
 }
 
 /**
- * Build a set of decisions covering several different reason codes, so the
- * comparison is not measured on one repeated case.
+ * Build a set of decisions covering several different reason codes, so the comparison is not measured on
+ * one repeated case.
  */
 async function collectDecisions(runId) {
   const tokens = {};
@@ -180,7 +156,6 @@ async function collectDecisions(runId) {
   return decisions;
 }
 
-// ---------------------------------------------------------------------------
 
 function summarise(rows, { isLlmArm = false } = {}) {
   const coverages = rows.map((r) => r.coverage);

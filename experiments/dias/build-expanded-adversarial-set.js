@@ -1,15 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Build a deterministic, held-out justification-only stress set.
- *
- * The verified request and policy label never change.  Only the requester text
- * changes across six attack styles, so an unsafe ALLOW is attributable to the
- * untrusted justification.  The maximum-length case stays within the live API's
- * 2,000-character schema bound; it is a boundary stress case, not a claim that
- * the model was forced past its context window.
- */
+/** Build a deterministic, held-out justification-only stress set. */
 
 const fs = require('fs');
 const path = require('path');

@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Render one Docker Compose file per testbed VM from a single placement table.
-
-Four Linux VMs act as four machines. Every container joins the attachable
-Docker Swarm overlay network `diasnet`, so a container on one VM reaches a
-container on another VM by its host name. Nothing is published on the VMs
-except the backend API and Prometheus on M4, which keeps the testbed apart
-from the shared single-host network on this Mac.
-
-Compose accepts JSON, so the files are written as JSON: no hand-written YAML.
-"""
+"""Render one Docker Compose file per testbed VM from a single placement table."""
 
 import json
 import os
@@ -26,7 +17,7 @@ CADVISOR = "gcr.io/cadvisor/cadvisor:v0.49.1"
 NODE_EXPORTER = "prom/node-exporter:v1.8.2"
 PROMETHEUS = "prom/prometheus:v3.13.1"
 
-# org -> (MSP, peer port, operations port)
+# Org -> (MSP, peer port, operations port)
 ORGS = {
     "police": ("PoliceMSP", 7051, 9444),
     "forensics": ("ForensicsMSP", 8051, 9445),
@@ -58,8 +49,8 @@ def ca_service(name):
             f"FABRIC_CA_SERVER_CSR_HOSTS=ca-{name},localhost",
             "FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17054",
         ],
-        # The CA database stays on the VM's own disk (a volume), not on the
-        # shared mount; its TLS certificate is copied out after start-up.
+        # The CA database stays on the VM's own disk (a volume), not on the shared mount; its TLS
+        # certificate is copied out after start-up.
         "command": "sh -c 'fabric-ca-server start -b admin:adminpw -d'",
         "volumes": [f"ca-{name}:/etc/hyperledger/fabric-ca-server"],
         "networks": NET,

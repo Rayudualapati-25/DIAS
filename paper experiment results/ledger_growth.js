@@ -1,36 +1,6 @@
 'use strict';
 
-/**
- * Does access-decision latency degrade as the ledger grows?
- *
- * Fabric reads world state through several different mechanisms, and they do
- * NOT scale alike. This experiment separates them instead of reporting one
- * blended "query latency" number:
- *
- *   1. point read        getState by key            expected: flat
- *   2. rich query        getQueryResult (Mango)     expected: linear, unindexed
- *   3. scoped range scan getStateByPartialCompositeKey([recordId])
- *   4. full range scan   getStateByPartialCompositeKey([])
- *   5. access decision   point reads + ordered commit
- *
- * The access-decision path reads the user profile, case, record and active
- * policy by key, so the prediction is that the paper's core operation stays
- * flat while the unindexed rich query degrades. Measuring them together would
- * hide exactly the effect worth reporting.
- *
- * Isolation of the independent variable:
- *   - Filler records are written to owningStation 'PS-BULK'. The probe query
- *     asks for 'PS-Central', which only the three seeded demo records use, so
- *     the RESULT SET STAYS CONSTANT (3 documents) while the COLLECTION grows
- *     from ~1k to 100k. What changes is scan cost, not serialisation cost.
- *   - Reads are measured serially. A query never reaches the orderer, so there
- *     is no block wait to amortise and concurrency would only add queueing noise.
- *   - The decision path is a write, so it is measured at fixed concurrency 20 —
- *     inside the flat region established by the earlier concurrency sweep, and
- *     above the point where BatchTimeout dominates.
- *
- * Prerequisites: make all; make backend
- */
+/** Does access-decision latency degrade as the ledger grows? */
 
 const fs = require('fs');
 const path = require('path');
@@ -40,8 +10,8 @@ const COUCH = process.env.COUCH_BASE || 'http://admin:adminpw@localhost:5984';
 const COUCH_DB = process.env.COUCH_DB || 'crimechannel_crimerecords';
 const OUT_DIR = __dirname;
 
-// Cumulative record counts at which the ledger is measured. Overridable so the
-// harness can be smoke-tested cheaply before a multi-hour run.
+// Cumulative record counts at which the ledger is measured. Overridable so the harness can be smoke-tested
+// cheaply before a multi-hour run.
 const GROWTH_POINTS = (process.env.GROWTH_POINTS || '1000,5000,10000,25000,50000,100000')
   .split(',').map((v) => Number(v.trim()));
 
@@ -63,8 +33,8 @@ const FILING_IDENTITIES = Object.freeze([
 
 const CASE_ID = 'CASE-2026-001';
 const JURISDICTION = 'district-north';
-const BULK_STATION = 'PS-BULK';     // filler records
-const PROBE_STATION = 'PS-Central'; // the 3 demo records only
+const BULK_STATION = 'PS-BULK';     // Filler records
+const PROBE_STATION = 'PS-Central'; // The 3 demo records only
 const PROBE_RECORD = 'REC-FIR-001';
 
 // ---------------------------------------------------------------- transport
@@ -103,12 +73,7 @@ async function login(username) {
   return result.data.token;
 }
 
-/**
- * World-state size straight from the peer's CouchDB, not inferred.
- *
- * Credentials go in an Authorization header, not the URL: WHATWG fetch refuses
- * to construct a Request from a URL that embeds them.
- */
+/** World-state size straight from the peer's CouchDB, not inferred. */
 async function couchStats() {
   try {
     const url = new URL(COUCH);
@@ -175,9 +140,7 @@ function fillerBody(recordId) {
 }
 
 /**
- * How many filler records already exist, so an interrupted run can resume
- * instead of re-seeding from zero. Filler ids are densely numbered, so a
- * binary search finds the boundary in ~17 point reads rather than a scan.
+ * How many filler records already exist, so an interrupted run can resume instead of re-seeding from zero.
  */
 async function countExistingFiller(tokens, upperBound) {
   const exists = async (index) => {
@@ -187,8 +150,8 @@ async function countExistingFiller(tokens, upperBound) {
   };
   if (!await exists(0)) return 0;
 
-  let low = 0;             // known to exist
-  let high = upperBound;   // assumed not to exist
+  let low = 0;             // Known to exist
+  let high = upperBound;   // Assumed not to exist
   if (await exists(high - 1)) return high;
   while (high - low > 1) {
     const mid = Math.floor((low + high) / 2);
@@ -257,8 +220,8 @@ function operations(tokens) {
     accessLog: () => repeat(SAMPLES.accessLog, () =>
       api('GET', '/audit/access-log', { token: tokens['aud.qureshi'] })),
 
-    // 5. The paper's core operation: point reads, policy evaluation, ordered
-    //    commit of the decision and its explanation. Fixed concurrency.
+    // 5. The paper's core operation: point reads, policy evaluation, ordered commit of the decision and its
+    // explanation. Fixed concurrency.
     decision: async () => {
       const out = [];
       let issued = 0;
@@ -288,11 +251,8 @@ async function measureAt(tokens, recordCount) {
     perRepetition.push(round);
   }
 
-  // Average each metric across repetitions.
-  //
-  // An operation that failed every sample has no latency, which is NOT the same
-  // as a latency of zero. It must stay null so a figure cannot silently plot a
-  // timeout as an instant response.
+  // Average each metric across repetitions. An operation that failed every sample has no latency, which is
+  // NOT the same as a latency of zero.
   const merged = {};
   for (const name of names) {
     const p50s = perRepetition.map((r) => r[name].p50Ms).filter((v) => v !== null);
@@ -374,8 +334,8 @@ async function main() {
     points: [],
   };
 
-  // Carry forward checkpoints from an interrupted attempt so a resumed run
-  // still writes one complete dataset rather than a fragment.
+  // Carry forward checkpoints from an interrupted attempt so a resumed run still writes one complete
+  // dataset rather than a fragment.
   if (fs.existsSync(outPath)) {
     try {
       const previous = JSON.parse(fs.readFileSync(outPath, 'utf8'));
@@ -397,8 +357,8 @@ async function main() {
       console.log(`  skipping ${target} (already measured)`);
       continue;
     }
-    // A previous attempt already grew past this checkpoint; its measurement
-    // cannot be repeated at the right ledger size, so skip rather than mislabel.
+    // A previous attempt already grew past this checkpoint; its measurement cannot be repeated at the right
+    // ledger size, so skip rather than mislabel.
     if (seeded > target) {
       console.log(`  skipping ${target} (ledger already at ${seeded})`);
       continue;

@@ -1,18 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * E6: the one-hour run (after InterSnap's resilience test).
- *
- * The 100 users send the requests of testbed/load/generated/steady-plan.json at
- * their planned times: random (Poisson) arrivals averaging six per minute for
- * sixty minutes, below the single model server's capacity, as in normal work.
- * Each workflow also has the reads a person makes: the auditor opens the pending
- * list before reviewing, and the requester reads the outcome afterwards. After
- * the last arrival the run waits for every open workflow to finish.
- *
- * Usage: node testbed/load/run-steady.js --url ... --out /results/<run>
- */
+/** E6: the one-hour run (after InterSnap's resilience test). */
 
 const fs = require('fs');
 const os = require('os');

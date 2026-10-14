@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * The off-chain review store at rest (design §10, plan step 13).
- *
- * The justification, the recommendation object and the auditor's note are written
- * encrypted: AES-256-GCM, a fresh IV per write, and the request identifier bound
- * in as authenticated data so a file moved to another request does not open. The
- * ledger's digests already make the content tamper-evident; this keeps copies and
- * backups of the store unreadable without the key.
- */
+/** The off-chain review store at rest. */
 
 const crypto = require('crypto');
 const fs = require('fs');

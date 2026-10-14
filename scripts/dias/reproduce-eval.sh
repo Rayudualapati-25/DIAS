@@ -1,21 +1,5 @@
 #!/usr/bin/env bash
-#
 # Reproduce a retained DIAS model evaluation and write a complete run record.
-#
-#   scripts/dias/reproduce-eval.sh <adapter-dir|none> <run-dir> <port> <sets> [limit]
-#
-#   adapter-dir  LoRA adapter directory, or "none" for the untuned base model
-#   run-dir      new directory under experiments/runs/ (must not exist, or must
-#                hold only an earlier partial attempt of the same command)
-#   port         local port for the temporary mlx_lm server (never 8080/8081)
-#   sets         comma-separated held-out sets, e.g. test-decision-balanced
-#   limit        optional: evaluate only the first N examples of each set
-#
-# The server runs with HF_HUB_OFFLINE=1 so the cached base-model revision is
-# used and no network call can change the weights. Decoding is fixed by the
-# harness (temperature 0, top_p 1, thinking disabled, 512 tokens). Every run
-# directory records config.json, environment.json, command.txt, timestamps,
-# evaluation.log, server.log, predictions/, metrics.json and exit_status.json.
 set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

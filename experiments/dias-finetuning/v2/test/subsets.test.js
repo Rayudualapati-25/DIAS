@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Training-subset properties.
- *
- * A subset is only useful for a learning curve if it is nested — otherwise two
- * points on the curve differ by sampling as well as by size, and the curve
- * measures nothing. It is only useful at all if it still covers the task.
- */
+/** Training-subset properties. */
 
 const fs = require('fs');
 const path = require('path');
@@ -66,8 +60,8 @@ test('every subset stays balanced', () => {
 });
 
 test('every subset still covers every reason code and scenario in the pool', () => {
-  // A subset that silently drops SEALED_RECORD is not a smaller version of the
-  // task; it is a different task, and its learning curve would be misleading.
+  // A subset that silently drops SEALED_RECORD is not a smaller version of the task; it is a different
+  // task, and its learning curve would be misleading.
   const poolCodes = new Set(pool.map((e) => e.label.reason_code));
   const poolScenarios = new Set(pool.map((e) => e.scenario.split(':')[0]));
   for (const size of sizes) {

@@ -1,0 +1,10 @@
+part,samples,cpuMeanPercent,cpuP95Percent,cpuMaxPercent,memoryMeanMiB,memoryMaxMiB,cpuUnit
+chaincode,864,1.4,9,27.7,385,406,% of one core
+peers,864,16.8,31.3,50.1,777.2,813,% of one core
+CouchDB,864,13.4,32.9,359.4,505.3,597.2,% of one core
+orderer,864,0.3,0.8,1.9,70.4,83.1,% of one core
+certificate authorities,864,0,0,1.3,57.5,57.7,% of one core
+phone emulators,864,37.5,131.2,877.3,10714.1,10938.2,% of one core
+model server,864,7.9,37.9,67.4,8353.5,8354.7,% of one core
+backend,864,1.3,5.4,15.7,163.2,181.8,% of one core
+Mac (whole machine),864,3.3,4.4,6.2,40718.7,45721,load average (1 min)

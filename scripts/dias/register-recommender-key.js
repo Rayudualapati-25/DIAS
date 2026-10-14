@@ -1,14 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Register the recommendation service's public key on the ledger (design §6.1).
- *
- *   node scripts/dias/register-recommender-key.js [--key FILE] [--registrar audit:sp.north]
- *
- * Needs an active AuditMSP district head. Safe to run again. Writes to the
- * ledger of the network the backend configuration points at.
- */
+/** Register the recommendation service's public key on the ledger. */
 
 const fs = require('fs');
 const path = require('path');

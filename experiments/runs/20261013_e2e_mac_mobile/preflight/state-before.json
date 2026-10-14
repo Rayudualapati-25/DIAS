@@ -1,0 +1,44 @@
+{
+ "observedAtUtc": "2026-10-13T17:05:30.644372Z",
+ "git": {
+  "branch": "feat/dias-v3-integrity",
+  "head": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "uncommittedEntries": 27
+ },
+ "backend": {
+  "health": {
+   "success": true,
+   "data": "ok",
+   "error": null
+  },
+  "startedAt": "Mon Oct 12 11:37:20 2026"
+ },
+ "model": {
+  "served": [
+   "mlx-community/Qwen3-14B-4bit",
+   "Qwen/Qwen2.5-7B-Instruct",
+   "meta-llama/Llama-3.2-3B-Instruct"
+  ],
+  "command": "/Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python .venv-qwen-policy/bin/mlx_lm.server --model mlx-community/Qwen3-14B-4bit --host 127.0.0.1 --port 8081 --max-tokens 512 --chat-template-args {\"enable_thinking\":false}"
+ },
+ "chaincodeContainers": [
+  "diasrecords_3.0:5fbef89a8a17e237"
+ ],
+ "ledger": {
+  "requests": 28,
+  "byStatus": {
+   "denied": 12,
+   "granted": 13,
+   "cancelled": 3
+  },
+  "pendingForAuditor": 0,
+  "activeAuthorizations": 0,
+  "accessEventsReturned": 500,
+  "newestEvent": "2026-10-13T17:04:25.396Z"
+ },
+ "emulator": {
+  "devices": "emulator-5554\tdevice",
+  "appInstalled": true,
+  "android": "16"
+ }
+}

@@ -29,8 +29,8 @@ describe('DIAS access workflow safeguards', () => {
       const { result } = await world.submit(INSPECTOR, {
         action: 'export', purpose: 'prosecution', emergencyDeclared: true,
       });
-      // v3 (plan step 5): the self-declared emergency is a requester claim with
-      // its own digest, outside the verified context; there is no approval flag.
+      // v3: the self-declared emergency is a requester claim with its own digest, outside the verified
+      // context; there is no approval flag.
       expect(result.verifiedRequest.request).to.deep.equal({ action: 'export', purpose: 'prosecution' });
       expect(result.verifiedRequestSchemaVersion).to.equal('dias-verified-context-v3');
       expect(result.requesterClaims).to.deep.equal({ emergencyDeclared: true });
@@ -91,9 +91,9 @@ describe('DIAS access workflow safeguards', () => {
 
   describe('auditor decision stage', () => {
     it('allows only AuditMSP district heads and takes the recommendation from the commitment', async () => {
-      // v3 replaces the v2 checks on a caller-supplied recommendation: the decision
-      // has no recommendation parameter, and malformed recommendation values are
-      // refused when κ is committed (diasRecommendationCommitment.test.js).
+      // v3 replaces the v2 checks on a caller-supplied recommendation: the decision has no recommendation
+      // parameter, and malformed recommendation values are refused when κ is committed
+      // (diasRecommendationCommitment.test.js).
       const { result: request } = await world.submit(INSPECTOR);
       await world.commit(request.requestId, world.commitmentFor(request.requestId, { recommendation: 'DENY' }));
       for (const caller of [INSPECTOR, CALLERS.districtJudge, FORMER_AI_IDENTITY]) {

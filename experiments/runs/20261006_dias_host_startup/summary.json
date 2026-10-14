@@ -1,0 +1,125 @@
+{
+  "run": "20261006_dias_host_startup",
+  "updatedAt": "2026-10-07T15:14:16.272Z",
+  "status": "host_workflow_verified_mobile_foundation_only",
+  "services": {
+    "website": "http://localhost:3001",
+    "model": "http://127.0.0.1:8081",
+    "identityDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/seal-live-run-20261003/network",
+    "channel": "diaschannel",
+    "chaincode": "diasrecords",
+    "version": "2.2",
+    "sequence": 1,
+    "ledgerReset": false,
+    "modelPidAtRecheck": 6696,
+    "backendPidAtRecheck": 8105
+  },
+  "checks": {
+    "currentV3Smoke": {
+      "passed": 14,
+      "failed": 0,
+      "total": 14
+    },
+    "focusedBackend": {
+      "passed": 53
+    },
+    "chaincodeUnit": {
+      "passed": 321
+    },
+    "androidDebugBuild": "passed",
+    "androidUnitTask": "up-to-date; retained 3 passing results dated 2026-10-03",
+    "mobileDeviceTestsAgainstCurrentDeployment": "not_run",
+    "legacyAcceptanceRunner": "stopped_incompatible_runner",
+    "fullSuitePassClaimed": false
+  },
+  "workflow": {
+    "requestId": "REQ-24601cfdab132c5f",
+    "recommendation": "ALLOW",
+    "commitmentId": "KAPPA-b62a6b506c50dfeb",
+    "commitmentTxId": "b62a6b506c50dfeb8a4cacf36dcb0d25b860a2f686586d70f0dcce9ced21f8db",
+    "decisionSource": "Existing committed decision read through GET audit trail; no duplicate decision submitted",
+    "auditorDecisionId": "AUDIT-8d81363001834c2c",
+    "outcomeId": "OUTCOME-8d81363001834c2c",
+    "outcome": "GRANTED",
+    "lifecycle": [
+      "ACCESS_REQUEST_SUBMITTED",
+      "DYNAMIC_AUTHORIZATION_CHECKED",
+      "RECOMMENDATION_COMMITTED",
+      "AUDITOR_DECISION_RECORDED",
+      "AGREEMENT_DERIVED",
+      "ACCESS_OUTCOME_RECORDED"
+    ]
+  },
+  "comparisons": [
+    {
+      "dataset": "deterministic_synthetic_53_cases",
+      "baseline": {
+        "requests": 1,
+        "rows": 53,
+        "maxRowsPerResponse": 53
+      },
+      "batched": {
+        "requests": 3,
+        "rows": 53,
+        "maxRowsPerResponse": 20,
+        "batchSizes": [
+          20,
+          20,
+          13
+        ],
+        "exactCoverage": true
+      },
+      "noBatchAblation": {
+        "requests": 1,
+        "maxRowsPerResponse": 53
+      }
+    },
+    {
+      "dataset": "live_local_Fabric_cases",
+      "baseline": {
+        "requests": 1,
+        "rows": 2,
+        "maxRowsPerResponse": 2
+      },
+      "batched": {
+        "requests": 1,
+        "rows": 2,
+        "maxRowsPerResponse": 2,
+        "batchSizes": [
+          2
+        ],
+        "exactCoverage": true
+      },
+      "noBatchAblation": {
+        "requests": 1,
+        "maxRowsPerResponse": 2
+      }
+    }
+  ],
+  "limitations": [
+    "One seeded-record path; no full acceptance-suite claim.",
+    "No physical phone, emulator sync, public tunnel, or automatic mobile synchronization.",
+    "No PDF upload/download, expiry, revocation, or multi-device conflict test in this check.",
+    "October 3 mobile device checks exercised the older channel; current deployment checked from host only.",
+    "Host pagination still reads the entire ledger case list.",
+    "No production authentication, encrypted cache, retention policy or background sync implemented.",
+    "Final smoke reads back the auditor decision submitted by the first attempt."
+  ],
+  "mobileReadiness": {
+    "androidStudioProject": true,
+    "starterScreen": true,
+    "demoIdentityLogin": true,
+    "caseSummaries": true,
+    "sqliteCache": true,
+    "manualBatches": true,
+    "offlineBrowsing": "cached summaries only during current signed-in session",
+    "fullDiasWorkflows": false,
+    "automaticSynchronization": false
+  },
+  "evidence": {
+    "workflow": "v3-smoke-attempt-02/host-smoke.json",
+    "transport": "transport/transport-results.json",
+    "currentReachability": "status-recheck-20261007.json",
+    "report": "../../../reports/iteration/iter_20261006_dias_host_startup.md"
+  }
+}

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-#
-# Create `diaschannel` on the three Raft orderers and join the five peers.
-# Runs inside hyperledger/fabric-tools on the diasnet overlay network with the
-# testbed directory mounted at /testbed. Mirrors network/scripts/createChannel.sh.
+# Create `diaschannel` on the three Raft orderers and join the five peers. Runs inside hyperledger/fabric-tools on the diasnet overlay network with the testbed directory mounted at /testbed.
 set -euo pipefail
 
 TB=/testbed

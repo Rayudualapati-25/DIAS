@@ -1,25 +1,6 @@
 'use strict';
 
-/**
- * The LLM's account of one recommendation, and who may read it (design §10).
- *
- * The account has a structured part — reason code, the policy clauses cited, what
- * the model said was missing, the review flags it raised, and why there was no
- * recommendation at all — and a free-text reason, which is case narrative and can
- * quote a sealed, juvenile or victim-protected detail.
- *
- *   - An audit-organisation district head reads all of it, at any time.
- *   - The officer who made the request reads it according to the auditor's
- *     decision (author's rule, 2026-10-08): nothing before a decision; the
- *     decision and the whole account when the request was denied; the decision
- *     and the recommendation value, without the account, when it was allowed.
- *   - Nobody else reads any of it.
- *
- * Nothing about how the recommendation was produced appears here: no latency, no
- * token counts, no model identity and no policy bundle hashes. Those stay in the
- * off-chain review entry for an auditor who goes looking for them. The auditor's
- * note is never part of this view.
- */
+/** The LLM's account of one recommendation, and who may read it. */
 
 const AUDIT_ORG = 'audit';
 
@@ -30,11 +11,7 @@ const WITHHELD = Object.freeze({
   NO_AUDITOR_DECISION: 'no-auditor-decision',
 });
 
-/**
- * Whether this caller is an audit-organisation district head. The organisation
- * is checked as well as the role because district-head roles exist in every
- * organisation, and only the audit organisation reviews requests.
- */
+/** Whether this caller is an audit-organisation district head. */
 const isAuditor = (user, auditorRoles) => Boolean(user)
   && user.org === AUDIT_ORG && auditorRoles.includes(user.role);
 
@@ -60,14 +37,7 @@ function absentDetail(requestId) {
   };
 }
 
-/**
- * Shape one stored review entry for the detail view.
- *
- * @param {object|null} entry the off-chain review entry, or null if there is none
- * @param {object} options
- * @param {string} options.requestId the request this detail belongs to
- * @param {boolean} options.reasonVisible whether this caller may read the free text
- */
+/** Shape one stored review entry for the detail view. */
 function recommendationDetail(entry, { requestId, reasonVisible }) {
   if (!entry) return absentDetail(requestId);
   if (entry.recommendationState === 'pending') {
@@ -134,17 +104,10 @@ function requesterView({ requestId, entry, decision, outcome }) {
   };
 }
 
-/**
- * The LLM detail of one request for this caller.
- *
- * `trail` is the ledger's request audit trail read as the caller: the contract
- * returns it only to a reviewer or to the requester, and says which.
- *
- * @returns {{status: 200, data: object} | {status: 403, error: string}}
- */
+/** The LLM detail of one request for this caller. */
 function explanationFor({ user, trail, entry, auditorRoles }) {
-  // Whoever made the request is its requester first, also when they hold a
-  // reviewer or auditor role themselves; the ledger trail says so.
+  // Whoever made the request is its requester first, also when they hold a reviewer or auditor role
+  // themselves; the ledger trail says so.
   const requester = Boolean(trail) && (trail.isRequester === true || trail.viewer === 'requester');
   const auditor = !requester && isAuditor(user, auditorRoles);
   if (!user || !trail || (!auditor && !requester)) {

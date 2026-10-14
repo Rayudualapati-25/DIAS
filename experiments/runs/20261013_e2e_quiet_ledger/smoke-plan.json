@@ -1,0 +1,33 @@
+{
+ "schema": "dias-e2e-plan-v2",
+ "seed": 98,
+ "perConfig": 1,
+ "prefix": "E2S",
+ "auditor": "sp.north",
+ "items": [
+  {
+   "id": "E2S-MAC-01",
+   "config": "mac",
+   "username": "io.krishnan",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "export",
+   "purpose": "prosecution",
+   "justification": "Needed to prepare the prosecution of this case. Synthetic end-to-end experiment request E2S-MAC-01."
+  },
+  {
+   "id": "E2S-MOB-01",
+   "config": "mobile",
+   "username": "dir.iyer",
+   "recordId": "REC-EVIDENCE-001",
+   "action": "view",
+   "purpose": "audit-review",
+   "justification": "Needed for an audit review of how this case was handled. Synthetic end-to-end experiment request E2S-MOB-01."
+  }
+ ],
+ "order": [
+  "E2S-MAC-01",
+  "E2S-MOB-01"
+ ],
+ "sha256": "7fd7d8ab8d7f05f728f60978113f6d0859381fd6480d37665623b7e7adfea47b",
+ "excludedScopes": 114
+}

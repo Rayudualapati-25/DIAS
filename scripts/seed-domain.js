@@ -1,13 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Deterministic ledger seed for departments and the initial demo cases.
- *
- * The governance policy is registered separately (scripts/dias/register-policy.js,
- * `make seed-policy`): the ledger holds its version and digest, never its text.
- * No model is registered on the ledger.
- */
+/** Deterministic ledger seed for departments and the initial demo cases. */
 
 const fabric = require('../backend/src/fabric/gateway');
 
@@ -31,10 +25,9 @@ const CASES = [
 ];
 
 /**
- * The real reason a transaction failed. fabric-gateway reports a rejected
- * endorsement as a generic "10 ABORTED" and puts each peer's chaincode message in
- * `details`; reading only `message` turns an ordinary "already exists" into a
- * fatal error when re-seeding.
+ * The real reason a transaction failed. fabric-gateway reports a rejected endorsement as a generic "10
+ * ABORTED" and puts each peer's chaincode message in `details`; reading only `message` turns an ordinary
+ * "already exists" into a fatal error when re-seeding.
  */
 function chaincodeMessage(error) {
   const parts = [String(error.message || error)];
@@ -59,14 +52,7 @@ async function submitOrSkip(org, user, contract, fn, ...args) {
   }
 }
 
-/**
- * Departments always; the two demo cases only with --with-demo-cases.
- *
- * A fresh DIAS install holds no case and no case file, so the first case and the
- * first record are created through the application, by an identity the chaincode
- * accepts. The demo cases exist for the live test suites, which need
- * CASE-2026-001, CASE-2026-002 and their records.
- */
+/** Departments always; the two demo cases only with --with-demo-cases. */
 async function main() {
   for (const [org, registrar, profile] of DEPARTMENTS) {
     await submitOrSkip(

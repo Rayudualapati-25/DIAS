@@ -1,38 +1,11 @@
 'use strict';
-/**
- * Reproduction material for Figure 3 of
- * papers/final_paper/SEBA_XAI_ACM_6page.tex
- *
- * Figure 3 is drawn in TikZ inside the manuscript rather than imported as a
- * raster or vector file, so "reproducing" it means regenerating the numbers it
- * plots and confirming the manuscript still carries exactly those numbers.
- *
- * Every value is read from the recorded measurement artifact; nothing is
- * recomputed from a live network and nothing is hard-coded here.
- *
- * Source of truth:
- *   experiments/results/live_fabric_measurements.json
- *
- * What the figure shows, and what it does not:
- *   - an OBSERVED median end-to-end commit latency (buildLatency.aggregate.p50Ms)
- *   - a CONFIGURED batching timeout used as a reference line
- *     (environment.ordererBatchTimeoutMs)
- *   - their DIFFERENCE (buildLatency.marginalP50Ms)
- * The difference is arithmetic between a configuration constant and an observed
- * total. It is not a component timing and carries no causal claim: the run did
- * not instrument API validation, policy evaluation, explanation construction,
- * endorsement, validation, or commit separately.
- *
- * Usage:
- *   node results/plots/figure3_latency_reference.js          # print + verify
- *   node results/plots/figure3_latency_reference.js --tikz   # print TikZ only
- */
+/** Reproduction material for Figure 3 of papers/final_paper/SEBA_XAI_ACM_6page.tex */
 
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// results/plots -> crime-records-network
+// Results/plots -> crime-records-network
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const DATA = path.join(REPO_ROOT, 'experiments', 'results', 'live_fabric_measurements.json');
 const TEX = path.join(REPO_ROOT, 'papers', 'final_paper', 'SEBA_XAI_ACM_6page.tex');
@@ -48,10 +21,10 @@ if (!fs.existsSync(DATA)) {
 }
 
 const d = JSON.parse(fs.readFileSync(DATA, 'utf8'));
-const total = d.buildLatency.aggregate.p50Ms;          // observed
-const n = d.buildLatency.aggregate.n;                  // sample count
-const timeout = d.environment.ordererBatchTimeoutMs;   // configured constant
-const diff = d.buildLatency.marginalP50Ms;             // observed - configured
+const total = d.buildLatency.aggregate.p50Ms;          // Observed
+const n = d.buildLatency.aggregate.n;                  // Sample count
+const timeout = d.environment.ordererBatchTimeoutMs;   // Configured constant
+const diff = d.buildLatency.marginalP50Ms;             // Observed - configured
 
 const tikz = `    \\draw[->] (0,0) -- (2200,0) node[right,note]{ms};
     \\foreach \\x in {0,500,1000,1500,2000}

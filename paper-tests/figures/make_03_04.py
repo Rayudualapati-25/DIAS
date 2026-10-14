@@ -1,8 +1,6 @@
-"""Figures and tables for Experiment 03 (security, end-to-end, reliability) and
-Experiment 04 (latency decomposition and concurrency).
-
-Each experiment is drawn only if its result file exists, so this can be run
-while the other is still in flight.
+"""
+Figures and tables for Experiment 03 (security, end-to-end, reliability) and Experiment 04 (latency
+decomposition and concurrency).
 """
 
 import sys
@@ -24,9 +22,10 @@ NEUTRAL = "#b9c0c9"
 # ------------------------------------------------------------------ figure 05
 
 def fig05_e2e(exp03):
-    """The three authorization paths as they actually executed: what the model
-    proposed, what the two agreement checks found, what was enforced, and what
-    was released."""
+    """
+    The three authorization paths as they actually executed: what the model proposed, what the two
+    agreement checks found, what was enforced, and what was released.
+    """
     scenarios = exp03["runs"]["endToEnd"]["scenarios"]
     checks = [
         ("Model input agreement", lambda s: s["inputAgreement"]),
@@ -71,8 +70,10 @@ def fig05_e2e(exp03):
 # ------------------------------------------------------------------ figure 06
 
 def fig06_security(exp03):
-    """Every constructed tampering and unauthorized-access attempt, with the
-    controls kept visibly separate from the attacks."""
+    """
+    Every constructed tampering and unauthorized-access attempt, with the controls kept visibly
+    separate from the attacks.
+    """
     checks = exp03["runs"]["security"]["checks"]
     attacks = [c for c in checks if not c["isControl"]]
     controls = [c for c in checks if c["isControl"]]
@@ -111,15 +112,7 @@ def fig06_security(exp03):
 # ------------------------------------------------------------------ figure 07
 
 def fig07_reliability(exp03):
-    """Reliability and failure behaviour as a scorecard.
-
-    Every reliability dimension in this experiment came out uniform, so per-run
-    bars would be ten identical columns and an events panel would be an empty
-    axis. Neither conveys anything. What is worth showing is the scope each
-    result rests on, and the count of the things that must never happen — drawn
-    on the same figure so the reader sees what was exercised and what came of it.
-    Per-run detail is in the stability table.
-    """
+    """Reliability and failure behaviour as a scorecard."""
     runs = exp03["runs"]
     sec = (runs.get("security") or {}).get("summary") or {}
     st = (runs.get("stability") or {}).get("summary") or {}
@@ -269,25 +262,14 @@ STAGE_ORDER = [
     ("fabricSubmitCommitMs", "Fabric submit + commit (decision)"),
 ]
 STAGE_COLOURS = ["#56B4E9", "#D55E00", "#009E73", "#CC79A7", "#0072B2"]
-# The API commits its own request transaction before the decision service is
-# involved, and afterwards polls to notice the decision. Neither can appear in
-# decision-service instrumentation, so both are drawn explicitly; without them
-# the breakdown would not sum to what the client actually waits for.
+# The API commits its own request transaction before the decision service is involved, and
+# afterwards polls to notice the decision.
 REQUEST_COMMIT_COLOUR = "#7A5195"
 UNATTRIBUTED_COLOUR = "#c8ccd2"
 
 
 def fig08_latency_breakdown(exp04, attribution=None):
-    """Where the client's wait actually goes.
-
-    Panel (a) accounts for the whole round trip, not only the instrumented part.
-    The API commits its own CreateAccessRequest transaction before the decision
-    service sees anything, and afterwards polls to notice the decision; a stack
-    of decision-service stages alone would sum to less than the client waits for
-    and invite exactly the wrong conclusion. The Fabric figure is submission and
-    commit together, because the gateway does not expose endorsement separately
-    from ordering and commit.
-    """
+    """Where the client's wait actually goes."""
     paths = exp04["runs"]["paths"]
     names = [n for n in ("allow", "deny", "escalate") if n in paths and paths[n].get("stages")]
     if not names:
@@ -377,9 +359,10 @@ def fig08_latency_breakdown(exp04, attribution=None):
 
 
 def fig09_concurrency(exp04):
-    """Latency and completed requests per second as concurrency rises. A single
-    local inference server sits behind this, so it largely measures model
-    queueing rather than ledger capacity."""
+    """
+    Latency and completed requests per second as concurrency rises. A single local inference server
+    sits behind this, so it largely measures model queueing rather than ledger capacity.
+    """
     levels = exp04["summary"]["concurrency"]
     x = [l["level"] for l in levels]
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(WIDE, 2.5))
@@ -417,9 +400,10 @@ def fig09_concurrency(exp04):
 
 
 def fig10_latency_distribution(exp04):
-    """The tail, drawn explicitly. A single inference exceeding the model timeout
-    was observed earlier in this evaluation, so a mean would misrepresent the
-    distribution."""
+    """
+    The tail, drawn explicitly. A single inference exceeding the model timeout was observed earlier
+    in this evaluation, so a mean would misrepresent the distribution.
+    """
     paths = exp04["runs"]["paths"]
     series = []
     for name in ("allow", "deny", "escalate"):

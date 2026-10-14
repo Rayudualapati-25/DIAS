@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Run the live DIAS API suite. The DIAS backend (make dias-backend) and the model
-# server (make dias-model) must already be running against diaschannel.
+# Run the live DIAS API suite. The DIAS backend (make dias-backend) and the model server (make dias-model) must already be running against diaschannel.
 
 set -euo pipefail
 

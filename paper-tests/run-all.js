@@ -1,16 +1,6 @@
 'use strict';
 
-/**
- * Runs the four paper experiments in order.
- *
- * The frozen configuration is verified once, before anything runs. If the system
- * differs from the baseline the run stops and reports every difference; nothing
- * is reconfigured automatically, because a silent fix would make the results
- * incomparable with the rest of the evaluation.
- *
- * Experiments 01 and 02 are offline and cheap. Experiments 03 and 04 drive the
- * live network and take tens of minutes.
- */
+/** Runs the four paper experiments in order. */
 
 const path = require('path');
 const { spawnSync } = require('child_process');
@@ -62,8 +52,8 @@ const EXPERIMENTS = [
       passed: proc.status === 0,
       durationMs: Date.now() - started,
     });
-    // A failed experiment is recorded and the run continues; failures are
-    // evidence too, and stopping here would hide the ones that come after.
+    // A failed experiment is recorded and the run continues; failures are evidence too, and stopping here
+    // would hide the ones that come after.
     if (proc.status !== 0) {
       process.stdout.write(`\n  EXPERIMENT ${exp.id} EXITED NON-ZERO (${proc.status}) — recorded, continuing\n`);
     }

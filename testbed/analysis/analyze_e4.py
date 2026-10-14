@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""E4 analysis: the LLM component alone (one model server, one request at a time).
-
-Reads the evaluation run the testbed's model server produced on the 600
-balanced test cases and reports its capacity (recommendations per minute), its
-time per recommendation, token counts, and whether it reproduces the stored V7
-evaluation decision for decision.
-
-Usage: python3 analyze_e4.py --run <experiments/runs/...e4...> --out <dir>
-"""
+"""E4 analysis: the LLM component alone (one model server, one request at a time)."""
 
 import argparse
 import json

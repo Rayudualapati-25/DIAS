@@ -1,19 +1,6 @@
 'use strict';
 
-/**
- * UserContract — the on-chain user registry.
- *
- * Enrolling with a Fabric CA issues an X.509 identity. It does NOT create the
- * application's authorization profile. CreateUser writes that profile to the
- * ledger so admission, role and status changes have Fabric history.
- *
- * A registered user therefore has an X.509 certificate issued by Fabric CA
- * and an authorization profile in this contract. No password or password hash
- * is accepted: secrets are not suitable for replicated, immutable state.
- *
- * Keys use the chaincode's composite-key convention ('user' namespace) so they
- * cannot collide with records or access decisions.
- */
+/** UserContract — the on-chain user registry. */
 
 const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
@@ -33,10 +20,8 @@ const ORG_TO_MSP = Object.freeze({
 });
 
 /**
- * Admitting a user to the network is an act of the district authority, not of the
- * department the user will work in. Every district head sits in the authority
- * organisation, so registration is restricted to a district-head rank there — no
- * station head and no working officer can create an identity.
+ * Admitting a user to the network is an act of the district authority, not of the department the user will
+ * work in.
  */
 
 const CREDENTIAL_STATUS = Object.freeze(['active', 'revoked', 'suspended']);
@@ -88,12 +73,10 @@ class UserContract extends Contract {
     if (!ORG_TO_MSP[org]) {
       throw new Error(`unknown organisation '${org}'`);
     }
-    // District heads of every department sit in the authority organisation and
-    // are the only identities that may admit a user to any department.
+    // District heads of every department sit in the authority organisation and are the only identities that
+    // may admit a user to any department.
     requireMsp(caller, [MSP.AUDIT], action);
-    // Genesis: district heads are themselves users, so on an empty ledger nobody
-    // could admit anyone. Exactly one admission is allowed to an administrator of
-    // the authority organisation, and the exception closes the moment it is used.
+    // Genesis: district heads are themselves users, so on an empty ledger nobody could admit anyone.
     if (await this._ledgerHasNoUsers(ctx)) return caller;
     requireRole(caller, [...DISTRICT_HEAD_ROLES], action);
     return caller;
@@ -105,8 +88,8 @@ class UserContract extends Contract {
   }
 
   /**
-   * Admit a user to a department and write them onto the ledger.
-   * The profile contains authorization attributes only, never a secret.
+   * Admit a user to a department and write them onto the ledger. The profile contains authorization
+   * attributes only, never a secret.
    */
   async CreateUser(ctx, userId, profileJson) {
     if (!SAFE_ID.test(userId)) {
@@ -137,9 +120,8 @@ class UserContract extends Contract {
       docType: 'user',
       userId,
       ...profile,
-      // The enrolled certificate that admitted this user. Recorded so the
-      // on-chain account is tied to a real, named Fabric identity rather than
-      // to "the application".
+      // The enrolled certificate that admitted this user. Recorded so the on-chain account is tied to a
+      // real, named Fabric identity rather than to "the application".
       registeredBy: caller.id,
       registeredByMSP: caller.mspId,
       registeredAt: ctx.stub.getDateTimestamp().toISOString(),
@@ -159,11 +141,7 @@ class UserContract extends Contract {
     return JSON.stringify(await this._getUser(ctx, userId));
   }
 
-  /**
-   * Prove that the transaction is signed by the X.509 identity named in the
-   * requested profile. This is the chain-backed login primitive: the MSP,
-   * certificate common name, role attribute and ledger status must agree.
-   */
+  /** Prove that the transaction is signed by the X.509 identity named in the requested profile. */
   async AuthenticateCurrentUser(ctx, userId) {
     const user = await this._getUser(ctx, userId);
     const caller = getCaller(ctx);
@@ -200,9 +178,8 @@ class UserContract extends Contract {
   }
 
   /**
-   * Revoke, suspend or reinstate a user. The record is never deleted: the
-   * point of an on-chain registry is that admission and removal are both
-   * permanently visible.
+   * Revoke, suspend or reinstate a user. The record is never deleted: the point of an on-chain registry is
+   * that admission and removal are both permanently visible.
    */
   async SetUserStatus(ctx, userId, status) {
     if (!CREDENTIAL_STATUS.includes(status)) {

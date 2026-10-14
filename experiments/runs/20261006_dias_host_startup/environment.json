@@ -1,0 +1,29 @@
+{
+  "observedAt": "2026-10-06T09:34:45.172Z",
+  "gitHead": "51baeb4da834245097d4121a869a8ceb9f9da0ea",
+  "node": "v22.20.0",
+  "model": "mlx-community/Qwen3-14B-4bit",
+  "modelAdapter": null,
+  "modelPort": 8081,
+  "backendPort": 3001,
+  "sourceRepo": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS",
+  "identityDirectory": "/Users/venkatrayudu/Workspace/XAI workspace/seal-live-run-20261003/network",
+  "dockerContext": "colima-seal-live",
+  "initialFabricChannels": [
+    "crimechannel"
+  ],
+  "targetChannel": "diaschannel",
+  "targetChaincode": "diasrecords",
+  "ledgerReset": false,
+  "mobileSyncStarted": false,
+  "completion": {
+    "recordedAt": "2026-10-07T15:14:16.272Z",
+    "chaincodeVersion": "2.2",
+    "sequence": 1,
+    "mobileSyncStarted": false,
+    "modelAdapter": null,
+    "servicesLeftRunning": true,
+    "androidUnitResultsDate": "2026-10-03",
+    "runtimeRecheck": "status-recheck-20261007.json"
+  }
+}

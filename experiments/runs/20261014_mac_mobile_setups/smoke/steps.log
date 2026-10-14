@@ -1,0 +1,15 @@
+S-PP-01 decided REQ-9ccde578942ded2f outcome=DENIED e2e=18.9s
+S-MM-01 decided REQ-77c3f541c7f2437c outcome=DENIED e2e=18.8s
+S-PM-01 decided REQ-11ff68727399af6b outcome=DENIED e2e=21.8s
+S-MP-01 decided REQ-cf3328b7b9f8f7e4 outcome=DENIED e2e=21.7s
+PASS workflows 1 to 4: every auditor review is in the searches-and-reads log on the ledger (4 of 4 found)
+PASS workflows 1 to 4: no call was refused or failed (0 since the run began)
+PASS the auditor's phone session ended cleanly (OK (1 test))
+PASS the officer's phone session ended cleanly (OK (1 test))
+PASS an officer outside the reviewers reads every workflow in the access log: who, which file, decision, outcome (4 of 4 shown to clerk.das)
+PASS that log holds no transaction identifier and no digest (150 entries read)
+PASS while a request waited, another officer saw who asked for which file but not the advice; the auditor saw the advice (4 of 4 sampled workflows)
+PASS each requester finds their own requests with the final outcome (4 of 4 requesters)
+PASS no request is left waiting for an auditor (0 waiting)
+PASS no reusable authorization is left active (0 active)
+4 of 4 workflows completed and verified (4 planned)

@@ -1,0 +1,53 @@
+{
+ "schema": "dias-e2e-run-v1",
+ "config": "mobile",
+ "planSha256": "01ca264f06562395863a4e9f4b5f428bed4f1f2ae00a3bc73fc18e6185453ee8",
+ "planned": 2,
+ "auditor": "sp.north",
+ "pauseMs": 2000,
+ "startedAtUtc": "2026-10-13T17:16:57.987Z",
+ "environment": {
+  "api": "http://127.0.0.1:3001/api",
+  "node": "v22.20.0",
+  "gitHead": "e683bae374d8fb790c3a5f46f842e37addd18cb4",
+  "gitUncommittedEntries": 29,
+  "chaincode": "diasrecords_3.0-5fbef89a8a17e237"
+ },
+ "decisionsBefore": 31,
+ "finishedAtUtc": "2026-10-13T17:17:43.055Z",
+ "ran": 2,
+ "completed": 2,
+ "failed": 0,
+ "endChecks": [
+  {
+   "name": "every auditor review is in the searches-and-reads log on the ledger",
+   "ok": true,
+   "detail": "2 of 2 found"
+  },
+  {
+   "name": "the reduced decision log an ordinary user reads grew by one entry per workflow",
+   "ok": true,
+   "detail": "31 -> 33, 2 workflows"
+  },
+  {
+   "name": "that reduced log shows no name or case file",
+   "ok": true,
+   "detail": "33 entries"
+  },
+  {
+   "name": "each requester finds their own requests with the final outcome",
+   "ok": true,
+   "detail": "2 of 2 requesters"
+  },
+  {
+   "name": "no request is left waiting for an auditor",
+   "ok": true,
+   "detail": "0 waiting"
+  },
+  {
+   "name": "no reusable authorization was created",
+   "ok": true,
+   "detail": "0 active"
+  }
+ ]
+}

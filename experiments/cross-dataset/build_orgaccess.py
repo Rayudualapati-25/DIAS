@@ -1,20 +1,7 @@
 #!/usr/bin/env python3
 """
-Build a DIAS-comparable evaluation sample from the public OrgAccess benchmark
-(respai-lab/orgaccess, MIT licence; Sanyal et al., arXiv:2505.19165).
-
-Findings that drive the design, measured on the downloaded splits:
-  easy   40282 rows: full 13304 / partial 13473 / rejected 13253  (usable)
-  medium 10073 rows: full 3    -> ALLOW class absent
-  hard   20148 rows: full 30   -> ALLOW class absent
-Only `easy` supports a balanced ALLOW/DENY score, so it is the headline split.
-A small `hard` slice is also emitted for a difficulty check, scored on the
-subset that has a usable label only.
-
-`partial` means granted-but-restricted. DIAS emits a binary ALLOW/DENY, so the
-mapping is a judgement call: the primary sample therefore excludes `partial`
-(full -> ALLOW, rejected -> DENY) and a separate partial-only sample lets the
-same predictions be rescored under partial->ALLOW and partial->DENY.
+Build a DIAS-comparable evaluation sample from the public OrgAccess benchmark (respai-lab/orgaccess,
+MIT licence; Sanyal et al., arXiv:2505.19165).
 """
 import json, random, collections, os
 

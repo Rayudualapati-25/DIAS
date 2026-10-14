@@ -1,19 +1,4 @@
-/**
- * Register a new officer.
- *
- * Two things happen when this form is submitted, and both are on the network:
- *   1. the chosen department's Fabric CA issues the officer a certificate, with
- *      their role, station and clearance signed into it;
- *   2. a transaction writes the account onto the blockchain.
- *
- * There is no user or password database behind this. The selected local
- * identity must have both an enrolled certificate and an active ledger profile.
- *
- * Admitting an officer is an act of the district authority: UserContract accepts
- * it only from a district head of the authority organisation (AuditMSP), into any
- * department. The role list follows the department chosen, so the form never
- * offers a combination the chaincode would reject.
- */
+/** Register a new officer. */
 
 import { api } from '../core/api.js';
 import {
@@ -75,8 +60,8 @@ export default {
         ),
       ],
       onSubmit: async (values, formNode) => {
-        // Only send what was filled in: an empty attribute would be signed into
-        // the certificate as an empty value, which the policy treats as set.
+        // Only send what was filled in: an empty attribute would be signed into the certificate as an empty
+        // value, which the policy treats as set.
         const optional = {};
         for (const key of ['station', 'badgeId', 'rank', 'caseAssignments']) {
           const value = (values[key] || '').trim();

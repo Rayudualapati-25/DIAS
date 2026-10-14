@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Per-rule verification for the SEBA-XAI LLM policy engine.
-Answers: does every one of the 8 rules / 12 reason codes actually work?"""
+"""
+Per-rule verification for the SEBA-XAI LLM policy engine. Answers: does every one of the 8 rules /
+12 reason codes actually work?
+"""
 import json, sys, collections
 
-# reason code -> (rule label, ordinal position in the ladder)
+# Reason code -> (rule label, ordinal position in the ladder)
 RULE = {
  "CRED_NOT_ACTIVE":("1  credential",1), "INVALID_PURPOSE":("2  purpose",2),
  "RBAC_NO_PERMISSION":("3  RBAC",3),    "AUDIT_METADATA_ONLY":("3b audit",4),

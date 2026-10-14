@@ -1,0 +1,13 @@
+{
+  "note": "The deploy scripts need a path without spaces, so a temporary folder held symbolic links to the source and to the active network (as on 2026-10-12). The temporary folder was deleted afterwards.",
+  "layout": {
+    "root": "<temporary folder>",
+    "project": "<temporary folder>/project (chaincode -> source chaincode)",
+    "network": "<temporary folder>/project/network (organizations -> active network organizations; scripts copied from network/scripts)",
+    "fabricSamples": "<temporary folder>/fabric-samples -> ../fabric-samples"
+  },
+  "source": "/Users/venkatrayudu/Workspace/XAI workspace/DIAS",
+  "activeNetwork": "/Users/venkatrayudu/Workspace/XAI workspace/seal-live-run-20261003/network",
+  "version": "3.1",
+  "sequence": "auto (resolved to 5)"
+}

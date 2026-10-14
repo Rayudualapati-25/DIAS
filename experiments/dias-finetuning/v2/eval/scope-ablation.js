@@ -1,29 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Scope ablation: exact-record authorization versus the SEAL property fingerprint.
- *
- * This is the one design decision the rewrite turned on, so it deserves a
- * measurement rather than an argument. Both designs are simulated over the same
- * request stream, with the same model answers and the same auditor behaviour;
- * only the scope key differs.
- *
- *   exact-record        stableUserId · recordId · caseId · action · purpose
- *   property fingerprint  the governed subject/request/record properties,
- *                         deliberately EXCLUDING recordId and caseId
- *
- * The quantity that matters is not how much work each design saves — a design
- * that auto-granted everything would save the most. It is how many DISTINCT
- * RECORDS each auditor approval ends up covering. Under exact-record that is
- * one, by construction. Under the property fingerprint it is however many
- * records happen to share those properties, and the auditor never saw them.
- *
- * No inference is involved: model answers come from the dataset labels, which is
- * what makes the two arms differ only in the scope key.
- *
- *   node experiments/dias-finetuning/v2/eval/scope-ablation.js --out <dir>
- */
+/** Scope ablation: exact-record authorization versus the SEAL property fingerprint. */
 
 const fs = require('fs');
 const path = require('path');
@@ -46,8 +24,8 @@ const exactScope = (request) => hashObject({
 });
 
 /**
- * The SEAL design, reconstructed: governed properties only. recordId and caseId
- * are absent, which is precisely why one approval could reach another record.
+ * The SEAL design, reconstructed: governed properties only. recordId and caseId are absent, which is
+ * precisely why one approval could reach another record.
  */
 const propertyScope = (request) => hashObject({
   scopeVersion: 'seal-property-fingerprint',
@@ -61,16 +39,9 @@ const propertyScope = (request) => hashObject({
   record: (({ caseId, ...rest }) => rest)(request.verifiedRequest.resource),
 });
 
-/**
- * Replay one request stream under one scope design.
- *
- * The auditor is modelled as the DIAS design specifies: they override a model
- * DENY to FORCE_ALLOW some of the time, and that is the only thing that creates
- * an authorization. `overrideDecision` is supplied by the caller so both arms
- * see identical auditor behaviour.
- */
+/** Replay one request stream under one scope design. */
 function replay(stream, scopeOf, overrideDecision) {
-  const authorizations = new Map(); // scope hash -> { approvedRecordId, requestId }
+  const authorizations = new Map(); // Scope hash -> { approvedRecordId, requestId }
   const counters = {
     requests: stream.length,
     modelInvocations: 0,
@@ -80,7 +51,7 @@ function replay(stream, scopeOf, overrideDecision) {
     automaticGrantsOnTheApprovedRecord: 0,
     automaticGrantsOnADifferentRecord: 0,
   };
-  const recordsCoveredByApproval = new Map(); // approving requestId -> Set(recordId)
+  const recordsCoveredByApproval = new Map(); // Approving requestId -> Set(recordId)
 
   for (const request of stream) {
     const key = scopeOf(request);
@@ -118,20 +89,7 @@ function replay(stream, scopeOf, overrideDecision) {
   };
 }
 
-/**
- * Build the replay stream.
- *
- * `siblings` is the parameter the whole ablation turns on. A sibling is a
- * DIFFERENT record, in a different case, with identical governed properties —
- * the same officer asking for another FIR of the same type, sensitivity and
- * jurisdiction from the same station. Under exact-record scope a sibling is a
- * different request. Under the property fingerprint it is the same one.
- *
- * With `siblings: 0` the stream holds no two records that share properties, and
- * the two designs are indistinguishable — which is itself worth reporting,
- * because it says the difference is conditional on siblings existing rather
- * than universal.
- */
+/** Build the replay stream. */
 function buildStream(rng, cases, repeats, siblings) {
   const base = cases.map((example) => ({
     exampleId: example.exampleId,
@@ -147,8 +105,8 @@ function buildStream(rng, cases, repeats, siblings) {
   const identified = [...base];
   for (const request of base) {
     for (let s = 0; s < siblings; s += 1) {
-      // A different record and case; every governed property identical, because
-      // the verified request carries no record or case identifier of its own.
+      // A different record and case; every governed property identical, because the verified request
+      // carries no record or case identifier of its own.
       identified.push({
         ...request,
         exampleId: `${request.exampleId}#s${s + 1}`,
@@ -182,8 +140,8 @@ function main() {
   const rng = createRng(seed, 'scope-ablation');
   const stream = buildStream(rng, cases, repeats, siblings);
 
-  // One fixed auditor decision per request id, so both arms see the same
-  // auditor. Without this the arms would differ by auditor behaviour too.
+  // One fixed auditor decision per request id, so both arms see the same auditor. Without this the arms
+  // would differ by auditor behaviour too.
   const overrides = new Map();
   const overrideRng = createRng(seed, 'auditor');
   for (const request of stream) {

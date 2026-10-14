@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""
-Cross-dataset evaluation harness for DIAS.
-
-Runs a served Qwen3-14B (with or without the V7 LoRA adapter) over an
-external access-control dataset, using the EXACT production system prompt
-lifted from backend/src/dias/recommendationPrompt.js (prompt_contract.json)
-and the same decoding settings recorded in the V7 final-eval descriptor:
-temperature 0, top_p 1, max_tokens 512, thinking disabled.
-
-Only the domain policy and the request facts change per dataset. The output
-contract (six-key JSON) and the untrusted-input wrapper are unchanged, so a
-score here describes the same decision path the paper evaluates.
-
-Predictions are appended as they arrive, so an interrupted run is still usable.
-"""
+"""Cross-dataset evaluation harness for DIAS."""
 import argparse, json, os, sys, time, urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor
 
@@ -101,8 +87,10 @@ BUILDERS = {"llmac": llmac_messages, "orgaccess": org_messages}
 
 # ------------------------------------------------------------------- inference
 def parse_reply(text):
-    """Extract the six-key object. Mirrors the production parser's tolerance:
-    the first balanced JSON object in the reply, nothing else accepted."""
+    """
+    Extract the six-key object. Mirrors the production parser's tolerance: the first balanced JSON
+    object in the reply, nothing else accepted.
+    """
     if not text: return None, ["empty reply"]
     s = text.strip()
     if s.startswith("```"):

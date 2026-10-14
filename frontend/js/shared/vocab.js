@@ -1,10 +1,4 @@
-/**
- * Domain vocabulary, in one place.
- *
- * These lists must match the chaincode. When you add a record type, purpose or
- * reason code to `chaincode/crimerecords/lib/policy/policyV1.js`, add it here
- * too — that is the only frontend change needed for the dropdowns and wording.
- */
+/** Domain vocabulary, in one place. */
 
 export const RECORD_TYPES = Object.freeze([
   'fir', 'case-diary', 'evidence', 'forensic-report',
@@ -54,9 +48,8 @@ export const requestActionLabel = (value) => ACTION_LABELS[value] || value;
 export const purposeLabel = (value) => PURPOSE_LABELS[value] || value;
 
 /**
- * Plain-English sentence per reason code defined by the governance policy
- * bundle. Every code here maps to exactly one recommendation class, matching
- * `policies/dias-governance-policy-v1.json`.
+ * Plain-English sentence per reason code defined by the governance policy bundle. Every code here maps to
+ * exactly one recommendation class, matching `policies/dias-governance-policy-v1.json`.
  */
 export const REASON_TEXT = Object.freeze({
   POLICY_SATISFIED: 'All policy gates passed for this role, purpose, and record sensitivity.',
@@ -72,8 +65,8 @@ export const REASON_TEXT = Object.freeze({
 });
 
 /**
- * Why no recommendation exists. These are generation statuses, not
- * recommendations: the model produced nothing, and the auditor still decides.
+ * Why no recommendation exists. These are generation statuses, not recommendations: the model produced
+ * nothing, and the auditor still decides.
  */
 export const GENERATION_STATUS_TEXT = Object.freeze({
   UNAVAILABLE: 'The LLM could not be reached or did not answer in time.',

@@ -1,23 +1,7 @@
 #!/usr/bin/env python3
 """
-Reconstruct an LLMAC-style evaluation set from the policy specification
-published in Zisad & Hasan, "LLMAC" (IEEE CCNC 2026), Table II.
-
-LLMAC's own dataset is not publicly released: the paper carries no data
-availability statement, repository, or archive link. What the paper does
-publish in full is the policy set (P1-P7) governing a class management
-system, taken from Park, Nguyen & Sandhu (2012). This script implements
-those seven policies as a deterministic oracle and generates requests
-against them.
-
-This is therefore a RECONSTRUCTION of the LLMAC policy domain, not LLMAC's
-data. No number produced from it may be compared against a number printed
-in the LLMAC paper; only models run by us on this set are comparable to
-each other.
-
-Reason codes are our addition. LLMAC records a binary decision plus a
-free-text explanation; DIAS's response schema requires a reason code, so
-one code is defined per distinct policy condition in Table II.
+Reconstruct an LLMAC-style evaluation set from the policy specification published in Zisad & Hasan,
+"LLMAC" (IEEE CCNC 2026), Table II.
 """
 import json, random, hashlib
 

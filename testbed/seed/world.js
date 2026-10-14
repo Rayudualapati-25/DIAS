@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * The synthetic world the testbed ledger is seeded with.
- *
- * The 20 base identities are exactly those of network/scripts/seed-identities.sh
- * and scripts/seed-users-onchain.js (same roles, clearances, stations,
- * jurisdictions and credential states). Cases and case files extend the two demo
- * cases so that every record type, sensitivity level and protection flag of the
- * governance policy appears, which gives the load generator many distinct
- * requests with known policy outcomes. Every value is synthetic.
- */
+/** The synthetic world the testbed ledger is seeded with. */
 
 const AUTHORITY = [
   { username: 'sp.north', org: 'audit', role: 'sp', displayName: 'SP (district-north)', jurisdiction: 'district-north', clearance: 'high', badgeId: 'A-1001' },
@@ -23,10 +14,9 @@ const AUTHORITY = [
 ];
 
 /**
- * Requester profiles. `certCredentialStatus` is the certificate attribute the
- * policy reads; the on-chain account itself stays active (as in the demo seed,
- * insp.rathore can sign in, and every request is denied for the revoked
- * credential).
+ * Requester profiles. `certCredentialStatus` is the certificate attribute the policy reads; the on-chain
+ * account itself stays active (as in the demo seed, insp.rathore can sign in, and every request is denied
+ * for the revoked credential).
  */
 const REQUESTERS = [
   { username: 'sho.reddy', org: 'police', role: 'inspector', displayName: 'Insp. K. Reddy (station head, PS-Central)', rank: '3', station: 'PS-Central', jurisdiction: 'district-north', clearance: 'high', badgeId: 'B-0100', certCredentialStatus: 'active' },
@@ -49,9 +39,8 @@ const REGISTRAR = Object.freeze({
 });
 
 /**
- * Case assignments: the demo cases of scripts/seed-domain.js, plus the constable
- * and the lab analyst on CASE-2026-001 (so low and medium clearances meet
- * higher-sensitivity records), plus a south-district case.
+ * Case assignments: the demo cases of scripts/seed-domain.js, plus the constable and the lab analyst on
+ * CASE-2026-001 (so low and medium clearances meet higher-sensitivity records), plus a south-district case.
  */
 const CASES = [
   { caseId: 'CASE-2026-001', owningAgency: 'police', jurisdiction: 'district-north', status: 'under-investigation', protectedClassifications: [], assignedProfiles: ['insp.sharma', 'io.krishnan', 'const.verma', 'analyst.rao'] },

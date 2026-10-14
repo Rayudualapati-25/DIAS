@@ -1,11 +1,4 @@
-/**
- * Navigation must match the chaincode.
- *
- * The sidebar is a convenience, not an authorisation boundary, but a screen shown
- * to someone the chaincode will refuse is a broken screen: every action on it
- * fails. These cases use the seeded demo identities and the chaincode's own role
- * tables, so a drift in either direction fails here instead of in a browser.
- */
+/** Navigation must match the chaincode. */
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -16,6 +9,7 @@ import {
   canTransferCustody, ADMINISTRATION_ORGS, ROLES_BY_ORG,
 } from '../js/core/access.js';
 import { moduleById } from '../js/modules/index.js';
+import { accessLogTabIds } from '../js/shared/access-log.js';
 
 const require = createRequire(import.meta.url);
 const { DISTRICT_HEAD_ROLES, SEAL_AUTHORITY_ROLES } =
@@ -55,7 +49,7 @@ test('the auditor console and officer administration are for AuditMSP district h
 });
 
 test('audit screens follow AuditContract reviewer organisations and roles', () => {
-  for (const moduleId of ['audit-trail', 'payload-integrity', 'access-log']) {
+  for (const moduleId of ['audit-trail', 'payload-integrity']) {
     for (const [name, user] of Object.entries(USERS)) {
       const expected = REVIEWER_MSPS.includes(MSP_BY_ORG[user.org]) && REVIEWER_ROLES.includes(user.role);
       assert.equal(visible(moduleId, user), expected, `${moduleId} for ${name}`);
@@ -92,11 +86,21 @@ test('case workflow is offered to the roles GovernanceContract accepts', () => {
   assert.equal(canAdvanceCaseWorkflow(USERS.inspSharma), false);
 });
 
-test('requesting access and the decision log are open to every signed-in identity', () => {
+test('requesting access, the decision log and the access log are open to every signed-in identity', () => {
   for (const [name, user] of Object.entries(USERS)) {
     assert.equal(visible('request-access', user), true, `request-access for ${name}`);
     assert.equal(visible('decision-log', user), true, `decision-log for ${name}`);
+    // Every officer reads who requested what and what was decided.
+    assert.equal(visible('access-log', user), true, `access-log for ${name}`);
   }
+});
+
+test('the searches-and-reads tab of the access log stays with the contract\'s reviewers', () => {
+  for (const [name, user] of Object.entries(USERS)) {
+    const reviewer = REVIEWER_MSPS.includes(MSP_BY_ORG[user.org]) && REVIEWER_ROLES.includes(user.role);
+    assert.deepEqual(accessLogTabIds(user), reviewer ? ['requests', 'events'] : ['requests'], name);
+  }
+  assert.deepEqual(accessLogTabIds(null), []);
 });
 
 test('a district head can register an officer into any department', () => {

@@ -1,7 +1,7 @@
 'use strict';
 
-// LEGACY (SEAL / pre-DIAS): exercises retained modules that the DIAS runtime no longer
-// loads and that deployCC.sh excludes from the chaincode package (see architectureGuard.test.js).
+// LEGACY (SEAL / pre-DIAS): exercises retained modules that the DIAS runtime no longer loads and that
+// deployCC.sh excludes from the chaincode package (see architectureGuard.test.js).
 
 const { expect } = require('chai');
 const chai = require('chai');

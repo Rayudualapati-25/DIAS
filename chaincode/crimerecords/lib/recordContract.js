@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * RecordContract — crime record registry.
- *
- * Fabric stores governed metadata and a SHA-256 commitment. Raw sensitive
- * content stays in agency-controlled off-chain storage. Evidence detail uses
- * a Fabric private data collection.
- */
+/** RecordContract — crime record registry. */
 
 const { Contract } = require('fabric-contract-api');
 const { MSP, getCaller, requireMsp, requireRole } = require('./util/identity');
@@ -33,21 +27,15 @@ const EVIDENCE_PDC = 'evidenceDetails';
 // Must mirror the collection's distribution policy in collections-config.json.
 const EVIDENCE_PDC_MSPS = [MSP.POLICE, MSP.FORENSICS, MSP.PROSECUTION, MSP.COURT];
 
-// Includes constable: in CCTNS practice, station data entry is routinely done
-// by a designated constable operator. Filing is governed separately from
-// reading — a constable can enter a record and still be escalated when
-// requesting access to it, because access depends on clearance.
-// SHO is a posting rather than a rank, so it is no longer a role; a station head
-// files records as the inspector or circle inspector they actually are.
+// Includes constable: in CCTNS practice, station data entry is routinely done by a designated constable
+// operator.
 const RECORD_CREATOR_ROLES = [
   ROLES.CONSTABLE, ROLES.SUB_INSPECTOR, ROLES.INSPECTOR,
   ROLES.CIRCLE_INSPECTOR, ROLES.INVESTIGATING_OFFICER,
 ];
 
-// Fields a caller may filter on when searching. Anything else is rejected, so
-// no caller-supplied CouchDB selector can reach the state database. A search
-// returns only the public index (identifier, case and owner), so looking a case
-// file up by its identifier reveals nothing a case search does not.
+// Fields a caller may filter on when searching. Anything else is rejected, so no caller-supplied CouchDB
+// selector can reach the state database.
 const SEARCH_SCHEMA = {
   recordId: { type: 'string', required: false, pattern: SAFE_ID },
   caseId: { type: 'string', required: false, pattern: SAFE_ID },
@@ -139,10 +127,9 @@ class RecordContract extends Contract {
   }
 
   /**
-   * A committed grant is honoured only while its basis still holds: the requester's
-   * credential is active at release time, and a grant issued by a dynamic
-   * authorization is released only while that authorization is active, unexpired,
-   * and still scoped to exactly this requester, record, case, action and purpose.
+   * A committed grant is honoured only while its basis still holds: the requester's credential is active at
+   * release time, and a grant issued by a dynamic authorization is released only while that authorization
+   * is active, unexpired, and still scoped to exactly this requester, record, case, action and purpose.
    */
   async _requireCurrentGrantBasis(ctx, caller, decision) {
     const profile = await this._readJson(
@@ -151,7 +138,7 @@ class RecordContract extends Contract {
     if (!profile || profile.credentialStatus !== 'active' || caller.credentialStatus !== 'active') {
       throw new Error('unauthorized: the requester credential is not active at release time');
     }
-    // Every grant is released only under the policy it was issued under (design §9).
+    // Every grant is released only under the policy it was issued under.
     if (!decision.policyHash) {
       throw new Error('DIAS_LEGACY_RECORD: this grant carries no policy binding; request access again');
     }
@@ -225,14 +212,9 @@ class RecordContract extends Contract {
     return JSON.stringify(record);
   }
 
-  /**
-   * Forensics attaches an evidence commitment. The public part is the hash;
-   * free-text detail (if supplied) goes only to the Police+Forensics PDC via
-   * transient data so it never appears on the shared ledger.
-   */
-  // Do not use JavaScript default parameters here: Fabric Contract API uses
-  // function.length to build transaction metadata and would expose only the
-  // parameters before the first default.
+  /** Forensics attaches an evidence commitment. */
+  // Do not use JavaScript default parameters here: Fabric Contract API uses function.length to build
+  // transaction metadata and would expose only the parameters before the first default.
   async AttachEvidenceHash(ctx, recordId, evidenceId, evidenceHash,
     source, offChainReference) {
     const caller = getCaller(ctx);
@@ -245,7 +227,7 @@ class RecordContract extends Contract {
     if (!SHA256_HEX.test(evidenceHash)) {
       throw new Error('evidenceHash must be a sha256 hex digest');
     }
-    await this._getRecord(ctx, recordId); // must exist
+    await this._getRecord(ctx, recordId); // Must exist
 
     const key = ctx.stub.createCompositeKey(EVIDENCE_KEY, [recordId, evidenceId]);
     const existing = await ctx.stub.getState(key);
@@ -316,7 +298,7 @@ class RecordContract extends Contract {
     return JSON.stringify(event);
   }
 
-  /** Evidence is read by a reviewer or by a same-district member of the evidence organisations (design §10). */
+  /** Evidence is read by a reviewer or by a same-district member of the evidence organisations. */
   async _requireEvidenceReader(ctx, recordId, action) {
     const caller = getCaller(ctx);
     const record = await this._getRecord(ctx, recordId);
@@ -376,8 +358,8 @@ class RecordContract extends Contract {
     const record = await this._getRecord(ctx, recordId);
     const isOwningStation = caller.mspId === record.owningMsp
       && caller.station === record.owningStation;
-    // Ungated metadata is limited to the station that owns the record and to a
-    // district head in the authority organisation.
+    // Ungated metadata is limited to the station that owns the record and to a district head in the
+    // authority organisation.
     const isDistrictAuthority = caller.mspId === MSP.AUDIT
       && DISTRICT_HEAD_ROLES.includes(caller.role);
     if (!isOwningStation && !isDistrictAuthority) {
@@ -401,9 +383,8 @@ class RecordContract extends Contract {
   }
 
   /**
-   * Confirm that the exact X.509 identity has a granted decision and return
-   * the governed reference/hash needed by the backend to release raw content.
-   * No raw content is returned by chaincode.
+   * Confirm that the exact X.509 identity has a granted decision and return the governed reference/hash
+   * needed by the backend to release raw content. No raw content is returned by chaincode.
    */
   async AuthorizeRecordRead(ctx, recordId) {
     const record = await this._getRecord(ctx, recordId);
@@ -578,8 +559,8 @@ class RecordContract extends Contract {
     if (request.status !== 'ready') {
       throw new Error(`full document is not ready (status: ${request.status})`);
     }
-    // The grant is re-checked at the moment of release, not only when the PDF was
-    // requested: a suspension, revocation or expiry in between blocks the download.
+    // The grant is re-checked at the moment of release, not only when the PDF was requested: a suspension,
+    // revocation or expiry in between blocks the download.
     await this._requireGrantedDecision(ctx, request.recordId, request.decisionId);
     return JSON.stringify({
       requestId,
@@ -592,7 +573,7 @@ class RecordContract extends Contract {
     });
   }
 
-  /** A record's history is read by a reviewer or by its owning station (design §10). */
+  /** A record's history is read by a reviewer or by its owning station. */
   async GetRecordHistory(ctx, recordId) {
     const caller = getCaller(ctx);
     const record = await this._getRecord(ctx, recordId);
@@ -617,9 +598,8 @@ class RecordContract extends Contract {
   }
 
   /**
-   * Read evidence detail from the private collection. Fabric enforces
-   * memberOnlyRead at the peer, but an explicit MSP check gives a clear error
-   * instead of an opaque empty read for a non-member org.
+   * Read evidence detail from the private collection. Fabric enforces memberOnlyRead at the peer, but an
+   * explicit MSP check gives a clear error instead of an opaque empty read for a non-member org.
    */
   async GetEvidenceDetail(ctx, recordId, evidenceId) {
     const caller = getCaller(ctx);
@@ -642,9 +622,8 @@ class RecordContract extends Contract {
   }
 
   /**
-   * Search records by case and other allow-listed metadata fields (CouchDB
-   * rich query). Returns metadata only — no payloads, and no access is granted
-   * by searching. Finding a record still requires a separate access request.
+   * Search records by case and other allow-listed metadata fields (CouchDB rich query). Returns metadata
+   * only — no payloads, and no access is granted by searching.
    */
   async QueryRecords(ctx, filtersJson) {
     const caller = getCaller(ctx);

@@ -1,21 +1,6 @@
 'use strict';
 
-/**
- * EXPERIMENT 02 — deterministic validator safety and explanation correctness.
- *
- * RQ2: does the independent deterministic validator stop incorrect model
- *      interpretations and policy-inconsistent proposals from becoming
- *      automatically enforced decisions, and is the explanation correct for the
- *      decision that actually takes effect?
- *
- * This experiment drives the DEPLOYED modules directly — the same
- * deriveEffectiveClassification and materializeDecision that the AI service and
- * the chaincode both call — so what is measured here is the hardened
- * two-condition guard, not the pre-hardening replay in the retained model runs.
- *
- * Malformed-output handling is exercised through the backend's real parser and
- * classification validator, again without touching the model.
- */
+/** EXPERIMENT 02 — deterministic validator safety and explanation correctness. */
 
 const path = require('path');
 const {
@@ -80,9 +65,7 @@ function policyTruth(trusted) {
 // ---------------------------------------------------------------- PART A cases
 
 /**
- * Each case states the canonical request, what the model proposed, and what the
- * effective outcome must be. `expectEnforced` is the decision that may be
- * enforced automatically; ESCALATE means nothing is enforced without a human.
+ * Each case states the canonical request, what the model proposed, and what the effective outcome must be.
  */
 const SAFETY_CASES = [
   {
@@ -184,8 +167,8 @@ function checkExplanation(reasonCode, trusted, effectiveClassification) {
   const isSystemReason = controlled.SYSTEM_REASON_CODES.includes(reasonCode);
   const truth = isSystemReason ? null : policyTruth(trusted);
 
-  // Decisive attributes must come from the rule that actually fired; a
-  // system-generated reason uses its own fixed evidence instead.
+  // Decisive attributes must come from the rule that actually fired; a system-generated reason uses its own
+  // fixed evidence instead.
   const expectedAttributes = isSystemReason
     ? details.decisiveAttributes
     : (truth && truth.reasonCode === reasonCode ? truth.decisiveAttributes : details.decisiveAttributes);

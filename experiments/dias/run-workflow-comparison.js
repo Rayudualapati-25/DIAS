@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * Deterministic DIAS workflow comparison.
- *
- * This is an offline authorization-path replay, not a latency benchmark and
- * not an LLM-accuracy evaluation. It counts which requests would invoke Qwen,
- * reach an auditor, or match a dynamic rule under controlled variants.
- */
+/** Deterministic DIAS workflow comparison. */
 
 const fs = require('fs');
 const path = require('path');

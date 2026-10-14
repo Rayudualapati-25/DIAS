@@ -1,10 +1,6 @@
 'use strict';
 
-/**
- * Client-observed latency with one distinct enrolled Fabric identity per
- * simultaneous request. Setup (enrollment, login, assignment, grants, warm-up)
- * is excluded; the measured path is HTTP request start through parsed response.
- */
+/** Client-observed latency with one distinct enrolled Fabric identity per simultaneous request. */
 
 const crypto = require('crypto');
 const childProcess = require('child_process');

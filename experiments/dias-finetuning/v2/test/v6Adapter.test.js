@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * The V6 comparison adapter.
- *
- * The single most important property: `escalate` must never become a DENY.
- * Folding it in would credit the SEAL-era model with a safe answer it did not
- * give, on exactly the metric the whole design is judged by.
- */
+/** The V6 comparison adapter. */
 
 const fs = require('fs');
 const path = require('path');

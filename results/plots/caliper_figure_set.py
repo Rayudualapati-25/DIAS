@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Generate paper figures from retained Caliper run artifacts.
-
-The script only consumes completed runs under `experiments/runs/`. It ignores
-warm-up rows, refuses to invent data, and exits with a clear message when no
-completed benchmark artifacts exist yet.
-"""
+"""Generate paper figures from retained Caliper run artifacts."""
 
 from __future__ import annotations
 

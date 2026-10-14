@@ -1,11 +1,8 @@
 'use strict';
 
 /**
- * Plan step 7: a pending request ends. It carries a review deadline taken from
- * an on-chain parameter; after the deadline no decision is accepted, and an
- * explicit transaction records the expiry. The requester may cancel while it is
- * pending. Every terminal state persists through its own successful transaction,
- * because a rejected transaction writes nothing (design §8).
+ * : a pending request ends. It carries a review deadline taken from an on-chain parameter; after the
+ * deadline no decision is accepted, and an explicit transaction records the expiry.
  */
 
 const chai = require('chai');

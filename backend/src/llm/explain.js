@@ -1,23 +1,6 @@
 'use strict';
 
-/**
- * The explainable-AI module.
- *
- * IMPORTANT — what this module does and does not do:
- *   The fine-tuned policy model makes the proposed allow/deny/escalate decision
- *   in policyDecision.js. Chaincode validates and records that decision before
- *   this module runs. This module only rewrites the recorded result into a
- *   readable sentence; it cannot change the outcome.
- *
- * The deterministic policy evaluator remains a safety guard: disagreement with
- * the model is converted to ESCALATE for an AuditMSP human decision.
- *
- * Safety steps in order:
- *   1. read the decision back from the blockchain (never trust the browser)
- *   2. build a prompt from a fixed list of safe fields (no case contents)
- *   3. ask the local model
- *   4. check the answer is grounded; if not, use the template instead
- */
+/** The explainable-AI module. */
 
 const crypto = require('crypto');
 const ollama = require('./ollama');
@@ -45,13 +28,7 @@ const SYSTEM_PROMPT = [
   'Refer to the protected item only as "the case file" because its record type was not supplied.',
 ].join(' ');
 
-/**
- * Build the prompt.
- *
- * Only the fields listed here are ever sent to the model. The case narrative,
- * complainant details, badge numbers and approval tokens are deliberately
- * excluded — the whole design keeps sensitive content away from extra systems.
- */
+/** Build the prompt. */
 function buildPrompt(decisionEvent) {
   const e = decisionEvent.explanation || {};
   const s = decisionEvent.subject || {};
@@ -72,18 +49,7 @@ function buildPrompt(decisionEvent) {
   return lines.join('\n');
 }
 
-/**
- * Check the model's answer is actually about this decision.
- *
- * Two severities, deliberately separated:
- *   problems  — the text says something WRONG. Discard it, use the template.
- *   warnings  — the text is correct but incomplete. Keep it, record the gap.
- *
- * Rejecting merely-incomplete text would throw away most good generations and
- * the LLM would never be seen; instead incompleteness becomes a reported metric.
- *
- * Returns { ok, problems[], warnings[] } — `ok` refers to problems only.
- */
+/** Check the model's answer is actually about this decision. */
 function validate(text, decisionEvent) {
   const problems = [];
   const warnings = [];
@@ -99,24 +65,21 @@ function validate(text, decisionEvent) {
     if (lower.includes(wrong)) problems.push(`states "${wrong}" but the decision was ${decision}`);
   }
 
-  // The prompt deliberately omits record type. Reject guesses rather than
-  // showing an invented type (a real failure once called an FIR a case diary).
+  // The prompt deliberately omits record type. Reject guesses rather than showing an invented type (a real
+  // failure once called an FIR a case diary).
   const inventedRecordType = /\b(fir|case diary|evidence|forensic report|witness statement|chargesheet|court order)\b/i
     .exec(textWithoutKnownIds);
   if (inventedRecordType) {
     problems.push(`invents unsupported record type "${inventedRecordType[1]}"`);
   }
 
-  // 1b. An escalated request is pending review, not settled. Saying it is
-  // final would mislead the officer about what happens next.
+  // 1b. An escalated request is pending review, not settled.
   if (decision === 'escalate' &&
       /\b(is final|cannot be changed|cannot be overturned|permanently|no appeal|irreversible)\b/i.test(lower)) {
     problems.push('describes an escalated decision as final');
   }
 
-  // 1c. Misattribution: the model must not blame a factor that did not decide
-  // this request. Observed failure: an RBAC denial explained as "low clearance".
-  // Each topic maps to the attribute that would license mentioning it.
+  // 1c. Misattribution: the model must not blame a factor that did not decide this request.
   const BLAME_TOPICS = [
     { words: /\bclearance\b/i, attribute: 'subject.clearance' },
     { words: /\bjurisdiction\b/i, attributes: ['subject.jurisdiction', 'object.jurisdiction'] },
@@ -134,7 +97,6 @@ function validate(text, decisionEvent) {
   }
 
   // 1d. The counterfactual is the actionable part, so note when it is dropped.
-  // Incomplete, not incorrect — a warning, so the text is still shown.
   if (decisionEvent.explanation.counterfactual &&
       !/\bwould\b|\bif\b|\bupgrade|\bonce\b/i.test(text)) {
     warnings.push('omits the counterfactual');
@@ -148,7 +110,7 @@ function validate(text, decisionEvent) {
   if (/^(sure|certainly|of course|here('s| is))\b/i.test(text)) problems.push('starts with filler');
   if (/as an ai|language model/i.test(lower)) problems.push('mentions being an AI');
 
-  // 4. No invented identifiers. Record and case IDs look like ABC-1234.
+  // 4. No invented identifiers.
   const invented = (text.match(/\b[A-Z]{2,}-[A-Z0-9-]{3,}\b/g) || []).filter(
     (token) => token !== decisionEvent.recordId && token !== decisionEvent.caseId
   );
@@ -161,13 +123,7 @@ function hash(text) {
   return crypto.createHash('sha256').update(text, 'utf8').digest('hex');
 }
 
-/**
- * Produce the plain-language explanation for one committed decision.
- *
- * @param {object} decisionEvent the decision as read back from the ledger
- * @param {object} store         db helpers (getRendering / saveRendering); optional
- * @returns {{text, source, model, latencyMs, validation, cached}}
- */
+/** Produce the plain-language explanation for one committed decision. */
 async function explainDecision(decisionEvent, store) {
   const context = {
     subject: decisionEvent.subject,

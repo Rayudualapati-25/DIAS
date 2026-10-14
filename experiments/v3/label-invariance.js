@@ -1,19 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Label invariance under the v3 input schema (plan step 5).
- *
- * v3 removes the self-declared emergency flag and the approval flag from the
- * verified context. This check applies the reference policy oracle to every
- * tracked dataset case twice, with the v1 facts and with the v3 facts, and counts
- * any difference in recommendation, reason code, policy references or review
- * flags. It also checks the oracle still reproduces the stored label.
- *
- *   node experiments/v3/label-invariance.js --out experiments/runs/<date>_v3_label_invariance
- *
- * Offline and deterministic: no model, no network, no ledger.
- */
+/** Label invariance under the v3 input schema. */
 
 const fs = require('fs');
 const path = require('path');

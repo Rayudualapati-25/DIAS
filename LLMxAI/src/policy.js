@@ -3,9 +3,7 @@
 const POLICY_VERSION = 'crime-policy-v2';
 const MODEL_VERSION = process.env.LLM_POLICY_MODEL_VERSION || 'qwen3-14b-seba-lora-v4';
 
-// This is the byte-compatible inference contract used during fine-tuning. The
-// phrase "LEDGER RESOURCE" is a historical input label; this standalone app
-// supplies the block from its local, trusted resource registry.
+// This is the byte-compatible inference contract used during fine-tuning.
 const SYSTEM_PROMPT = [
   `You are the ${POLICY_VERSION} access-control decision engine.`,
   'The AUTHENTICATED SUBJECT and LEDGER RESOURCE blocks are authoritative.',
@@ -133,9 +131,8 @@ const DECISION_SCHEMA = Object.freeze({
   },
 });
 
-// Exact materialization used by the retained evaluations and dataset audit.
-// It does not make a policy decision; it converts the model-selected reason
-// into a stable, comparable explanation artifact.
+// Exact materialization used by the retained evaluations and dataset audit. It does not make a policy
+// decision; it converts the model-selected reason into a stable, comparable explanation artifact.
 const EVALUATION_DETAILS = Object.freeze({
   CRED_NOT_ACTIVE: {
     attributes: ['subject.credentialStatus'],
@@ -243,9 +240,7 @@ function explainClassification(classification, trusted) {
   }
   const detail = REASON_DETAILS[classification.reasonCode];
   return {
-    // For a valid, internally consistent response, this is exactly the decision
-    // emitted by Qwen. A contradiction is escalated by the safety wrapper and is
-    // explicitly labelled instead of being silently rewritten.
+    // For a valid, internally consistent response, this is exactly the decision emitted by Qwen.
     decision: validation.disagreement ? 'escalate' : classification.decision,
     modelDecision: classification.decision,
     decisionSource: validation.disagreement ? 'runtime-safety-escalation' : MODEL_VERSION,

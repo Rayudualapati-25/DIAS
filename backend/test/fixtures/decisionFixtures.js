@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Shared fixtures for the auditor-decision tests: a committed request, and a
- * recommendation object M with the commitment κ the ledger holds for it, built
- * the way the backend builds them.
+ * Shared fixtures for the auditor-decision tests: a committed request, and a recommendation object M with
+ * the commitment κ the ledger holds for it, built the way the backend builds them.
  */
 
 const { verifiedRequestFixture } = require('./diasFixtures');
@@ -47,9 +46,8 @@ const MODEL = Object.freeze({
 });
 
 /**
- * A recommendation object M and the commitment κ the ledger holds for it, built
- * the way the backend builds them (generationStatus not OK when
- * `value` is null).
+ * A recommendation object M and the commitment κ the ledger holds for it, built the way the backend builds
+ * them (generationStatus not OK when `value` is null).
  */
 function commitmentPair(requestId, value, generationStatus = value ? 'OK' : 'UNAVAILABLE') {
   const request = committedRequest(requestId);

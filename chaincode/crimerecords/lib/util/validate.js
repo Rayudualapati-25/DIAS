@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Strict allow-list input validation.
- *
- * This replaces the denylist (`FORBIDDEN_FIELDS` + object spread) approach
- * that let arbitrary caller-supplied fields reach the ledger in the previous
- * chaincode. Only fields named in a schema are copied; everything else is
- * rejected, and every value is type-checked.
- */
+/** Strict allow-list input validation. */
 
 const crypto = require('crypto');
 
@@ -32,10 +25,8 @@ function hashObject(obj) {
 }
 
 /**
- * Validate `input` against `schema` and return a NEW object containing only
- * schema fields. Schema entry: { type, required, enum?, pattern? }.
- * Unknown fields in the input are an error, not silently dropped, so a
- * client that tries to smuggle PII gets a loud failure.
+ * Validate `input` against `schema` and return a NEW object containing only schema fields. Schema entry: {
+ * type, required, enum?, pattern? }.
  */
 function validateAllowList(input, schema, label) {
   if (input === null || typeof input !== 'object' || Array.isArray(input)) {

@@ -1,10 +1,4 @@
-/**
- * The auditor screen's automatic "is the recommendation ready" watch.
- *
- * It must tell the screen the moment a recommendation is ready, and it must
- * never run away: every way it can end is tested here, because a check that
- * keeps repeating is a request to the backend every few seconds.
- */
+/** The auditor screen's automatic "is the recommendation ready" watch. */
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -27,8 +21,8 @@ const networkFailure = () => new Error('cannot reach the server');
 const refusal = (httpStatus) => Object.assign(new Error('refused'), { status: httpStatus });
 
 /**
- * A watch on hand-driven timers and a scripted backend. `answers` are used one
- * per call: a status list, an Error to reject with, or a function of the ids.
+ * A watch on hand-driven timers and a scripted backend. `answers` are used one per call: a status list, an
+ * Error to reject with, or a function of the ids.
  */
 function harness({ answers = [], isActive = () => true, limitMs = WATCH_LIMIT_MS } = {}) {
   const timers = new Map();

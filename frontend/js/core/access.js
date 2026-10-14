@@ -1,18 +1,4 @@
-/**
- * Who may see which module.
- *
- * This is a navigation filter, not an authorisation boundary. It decides what
- * appears in the sidebar and which forms a screen offers. Authorisation is
- * enforced by:
- *   1. the chaincode  (checks the caller's signed X.509 certificate)
- *   2. the backend    (requireRole in src/routes/*.js)
- * A user who hand-crafts a request still hits both. Never move a security
- * decision into this file.
- *
- * Every group below mirrors a chaincode rule — organisation AND role — so a
- * screen is never offered to someone the chaincode will refuse.
- * frontend/test/access-roles.test.mjs checks them against the chaincode tables.
- */
+/** Who may see which module. */
 
 export const ORG = Object.freeze({
   POLICE: 'police',
@@ -30,7 +16,7 @@ export const ORG_LABEL = Object.freeze({
   audit: 'Oversight & Internal Affairs',
 });
 
-/** District heads sit in the authority organisation (policy/authority.js). */
+/** District heads sit in the authority organisation. */
 export const DISTRICT_HEAD_ROLES = Object.freeze([
   'sp', 'commissioner', 'chief-forensic-officer', 'director-of-prosecution', 'district-judge',
 ]);
@@ -51,7 +37,7 @@ export const FORENSIC_ROLES = Object.freeze(['lab-analyst', 'lab-director']);
 /** Mirrors RecordContract.SEAL_ROLES (CourtMSP). */
 export const JUDICIAL_ROLES = Object.freeze(['judge', 'magistrate']);
 
-/** Mirrors AuditContract.REVIEWER_ROLES (court seal authority + district heads) and REVIEWER_MSPS. */
+/** Mirrors AuditContract.REVIEWER_ROLES and REVIEWER_MSPS. */
 export const REVIEWER_ROLES = Object.freeze([
   'judge', 'district-judge', 'sp', 'commissioner', 'chief-forensic-officer', 'director-of-prosecution',
 ]);
@@ -83,8 +69,10 @@ export const ALL_ROLES = Object.freeze([
   'court-clerk', 'magistrate', 'judge', 'district-judge',
 ]);
 
-/** Which roles belong to which department, so the form cannot offer a
- *  combination the chaincode would reject. */
+/**
+ * Which roles belong to which department, so the form cannot offer a combination the chaincode would
+ * reject.
+ */
 export const ROLES_BY_ORG = Object.freeze({
   police: ['constable', 'sub-inspector', 'inspector', 'investigating-officer',
     'circle-inspector', 'dsp', 'sp', 'commissioner'],
@@ -97,16 +85,7 @@ export const ROLES_BY_ORG = Object.freeze({
   audit: [...DISTRICT_HEAD_ROLES],
 });
 
-/**
- * Does this user satisfy a module's `allow` rule?
- *
- * `allow` shapes, in order of precedence:
- *   undefined            -> everyone signed in
- *   { roles: [...] }     -> user.role must be listed
- *   { orgs:  [...] }     -> user.org must be listed
- *   { roles, orgs }      -> BOTH must match
- *   { when: (user) => boolean } -> custom predicate, for anything unusual
- */
+/** Does this user satisfy a module's `allow` rule? */
 export function canAccess(user, allow) {
   if (!user) return false;
   if (!allow) return true;
@@ -132,8 +111,8 @@ export const canTransferCustody = (user) => [ORG.POLICE, ORG.FORENSICS, ORG.COUR
   .includes(user?.org);
 
 /**
- * GovernanceContract.AdvanceCaseWorkflow: a police circle inspector or a public
- * prosecutor files to court; a judge or magistrate closes a filed case.
+ * GovernanceContract.AdvanceCaseWorkflow: a police circle inspector or a public prosecutor files to court;
+ * a judge or magistrate closes a filed case.
  */
 export function canAdvanceCaseWorkflow(user) {
   if (!user) return false;

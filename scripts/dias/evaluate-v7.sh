@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-#
 # Serve a trained V7 adapter and evaluate it on the held-out suite.
-#
-# V7 gets its own port (8082 by default) so the untuned baseline server on 8081
-# stays available for re-runs, and the V6 service on 8080 is never touched.
-#
-#   nohup scripts/dias/evaluate-v7.sh <adapter-dir> <run-dir> [port] > /dev/null 2>&1 &
 set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

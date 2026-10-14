@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Write a DRAFT of the new Experiments and Results section from the summaries.
-
-The draft is a suggestion for the author, who writes the paper: it is written
-to a separate file and never touches the Overleaf sections. Every number is
-read from the analysis summaries. Style follows the author's rules: plain
-sentences, each subsection starts from its figure, ends with the trend, short
-captions, no "measured"/"automated" workflows.
-
-Usage: python3 make_paper_draft.py --analysis <run>/analysis --out <run>/paper/results_draft.tex
-"""
+"""Write a DRAFT of the new Experiments and Results section from the summaries."""
 
 import argparse
 import json

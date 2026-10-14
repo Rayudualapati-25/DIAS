@@ -1,7 +1,6 @@
-"""Figures and tables for Experiment 01 (model effectiveness, subject-context
-ablation) and Experiment 02 (validator safety, explanation correctness).
-
-Run: python3 paper-tests/figures/make_01_02.py
+"""
+Figures and tables for Experiment 01 (model effectiveness, subject-context ablation) and Experiment
+02 (validator safety, explanation correctness).
 """
 
 import sys
@@ -36,8 +35,10 @@ def metrics_by_label(exp01, label):
 # ------------------------------------------------------------------ figure 01
 
 def fig01_model_effectiveness(exp01):
-    """Three retained arms on the same held-out split: what fine-tuning and
-    prompt grounding change, and what it costs on each side of the error."""
+    """
+    Three retained arms on the same held-out split: what fine-tuning and prompt grounding change,
+    and what it costs on each side of the error.
+    """
     labels = ["V6 grounded", "V4 grounded", "V4 short prompt"]
     colours = [ARM["v6"], ARM["v4"], ARM["v4short"]]
     arms = [arm_by_label(exp01, lab) for lab in labels]
@@ -68,8 +69,8 @@ def fig01_model_effectiveness(exp01):
              f"Action and purpose accuracy $\\geq$ {lowest * 100:.1f}% for every arm",
              transform=ax1.transAxes, ha="center", va="top", fontsize=6.8, color="#555555")
 
-    # Both error directions, because zero false Allow is only meaningful when the
-    # false Deny count that buys it is shown next to it.
+    # Both error directions, because zero false Allow is only meaningful when the false Deny count
+    # that buys it is shown next to it.
     x2 = np.arange(2)
     for i, (arm, colour) in enumerate(zip(arms, colours)):
         vals = [arm["falseAllowCount"], arm["falseDenyCount"]]
@@ -86,15 +87,15 @@ def fig01_model_effectiveness(exp01):
 
     save(fig, "fig01_model_effectiveness")
 
-# The subject-context ablation figure and its table are produced by
-# make_ablation_analysis.py, which reads the raw rows and can therefore report
-# Allow recall and the emitted reason-code distribution alongside the
-# accuracies. Keeping a second version here would create two sources for one
-# figure.
+# The subject-context ablation figure and its table are produced by make_ablation_analysis.py, which
+# reads the raw rows and can therefore report Allow recall and the emitted reason-code distribution
+# alongside the accuracies.
 
 def fig03_confusion(exp01):
-    """V6 on the held-out split, and the same model on the matched ablation
-    cases with the subject context removed."""
+    """
+    V6 on the held-out split, and the same model on the matched ablation cases with the subject
+    context removed.
+    """
     panels = [
         ("(a) V6, authenticated subject context", metrics_by_label(exp01, "V6 grounded")),
         ("(b) V6, subject context removed", exp01["summary"]["ablation"]["withoutSubject"]),
@@ -136,8 +137,10 @@ def fig03_confusion(exp01):
 # ------------------------------------------------------------------ figure 04
 
 def fig04_validator_safety(exp02):
-    """What the deterministic validator did with proposals that should not be
-    enforced, and whether the explanation matched the effective decision."""
+    """
+    What the deterministic validator did with proposals that should not be enforced, and whether the
+    explanation matched the effective decision.
+    """
     s = exp02["summary"]
     safety, malformed, expl = s["safety"], s["malformed"], s["explanation"]
 
@@ -346,8 +349,8 @@ def tables(exp01, exp02):
              s["safety"]["disagreementCases"], "replaced"],
         ])
 
-    # Per-class behaviour for V6: the zero false Allow figure is only readable
-    # next to the Allow recall that pays for it.
+    # Per-class behaviour for V6: the zero false Allow figure is only readable next to the Allow
+    # recall that pays for it.
     m = metrics_by_label(exp01, "V6 grounded")
     prows = []
     for cls in CLASSES:

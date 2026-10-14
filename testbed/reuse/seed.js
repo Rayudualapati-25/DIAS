@@ -2,15 +2,9 @@
 'use strict';
 
 /**
- * Seed the records of a reuse plan on the testbed ledger: the sibling cases
- * (copies of the world cases with the same assigned users) and one record per
- * stream (the base copy in the world case, the siblings in the sibling cases).
- * Same contract calls, identity and off-chain payload commitment as
- * testbed/seed/seed-ledger.js. Idempotent: anything already on the ledger is
- * skipped. Records are written ten at a time.
- *
- * Runs inside the dias-backend:testbed image with testbed/reuse mounted:
- *   node testbed/reuse/seed.js --plan testbed/reuse/generated/reuse-100-users-plan.json
+ * Seed the records of a reuse plan on the testbed ledger: the sibling cases (copies of the world cases with
+ * the same assigned users) and one record per stream (the base copy in the world case, the siblings in the
+ * sibling cases).
  */
 
 const fs = require('fs');

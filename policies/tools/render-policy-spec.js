@@ -2,10 +2,8 @@
 'use strict';
 
 /**
- * Render docs/policies/governance-policy-specification.md from the canonical
- * bundle so the human-readable specification cannot drift from the JSON.
- *
- * Usage (repository root): node policies/tools/render-policy-spec.js [--check]
+ * Render docs/policies/governance-policy-specification.md from the canonical bundle so the human-readable
+ * specification cannot drift from the JSON.
  */
 
 const fs = require('fs');

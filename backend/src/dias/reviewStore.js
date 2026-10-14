@@ -1,20 +1,6 @@
 'use strict';
 
-/**
- * Off-chain review store.
- *
- * The auditor screen needs what the ledger deliberately does not hold: the
- * requester's written justification, the recommendation object M, and the
- * auditor's note. All three live here, one JSON file per request; the ledger
- * keeps only their digests (h_J, h_M in κ, h_N in the decision), so each can be
- * checked against it.
- *
- * Every write replaces the whole entry through a temporary file and a rename, so
- * a reader never sees a half-written entry. With a cipher, every entry is written
- * encrypted and only encrypted entries are read (design §10). `sealWithCurrentKey`,
- * run at start-up, encrypts entries an earlier version left in the clear and
- * re-seals those of an earlier key.
- */
+/** Off-chain review store. */
 
 const fs = require('fs');
 const path = require('path');
@@ -23,10 +9,9 @@ const { isEncryptedReview } = require('./reviewCipher');
 const REVIEW_SCHEMA_VERSION = 'dias-offchain-review-v1';
 const SAFE_ID = /^[A-Za-z0-9._-]{1,128}$/;
 /**
- * pending: waiting for the LLM recommendation; signed: M and κ stored, κ not
- * yet confirmed on the ledger; committed: κ on the ledger; commit-rejected: the
- * ledger refused κ for a lasting reason; failed: the recommender could not answer.
- * `ready` is the v2 state, kept so entries written before v3 still read.
+ * Pending: waiting for the LLM recommendation; signed: M and κ stored, κ not yet confirmed on the ledger;
+ * committed: κ on the ledger; commit-rejected: the ledger refused κ for a lasting reason; failed: the
+ * recommender could not answer.
  */
 const RECOMMENDATION_STATE = Object.freeze({
   PENDING: 'pending',
@@ -72,10 +57,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console, cipher 
   }
 
   /**
-   * Read for a view that must not fail because of one entry: an entry that cannot
-   * be opened (a retired key, a damaged file) is reported and treated as absent.
-   * A decision on such a request is then refused as "recommendation object not
-   * available", never taken on something nobody could read.
+   * Read for a view that must not fail because of one entry: an entry that cannot be opened (a retired key,
+   * a damaged file) is reported and treated as absent.
    */
   function readSafely(requestId) {
     fileFor(requestId);
@@ -130,9 +113,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console, cipher 
   }
 
   /**
-   * The entry for a request this store has no review for (the request never
-   * reached this backend, or its review was lost): it holds only notes, so a
-   * note can still be made durable before its decision.
+   * The entry for a request this store has no review for (the request never reached this backend, or its
+   * review was lost): it holds only notes, so a note can still be made durable before its decision.
    */
   function noteOnlyEntry(requestId, recordId) {
     const timestamp = now().toISOString();
@@ -151,8 +133,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console, cipher 
   }
 
   /**
-   * Stage an auditor note before its decision is submitted (design §11). A note
-   * staged again with the same digest replaces the earlier copy.
+   * Stage an auditor note before its decision is submitted. A note staged again with the same digest
+   * replaces the earlier copy.
    */
   function stageNote(requestId, { noteHash, reason, decision, auditorUsername, recordId }) {
     const current = read(requestId) || noteOnlyEntry(requestId, recordId);
@@ -166,8 +148,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console, cipher 
   }
 
   /**
-   * The decision is on the ledger: its note becomes the auditor note. A request
-   * is decided once, so no other staged note can ever commit and all are cleared.
+   * The decision is on the ledger: its note becomes the auditor note. A request is decided once, so no
+   * other staged note can ever commit and all are cleared.
    */
   function commitNote(requestId, note) {
     return update(requestId, { auditorNote: { ...note, state: 'committed' }, stagedNotes: [] });
@@ -221,10 +203,8 @@ function createReviewStore(dir, { now = () => new Date(), log = console, cipher 
   }
 
   /**
-   * Bring every stored entry under the current key, at start-up: encrypt what an
-   * earlier version left in the clear, and re-seal what an earlier key sealed, so
-   * that key can be retired. An entry that cannot be opened is counted, reported
-   * and left exactly as it is.
+   * Bring every stored entry under the current key, at start-up: encrypt what an earlier version left in
+   * the clear, and re-seal what an earlier key sealed, so that key can be retired.
    */
   function sealWithCurrentKey() {
     const counts = { encrypted: 0, resealed: 0, unreadable: 0 };

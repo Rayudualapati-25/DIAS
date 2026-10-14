@@ -9,8 +9,7 @@ const { createDiasWorld } = require('./diasTestWorld');
 
 const INSPECTOR = CALLERS.inspector;
 const CONSTABLE = CALLERS.constable;
-// v3: the recommendation is committed before review and the agreement is a
-// lifecycle stage of its own (paper §IV-G; plan step 10).
+// v3: the recommendation is committed before review and the agreement is a lifecycle stage of its own.
 const REVIEWED_STAGES = Object.freeze([
   'ACCESS_REQUEST_SUBMITTED', 'DYNAMIC_AUTHORIZATION_CHECKED', 'RECOMMENDATION_COMMITTED',
   'AUDITOR_DECISION_RECORDED', 'AGREEMENT_DERIVED', 'ACCESS_OUTCOME_RECORDED',
@@ -45,10 +44,7 @@ describe('DIAS access workflow', () => {
     });
 
     it('commits digests and the recommendation value, but never free text', async () => {
-      // v3 replaces the v2 rule "only the value": the ledger now also holds the
-      // justification digest h_J (and, from step 10, h_M and h_N). Free text stays
-      // off-chain: the justification, the model's reason, its clause list, and
-      // nothing from the retired AI organisation.
+      // v3 replaces the v2 rule "only the value": the ledger now also holds the justification digest h_J.
       const justification = 'Witness statement needed for tomorrow\'s hearing.';
       const { result: request } = await world.submit(INSPECTOR, { justification });
       await world.decide(request.requestId, 'FORCE_ALLOW', 'DENY');
@@ -161,8 +157,8 @@ describe('DIAS access workflow', () => {
     });
   });
 
-  // Step 13 (design §10): the full log is for reviewers. What every other member
-  // reads is the redacted log, tested in diasPrivacy.test.js.
+  // Since 2026-10-14 every enrolled officer reads this log in full; diasPrivacy.test.js checks the other
+  // callers.
   describe('decision log, as a reviewer reads it', () => {
     it('lets a reviewer read who asked for what and what was decided', async () => {
       const granted = (await world.submit(INSPECTOR)).result;
@@ -207,7 +203,7 @@ describe('DIAS access workflow', () => {
     });
 
     it('returns the newest entries first and refuses an out-of-range limit', async () => {
-      // Both decisions fall inside the 72-hour review deadline of v3 (plan step 7).
+      // Both decisions fall inside the 72-hour review deadline of v3.
       const times = { 'FIR-1': '2026-08-06T09:00:00.000Z', 'FIR-2': '2026-08-06T10:00:00.000Z' };
       for (const recordId of ['FIR-1', 'FIR-2']) {
         const request = (await world.submit(INSPECTOR, { recordId })).result;

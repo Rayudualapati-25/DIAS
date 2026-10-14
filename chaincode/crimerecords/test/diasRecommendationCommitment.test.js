@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * Plan steps 10 and 12 (contract side): the pre-review recommendation commitment
- * κ and its signed provenance (design §6), and the agreement the decision now
- * derives from κ instead of from a value the backend supplies (paper Eq. 3).
+ * Plan steps 10 and 12 (contract side): the pre-review recommendation commitment κ and its signed
+ * provenance, and the agreement the decision now derives from κ instead of from a value the backend
+ * supplies (paper Eq.
  */
 
 const crypto = require('crypto');

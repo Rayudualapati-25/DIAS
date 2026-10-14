@@ -1,15 +1,4 @@
-/**
- * The decision log, read from the ledger by anyone signed in.
- *
- * Every settled request appears here: what was decided, the LLM recommendation
- * that decision was taken against — or that none was available — and whether the
- * two agreed. That much is open to every organization on the channel: a decision
- * that only its maker can see is not an accountable decision. Who asked, for
- * which case file, who decided and in which transaction are shown to reviewers
- * only; everyone else receives the reduced entries (design §10). The LLM's own
- * account opens from here for district heads of the audit organisation; the
- * officer who made a request reads theirs on the request screen.
- */
+/** The decision log, read from the ledger by anyone signed in. */
 
 import { api } from '../core/api.js';
 import { ALLOW, canAccess } from '../core/access.js';
@@ -32,11 +21,7 @@ function decidedBy(entry) {
     el('small', { class: 'block' }, show(entry.auditor && entry.auditor.role)));
 }
 
-/**
- * Why an entry names no LLM recommendation. A reused authorization never asks the
- * LLM. A request that expired or was cancelled may have had a recommendation, but
- * the ledger's list carries it only with a decision.
- */
+/** Why an entry names no LLM recommendation. A reused authorization never asks the LLM. */
 const noRecommendationText = (entry) => (entry.basis === 'DYNAMIC_AUTHORIZATION'
   ? 'LLM not consulted' : 'Not recorded: no decision was made');
 
@@ -56,15 +41,7 @@ function agreementCell(entry) {
     el('small', { class: 'block' }, agreementLabel(entry.llmAgreement)));
 }
 
-/**
- * The model's own account of one recommendation.
- *
- * Everyone reads the structured part. The free text is case narrative, so the
- * backend returns it only to the officer who made the request and to auditors;
- * for anyone else `reasonVisible` is false and this says so rather than pretending
- * there was nothing to read. How the recommendation was produced — timings, token
- * counts, model identity, policy hashes — is deliberately not shown.
- */
+/** The model's own account of one recommendation. */
 function detailPanel(entry, detail) {
   const heading = subheading(`Why ${entry.requestId} was decided as it was`);
   if (detail.recommendationState === 'pending') {
@@ -137,8 +114,8 @@ export default {
           return el('div', {}, total,
             callout('info', 'You see the reduced log',
               hint('It shows what was decided and against which LLM recommendation, without names, '
-                + 'case files or transactions. Reviewers see the full log. Your own requests, with '
-                + 'their decisions, are on the "Request access" screen.')),
+                + 'case files or transactions, because this network runs an earlier contract. Your own '
+                + 'requests, with their decisions, are on the "Request access" screen.')),
             reducedTable(entries));
         }
         const panel = slot({ class: 'region' });
@@ -177,9 +154,8 @@ export default {
     return grid(card('Decisions recorded on the blockchain',
       'Committed by the chaincode: the request and the decision (FORCE ALLOW or FORCE DENY, the LLM '
       + 'recommendation it was taken against, and whether the two agreed). A recommendation the '
-      + 'backend could not produce is recorded as unavailable. Every organization on the channel '
-      + 'can read what was decided; who asked, for which case file and who decided are shown to '
-      + 'reviewers only.',
+      + 'backend could not produce is recorded as unavailable. Every officer on the channel can '
+      + 'read who asked, for which case file, what was decided and who decided.',
       el('div', { class: 'actions' },
         button('Refresh', { kind: 'ghost', onclick: () => region.reload() })),
       region));

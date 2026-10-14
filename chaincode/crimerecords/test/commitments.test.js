@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * dias-commitment-hash-v1 (docs/design/dias-v3-ledger-schema.md §4): strict
- * canonical JSON and domain-separated SHA-256. The vectors are shared with the
- * backend and frontend tests; some digests were computed with the shell, so a
- * bug shared by every JavaScript implementation would still be caught.
+ * dias-commitment-hash-v1: strict canonical JSON and domain-separated SHA-256. The vectors are shared with
+ * the backend and frontend tests; some digests were computed with the shell, so a bug shared by every
+ * JavaScript implementation would still be caught.
  */
 
 const { expect } = require('chai');

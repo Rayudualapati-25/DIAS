@@ -1,30 +1,6 @@
 'use strict';
 
-/**
- * Evaluate the retained SEAL-era V6 adapter on the DIAS v2 test facts.
- *
- * V6 is a HISTORICAL REFERENCE, not a peer. It was trained against a different
- * contract, and three differences matter enough that a raw side-by-side number
- * would mislead:
- *
- *  1. V6's vocabulary has three classes. `escalate` has no binary equivalent, so
- *     it is mapped to "no recommendation" — the same way a generation failure is
- *     treated — rather than being folded into DENY. Folding it into DENY would
- *     flatter V6 on exactly the safety metric that matters.
- *
- *  2. V6 is NOT shown the action and purpose. The SEAL design withheld them so
- *     the model's inference could be compared against them. It therefore has to
- *     read them out of the request text, while V7 is given them as verified
- *     facts. This is a real disadvantage for V6 on this task and is the reason
- *     the comparison is reported as a reference rather than a fair head-to-head.
- *
- *  3. V6's prompt shows a SEAL-era subject/record shape, so the facts are
- *     re-projected into it. Every policy-relevant value is preserved; only the
- *     container changes.
- *
- * All three adaptations are recorded in the output so a reader can see exactly
- * what was compared.
- */
+/** Evaluate the retained SEAL-era V6 adapter on the DIAS v2 test facts. */
 
 const {
   RULES_SYSTEM_PROMPT, buildUserPrompt,
@@ -109,8 +85,8 @@ const CODE_MAP = Object.freeze({
 });
 
 /**
- * Parse a V6 answer into the binary shape, or into an explicit absence.
- * Returns `{ recommendation, status, sealDecision, inferredAction, inferredPurpose }`.
+ * Parse a V6 answer into the binary shape, or into an explicit absence. Returns `{ recommendation, status,
+ * sealDecision, inferredAction, inferredPurpose }`.
  */
 function parseV6(raw) {
   let body = String(raw ?? '').trim();
@@ -131,8 +107,8 @@ function parseV6(raw) {
     sealReasonCode: parsed.reasonCode ?? null,
   };
   if (decision === 'escalate') {
-    // Deliberately NOT a DENY. The binary contract has no third class, and
-    // counting it as DENY would credit V6 with a safe answer it did not give.
+    // Deliberately NOT a DENY. The binary contract has no third class, and counting it as DENY would credit
+    // V6 with a safe answer it did not give.
     return { ...base, recommendation: null, status: 'ESCALATE_NOT_IN_BINARY_CONTRACT' };
   }
   if (decision !== 'allow' && decision !== 'deny') {
@@ -146,9 +122,7 @@ function parseV6(raw) {
     recommendation: {
       recommendation: decision === 'allow' ? 'ALLOW' : 'DENY',
       reason_code: code,
-      // V6 emits no free-text reason, clause references, evidence list or review
-      // flags. Those fields are left empty rather than fabricated, so joint and
-      // policy-reference metrics are correctly zero for V6 and the report says why.
+      // V6 emits no free-text reason, clause references, evidence list or review flags.
       reason: '',
       policy_refs: [],
       missing_evidence: [],

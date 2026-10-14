@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Metrics must be right, because nothing downstream can detect that they are not.
- *
- * A wrong accuracy figure propagates into tables, reports and a paper, and looks
- * exactly like a right one. These tests fix each metric against hand-counted
- * cases, and pin the two decisions that are easy to get quietly wrong: an
- * unparseable answer is an ABSENT decision rather than a wrong one, and false
- * ALLOW is reported separately from false DENY rather than averaged away.
- */
+/** Metrics must be right, because nothing downstream can detect that they are not. */
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -54,8 +46,8 @@ test('an always-DENY model scores 0.5 balanced accuracy, not the class prior', (
 });
 
 test('an unparseable answer is an absent decision, never a safe DENY', () => {
-  // If invalid counted as DENY, a model that fails on every DENY example would
-  // look perfect on the safety metric.
+  // If invalid counted as DENY, a model that fails on every DENY example would look perfect on the safety
+  // metric.
   const results = [item('DENY', null), item('DENY', null), item('ALLOW', 'ALLOW')];
   const m = summarize(results);
   assert.equal(m.examples, 3);

@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * DIAS workflow parameters held on the ledger (dias-parameters-v1).
- *
- * Today one parameter: how long a request may wait for an auditor before it can
- * be expired (design §8). Absent a stored value the default applies, so a fresh
- * network works without a governance transaction. Values are validated strictly:
- * a parameter that is mistyped or out of range is refused rather than clamped.
- */
+/** DIAS workflow parameters held on the ledger (dias-parameters-v1). */
 
 const PARAMETERS_KEY = 'diasParameters';
 const PARAMETERS_ID = 'current';

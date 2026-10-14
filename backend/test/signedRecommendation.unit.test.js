@@ -1,11 +1,9 @@
 'use strict';
 
 /**
- * The signed recommender, the part of the backend that asks the model and signs
- * what it got (design §6.1): it recomputes the digests of what it is asked to
- * judge, checks its policy is the request's policy, runs the recommender, builds
- * M, and signs κ. A mismatch is not judged; it is signed as a specific failure
- * status, so the ledger still records that it happened.
+ * The signed recommender, the part of the backend that asks the model and signs what it got: it recomputes
+ * the digests of what it is asked to judge, checks its policy is the request's policy, runs the
+ * recommender, builds M, and signs κ.
  */
 
 const crypto = require('crypto');
@@ -78,8 +76,8 @@ describe('signed recommender', () => {
     expect(verifies(signer, 'REQ-1', produced.commitment)).to.equal(true);
   });
 
-  // Moved from the v2 worker tests: facts or claims that no longer match the
-  // digests the ledger holds are never shown to the model.
+  // Moved from the v2 worker tests: facts or claims that no longer match the digests the ledger holds are
+  // never shown to the model.
   it('does not judge a changed verified context or changed claims, naming which one', async () => {
     const facts = verifiedRequestFixture();
     const changedFacts = { ...facts, request: { ...facts.request, purpose: 'audit' } };

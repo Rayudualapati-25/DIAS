@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-#
-# Register and enroll every testbed user with the ABAC attributes baked into
-# their X.509 certificate (":ecert"), exactly as network/scripts/seed-identities.sh
-# does. Reads /testbed/roster.txt, one "org|username|attrs" line per user.
-# Runs inside hyperledger/fabric-ca on the diasnet overlay network.
+# Register and enroll every testbed user with the ABAC attributes baked into their X.509 certificate (":ecert"), exactly as network/scripts/seed-identities.sh does.
 set -euo pipefail
 
 TB=/testbed

@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * The digest of a LoRA adapter directory.
- *
- * A registration pins an adapter by hash so the ledger can say exactly which
- * weights produced a recommendation. Hashing the whole directory rather than one
- * file means a changed config, a swapped checkpoint or an added file all change
- * the digest. Entries are sorted so the digest does not depend on the filesystem
- * listing order, and each file's path is mixed in so moving bytes between files
- * changes the result.
- */
+/** The digest of a LoRA adapter directory. */
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -25,10 +16,6 @@ function adapterFiles(dir) {
     .sort();
 }
 
-/**
- * @param {string} dir adapter directory
- * @returns {{digest: string, files: Array<{name: string, bytes: number, sha256: string}>}}
- */
 function adapterDigest(dir) {
   if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
     throw new Error(`adapter directory does not exist: ${dir}`);

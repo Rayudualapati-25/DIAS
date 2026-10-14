@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * Experiment timing trace.
- *
- * Off unless DIAS_TRACE_FILE names a file. When it is on, each traced step
- * appends one JSON line saying what ran, for which request, when, and how long
- * each of its stages took. The multi-machine testbed reads these lines to split
- * the end-to-end workflow time into its components. Nothing in the application
- * reads them back, and no request payload, justification or token is written:
- * only identifiers, stage names and durations.
- */
+/** Experiment timing trace. */
 
 const fs = require('fs');
 const path = require('path');

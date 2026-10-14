@@ -1,11 +1,11 @@
 /**
- * Transient messages. Kept separate from components.js so any file can import
- * it without pulling in the whole component library.
+ * Transient messages. Kept separate from components.js so any file can import it without pulling in the
+ * whole component library.
  */
 
 let timer = null;
 
-/** kind: success | error | info */
+/** Kind: success | error | info */
 export function toast(message, kind = 'info') {
   const node = document.getElementById('toast');
   if (!node) return;

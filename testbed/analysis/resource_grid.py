@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
-"""One-hour run (E6): CPU and memory of every machine as a grid of small panels.
-
-The top row shows CPU and the bottom row memory for M1-M5. Each panel carries a
-subfigure label below it, "(a) Node 1: CPU Usage" and so on, so the whole figure is
-one PDF that spans the text width at about a third of a page. M1-M4 come from
-node-exporter through the testbed's Prometheus, and M5 (the LLM server on the
-Mac) from the Mac sampler. The Prometheus series are saved to --series the
-first time, so later runs redraw the figure without the testbed.
-
-Usage: python3 resource_grid.py --run <e6 run dir> --mac-samples <csv> --series <csv> --out <path without extension>
-"""
+"""One-hour run (E6): CPU and memory of every machine as a grid of small panels."""
 
 import argparse
 import csv
@@ -24,7 +14,7 @@ import figstyle  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.axes import Axes  # noqa: E402
 
-Series = dict[str, list[tuple[float, float]]]  # machine -> [(epoch seconds, value)]
+Series = dict[str, list[tuple[float, float]]]  # Machine -> [(epoch seconds, value)]
 Panel = tuple[list[float], list[float], list[float], list[float]]  # CPU minutes, cores, memory minutes, GB
 
 MACHINES = ["m1", "m2", "m3", "m4", "m5"]

@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Plan step 4: the final PDF download re-checks the grant.
- *
- * Each test runs the real workflow — request, auditor decision (or reuse of a
- * dynamic authorization), full-document request, owner upload — and then changes
- * one condition before the requester downloads. The download must be refused
- * whenever the grant no longer holds at that moment.
- */
+/** : the final PDF download re-checks the grant. */
 
 const chai = require('chai');
 chai.use(require('chai-as-promised'));

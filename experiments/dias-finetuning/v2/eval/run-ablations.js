@@ -1,17 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * Run the prompt ablations for one served model.
- *
- * Every ablation sees the same examples in the same order with the same
- * decoding, and differs from the control only inside the redacted region, so a
- * difference in accuracy is attributable to the component removed.
- *
- *   node experiments/dias-finetuning/v2/eval/run-ablations.js \
- *     --label untuned-qwen3-14b-4bit --url http://127.0.0.1:8081/v1 \
- *     --limit 120 --out experiments/runs/<date>_dias_ablations
- */
+/** Run the prompt ablations for one served model. */
 
 const fs = require('fs');
 const path = require('path');
@@ -38,9 +28,8 @@ function parseArgs(argv) {
 }
 
 /**
- * Call the model directly rather than through the recommender: an ablated prompt
- * is not one the recommender would ever build, and routing it through the live
- * path would misrepresent what that path does.
+ * Call the model directly rather than through the recommender: an ablated prompt is not one the recommender
+ * would ever build, and routing it through the live path would misrepresent what that path does.
  */
 async function ask({ url, servedModel, adapterPath, messages, maxTokens, timeoutMs }) {
   const started = performance.now();

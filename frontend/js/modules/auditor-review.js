@@ -1,20 +1,4 @@
-/**
- * DIAS auditor console.
- *
- * Every request that no active dynamic authorization settled arrives here. The
- * backend asks the LLM at once for an advisory recommendation and its signed
- * commitment κ is written to the ledger before review; this screen shows the
- * recommendation — or that it is still being prepared, or that none could be
- * produced — and recomputes its digest against κ in the browser. While one is
- * being prepared the screen checks by itself and shows it when ready. The AuditMSP
- * reviewer sees all verified facts, the untrusted justification as submitted,
- * and the model's answer clearly marked as advisory, and is the only actor who
- * can decide. The ledger records the decision and its agreement with κ; the
- * recommendation object itself stays off-chain.
- *
- * Two things this screen must never do: present the model's answer as an
- * outcome, and let an auditor create a dynamic authorization without knowing it.
- */
+/** DIAS auditor console. */
 
 import { api } from '../core/api.js';
 import { ALLOW } from '../core/access.js';
@@ -95,9 +79,8 @@ function requestTable(item) {
 }
 
 /**
- * Whether the recommendation shown is the one committed on the ledger before
- * review. Recomputed in this browser (recommendationIntegrity), not taken from
- * the backend.
+ * Whether the recommendation shown is the one committed on the ledger before review. Recomputed in this
+ * browser (recommendationIntegrity), not taken from the backend.
  */
 function integrityCallout(review) {
   const integrity = recommendationIntegrity(review);
@@ -201,12 +184,12 @@ export default {
     const authorizationDetail = slot();
     let queueRegion;
     let layout;
-    // What the screen is waiting for: the queue's unfinished recommendations, and
-    // the open review's when it is one of them.
+    // What the screen is waiting for: the queue's unfinished recommendations, and the open review's when it
+    // is one of them.
     let waitingInQueue = [];
     let openedReview = null;
-    // Counts every opening and refresh of a review, so that an answer which arrives
-    // after a newer one, or after the dialog was closed, is dropped.
+    // Counts every opening and refresh of a review, so that an answer which arrives after a newer one, or
+    // after the dialog was closed, is dropped.
     let reviewSequence = 0;
     // Shown in the queue card and in an open review when automatic checking gave up.
     const queueNotice = slot();
@@ -304,10 +287,8 @@ export default {
     });
 
     /**
-     * Open or refresh the review of one request. `keepDraft` carries over what the
-     * auditor typed when the dialog already shows this request. `automatic` marks a
-     * refresh the screen started itself: it never reopens a dialog the auditor
-     * closed and never replaces a review the auditor has since switched to.
+     * Open or refresh the review of one request. `keepDraft` carries over what the auditor typed when the
+     * dialog already shows this request.
      */
     const showReview = async (requestId, { keepDraft = false, automatic = false } = {}) => {
       reviewSequence += 1;
@@ -332,14 +313,7 @@ export default {
       const consequence = slot({ class: 'auditor-consequence' });
       const problem = slot({ class: 'auditor-problem', role: 'alert' });
 
-      /**
-       * Both consequences, always visible.
-       *
-       * An earlier version revealed this on hover, which was wrong twice over:
-       * `button()` forwards only `onclick`, so the handler never ran, and a
-       * consequence an auditor has to discover is a consequence they can miss.
-       * Showing both is what lets the choice be made with its effect known.
-       */
+      /** Both consequences, always visible. */
       const renderConsequences = () => {
         replace(consequence, ...['FORCE_ALLOW', 'FORCE_DENY'].map((decision) => {
           const creates = willCreateAuthorization(committed, decision);
@@ -375,8 +349,8 @@ export default {
           reason.focus();
           return;
         }
-        // The error is shown in the dialog, not only as a toast that disappears:
-        // a refusal from the chaincode is the answer to what the auditor just did.
+        // The error is shown in the dialog, not only as a toast that disappears: a refusal from the
+        // chaincode is the answer to what the auditor just did.
         let result;
         try {
           result = await api.access.auditorDecision(requestId, decision, reason.value.trim());
@@ -513,8 +487,8 @@ export default {
     layout.classList.add('single-column');
     const linkedRequestId = auditorRequestFromSearch();
     if (linkedRequestId) {
-      // Consume the one-shot handoff parameter. Otherwise navigating away and
-      // back to this module would reopen an already-reviewed request.
+      // Consume the one-shot handoff parameter. Otherwise navigating away and back to this module would
+      // reopen an already-reviewed request.
       window.history.replaceState(null, '', `${window.location.pathname}${window.location.hash}`);
       window.setTimeout(() => showReview(linkedRequestId), 0);
     }

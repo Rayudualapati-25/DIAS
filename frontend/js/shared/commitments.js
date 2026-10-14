@@ -1,16 +1,4 @@
-/**
- * dias-commitment-hash-v1 in the browser (docs/design/dias-v3-ledger-schema.md §4).
- *
- *   digest = SHA-256( UTF-8("DIAS/v3/" + domain) || 0x00 || content )
- *
- * The same rule as chaincode/crimerecords/lib/dias/commitments.js, written again
- * here because the page cannot load the contract's CommonJS module. Both are
- * tested against the same vectors and against each other.
- *
- * SHA-256 is implemented in plain JavaScript (FIPS 180-4) on purpose: Web Crypto
- * (crypto.subtle) exists only in secure contexts, and the testbed serves this
- * page over plain HTTP from another machine, where it is undefined.
- */
+/** dias-commitment-hash-v1 in the browser. */
 
 const DOMAIN_PREFIX = 'DIAS/v3/';
 const DOMAINS = Object.freeze(['context', 'claims', 'justification', 'recommendation', 'note', 'policy']);

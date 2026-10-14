@@ -10,9 +10,7 @@ const { requireAuth, requireRole } = require('../middleware/auth');
 const router = express.Router();
 router.use(requireAuth);
 
-// Mirrors RecordContract.RECORD_CREATOR_ROLES. Filing is a station-level duty;
-// listing extra senior roles here only turned a clean 403 into a late chaincode
-// rejection after the vault write had already happened.
+// Mirrors RecordContract.RECORD_CREATOR_ROLES.
 const { ROLES } = require('../../../chaincode/crimerecords/lib/policy/policyV1');
 const RECORD_CREATOR_ROLES = [
   ROLES.CONSTABLE, ROLES.SUB_INSPECTOR, ROLES.INSPECTOR,
@@ -50,8 +48,8 @@ const searchSchema = z.object({
   { message: 'at least one search filter is required' });
 
 /**
- * Case-file search. Returns on-chain metadata only — finding a record grants
- * no access to its contents; that still needs an access request.
+ * Case-file search. Returns on-chain metadata only — finding a record grants no access to its contents;
+ * that still needs an access request.
  */
 router.get('/', asyncRoute(async (req, res) => {
   const parsed = searchSchema.safeParse(req.query);
@@ -97,10 +95,8 @@ const PUBLIC_INDEX_FIELDS = Object.freeze([
 ]);
 
 /**
- * Find one case file by its identifier in the public record index — the same
- * identifier and ownership fields a case search returns to any role. Protected
- * metadata is never read, so an officer outside the owning station can find the
- * file before requesting access to it through DIAS.
+ * Find one case file by its identifier in the public record index — the same identifier and ownership
+ * fields a case search returns to any role.
  */
 async function lookupRecord({ user, recordId, ledger = fabric }) {
   if (!SAFE_ID.test(recordId || '')) return { status: 400, error: 'recordId has invalid format' };
@@ -171,10 +167,9 @@ router.post('/document-requests/:requestId/upload',
   }));
 
 /**
- * Release PDF bytes. The ledger first re-checks the whole grant at this moment —
- * requester identity and credential, the decision, and for a reused grant its
- * dynamic authorization — and only then is the vault read; the bytes are still
- * compared with the committed content hash before delivery.
+ * Release PDF bytes. The ledger first re-checks the whole grant at this moment — requester identity and
+ * credential, the decision, and for a reused grant its dynamic authorization — and only then is the vault
+ * read; the bytes are still compared with the committed content hash before delivery.
  */
 async function releaseDocument({ user, requestId, ledger = fabric, vault: store = vault }) {
   if (!SAFE_ID.test(requestId || '')) return { status: 400, error: 'requestId has invalid format' };
@@ -230,9 +225,8 @@ router.get('/:recordId', asyncRoute(async (req, res) => {
 }));
 
 /**
- * Off-chain raw content. Chaincode first verifies that the exact signing X.509
- * identity owns a grant, then the backend validates the file against Fabric's
- * content hash before release.
+ * Off-chain raw content. Chaincode first verifies that the exact signing X.509 identity owns a grant, then
+ * the backend validates the file against Fabric's content hash before release.
  */
 router.get('/:recordId/payload', asyncRoute(async (req, res) => {
   return fail(res,

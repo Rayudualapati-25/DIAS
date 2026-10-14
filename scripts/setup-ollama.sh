@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-#
 # Start the local LLM used by the explainable-AI module and pull its model.
-#
-# Ollama runs as an ordinary program on this Mac, NOT inside Docker, so it does
-# not compete with the Fabric containers for memory.
-#
 # Usage: ./scripts/setup-ollama.sh [model]
 
 set -euo pipefail

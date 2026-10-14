@@ -25,9 +25,8 @@ const INPUT = Object.freeze({
     sensitivityLevel: 'medium', jurisdiction: 'district-north', sealed: false,
     juvenileFlag: false, victimProtectionFlag: false,
   },
-  // The canonical request facts the requester committed. The deterministic
-  // safety check evaluates these; the model's own reading of the query is
-  // compared against them rather than trusted in their place.
+  // The canonical request facts the requester committed. The deterministic safety check evaluates these;
+  // the model's own reading of the query is compared against them rather than trusted in their place.
   requestContext: {
     action: 'view',
     purpose: 'investigation',
@@ -144,9 +143,7 @@ describe('fine-tuned policy decision client', () => {
   });
 
   it('escalates when the model reads a different operation than the one committed', () => {
-    // The request committed action=view; the model reports export. Before the
-    // canonical-input fix the policy engine consumed the model's action, so this
-    // misreading produced a self-consistent result nothing could detect.
+    // The request committed action=view; the model reports export.
     const guarded = applyPolicySafetyGuard({ ...CLASSIFICATION, action: 'export' }, INPUT);
     expect(guarded.decision).to.equal('escalate');
     expect(guarded.reasonCode).to.equal('MODEL_INPUT_DISAGREEMENT');
@@ -159,8 +156,8 @@ describe('fine-tuned policy decision client', () => {
   });
 
   it('never puts the canonical operation or purpose in the model prompt', () => {
-    // Showing them would let the model echo them back, making the comparison
-    // above vacuous. Everything else in the request context is still shown.
+    // Showing them would let the model echo them back, making the comparison above vacuous. Everything else
+    // in the request context is still shown.
     const shown = promptRequestContext(INPUT.requestContext);
     expect(shown).to.not.have.property('action');
     expect(shown).to.not.have.property('purpose');

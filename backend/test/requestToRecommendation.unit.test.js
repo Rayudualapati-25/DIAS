@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * From a committed request to the auditor's recommendation, inside the backend
- * (author's decision, 2026-10-08: there is no separate recommendation service).
- *
- * The contract settles a request that has a reusable authorization by itself.
- * For every other request the backend saves the off-chain review and asks the LLM
- * at once, in its own process, then signs the answer and commits it for the
- * auditor. These tests run the real composition root against a stand-in model
- * endpoint and a recording ledger.
- */
+/** From a committed request to the auditor's recommendation, inside the backend. */
 
 const crypto = require('crypto');
 const fs = require('fs');

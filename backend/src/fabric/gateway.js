@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Fabric Gateway connections — one per logged-in user, so every transaction
- * is signed with that individual's X.509 identity and the ledger attributes
- * actions to the person, not to this server.
+ * Fabric Gateway connections — one per logged-in user, so every transaction is signed with that
+ * individual's X.509 identity and the ledger attributes actions to the person, not to this server.
  */
 
 const fs = require('fs');
@@ -16,8 +15,8 @@ const { NETWORK_DIR, ORG_CONFIG, CHANNEL, CHAINCODE } = require('../config');
 const { withCommitRetry } = require('./commitErrors');
 const trace = require('../util/trace');
 
-const grpcClients = new Map();   // org -> grpc.Client (shared per org)
-const gateways = new Map();      // username -> Gateway
+const grpcClients = new Map();   // Org -> grpc.Client (shared per org)
+const gateways = new Map();      // Username -> Gateway
 
 function orgPaths(org, fabricUser) {
   const cfg = ORG_CONFIG[org];
@@ -90,10 +89,8 @@ async function evaluate(org, user, contractName, fn, ...args) {
 }
 
 /**
- * The same steps as fabric-gateway's Contract.submit — endorse, submit to the
- * orderer, wait for the commit status, fail on an unsuccessful status — with the
- * time of each step written to the experiment trace. Used only while tracing is
- * on, so the normal path is the library's own call.
+ * The same steps as fabric-gateway's Contract.submit — endorse, submit to the orderer, wait for the commit
+ * status, fail on an unsuccessful status — with the time of each step written to the experiment trace.
  */
 async function submitStaged(contract, contractName, fn, options) {
   const started = trace.now();
@@ -131,13 +128,7 @@ async function submit(org, user, contractName, fn, ...args) {
   return JSON.parse(utf8.decode(result));
 }
 
-/**
- * Submit with transient (private) data. Endorsement must be restricted to orgs in
- * the collection's distribution policy — Fabric rejects the proposal rather than
- * leak transient data to a non-member org — and the chosen set must still satisfy
- * the chaincode's MAJORITY endorsement policy, which is three of the five orgs on
- * the DIAS channel.
- */
+/** Submit with transient (private) data. */
 const EVIDENCE_ENDORSERS = Object.freeze([
   'PoliceMSP', 'ForensicsMSP', 'ProsecutionMSP', 'CourtMSP',
 ]);

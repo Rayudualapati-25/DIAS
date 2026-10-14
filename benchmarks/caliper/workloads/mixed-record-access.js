@@ -51,9 +51,7 @@ class MixedRecordAccessWorkload extends WorkloadModuleBase {
   }
 
   async submitTransaction() {
-    // Seven slots are reads and three are writes in every complete ten-call
-    // cycle for each worker. The coprime worker offset staggers write slots so
-    // workers do not all switch operation type at the same time.
+    // Seven slots are reads and three are writes in every complete ten-call cycle for each worker.
     const scheduleSlot = mixedScheduleSlot(this.sequence, this.workerIndex);
     this.sequence += 1;
 

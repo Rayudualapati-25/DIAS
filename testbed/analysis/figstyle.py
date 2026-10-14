@@ -1,10 +1,4 @@
-"""Shared figure style for the testbed results (IEEE single column).
-
-Colors come from the validated categorical palette in fixed order and are never
-cycled; every series also carries a hatch pattern, so the figures stay readable
-in grayscale print and for color-blind readers. Values are printed on the marks
-in ink colors, never in the series color, and every axis is in real units.
-"""
+"""Shared figure style for the testbed results (IEEE single column)."""
 
 import matplotlib
 

@@ -1,17 +1,6 @@
 'use strict';
 
-/**
- * Policy v2 — declarative tables for the access-governance rules.
- *
- * The domain is rank-based: every role sits on a ladder inside its own
- * department, and authority (who heads a station, who heads a district, who may
- * review a refused request) is derived from that ladder in ./authority.js rather
- * than from any named individual.
- *
- * RBAC:  which roles may perform which actions on which record types.
- * ABAC:  contextual constraints (jurisdiction, assignment, clearance, flags).
- * PBAC:  policy versioning and review requirements.
- */
+/** Policy v2 — declarative tables for the access-governance rules. */
 
 const {
   RANK_TABLE, CLEARANCE_RANK, DISTRICT_ONLY_DEPARTMENTS, DISTRICT_HEAD_ROLES,
@@ -40,10 +29,8 @@ const FORENSIC_TYPES = Object.freeze(['evidence', 'forensic-report']);
 const COURT_FILING_TYPES = Object.freeze(['chargesheet', 'court-order']);
 
 /**
- * RBAC base matrix: role -> record types it may request at all, per action.
- * A role/type pair absent here is a deny before any ABAC rule runs. Seniority on
- * the ladder widens what a role may reach, which is why the senior police,
- * forensic, prosecution and court ranks carry the full record-type list.
+ * RBAC base matrix: role -> record types it may request at all, per action. A role/type pair absent here is
+ * a deny before any ABAC rule runs.
  */
 const RBAC = Object.freeze({
   // Police
@@ -86,8 +73,8 @@ const RBAC = Object.freeze({
 });
 
 /**
- * Roles whose duty is cross-case review, so the case-assignment rule does not
- * apply to them. Jurisdiction still does: nobody reaches outside their district.
+ * Roles whose duty is cross-case review, so the case-assignment rule does not apply to them. Jurisdiction
+ * still does: nobody reaches outside their district.
  */
 const ASSIGNMENT_EXEMPT = Object.freeze([
   'circle-inspector', 'dsp', 'sp', 'commissioner',

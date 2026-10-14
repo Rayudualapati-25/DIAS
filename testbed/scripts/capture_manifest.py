@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-"""Record exactly what the testbed ran: hardware, VMs, images, contract, model,
-code snapshots and git state. Written next to the results so every number can
-be traced to the software that produced it.
-
-Usage: python3 capture_manifest.py --out <manifest.json>
-       --chaincode-definition <querycommitted.json> --model-evidence <smoke.json>
+"""
+Record exactly what the testbed ran: hardware, VMs, images, contract, model, code snapshots and git
+state. Written next to the results so every number can be traced to the software that produced it.
 """
 
 import argparse

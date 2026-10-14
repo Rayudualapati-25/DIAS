@@ -1,19 +1,6 @@
 'use strict';
 
-/**
- * Governed policy versions (design §5).
- *
- * A version is registered with the digest of its canonical policy bundle and
- * becomes active only when a second, different district head activates it. The
- * previously active version is retired and never returns: rolling back means
- * registering the old content under a new version. Requests, commitments,
- * decisions, authorizations and grants carry the binding {policyVersion,
- * policyHash} of the policy active when they were produced.
- *
- * The contracts never read the policy text; they hold only its digest. The
- * backend and the recommendation service compute that digest with
- * policyHashOf(), so every component agrees on what "the active policy" is.
- */
+/** Governed policy versions. */
 
 const { DOMAINS, assertDigest, hashCanonical } = require('./commitments');
 const { SAFE_ID } = require('../util/validate');

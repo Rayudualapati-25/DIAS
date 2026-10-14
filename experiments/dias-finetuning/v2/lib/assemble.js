@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * Cut the generated pool into the training set and the evaluation sets.
- *
- * Every evaluation set is drawn from families assigned to `test` (or, for
- * validation, to `validation`). Nothing is ever moved between splits to make a
- * set the right size: a set that cannot be filled is reported short, because
- * padding it from the training split would destroy the only property that makes
- * the numbers meaningful.
- */
+/** Cut the generated pool into the training set and the evaluation sets. */
 
 const isAllow = (example) => example.meta.label.recommendation === 'ALLOW';
 const scenarioIs = (prefix) => (example) => example.meta.scenario.startsWith(prefix);
@@ -35,12 +27,6 @@ function reasonBalancedSample(rng, examples, perReason) {
   return rng.shuffle(picked);
 }
 
-/**
- * @param {object} options
- * @param {object} options.rng
- * @param {Array} options.pool every generated example, already deduplicated
- * @param {object} options.sizes target sizes per evaluation set
- */
 function assembleSplits({ rng, pool, sizes }) {
   const trainPool = pool.filter((e) => e.meta.split === 'train');
   const validationPool = pool.filter((e) => e.meta.split === 'validation');

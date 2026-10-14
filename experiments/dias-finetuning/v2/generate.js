@@ -1,29 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-/**
- * DIAS binary recommendation dataset v2.
- *
- * Purpose: supervised fine-tuning and held-out evaluation of an ADVISORY
- * ALLOW/DENY access recommendation model. Labels come from the versioned written
- * governance policy through the offline reference oracle. Auditor overrides are
- * never used as labels: an override is an exceptional governance act recorded in
- * the dynamic-authorization system, and training the model to predict one would
- * teach it to imitate the authority it is explicitly denied.
- *
- * What this generator fixes, relative to data-v1:
- *   - usernames no longer contain the role or the split name;
- *   - record and case identifiers no longer occupy per-reason numeric ranges;
- *   - cross-jurisdiction is two different real districts, not `outside-<x>`;
- *   - all three clearance levels appear, so the ordered comparison is exercised;
- *   - emergency and approval flags vary independently of the label;
- *   - multi-clause failures exist at all (v1 had none), so precedence is tested;
- *   - paraphrases and near-miss partners cannot cross a split;
- *   - a held-out template family set measures phrasing generalisation;
- *   - INVALID_PURPOSE is excluded: the runtime rejects it before inference.
- *
- *   node experiments/dias-finetuning/v2/generate.js [--seed 20260912] [--out <dir>]
- */
+/** DIAS binary recommendation dataset v2. */
 
 const fs = require('fs');
 const path = require('path');
@@ -89,12 +67,7 @@ function withIdentifiers(context, facts) {
   };
 }
 
-/**
- * Emit every variant of one set of facts into a family.
- *
- * Variants differ only in phrasing, and `heldOut` swaps the pool for the
- * template families that never appear in training.
- */
+/** Emit every variant of one set of facts into a family. */
 function emitVariants(context, family, facts, spec, { heldOut = false } = {}) {
   const { facts: withCase, identifiers } = withIdentifiers(context, facts);
   const policyContext = context.provider.assemble(withCase);
@@ -192,8 +165,8 @@ function generateMultiViolations(context) {
 }
 
 /**
- * Near misses. Both halves of a pair live in one family, so the ALLOW side can
- * never train while the DENY side tests.
+ * Near misses. Both halves of a pair live in one family, so the ALLOW side can never train while the DENY
+ * side tests.
  */
 function generateNearMisses(context) {
   const spec = PLAN.nearMiss;
@@ -256,8 +229,8 @@ function generateOodParaphrase(context) {
 }
 
 /**
- * Workflow cases. These are not training data: they drive the live Fabric
- * scenarios, where the model's answer decides which branch is exercised.
+ * Workflow cases. These are not training data: they drive the live Fabric scenarios, where the model's
+ * answer decides which branch is exercised.
  */
 function generateWorkflow(context) {
   const spec = PLAN.workflow;

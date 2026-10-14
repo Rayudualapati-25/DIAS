@@ -1,17 +1,8 @@
 'use strict';
 
 /**
- * Live client-observed latency study for the three interactions shown in the
- * paper: search case files, file a record, and open an authorized case file.
- *
- * Each concurrency level releases N HTTP requests together.  The measurements
- * therefore include the browser-facing REST path and Fabric Gateway work.  The
- * file-release path additionally includes AuthorizeRecordRead, agency-vault
- * retrieval, and the backend's SHA-256 integrity check.  It is not an isolated
- * chaincode-compute benchmark.
- *
- * Prerequisites: a seeded local Fabric network and the backend on API_BASE.
- * Usage: node experiments/run-ui-latency.js
+ * Live client-observed latency study for the three interactions shown in the paper: search case files, file
+ * a record, and open an authorized case file.
  */
 
 const crypto = require('crypto');
@@ -32,8 +23,8 @@ const OPERATIONS = Object.freeze((process.env.OPERATIONS || 'search,release,subm
 const SEARCH_CASE_ID = 'CASE-2026-002';
 const FILE_CASE_ID = 'CASE-2026-001';
 
-// These are enrolled identities, not a claim of N distinct officers.  Sessions
-// cycle through this fixed pool, matching the prototype's local deployment.
+// These are enrolled identities, not a claim of N distinct officers. Sessions cycle through this fixed
+// pool, matching the prototype's local deployment.
 const FILING_IDENTITIES = Object.freeze([
   'insp.sharma', 'sho.reddy', 'const.verma', 'io.krishnan', 'insp.singh',
 ]);

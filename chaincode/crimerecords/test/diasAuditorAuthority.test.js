@@ -1,11 +1,6 @@
 'use strict';
 
-/**
- * Plan step 3: an auditor's certificate is not enough. A decision or a revocation
- * also needs an active ledger profile that matches the certificate, the district
- * that holds the record, and clearance for the record's sensitivity. Every
- * rejection must leave the ledger unchanged.
- */
+/** : an auditor's certificate is not enough. */
 
 const chai = require('chai');
 chai.use(require('chai-as-promised'));

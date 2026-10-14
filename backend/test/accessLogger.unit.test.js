@@ -235,9 +235,8 @@ describe('access-log policy (plan step 6)', () => {
     expect(shouldLog({ mode, action: 'auth.whoami', status: 500 })).to.equal(true);
   });
 
-  // The auditor screen asks this every few seconds while a recommendation is being
-  // prepared. It reads no case data, so a successful call must not become a ledger
-  // transaction; a refused one still does.
+  // The auditor screen asks this every few seconds while a recommendation is being prepared. It reads no
+  // case data, so a successful call must not become a ledger transaction; a refused one still does.
   it('treats the auditor screen\'s status check as a routine read that writes nothing when it succeeds', () => {
     const entry = classify(snapshot('GET', '/access/auditor/pending/status', { query: { ids: 'REQ-1,REQ-2' } }));
     expect(entry).to.deep.equal({ action: 'dias.auditor.queue.status', target: null });

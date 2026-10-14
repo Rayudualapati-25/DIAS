@@ -1,7 +1,4 @@
-/**
- * Pure-logic tests for the session-scoped recent-requests store.
- * Run with:  node --test frontend/test/
- */
+/** Pure-logic tests for the session-scoped recent-requests store. */
 
 import { test, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';

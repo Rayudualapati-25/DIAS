@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Train and identically evaluate the three bounded overnight seed pilots.
-# This is intentionally not the full 5,254-example robustness experiment.
+# Train and identically evaluate the three bounded overnight seed pilots. This is intentionally not the full 5,254-example robustness experiment.
 set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

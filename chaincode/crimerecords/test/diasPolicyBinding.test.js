@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * Plan step 8: governed policy versions and policy binding (design §5).
- *
- * A policy version is registered by one active district head and activated by
- * another. Requests bind the active policy when they are created; decisions,
- * reuse and release are refused once a different policy is active, and an
- * authorization issued under an older policy never qualifies again.
- */
+/** : governed policy versions and policy binding. */
 
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
