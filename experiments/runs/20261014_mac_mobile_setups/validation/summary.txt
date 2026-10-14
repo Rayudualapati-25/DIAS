@@ -22,3 +22,6 @@ caliper: check-installation, validate-configs and test-runner-helpers need @hype
 mobile unit tests + lint (gradle --offline): exit 0
 mobile unit tests: 29 run, 0 failed; lint: 0 errors, 5 warnings
 mobile device tests on emulator-5554 (no apiBase, so the live-host tests skip): OK (44 tests)
+later on 2026-10-14, after the CI fixes (gRPC 1.14.5 and proxy-addr 2.0.8 in the lockfiles):
+every CI job run on a clean checkout: repository hygiene, chaincode (tests + audit),
+backend (tests + audit), policy/frontend/dataset, Caliper (npm ci, full check, audit): all exit 0
