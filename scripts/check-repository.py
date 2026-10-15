@@ -27,7 +27,6 @@ FORBIDDEN_PATHS = (
     re.compile(r"^network/organizations/"),
     re.compile(r"^network/channel-artifacts/"),
     re.compile(r"^backend/(data|wallets)/"),
-    re.compile(r"^benchmarks/caliper/generated/"),
     re.compile(r"(^|/)(tmp|verify-build[^/]*)/"),
     re.compile(r"(^|/)\.DS_Store$"),
     re.compile(r"\.(?:sqlite(?:-.+)?|db|pem|key|p12|pfx)$", re.IGNORECASE),

@@ -68,13 +68,11 @@ officer (web portal or phone)
 | `frontend` | Web portal (plain JavaScript modules) served by the backend |
 | `mobile/android` | Android app (Kotlin): sign-in, request access, auditor decisions, access log, case summaries |
 | `policies` | The written governance policy and a reference implementation used to check the model offline |
-| `docs` | The policy as readable text (generated from the bundle by `policies/tools/render-policy-spec.js`), its open questions, and architecture figures |
+| `docs` | The policy as readable text (generated from the bundle by `policies/tools/render-policy-spec.js`) and its open questions |
 | `network` | Fabric network configuration and scripts (five organizations on `diaschannel`) |
 | `experiments` | Experiment scripts, the fine-tuning data and evaluation, and all run outputs (`experiments/runs`) |
 | `testbed` | Four-VM testbed setup and its analysis scripts |
-| `LLMxAI` | Model training and evaluation work for the LLM (adapters are not in Git) |
 | `results` | Result tables (CSV) and figures |
-| `benchmarks/caliper` | Hyperledger Caliper benchmark setup (older SEAL-era deployment) |
 
 ## Requirements
 

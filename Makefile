@@ -1,4 +1,4 @@
-# Crime Records Access Network — operational entry points.
+# DIAS — operational entry points.
 #
 # Every command in the project is a target here, so nothing has to be
 # remembered as a long path. Run `make` with no target for the list.
@@ -46,18 +46,12 @@ ifneq ($(strip $(DOCKER_CONTEXT)),)
 export DOCKER_CONTEXT
 endif
 
-.PHONY: help all install check repo-check doctor up down deploy seed seed-users seed-domain seed-policy seed-recommender seed-records dias-demo-data backend model ollama test test-chaincode \
+.PHONY: help all install check repo-check doctor up down deploy seed seed-users seed-domain seed-policy seed-recommender seed-records dias-demo-data backend test test-chaincode \
         test-backend test-policies test-frontend test-dataset test-live \
         dias-all dias-channel dias-deploy dias-seed dias-model dias-backend \
         dias-acceptance dias-readiness dias-subsets \
-        smoke prove inspect verify-log measure evaluate results caliper-install caliper-prepare \
-        caliper-check caliper-monitoring-up caliper-monitoring-check caliper-monitoring-down caliper-smoke \
-        caliper-read caliper-write caliper-load caliper-mixed caliper-endurance caliper-profile-graphs \
-        caliper-latency-graphs caliper-plots ui-latency-run ui-latency-plots \
-        ui-latency-verify dias-data dias-data-check dias-data-v1 clean-containers
+        smoke prove inspect verify-log dias-data dias-data-check dias-data-v1 clean-containers
 
-UI_LATENCY_RUN ?= experiments/runs/2026-08-25T14-12-11-482Z_ui_interaction_latency
-UI_LATENCY_OUTPUT ?= results/plots/ui-latency
 DIAS_DATA_OUTPUT ?= experiments/dias-finetuning/data-next
 
 help:
@@ -92,35 +86,6 @@ help:
 	@echo "  make prove         prove it is a real permissioned blockchain (10 checks; writes a proof record)"
 	@echo "  make inspect       read DIAS ledger state: blocks, endorsements, history"
 	@echo "  make verify-log    read direct-ledger access events and integrity status"
-	@echo
-	@echo "SEAL-era references (not used by DIAS)"
-	@echo "  make model         serve the retired V6 adapter on :8080"
-	@echo "  make ollama        start the local wording model used by make evaluate"
-	@echo
-	@echo "Measurement"
-	@echo "  make measure       latency, storage, attack replay"
-	@echo "  make evaluate      SEAL explanation quality: template vs local LLM"
-	@echo "  make dias-data     generate the versioned DIAS fine-tuning dataset"
-	@echo "  make dias-data-check validate hashes, splits, schemas, and workflow coverage"
-	@echo "  make caliper-install  install the pinned Caliper CLI and Fabric Gateway binding"
-	@echo "  make caliper-check    validate Caliper dependencies, scripts, and all test configurations"
-	@echo "  make caliper-prepare  validate the live network and generate the runtime connection file"
-	@echo "  make caliper-monitoring-up     start the local Prometheus metrics collector"
-	@echo "  make caliper-monitoring-check  require all 6 Fabric metrics targets to be ready"
-	@echo "  make caliper-monitoring-down   stop the local Prometheus metrics collector"
-	@echo "  make caliper-smoke    run the manual low-load Caliper connectivity benchmark"
-	@echo "  make caliper-read     run the manual read-performance test"
-	@echo "  make caliper-write    run the manual write-performance test"
-	@echo "  make caliper-load     run the manual 1/2/5/10/20 TPS increasing-load test"
-	@echo "  make caliper-mixed    run the manual deterministic 70/30 mixed-workload test"
-	@echo "  make caliper-endurance run the manual two-hour endurance test"
-	@echo "  make caliper-profile-graphs generate configured-input methodology figures (not results)"
-	@echo "  make caliper-latency-graphs run five short measured latency tests and generate graphs"
-	@echo "  make caliper-plots    generate paper figures from completed Caliper runs"
-	@echo "  make ui-latency-run   run the live three-operation interactive latency study"
-	@echo "  make ui-latency-plots regenerate UI-latency figures from UI_LATENCY_RUN"
-	@echo "  make ui-latency-verify check raw samples, tables, figures, and paper claims"
-	@echo "  make results       list generated result files"
 	@echo
 	@echo "Maintenance"
 	@echo "  make clean-containers   remove stale chaincode build containers"
@@ -201,18 +166,7 @@ seed-recommender:
 	@test -f backend/data/dias-recommender-signing-key.pem || node scripts/dias/recommender-key.js
 	CHANNEL=$(DIAS_CHANNEL) CHAINCODE=$(DIAS_CC_NAME) node scripts/dias/register-recommender-key.js
 
-ollama:
-	scripts/setup-ollama.sh
-
 backend: dias-backend
-
-## model: the retired SEAL-era V6 adapter on :8080, kept for reference runs only.
-model:
-	.venv-qwen-policy/bin/mlx_lm.server \
-		--model mlx-community/Qwen3-14B-4bit \
-		--adapter-path "$(abspath LLMxAI/experiments/llm_policy_engine/adapters/qwen3-14b-seba-lora-v6-best)" \
-		--host 127.0.0.1 --port 8080 --max-tokens 192 \
-		--chat-template-args '{"enable_thinking":false}'
 
 down:
 	scripts/network-down.sh
@@ -311,13 +265,7 @@ inspect:
 verify-log:
 	scripts/verify-access-log.sh
 
-# --- measurement -----------------------------------------------------------
-
-measure:
-	node experiments/measure.js $(N)
-
-evaluate:
-	node experiments/evaluate-explanations.js
+# --- dataset ---------------------------------------------------------------
 
 ## dias-data: regenerate the binary v2 dataset. Deterministic from its seed.
 dias-data:
@@ -330,65 +278,6 @@ dias-data-check:
 ## reproducible. data-v1 is prior evidence and must not be regenerated in place.
 dias-data-v1:
 	node experiments/dias-finetuning/generate.js --output "$(DIAS_DATA_OUTPUT)"
-
-caliper-install:
-	cd benchmarks/caliper && npx --yes npm@11.5.1 ci --omit=dev
-	cd benchmarks/caliper && node scripts/check-installation.js
-
-caliper-check:
-	cd benchmarks/caliper && npm run check
-
-caliper-prepare:
-	cd benchmarks/caliper && node scripts/prepare-network.js
-
-caliper-monitoring-up:
-	docker compose -f benchmarks/caliper/monitoring/compose.yaml up -d
-
-caliper-monitoring-check:
-	cd benchmarks/caliper && node scripts/check-monitoring.js
-
-caliper-monitoring-down:
-	docker compose -f benchmarks/caliper/monitoring/compose.yaml down
-
-caliper-smoke: caliper-prepare
-	cd benchmarks/caliper && node scripts/run-benchmark.js configs/smoke.yaml smoke
-
-caliper-read: caliper-prepare caliper-monitoring-check
-	cd benchmarks/caliper && node scripts/run-benchmark.js configs/read-performance.yaml read
-
-caliper-write: caliper-prepare caliper-monitoring-check
-	cd benchmarks/caliper && node scripts/run-benchmark.js configs/write-performance.yaml write
-
-caliper-load: caliper-prepare caliper-monitoring-check
-	cd benchmarks/caliper && node scripts/run-benchmark.js configs/increasing-load.yaml load
-
-caliper-mixed: caliper-prepare caliper-monitoring-check
-	cd benchmarks/caliper && node scripts/run-benchmark.js configs/mixed-workload.yaml mixed
-
-caliper-endurance: caliper-prepare caliper-monitoring-check
-	cd benchmarks/caliper && node scripts/run-benchmark.js configs/endurance.yaml endurance
-
-caliper-profile-graphs:
-	python3 benchmarks/caliper/scripts/generate-workload-profile-graphs.py
-
-caliper-latency-graphs: caliper-prepare caliper-monitoring-check
-	cd benchmarks/caliper && npm run benchmark:latency
-
-caliper-plots:
-	python3 results/plots/caliper_figure_set.py
-
-ui-latency-run:
-	node experiments/run-ui-latency.js
-
-ui-latency-plots:
-	python3 experiments/plot-ui-latency.py $(UI_LATENCY_RUN)/run-report.json \
-		--output-dir $(UI_LATENCY_OUTPUT)
-
-ui-latency-verify:
-	node experiments/verify-ui-latency-artifacts.js
-
-results:
-	@ls -1 experiments/results/
 
 # --- maintenance -----------------------------------------------------------
 
