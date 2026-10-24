@@ -110,6 +110,40 @@ cd mobile/android && ./gradlew :app:testDebugUnitTest
 The Android screen tests run on an emulator with
 `adb shell am instrument -w org.dias.mobile.dev.test/androidx.test.runner.AndroidJUnitRunner`.
 
+## Dataset
+
+The model was trained and tested on a synthetic dataset: no real case or officer
+data is used. Every label comes from a rule program, not from a person or a model.
+
+- **Rules.** The written governance policy has 13 clauses. Eleven decide the
+  outcome: active credential, allowed purpose, role belongs to the organization,
+  role permission, sealed record, juvenile record, victim data, jurisdiction, case
+  assignment, clearance, and a default ALLOW. The first DENY clause that applies
+  decides. The other two only describe context flags and the order of the checks.
+  The source is `policies/dias-governance-policy-v1.json`; the readable version is
+  `docs/policies/governance-policy-specification.md`.
+- **Labels.** `policies/reference-oracle/referencePolicyOracle.js` applies these
+  clauses to each generated request and gives ALLOW or DENY, a reason code and the
+  clauses used. Auditor decisions are never used as labels.
+- **Generator.** `experiments/dias-finetuning/v2/generate.js` builds the requests
+  (officer, record and request facts plus a free-text reason) from a fixed seed
+  (20260912), so `make dias-data` writes the same data files again, byte for byte.
+  `make dias-data-check` runs 25 checks, for example that every label matches the
+  oracle and that no case family appears in more than one split.
+- **Files.** `experiments/dias-finetuning/data-v2-binary/`: 8,013 labelled
+  examples. 5,254 are for training and 400 for validation; the rest form five test
+  sets and a 60-case workflow set. Some test cases appear in more than one test
+  set, so there are 7,478 distinct prompts. `manifest.json` lists every set with
+  its hash and composition.
+- **The 600 test cases** are `test-decision-balanced.jsonl`: 300 ALLOW and 300 DENY.
+  They cover clean ALLOWs (161), single violations (103), several violations (88),
+  near misses at a rule boundary (133) and attack cases built to mislead the model
+  (115). Misleading reasons are not limited to the attack cases: across all 600,
+  130 reasons contain an instruction to the model and 153 make a false claim.
+- **Not yet done.** `human-review-sample.csv` holds 161 cases selected for manual
+  checking. Nobody has reviewed them yet, so the dataset must not be described as
+  human-checked.
+
 ## Experiments of 14 October 2026
 
 All runs are in `experiments/runs/20261014_mac_mobile_setups/` (raw rows, logs,
