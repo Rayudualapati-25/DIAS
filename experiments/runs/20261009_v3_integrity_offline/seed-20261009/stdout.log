@@ -1,0 +1,26 @@
+[2026-10-09T10:07:48.661Z] start: node v22.22.0, Intel(R) Xeon(R) Processor @ 2.10GHz, v3 b27f4560e760e9ca144ee8e93ff9cba0b7e1da4e, clean=false
+[2026-10-09T10:07:48.785Z] latency h_J: hashText(justification): p50 2.273 us, p95 6.908 us
+[2026-10-09T10:07:48.802Z] latency h_N: hashText(note): p50 1.532 us, p95 4.148 us
+[2026-10-09T10:07:48.857Z] latency canonicalJson(verified context): p50 7.161 us, p95 13.522 us
+[2026-10-09T10:07:48.951Z] latency h_C: verifiedRequestHash(context): p50 13.479 us, p95 23.432 us
+[2026-10-09T10:07:49.058Z] latency h_M: recommendationHashOf(M): p50 14.338 us, p95 26.623 us
+[2026-10-09T10:07:49.165Z] latency generic hashCanonical(M): p50 14.485 us, p95 29.48 us
+[2026-10-09T10:07:49.200Z] latency naive SHA-256(JSON.stringify(M)) [ablation]: p50 4.538 us, p95 10.206 us
+[2026-10-09T10:07:49.531Z] latency Ed25519 sign κ provenance: p50 51.652 us, p95 82.241 us
+[2026-10-09T10:07:50.432Z] latency Ed25519 verify κ provenance: p50 150.029 us, p95 213.109 us
+[2026-10-09T10:07:50.543Z] latency check M against κ (backend): p50 15.388 us, p95 28.355 us
+[2026-10-09T10:07:50.689Z] latency AES-256-GCM seal review entry: p50 17.78 us, p95 55.373 us
+[2026-10-09T10:07:50.793Z] latency AES-256-GCM open review entry: p50 14.13 us, p95 37.129 us
+[2026-10-09T10:07:51.485Z] workflow v2 W1: 2 tx, write set 14572-14572 B, exec p50 0.618 ms
+[2026-10-09T10:07:51.486Z] workflow v3 W1: 3 tx, write set 22742-22742 B, exec p50 1.22 ms
+[2026-10-09T10:07:52.096Z] workflow v2 W2: 2 tx, write set 10061-10061 B, exec p50 0.52 ms
+[2026-10-09T10:07:52.097Z] workflow v3 W2: 3 tx, write set 17359-17359 B, exec p50 1.162 ms
+[2026-10-09T10:07:52.620Z] workflow v2 W3: 2 tx, write set 10075-10075 B, exec p50 0.402 ms
+[2026-10-09T10:07:52.620Z] workflow v3 W3: 3 tx, write set 17376-17376 B, exec p50 0.957 ms
+[2026-10-09T10:07:53.326Z] workflow v2 W4: 1 tx, write set 6870-6870 B, exec p50 0.225 ms
+[2026-10-09T10:07:53.327Z] workflow v3 W4: 1 tx, write set 7875-7875 B, exec p50 0.292 ms
+[config] JWT_SECRET not set — using a dev-only default. Do not deploy like this.
+[2026-10-09T10:07:56.172Z] end-to-end v3 (backend runtime, stand-in model): generate+sign+commit p50 5.147 ms; off-chain 9119 B encrypted vs 7968 B plaintext
+[2026-10-09T10:07:57.353Z] tamper: 44 mutation classes x 200 cases; clean-copy false alarms 0; contract rejected 60/60 forged κ
+[2026-10-09T10:07:57.483Z] policy: v3 reuse after change 0/12; v2 reuse continues 12/12
+[2026-10-09T10:07:57.483Z] done
