@@ -1,0 +1,96 @@
+{
+  "repetitions": 200,
+  "modelOutput": "DENY",
+  "summary": {
+    "openReviewMs": {
+      "n": 200,
+      "min": 0.743,
+      "p50": 1.158,
+      "p95": 2.36,
+      "p99": 4.75,
+      "max": 39.119,
+      "mean": 1.646
+    },
+    "generateSignCommitMs": {
+      "n": 200,
+      "min": 4.058,
+      "p50": 6.227,
+      "p95": 10.744,
+      "p99": 43.59,
+      "max": 71.798,
+      "mean": 7.604
+    },
+    "commitRecommendationContractMs": {
+      "n": 200,
+      "min": 0.427,
+      "p50": 0.551,
+      "p95": 0.886,
+      "p99": 1.145,
+      "max": 2.578,
+      "mean": 0.605
+    },
+    "stageNoteMs": {
+      "n": 200,
+      "min": 0.765,
+      "p50": 1.24,
+      "p95": 2.751,
+      "p99": 6.383,
+      "max": 43.75,
+      "mean": 1.653
+    },
+    "commitNoteMs": {
+      "n": 200,
+      "min": 0.807,
+      "p50": 1.349,
+      "p95": 2.491,
+      "p99": 4.644,
+      "max": 10.193,
+      "mean": 1.549
+    },
+    "createRequestContractMs": {
+      "n": 200,
+      "min": 0.213,
+      "p50": 0.294,
+      "p95": 0.433,
+      "p99": 0.561,
+      "max": 0.97,
+      "mean": 0.31
+    },
+    "decisionContractMs": {
+      "n": 200,
+      "min": 0.48,
+      "p50": 0.625,
+      "p95": 0.969,
+      "p99": 1.102,
+      "max": 1.776,
+      "mean": 0.673
+    },
+    "onChainWriteSetBytes": {
+      "n": 200,
+      "min": 22788,
+      "p50": 22788,
+      "p95": 22788,
+      "p99": 22788,
+      "max": 22788,
+      "mean": 22788
+    },
+    "offChainEncryptedBytes": {
+      "n": 200,
+      "min": 8935,
+      "p50": 9147,
+      "p95": 9255,
+      "p99": 9287,
+      "max": 9303,
+      "mean": 9138.92
+    },
+    "offChainPlaintextBytes": {
+      "n": 200,
+      "min": 7830,
+      "p50": 7988,
+      "p95": 8070,
+      "p99": 8094,
+      "max": 8106,
+      "mean": 7982.865
+    }
+  }
+}

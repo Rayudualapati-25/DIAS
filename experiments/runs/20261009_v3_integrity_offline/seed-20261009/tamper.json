@@ -1,0 +1,464 @@
+{
+  "cases": 200,
+  "cleanCopyFalseAlarms": 0,
+  "contractForgedCommitments": {
+    "attempts": 60,
+    "rejected": 60
+  },
+  "rows": [
+    {
+      "group": "justification (h_J)",
+      "mutation": "replace one character",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "insert one character",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "delete one character",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "append trailing space",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "change letter case",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "Unicode look-alike (Latin a -> Cyrillic a)",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "Unicode normalization NFC -> NFD (same visible text)",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "emptied",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "justification (h_J)",
+      "mutation": "object deleted",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "replace one character",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "insert one character",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "delete one character",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "append trailing space",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "change letter case",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "Unicode look-alike (Latin a -> Cyrillic a)",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "Unicode normalization NFC -> NFD (same visible text)",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "emptied",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "auditor note (h_N)",
+      "mutation": "object deleted",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "flip recommendation value",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "flip value in value and output together",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "one character of the explanation",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "reason code",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "add a policy reference",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "generation status",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "request id",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "provenance.contextHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "provenance.claimsHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "provenance.justificationHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "provenance.policyVersion",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "provenance.policyHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "provenance.modelVersion",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 200,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 1,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "add an unknown field",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "remove the output",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 200,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 1,
+      "digestOnlyRate": 1,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "reorder keys at every depth (same content)",
+      "expectedChange": false,
+      "trials": 200,
+      "detected": 0,
+      "detectedByDigestOnly": 0,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 200,
+      "detectionRate": 0,
+      "digestOnlyRate": 0,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 1
+    },
+    {
+      "group": "recommendation object (h_M)",
+      "mutation": "object deleted",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectedByDigestOnly": 0,
+      "detectedByFieldBindingOnly": 0,
+      "flaggedByNaiveHash": 0,
+      "detectionRate": 1,
+      "digestOnlyRate": 0,
+      "fieldBindingOnlyRate": 0,
+      "naiveHashFlagRate": 0
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field contextHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field claimsHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field justificationHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field policyVersion",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field policyHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field recommendation",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field generationStatus",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field modelVersion",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    },
+    {
+      "group": "commitment κ (signature)",
+      "mutation": "signed field recommendationHash",
+      "expectedChange": true,
+      "trials": 200,
+      "detected": 200,
+      "detectionRate": 1
+    }
+  ]
+}
